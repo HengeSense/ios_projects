@@ -74,6 +74,7 @@
 		6F0FAF5317AF9E1E00B75D3E /* DrawerNavItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAF5217AF9E1E00B75D3E /* DrawerNavItemCell.xib */; };
 		6F0FAF5617AFA3C800B75D3E /* DrawerNavigationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF5517AFA3C800B75D3E /* DrawerNavigationItem.m */; };
 		6F0FAF5B17AFA51A00B75D3E /* ViewsPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF5A17AFA51A00B75D3E /* ViewsPool.m */; };
+		6F8A722D17B23E91002BA8C5 /* SpeechRecognitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
 		6FD8A71917B0F8C7009C7493 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD8A71817B0F8C7009C7493 /* back@2x.png */; };
 		6FD8A71C17B22935009C7493 /* record_animate_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD8A71B17B22935009C7493 /* record_animate_00@2x.png */; };
@@ -213,6 +214,8 @@
 		6F0FAF5517AFA3C800B75D3E /* DrawerNavigationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawerNavigationItem.m; sourceTree = "<group>"; };
 		6F0FAF5917AFA51A00B75D3E /* ViewsPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewsPool.h; sourceTree = "<group>"; };
 		6F0FAF5A17AFA51A00B75D3E /* ViewsPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewsPool.m; sourceTree = "<group>"; };
+		6F8A722B17B23E91002BA8C5 /* SpeechRecognitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechRecognitionView.h; sourceTree = "<group>"; };
+		6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechRecognitionView.m; sourceTree = "<group>"; };
 		6FD8A71517B0DD6F009C7493 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		6FD8A71617B0DD6F009C7493 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		6FD8A71817B0F8C7009C7493 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
@@ -401,6 +404,8 @@
 				6F0FAEC317AF824B00B75D3E /* TopbarView.m */,
 				6F0FAEC817AF832700B75D3E /* DrawerView.h */,
 				6F0FAEC917AF832700B75D3E /* DrawerView.m */,
+				6F8A722B17B23E91002BA8C5 /* SpeechRecognitionView.h */,
+				6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -771,6 +776,7 @@
 				6FD8A72F17B22AD8009C7493 /* ParagraphBuilder.m in Sources */,
 				6FD8A73317B23543009C7493 /* RestClient.m in Sources */,
 				6FD8A73617B2356F009C7493 /* RestResponse.m in Sources */,
+				6F8A722D17B23E91002BA8C5 /* SpeechRecognitionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
