@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  SmartHome
+
+  Created by Zhao yang on 8/5/13.
+  Copyright (c) 2013 hentre. All rights reserved.
+*/
+
+
+/*
+ * main view controller
+ */
+"main.view"        = "Main View";
+"unit.list"        = "Units";
+"device.list"      = "Devices";
+"scene_mode"       = "Scene Mode";
+"historical.data"  = "History Data";
+"扫一扫"            = "Scaner ZBar";
+"输入二维码"         = "Input ZBar";
+"手机号注册"         ="Phone Number For Register";
+"确认"              ="OK";
