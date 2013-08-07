@@ -46,7 +46,7 @@
     view.alpha = 0.7f;
     [self addSubview:view];
     
-    [UIView animateWithDuration:0.5f
+    [UIView animateWithDuration:0.3f
                 animations:^{
                     view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
                 }
