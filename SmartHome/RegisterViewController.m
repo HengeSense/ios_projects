@@ -46,9 +46,10 @@
     self.view.backgroundColor = [UIColor blueColor];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 100, 40)];
     [text setText:NSLocalizedString(@"手机号注册", @"")];
+    [text setBackgroundColor:[UIColor blueColor]];
     [self.view addSubview:text];
     
-    phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(100, screenHeight/3, screenWidth-100, 40)];
+    phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/3, screenWidth-100, 40)];
     [phoneNumber setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:phoneNumber];
     
@@ -78,6 +79,7 @@
         NSError *error){
        
         self.xmlParser = [[NSXMLParser alloc] initWithData:data];
+        
          NSLog(@"callback data  = %@",self.xmlParser.description);
         
     }

@@ -88,6 +88,7 @@
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F237F60817B1F1130057C95B /* VerifiedCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F60717B1F1130057C95B /* VerifiedCodeViewController.m */; };
 		F237F60B17B234760057C95B /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F60A17B234760057C95B /* XMLElement.m */; };
+		F237F61117B3314E0057C95B /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F61017B3314E0057C95B /* GDataXMLNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,6 +240,8 @@
 		F237F60917B234760057C95B /* XMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLElement.h; sourceTree = "<group>"; };
 		F237F60A17B234760057C95B /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
 		F237F60C17B23C320057C95B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard_iPhone.storyboard"; sourceTree = "<group>"; };
+		F237F60F17B3314E0057C95B /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		F237F61017B3314E0057C95B /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +444,8 @@
 		6F0FAEA417AF802000B75D3E /* third */ = {
 			isa = PBXGroup;
 			children = (
+				F237F60F17B3314E0057C95B /* GDataXMLNode.h */,
+				F237F61017B3314E0057C95B /* GDataXMLNode.m */,
 				6F0FAF1717AF882600B75D3E /* ZBarSDK */,
 				6F0FAECB17AF836600B75D3E /* EGOTableViewPullRefresh */,
 			);
@@ -771,6 +776,7 @@
 				6FD8A72F17B22AD8009C7493 /* ParagraphBuilder.m in Sources */,
 				6FD8A73317B23543009C7493 /* RestClient.m in Sources */,
 				6FD8A73617B2356F009C7493 /* RestResponse.m in Sources */,
+				F237F61117B3314E0057C95B /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
