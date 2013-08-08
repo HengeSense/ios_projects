@@ -43,10 +43,10 @@
     CGFloat f = self.frame.size.height-111/2-20;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - f, self.frame.size.width, f)];
     view.backgroundColor = [UIColor blackColor];
-    view.alpha = 0.7f;
+    view.alpha = 0.8f;
     [self addSubview:view];
     
-    [UIView animateWithDuration:0.5f
+    [UIView animateWithDuration:0.3f
                 animations:^{
                     view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
                 }

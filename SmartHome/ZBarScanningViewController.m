@@ -31,14 +31,14 @@
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blueColor];
     UIButton *scannerButton = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];
-    [scannerButton setTitle:NSLocalizedString(@"扫一扫", @"") forState:UIControlStateNormal];
+    [scannerButton setTitle:NSLocalizedString(@"zbar.scan", @"") forState:UIControlStateNormal];
     [scannerButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [scannerButton addTarget:self action:@selector(buttonChange:) forControlEvents:UIControlEventTouchDown];
 //    scannerButton.center = self.view.center;
     scannerButton.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:scannerButton];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 200.0f, 90.0f, 24.0f)];
-    [text setText:NSLocalizedString(@"输入二维码", @"")];
+    [text setText:NSLocalizedString(@"zbar.enter", @"")];
     text.backgroundColor = [UIColor blueColor];
     text.textColor = [UIColor whiteColor];
     [self.view addSubview:text];
