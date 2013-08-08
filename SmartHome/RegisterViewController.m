@@ -7,6 +7,7 @@
 //
 
 #import "RegisterViewController.h"
+#import "UIViewController+UIViewControllerExtension.h"
 
 @interface RegisterViewController ()
 
@@ -71,7 +72,7 @@
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setTimeoutInterval:30.0f];
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
     NSOperationQueue *queue = [NSOperationQueue new];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(
         NSURLResponse *response,
@@ -80,11 +81,14 @@
        
         
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
-         NSLog(@"callback data  = %@",doc.rootElement);
+        NSLog(@"url=%@",urlAsString);
+        NSLog(@"callback data  = %@",doc.rootElement);
         
     }
         
      ];
+    
+
     
 }
 -(int)randomIntBetween:(int)num1 andLargerInt:(int)num2
