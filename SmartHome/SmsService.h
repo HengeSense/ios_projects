@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ServiceBase.h"
 
-@interface SmsService : NSObject
+@interface SmsService : ServiceBase
 
 @end
