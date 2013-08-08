@@ -7,6 +7,13 @@
 */
 
 
+
+/*
+ * global
+ */
+"OK"               = "好的";
+"DONE"             = "完成";
+
 /*
  * main view controller
  */
@@ -15,7 +22,14 @@
 "device.list"      = "设备列表";
 "scene_mode"       = "情景模式";
 "historical.data"  = "历史数据";
+
+/*
+ * zbar scan view controller
+ */
 "zbar.scan"        = "扫一扫";
 "zbar.enter"       = "请输入二维码";
+
+/*
+ * register view controller
+ */
 "phone.register"   = "手机号码注册";
-"OK"               = "确认";
