@@ -10,8 +10,8 @@
 /*
  * global
  */
-"OK"               = "OK";
-"DONE"             = "Done";
+"ok"               = "OK";
+"done"             = "Done";
 
 /*
  * main view controller
