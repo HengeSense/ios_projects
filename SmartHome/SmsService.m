@@ -10,7 +10,8 @@
 #import "RestClient.h"
 
 #define SMS_URL @"http://si.800617.com:4400"
-
+#define SMS_UN @"ctyswse-27"
+#define SMS_PWD @"b3d2dd"
 @implementation SmsService {
     RestClient *client;
 }
@@ -51,8 +52,8 @@
     return self;
 }
 
-- (void)sendMessageFor:(NSString *)sms mobile:(NSString *)phoneNumber {
-    [client getForUrl:@"" acceptType:@"application/xml" success:@selector(sendMessageSuccess:) error:@selector(sendMessageFailed:) for:self callback:nil];
+- (void)sendMessageFor:(NSString *)msg mobile:(NSString *)phoneNumber {
+    [client getForUrl:[SMS_URL stringByAppendingFormat:@"?un=%@&pwd=%@&mobile=%@&msg=%@",SMS_UN,SMS_PWD,phoneNumber,msg] acceptType:@"application/xml" success:@selector(sendMessageSuccess:) error:@selector(sendMessageFailed:) for:self callback:nil];
 }
 
 - (void)sendMessageSuccess:(RestResponse *)resp {

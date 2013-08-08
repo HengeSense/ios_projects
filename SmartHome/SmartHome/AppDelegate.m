@@ -47,7 +47,7 @@
 
 - (SmsService *)smsService {
     if(smsService == nil) {
-//        smsService = 
+        smsService = [SmsService new];
     }
     return smsService;
 }
