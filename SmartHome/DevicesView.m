@@ -54,7 +54,7 @@
 - (void)goReg {
     RegisterViewController *regViewController = [[RegisterViewController alloc] init];
     
-    regViewController.preViewController = self.ownerController;
+//    regViewController.preViewController = self.ownerController;
     [self.ownerController.navigationController pushViewController:regViewController animated:YES];
 }
 

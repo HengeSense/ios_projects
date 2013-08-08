@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NavViewController.h"
 #import "XMLElement.h"
 #import "GDataXMLNode.h"
 
-@interface RegisterViewController : NavViewController<NSXMLParserDelegate>
+@interface RegisterViewController : UIViewController<NSXMLParserDelegate>
+
 @property (strong,nonatomic) NSXMLParser *xmlParser;
+
 @end

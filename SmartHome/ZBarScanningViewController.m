@@ -7,6 +7,7 @@
 //
 
 #import "ZBarScanningViewController.h"
+#import "UIViewController+UIViewControllerExtension.h"
 
 
 @interface ZBarScanningViewController ()
@@ -16,6 +17,7 @@
 @implementation ZBarScanningViewController{
     UITextField *zbarCode;
 }
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,16 +27,30 @@
     return self;
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [self initDefaults];
+    [self initUI];
+}
+
+- (void)initDefaults {
+    
+}
+
+- (void)initUI {
     self.view.backgroundColor = [UIColor blueColor];
     UIButton *scannerButton = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];
     [scannerButton setTitle:NSLocalizedString(@"zbar.scan", @"") forState:UIControlStateNormal];
     [scannerButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [scannerButton addTarget:self action:@selector(buttonChange:) forControlEvents:UIControlEventTouchDown];
-//    scannerButton.center = self.view.center;
+    //    scannerButton.center = self.view.center;
     scannerButton.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:scannerButton];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 200.0f, 90.0f, 24.0f)];
@@ -46,10 +62,18 @@
     [zbarCode setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:zbarCode];
     
-        
+    UIButton *btnDone = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 120, 48)];
+    [btnDone setTitle:@"完成" forState:UIControlStateNormal];
+    [btnDone addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnDone];
 }
 
-- (void) imagePickerController: (UIImagePickerController*) reader
+- (void)btnDownPressed:(id)sender {
+    self.app.rootViewController.needLoadMainViewController = YES;
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
     id<NSFastEnumeration> results =
@@ -77,10 +101,6 @@
     [self presentModalViewController: reader
                             animated: YES];
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
