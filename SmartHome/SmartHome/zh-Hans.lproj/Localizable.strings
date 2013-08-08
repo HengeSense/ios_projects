@@ -11,8 +11,8 @@
 /*
  * global
  */
-"OK"               = "好的";
-"DONE"             = "完成";
+"ok"               = "好的";
+"done"             = "完成";
 
 /*
  * main view controller
