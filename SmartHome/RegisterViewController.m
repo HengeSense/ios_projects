@@ -7,6 +7,7 @@
 //
 
 #import "RegisterViewController.h"
+#import "UIViewController+UIViewControllerExtension.h"
 
 @interface RegisterViewController ()
 
@@ -46,9 +47,10 @@
     self.view.backgroundColor = [UIColor blueColor];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 100, 40)];
     [text setText:NSLocalizedString(@"phone.register", @"")];
+    [text setBackgroundColor:[UIColor blueColor]];
     [self.view addSubview:text];
     
-    phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(100, screenHeight/3, screenWidth-100, 40)];
+    phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/3, screenWidth-100, 40)];
     [phoneNumber setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:phoneNumber];
     
@@ -70,19 +72,23 @@
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setTimeoutInterval:30.0f];
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
     NSOperationQueue *queue = [NSOperationQueue new];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(
         NSURLResponse *response,
         NSData *data,
         NSError *error){
        
-        self.xmlParser = [[NSXMLParser alloc] initWithData:data];
-         NSLog(@"callback data  = %@",self.xmlParser.description);
+        
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
+        NSLog(@"url=%@",urlAsString);
+        NSLog(@"callback data  = %@",doc.rootElement);
         
     }
         
      ];
+    
+
     
 }
 -(int)randomIntBetween:(int)num1 andLargerInt:(int)num2

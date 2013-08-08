@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
+#import "XMLElement.h"
+#import "GDataXMLNode.h"
 
 @interface RegisterViewController : NavViewController<NSXMLParserDelegate>
 @property (strong,nonatomic) NSXMLParser *xmlParser;

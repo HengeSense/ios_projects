@@ -87,8 +87,12 @@
 		6FD8A73317B23543009C7493 /* RestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73217B23543009C7493 /* RestClient.m */; };
 		6FD8A73617B2356F009C7493 /* RestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73517B2356F009C7493 /* RestResponse.m */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
+		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
+		F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */; };
+		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
 		F237F60817B1F1130057C95B /* VerifiedCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F60717B1F1130057C95B /* VerifiedCodeViewController.m */; };
 		F237F60B17B234760057C95B /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F60A17B234760057C95B /* XMLElement.m */; };
+		F237F61117B3314E0057C95B /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F61017B3314E0057C95B /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,11 +241,18 @@
 		6FD8A73517B2356F009C7493 /* RestResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestResponse.m; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
+		F237167E17B349650057C95B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		F237168017B371460057C95B /* UIViewController+UIViewControllerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+UIViewControllerExtension.h"; sourceTree = "<group>"; };
+		F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+UIViewControllerExtension.m"; sourceTree = "<group>"; };
+		F237168317B3715C0057C95B /* SmsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsService.h; sourceTree = "<group>"; };
+		F237168417B3715C0057C95B /* SmsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsService.m; sourceTree = "<group>"; };
 		F237F60617B1F1130057C95B /* VerifiedCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifiedCodeViewController.h; sourceTree = "<group>"; };
 		F237F60717B1F1130057C95B /* VerifiedCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiedCodeViewController.m; sourceTree = "<group>"; };
 		F237F60917B234760057C95B /* XMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLElement.h; sourceTree = "<group>"; };
 		F237F60A17B234760057C95B /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
 		F237F60C17B23C320057C95B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard_iPhone.storyboard"; sourceTree = "<group>"; };
+		F237F60F17B3314E0057C95B /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		F237F61017B3314E0057C95B /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F237167F17B349650057C95B /* libxml2.dylib in Frameworks */,
 				6FD8A72217B229C4009C7493 /* SystemConfiguration.framework in Frameworks */,
 				6F0FAF4B17AF8B4600B75D3E /* CoreVideo.framework in Frameworks */,
 				6F0FAF4917AF8B4000B75D3E /* CoreMedia.framework in Frameworks */,
@@ -297,6 +309,7 @@
 		6F0FAE7617AF7F9F00B75D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F237167E17B349650057C95B /* libxml2.dylib */,
 				6F0FAF4417AF8B0D00B75D3E /* libiconv.dylib */,
 				6F0FAF3017AF882600B75D3E /* libzbar.a */,
 				6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */,
@@ -372,6 +385,8 @@
 		6F0FAEA017AF800500B75D3E /* services */ = {
 			isa = PBXGroup;
 			children = (
+				F237168317B3715C0057C95B /* SmsService.h */,
+				F237168417B3715C0057C95B /* SmsService.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -439,6 +454,8 @@
 				F205B78217B0EEE2003EC863 /* NavViewController.m */,
 				F237F60617B1F1130057C95B /* VerifiedCodeViewController.h */,
 				F237F60717B1F1130057C95B /* VerifiedCodeViewController.m */,
+				F237168017B371460057C95B /* UIViewController+UIViewControllerExtension.h */,
+				F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -446,6 +463,8 @@
 		6F0FAEA417AF802000B75D3E /* third */ = {
 			isa = PBXGroup;
 			children = (
+				F237F60F17B3314E0057C95B /* GDataXMLNode.h */,
+				F237F61017B3314E0057C95B /* GDataXMLNode.m */,
 				6F0FAF1717AF882600B75D3E /* ZBarSDK */,
 				6F0FAECB17AF836600B75D3E /* EGOTableViewPullRefresh */,
 			);
@@ -776,6 +795,9 @@
 				6FD8A72F17B22AD8009C7493 /* ParagraphBuilder.m in Sources */,
 				6FD8A73317B23543009C7493 /* RestClient.m in Sources */,
 				6FD8A73617B2356F009C7493 /* RestResponse.m in Sources */,
+				F237F61117B3314E0057C95B /* GDataXMLNode.m in Sources */,
+				F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */,
+				F237168517B3715C0057C95B /* SmsService.m in Sources */,
 				6F8A722D17B23E91002BA8C5 /* SpeechRecognitionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,13 +911,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartHome/SmartHome-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/EGOTableViewPullRefresh/ZBarSDK\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -910,13 +935,16 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartHome/SmartHome-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/EGOTableViewPullRefresh/ZBarSDK\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
