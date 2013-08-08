@@ -78,9 +78,9 @@
         NSData *data,
         NSError *error){
        
-        self.xmlParser = [[NSXMLParser alloc] initWithData:data];
         
-         NSLog(@"callback data  = %@",self.xmlParser.description);
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
+         NSLog(@"callback data  = %@",doc.rootElement);
         
     }
         
