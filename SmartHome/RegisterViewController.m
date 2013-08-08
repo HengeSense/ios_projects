@@ -45,7 +45,7 @@
     
     self.view.backgroundColor = [UIColor blueColor];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 100, 40)];
-    [text setText:NSLocalizedString(@"手机号注册", @"")];
+    [text setText:NSLocalizedString(@"phone.register", @"")];
     [self.view addSubview:text];
     
     phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(100, screenHeight/3, screenWidth-100, 40)];
@@ -54,7 +54,7 @@
     
     UIButton *OKButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 64)];
     OKButton.center = self.view.center;
-    [OKButton setTitle:NSLocalizedString(@"确认", @"") forState:UIControlStateNormal];
+    [OKButton setTitle:NSLocalizedString(@"OK", @"") forState:UIControlStateNormal];
     [OKButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:OKButton];
     

@@ -15,3 +15,7 @@
 "device.list"      = "设备列表";
 "scene_mode"       = "情景模式";
 "historical.data"  = "历史数据";
+"zbar.scan"        = "扫一扫";
+"zbar.enter"       = "请输入二维码";
+"phone.register"   = "手机号码注册";
+"OK"               = "确认";
