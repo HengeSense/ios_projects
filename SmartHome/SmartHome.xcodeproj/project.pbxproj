@@ -77,6 +77,7 @@
 		6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */; };
 		6F8A722D17B23E91002BA8C5 /* SpeechRecognitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */; };
 		6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240217B482F50042EA41 /* BaseViewController.m */; };
+		6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240617B4B4500042EA41 /* ViewUtils.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
 		6FD8A71917B0F8C7009C7493 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD8A71817B0F8C7009C7493 /* back@2x.png */; };
 		6FD8A71C17B22935009C7493 /* record_animate_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD8A71B17B22935009C7493 /* record_animate_00@2x.png */; };
@@ -227,6 +228,8 @@
 		6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechRecognitionView.m; sourceTree = "<group>"; };
 		6FB4240117B482F50042EA41 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6FB4240217B482F50042EA41 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		6FB4240517B4B4500042EA41 /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
+		6FB4240617B4B4500042EA41 /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
 		6FD8A71517B0DD6F009C7493 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		6FD8A71617B0DD6F009C7493 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		6FD8A71817B0F8C7009C7493 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
@@ -618,10 +621,9 @@
 		6F0FAF5817AFA4E800B75D3E /* ui_utils */ = {
 			isa = PBXGroup;
 			children = (
+				6FB4240817B4B4560042EA41 /* view */,
 				6FD8A72617B22A66009C7493 /* core_text */,
 				6FD8A71D17B22961009C7493 /* speech_recognition */,
-				6F0FAF5917AFA51A00B75D3E /* ViewsPool.h */,
-				6F0FAF5A17AFA51A00B75D3E /* ViewsPool.m */,
 			);
 			name = ui_utils;
 			sourceTree = "<group>";
@@ -633,6 +635,17 @@
 				F237F61017B3314E0057C95B /* GDataXMLNode.m */,
 			);
 			name = GDataXMLNode;
+			sourceTree = "<group>";
+		};
+		6FB4240817B4B4560042EA41 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				6F0FAF5917AFA51A00B75D3E /* ViewsPool.h */,
+				6F0FAF5A17AFA51A00B75D3E /* ViewsPool.m */,
+				6FB4240517B4B4500042EA41 /* ViewUtils.h */,
+				6FB4240617B4B4500042EA41 /* ViewUtils.m */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		6FD8A71A17B22921009C7493 /* test */ = {
@@ -816,6 +829,7 @@
 				6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */,
 				6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */,
 				6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */,
+				6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

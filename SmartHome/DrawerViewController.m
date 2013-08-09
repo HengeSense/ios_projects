@@ -128,7 +128,7 @@
                 }
                 if([@"left" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    self.mainView.center =CGPointMake(160, self.mainView.center.y);
+                    self.mainView.center = CGPointMake(160, self.mainView.center.y);
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -268,7 +268,6 @@
 
 - (void)showMainView {
     if(self.mainView == nil) return;
-//    if(self.mainView.center.x == 160) return;
     if(!(self.panFromScrollViewFirstPage && [intentionDirection isEqualToString:@"left"])
        && !(self.panFromScrollViewLastPage && [intentionDirection isEqualToString:@"right"])) {
         self.mainView.backgroundColor = [UIColor clearColor];

@@ -9,6 +9,7 @@
 #import "MainView.h"
 
 @implementation MainView {
+    BOOL speechViewIsOpenning;
     
 }
 
