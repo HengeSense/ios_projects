@@ -476,8 +476,7 @@
 		6F0FAEA417AF802000B75D3E /* third */ = {
 			isa = PBXGroup;
 			children = (
-				F237F60F17B3314E0057C95B /* GDataXMLNode.h */,
-				F237F61017B3314E0057C95B /* GDataXMLNode.m */,
+				6FB4240417B48CC70042EA41 /* GDataXMLNode */,
 				6F0FAF1717AF882600B75D3E /* ZBarSDK */,
 				6F0FAECB17AF836600B75D3E /* EGOTableViewPullRefresh */,
 			);
@@ -630,6 +629,15 @@
 				6F0FAF5A17AFA51A00B75D3E /* ViewsPool.m */,
 			);
 			name = ui_utils;
+			sourceTree = "<group>";
+		};
+		6FB4240417B48CC70042EA41 /* GDataXMLNode */ = {
+			isa = PBXGroup;
+			children = (
+				F237F60F17B3314E0057C95B /* GDataXMLNode.h */,
+				F237F61017B3314E0057C95B /* GDataXMLNode.m */,
+			);
+			name = GDataXMLNode;
 			sourceTree = "<group>";
 		};
 		6FD8A71A17B22921009C7493 /* test */ = {
