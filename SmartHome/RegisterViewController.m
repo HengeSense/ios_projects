@@ -59,6 +59,7 @@
     phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/3, screenWidth-100, 40)];
     [phoneNumber setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:phoneNumber];
+    phoneNumber.keyboardType = UIKeyboardTypePhonePad;
     
     sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 64)];
     sendButton.center = self.view.center;
@@ -73,6 +74,7 @@
     
     verification = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/2+20, 100, 40)];
     [verification setBackgroundColor:[UIColor whiteColor]];
+    verification.keyboardType = UIKeyboardTypePhonePad;
     [self.view addSubview:verification];
     
     
@@ -99,24 +101,32 @@
 }
 -(void) send{
     verificationCode = [NSString stringWithFormat:@"%i",[self randomIntBetween:100000 andLargerInt:999999]];
-    SmsService *smsService = self.app.smsService;
+    SmsService *smsService = self.smsService;
     [smsService sendMessage:verificationCode for: phoneNumber.text success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
 }
 -(void) handleSendSuccess:(RestResponse *) resp{
-    if(resp.statusCode == 200){
-        NSData *data = resp.body;
+
+    NSLog(@"%d", resp.statusCode);
+    if(resp.statusCode == 200) {
+//    if(resp.statusCode == 200){
+       NSData *data = resp.body;
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:NULL];
-        NSString *result = [[doc rootElement] attributeForName:@"Result"].stringValue;
-        if([result isEqualToString:@"1"]){
-            [self.sendTimer invalidate];
-            
-        }else{
-            
-        }
-        
+    NSLog(@"doc = %@",doc);
+//        NSString *result = [[doc rootElement] attributeForName:@"Result"].stringValue;
+//        if([result isEqualToString:@"1"]){
+//            [self.sendTimer invalidate];
+//            
+//        }else{
+//            
+//        }
+//        
+//    }
+    } else {
+        [self handleSendfailed:resp];
     }
 }
 -(void) handleSendfailed:(RestResponse *) resp{
+        NSLog(@"error %d", resp.statusCode);
          
 }
 - (int)randomIntBetween:(int)num1 andLargerInt:(int)num2 {

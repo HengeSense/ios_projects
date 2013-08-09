@@ -70,7 +70,7 @@
 
 - (SmsService *)smsService {
     if(smsService == nil) {
-        smsService = [SmsService new];
+        smsService = [[SmsService alloc] init];
     }
     return smsService;
 }

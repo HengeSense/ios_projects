@@ -80,7 +80,7 @@ timeoutInterval=_timeoutInterval, auth=_auth;
 - (void)executeForUrl:(NSString *)u method:(NSString *)m headers:(NSDictionary *)h body : (NSData *) b success:(SEL)s error:(SEL)e for:(NSObject *)obj callback:(id)cb {
     
     @try {
-        
+        NSLog(@"%@", [self getFullUrl:u] );
         NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [self getFullUrl:u] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:self.timeoutInterval];
         request.HTTPMethod = m;
         if(h != nil) {
@@ -113,10 +113,10 @@ timeoutInterval=_timeoutInterval, auth=_auth;
                                        }
                                    } else {
                                        if(obj != nil && e != nil) {
-                                           if([obj respondsToSelector:s]) {
+                                           if([obj respondsToSelector:e]) {
                                                response.statusCode = error.code;
                                                response.failedReason = error.localizedFailureReason;
-                                               [obj performSelectorOnMainThread:s withObject:response waitUntilDone:NO];
+                                               [obj performSelectorOnMainThread:e withObject:response waitUntilDone:NO];
                                            }
                                        }
                                    }
@@ -125,7 +125,7 @@ timeoutInterval=_timeoutInterval, auth=_auth;
         RestResponse *response = [[RestResponse alloc] init];
         response.statusCode = 500; //Server internal error
         response.failedReason = ex.reason;
-        [obj performSelectorOnMainThread:s withObject:response waitUntilDone:NO];
+        [obj performSelectorOnMainThread:e withObject:response waitUntilDone:NO];
     }
 }
 
@@ -140,19 +140,24 @@ timeoutInterval=_timeoutInterval, auth=_auth;
     if([NSString isBlank:relativeUrl]) return [[NSURL alloc] initWithString:self.baseUrl];
     if([NSString isBlank:self.baseUrl]) return [[NSURL alloc] initWithString:relativeUrl];
     
+    
     BOOL hasEnd;
     BOOL hasStart;
     NSString *fullUrl;
     
-    hasEnd = [self.baseUrl hasSuffix:@"/"];
-    hasStart = [relativeUrl hasPrefix:@"/"];
-    
-    if(hasEnd && hasStart) {
-        fullUrl = [self.baseUrl stringByAppendingString:[relativeUrl substringFromIndex:1]];
-    } else if(!hasEnd && !hasStart) {
-        fullUrl = [[self.baseUrl stringByAppendingString:@"/"] stringByAppendingString:relativeUrl];
-    } else {
+    if([relativeUrl hasPrefix:@"?"]) {
         fullUrl = [self.baseUrl stringByAppendingString:relativeUrl];
+    } else {
+        hasEnd = [self.baseUrl hasSuffix:@"/"];
+        hasStart = [relativeUrl hasPrefix:@"/"];
+        
+        if(hasEnd && hasStart) {
+            fullUrl = [self.baseUrl stringByAppendingString:[relativeUrl substringFromIndex:1]];
+        } else if(!hasEnd && !hasStart) {
+            fullUrl = [[self.baseUrl stringByAppendingString:@"/"] stringByAppendingString:relativeUrl];
+        } else {
+            fullUrl = [self.baseUrl stringByAppendingString:relativeUrl];
+        }
     }
     return [[NSURL alloc] initWithString:fullUrl];
 }
