@@ -19,6 +19,7 @@
     UITextField *verification;
     UIButton *sendButton;
     NSTimeInterval resendTimeInterval;
+    NSString *accountPhone;
     @private NSString *verificationCode;
 
 }
@@ -61,8 +62,10 @@
     [self.view addSubview:phoneNumber];
     phoneNumber.keyboardType = UIKeyboardTypePhonePad;
     
-    sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 64)];
+    sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
     sendButton.center = self.view.center;
+    sendButton.backgroundColor = [UIColor whiteColor];
+    [sendButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [sendButton setTitle:NSLocalizedString(@"send.verificationCode", @"") forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:sendButton];
@@ -72,18 +75,20 @@
     [text setBackgroundColor:[UIColor blueColor]];
     [self.view addSubview:text];
     
-    verification = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/2+20, 100, 40)];
+    verification = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/2+50, 100, 40)];
     [verification setBackgroundColor:[UIColor whiteColor]];
     verification.keyboardType = UIKeyboardTypePhonePad;
     [self.view addSubview:verification];
     
     
-    UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth/2, screenHeight/2+40, 100, 64)];
+    UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(120, screenHeight/2+100, 100, 40)];
+    okButton.backgroundColor = [UIColor whiteColor];
+    [okButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [okButton setTitle:NSLocalizedString(@"OK", @"") forState:UIControlStateNormal];
-    [okButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
+    [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:okButton];
     
-    resendTimeInterval = 60;
+    resendTimeInterval = 10;
 }
 
 - (void)sendVerificationCode {
@@ -93,34 +98,58 @@
     
 }
 -(void) sendTimeCountDown{
-    if(resendTimeInterval>0){
-        [sendButton setTitle:[NSString stringWithFormat:@"%li",(long)resendTimeInterval-1] forState:UIControlStateNormal];
+    if((long)resendTimeInterval>0){
+       resendTimeInterval = resendTimeInterval-1;
+        [sendButton setTitle:[NSString stringWithFormat:@"%li",(long)resendTimeInterval] forState:UIControlStateNormal];
     }else{
+        [sendButton setTitle:@"resend" forState:UIControlStateNormal];
+        [sendTimer invalidate];
         [sendButton setEnabled:YES];
+        resendTimeInterval = 10;
     }
 }
 -(void) send{
     verificationCode = [NSString stringWithFormat:@"%i",[self randomIntBetween:100000 andLargerInt:999999]];
     SmsService *smsService = self.smsService;
-    [smsService sendMessage:verificationCode for: phoneNumber.text success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
+    accountPhone = phoneNumber.text;
+    [smsService sendMessage:verificationCode for: accountPhone success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
+}
+-(void) checkVerificationCode{
+    
+    NSString *input = verification.text;
+    
+    if ([input isEqualToString:verificationCode]) {
+        
+        [self.navigationController pushViewController:[[ZBarScanningViewController alloc] init] animated:YES];
+        self.settings.isValid = YES;
+        self.settings.accountPhone = accountPhone;
+        [self.settings saveSettings];
+    }else{
+        UIAlertView *checkAlert = [[UIAlertView alloc] initWithTitle:@"error" message:@"check.verification.code.error" delegate:self cancelButtonTitle:NSLocalizedString(@"retry", @"") otherButtonTitles:nil];
+        [self.view addSubview:checkAlert];
+    }
 }
 -(void) handleSendSuccess:(RestResponse *) resp{
 
     NSLog(@"%d", resp.statusCode);
     if(resp.statusCode == 200) {
-//    if(resp.statusCode == 200){
        NSData *data = resp.body;
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:NULL];
-    NSLog(@"doc = %@",doc);
-//        NSString *result = [[doc rootElement] attributeForName:@"Result"].stringValue;
-//        if([result isEqualToString:@"1"]){
-//            [self.sendTimer invalidate];
-//            
-//        }else{
-//            
-//        }
-//        
-//    }
+        NSArray *nodes =[doc nodesForXPath:@"//Result" error:nil];
+        NSString *result = nil;
+        for (GDataXMLElement *element in nodes) {
+           
+            result = element.stringValue;
+            
+        }
+        if([result isEqualToString:@"1"]){
+            NSLog(@"ok");
+            
+        }else if([@"" isEqualToString:result]){
+            NSLog(@"wrong");
+        }
+        
+    
     } else {
         [self handleSendfailed:resp];
     }
