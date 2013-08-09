@@ -7,14 +7,37 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
+#import "RegisterViewController.h"
 
 @implementation AppDelegate
 
 @synthesize smsService;
+@synthesize settings;
+@synthesize rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Override point for customization after application launch.
+{   
+    // initial global settings file
+    self.settings = [[GlobalSettings alloc] init];
+    
+    UINavigationController *navigationController =
+        [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
+    [navigationController setNavigationBarHidden:YES];
+    navigationController.delegate = rootViewController;
+
+    if(self.settings.isValid) {
+        [rootViewController.navigationController pushViewController:
+            [[MainViewController alloc] init] animated:NO];
+    } else {
+        [rootViewController.navigationController pushViewController:
+         [[RegisterViewController alloc] init] animated:NO];
+    }
+
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 							
@@ -50,6 +73,13 @@
         smsService = [SmsService new];
     }
     return smsService;
+}
+
+- (RootViewController *)rootViewController {
+    if(rootViewController == nil) {
+        rootViewController = [[RootViewController alloc] init];
+    }
+    return rootViewController;
 }
 
 @end

@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
-#import "ZBarScanningViewController.h"
-#import "RegisterViewController.h"
 
 @interface DevicesView : NavigationView
 

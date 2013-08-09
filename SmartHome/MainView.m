@@ -27,7 +27,6 @@
 - (void)initUI {
     [super initUI];
     self.backgroundColor = [UIColor lightGrayColor];
-    
 
     UIButton *btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width-75/2)/2, self.frame.size.height-111/2 - 10, 75/2, 111/2)];
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"record_animate_00.png"] forState:UIControlStateNormal];

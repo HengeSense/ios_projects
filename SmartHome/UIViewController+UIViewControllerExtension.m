@@ -10,6 +10,11 @@
 
 @implementation UIViewController (UIViewControllerExtension)
 
+
+- (GlobalSettings *)settings {
+    return self.app.settings;
+}
+
 - (SmsService *)smsService {
     return self.app.smsService;
 }

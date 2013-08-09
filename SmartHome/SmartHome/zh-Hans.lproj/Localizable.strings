@@ -7,15 +7,28 @@
 */
 
 
+
+/*
+ * global
+ */
+"ok"               = "好的";
+"done"             = "完成";
+
 /*
  * main view controller
  */
 "main.view"        = "主界面";
-"unit.list"        = "主控列表";
 "device.list"      = "设备列表";
 "scene_mode"       = "情景模式";
 "historical.data"  = "历史数据";
+
+/*
+ * zbar scan view controller
+ */
 "zbar.scan"        = "扫一扫";
 "zbar.enter"       = "请输入二维码";
+
+/*
+ * register view controller
+ */
 "phone.register"   = "手机号码注册";
-"OK"               = "确认";

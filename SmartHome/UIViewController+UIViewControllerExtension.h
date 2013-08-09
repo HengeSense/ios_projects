@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "SmsService.h"
 #import "AppDelegate.h"
+#import "GlobalSettings.h"
 
 @interface UIViewController (UIViewControllerExtension)
 
-@property(strong, nonatomic, readonly) SmsService *smsService;
-@property(strong, nonatomic, readonly) AppDelegate *app;
+
+@property (strong, nonatomic, readonly) AppDelegate *app;
+@property (strong, nonatomic, readonly) GlobalSettings *settings;
+
+@property (strong, nonatomic, readonly) SmsService *smsService;
 
 @end

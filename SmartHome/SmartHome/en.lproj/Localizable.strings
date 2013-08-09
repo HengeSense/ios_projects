@@ -8,14 +8,26 @@
 
 
 /*
+ * global
+ */
+"ok"               = "OK";
+"done"             = "Done";
+
+/*
  * main view controller
  */
 "main.view"        = "Main View";
-"unit.list"        = "Units";
-"device.list"      = "Devices";
+"device.list"      = "Devices View";
 "scene_mode"       = "Scene Mode";
 "historical.data"  = "History Data";
-"zbar.scan"        = "Scaner ZBar";
-"zbar.enter"       = "Input ZBar";
-"phone.register"   = "Phone Number For Register";
-"OK"               = "OK";
+
+/*
+ * zbar scan view controller
+ */
+"zbar.scan"        = "Scaner Zbar";
+"zbar.enter"       = "Please enter Zbar code";
+
+/*
+ * register view controller
+ */
+"phone.register"   = "Phone number register";

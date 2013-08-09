@@ -7,6 +7,7 @@
 //
 
 #import "RegisterViewController.h"
+#import "ZBarScanningViewController.h"
 #import "UIViewController+UIViewControllerExtension.h"
 
 @interface RegisterViewController ()
@@ -15,18 +16,18 @@
 
 @implementation RegisterViewController{
     UITextField *phoneNumber;
-@private NSString *un ;
-@private NSString *pwd;
-@private NSString *urlAsString;
-@private NSString *mobile;
-@private NSString *verificationCode;
+    @private NSString *un ;
+    @private NSString *pwd;
+    @private NSString *urlAsString;
+    @private NSString *mobile;
+    @private NSString *verificationCode;
 }
 @synthesize xmlParser = _xmlParser;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -34,13 +35,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     [self initUI];
-   
-
-    
 }
--(void) initUI{
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)initUI {
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
@@ -59,10 +63,9 @@
     [OKButton setTitle:NSLocalizedString(@"OK", @"") forState:UIControlStateNormal];
     [OKButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:OKButton];
-    
-    
 }
--(void)sendVerificationCode{
+
+- (void)sendVerificationCode {
     un = @"ctyswse-27";
     pwd = @"b3d2dd";
     urlAsString = @"http://si.800617.com:4400/SendLenSms.aspx";
@@ -85,27 +88,17 @@
         NSLog(@"callback data  = %@",doc.rootElement);
         
     }
-        
      ];
-    
 
-    
-}
--(int)randomIntBetween:(int)num1 andLargerInt:(int)num2
-{
-    int startVal = num1*10000;
-    int endVal = num2*10000;
-    
-    int randomValue = startVal +(arc4random()%(endVal - startVal));
-    float a = randomValue;
-    
-    return(a /10000);
+
+    [self.navigationController pushViewController:[[ZBarScanningViewController alloc] init] animated:YES];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (int)randomIntBetween:(int)num1 andLargerInt:(int)num2 {
+    int startVal = num1 * 10000;
+    int endVal = num2 * 10000;
+    int randomValue = startVal + (arc4random() % (endVal - startVal));
+    return randomValue /10000;
 }
 
 @end
