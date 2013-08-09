@@ -11,5 +11,6 @@
 #import "ServiceBase.h"
 
 @interface SmsService : ServiceBase
-
+- (void)sendMessage:(NSString *)message for:(NSString *)phoneNumber
+            success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
 @end

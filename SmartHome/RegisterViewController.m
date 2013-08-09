@@ -16,14 +16,14 @@
 
 @implementation RegisterViewController{
     UITextField *phoneNumber;
-    @private NSString *un ;
-    @private NSString *pwd;
-    @private NSString *urlAsString;
-    @private NSString *mobile;
+    UITextField *verification;
+    UIButton *sendButton;
+    NSTimeInterval resendTimeInterval;
     @private NSString *verificationCode;
+
 }
 @synthesize xmlParser = _xmlParser;
-
+@synthesize sendTimer;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -58,42 +58,65 @@
     [phoneNumber setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:phoneNumber];
     
-    UIButton *OKButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 64)];
-    OKButton.center = self.view.center;
-    [OKButton setTitle:NSLocalizedString(@"OK", @"") forState:UIControlStateNormal];
-    [OKButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:OKButton];
+    sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 64)];
+    sendButton.center = self.view.center;
+    [sendButton setTitle:NSLocalizedString(@"send.verificationCode", @"") forState:UIControlStateNormal];
+    [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:sendButton];
+    
+    UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/2+20, 100, 40)];
+    [text2 setText:NSLocalizedString(@"verificationCode", @"")];
+    [text setBackgroundColor:[UIColor blueColor]];
+    [self.view addSubview:text];
+    
+    verification = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/2+20, 100, 40)];
+    [verification setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:verification];
+    
+    
+    UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth/2, screenHeight/2+40, 100, 64)];
+    [okButton setTitle:NSLocalizedString(@"OK", @"") forState:UIControlStateNormal];
+    [okButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:okButton];
+    
+    resendTimeInterval = 60;
 }
 
 - (void)sendVerificationCode {
-    un = @"ctyswse-27";
-    pwd = @"b3d2dd";
-    urlAsString = @"http://si.800617.com:4400/SendLenSms.aspx";
-    mobile = phoneNumber.text;
+    [sendButton setEnabled:NO];
+    sendTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendTimeCountDown) userInfo:nil repeats:YES];
+    [self send];
+    
+}
+-(void) sendTimeCountDown{
+    if(resendTimeInterval>0){
+        [sendButton setTitle:[NSString stringWithFormat:@"%li",(long)resendTimeInterval-1] forState:UIControlStateNormal];
+    }else{
+        [sendButton setEnabled:YES];
+    }
+}
+-(void) send{
     verificationCode = [NSString stringWithFormat:@"%i",[self randomIntBetween:100000 andLargerInt:999999]];
-    urlAsString = [urlAsString stringByAppendingFormat:@"?un=%@&pwd=%@&mobile=%@&msg=%@",un,pwd,mobile,verificationCode];
-    NSURL *url = [NSURL URLWithString:urlAsString];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setTimeoutInterval:30.0f];
-    [request setHTTPMethod:@"POST"];
-    NSOperationQueue *queue = [NSOperationQueue new];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(
-        NSURLResponse *response,
-        NSData *data,
-        NSError *error){
-       
-        
-        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:&error];
-        NSLog(@"url=%@",urlAsString);
-        NSLog(@"callback data  = %@",doc.rootElement);
+    SmsService *smsService = self.app.smsService;
+    [smsService sendMessage:verificationCode for: phoneNumber.text success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
+}
+-(void) handleSendSuccess:(RestResponse *) resp{
+    if(resp.statusCode == 200){
+        NSData *data = resp.body;
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:NULL];
+        NSString *result = [[doc rootElement] attributeForName:@"Result"].stringValue;
+        if([result isEqualToString:@"1"]){
+            [self.sendTimer invalidate];
+            
+        }else{
+            
+        }
         
     }
-     ];
-
-
-    [self.navigationController pushViewController:[[ZBarScanningViewController alloc] init] animated:YES];
 }
-
+-(void) handleSendfailed:(RestResponse *) resp{
+         
+}
 - (int)randomIntBetween:(int)num1 andLargerInt:(int)num2 {
     int startVal = num1 * 10000;
     int endVal = num2 * 10000;

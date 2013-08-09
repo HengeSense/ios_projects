@@ -9,9 +9,9 @@
 #import "SmsService.h"
 #import "RestClient.h"
 
-#define SMS_URL  @"http://si.800617.com:4400"
-#define SMS_UN   @"ctyswse-27"
-#define SMS_PWD  @"b3d2dd"
+#define SMS_URL  @"http://si.800617.com:4400SendLenSms.aspx"
+#define SMS_UN   @"cshtxx-1"
+#define SMS_PWD  @"0830a0"
 
 
 @implementation SmsService {
