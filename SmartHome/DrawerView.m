@@ -43,6 +43,7 @@
         tblNavigationItems = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
         tblNavigationItems.dataSource = self;
         tblNavigationItems.delegate = self;
+        tblNavigationItems.scrollEnabled = NO;
         [self addSubview:tblNavigationItems];
     }
 }

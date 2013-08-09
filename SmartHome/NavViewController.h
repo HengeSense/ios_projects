@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "TopbarView.h"
 
-@interface NavViewController : UIViewController
+@interface NavViewController : BaseViewController
 
 @property (strong, nonatomic) TopbarView *topbar;
 @property (strong, nonatomic) UIViewController *preViewController;

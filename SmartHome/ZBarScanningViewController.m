@@ -15,6 +15,9 @@
 @end
 
 @implementation ZBarScanningViewController{
+    UIButton *btnDone;
+    UILabel *lblTitle;
+    UIButton *btnZbarScan;
     UITextField *txtZbarCode;
 }
 
@@ -48,25 +51,34 @@
     self.view.backgroundColor = [UIColor darkGrayColor];
     
     //zbar scanner button
-    UIButton *btnZbarScan = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];
-    [btnZbarScan setTitle:NSLocalizedString(@"zbar.scan", @"") forState:UIControlStateNormal];
-    [btnZbarScan addTarget:self action:@selector(btnZbarScanPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnZbarScan];
+    if(btnZbarScan == nil) {
+        btnZbarScan = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];
+        [btnZbarScan setTitle:NSLocalizedString(@"zbar.scan", @"") forState:UIControlStateNormal];
+        [btnZbarScan addTarget:self action:@selector(btnZbarScanPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnZbarScan];
+    }
     
-    //text view with zbar code for user custom
-    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 200.0f, 90.0f, 24.0f)];
-    lblTitle.text = NSLocalizedString(@"zbar.enter", @"");
-    lblTitle.textColor = [UIColor whiteColor];
-    [self.view addSubview:lblTitle];
-    txtZbarCode = [[UITextField alloc] initWithFrame:CGRectMake(130.0f, 200.0f, 180.0f, 24.0f)];
-    [txtZbarCode setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:txtZbarCode];
+    if(lblTitle == nil) {
+        //text view with zbar code for user custom
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 200.0f, 90.0f, 24.0f)];
+        lblTitle.text = NSLocalizedString(@"zbar.enter", @"");
+        lblTitle.textColor = [UIColor whiteColor];
+        [self.view addSubview:lblTitle];
+    }
+    
+    if(txtZbarCode == nil) {
+        txtZbarCode = [[UITextField alloc] initWithFrame:CGRectMake(130.0f, 200.0f, 180.0f, 24.0f)];
+        [txtZbarCode setBackgroundColor:[UIColor whiteColor]];
+        [self.view addSubview:txtZbarCode];
+    }
     
     //done button to main view
-    UIButton *btnDone = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 120, 48)];
-    [btnDone setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
-    [btnDone addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnDone];
+    if(btnDone == nil) {
+        btnDone = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 120, 48)];
+        [btnDone setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
+        [btnDone addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnDone];
+    }
 }
 
 #pragma mark -
@@ -76,9 +88,13 @@
     id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
     ZBarSymbol *symbol = nil;
     for(symbol in results) break;
-    NSLog(@">>>>>>> %@", symbol.data);
-    txtZbarCode.text = symbol.data;
     [picker dismissModalViewControllerAnimated: YES];
+    [self zbarCodeScanningSuccess:symbol.data];
+}
+
+- (void)zbarCodeScanningSuccess:(NSString *)zbarCode {
+    NSLog(@">>>>>>> %@", zbarCode);
+    txtZbarCode.text = zbarCode;
 }
 
 #pragma mark -
