@@ -30,10 +30,6 @@
 {
     [super viewDidLoad];
     [self generateTopbar];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
-    [tapGesture addTarget:self action:@selector(resignKeyBoardInView:)];
-    [self.view addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,20 +47,5 @@
 - (void)backToPreViewController {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)resignKeyBoardInView:(id)sender
-{
-    UIView *view = self.view;
-    
-    for (UIView *v in view.subviews) {
-        
-        if ([v isKindOfClass:[UITextView class]] || [v isKindOfClass:[UITextField class]]) {
-            [v resignFirstResponder];
-        }
-    }
-    
-    
-}
-
 
 @end

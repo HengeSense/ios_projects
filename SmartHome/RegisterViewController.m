@@ -48,6 +48,8 @@
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
+    [self registerTapGestureToResignKeyboard];
+    
     self.view.backgroundColor = [UIColor blueColor];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 100, 40)];
     [text setText:NSLocalizedString(@"phone.register", @"")];
