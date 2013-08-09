@@ -58,7 +58,8 @@
 
 - (void)sendMessageSuccess:(RestResponse *)resp {
     if(resp.statusCode == 200) {
-//  resp.body
+        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:resp.body options:0 error:NULL];
+        NSLog(@"return value = %@",doc);
     }
 }
 
