@@ -16,7 +16,6 @@
 		6F0FAE8A17AF7F9F00B75D3E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8917AF7F9F00B75D3E /* Default.png */; };
 		6F0FAE8C17AF7F9F00B75D3E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8B17AF7F9F00B75D3E /* Default@2x.png */; };
 		6F0FAE8E17AF7F9F00B75D3E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8D17AF7F9F00B75D3E /* Default-568h@2x.png */; };
-		6F0FAE9717AF7F9F00B75D3E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAE9617AF7F9F00B75D3E /* ViewController.m */; };
 		6F0FAEA817AF805C00B75D3E /* DrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEA717AF805C00B75D3E /* DrawerViewController.m */; };
 		6F0FAEAC17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAB17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m */; };
 		6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */; };
@@ -111,8 +110,6 @@
 		6F0FAE8917AF7F9F00B75D3E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6F0FAE8B17AF7F9F00B75D3E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6F0FAE8D17AF7F9F00B75D3E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6F0FAE9517AF7F9F00B75D3E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6F0FAE9617AF7F9F00B75D3E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6F0FAEA617AF805C00B75D3E /* DrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawerViewController.h; sourceTree = "<group>"; };
 		6F0FAEA717AF805C00B75D3E /* DrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawerViewController.m; sourceTree = "<group>"; };
 		6F0FAEAA17AF80CC00B75D3E /* NSDictionary+NSNullUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NSNullUtility.h"; sourceTree = "<group>"; };
@@ -339,8 +336,6 @@
 			children = (
 				6F0FAE8617AF7F9F00B75D3E /* AppDelegate.h */,
 				6F0FAE8717AF7F9F00B75D3E /* AppDelegate.m */,
-				6F0FAE9517AF7F9F00B75D3E /* ViewController.h */,
-				6F0FAE9617AF7F9F00B75D3E /* ViewController.m */,
 				6F0FAE7E17AF7F9F00B75D3E /* Supporting Files */,
 			);
 			path = SmartHome;
@@ -782,7 +777,6 @@
 			files = (
 				6F0FAE8417AF7F9F00B75D3E /* main.m in Sources */,
 				6F0FAE8817AF7F9F00B75D3E /* AppDelegate.m in Sources */,
-				6F0FAE9717AF7F9F00B75D3E /* ViewController.m in Sources */,
 				6F0FAEA817AF805C00B75D3E /* DrawerViewController.m in Sources */,
 				6F0FAEAC17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m in Sources */,
 				6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */,
