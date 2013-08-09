@@ -35,16 +35,16 @@
 }
 
 - (void)btnSpeechPressed {
+    
     [self showSpeechView];
 }
 
 - (void)showSpeechView {
-    CGFloat f = self.frame.size.height-111/2-20;
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - f, self.frame.size.width, f)];
+    CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
+    SpeechRecognitionView *view = [[SpeechRecognitionView alloc] initWithFrame:CGRectMake(0, 0 - viewHeight, self.frame.size.width, viewHeight)];
     view.backgroundColor = [UIColor blackColor];
     view.alpha = 0.8f;
     [self addSubview:view];
-    
     [UIView animateWithDuration:0.3f
                 animations:^{
                     view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
