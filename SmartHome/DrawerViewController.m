@@ -8,12 +8,19 @@
 
 #import "DrawerViewController.h"
 
+#define BLACK_MASK_VIEW_TAG    2900
+#define BLACK_MASK_VIEW_ALPHA  0.6
+#define BLACK_BOARD_SCALE      0.95
+
 @interface DrawerViewController ()
 
 @end
 
 @implementation DrawerViewController {
+    UIView *blackLeftMaskView;
+    UIView *blackRightMaskView;
     UIView *lockView;
+    UIView *blackBoard;
     CGFloat lastedMainViewCenterX;
     CGFloat screenCenterY;
     BOOL leftViewIsAboveOnRightView;
@@ -58,11 +65,33 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     
+    if(blackLeftMaskView == nil) {
+        blackLeftMaskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, screenCenterY * 2)];
+        blackLeftMaskView.backgroundColor = [UIColor blackColor];
+        blackLeftMaskView.tag = BLACK_MASK_VIEW_TAG;
+        blackLeftMaskView.alpha = 0.4;
+    }
+    
+    if(blackRightMaskView == nil) {
+        blackRightMaskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, screenCenterY * 2)];
+        blackRightMaskView.backgroundColor = [UIColor blackColor];
+        blackRightMaskView.tag = BLACK_MASK_VIEW_TAG;
+        blackRightMaskView.alpha = 0.4;
+    }
+    
     if(self.rightView != nil) {
-        [self.view addSubview:rightView];
+        [self.rightView addSubview:blackRightMaskView];
+        [self.view addSubview:self.rightView];
+    }
+    
+    if(blackBoard == nil) {
+        blackBoard = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, screenCenterY * 2)];
+        blackBoard.backgroundColor = [UIColor blackColor];
+        [self.view addSubview:blackBoard];
     }
     
     if(self.leftView != nil) {
+        [self.leftView addSubview:blackLeftMaskView];
         [self.view addSubview:self.leftView];
     }
     
@@ -128,7 +157,7 @@
                 }
                 if([@"left" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    self.mainView.center = CGPointMake(160, self.mainView.center.y);
+                    [self showMainView:NO];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -139,7 +168,7 @@
                 }
                 if([@"left" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    self.mainView.center =CGPointMake(160, self.mainView.center.y);
+                    [self showMainView:NO];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -152,7 +181,7 @@
                 }
                 if([@"right" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    self.mainView.center =CGPointMake(160, self.mainView.center.y);
+                    [self showMainView:NO];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -163,7 +192,7 @@
                 }
                 if([@"right" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    self.mainView.center =CGPointMake(160, self.mainView.center.y);
+                    [self showMainView:NO];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -172,19 +201,19 @@
         }
         if(translation.x > 0) {
             if(leftView == nil) {
-                self.mainView.center = CGPointMake(160, screenCenterY);
+                [self showMainView:NO];
                 return;
             }
             if(!leftViewIsAboveOnRightView && rightView != nil) [self leftViewToTopLevel];
         } else if(translation.x < 0) {
             if(rightView == nil) {
-                self.mainView.center = CGPointMake(160, screenCenterY);
+                [self showMainView:NO];
                 return;
             }
             if(leftViewIsAboveOnRightView && leftView != nil) [self rightViewToTopLevel];
         }
         CGPoint center = self.mainView.center;
-        self.mainView.center = CGPointMake(lastedMainViewCenterX + translation.x, center.y);
+        [self moveMainViewToCenter:CGPointMake(lastedMainViewCenterX + translation.x, center.y)];
     } else if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
         CGFloat mainViewX = self.mainView.frame.origin.x;
         //left view
@@ -195,7 +224,7 @@
             }
             //hide
             else {
-                [self showMainView];
+                [self showMainView:YES];
             }
         }
         //right view
@@ -203,7 +232,7 @@
             if(mainViewX < (0 - self.showDrawerMaxTrasitionX)) {
                 [self showRightView];
             } else {
-                [self showMainView];
+                [self showMainView:YES];
             }
         }
         lastedMainViewCenterX = self.mainView.center.x;
@@ -211,7 +240,7 @@
 }
 
 - (void)handleTapGestureForMainViewStateHide:(UITapGestureRecognizer *)gesture {
-    [self showMainView];
+    [self showMainView:YES];
 }
 
 - (void)handlePanGestureForMainViewStateHide:(UIPanGestureRecognizer *)gesture {
@@ -223,29 +252,29 @@
         CGFloat mainViewX = self.mainView.frame.origin.x;
         CGPoint center = self.mainView.center;
         if(mainViewX >= 0 && (lastedMainViewCenterX + translation.x) <= 160) {
-            self.mainView.center = CGPointMake(160, center.y);
+            [self showMainView:NO];
             return;
         } else if(mainViewX <= 0 && (lastedMainViewCenterX + translation.x) >= 160) {
-            self.mainView.center = CGPointMake(160, center.y);
+            [self showMainView:NO];
             return;
         }
-        self.mainView.center = CGPointMake(lastedMainViewCenterX + translation.x, center.y);
+        [self moveMainViewToCenter:CGPointMake(lastedMainViewCenterX + translation.x, center.y)];
     } else if(gesture.state == UIGestureRecognizerStateEnded) {
         CGFloat mainViewX = self.mainView.frame.origin.x;
         if(mainViewX > 0) {
             if(mainViewX <= self.leftViewCenterX) {
-                [self showMainView];
+                [self showMainView:YES];
             } else {
                 [self showLeftView];
             }
         } else if(mainViewX < 0){
             if((mainViewX + 320) >= self.rightViewCenterX) {
-                [self showMainView];
+                [self showMainView:YES];
             } else {
                 [self showRightView];
             }
         } else {
-            [self showMainView];
+            [self showMainView:YES];
         }
     }
 }
@@ -257,32 +286,45 @@
     }
     if(!leftViewIsAboveOnRightView && leftView && rightView) [self leftViewToTopLevel];
     [UIView animateWithDuration:0.3 animations:^{
-        self.mainView.center = CGPointMake(160 + self.leftViewVisibleWidth, screenCenterY);
+        [self moveMainViewToCenter:CGPointMake(160 + self.leftViewVisibleWidth, screenCenterY)];
     } completion:^(BOOL finished) {
         [self.mainView addSubview:lockView];
         self.panFromScrollViewFirstPage = NO;
         self.panFromScrollViewLastPage = NO;
         self.mainView.backgroundColor = [UIColor whiteColor];
+        UIView *blackMaskView = [self.leftView viewWithTag:BLACK_MASK_VIEW_TAG];
+        if(blackMaskView) {
+            [blackMaskView removeFromSuperview];
+        }
     }];
 }
 
-- (void)showMainView {
+- (void)showMainView:(BOOL)animate {
     if(self.mainView == nil) return;
     if(!(self.panFromScrollViewFirstPage && [intentionDirection isEqualToString:@"left"])
        && !(self.panFromScrollViewLastPage && [intentionDirection isEqualToString:@"right"])) {
         self.mainView.backgroundColor = [UIColor clearColor];
     }
-    [UIView animateWithDuration:0.3 animations:^{
-        self.mainView.center = CGPointMake(160, screenCenterY);
-    } completion:^(BOOL finished) {
-        if(self.scrollView != nil) self.scrollView.scrollEnabled = YES;
-        self.panFromScrollViewFirstPage = NO;
-        self.panFromScrollViewLastPage = NO;
-        if(lockView.superview != nil) {
-            [lockView removeFromSuperview];
-        }
-        self.mainView.backgroundColor = [UIColor whiteColor];
-    }];
+    if(animate) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
+        } completion:^(BOOL finished) {
+            [self afterShowMainView];
+        }];
+    } else {
+        [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
+        [self afterShowMainView];
+    }
+}
+
+- (void)afterShowMainView {
+    if(self.scrollView != nil) self.scrollView.scrollEnabled = YES;
+    self.panFromScrollViewFirstPage = NO;
+    self.panFromScrollViewLastPage = NO;
+    if(lockView.superview != nil) {
+        [lockView removeFromSuperview];
+    }
+    self.mainView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)showRightView {
@@ -292,26 +334,104 @@
     }
     if(leftViewIsAboveOnRightView && leftView && rightView) [self rightViewToTopLevel];
     [UIView animateWithDuration:0.3 animations:^{
-        self.mainView.center = CGPointMake(160 - self.rightViewVisibleWidth, screenCenterY);
+        [self moveMainViewToCenter:CGPointMake(160 - self.rightViewVisibleWidth, screenCenterY)];
     } completion:^(BOOL finished) {
         [self.mainView addSubview:lockView];
         self.panFromScrollViewFirstPage = NO;
         self.panFromScrollViewLastPage = NO;
         self.mainView.backgroundColor = [UIColor whiteColor];
+        
+        UIView *blackMaskView = [self.rightView viewWithTag:BLACK_MASK_VIEW_TAG];
+        if(blackMaskView) {
+            [blackMaskView removeFromSuperview];
+        }
     }];
 }
 
 - (void)leftViewToTopLevel {
     if(!leftViewIsAboveOnRightView) {
-        [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+        [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:2];
         leftViewIsAboveOnRightView = YES;
     }
 }
 
 - (void)rightViewToTopLevel {
     if(leftViewIsAboveOnRightView) {
-        [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+        [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:2];
         leftViewIsAboveOnRightView = NO;
+    }
+}
+
+- (void)moveMainViewToCenter:(CGPoint)center {
+    CGFloat preX = self.mainView.center.x - 160;
+    CGFloat intentionX = center.x - self.mainView.center.x;
+    CGFloat toX = center.x - 160;
+    if(intentionX == 0) return;
+    if(toX < 0) {
+        [self addBlackMaskViewForDrawerViewIfNeed];
+        [self rightViewMoving:toX];
+    } else if(toX > 0) {
+        [self addBlackMaskViewForDrawerViewIfNeed];
+        [self leftViewMoving:toX];
+    } else {
+        if(preX == 0) return;
+        [self addBlackMaskViewForDrawerViewIfNeed];
+        if(preX > 0) {
+            [self leftViewMoving:toX];
+        } else {
+            [self rightViewMoving:toX];
+        }
+    }
+    self.mainView.center = center;
+}
+
+- (void)leftViewMoving:(CGFloat)x {
+    // .transform = CGAffineTransformMakeScale(scale, scale);
+    UIView *view = [self.leftView viewWithTag:BLACK_MASK_VIEW_TAG];
+    if(view != nil) {
+        if(x >= self.leftViewVisibleWidth) {
+            view.alpha = 0;
+            self.leftView.transform = CGAffineTransformMakeScale(1, 1);
+        } else if(x <= 0) {
+            view.alpha = BLACK_MASK_VIEW_ALPHA;
+            self.leftView.transform = CGAffineTransformMakeScale(BLACK_BOARD_SCALE, BLACK_BOARD_SCALE);
+        } else {
+            view.alpha = BLACK_MASK_VIEW_ALPHA - ((x * BLACK_MASK_VIEW_ALPHA) / self.leftViewVisibleWidth);
+            CGFloat scale = ((1 - BLACK_BOARD_SCALE) * x) / self.leftViewVisibleWidth + BLACK_BOARD_SCALE;
+            self.leftView.transform = CGAffineTransformMakeScale(scale, scale);
+        }
+    }
+}
+
+- (void)rightViewMoving:(CGFloat)x {
+    UIView *view = [self.rightView viewWithTag:BLACK_MASK_VIEW_TAG];
+    if(view != nil) {
+        if((0-x) >= self.rightViewVisibleWidth) {
+            view.alpha = 0;
+            self.rightView.transform = CGAffineTransformMakeScale(1, 1);
+        } else if(x >= 0) {
+            view.alpha = BLACK_MASK_VIEW_ALPHA;
+            self.rightView.transform = CGAffineTransformMakeScale(BLACK_BOARD_SCALE, BLACK_BOARD_SCALE);
+        } else {
+            view.alpha = BLACK_MASK_VIEW_ALPHA - (((0 - x) * BLACK_MASK_VIEW_ALPHA) / self.rightViewVisibleWidth);
+            CGFloat scale = ((1 - BLACK_BOARD_SCALE) * (0 - x)) / self.rightViewVisibleWidth + BLACK_BOARD_SCALE;
+            self.rightView.transform = CGAffineTransformMakeScale(scale, scale);
+        }
+    }
+}
+
+- (void)addBlackMaskViewForDrawerViewIfNeed {
+    if(self.rightView != nil) {
+        UIView *view = [self.rightView viewWithTag:BLACK_MASK_VIEW_TAG];
+        if(view == nil) {
+            [self.rightView addSubview:blackRightMaskView];
+        }
+    }
+    if(self.leftView != nil) {
+        UIView *view = [self.leftView viewWithTag:BLACK_MASK_VIEW_TAG];
+        if(view == nil) {
+            [self.leftView addSubview:blackLeftMaskView];
+        }
     }
 }
 

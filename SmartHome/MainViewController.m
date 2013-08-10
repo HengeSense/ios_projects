@@ -91,6 +91,13 @@
         self.leftView.backgroundColor = [UIColor whiteColor];
     }
     
+    
+    if(self.rightView == nil) {
+        UIView *vvv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20)];
+        vvv.backgroundColor = [UIColor whiteColor];
+        self.rightView = vvv;
+    }
+    
     //parameter of drawer navigation view controller
     self.leftViewVisibleWidth = 120;
     self.showDrawerMaxTrasitionX = 40;
@@ -103,7 +110,7 @@
     if(item == nil) return;
     if(currentItem != nil) {
         if([item.itemIdentifier isEqualToString:currentItem.itemIdentifier]) {
-            [self showMainView];
+            [self showMainView:YES];
             return;
         }
     }
@@ -131,7 +138,7 @@
         if(v != nil) [v removeFromSuperview];
         [self.mainView addSubview:view];
         if(!isFirst) {
-            [self showMainView];
+            [self showMainView:YES];
         }
     }
 }

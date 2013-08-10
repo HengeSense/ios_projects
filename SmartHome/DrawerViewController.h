@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface DrawerViewController : UIViewController<UIScrollViewDelegate>
 
@@ -24,7 +24,7 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 
 - (void)showRightView;
-- (void)showMainView;
+- (void)showMainView:(BOOL)animate;
 - (void)showLeftView;
 
 - (void)applyBindings;
