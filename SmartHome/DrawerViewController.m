@@ -410,7 +410,6 @@
 }
 
 - (void)leftViewMoving:(CGFloat)x {
-    // .transform = CGAffineTransformMakeScale(scale, scale);
     UIView *view = [self.leftView viewWithTag:BLACK_MASK_VIEW_TAG];
     if(view != nil) {
         if(x >= self.leftViewVisibleWidth) {
