@@ -157,7 +157,7 @@
                 }
                 if([@"left" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    [self showMainView:NO];
+                    [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -168,7 +168,7 @@
                 }
                 if([@"left" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    [self showMainView:NO];
+                    [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -181,7 +181,7 @@
                 }
                 if([@"right" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    [self showMainView:NO];
+                    [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -192,7 +192,7 @@
                 }
                 if([@"right" isEqualToString:intentionDirection]) {
                     self.scrollView.scrollEnabled = YES;
-                    [self showMainView:NO];
+                    [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
                     return;
                 } else {
                     self.scrollView.scrollEnabled = NO;
@@ -250,15 +250,39 @@
     }
     if(gesture.state == UIGestureRecognizerStateChanged || gesture.state == UIGestureRecognizerStateBegan) {
         CGFloat mainViewX = self.mainView.frame.origin.x;
-        CGPoint center = self.mainView.center;
-        if(mainViewX >= 0 && (lastedMainViewCenterX + translation.x) <= 160) {
-            [self showMainView:NO];
+        if(mainViewX > 0 && (lastedMainViewCenterX + translation.x) <= 160) {
+            [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
+
+            [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
             return;
-        } else if(mainViewX <= 0 && (lastedMainViewCenterX + translation.x) >= 160) {
-            [self showMainView:NO];
+        } else if(mainViewX < 0 && (lastedMainViewCenterX + translation.x) >= 160) {
+            [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
+
+            [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
             return;
+        } else if(mainViewX == 0) {
+            //main view is in center, but gesture are not canncelled now
+            CGFloat lastedMainViewX = lastedMainViewCenterX - 160;
+            if(lastedMainViewX > 0) {
+                // hide left view
+                // if direction is to left return
+                if(translation.x <= 0) {
+                    //lastedMainViewCenterX = self.mainView.center.x;
+                    [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
+                    return;
+                }
+                lastedMainViewCenterX = self.mainView.center.x + translation.x;
+            } else if(lastedMainViewX < 0) {
+                // hide right view
+                // if direction is to right return
+                if(translation.x >= 0) {
+                    [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
+                    return;
+                }
+                lastedMainViewCenterX = self.mainView.center.x + translation.x;
+            }
         }
-        [self moveMainViewToCenter:CGPointMake(lastedMainViewCenterX + translation.x, center.y)];
+        [self moveMainViewToCenter:CGPointMake(lastedMainViewCenterX + translation.x, self.mainView.center.y)];
     } else if(gesture.state == UIGestureRecognizerStateEnded) {
         CGFloat mainViewX = self.mainView.frame.origin.x;
         if(mainViewX > 0) {
