@@ -11,7 +11,7 @@
 
 @interface NavigationView : UIView
 
-@property (strong, nonatomic) UIViewController *ownerController;
+@property (strong, nonatomic) MainViewController *ownerController;
 
 - (id)initWithFrame:(CGRect)frame owner:(MainViewController *)controller;
 

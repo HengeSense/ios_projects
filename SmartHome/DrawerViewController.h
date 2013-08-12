@@ -27,6 +27,9 @@
 - (void)showMainView:(BOOL)animate;
 - (void)showLeftView;
 
+- (void)disableGestureForDrawerView;
+- (void)enableGestureForDrawerView;
+
 - (void)applyBindings;
 
 @end

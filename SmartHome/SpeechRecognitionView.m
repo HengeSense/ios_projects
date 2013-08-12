@@ -59,6 +59,7 @@
         tblSpeech.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblSpeech.delegate = self;
         tblSpeech.dataSource = self;
+        
         [self addSubview:tblSpeech];
     }
     
@@ -164,5 +165,7 @@
     }
     return cell;
 }
+
+
 
 @end
