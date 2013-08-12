@@ -89,6 +89,9 @@
 		6FD8A72F17B22AD8009C7493 /* ParagraphBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A72E17B22AD8009C7493 /* ParagraphBuilder.m */; };
 		6FD8A73317B23543009C7493 /* RestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73217B23543009C7493 /* RestClient.m */; };
 		6FD8A73617B2356F009C7493 /* RestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73517B2356F009C7493 /* RestResponse.m */; };
+		6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */; };
+		6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */; };
+		6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF756617B8D78F004EF7FD /* ImageFactory.m */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
 		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
@@ -250,6 +253,10 @@
 		6FD8A73217B23543009C7493 /* RestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestClient.m; sourceTree = "<group>"; };
 		6FD8A73417B2356E009C7493 /* RestResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestResponse.h; sourceTree = "<group>"; };
 		6FD8A73517B2356F009C7493 /* RestResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestResponse.m; sourceTree = "<group>"; };
+		6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_theirs@2x.png"; sourceTree = "<group>"; };
+		6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mine@2x.png"; sourceTree = "<group>"; };
+		6FDF756517B8D78F004EF7FD /* ImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFactory.h; sourceTree = "<group>"; };
+		6FDF756617B8D78F004EF7FD /* ImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFactory.m; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 		F20B36CB17B87CF1009286D6 /* MainControllersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainControllersView.h; sourceTree = "<group>"; };
@@ -374,6 +381,8 @@
 		6F0FAE9E17AF7FF700B75D3E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */,
+				6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */,
 				6FD8A71A17B22921009C7493 /* test */,
 			);
 			name = images;
@@ -629,6 +638,8 @@
 				6FB4240817B4B4560042EA41 /* view */,
 				6FD8A72617B22A66009C7493 /* core_text */,
 				6FD8A71D17B22961009C7493 /* speech_recognition */,
+				6FDF756517B8D78F004EF7FD /* ImageFactory.h */,
+				6FDF756617B8D78F004EF7FD /* ImageFactory.m */,
 			);
 			name = ui_utils;
 			sourceTree = "<group>";
@@ -775,6 +786,8 @@
 				6F0FAF5317AF9E1E00B75D3E /* DrawerNavItemCell.xib in Resources */,
 				6FD8A71917B0F8C7009C7493 /* back@2x.png in Resources */,
 				6FD8A71C17B22935009C7493 /* record_animate_00@2x.png in Resources */,
+				6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */,
+				6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +849,7 @@
 				6F92A1EA17B7D5B6009AD656 /* SpeechViewMessage.m in Sources */,
 				6F92A1ED17B7D6CC009AD656 /* SpeechViewTextMessage.m in Sources */,
 				F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */,
+				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

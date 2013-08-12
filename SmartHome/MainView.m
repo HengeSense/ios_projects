@@ -74,7 +74,6 @@
                          [[self speechView] removeFromSuperview];
                          [self.ownerController enableGestureForDrawerView];
                          speechViewState = SpeechViewStateClosed;
-                         
                      }];
 }
 
@@ -91,7 +90,8 @@
 
 - (void)btnSpeechRecordingPressed:(id)sender {
     NSLog(@"换图片");
-    [speechView showWelcomeMessage];
+    //[speechView showWelcomeMessage];
+    [speechView hideWelcomeMessage];
 }
 
 #pragma mark -

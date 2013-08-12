@@ -9,7 +9,8 @@
 #import "SpeechRecognitionView.h"
 #import "MainView.h"
 
-#define WELCOME_VIEW_TAG 3333
+#define WELCOME_VIEW_TAG        3333
+#define CELL_CONTENT_VIEW_TAG   5555
 
 @implementation SpeechRecognitionView {
     UIView *containerView;
@@ -44,10 +45,30 @@
     } else {
         [messages removeAllObjects];
     }
+    
+    
+    
+    //add some test messages
+    SpeechViewTextMessage *msg1 = [[SpeechViewTextMessage alloc] init];
+    msg1.messageOwner = MESSAGE_OWNER_THEIRS;
+    msg1.textMessage = @"这是测试消息一二三四五六七八a";
+    
+    SpeechViewTextMessage *msg2 = [[SpeechViewTextMessage alloc] init];
+    msg2.messageOwner = MESSAGE_OWNER_THEIRS;
+    msg2.textMessage = @"你好,空调已经打开,即将进入爆炸模式,请离开你的房间,你的空调将于2分钟发生核爆  请速度离开.";
+    
+    SpeechViewTextMessage *msg3 = [[SpeechViewTextMessage alloc] init];
+    msg3.messageOwner = MESSAGE_OWNER_THEIRS;
+    msg3.textMessage = @"空调已经发生核爆,已造成1000W人口死亡,根据检测  您已经死亡,手机已进入幽灵模式, test test test, 情景模式中选择设备列表  情景模式温度时间设置  情景模式语音标签  扫主控二维码货手动输入二维码  撒是滴哦房间噢is的就是的哦if奖哦 测试失败~!  死了....  ok wifi 挂!";
+    
+    
+    [self addMessage:msg1];
+    [self addMessage:msg2];
+    [self addMessage:msg3];
 }
 
 - (void)initUI {
-    self.alpha = 0.8f;
+    self.alpha = 1.f;
     self.backgroundColor = [UIColor blackColor];
     
     if(tblSpeech == nil) {
@@ -94,7 +115,7 @@
     }
 
     UIButton *btnCloseSelf = [[UIButton alloc] initWithFrame:CGRectMake(320-60, 320, 60, 25)];
-    btnCloseSelf.backgroundColor = [UIColor whiteColor];
+    btnCloseSelf.backgroundColor = [UIColor redColor];
     [btnCloseSelf setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnCloseSelf setTitle:@"close" forState:UIControlStateNormal];
     [btnCloseSelf addTarget:containerView action:@selector(hideSpeechView) forControlEvents:UIControlEventTouchUpInside];
@@ -139,6 +160,15 @@
 #pragma mark -
 #pragma mark events
 
+- (void)addMessage:(SpeechViewMessage *)message {
+    if(message == nil) return;
+    [messages addObject:message];
+    [tblSpeech beginUpdates];
+    NSIndexPath *newMessageIndexPath = [NSIndexPath indexPathForRow:(messages.count - 1) inSection:0];
+    [tblSpeech insertRowsAtIndexPaths:[NSArray arrayWithObject:newMessageIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [tblSpeech endUpdates];
+    [tblSpeech scrollToRowAtIndexPath:newMessageIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
 
 #pragma mark -
 #pragma mark table view delegate
@@ -148,11 +178,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if(messages == nil) return 0;
+    return messages.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50.f;
+    SpeechViewMessage *message = [messages objectAtIndex:indexPath.row];
+    if(message != nil) {
+        UIView *messageView = [message viewWithMessage];
+        if(messageView != nil) {
+            return messageView.frame.size.height + 15;
+        }
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -160,12 +198,21 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifer];
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifer];
-        cell.textLabel.text = @"";
-        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    UIView *messageView = [cell viewWithTag:CELL_CONTENT_VIEW_TAG];
+    if(messageView != nil) {
+        [messageView removeFromSuperview];
+    }
+    SpeechViewMessage *message = [messages objectAtIndex:indexPath.row];
+    if(message != nil) {
+        messageView = [message viewWithMessage];
+        if(messageView != nil) {
+            messageView.tag = CELL_CONTENT_VIEW_TAG;
+            [cell addSubview:messageView];
+        }
     }
     return cell;
 }
-
-
 
 @end

@@ -10,8 +10,9 @@
 
 @interface TopbarView : UIView
 
-@property(strong, nonatomic) UIButton *leftButton;
-@property(strong, nonatomic) UIButton *rightButton;
+@property (strong, nonatomic) UIButton *leftButton;
+@property (strong, nonatomic) UIButton *rightButton;
+@property (strong, nonatomic) UILabel *titleLabel;
 
 + (TopbarView *)topBarWithImage:(UIImage *)img;
 

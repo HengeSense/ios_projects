@@ -144,10 +144,11 @@ headIndent:(CGFloat)hi*/ lineBreakMode:(LINE_BREAK_MODE)lbm
             textHeight = CGRectGetMaxY(rect)-lastLineOrgin.y + descent;
         }
     }
+    
     //why shoulb be plus one px
-    if(lineCounts == 1) {
-        lineMaxWidth += 1.f;
-    }
+    //i think here is a bug for core text that i can't resolved  --- young
+    lineMaxWidth += 1.f;
+
     return CGSizeMake(ceil(lineMaxWidth), ceil(textHeight));
 }
 
