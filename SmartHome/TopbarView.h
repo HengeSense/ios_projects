@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define TOP_BAR_HEIGHT 44
+
 @interface TopbarView : UIView
 
 @property (strong, nonatomic) UIButton *leftButton;

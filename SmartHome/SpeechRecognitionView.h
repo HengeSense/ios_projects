@@ -17,5 +17,6 @@
 - (void)hideWelcomeMessage;
 
 - (void)addMessage:(SpeechViewMessage *)message;
+- (void)clearMessages;
 
 @end

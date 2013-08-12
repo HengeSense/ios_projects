@@ -140,10 +140,12 @@
 }
 
 - (void)test {
-    SpeechViewTextMessage *msg12 = [[SpeechViewTextMessage alloc] init];
-    msg12.messageOwner = MESSAGE_OWNER_MINE;
-    msg12.textMessage = @"速度关机";
-    [self addMessage:msg12];
+
+        SpeechViewTextMessage *msg12 = [[SpeechViewTextMessage alloc] init];
+        msg12.messageOwner = MESSAGE_OWNER_MINE;
+        msg12.textMessage = @"速度关机";
+        [self addMessage:msg12];
+    
 }
 
 - (void)showWelcomeMessage {
@@ -168,7 +170,7 @@
 }
 
 #pragma mark -
-#pragma mark events
+#pragma mark methods
 
 - (void)addMessage:(SpeechViewMessage *)message {
     if(message == nil) return;
@@ -178,6 +180,12 @@
     [tblSpeech insertRowsAtIndexPaths:[NSArray arrayWithObject:newMessageIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
     [tblSpeech endUpdates];
     [tblSpeech scrollToRowAtIndexPath:newMessageIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (void)clearMessages {
+    if(messages == nil || messages.count == 0) return;
+    [messages removeAllObjects];
+    [tblSpeech reloadData];
 }
 
 #pragma mark -
