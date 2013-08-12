@@ -52,12 +52,12 @@
     [self registerTapGestureToResignKeyboard];
     
     self.view.backgroundColor = [UIColor blueColor];
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 100, 40)];
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 130, 30)];
     [text setText:NSLocalizedString(@"phone.register", @"")];
     [text setBackgroundColor:[UIColor blueColor]];
     [self.view addSubview:text];
     
-    phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/3, screenWidth-100, 40)];
+    phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(150, screenHeight/3, screenWidth-160, 30)];
     [phoneNumber setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:phoneNumber];
     phoneNumber.keyboardType = UIKeyboardTypePhonePad;
@@ -88,7 +88,7 @@
     [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:okButton];
     
-    resendTimeInterval = 10;
+    resendTimeInterval = 60;
 }
 
 - (void)sendVerificationCode {
@@ -105,7 +105,7 @@
         [sendButton setTitle:@"resend" forState:UIControlStateNormal];
         [sendTimer invalidate];
         [sendButton setEnabled:YES];
-        resendTimeInterval = 10;
+        resendTimeInterval = 60;
     }
 }
 -(void) send{
@@ -125,8 +125,8 @@
         self.settings.accountPhone = accountPhone;
         [self.settings saveSettings];
     }else{
-        UIAlertView *checkAlert = [[UIAlertView alloc] initWithTitle:@"error" message:@"check.verification.code.error" delegate:self cancelButtonTitle:NSLocalizedString(@"retry", @"") otherButtonTitles:nil];
-        [self.view addSubview:checkAlert];
+        UIAlertView *checkAlert = [[UIAlertView alloc] initWithTitle:@"error" message:@"check.verification.code.error" delegate:nil cancelButtonTitle:NSLocalizedString(@"retry", @"") otherButtonTitles:nil];
+        [checkAlert show];
     }
 }
 -(void) handleSendSuccess:(RestResponse *) resp{
