@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
-@interface MainControllersView : NavigationView
+@interface MainControllersView : NavigationView <UITableViewDelegate, UITableViewDataSource>
 
 @end
