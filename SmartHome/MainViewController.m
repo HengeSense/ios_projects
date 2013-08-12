@@ -10,7 +10,7 @@
 #import "MainView.h"
 #import "HistoricalDataView.h"
 #import "SceneModeView.h"
-#import "DevicesView.h"
+#import "MainControllersView.h"
 #import "TopbarView.h"
 #import "ViewsPool.h"
 
@@ -44,7 +44,7 @@
     drawerItems = [NSMutableArray array];
     
     DrawerNavigationItem *mainView = [[DrawerNavigationItem alloc] init];
-    DrawerNavigationItem *devicesView = [[DrawerNavigationItem alloc] init];
+    DrawerNavigationItem *mainControllersView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *sceneModeView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *historicalView = [[DrawerNavigationItem alloc] init];
      
@@ -52,9 +52,9 @@
     mainView.itemTitle = NSLocalizedString(@"main.view", @"");
     mainView.itemImageName = @"";
         
-    devicesView.itemIdentifier = @"devicesView";
-    devicesView.itemTitle = NSLocalizedString(@"device.list", @"");
-    devicesView.itemImageName = @"";
+    mainControllersView.itemIdentifier = @"mainControllersView";
+    mainControllersView.itemTitle = NSLocalizedString(@"mainControllersView.list", @"");
+    mainControllersView.itemImageName = @"";
     
     sceneModeView.itemIdentifier = @"sceneModeView";
     sceneModeView.itemTitle = NSLocalizedString(@"scene_mode", @"");
@@ -65,7 +65,7 @@
     historicalView.itemImageName = @"";
     
     [drawerItems addObject:mainView];
-    [drawerItems addObject:devicesView];
+    [drawerItems addObject:mainControllersView];
     [drawerItems addObject:sceneModeView];
     [drawerItems addObject:historicalView];
 }
@@ -114,8 +114,8 @@
     if(view == nil) {
         if([@"mainView" isEqualToString:item.itemIdentifier]) {
             view = [[MainView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
-        } else if([@"devicesView" isEqualToString:item.itemIdentifier]) {
-            view = [[DevicesView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+        } else if([@"mainControllersView" isEqualToString:item.itemIdentifier]) {
+            view = [[MainControllersView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
         } else if([@"sceneModeView" isEqualToString:item.itemIdentifier]) {
             view = [[SceneModeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
         } else if([@"historicalView" isEqualToString:item.itemIdentifier]) {

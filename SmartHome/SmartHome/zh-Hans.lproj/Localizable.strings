@@ -18,7 +18,7 @@
  * main view controller
  */
 "main.view"        = "主界面";
-"device.list"      = "设备列表";
+"mainControllersView.list"      = "主控列表";
 "scene_mode"       = "情景模式";
 "historical.data"  = "历史数据";
 

@@ -1,8 +1,8 @@
 //
-//  MainControllersView.m
+//  DevicesView.m
 //  SmartHome
 //
-//  Created by hadoop user account on 12/08/13.
+//  Created by Zhao yang on 8/5/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
@@ -14,18 +14,23 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self initUI];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)initDefaults {
+    [super initDefaults];
 }
-*/
+
+- (void)initUI {
+    [super initUI];
+    
+    self.backgroundColor = [UIColor lightGrayColor];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 25)];
+    lbl.text = @"主控列表页面";
+    lbl.center = CGPointMake(160, 240);
+    [self addSubview:lbl];
+}
 
 @end

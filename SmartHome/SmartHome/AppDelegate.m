@@ -20,8 +20,6 @@
 {   
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
-    self.settings.isValid = NO;
-    [self.settings saveSettings];
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];

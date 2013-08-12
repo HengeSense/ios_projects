@@ -17,7 +17,7 @@
  * main view controller
  */
 "main.view"        = "Main View";
-"device.list"      = "Devices View";
+"mainControllersView.list"      = "Main Controllers View";
 "scene_mode"       = "Scene Mode";
 "historical.data"  = "History Data";
 
