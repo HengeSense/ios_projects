@@ -117,6 +117,10 @@
 -(void) checkVerificationCode{
     
     NSString *input = verification.text;
+    NSLog(@"verificationCode=%@ and input=%@",verificationCode,input);
+    if(verificationCode == NULL){
+        return ;
+    }
     
     if ([input isEqualToString:verificationCode]) {
         
