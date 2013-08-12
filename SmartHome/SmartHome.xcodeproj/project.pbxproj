@@ -300,6 +300,7 @@
 		6F0FAE6B17AF7F9F00B75D3E = {
 			isa = PBXGroup;
 			children = (
+				6F5905F117B9259B00022B2C /* sound */,
 				6F0FAF5817AFA4E800B75D3E /* ui_utils */,
 				6F0FAEA417AF802000B75D3E /* third */,
 				6F0FAEA317AF801700B75D3E /* controllers */,
@@ -642,6 +643,13 @@
 				6FDF756617B8D78F004EF7FD /* ImageFactory.m */,
 			);
 			name = ui_utils;
+			sourceTree = "<group>";
+		};
+		6F5905F117B9259B00022B2C /* sound */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = sound;
 			sourceTree = "<group>";
 		};
 		6FB4240417B48CC70042EA41 /* GDataXMLNode */ = {
