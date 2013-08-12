@@ -29,6 +29,12 @@
 "zbar.enter"       = "请输入二维码";
 
 /*
+ * speech recognition view
+ */
+"welcome.message.line1" = "您好,请问需要";
+"welcome.message.line2" = "什么帮助?";
+
+/*
  * register view controller
  */
 "phone.register"   = "手机号码注册";

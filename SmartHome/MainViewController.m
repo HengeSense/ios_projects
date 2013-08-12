@@ -91,13 +91,6 @@
         self.leftView.backgroundColor = [UIColor whiteColor];
     }
     
-    
-    if(self.rightView == nil) {
-        UIView *vvv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20)];
-        vvv.backgroundColor = [UIColor whiteColor];
-        self.rightView = vvv;
-    }
-    
     //parameter of drawer navigation view controller
     self.leftViewVisibleWidth = 120;
     self.showDrawerMaxTrasitionX = 40;

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SpeechRecognitionView : UIView
+@interface SpeechRecognitionView : UIView<UITableViewDataSource, UITableViewDelegate>
+
+- (id)initWithFrame:(CGRect)frame andContainerView:(UIView *)cv;
+
+- (void)showWelcomeMessage;
+- (void)hideWelcomeMessage;
 
 @end

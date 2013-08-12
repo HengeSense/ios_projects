@@ -10,6 +10,16 @@
 #import "NavigationView.h"
 #import "SpeechRecognitionView.h"
 
+typedef NS_ENUM(NSInteger, SpeechViewState) {
+    SpeechViewStateOpenning = 1,
+    SpeechViewStateOpenned  = 2,
+    SpeechViewStateClosing  = 3,
+    SpeechViewStateClosed   = 4
+};
+
 @interface MainView : NavigationView
+
+- (void)showSpeechView;
+- (void)hideSpeechView;
 
 @end

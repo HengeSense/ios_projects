@@ -28,6 +28,13 @@
 "zbar.enter"       = "Please enter Zbar code";
 
 /*
+ * speech recognition view
+ */
+"welcome.message.line1" = "Hello, What can i";
+"welcome.message.line2" = "help you ?";
+
+
+/*
  * register view controller
  */
 "phone.register"   = "Phone number register";

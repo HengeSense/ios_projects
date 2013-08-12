@@ -75,6 +75,8 @@
 		6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282717B3DF3D00D0C1E3 /* RootViewController.m */; };
 		6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */; };
 		6F8A722D17B23E91002BA8C5 /* SpeechRecognitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */; };
+		6F92A1EA17B7D5B6009AD656 /* SpeechViewMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1E917B7D5B6009AD656 /* SpeechViewMessage.m */; };
+		6F92A1ED17B7D6CC009AD656 /* SpeechViewTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1EC17B7D6CC009AD656 /* SpeechViewTextMessage.m */; };
 		6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240217B482F50042EA41 /* BaseViewController.m */; };
 		6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240617B4B4500042EA41 /* ViewUtils.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
@@ -223,6 +225,10 @@
 		6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceBase.m; sourceTree = "<group>"; };
 		6F8A722B17B23E91002BA8C5 /* SpeechRecognitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechRecognitionView.h; sourceTree = "<group>"; };
 		6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechRecognitionView.m; sourceTree = "<group>"; };
+		6F92A1E817B7D5B6009AD656 /* SpeechViewMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechViewMessage.h; sourceTree = "<group>"; };
+		6F92A1E917B7D5B6009AD656 /* SpeechViewMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechViewMessage.m; sourceTree = "<group>"; };
+		6F92A1EB17B7D6CC009AD656 /* SpeechViewTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechViewTextMessage.h; sourceTree = "<group>"; };
+		6F92A1EC17B7D6CC009AD656 /* SpeechViewTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechViewTextMessage.m; sourceTree = "<group>"; };
 		6FB4240117B482F50042EA41 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6FB4240217B482F50042EA41 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		6FB4240517B4B4500042EA41 /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
@@ -402,6 +408,10 @@
 				6F0FAF5517AFA3C800B75D3E /* DrawerNavigationItem.m */,
 				F237F60917B234760057C95B /* XMLElement.h */,
 				F237F60A17B234760057C95B /* XMLElement.m */,
+				6F92A1E817B7D5B6009AD656 /* SpeechViewMessage.h */,
+				6F92A1E917B7D5B6009AD656 /* SpeechViewMessage.m */,
+				6F92A1EB17B7D6CC009AD656 /* SpeechViewTextMessage.h */,
+				6F92A1EC17B7D6CC009AD656 /* SpeechViewTextMessage.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -824,6 +834,8 @@
 				6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */,
 				6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */,
 				6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */,
+				6F92A1EA17B7D5B6009AD656 /* SpeechViewMessage.m in Sources */,
+				6F92A1ED17B7D6CC009AD656 /* SpeechViewTextMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

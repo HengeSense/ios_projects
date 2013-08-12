@@ -202,12 +202,14 @@
         if(translation.x > 0) {
             if(leftView == nil) {
                 [self showMainView:NO];
+                [gesture setTranslation:CGPointMake(0, 0) inView:self.mainView];
                 return;
             }
             if(!leftViewIsAboveOnRightView && rightView != nil) [self leftViewToTopLevel];
         } else if(translation.x < 0) {
             if(rightView == nil) {
                 [self showMainView:NO];
+                [gesture setTranslation:CGPointMake(0, 0) inView:self.mainView];
                 return;
             }
             if(leftViewIsAboveOnRightView && leftView != nil) [self rightViewToTopLevel];

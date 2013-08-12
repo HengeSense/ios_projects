@@ -8,9 +8,11 @@
 
 #import "MainView.h"
 
+#define SPEECH_VIEW_TAG 46001
+
 @implementation MainView {
-    BOOL speechViewIsOpenning;
-    
+    SpeechViewState speechViewState;
+    SpeechRecognitionView *speechView;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -23,6 +25,7 @@
 
 - (void)initDefaults {
     [super initDefaults];
+    speechViewState = SpeechViewStateClosed;
 }
 
 - (void)initUI {
@@ -31,27 +34,73 @@
 
     UIButton *btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width-75/2)/2, self.frame.size.height-111/2 - 10, 75/2, 111/2)];
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"record_animate_00.png"] forState:UIControlStateNormal];
-    [btnSpeech addTarget:self action:@selector(btnSpeechPressed) forControlEvents:UIControlEventTouchUpInside];
+    [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnSpeech];
 }
 
-- (void)btnSpeechPressed {
-    
-    [self showSpeechView];
-}
+#pragma mark -
+#pragma mark speech view
 
 - (void)showSpeechView {
-    CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
-    SpeechRecognitionView *view = [[SpeechRecognitionView alloc] initWithFrame:CGRectMake(0, 0 - viewHeight, self.frame.size.width, viewHeight)];
-    view.backgroundColor = [UIColor blackColor];
-    view.alpha = 0.8f;
-    [self addSubview:view];
+    if(speechViewState != SpeechViewStateClosed) return;
+    SpeechRecognitionView *view = (SpeechRecognitionView *)[self viewWithTag:SPEECH_VIEW_TAG];
+    if(view == nil) {
+        view = [self speechView];
+        [self addSubview:view];
+    }
+    speechViewState = SpeechViewStateOpenning;
     [UIView animateWithDuration:0.3f
                 animations:^{
                     view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
                 }
                 completion:^(BOOL finished) {
+                    speechViewState = SpeechViewStateOpenned;
+                    [self btnSpeechRecordingPressed:nil];
                 }];
+}
+
+- (void)hideSpeechView {
+    if(speechViewState != SpeechViewStateOpenned) return;
+    CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
+    SpeechRecognitionView *view = [self speechView];
+    speechViewState = SpeechViewStateClosing;
+    [UIView animateWithDuration:0.3f
+                     animations:^{
+                         view.frame = CGRectMake(0, (0 - viewHeight), view.frame.size.width, view.frame.size.height);
+                     }
+                     completion:^(BOOL finished) {
+                         [[self speechView] hideWelcomeMessage];
+                         [[self speechView] removeFromSuperview];
+                         speechViewState = SpeechViewStateClosed;
+                     }];
+}
+
+#pragma mark -
+#pragma mark speech control
+
+- (void)btnSpeechPressed:(id)sender {
+    if(speechViewState == SpeechViewStateClosed) {
+        [self showSpeechView];
+    } else if(speechViewState ==  SpeechViewStateOpenned) {
+        [self btnSpeechRecordingPressed:sender];
+    }
+}
+
+- (void)btnSpeechRecordingPressed:(id)sender {
+    NSLog(@"换图片");
+    [speechView showWelcomeMessage];
+}
+
+#pragma mark -
+#pragma mark getter and setters
+
+- (SpeechRecognitionView *)speechView {
+    if(speechView == nil) {
+        CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
+        speechView = [[SpeechRecognitionView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight), self.frame.size.width, viewHeight) andContainerView:self];
+        speechView.tag = SPEECH_VIEW_TAG;
+    }
+    return speechView;
 }
 
 @end
