@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SpeechViewTextMessage.h"
 
 @interface SpeechRecognitionView : UIView<UITableViewDataSource, UITableViewDelegate>
 
@@ -14,5 +15,7 @@
 
 - (void)showWelcomeMessage;
 - (void)hideWelcomeMessage;
+
+- (void)addMessage:(SpeechViewMessage *)message;
 
 @end

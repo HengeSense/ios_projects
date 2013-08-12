@@ -141,6 +141,7 @@
 }
 
 - (void)handlePanGestureForMainViewStateNormal:(UIPanGestureRecognizer *)gesture {
+    
     CGPoint translation = [gesture translationInView:self.mainView];
     
     if(gesture.state == UIGestureRecognizerStateBegan) {
@@ -458,6 +459,14 @@
             [self.leftView addSubview:blackLeftMaskView];
         }
     }
+}
+
+- (void)disableGestureForDrawerView {
+    panGesture.enabled = NO;
+}
+
+- (void)enableGestureForDrawerView {
+    panGesture.enabled = YES;
 }
 
 @end

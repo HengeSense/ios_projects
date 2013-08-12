@@ -7,13 +7,14 @@
 //
 
 #import "NavigationView.h"
-#import "TopbarView.h"
 
 @implementation NavigationView {
     TopbarView *topbar;
+    UILabel *lblTitle;
 }
 
 @synthesize ownerController;
+@synthesize topbar;
 
 - (id)initWithFrame:(CGRect)frame owner:(MainViewController *)controller {
     self = [super initWithFrame:frame];
@@ -26,15 +27,20 @@
 }
 
 - (void)initDefaults {
-      //  
 }
 
 - (void)initUI {
-    topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"top.png"]];
-    [topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"left_btn.png"] forState:UIControlStateNormal];
-    [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
     //top bar for main view
-    [self addSubview:topbar];
+    [self addSubview:self.topbar];
+}
+
+- (TopbarView *)topbar {
+    if(topbar == nil) {
+        topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"top.png"]];
+        [topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"left_btn.png"] forState:UIControlStateNormal];
+        [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return topbar;
 }
 
 @end

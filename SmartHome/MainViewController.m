@@ -110,10 +110,11 @@
     currentItem = item;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    UIView *view = [[ViewsPool sharedPool] viewWithIdentifier:item.itemIdentifier];
+    NavigationView *view = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:item.itemIdentifier];
     if(view == nil) {
         if([@"mainView" isEqualToString:item.itemIdentifier]) {
             view = [[MainView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+            view.topbar.titleLabel.text = @"主页面";
         } else if([@"mainControllersView" isEqualToString:item.itemIdentifier]) {
             view = [[MainControllersView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
         } else if([@"sceneModeView" isEqualToString:item.itemIdentifier]) {

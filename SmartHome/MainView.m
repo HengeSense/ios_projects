@@ -49,6 +49,7 @@
         [self addSubview:view];
     }
     speechViewState = SpeechViewStateOpenning;
+    [self.ownerController disableGestureForDrawerView];
     [UIView animateWithDuration:0.3f
                 animations:^{
                     view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
@@ -71,6 +72,7 @@
                      completion:^(BOOL finished) {
                          [[self speechView] hideWelcomeMessage];
                          [[self speechView] removeFromSuperview];
+                         [self.ownerController enableGestureForDrawerView];
                          speechViewState = SpeechViewStateClosed;
                      }];
 }
@@ -88,7 +90,8 @@
 
 - (void)btnSpeechRecordingPressed:(id)sender {
     NSLog(@"换图片");
-    [speechView showWelcomeMessage];
+    //[speechView showWelcomeMessage];
+    [speechView hideWelcomeMessage];
 }
 
 #pragma mark -

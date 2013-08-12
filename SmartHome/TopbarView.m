@@ -12,6 +12,7 @@
 
 @synthesize leftButton;
 @synthesize rightButton;
+@synthesize titleLabel;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -46,6 +47,19 @@
         rightButton = [[UIButton alloc] initWithFrame:CGRectMake(320-44, 0, 44, 44)];
     }
     return rightButton;
+}
+
+- (UILabel *)titleLabel {
+    if(titleLabel == nil) {
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
+        titleLabel.center = self.center;
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = [UIFont boldSystemFontOfSize:22.0f];
+        [self addSubview:titleLabel];
+    }
+    return titleLabel;
 }
 
 @end

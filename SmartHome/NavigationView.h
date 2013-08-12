@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
+#import "TopbarView.h"
 
 @interface NavigationView : UIView
 
-@property (strong, nonatomic) UIViewController *ownerController;
+@property (strong, nonatomic) MainViewController *ownerController;
+@property (strong, nonatomic, readonly) TopbarView *topbar;
 
 - (id)initWithFrame:(CGRect)frame owner:(MainViewController *)controller;
 
