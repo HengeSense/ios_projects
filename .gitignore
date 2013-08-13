@@ -1,3 +1,4 @@
 .DS_Store
-SmartHome/SmartHome.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/
+SmartHome/SmartHome.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad
+SmartHome/SmartHome.xcodeproj/project.xcworkspace/xcuserdata/hadoop.xcuserdatad/
 .gitignore
