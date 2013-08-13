@@ -46,24 +46,31 @@
         [messages removeAllObjects];
     }
     
-    
-    
     //add some test messages
     SpeechViewTextMessage *msg1 = [[SpeechViewTextMessage alloc] init];
     msg1.messageOwner = MESSAGE_OWNER_THEIRS;
     msg1.textMessage = @"这是测试消息一二三四五六七八a";
     
+    SpeechViewTextMessage *msg11 = [[SpeechViewTextMessage alloc] init];
+    msg11.messageOwner = MESSAGE_OWNER_MINE;
+    msg11.textMessage = @"你好,给大爷我跳个舞~";
+    
     SpeechViewTextMessage *msg2 = [[SpeechViewTextMessage alloc] init];
     msg2.messageOwner = MESSAGE_OWNER_THEIRS;
     msg2.textMessage = @"你好,空调已经打开,即将进入爆炸模式,请离开你的房间,你的空调将于2分钟发生核爆  请速度离开.";
+    
+    SpeechViewTextMessage *msg12 = [[SpeechViewTextMessage alloc] init];
+    msg12.messageOwner = MESSAGE_OWNER_MINE;
+    msg12.textMessage = @"春眠不觉晓,处处闻啼鸟,夜来风雨声,花落知多少.";
     
     SpeechViewTextMessage *msg3 = [[SpeechViewTextMessage alloc] init];
     msg3.messageOwner = MESSAGE_OWNER_THEIRS;
     msg3.textMessage = @"空调已经发生核爆,已造成1000W人口死亡,根据检测  您已经死亡,手机已进入幽灵模式, test test test, 情景模式中选择设备列表  情景模式温度时间设置  情景模式语音标签  扫主控二维码货手动输入二维码  撒是滴哦房间噢is的就是的哦if奖哦 测试失败~!  死了....  ok wifi 挂!";
     
-    
     [self addMessage:msg1];
+    [self addMessage:msg11];
     [self addMessage:msg2];
+    [self addMessage:msg12];
     [self addMessage:msg3];
 }
 
@@ -128,11 +135,16 @@
     btnTest.backgroundColor = [UIColor blueColor];
     [btnTest setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnTest setTitle:@"test" forState:UIControlStateNormal];
-    [btnTest addTarget:containerView action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+    [btnTest addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnTest];
 }
 
 - (void)test {
+
+        SpeechViewTextMessage *msg12 = [[SpeechViewTextMessage alloc] init];
+        msg12.messageOwner = MESSAGE_OWNER_MINE;
+        msg12.textMessage = @"速度关机";
+        [self addMessage:msg12];
     
 }
 
@@ -158,7 +170,7 @@
 }
 
 #pragma mark -
-#pragma mark events
+#pragma mark methods
 
 - (void)addMessage:(SpeechViewMessage *)message {
     if(message == nil) return;
@@ -168,6 +180,12 @@
     [tblSpeech insertRowsAtIndexPaths:[NSArray arrayWithObject:newMessageIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
     [tblSpeech endUpdates];
     [tblSpeech scrollToRowAtIndexPath:newMessageIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (void)clearMessages {
+    if(messages == nil || messages.count == 0) return;
+    [messages removeAllObjects];
+    [tblSpeech reloadData];
 }
 
 #pragma mark -

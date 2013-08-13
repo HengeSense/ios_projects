@@ -23,10 +23,12 @@
 }
 
 + (TopbarView *)topBarWithImage:(UIImage *)img {
-    TopbarView *topbar = [[TopbarView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    TopbarView *topbar =
+        [[TopbarView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TOP_BAR_HEIGHT)];
     
     if(img != nil) {
-        UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        UIImageView *backgroundImageView =
+            [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TOP_BAR_HEIGHT)];
         backgroundImageView.image = img;
         [topbar addSubview:backgroundImageView];
     }
@@ -36,7 +38,7 @@
 
 - (UIButton *)leftButton {
     if(leftButton == nil) {
-        leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, TOP_BAR_HEIGHT)];
         [self addSubview:leftButton];
     }
     return leftButton;
@@ -44,14 +46,15 @@
 
 - (UIButton *)rightButton {
     if(rightButton == nil) {
-        rightButton = [[UIButton alloc] initWithFrame:CGRectMake(320-44, 0, 44, 44)];
+        rightButton = [[UIButton alloc]
+            initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 44), 0, 44, TOP_BAR_HEIGHT)];
     }
     return rightButton;
 }
 
 - (UILabel *)titleLabel {
     if(titleLabel == nil) {
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, TOP_BAR_HEIGHT)];
         titleLabel.center = self.center;
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;

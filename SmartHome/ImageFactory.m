@@ -22,7 +22,7 @@
 
 - (UIImage *)imageForBubbleMine {
     if(imgBubbleMine == nil) {
-        imgBubbleTheirs = [UIImage imageNamed:@"bubble_mine.png"];
+        imgBubbleMine = [[UIImage imageNamed:@"bubble_mine.png"] stretchableImageWithLeftCapWidth:8 topCapHeight:22];
     }
     return imgBubbleMine;
 }
