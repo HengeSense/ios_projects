@@ -73,15 +73,15 @@
 		6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */; };
 		6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282717B3DF3D00D0C1E3 /* RootViewController.m */; };
 		6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */; };
-		6F8A722D17B23E91002BA8C5 /* SpeechRecognitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */; };
-		6F92A1EA17B7D5B6009AD656 /* SpeechViewMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1E917B7D5B6009AD656 /* SpeechViewMessage.m */; };
-		6F92A1ED17B7D6CC009AD656 /* SpeechViewTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1EC17B7D6CC009AD656 /* SpeechViewTextMessage.m */; };
+		6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* ConversationView.m */; };
+		6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */; };
+		6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */; };
 		6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240217B482F50042EA41 /* BaseViewController.m */; };
 		6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240617B4B4500042EA41 /* ViewUtils.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
 		6FD8A71917B0F8C7009C7493 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD8A71817B0F8C7009C7493 /* back@2x.png */; };
 		6FD8A71C17B22935009C7493 /* record_animate_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD8A71B17B22935009C7493 /* record_animate_00@2x.png */; };
-		6FD8A72017B22980009C7493 /* SpeechRecognitionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71F17B22980009C7493 /* SpeechRecognitionButton.m */; };
+		6FD8A72017B22980009C7493 /* SpeechRecognitionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71F17B22980009C7493 /* SpeechRecognitionUtil.m */; };
 		6FD8A72217B229C4009C7493 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */; };
 		6FD8A72517B22A18009C7493 /* SpeechSynthesizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A72417B22A18009C7493 /* SpeechSynthesizer.m */; };
 		6FD8A72917B22A90009C7493 /* TextContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A72817B22A90009C7493 /* TextContainerView.m */; };
@@ -92,6 +92,7 @@
 		6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */; };
 		6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */; };
 		6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF756617B8D78F004EF7FD /* ImageFactory.m */; };
+		6FEB91CC17BA0101007C04A1 /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91CB17BA0101007C04A1 /* test.wav */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
@@ -225,12 +226,12 @@
 		6F89282717B3DF3D00D0C1E3 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		6F89282917B3F2D000D0C1E3 /* ServiceBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceBase.h; sourceTree = "<group>"; };
 		6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceBase.m; sourceTree = "<group>"; };
-		6F8A722B17B23E91002BA8C5 /* SpeechRecognitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechRecognitionView.h; sourceTree = "<group>"; };
-		6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechRecognitionView.m; sourceTree = "<group>"; };
-		6F92A1E817B7D5B6009AD656 /* SpeechViewMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechViewMessage.h; sourceTree = "<group>"; };
-		6F92A1E917B7D5B6009AD656 /* SpeechViewMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechViewMessage.m; sourceTree = "<group>"; };
-		6F92A1EB17B7D6CC009AD656 /* SpeechViewTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechViewTextMessage.h; sourceTree = "<group>"; };
-		6F92A1EC17B7D6CC009AD656 /* SpeechViewTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechViewTextMessage.m; sourceTree = "<group>"; };
+		6F8A722B17B23E91002BA8C5 /* ConversationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationView.h; sourceTree = "<group>"; };
+		6F8A722C17B23E91002BA8C5 /* ConversationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationView.m; sourceTree = "<group>"; };
+		6F92A1E817B7D5B6009AD656 /* ConversationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationMessage.h; sourceTree = "<group>"; };
+		6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationMessage.m; sourceTree = "<group>"; };
+		6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTextMessage.h; sourceTree = "<group>"; };
+		6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTextMessage.m; sourceTree = "<group>"; };
 		6FB4240117B482F50042EA41 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6FB4240217B482F50042EA41 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		6FB4240517B4B4500042EA41 /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
@@ -239,8 +240,8 @@
 		6FD8A71617B0DD6F009C7493 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		6FD8A71817B0F8C7009C7493 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		6FD8A71B17B22935009C7493 /* record_animate_00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record_animate_00@2x.png"; sourceTree = "<group>"; };
-		6FD8A71E17B22980009C7493 /* SpeechRecognitionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechRecognitionButton.h; sourceTree = "<group>"; };
-		6FD8A71F17B22980009C7493 /* SpeechRecognitionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechRecognitionButton.m; sourceTree = "<group>"; };
+		6FD8A71E17B22980009C7493 /* SpeechRecognitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechRecognitionUtil.h; sourceTree = "<group>"; };
+		6FD8A71F17B22980009C7493 /* SpeechRecognitionUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechRecognitionUtil.m; sourceTree = "<group>"; };
 		6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6FD8A72317B22A18009C7493 /* SpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechSynthesizer.h; sourceTree = "<group>"; };
 		6FD8A72417B22A18009C7493 /* SpeechSynthesizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeechSynthesizer.m; sourceTree = "<group>"; };
@@ -258,6 +259,7 @@
 		6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mine@2x.png"; sourceTree = "<group>"; };
 		6FDF756517B8D78F004EF7FD /* ImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFactory.h; sourceTree = "<group>"; };
 		6FDF756617B8D78F004EF7FD /* ImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFactory.m; sourceTree = "<group>"; };
+		6FEB91CB17BA0101007C04A1 /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 		F20B36CB17B87CF1009286D6 /* MainControllersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainControllersView.h; sourceTree = "<group>"; };
@@ -421,10 +423,10 @@
 				6F0FAF5517AFA3C800B75D3E /* DrawerNavigationItem.m */,
 				F237F60917B234760057C95B /* XMLElement.h */,
 				F237F60A17B234760057C95B /* XMLElement.m */,
-				6F92A1E817B7D5B6009AD656 /* SpeechViewMessage.h */,
-				6F92A1E917B7D5B6009AD656 /* SpeechViewMessage.m */,
-				6F92A1EB17B7D6CC009AD656 /* SpeechViewTextMessage.h */,
-				6F92A1EC17B7D6CC009AD656 /* SpeechViewTextMessage.m */,
+				6F92A1E817B7D5B6009AD656 /* ConversationMessage.h */,
+				6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */,
+				6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */,
+				6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -444,8 +446,8 @@
 				6F0FAEC317AF824B00B75D3E /* TopbarView.m */,
 				6F0FAEC817AF832700B75D3E /* DrawerView.h */,
 				6F0FAEC917AF832700B75D3E /* DrawerView.m */,
-				6F8A722B17B23E91002BA8C5 /* SpeechRecognitionView.h */,
-				6F8A722C17B23E91002BA8C5 /* SpeechRecognitionView.m */,
+				6F8A722B17B23E91002BA8C5 /* ConversationView.h */,
+				6F8A722C17B23E91002BA8C5 /* ConversationView.m */,
 				F20B36CB17B87CF1009286D6 /* MainControllersView.h */,
 				F20B36CC17B87CF1009286D6 /* MainControllersView.m */,
 			);
@@ -653,6 +655,7 @@
 		6F5905F117B9259B00022B2C /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				6FEB91CA17BA00F6007C04A1 /* test */,
 			);
 			name = sound;
 			sourceTree = "<group>";
@@ -691,8 +694,8 @@
 		6FD8A71D17B22961009C7493 /* speech_recognition */ = {
 			isa = PBXGroup;
 			children = (
-				6FD8A71E17B22980009C7493 /* SpeechRecognitionButton.h */,
-				6FD8A71F17B22980009C7493 /* SpeechRecognitionButton.m */,
+				6FD8A71E17B22980009C7493 /* SpeechRecognitionUtil.h */,
+				6FD8A71F17B22980009C7493 /* SpeechRecognitionUtil.m */,
 				6FD8A72317B22A18009C7493 /* SpeechSynthesizer.h */,
 				6FD8A72417B22A18009C7493 /* SpeechSynthesizer.m */,
 			);
@@ -721,6 +724,14 @@
 				6FD8A73517B2356F009C7493 /* RestResponse.m */,
 			);
 			name = rest;
+			sourceTree = "<group>";
+		};
+		6FEB91CA17BA00F6007C04A1 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				6FEB91CB17BA0101007C04A1 /* test.wav */,
+			);
+			name = test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -801,6 +812,7 @@
 				6FD8A71C17B22935009C7493 /* record_animate_00@2x.png in Resources */,
 				6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */,
 				6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */,
+				6FEB91CC17BA0101007C04A1 /* test.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,7 +855,7 @@
 				6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */,
 				F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */,
 				F237F60B17B234760057C95B /* XMLElement.m in Sources */,
-				6FD8A72017B22980009C7493 /* SpeechRecognitionButton.m in Sources */,
+				6FD8A72017B22980009C7493 /* SpeechRecognitionUtil.m in Sources */,
 				6FD8A72517B22A18009C7493 /* SpeechSynthesizer.m in Sources */,
 				6FD8A72917B22A90009C7493 /* TextContainerView.m in Sources */,
 				6FD8A72C17B22AB3009C7493 /* AttributedStringBuilder.m in Sources */,
@@ -853,14 +865,14 @@
 				F237F61117B3314E0057C95B /* GDataXMLNode.m in Sources */,
 				F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */,
 				F237168517B3715C0057C95B /* SmsService.m in Sources */,
-				6F8A722D17B23E91002BA8C5 /* SpeechRecognitionView.m in Sources */,
+				6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */,
 				6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */,
 				6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */,
 				6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */,
 				6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */,
 				6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */,
-				6F92A1EA17B7D5B6009AD656 /* SpeechViewMessage.m in Sources */,
-				6F92A1ED17B7D6CC009AD656 /* SpeechViewTextMessage.m in Sources */,
+				6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */,
+				6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */,
 				F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */,
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 				F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */,

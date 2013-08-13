@@ -1,5 +1,5 @@
 //
-//  SpeechViewTextMessage.h
+//  ConversationTextMessage.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/11/13.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SpeechViewMessage.h"
+#import "ConversationMessage.h"
 
-@interface SpeechViewTextMessage : SpeechViewMessage
+@interface ConversationTextMessage : ConversationMessage
 
 @property (strong, nonatomic) NSString *textMessage;
 

@@ -1,17 +1,16 @@
 //
-//  SpeechViewMessage.m
+//  ConversationMessage.m
 //  SmartHome
 //
 //  Created by Zhao yang on 8/11/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "SpeechViewMessage.h"
+#import "ConversationMessage.h"
 
-@implementation SpeechViewMessage
+@implementation ConversationMessage
 
 @synthesize messageOwner;
-
 
 - (UIView *)viewWithMessage {
     return nil;

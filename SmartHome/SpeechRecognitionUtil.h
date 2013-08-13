@@ -27,17 +27,9 @@
 
 @end
 
-typedef NS_ENUM(NSInteger, RECORD_MODE) {
-    RECORD_MODE_BUTTON_AUTO,
-    RECORD_MODE_BUTTON_MANUAL
-};
-
-@interface SpeechRecognitionButton : UIButton<IFlySpeechRecognizerDelegate>
+@interface SpeechRecognitionUtil : NSObject<IFlySpeechRecognizerDelegate>
 
 @property(assign, nonatomic) id<SpeechRecognitionNotificationDelegate> speechRecognitionNotificationDelegate;
-
-/* 录音模式 手动 与 自动, 手动类似于微信录音 自动类似于siri */
-@property(assign, nonatomic, readonly) RECORD_MODE recordMode;
 
 /*
  *   iat:     普通文本转写;
@@ -78,8 +70,8 @@ typedef NS_ENUM(NSInteger, RECORD_MODE) {
 /* 命令词识别的语法id 只针对 domain 为 asr的应用 */
 @property(strong, nonatomic) NSString *grammarID;
 
-
-- (id)initWithFrame:(CGRect)frame andMode:(RECORD_MODE)_recodeMode_;
-- (void)touchUpInsideForAutoMode:(id)sender;
+- (void)startListening;
+- (void)stopListening;
+- (void)cancel;
 
 @end

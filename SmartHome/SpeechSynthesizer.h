@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <iflyMSC/IFlySpeechSynthesizer.h>
-#import "SpeechRecognitionButton.h"
+#import "SpeechRecognitionUtil.h"
 
 @protocol SpeechSynthesizerNotificationDelegate <NSObject>
 

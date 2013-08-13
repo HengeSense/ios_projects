@@ -1,25 +1,26 @@
 //
-//  SpeechRecognitionView.m
+//  ConversationView.m
 //  SmartHome
 //
 //  Created by Zhao yang on 8/7/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "SpeechRecognitionView.h"
+#import "ConversationView.h"
 #import "MainView.h"
 
 #define WELCOME_VIEW_TAG        3333
 #define CELL_CONTENT_VIEW_TAG   5555
 
-@implementation SpeechRecognitionView {
+@implementation ConversationView {
     UIView *containerView;
     UIView *welcomeView;
-    
-    
-    UITableView *tblSpeech;
+    UITableView *tblMessages;
     NSMutableArray *messages;
 }
+
+#pragma mark -
+#pragma mark initializations
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -47,48 +48,44 @@
     }
     
     //add some test messages
-    SpeechViewTextMessage *msg1 = [[SpeechViewTextMessage alloc] init];
+    ConversationTextMessage *msg1 = [[ConversationTextMessage alloc] init];
     msg1.messageOwner = MESSAGE_OWNER_THEIRS;
     msg1.textMessage = @"这是测试消息一二三四五六七八a";
     
-    SpeechViewTextMessage *msg11 = [[SpeechViewTextMessage alloc] init];
+    ConversationTextMessage *msg11 = [[ConversationTextMessage alloc] init];
     msg11.messageOwner = MESSAGE_OWNER_MINE;
     msg11.textMessage = @"你好,给大爷我跳个舞~";
     
-    SpeechViewTextMessage *msg2 = [[SpeechViewTextMessage alloc] init];
+    ConversationTextMessage *msg2 = [[ConversationTextMessage alloc] init];
     msg2.messageOwner = MESSAGE_OWNER_THEIRS;
     msg2.textMessage = @"你好,空调已经打开,即将进入爆炸模式,请离开你的房间,你的空调将于2分钟发生核爆  请速度离开.";
     
-    SpeechViewTextMessage *msg12 = [[SpeechViewTextMessage alloc] init];
+    ConversationTextMessage *msg12 = [[ConversationTextMessage alloc] init];
     msg12.messageOwner = MESSAGE_OWNER_MINE;
     msg12.textMessage = @"春眠不觉晓,处处闻啼鸟,夜来风雨声,花落知多少.";
     
-    SpeechViewTextMessage *msg3 = [[SpeechViewTextMessage alloc] init];
-    msg3.messageOwner = MESSAGE_OWNER_THEIRS;
-    msg3.textMessage = @"空调已经发生核爆,已造成1000W人口死亡,根据检测  您已经死亡,手机已进入幽灵模式, test test test, 情景模式中选择设备列表  情景模式温度时间设置  情景模式语音标签  扫主控二维码货手动输入二维码  撒是滴哦房间噢is的就是的哦if奖哦 测试失败~!  死了....  ok wifi 挂!";
     
     [self addMessage:msg1];
     [self addMessage:msg11];
     [self addMessage:msg2];
     [self addMessage:msg12];
-    [self addMessage:msg3];
 }
 
 - (void)initUI {
     self.alpha = 1.f;
     self.backgroundColor = [UIColor blackColor];
     
-    if(tblSpeech == nil) {
+    if(tblMessages == nil) {
         
-        tblSpeech = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
-        tblSpeech.backgroundColor = [UIColor clearColor];
+        tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
+        tblMessages.backgroundColor = [UIColor clearColor];
 //        tblSpeech.backgroundView = [[UIView alloc] initWithFrame:tblSpeech.frame];
 //        tblSpeech.backgroundView.backgroundColor = [UIColor clearColor];
-        tblSpeech.separatorStyle = UITableViewCellSeparatorStyleNone;
-        tblSpeech.delegate = self;
-        tblSpeech.dataSource = self;
+        tblMessages.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tblMessages.delegate = self;
+        tblMessages.dataSource = self;
         
-        [self addSubview:tblSpeech];
+        [self addSubview:tblMessages];
     }
     
     if(welcomeView == nil) {
@@ -141,12 +138,15 @@
 
 - (void)test {
 
-        SpeechViewTextMessage *msg12 = [[SpeechViewTextMessage alloc] init];
+        ConversationTextMessage *msg12 = [[ConversationTextMessage alloc] init];
         msg12.messageOwner = MESSAGE_OWNER_MINE;
         msg12.textMessage = @"速度关机";
         [self addMessage:msg12];
     
 }
+
+#pragma mark -
+#pragma mark public methods
 
 - (void)showWelcomeMessage {
     UIView *view = [self viewWithTag:WELCOME_VIEW_TAG];
@@ -169,23 +169,20 @@
     }
 }
 
-#pragma mark -
-#pragma mark methods
-
-- (void)addMessage:(SpeechViewMessage *)message {
+- (void)addMessage:(ConversationMessage *)message {
     if(message == nil) return;
     [messages addObject:message];
-    [tblSpeech beginUpdates];
+    [tblMessages beginUpdates];
     NSIndexPath *newMessageIndexPath = [NSIndexPath indexPathForRow:(messages.count - 1) inSection:0];
-    [tblSpeech insertRowsAtIndexPaths:[NSArray arrayWithObject:newMessageIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
-    [tblSpeech endUpdates];
-    [tblSpeech scrollToRowAtIndexPath:newMessageIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [tblMessages insertRowsAtIndexPaths:[NSArray arrayWithObject:newMessageIndexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [tblMessages endUpdates];
+    [tblMessages scrollToRowAtIndexPath:newMessageIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void)clearMessages {
     if(messages == nil || messages.count == 0) return;
     [messages removeAllObjects];
-    [tblSpeech reloadData];
+    [tblMessages reloadData];
 }
 
 #pragma mark -
@@ -201,7 +198,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SpeechViewMessage *message = [messages objectAtIndex:indexPath.row];
+    ConversationMessage *message = [messages objectAtIndex:indexPath.row];
     if(message != nil) {
         UIView *messageView = [message viewWithMessage];
         if(messageView != nil) {
@@ -222,7 +219,7 @@
     if(messageView != nil) {
         [messageView removeFromSuperview];
     }
-    SpeechViewMessage *message = [messages objectAtIndex:indexPath.row];
+    ConversationMessage *message = [messages objectAtIndex:indexPath.row];
     if(message != nil) {
         messageView = [message viewWithMessage];
         if(messageView != nil) {

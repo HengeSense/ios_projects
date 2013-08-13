@@ -6,16 +6,13 @@
 //  Copyright (c) 2013 young. All rights reserved.
 //
 
-#import "SpeechRecognitionButton.h"
+#import "SpeechRecognitionUtil.h"
 
-@implementation SpeechRecognitionButton {
+@implementation SpeechRecognitionUtil {
     IFlySpeechRecognizer *speechRecognizer;
     NSMutableString *textResult;
-    BOOL isRecognizing;
-    BOOL lockButton;
 }
 
-@synthesize recordMode;
 @synthesize domain;
 @synthesize vadBos;
 @synthesize vadEos;
@@ -29,24 +26,29 @@
 #pragma mark -
 #pragma mark initializations
 
-- (id)initWithFrame:(CGRect)frame {
-    return [self initWithFrame:frame andMode:RECORD_MODE_BUTTON_AUTO];
-}
+//- (id)initWithFrame:(CGRect)frame andMode:(RECORD_MODE)_recodeMode_ {
+//    self = [super initWithFrame:frame];
+//    if(self) {
+//        [self initDefaults];
+//        
+//        recordMode = _recodeMode_;
+//        if(self.recordMode == RECORD_MODE_BUTTON_AUTO) {
+//            [self addTarget:self action:@selector(touchUpInsideForAutoMode:) forControlEvents:UIControlEventTouchUpInside];
+//        } else if(self.recordMode == RECORD_MODE_BUTTON_MANUAL) {
+//            [self addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
+//            [self addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+//            [self addTarget:self action:@selector(dragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+//            [self addTarget:self action:@selector(dragExit:) forControlEvents:UIControlEventTouchDragExit];
+//            [self addTarget:self action:@selector(touchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
+//        }
+//    }
+//    return self;
+//}
 
-- (id)initWithFrame:(CGRect)frame andMode:(RECORD_MODE)_recodeMode_ {
-    self = [super initWithFrame:frame];
+- (id)init {
+    self = [super init];
     if(self) {
         [self initDefaults];
-        recordMode = _recodeMode_;
-        if(self.recordMode == RECORD_MODE_BUTTON_AUTO) {
-            [self addTarget:self action:@selector(touchUpInsideForAutoMode:) forControlEvents:UIControlEventTouchUpInside];
-        } else if(self.recordMode == RECORD_MODE_BUTTON_MANUAL) {
-            [self addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
-            [self addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-            [self addTarget:self action:@selector(dragEnter:) forControlEvents:UIControlEventTouchDragEnter];
-            [self addTarget:self action:@selector(dragExit:) forControlEvents:UIControlEventTouchDragExit];
-            [self addTarget:self action:@selector(touchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
-        }
     }
     return self;
 }
@@ -65,49 +67,48 @@
     self.plainResult = @"0";
 }
 
-#pragma mark -
-#pragma mark speech recognizer event for manual
-
-- (void)touchDown:(id)sender {
-    [self startListening];
-}
-
-- (void)touchUpInside:(id)sender {
-    [self stopListening];
-}
-
-- (void)dragEnter:(id)sender {
-}
-
-- (void)dragExit:(id)sender {
-}
-
-- (void)touchUpOutside:(id)sender {
-    [speechRecognizer cancel];
-    if(self.speechRecognitionNotificationDelegate == nil) return;
-    if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(recognizeCancelled)]) {
-        [self.speechRecognitionNotificationDelegate recognizeCancelled];
-    }
-}
-
-#pragma mark -
-#pragma mark speech recognizer event for auto
-
-- (void)touchUpInsideForAutoMode:(id)sender {
-    if(lockButton) return;
-    lockButton = YES;
-    if(isRecognizing) {
-        [self stopListening];
-    } else {
-        [self startListening];
-    }
-}
+//#pragma mark -
+//#pragma mark speech recognizer event for manual
+//
+//- (void)touchDown:(id)sender {
+//    [self startListening];
+//}
+//
+//- (void)touchUpInside:(id)sender {
+//    [self stopListening];
+//}
+//
+//- (void)dragEnter:(id)sender {
+//}
+//
+//- (void)dragExit:(id)sender {
+//}
+//
+//- (void)touchUpOutside:(id)sender {
+//    [speechRecognizer cancel];
+//    if(self.speechRecognitionNotificationDelegate == nil) return;
+//    if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(recognizeCancelled)]) {
+//        [self.speechRecognitionNotificationDelegate recognizeCancelled];
+//    }
+//}
+//
+//#pragma mark -
+//#pragma mark speech recognizer event for auto
+//
+//- (void)touchUpInsideForAutoMode:(id)sender {
+//    if(lockButton) return;
+//    lockButton = YES;
+//    if(isRecognizing) {
+//        [self stopListening];
+//    } else {
+//        [self startListening];
+//    }
+//}
 
 #pragma mark -
 #pragma mark iFly recognizer control
 
 - (void)startListening {
-    isRecognizing = YES;
     textResult = nil;
     [speechRecognizer setParameter:@"domain" value:self.domain];
     [speechRecognizer setParameter:@"vad_bos" value:self.vadBos];
@@ -126,6 +127,10 @@
     [speechRecognizer stopListening];
 }
 
+- (void)cancel {
+    [speechRecognizer cancel];
+}
+
 #pragma mark -
 #pragma mark iFly speech recognizer delegate
 
@@ -138,7 +143,6 @@
 }
 
 - (void)onBeginOfSpeech {
-    lockButton = NO;
     if(self.speechRecognitionNotificationDelegate == nil) return;
     if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(beginRecord)]) {
         [self.speechRecognitionNotificationDelegate beginRecord];
@@ -146,7 +150,6 @@
 }
 
 - (void)onEndOfSpeech {
-    lockButton = YES;
     if(self.speechRecognitionNotificationDelegate == nil) return;
     if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(endRecord)]) {
         [self.speechRecognitionNotificationDelegate endRecord];
@@ -164,7 +167,11 @@
 }
 
 - (void)onCancel {
-    
+    // need to test
+    if(self.speechRecognitionNotificationDelegate != nil
+       && [self.speechRecognitionNotificationDelegate respondsToSelector:@selector(recognizeCancelled)]) {
+        [self.speechRecognitionNotificationDelegate recognizeCancelled];
+    }
 }
 
 - (void)onError:(IFlySpeechError *)errorCode {
@@ -178,8 +185,6 @@
             [self.speechRecognitionNotificationDelegate recognizeError:errorCode.errorCode];
         }
     }
-    isRecognizing = NO;
-    lockButton = NO;
 }
 
 @end

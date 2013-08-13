@@ -7,12 +7,13 @@
 //
 
 #import "MainView.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 #define SPEECH_VIEW_TAG 46001
 
 @implementation MainView {
     SpeechViewState speechViewState;
-    SpeechRecognitionView *speechView;
+    ConversationView *speechView;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -43,7 +44,7 @@
 
 - (void)showSpeechView {
     if(speechViewState != SpeechViewStateClosed) return;
-    SpeechRecognitionView *view = (SpeechRecognitionView *)[self viewWithTag:SPEECH_VIEW_TAG];
+    ConversationView *view = (ConversationView *)[self viewWithTag:SPEECH_VIEW_TAG];
     if(view == nil) {
         view = [self speechView];
         [self addSubview:view];
@@ -63,7 +64,7 @@
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
     CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
-    SpeechRecognitionView *view = [self speechView];
+    ConversationView *view = [self speechView];
     speechViewState = SpeechViewStateClosing;
     [UIView animateWithDuration:0.3f
                      animations:^{
@@ -90,17 +91,79 @@
 
 - (void)btnSpeechRecordingPressed:(id)sender {
     NSLog(@"换图片");
+    AudioServicesPlaySystemSound(1113);
     //[speechView showWelcomeMessage];
     [speechView hideWelcomeMessage];
+}
+
+#pragma mark - 
+#pragma mark play system sound
+
+- (void)go {
+//    
+//    NSLog(@"2");
+//    SystemSoundID soundID;
+////    NSURL* soundURL = [[NSURL alloc]initWithString:@"test.wav"];
+//    
+//    NSString *sndpath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"wav"];
+//    CFURLRef soundURL = (__bridge CFURLRef)[[NSURL alloc] initFileURLWithPath:sndpath];
+//    
+//    
+//    OSStatus err = AudioServicesCreateSystemSoundID(soundURL, &soundID);
+//    if (err) {
+//        
+//        NSLog(@"Error occurred assigning system sound!");
+//        return;
+//    }
+////    AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundFinished, soundURL);
+//    AudioServicesPlaySystemSound(soundID);
+//    CFRunLoopRun();
+}
+
+static void soundFinished(SystemSoundID soundID, void *soundURL){
+    AudioServicesDisposeSystemSoundID(soundID);
+    CFBridgingRelease(soundURL);
+//    CFRelease(soundURL);
+    CFRunLoopStop(CFRunLoopGetCurrent());
+    
+    //do some thing after sound played
+}
+
+
+#pragma mark -
+#pragma mark speech recognizer notification delegate
+
+- (void)beginRecord {
+    
+}
+
+- (void)endRecord {
+    
+}
+
+- (void)recognizeCancelled {
+    
+}
+
+- (void)speakerVolumeChanged:(int)volume {
+    
+}
+
+- (void)recognizeSuccess:(NSString *)result {
+    
+}
+
+- (void)recognizeError:(int)errorCode {
+    
 }
 
 #pragma mark -
 #pragma mark getter and setters
 
-- (SpeechRecognitionView *)speechView {
+- (ConversationView *)speechView {
     if(speechView == nil) {
         CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
-        speechView = [[SpeechRecognitionView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight), self.frame.size.width, viewHeight) andContainerView:self];
+        speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight), self.frame.size.width, viewHeight) andContainerView:self];
         speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;

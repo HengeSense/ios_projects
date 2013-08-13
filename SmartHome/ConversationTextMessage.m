@@ -1,12 +1,12 @@
 //
-//  SpeechViewTextMessage.m
+//  ConversationTextMessage.m
 //  SmartHome
 //
 //  Created by Zhao yang on 8/11/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "SpeechViewTextMessage.h"
+#import "ConversationTextMessage.h"
 #import "TextContainerView.h"
 #import "ParagraphBuilder.h"
 #import "AttributedStringBuilder.h"
@@ -17,7 +17,7 @@
 #define MESSAGE_MAX_WIDTH 250
 #define BubbleSpace 10
 
-@implementation SpeechViewTextMessage {
+@implementation ConversationTextMessage {
     UIView *messageView;
 }
 

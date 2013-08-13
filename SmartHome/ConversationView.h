@@ -1,5 +1,5 @@
 //
-//  SpeechRecognitionView.h
+//  ConversationView.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/7/13.
@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SpeechViewTextMessage.h"
+#import "ConversationTextMessage.h"
 
-@interface SpeechRecognitionView : UIView<UITableViewDataSource, UITableViewDelegate>
+@interface ConversationView : UIView<UITableViewDataSource, UITableViewDelegate>
 
 - (id)initWithFrame:(CGRect)frame andContainerView:(UIView *)cv;
 
 - (void)showWelcomeMessage;
 - (void)hideWelcomeMessage;
 
-- (void)addMessage:(SpeechViewMessage *)message;
+- (void)addMessage:(ConversationMessage *)message;
 - (void)clearMessages;
 
 @end

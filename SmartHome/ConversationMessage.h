@@ -1,5 +1,5 @@
 //
-//  SpeechViewMessage.h
+//  ConversationMessage.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/11/13.
@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, MESSAGE_OWNER) {
     MESSAGE_OWNER_THEIRS
 };
 
-@interface SpeechViewMessage : NSObject
+@interface ConversationMessage : NSObject
 
 // properties
 

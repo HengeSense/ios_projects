@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
-#import "SpeechRecognitionView.h"
+#import "ConversationView.h"
+#import "SpeechRecognitionUtil.h"
 
 typedef NS_ENUM(NSInteger, SpeechViewState) {
     SpeechViewStateOpenning = 1,
@@ -17,7 +18,7 @@ typedef NS_ENUM(NSInteger, SpeechViewState) {
     SpeechViewStateClosed   = 4
 };
 
-@interface MainView : NavigationView
+@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate>
 
 - (void)showSpeechView;
 - (void)hideSpeechView;
