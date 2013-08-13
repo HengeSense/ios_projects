@@ -36,6 +36,7 @@
     mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.frame.size.width, self.frame.size.height-44) style:UITableViewStylePlain];
     [self addSubview:mainTableView];
     mainTableView.dataSource = self;
+    mainTableView.delegate = self;
     
 }
 
@@ -51,14 +52,14 @@
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = nil;
-    if([tableView isEqual:mainTableView]){
+    static NSString *cellIdentifier = @"cellIdentifer";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"mycells"];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"主控%ld",(long)indexPath.row];
-        
-    }
+        cell.textLabel.text = [NSString stringWithFormat:@"主控%ld                   设备列表",(long)indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     return cell;
 }
 @end
