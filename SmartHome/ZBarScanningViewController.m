@@ -125,16 +125,10 @@
     //扫描区域
     CGRect scanMaskRect = CGRectMake(60, CGRectGetMidY(readerView.frame) - 126, 200, 200);
     
-    //处理模拟器
-    if (TARGET_IPHONE_SIMULATOR) {
-        ZBarCameraSimulator *cameraSimulator
-        = [[ZBarCameraSimulator alloc] initWithViewController:self];
-        cameraSimulator.readerView = readerView;
-    }
     [self.view addSubview:readerView];
     //扫描区域计算
     readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:readerView.bounds];
-    
+
     [readerView start];
 }
 - (void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
@@ -145,6 +139,7 @@
     }
     
     [readerView stop];
+    [readerView removeFromSuperview];
 }
 
 @end
