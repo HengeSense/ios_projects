@@ -37,7 +37,10 @@
 - (TopbarView *)topbar {
     if(topbar == nil) {
         topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"top.png"]];
-        [topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"left_btn.png"] forState:UIControlStateNormal];
+//        topbar.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 21, 20)];
+        topbar.leftButton.frame = CGRectMake(0, 0, 21, 20);
+        topbar.leftButton.center = CGPointMake(22.5f, 22);
+        [topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_drawer_nav.png"] forState:UIControlStateNormal];
         [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
     }
     return topbar;
