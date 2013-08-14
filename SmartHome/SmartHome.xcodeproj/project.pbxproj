@@ -92,7 +92,6 @@
 		6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */; };
 		6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */; };
 		6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF756617B8D78F004EF7FD /* ImageFactory.m */; };
-		6FEB91CC17BA0101007C04A1 /* test.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91CB17BA0101007C04A1 /* test.wav */; };
 		6FEB91D117BB2636007C04A1 /* btn_drawer_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91D017BB2636007C04A1 /* btn_drawer_nav@2x.png */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
@@ -260,7 +259,6 @@
 		6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mine@2x.png"; sourceTree = "<group>"; };
 		6FDF756517B8D78F004EF7FD /* ImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFactory.h; sourceTree = "<group>"; };
 		6FDF756617B8D78F004EF7FD /* ImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFactory.m; sourceTree = "<group>"; };
-		6FEB91CB17BA0101007C04A1 /* test.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = test.wav; sourceTree = "<group>"; };
 		6FEB91D017BB2636007C04A1 /* btn_drawer_nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_drawer_nav@2x.png"; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 		6F0FAE6B17AF7F9F00B75D3E = {
 			isa = PBXGroup;
 			children = (
-				6F5905F117B9259B00022B2C /* sound */,
 				6F0FAF5817AFA4E800B75D3E /* ui_utils */,
 				6F0FAEA417AF802000B75D3E /* third */,
 				6F0FAEA317AF801700B75D3E /* controllers */,
@@ -656,14 +653,6 @@
 			name = ui_utils;
 			sourceTree = "<group>";
 		};
-		6F5905F117B9259B00022B2C /* sound */ = {
-			isa = PBXGroup;
-			children = (
-				6FEB91CA17BA00F6007C04A1 /* test */,
-			);
-			name = sound;
-			sourceTree = "<group>";
-		};
 		6FB4240417B48CC70042EA41 /* GDataXMLNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,14 +717,6 @@
 				6FD8A73517B2356F009C7493 /* RestResponse.m */,
 			);
 			name = rest;
-			sourceTree = "<group>";
-		};
-		6FEB91CA17BA00F6007C04A1 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				6FEB91CB17BA0101007C04A1 /* test.wav */,
-			);
-			name = test;
 			sourceTree = "<group>";
 		};
 		6FEB91CD17BB201C007C04A1 /* socket */ = {
@@ -823,7 +804,6 @@
 				6FD8A71C17B22935009C7493 /* record_animate_00@2x.png in Resources */,
 				6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */,
 				6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */,
-				6FEB91CC17BA0101007C04A1 /* test.wav in Resources */,
 				6FEB91D117BB2636007C04A1 /* btn_drawer_nav@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
