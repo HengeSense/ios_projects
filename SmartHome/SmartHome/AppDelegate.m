@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "RegisterViewController.h"
+#import "ZBarScanningViewController.h"
 
 
 @implementation AppDelegate
@@ -22,7 +23,10 @@
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
     
-    self.settings.accountPhone = @"";    
+    self.settings.accountPhone = @"";
+    self.settings.isValid = NO;
+    [self.settings saveSettings];
+    
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
@@ -33,7 +37,7 @@
             [[MainViewController alloc] init] animated:NO];
     } else {
         [rootViewController.navigationController pushViewController:
-         [[RegisterViewController alloc] init] animated:NO];
+         [[ZBarScanningViewController alloc] init] animated:NO];
     }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

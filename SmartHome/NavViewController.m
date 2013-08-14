@@ -45,7 +45,7 @@
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar_second_level.png"]];
     self.topbar.leftButton.frame = CGRectMake(0, 0, 61, 30);
     self.topbar.leftButton.center = CGPointMake(37.5, 22);
-    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
+    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal | UIControlStateHighlighted];
     [self.topbar.leftButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.topbar];
 }
