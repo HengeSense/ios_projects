@@ -118,9 +118,10 @@
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;
     ZBarImageScanner *scanner = reader.scanner;
+//    CGRect rect = reader.view.bounds;
     CGRect scanMaskRect = CGRectMake(60, CGRectGetMidY(reader.view.frame) - 126, 200, 200);
     reader.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:reader.view.bounds];
-    
+//
 //    UIImageView *imageBounds = [[UIImageView alloc] initWithFrame:reader.scanCrop];
 //    [reader.view addSubview:imageBounds];
     [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to: 0];
