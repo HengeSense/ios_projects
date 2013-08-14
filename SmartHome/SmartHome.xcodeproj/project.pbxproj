@@ -44,7 +44,6 @@
 		6F0FAEF717AF844700B75D3E /* left_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAEF517AF844700B75D3E /* left_btn@2x.png */; };
 		6F0FAEF817AF844700B75D3E /* top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAEF617AF844700B75D3E /* top@2x.png */; };
 		6F0FAEFB17AF874100B75D3E /* AirConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEFA17AF874100B75D3E /* AirConditionViewController.m */; };
-		6F0FAEFE17AF875000B75D3E /* UnitDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEFD17AF875000B75D3E /* UnitDetailViewController.m */; };
 		6F0FAF0117AF876200B75D3E /* SceneModeSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0017AF876200B75D3E /* SceneModeSettingViewController.m */; };
 		6F0FAF0417AF877900B75D3E /* SceneModeDeviceSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0317AF877900B75D3E /* SceneModeDeviceSelectionViewController.m */; };
 		6F0FAF0717AF878700B75D3E /* TVAdjustmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0617AF878700B75D3E /* TVAdjustmentViewController.m */; };
@@ -166,8 +165,6 @@
 		6F0FAEF617AF844700B75D3E /* top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top@2x.png"; sourceTree = "<group>"; };
 		6F0FAEF917AF874100B75D3E /* AirConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirConditionViewController.h; sourceTree = "<group>"; };
 		6F0FAEFA17AF874100B75D3E /* AirConditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirConditionViewController.m; sourceTree = "<group>"; };
-		6F0FAEFC17AF875000B75D3E /* UnitDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitDetailViewController.h; sourceTree = "<group>"; };
-		6F0FAEFD17AF875000B75D3E /* UnitDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitDetailViewController.m; sourceTree = "<group>"; };
 		6F0FAEFF17AF876200B75D3E /* SceneModeSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneModeSettingViewController.h; sourceTree = "<group>"; };
 		6F0FAF0017AF876200B75D3E /* SceneModeSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneModeSettingViewController.m; sourceTree = "<group>"; };
 		6F0FAF0217AF877900B75D3E /* SceneModeDeviceSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneModeDeviceSelectionViewController.h; sourceTree = "<group>"; };
@@ -474,8 +471,6 @@
 				6F0FAEC617AF82CC00B75D3E /* MainViewController.m */,
 				6F0FAEF917AF874100B75D3E /* AirConditionViewController.h */,
 				6F0FAEFA17AF874100B75D3E /* AirConditionViewController.m */,
-				6F0FAEFC17AF875000B75D3E /* UnitDetailViewController.h */,
-				6F0FAEFD17AF875000B75D3E /* UnitDetailViewController.m */,
 				6F0FAEFF17AF876200B75D3E /* SceneModeSettingViewController.h */,
 				6F0FAF0017AF876200B75D3E /* SceneModeSettingViewController.m */,
 				6F0FAF0217AF877900B75D3E /* SceneModeDeviceSelectionViewController.h */,
@@ -848,7 +843,6 @@
 				6F0FAEE017AF836600B75D3E /* MessageInterceptor.m in Sources */,
 				6F0FAEE117AF836600B75D3E /* PullTableView.m in Sources */,
 				6F0FAEFB17AF874100B75D3E /* AirConditionViewController.m in Sources */,
-				6F0FAEFE17AF875000B75D3E /* UnitDetailViewController.m in Sources */,
 				6F0FAF0117AF876200B75D3E /* SceneModeSettingViewController.m in Sources */,
 				6F0FAF0417AF877900B75D3E /* SceneModeDeviceSelectionViewController.m in Sources */,
 				6F0FAF0717AF878700B75D3E /* TVAdjustmentViewController.m in Sources */,
