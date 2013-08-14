@@ -94,6 +94,7 @@
 		6FEB91DF17BB6614007C04A1 /* DeviceAffectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DE17BB6614007C04A1 /* DeviceAffectViewController.m */; };
 		6FEB91E317BB7AAB007C04A1 /* bg_topbar_first_level@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91E217BB7AAB007C04A1 /* bg_topbar_first_level@2x.png */; };
 		6FEB91E517BB7C6C007C04A1 /* btn_drawer_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91E417BB7C6C007C04A1 /* btn_drawer_nav@2x.png */; };
+		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
@@ -263,6 +264,8 @@
 		6FEB91DE17BB6614007C04A1 /* DeviceAffectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceAffectViewController.m; sourceTree = "<group>"; };
 		6FEB91E217BB7AAB007C04A1 /* bg_topbar_first_level@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_topbar_first_level@2x.png"; sourceTree = "<group>"; };
 		6FEB91E417BB7C6C007C04A1 /* btn_drawer_nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_drawer_nav@2x.png"; sourceTree = "<group>"; };
+		6FEB91E717BB843D007C04A1 /* TemperatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureView.h; sourceTree = "<group>"; };
+		6FEB91E817BB843D007C04A1 /* TemperatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureView.m; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 		F20B36CB17B87CF1009286D6 /* MainControllersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainControllersView.h; sourceTree = "<group>"; };
@@ -380,6 +383,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				6FEB91E617BB83CE007C04A1 /* temperature_view */,
 				6F0FAF4C17AF9C7B00B75D3E /* cells */,
 				6F0FAEA517AF803800B75D3E /* drawer_navigation */,
 			);
@@ -723,6 +727,15 @@
 			name = socket;
 			sourceTree = "<group>";
 		};
+		6FEB91E617BB83CE007C04A1 /* temperature_view */ = {
+			isa = PBXGroup;
+			children = (
+				6FEB91E717BB843D007C04A1 /* TemperatureView.h */,
+				6FEB91E817BB843D007C04A1 /* TemperatureView.m */,
+			);
+			name = temperature_view;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -866,6 +879,7 @@
 				F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */,
 				6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */,
 				6FEB91DF17BB6614007C04A1 /* DeviceAffectViewController.m in Sources */,
+				6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
