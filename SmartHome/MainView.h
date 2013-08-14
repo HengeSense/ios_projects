@@ -28,6 +28,10 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 
 @interface MainView : NavigationView<SpeechRecognitionNotificationDelegate>
 
+@property (assign, nonatomic) NSInteger temperature;
+@property (assign, nonatomic) NSUInteger humidity;
+@property (assign, nonatomic) NSInteger pm25;
+
 - (void)showSpeechView;
 - (void)hideSpeechView;
 

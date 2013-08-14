@@ -49,7 +49,7 @@
 		6F0FAF0D17AF87AC00B75D3E /* TVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */; };
 		6F0FAF1017AF87BD00B75D3E /* AirconditionAdjustmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */; };
 		6F0FAF1317AF87CD00B75D3E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1217AF87CC00B75D3E /* RegisterViewController.m */; };
-		6F0FAF1617AF87DE00B75D3E /* ZBarScanningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1517AF87DE00B75D3E /* ZBarScanningViewController.m */; };
+		6F0FAF1617AF87DE00B75D3E /* QRCodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */; };
 		6F0FAF3717AF882600B75D3E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1817AF882600B75D3E /* .gitignore */; };
 		6F0FAF3817AF882600B75D3E /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAF3017AF882600B75D3E /* libzbar.a */; };
 		6F0FAF3917AF882600B75D3E /* README in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAF3117AF882600B75D3E /* README */; };
@@ -176,8 +176,8 @@
 		6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirconditionAdjustmentViewController.m; sourceTree = "<group>"; };
 		6F0FAF1117AF87CC00B75D3E /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		6F0FAF1217AF87CC00B75D3E /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		6F0FAF1417AF87DE00B75D3E /* ZBarScanningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarScanningViewController.h; sourceTree = "<group>"; };
-		6F0FAF1517AF87DE00B75D3E /* ZBarScanningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBarScanningViewController.m; sourceTree = "<group>"; };
+		6F0FAF1417AF87DE00B75D3E /* QRCodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScannerViewController.h; sourceTree = "<group>"; };
+		6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScannerViewController.m; sourceTree = "<group>"; };
 		6F0FAF1817AF882600B75D3E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6F0FAF1C17AF882600B75D3E /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		6F0FAF1D17AF882600B75D3E /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
@@ -486,8 +486,8 @@
 				6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */,
 				6F0FAF1117AF87CC00B75D3E /* RegisterViewController.h */,
 				6F0FAF1217AF87CC00B75D3E /* RegisterViewController.m */,
-				6F0FAF1417AF87DE00B75D3E /* ZBarScanningViewController.h */,
-				6F0FAF1517AF87DE00B75D3E /* ZBarScanningViewController.m */,
+				6F0FAF1417AF87DE00B75D3E /* QRCodeScannerViewController.h */,
+				6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */,
 				F205B78117B0EEE2003EC863 /* NavViewController.h */,
 				F205B78217B0EEE2003EC863 /* NavViewController.m */,
 				6F89282617B3DF3D00D0C1E3 /* RootViewController.h */,
@@ -849,7 +849,7 @@
 				6F0FAF0D17AF87AC00B75D3E /* TVViewController.m in Sources */,
 				6F0FAF1017AF87BD00B75D3E /* AirconditionAdjustmentViewController.m in Sources */,
 				6F0FAF1317AF87CD00B75D3E /* RegisterViewController.m in Sources */,
-				6F0FAF1617AF87DE00B75D3E /* ZBarScanningViewController.m in Sources */,
+				6F0FAF1617AF87DE00B75D3E /* QRCodeScannerViewController.m in Sources */,
 				6F0FAF4F17AF9C8F00B75D3E /* DrawerNavItemCell.m in Sources */,
 				6F0FAF5617AFA3C800B75D3E /* DrawerNavigationItem.m in Sources */,
 				6F0FAF5B17AFA51A00B75D3E /* ViewsPool.m in Sources */,

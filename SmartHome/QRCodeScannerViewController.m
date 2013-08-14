@@ -1,26 +1,25 @@
 //
-//  ZBarScanningViewController.m
+//  QRCodeScannerViewController.m
 //  SmartHome
 //
 //  Created by Zhao yang on 8/5/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "ZBarScanningViewController.h"
+#import "QRCodeScannerViewController.h"
 #import "UIViewController+UIViewControllerExtension.h"
 #import "ZBarCameraSimulator.h"
 
-@interface ZBarScanningViewController ()
+@interface QRCodeScannerViewController ()
 
 @end
 
-@implementation ZBarScanningViewController{
+@implementation QRCodeScannerViewController{
     UIButton *btnDone;
     UILabel *lblTitle;
     UIButton *btnZbarScan;
     UITextField *txtZbarCode;
 }
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

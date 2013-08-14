@@ -14,5 +14,6 @@
 
 - (UIImage *)imageForBubbleMine;
 - (UIImage *)imageForBubbleTheirs;
+- (UIImage *)imageForNumber:(NSInteger)number;
 
 @end

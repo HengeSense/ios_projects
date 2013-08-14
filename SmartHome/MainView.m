@@ -30,6 +30,10 @@
     UIButton *btnShowAffectDevice;
 }
 
+@synthesize temperature;
+@synthesize humidity;
+@synthesize pm25;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -209,6 +213,18 @@
         speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;
+}
+
+- (void)setTemperature:(NSInteger)temperature {
+    
+}
+
+- (void)setHumidity:(NSUInteger)humidity {
+    
+}
+
+- (void)setPm25:(NSInteger)pm25 {
+    
 }
 
 @end

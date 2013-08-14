@@ -11,7 +11,6 @@
 @interface TemperatureView : UIView
 
 @property (assign, nonatomic) NSInteger temperature;
-@property (assign, nonatomic) Boolean hasTemperature;
 
 + (TemperatureView *)createTemperatureView;
 

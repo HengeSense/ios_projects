@@ -27,6 +27,11 @@
     return imgBubbleMine;
 }
 
+- (UIImage *)imageForNumber:(NSInteger)number {
+    if(number < 0 || number > 9) return nil;
+    return [UIImage imageNamed:[NSString stringWithFormat:@"num_%d.png", number]];
+}
+
 + (ImageFactory *)sharedImageFactory {
     static ImageFactory *factory = nil;
     if(factory == nil) {

@@ -1,5 +1,5 @@
 //
-//  ZBarScanningViewController.h
+//  QRCodeScannerViewController.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/5/13.
@@ -11,8 +11,7 @@
 #import "ZBarSymbol.h"
 #import "BaseViewController.h"
 
-@interface ZBarScanningViewController : BaseViewController<ZBarReaderViewDelegate>
-
+@interface QRCodeScannerViewController : BaseViewController<ZBarReaderViewDelegate>
 
 
 @end
