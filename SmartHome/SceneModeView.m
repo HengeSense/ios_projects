@@ -36,7 +36,7 @@
     sceneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.frame.size.width, self.frame.size.height-44) style:UITableViewStylePlain];
     [self addSubview:sceneTableView];
     sceneTableView.dataSource = self;
-
+    self.topbar.titleLabel.text = @"情景模式";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -55,6 +55,14 @@
     }
     cell.textLabel.text = [NSString stringWithFormat:@"睡觉%ld",(long)indexPath.row];
     
+    UIButton *deviceCount = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+                             
+    deviceCount.frame = CGRectMake(0, 0, 150, 25);
+                             
+                             
+    
+    [deviceCount setTitle:@"设备数 5" forState:UIControlStateNormal];
+    cell.accessoryView = deviceCount;
     return cell;
 }
 

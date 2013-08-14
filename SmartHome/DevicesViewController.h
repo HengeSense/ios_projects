@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface DevicesViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "NavViewController.h"
+@interface DevicesViewController :NavViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

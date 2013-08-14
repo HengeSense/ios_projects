@@ -37,6 +37,8 @@
     [self addSubview:mainTableView];
     mainTableView.dataSource = self;
     mainTableView.delegate = self;
+    self.topbar.titleLabel.text = @"主控列表";
+
     
 }
 

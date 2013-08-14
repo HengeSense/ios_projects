@@ -92,6 +92,17 @@
     [self zbarCodeScanningSuccess:symbol.data];
 }
 
+-(CGRect)getScanCrop:(CGRect)rect readerViewBounds:(CGRect)readerViewBounds
+{
+    CGFloat x,y,width,height;
+    
+    x = rect.origin.x / readerViewBounds.size.width;
+    y = rect.origin.y / readerViewBounds.size.height;
+    width = rect.size.width / readerViewBounds.size.width;
+    height = rect.size.height / readerViewBounds.size.height;
+    
+    return CGRectMake(x, y, width, height);
+}
 - (void)zbarCodeScanningSuccess:(NSString *)zbarCode {
     NSLog(@">>>>>>> %@", zbarCode);
     txtZbarCode.text = zbarCode;
@@ -109,6 +120,11 @@
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
     reader.readerDelegate = self;
     ZBarImageScanner *scanner = reader.scanner;
+    CGRect scanMaskRect = CGRectMake(60, CGRectGetMidY(reader.view.frame) - 126, 200, 200);
+    reader.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:reader.view.bounds];
+    
+//    UIImageView *imageBounds = [[UIImageView alloc] initWithFrame:reader.scanCrop];
+//    [reader.view addSubview:imageBounds];
     [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to: 0];
     [self presentModalViewController:reader animated: YES];
 }
