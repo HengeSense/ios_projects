@@ -7,13 +7,17 @@
 //
 
 #import "MainView.h"
+#import "NSString+StringUtils.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 #define SPEECH_VIEW_TAG 46001
 
+
 @implementation MainView {
     SpeechViewState speechViewState;
+    RecognizerState recognizerState;
     ConversationView *speechView;
+    SpeechRecognitionUtil *speechRecognitionUtil;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -27,6 +31,9 @@
 - (void)initDefaults {
     [super initDefaults];
     speechViewState = SpeechViewStateClosed;
+    recognizerState = RecognizerStateReady;
+    speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
+    speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
 }
 
 - (void)initUI {
@@ -90,10 +97,19 @@
 }
 
 - (void)btnSpeechRecordingPressed:(id)sender {
-    NSLog(@"换图片");
-    AudioServicesPlaySystemSound(1113);
-    //[speechView showWelcomeMessage];
     [speechView hideWelcomeMessage];
+    
+    if(recognizerState == RecognizerStateReady) {
+        AudioServicesPlaySystemSound(1113);
+        [speechRecognitionUtil startListening];
+    } else if(recognizerState == RecognizerStateRecordBegin) {
+        [speechRecognitionUtil stopListening];
+    }
+    //[speechView showWelcomeMessage];
+}
+
+- (void)speechRecognizerFailed:(NSString *)message {
+    
 }
 
 #pragma mark - 
@@ -134,27 +150,40 @@ static void soundFinished(SystemSoundID soundID, void *soundURL){
 #pragma mark speech recognizer notification delegate
 
 - (void)beginRecord {
-    
+    recognizerState = RecognizerStateRecordBegin;
 }
 
 - (void)endRecord {
-    
+    AudioServicesPlaySystemSound(1114);
+    recognizerState = RecognizerStateRecordEnd;
 }
 
 - (void)recognizeCancelled {
-    
 }
 
 - (void)speakerVolumeChanged:(int)volume {
-    
 }
 
 - (void)recognizeSuccess:(NSString *)result {
-    
+    if(![NSString isBlank:result]) {
+        ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];
+        textMessage.messageOwner = MESSAGE_OWNER_MINE;
+        textMessage.textMessage = result;
+        [speechView addMessage:textMessage];
+        
+        //process text message
+    } else {
+        [self speechRecognizerFailed:nil];
+        //
+    }
+    recognizerState = RecognizerStateReady;
 }
 
 - (void)recognizeError:(int)errorCode {
+    NSLog(@"need alert error ,,, the code is %d", errorCode);
     
+    [self speechRecognizerFailed:nil];
+    recognizerState = RecognizerStateReady;
 }
 
 #pragma mark -

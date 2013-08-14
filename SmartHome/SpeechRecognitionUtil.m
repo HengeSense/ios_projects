@@ -59,8 +59,8 @@
         speechRecognizer = [IFlySpeechRecognizer createRecognizer:initString delegate:self];
     }
     self.domain = @"iat";
-    self.vadBos = @"4000";
-    self.vadEos = @"700";
+    self.vadBos = @"3000";
+    self.vadEos = @"1500";
     self.asrSch = @"0";
     self.asrPtt = @"1";
     self.sampleRate = @"16000";
