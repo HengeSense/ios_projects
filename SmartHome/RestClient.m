@@ -140,17 +140,16 @@ timeoutInterval=_timeoutInterval, auth=_auth;
     if([NSString isBlank:relativeUrl]) return [[NSURL alloc] initWithString:self.baseUrl];
     if([NSString isBlank:self.baseUrl]) return [[NSURL alloc] initWithString:relativeUrl];
     
-    
     BOOL hasEnd;
     BOOL hasStart;
     NSString *fullUrl;
     
+    //this is a query string
     if([relativeUrl hasPrefix:@"?"]) {
         fullUrl = [self.baseUrl stringByAppendingString:relativeUrl];
     } else {
         hasEnd = [self.baseUrl hasSuffix:@"/"];
         hasStart = [relativeUrl hasPrefix:@"/"];
-        
         if(hasEnd && hasStart) {
             fullUrl = [self.baseUrl stringByAppendingString:[relativeUrl substringFromIndex:1]];
         } else if(!hasEnd && !hasStart) {
