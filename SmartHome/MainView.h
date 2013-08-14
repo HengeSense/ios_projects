@@ -21,10 +21,9 @@ typedef NS_ENUM(NSInteger, SpeechViewState) {
 typedef NS_ENUM(NSInteger, RecognizerState) {
     RecognizerStateReady,
     RecognizerStateRecordBegin,
-    RecognizerStateRecordEnd,
+    RecognizerStateRecording,
+    RecognizerStateRecordingEnd,
     RecognizerStateProceesing
-    
-    
 };
 
 @interface MainView : NavigationView<SpeechRecognitionNotificationDelegate>
