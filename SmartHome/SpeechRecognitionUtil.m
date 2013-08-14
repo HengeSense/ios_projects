@@ -26,25 +26,6 @@
 #pragma mark -
 #pragma mark initializations
 
-//- (id)initWithFrame:(CGRect)frame andMode:(RECORD_MODE)_recodeMode_ {
-//    self = [super initWithFrame:frame];
-//    if(self) {
-//        [self initDefaults];
-//        
-//        recordMode = _recodeMode_;
-//        if(self.recordMode == RECORD_MODE_BUTTON_AUTO) {
-//            [self addTarget:self action:@selector(touchUpInsideForAutoMode:) forControlEvents:UIControlEventTouchUpInside];
-//        } else if(self.recordMode == RECORD_MODE_BUTTON_MANUAL) {
-//            [self addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
-//            [self addTarget:self action:@selector(touchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-//            [self addTarget:self action:@selector(dragEnter:) forControlEvents:UIControlEventTouchDragEnter];
-//            [self addTarget:self action:@selector(dragExit:) forControlEvents:UIControlEventTouchDragExit];
-//            [self addTarget:self action:@selector(touchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
-//        }
-//    }
-//    return self;
-//}
-
 - (id)init {
     self = [super init];
     if(self) {
@@ -60,50 +41,13 @@
     }
     self.domain = @"iat";
     self.vadBos = @"3000";
-    self.vadEos = @"1500";
+    self.vadEos = @"2200";
     self.asrSch = @"0";
     self.asrPtt = @"1";
     self.sampleRate = @"16000";
     self.plainResult = @"0";
 }
 
-//#pragma mark -
-//#pragma mark speech recognizer event for manual
-//
-//- (void)touchDown:(id)sender {
-//    [self startListening];
-//}
-//
-//- (void)touchUpInside:(id)sender {
-//    [self stopListening];
-//}
-//
-//- (void)dragEnter:(id)sender {
-//}
-//
-//- (void)dragExit:(id)sender {
-//}
-//
-//- (void)touchUpOutside:(id)sender {
-//    [speechRecognizer cancel];
-//    if(self.speechRecognitionNotificationDelegate == nil) return;
-//    if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(recognizeCancelled)]) {
-//        [self.speechRecognitionNotificationDelegate recognizeCancelled];
-//    }
-//}
-//
-//#pragma mark -
-//#pragma mark speech recognizer event for auto
-//
-//- (void)touchUpInsideForAutoMode:(id)sender {
-//    if(lockButton) return;
-//    lockButton = YES;
-//    if(isRecognizing) {
-//        [self stopListening];
-//    } else {
-//        [self startListening];
-//    }
-//}
 
 #pragma mark -
 #pragma mark iFly recognizer control

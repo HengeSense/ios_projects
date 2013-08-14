@@ -43,8 +43,6 @@
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"record_animate_00.png"] forState:UIControlStateNormal];
     [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnSpeech];
-    
-    
 }
 
 #pragma mark -
@@ -135,16 +133,6 @@
 //    CFRunLoopRun();
 }
 
-static void soundFinished(SystemSoundID soundID, void *soundURL){
-    AudioServicesDisposeSystemSoundID(soundID);
-    CFBridgingRelease(soundURL);
-//    CFRelease(soundURL);
-    CFRunLoopStop(CFRunLoopGetCurrent());
-    
-    //do some thing after sound played
-}
-
-
 #pragma mark -
 #pragma mark speech recognizer notification delegate
 
@@ -184,6 +172,11 @@ static void soundFinished(SystemSoundID soundID, void *soundURL){
     [self speechRecognizerFailed:nil];
     recognizerState = RecognizerStateReady;
 }
+
+#pragma mark -
+#pragma mark text message processor delegate
+
+
 
 #pragma mark -
 #pragma mark getter and setters
