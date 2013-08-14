@@ -47,7 +47,7 @@
     self.topbar.leftButton.center = CGPointMake(37.5, 22);
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateHighlighted];
-    self.topbar.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 2, 0);
+    self.topbar.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 1, 0);
     [self.topbar.leftButton setTitle:NSLocalizedString(@"back", @"") forState:UIControlStateNormal];
 
     self.topbar.leftButton.titleLabel.font = [UIFont systemFontOfSize:16.f];

@@ -41,7 +41,7 @@
     }
     self.domain = @"iat";
     self.vadBos = @"3000";
-    self.vadEos = @"2200";
+    self.vadEos = @"1800";
     self.asrSch = @"0";
     self.asrPtt = @"1";
     self.sampleRate = @"16000";
