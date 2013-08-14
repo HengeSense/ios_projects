@@ -96,6 +96,8 @@
 		6FEB91D517BB538F007C04A1 /* bg_topbar_second_level@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91D317BB538F007C04A1 /* bg_topbar_second_level@2x.png */; };
 		6FEB91D717BB541A007C04A1 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91D617BB541A007C04A1 /* bg@2x.png */; };
 		6FEB91D917BB5457007C04A1 /* btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEB91D817BB5457007C04A1 /* btn_back@2x.png */; };
+		6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */; };
+		6FEB91DF17BB6614007C04A1 /* DeviceAffectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DE17BB6614007C04A1 /* DeviceAffectViewController.m */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
@@ -265,6 +267,10 @@
 		6FEB91D317BB538F007C04A1 /* bg_topbar_second_level@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_topbar_second_level@2x.png"; sourceTree = "<group>"; };
 		6FEB91D617BB541A007C04A1 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		6FEB91D817BB5457007C04A1 /* btn_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back@2x.png"; sourceTree = "<group>"; };
+		6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
+		6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		6FEB91DD17BB6614007C04A1 /* DeviceAffectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceAffectViewController.h; sourceTree = "<group>"; };
+		6FEB91DE17BB6614007C04A1 /* DeviceAffectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceAffectViewController.m; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 		F20B36CB17B87CF1009286D6 /* MainControllersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainControllersView.h; sourceTree = "<group>"; };
@@ -497,6 +503,10 @@
 				6FB4240217B482F50042EA41 /* BaseViewController.m */,
 				F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */,
 				F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */,
+				6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */,
+				6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */,
+				6FEB91DD17BB6614007C04A1 /* DeviceAffectViewController.h */,
+				6FEB91DE17BB6614007C04A1 /* DeviceAffectViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -878,6 +888,8 @@
 				F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */,
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 				F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */,
+				6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */,
+				6FEB91DF17BB6614007C04A1 /* DeviceAffectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,14 +9,22 @@
 #import "MainView.h"
 #import "NSString+StringUtils.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "NotificationViewController.h"
+#import "DeviceAffectViewController.h"
 
-#define SPEECH_VIEW_TAG 46001
+#define SPEECH_VIEW_TAG       46001
+#define SPEECH_BUTTON_WIDTH   75
+#define SPEECH_BUTTON_HEIGHT  111
 
 @implementation MainView {
     SpeechViewState speechViewState;
     RecognizerState recognizerState;
     ConversationView *speechView;
     SpeechRecognitionUtil *speechRecognitionUtil;
+    
+    UIButton *btnSpeech;
+    UIButton *btnShowNotification;
+    UIButton *btnShowAffectDevice;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -37,12 +45,40 @@
 
 - (void)initUI {
     [super initUI];
-    self.backgroundColor = [UIColor lightGrayColor];
 
-    UIButton *btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake((self.frame.size.width-75/2)/2, self.frame.size.height-111/2 - 10, 75/2, 111/2)];
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"record_animate_00.png"] forState:UIControlStateNormal];
-    [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:btnSpeech];
+    if(btnShowAffectDevice == nil) {
+        btnShowAffectDevice = [[UIButton alloc] initWithFrame:CGRectMake(200, 150, 120, 30)];
+        [btnShowAffectDevice setTitle:@"影响" forState:UIControlStateNormal];
+        [btnShowAffectDevice addTarget:self action:@selector(btnShowAffectDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnShowAffectDevice];
+    }
+    
+    if(btnShowNotification == nil) {
+        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 200, 120, 30)];
+        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
+        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnShowNotification];
+    }
+    
+    if(btnSpeech == nil) {
+        btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 10), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
+        [btnSpeech setBackgroundImage:[UIImage imageNamed:@"record_animate_00.png"] forState:UIControlStateNormal];
+        [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnSpeech];
+    }
+}
+
+#pragma mark -
+#pragma mark notification && affect button
+
+- (void)btnShowAffectDevicePressed:(id)sender {
+    DeviceAffectViewController *deviceAffectViewController = [[DeviceAffectViewController alloc] init];
+    [self.ownerController.navigationController pushViewController:deviceAffectViewController animated:YES];
+}
+
+- (void)btnShowNotificationDevicePressed:(id)sender {
+    NotificationViewController *notificationViewController = [[NotificationViewController alloc] init];
+    [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 
 #pragma mark -
@@ -70,7 +106,7 @@
 
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
-    CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
+    CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 20;
     ConversationView *view = [self speechView];
     speechViewState = SpeechViewStateClosing;
     [UIView animateWithDuration:0.3f
