@@ -16,10 +16,10 @@
 /*
  * main view controller
  */
-"main.view"        = "Main View";
-"mainControllersView.list"      = "Main Controllers View";
-"scene_mode"       = "Scene Mode";
-"historical.data"  = "History Data";
+"main.view"                     = "Main View";
+"my_devices"                    = "My Devices";
+"scene_mode"                    = "Scene Mode";
+"historical.data"               = "History Data";
 
 /*
  * zbar scan view controller

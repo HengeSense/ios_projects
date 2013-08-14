@@ -17,10 +17,10 @@
 /*
  * main view controller
  */
-"main.view"        = "主界面";
-"mainControllersView.list"      = "主控列表";
-"scene_mode"       = "情景模式";
-"historical.data"  = "历史数据";
+"main.view"                     = "主界面";
+"my_devices"                    = "我的设备";
+"scene_mode"                    = "情景模式";
+"historical.data"               = "历史数据";
 
 /*
  * zbar scan view controller

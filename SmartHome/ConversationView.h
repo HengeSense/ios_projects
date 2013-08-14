@@ -11,6 +11,8 @@
 
 @interface ConversationView : UIView<UITableViewDataSource, UITableViewDelegate>
 
+@property (assign, nonatomic, readonly) NSUInteger messageCount;
+
 - (id)initWithFrame:(CGRect)frame andContainerView:(UIView *)cv;
 
 - (void)showWelcomeMessage;

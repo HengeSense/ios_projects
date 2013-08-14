@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 young. All rights reserved.
 //
 
-#define IFLY_APP_ID            @"51c0059d"
+#define IFLY_APP_ID            @"520b156b"
 #define CONNECTION_TIME_OUT    @"20000"      //Unit is ms
 
 

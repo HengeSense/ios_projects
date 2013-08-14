@@ -19,6 +19,8 @@
     NSMutableArray *messages;
 }
 
+@synthesize messageCount;
+
 #pragma mark -
 #pragma mark initializations
 
@@ -46,29 +48,6 @@
     } else {
         [messages removeAllObjects];
     }
-    
-    //add some test messages
-    ConversationTextMessage *msg1 = [[ConversationTextMessage alloc] init];
-    msg1.messageOwner = MESSAGE_OWNER_THEIRS;
-    msg1.textMessage = @"这是测试消息一二三四五六七八a";
-    
-    ConversationTextMessage *msg11 = [[ConversationTextMessage alloc] init];
-    msg11.messageOwner = MESSAGE_OWNER_MINE;
-    msg11.textMessage = @"你好,给大爷我跳个舞~";
-    
-    ConversationTextMessage *msg2 = [[ConversationTextMessage alloc] init];
-    msg2.messageOwner = MESSAGE_OWNER_THEIRS;
-    msg2.textMessage = @"你好,空调已经打开,即将进入爆炸模式,请离开你的房间,你的空调将于2分钟发生核爆  请速度离开.";
-    
-    ConversationTextMessage *msg12 = [[ConversationTextMessage alloc] init];
-    msg12.messageOwner = MESSAGE_OWNER_MINE;
-    msg12.textMessage = @"春眠不觉晓,处处闻啼鸟,夜来风雨声,花落知多少.";
-    
-    
-    [self addMessage:msg1];
-    [self addMessage:msg11];
-    [self addMessage:msg2];
-    [self addMessage:msg12];
 }
 
 - (void)initUI {
@@ -76,11 +55,8 @@
     self.backgroundColor = [UIColor blackColor];
     
     if(tblMessages == nil) {
-        
         tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
         tblMessages.backgroundColor = [UIColor clearColor];
-//        tblSpeech.backgroundView = [[UIView alloc] initWithFrame:tblSpeech.frame];
-//        tblSpeech.backgroundView.backgroundColor = [UIColor clearColor];
         tblMessages.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblMessages.delegate = self;
         tblMessages.dataSource = self;
@@ -113,9 +89,6 @@
 
         [welcomeView addSubview:lblWelcomeTitle1];
         [welcomeView addSubview:lblWelcomeTitle2];
-        
-        //need in a button
-        [self addSubview:welcomeView];
     }
 
     UIButton *btnCloseSelf = [[UIButton alloc] initWithFrame:CGRectMake(320-60, 320, 60, 25)];
@@ -124,25 +97,6 @@
     [btnCloseSelf setTitle:@"close" forState:UIControlStateNormal];
     [btnCloseSelf addTarget:containerView action:@selector(hideSpeechView) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnCloseSelf];
-    
-    
-    // add a test button
-    
-    UIButton *btnTest = [[UIButton alloc] initWithFrame:CGRectMake(0, 320, 60, 25)];
-    btnTest.backgroundColor = [UIColor blueColor];
-    [btnTest setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnTest setTitle:@"test" forState:UIControlStateNormal];
-    [btnTest addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:btnTest];
-}
-
-- (void)test {
-
-        ConversationTextMessage *msg12 = [[ConversationTextMessage alloc] init];
-        msg12.messageOwner = MESSAGE_OWNER_MINE;
-        msg12.textMessage = @"速度关机";
-        [self addMessage:msg12];
-    
 }
 
 #pragma mark -
@@ -171,6 +125,7 @@
 
 - (void)addMessage:(ConversationMessage *)message {
     if(message == nil) return;
+    if(messages.count == 0) [self hideWelcomeMessage];
     [messages addObject:message];
     [tblMessages beginUpdates];
     NSIndexPath *newMessageIndexPath = [NSIndexPath indexPathForRow:(messages.count - 1) inSection:0];
@@ -228,6 +183,14 @@
         }
     }
     return cell;
+}
+
+#pragma mark -
+#pragma mark getter and setters
+
+- (NSUInteger)messageCount {
+    if(messages == nil) return 0;
+    return messages.count;
 }
 
 @end

@@ -36,7 +36,6 @@
     sceneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.frame.size.width, self.frame.size.height-44) style:UITableViewStylePlain];
     [self addSubview:sceneTableView];
     sceneTableView.dataSource = self;
-    self.topbar.titleLabel.text = @"情景模式";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

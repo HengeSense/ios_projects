@@ -36,10 +36,7 @@
     mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.frame.size.width, self.frame.size.height-44) style:UITableViewStylePlain];
     [self addSubview:mainTableView];
     mainTableView.dataSource = self;
-    mainTableView.delegate = self;
-    self.topbar.titleLabel.text = @"主控列表";
-
-    
+    mainTableView.delegate = self;    
 }
 
 

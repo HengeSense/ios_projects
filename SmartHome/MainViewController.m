@@ -53,7 +53,7 @@
     mainView.itemImageName = @"";
         
     mainControllersView.itemIdentifier = @"mainControllersView";
-    mainControllersView.itemTitle = NSLocalizedString(@"mainControllersView.list", @"");
+    mainControllersView.itemTitle = NSLocalizedString(@"my_devices", @"");
     mainControllersView.itemImageName = @"";
     
     sceneModeView.itemIdentifier = @"sceneModeView";
@@ -114,11 +114,13 @@
     if(view == nil) {
         if([@"mainView" isEqualToString:item.itemIdentifier]) {
             view = [[MainView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
-            view.topbar.titleLabel.text = @"主页面";
+            view.topbar.titleLabel.text = NSLocalizedString(@"main.view", @"");
         } else if([@"mainControllersView" isEqualToString:item.itemIdentifier]) {
             view = [[MainControllersView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+            view.topbar.titleLabel.text = NSLocalizedString(@"my_devices", @"");
         } else if([@"sceneModeView" isEqualToString:item.itemIdentifier]) {
             view = [[SceneModeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+            view.topbar.titleLabel.text = NSLocalizedString(@"scene_mode", @"");
         } else if([@"historicalView" isEqualToString:item.itemIdentifier]) {
             view = [[HistoricalDataView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
         }

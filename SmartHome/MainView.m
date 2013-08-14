@@ -64,6 +64,7 @@
                 }
                 completion:^(BOOL finished) {
                     speechViewState = SpeechViewStateOpenned;
+                    if(speechView.messageCount == 0) [speechView showWelcomeMessage];
                     [self btnSpeechRecordingPressed:nil];
                 }];
 }
@@ -96,16 +97,13 @@
     }
 }
 
-- (void)btnSpeechRecordingPressed:(id)sender {
-    [speechView hideWelcomeMessage];
-    
+- (void)btnSpeechRecordingPressed:(id)sender {    
     if(recognizerState == RecognizerStateReady) {
         AudioServicesPlaySystemSound(1113);
         [speechRecognitionUtil startListening];
     } else if(recognizerState == RecognizerStateRecordBegin) {
         [speechRecognitionUtil stopListening];
     }
-    //[speechView showWelcomeMessage];
 }
 
 - (void)speechRecognizerFailed:(NSString *)message {

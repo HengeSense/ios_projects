@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) MainViewController *ownerController;
 @property (strong, nonatomic, readonly) TopbarView *topbar;
+@property (strong, nonatomic) UIImageView *backgroundImageView;
 
 - (id)initWithFrame:(CGRect)frame owner:(MainViewController *)controller;
 
