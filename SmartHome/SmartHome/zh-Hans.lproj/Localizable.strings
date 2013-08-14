@@ -16,28 +16,35 @@
 "done"             = "完成";
 
 /*
+ * title
+ */
+"main_view.title"                     = "主界面";
+"my_devices.title"                    = "我的设备";
+"scene_mode.title"                    = "情景模式";
+"historical_data.title"               = "历史数据";
+
+/*
  * main view controller
  */
-"main.view"                     = "主界面";
+"main_view"                     = "主界面";
 "my_devices"                    = "我的设备";
 "scene_mode"                    = "情景模式";
-"historical.data"               = "历史数据";
+"historical_data"               = "历史数据";
 
 /*
  * zbar scan view controller
  */
-"zbar.scan"        = "扫一扫";
-"zbar.enter"       = "请输入二维码";
+"zbar_scanner"        = "扫一扫";
 
 /*
  * speech recognition view
  */
-"welcome.message.line1" = "您好,请问需要";
-"welcome.message.line2" = "什么帮助?";
+"welcome_message_line1" = "您好,请问需要";
+"welcome_message_line2" = "什么帮助?";
 
 /*
  * register view controller
  */
-"phone.register"   = "手机号码注册";
-"get.verificationCode" = "获取验证码";
-"verificationCode" = "验证码";
+"phone_number_register"           = "手机号码注册";
+"get_verification_code"           = "获取验证码";
+"verification_code"               = "验证码";

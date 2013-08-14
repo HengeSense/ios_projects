@@ -15,28 +15,36 @@
 "done"             = "Done";
 
 /*
+ * title
+ */
+"main_view.title"                     = "Main View";
+"my_devices.title"                    = "My Devices";
+"scene_mode.title"                    = "Scene Mode";
+"historical_data.title"               = "History Data";
+
+/*
  * main view controller
  */
 "main.view"                     = "Main View";
 "my_devices"                    = "My Devices";
 "scene_mode"                    = "Scene Mode";
-"historical.data"               = "History Data";
+"historical_data"               = "History Data";
 
 /*
  * zbar scan view controller
  */
-"zbar.scan"        = "Scaner Zbar";
-"zbar.enter"       = "Please enter Zbar code";
+"zbar_scanner"        = "Scaner Zbar";
 
 /*
  * speech recognition view
  */
-"welcome.message.line1" = "Hello, What can i";
-"welcome.message.line2" = "help you ?";
+"welcome_message_line1" = "Hello, What can i";
+"welcome_message_line2" = "help you ?";
 
 
 /*
  * register view controller
  */
-"phone.register"   = "Phone number register";
-"get.verificationCode" = "get verificationCode";
+"phone_number_register"           = "Phone number register";
+"get_verification_code"           = "Get Verification Code";
+"verification_code"               = "Verification Code";

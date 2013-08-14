@@ -51,7 +51,7 @@
     //zbar scanner button
     if(btnZbarScan == nil) {
         btnZbarScan = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];
-        [btnZbarScan setTitle:NSLocalizedString(@"zbar.scan", @"") forState:UIControlStateNormal];
+        [btnZbarScan setTitle:NSLocalizedString(@"zbar_scanner", @"") forState:UIControlStateNormal];
         [btnZbarScan addTarget:self action:@selector(btnZbarScanPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnZbarScan];
     }
@@ -59,7 +59,7 @@
     if(lblTitle == nil) {
         //text view with zbar code for user custom
         lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 200.0f, 90.0f, 24.0f)];
-        lblTitle.text = NSLocalizedString(@"zbar.enter", @"");
+        lblTitle.text = @"will remove";
         lblTitle.textColor = [UIColor whiteColor];
         [self.view addSubview:lblTitle];
     }

@@ -53,7 +53,7 @@
     [self registerTapGestureToResignKeyboard];
     
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 120, 30)];
-    [text setText:NSLocalizedString(@"phone.register", @"")];
+    [text setText:NSLocalizedString(@"phone_number_register", @"")];
     [text setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:text];
     
@@ -66,12 +66,12 @@
     sendButton.center = self.view.center;
     sendButton.backgroundColor = [UIColor whiteColor];
     [sendButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [sendButton setTitle:NSLocalizedString(@"get.verificationCode", @"") forState:UIControlStateNormal];
+    [sendButton setTitle:NSLocalizedString(@"get_verification_code", @"") forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:sendButton];
     
     UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/2+50, 80, 30)];
-    [text2 setText:NSLocalizedString(@"verificationCode", @"")];
+    [text2 setText:NSLocalizedString(@"verification_code", @"")];
     [text setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:text2];
     
@@ -84,7 +84,7 @@
     UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(120, screenHeight/2+100, 100, 40)];
     okButton.backgroundColor = [UIColor whiteColor];
     [okButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [okButton setTitle:NSLocalizedString(@"OK", @"") forState:UIControlStateNormal];
+    [okButton setTitle:NSLocalizedString(@"ok", @"") forState:UIControlStateNormal];
     [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:okButton];
     
