@@ -116,6 +116,7 @@
 
 - (void)btnZbarScanPressed:(id)sender {
     ZBarReaderViewController *reader = [ZBarReaderViewController new];
+    ZBarReaderView readerView = [ZBarReaderView alloc] initWithFrame:<#(CGRect)#>;
     reader.readerDelegate = self;
     ZBarImageScanner *scanner = reader.scanner;
 //    CGRect rect = reader.view.bounds;
