@@ -39,8 +39,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initDefaults];
-    [self initUI];
 }
 
 - (void)initDefaults {
@@ -48,8 +46,8 @@
 }
 
 - (void)initUI {
-    self.view.backgroundColor = [UIColor darkGrayColor];
-    
+    [super initUI];
+
     //zbar scanner button
     if(btnZbarScan == nil) {
         btnZbarScan = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];

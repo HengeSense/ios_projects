@@ -10,7 +10,8 @@
 #import "ZBarReaderView.h"
 #import "ZBarSymbol.h"
 #import "ZBarReaderViewController.h"
+#import "BaseViewController.h"
 
-@interface ZBarScanningViewController : UIViewController<ZBarReaderDelegate>
+@interface ZBarScanningViewController : BaseViewController<ZBarReaderDelegate>
 
 @end

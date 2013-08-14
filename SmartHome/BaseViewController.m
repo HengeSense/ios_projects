@@ -44,13 +44,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [self initDefaults];
+    [self initUI];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)initDefaults {
+    
+}
+
+- (void)initUI {
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
+     CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 20)];
+    backgroundImageView.image = [UIImage imageNamed:@"bg.png"];
+    [self.view addSubview:backgroundImageView];
 }
 
 @end

@@ -12,7 +12,6 @@
 
 #define SPEECH_VIEW_TAG 46001
 
-
 @implementation MainView {
     SpeechViewState speechViewState;
     RecognizerState recognizerState;
@@ -44,6 +43,8 @@
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"record_animate_00.png"] forState:UIControlStateNormal];
     [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnSpeech];
+    
+    
 }
 
 #pragma mark -

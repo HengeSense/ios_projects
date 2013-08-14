@@ -13,4 +13,7 @@
 - (void)resignFirstResponderFor:(UIView *)view;
 - (void)registerTapGestureToResignKeyboard;
 
+- (void)initDefaults;
+- (void)initUI;
+
 @end

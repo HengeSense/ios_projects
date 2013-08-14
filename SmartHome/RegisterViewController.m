@@ -36,7 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initUI];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,12 +45,13 @@
 }
 
 - (void)initUI {
+    [super initUI];
+    
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
     [self registerTapGestureToResignKeyboard];
     
-    self.view.backgroundColor = [UIColor blueColor];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 130, 30)];
     [text setText:NSLocalizedString(@"phone.register", @"")];
     [text setBackgroundColor:[UIColor blueColor]];

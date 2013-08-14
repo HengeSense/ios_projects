@@ -29,7 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self generateTopbar];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,11 +36,26 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)initUI {
+    [self generateTopbar];
+    [self generateBackgroundView];
+}
+
 - (void)generateTopbar {
-    self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"top.png"]];
-    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar_second_level.png"]];
+    self.topbar.leftButton.frame = CGRectMake(0, 0, 61, 30);
+    self.topbar.leftButton.center = CGPointMake(37.5, 22);
+    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     [self.topbar.leftButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.topbar];
+}
+
+- (void)generateBackgroundView {
+    UIImageView *backgroundImageView = [[UIImageView alloc]
+        initWithFrame:CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width,
+        ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - 20))];
+    backgroundImageView.image = [UIImage imageNamed:@"bg.png"];
+    [self.view addSubview:backgroundImageView];
 }
 
 - (void)backToPreViewController {
