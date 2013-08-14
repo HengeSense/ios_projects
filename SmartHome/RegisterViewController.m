@@ -52,9 +52,9 @@
     
     [self registerTapGestureToResignKeyboard];
     
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 130, 30)];
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 120, 30)];
     [text setText:NSLocalizedString(@"phone.register", @"")];
-    [text setBackgroundColor:[UIColor blueColor]];
+    [text setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:text];
     
     phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(150, screenHeight/3, screenWidth-160, 30)];
@@ -66,16 +66,16 @@
     sendButton.center = self.view.center;
     sendButton.backgroundColor = [UIColor whiteColor];
     [sendButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [sendButton setTitle:NSLocalizedString(@"send.verificationCode", @"") forState:UIControlStateNormal];
+    [sendButton setTitle:NSLocalizedString(@"get.verificationCode", @"") forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:sendButton];
     
-    UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/2+20, 100, 40)];
+    UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/2+50, 80, 30)];
     [text2 setText:NSLocalizedString(@"verificationCode", @"")];
-    [text setBackgroundColor:[UIColor blueColor]];
-    [self.view addSubview:text];
+    [text setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:text2];
     
-    verification = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/2+50, 100, 40)];
+    verification = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/2+50, 100, 30)];
     [verification setBackgroundColor:[UIColor whiteColor]];
     verification.keyboardType = UIKeyboardTypePhonePad;
     [self.view addSubview:verification];
@@ -112,6 +112,9 @@
     verificationCode = [NSString stringWithFormat:@"%i",[self randomIntBetween:100000 andLargerInt:999999]];
     SmsService *smsService = self.smsService;
     accountPhone = phoneNumber.text;
+    if(accountPhone!=nil&&verificationCode!=nil){
+        [smsService sendMessage:verificationCode for: accountPhone success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
+    }
     [smsService sendMessage:verificationCode for: accountPhone success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
 }
 -(void) checkVerificationCode{

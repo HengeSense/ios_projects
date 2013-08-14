@@ -38,4 +38,4 @@
  * register view controller
  */
 "phone.register"   = "Phone number register";
-"send.verificationCode" = "send verificationCode";
+"get.verificationCode" = "get verificationCode";

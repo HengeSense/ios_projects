@@ -38,4 +38,5 @@
  * register view controller
  */
 "phone.register"   = "手机号码注册";
-"send.verificationCode" = "发送验证码";
+"get.verificationCode" = "获取验证码";
+"verificationCode" = "验证码";
