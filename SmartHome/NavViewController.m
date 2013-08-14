@@ -47,6 +47,7 @@
     self.topbar.leftButton.center = CGPointMake(37.5, 22);
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateHighlighted];
+    [self.topbar.leftButton setTitle:@"返回" forState:UIControlStateNormal];
     [self.topbar.leftButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.topbar];
 }
