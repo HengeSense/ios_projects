@@ -8,7 +8,7 @@
 
 #import "ZBarScanningViewController.h"
 #import "UIViewController+UIViewControllerExtension.h"
-
+#import "ZBarCameraSimulator.h"
 
 @interface ZBarScanningViewController ()
 
@@ -20,6 +20,7 @@
     UIButton *btnZbarScan;
     UITextField *txtZbarCode;
 }
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -82,13 +83,13 @@
 #pragma mark -
 #pragma mark delegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
-    for(symbol in results) break;
-    [picker dismissModalViewControllerAnimated: YES];
-    [self zbarCodeScanningSuccess:symbol.data];
-}
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+//    id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
+//    ZBarSymbol *symbol = nil;
+//    for(symbol in results) break;
+//    [picker dismissModalViewControllerAnimated: YES];
+//    [self zbarCodeScanningSuccess:symbol.data];
+//}
 
 -(CGRect)getScanCrop:(CGRect)rect readerViewBounds:(CGRect)readerViewBounds
 {
@@ -115,18 +116,35 @@
 }
 
 - (void)btnZbarScanPressed:(id)sender {
-    ZBarReaderViewController *reader = [ZBarReaderViewController new];
-//    ZBarReaderView readerView = [ZBarReaderView alloc] initWithFrame:<#(CGRect)#>;
-    reader.readerDelegate = self;
-    ZBarImageScanner *scanner = reader.scanner;
-//    CGRect rect = reader.view.bounds;
-    CGRect scanMaskRect = CGRectMake(60, CGRectGetMidY(reader.view.frame) - 126, 200, 200);
-    reader.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:reader.view.bounds];
-//
-//    UIImageView *imageBounds = [[UIImageView alloc] initWithFrame:reader.scanCrop];
-//    [reader.view addSubview:imageBounds];
-    [scanner setSymbology:ZBAR_I25 config:ZBAR_CFG_ENABLE to: 0];
-    [self presentModalViewController:reader animated: YES];
+
+    ZBarReaderView *readerView = [[ZBarReaderView alloc] init];
+    readerView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
+    readerView.readerDelegate = self;
+    //关闭闪光灯
+    readerView.torchMode = 0;
+    //扫描区域
+    CGRect scanMaskRect = CGRectMake(60, CGRectGetMidY(readerView.frame) - 126, 200, 200);
+    
+    //处理模拟器
+    if (TARGET_IPHONE_SIMULATOR) {
+        ZBarCameraSimulator *cameraSimulator
+        = [[ZBarCameraSimulator alloc] initWithViewController:self];
+        cameraSimulator.readerView = readerView;
+    }
+    [self.view addSubview:readerView];
+    //扫描区域计算
+    readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:readerView.bounds];
+    
+    [readerView start];
+}
+- (void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
+{
+    for (ZBarSymbol *symbol in symbols) {
+        NSLog(@"%@", symbol.data);
+        break;
+    }
+    
+    [readerView stop];
 }
 
 @end
