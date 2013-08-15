@@ -14,7 +14,6 @@
 #import "TopbarView.h"
 #import "ViewsPool.h"
 
-
 #define MAIN_VIEW_TAG 5001
 
 @interface MainViewController ()
@@ -49,7 +48,7 @@
     DrawerNavigationItem *historicalView = [[DrawerNavigationItem alloc] init];
      
     mainView.itemIdentifier = @"mainView";
-    mainView.itemTitle = NSLocalizedString(@"main.view", @"");
+    mainView.itemTitle = NSLocalizedString(@"main_view", @"");
     mainView.itemImageName = @"";
         
     mainControllersView.itemIdentifier = @"mainControllersView";
@@ -61,7 +60,7 @@
     sceneModeView.itemImageName = @"";
     
     historicalView.itemIdentifier = @"historicalView";
-    historicalView.itemTitle = NSLocalizedString(@"historical.data", @"");
+    historicalView.itemTitle = NSLocalizedString(@"historical_data", @"");
     historicalView.itemImageName = @"";
     
     [drawerItems addObject:mainView];
@@ -114,15 +113,16 @@
     if(view == nil) {
         if([@"mainView" isEqualToString:item.itemIdentifier]) {
             view = [[MainView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
-            view.topbar.titleLabel.text = NSLocalizedString(@"main.view", @"");
+            view.topbar.titleLabel.text = NSLocalizedString(@"main_view.title", @"");
         } else if([@"mainControllersView" isEqualToString:item.itemIdentifier]) {
             view = [[MainControllersView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
-            view.topbar.titleLabel.text = NSLocalizedString(@"my_devices", @"");
+            view.topbar.titleLabel.text = NSLocalizedString(@"my_devices.title", @"");
         } else if([@"sceneModeView" isEqualToString:item.itemIdentifier]) {
             view = [[SceneModeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
-            view.topbar.titleLabel.text = NSLocalizedString(@"scene_mode", @"");
+            view.topbar.titleLabel.text = NSLocalizedString(@"scene_mode.title", @"");
         } else if([@"historicalView" isEqualToString:item.itemIdentifier]) {
             view = [[HistoricalDataView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+            view.topbar.titleLabel.text = NSLocalizedString(@"historical_data.title", @"");
         }
         if(view != nil) {
             view.tag = MAIN_VIEW_TAG;

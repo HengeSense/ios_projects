@@ -9,8 +9,6 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "RegisterViewController.h"
-#import "ZBarScanningViewController.h"
-
 
 @implementation AppDelegate
 
@@ -37,7 +35,7 @@
             [[MainViewController alloc] init] animated:NO];
     } else {
         [rootViewController.navigationController pushViewController:
-         [[ZBarScanningViewController alloc] init] animated:NO];
+         [[UnitsBindingViewController alloc] init] animated:NO];
     }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -12,9 +12,12 @@
 #import "NotificationViewController.h"
 #import "DeviceAffectViewController.h"
 
-#define SPEECH_VIEW_TAG       46001
-#define SPEECH_BUTTON_WIDTH   75
-#define SPEECH_BUTTON_HEIGHT  111
+#define SPEECH_VIEW_TAG                  46001
+#define SPEECH_BUTTON_WIDTH              75
+#define SPEECH_BUTTON_HEIGHT             111
+#define DELAY_START_LISTENING_DURATION   0.6f
+#define RECORD_BEGIN_SOUND_ID            1113
+#define RECORD_END_SOUND_ID              1114
 
 @implementation MainView {
     SpeechViewState speechViewState;
@@ -26,6 +29,10 @@
     UIButton *btnShowNotification;
     UIButton *btnShowAffectDevice;
 }
+
+@synthesize temperature;
+@synthesize humidity;
+@synthesize pm25;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -134,51 +141,32 @@
 
 - (void)btnSpeechRecordingPressed:(id)sender {    
     if(recognizerState == RecognizerStateReady) {
-        AudioServicesPlaySystemSound(1113);
-        [speechRecognitionUtil startListening];
-    } else if(recognizerState == RecognizerStateRecordBegin) {
+        recognizerState = RecognizerStateRecordBegin;
+        AudioServicesPlaySystemSound(RECORD_BEGIN_SOUND_ID);
+        [self delayStartListening];
+    } else if(recognizerState == RecognizerStateRecording) {
         [speechRecognitionUtil stopListening];
     }
 }
 
-- (void)speechRecognizerFailed:(NSString *)message {
-    
+- (void)delayStartListening {
+    [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
 }
 
-#pragma mark - 
-#pragma mark play system sound
-
-- (void)go {
-//    
-//    NSLog(@"2");
-//    SystemSoundID soundID;
-////    NSURL* soundURL = [[NSURL alloc]initWithString:@"test.wav"];
-//    
-//    NSString *sndpath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"wav"];
-//    CFURLRef soundURL = (__bridge CFURLRef)[[NSURL alloc] initFileURLWithPath:sndpath];
-//    
-//    
-//    OSStatus err = AudioServicesCreateSystemSoundID(soundURL, &soundID);
-//    if (err) {
-//        
-//        NSLog(@"Error occurred assigning system sound!");
-//        return;
-//    }
-////    AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, soundFinished, soundURL);
-//    AudioServicesPlaySystemSound(soundID);
-//    CFRunLoopRun();
+- (void)startListening:(NSTimer *)timer {
+    [speechRecognitionUtil startListening];
 }
 
 #pragma mark -
 #pragma mark speech recognizer notification delegate
 
 - (void)beginRecord {
-    recognizerState = RecognizerStateRecordBegin;
+    recognizerState = RecognizerStateRecording;
 }
 
 - (void)endRecord {
-    AudioServicesPlaySystemSound(1114);
-    recognizerState = RecognizerStateRecordEnd;
+    AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
+    recognizerState = RecognizerStateRecordingEnd;
 }
 
 - (void)recognizeCancelled {
@@ -193,20 +181,21 @@
         textMessage.messageOwner = MESSAGE_OWNER_MINE;
         textMessage.textMessage = result;
         [speechView addMessage:textMessage];
-        
         //process text message
     } else {
-        [self speechRecognizerFailed:nil];
+        [self speechRecognizerFailed:@"empty speaking..."];
         //
     }
     recognizerState = RecognizerStateReady;
 }
 
 - (void)recognizeError:(int)errorCode {
-    NSLog(@"need alert error ,,, the code is %d", errorCode);
-    
-    [self speechRecognizerFailed:nil];
+    [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
     recognizerState = RecognizerStateReady;
+}
+
+- (void)speechRecognizerFailed:(NSString *)message {
+    NSLog(@"need alert fail the error message is : [   %@  ]", message);
 }
 
 #pragma mark -
@@ -224,6 +213,18 @@
         speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;
+}
+
+- (void)setTemperature:(NSInteger)temperature {
+    
+}
+
+- (void)setHumidity:(NSUInteger)humidity {
+    
+}
+
+- (void)setPm25:(NSInteger)pm25 {
+    
 }
 
 @end
