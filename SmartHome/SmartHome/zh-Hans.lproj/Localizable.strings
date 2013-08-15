@@ -32,9 +32,10 @@
 "historical_data"               = "历史数据";
 
 /*
- * zbar scan view controller
+ * qr code scanner view controller
  */
-"zbar_scanner"        = "扫一扫";
+"qr_code_scanner"        = "扫一扫";
+"qr_code.tips"           = "将二维码放入框内 即可自动扫描";
 
 /*
  * speech recognition view

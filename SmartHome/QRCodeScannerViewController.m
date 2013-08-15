@@ -11,6 +11,11 @@
 
 #define SCANNER_VIEW_LENGTH 235
 
+typedef NS_ENUM(NSUInteger, MoveDirection) {
+    MoveDirectionDown,
+    MoveDirectionUp
+};
+
 @interface QRCodeScannerViewController ()
 
 @end
@@ -19,8 +24,10 @@
     ZBarReaderView *readerView;
     UIImageView *scannerFrame;
     UIImageView *scannerLine;
-    BOOL scannerLineMoving;
+    MoveDirection moveDirection;
 }
+
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,9 +77,13 @@
         scannerLine.image = [UIImage imageNamed:@"line_scanner.png"];
         [readerView addSubview:scannerLine];
         
-        UILabel *lblTips = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        lblTips.text = @"";
-        
+        UILabel *lblTips = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 235, 21)];
+        lblTips.text = NSLocalizedString(@"qr_code.tips", @"");
+        lblTips.textAlignment = NSTextAlignmentCenter;
+        lblTips.backgroundColor = [UIColor clearColor];
+        lblTips.textColor = [UIColor lightGrayColor];
+        lblTips.font = [UIFont systemFontOfSize:14.f];
+        lblTips.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, scannerFrame.center.y + 140);
         [readerView addSubview:lblTips];
         
         //set scanner region
@@ -90,6 +101,7 @@
         [self.view addSubview:btnBack];
     }
     [readerView start];
+    [self startScannerAnimating];
 }
 
 #pragma mark -
@@ -102,48 +114,32 @@
 #pragma mark -
 #pragma mark scanner view
 
-- (void)f {
-//    NSTimer *timer = [NSTimer timerWithTimeInterval:0.1f target:self selector:@selector(f:) userInfo:nil repeats:YES];
-//    
-//    
-//    
-//    
-//    CGFloat yMin = readerView.scanCrop.origin.y;
-//    CGFloat yMax = readerView.scanCrop.origin.y + SCANNER_VIEW_LENGTH;
-//    CGFloat y = scannerLine.frame.origin.y;
-//    
-//    if(y >= yMax) {
-//        y--;
-//    } else {
-//        y++;
-//    }
-//    
-//    
+- (void)movingScannerLine:(NSTimer *)timer {
+    CGFloat yMin = scannerFrame.frame.origin.y;
+    CGFloat yMax = scannerFrame.frame.origin.y + SCANNER_VIEW_LENGTH - 7;
+    CGFloat y = scannerLine.frame.origin.y;
+    
+    if(y >= yMax) {
+        moveDirection = MoveDirectionUp;
+    } else if(y <= yMin) {
+        moveDirection = MoveDirectionDown;
+    }
+    
+    if(moveDirection == MoveDirectionDown) {
+        scannerLine.center = CGPointMake(scannerLine.center.x, scannerLine.center.y+1);
+    } else {
+        scannerLine.center = CGPointMake(scannerLine.center.x, scannerLine.center.y-1);
+    }
 }
 
-- (void)sannerLineUpDownMoving {
-//    if(scannerLineMoving) {
-        CGRect rect = scannerLine.frame;
-        CGFloat y = rect.origin.y - 100;
-        scannerLine.frame = CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height);
-//    }
+- (void)startScannerAnimating {
+    [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(movingScannerLine:) userInfo:nil repeats:YES];
 }
-
-
-
-
 
 #pragma mark -
 #pragma mark QR Code calc
 
 -(CGRect)regionRectForScanner:(CGRect)scannerView readerViewBounds:(CGRect)readerView_ {
-//    CGFloat x, y, width, height;
-//    x = scannerView.origin.y / readerView_.size.height;
-//    y = 1 - (scannerView.origin.x + scannerView.size.width) / readerView_.size.width;
-//    width = (scannerView.origin.y + scannerView.size.height) / readerView_.size.height;
-//    height = 1 - scannerView.origin.x / readerView_.size.width;
-//    return CGRectMake(x, y, width, height);
-//    
     CGFloat x, y, width, height;
     x = scannerView.origin.x / readerView_.size.width;
     y = scannerView.origin.y / readerView_.size.height;
@@ -162,7 +158,10 @@
         break;
     }
     [readerView_ stop];
-    NSLog(result);
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(qrCodeSanningSuccess:)]) {
+        [self.delegate qrCodeSanningSuccess:result];
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "QRCodeScannerViewController.h"
 
-@interface UnitsBindingViewController : BaseViewController
+@interface UnitsBindingViewController : BaseViewController<QRCodeScannerDelegate>
 
 @end

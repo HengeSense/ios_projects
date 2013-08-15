@@ -10,6 +10,14 @@
 
 #import "ZBarReaderView.h"
 
+@protocol QRCodeScannerDelegate <NSObject>
+
+- (void)qrCodeSanningSuccess:(NSString *)result;
+
+@end
+
 @interface QRCodeScannerViewController : UIViewController<ZBarReaderViewDelegate>
+
+@property (assign, nonatomic) id<QRCodeScannerDelegate> delegate;
 
 @end

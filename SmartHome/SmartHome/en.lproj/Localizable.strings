@@ -31,9 +31,10 @@
 "historical_data"               = "History Data";
 
 /*
- * zbar scan view controller
+ * qr code scanner view controller
  */
-"zbar_scanner"        = "Scaner Zbar";
+"qr_code_scanner"        = "Scanner QR Code";
+"qr_code.tips"           = "Put QR Code to the rect, will automaic";
 
 /*
  * speech recognition view

@@ -7,8 +7,6 @@
 //
 
 #import "UnitsBindingViewController.h"
-#import "QRCodeScannerViewController.h"
-
 
 @interface UnitsBindingViewController ()
 
@@ -50,7 +48,7 @@
     //QR Code scanner button
     if(btnQRCodeScanner == nil) {
         btnQRCodeScanner = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];
-        [btnQRCodeScanner setTitle:NSLocalizedString(@"zbar_scanner", @"") forState:UIControlStateNormal];
+        [btnQRCodeScanner setTitle:NSLocalizedString(@"qr_code_scanner", @"") forState:UIControlStateNormal];
         [btnQRCodeScanner addTarget:self action:@selector(btnQRCodeScannerPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnQRCodeScanner];
     }
@@ -70,7 +68,22 @@
 }
 
 - (void)btnQRCodeScannerPressed:(id)sender {
-    [self presentModalViewController:[[QRCodeScannerViewController alloc] init] animated:YES];
+    QRCodeScannerViewController *qrCodeViewController = [[QRCodeScannerViewController alloc] init];
+    qrCodeViewController.delegate = self;
+    [self presentModalViewController:qrCodeViewController animated:YES];
 }
+
+- (void)qrCodeSanningSuccess:(NSString *)result {
+    NSLog(@"%@", result);
+    
+    //process qr code
+    //show processing...
+    
+    //if success
+    [self btnDownPressed:nil];
+    //if error
+    //do something...
+}
+
 
 @end
