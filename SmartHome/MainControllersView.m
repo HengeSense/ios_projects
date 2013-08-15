@@ -7,6 +7,7 @@
 //
 
 #import "MainControllersView.h"
+#import "DevicesViewController.h"
 
 @implementation MainControllersView{
     UITableView *mainTableView;
@@ -57,8 +58,16 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"主控%ld                   设备列表",(long)indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"主控%ld",(long)indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    
     return cell;
 }
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
+    DevicesViewController *devicesViewController = [[DevicesViewController alloc] init];
+    devicesViewController.curCell = curCell;
+    [self.ownerController.navigationController pushViewController:devicesViewController animated:YES];
+}
+
 @end

@@ -13,7 +13,7 @@
 "ok"               = "OK";
 "back"             = "back";
 "done"             = "Done";
-
+"rename"           = "rename";
 /*
  * main view controller
  */

@@ -14,7 +14,7 @@
 "ok"               = "好的";
 "back"             = "返回";
 "done"             = "完成";
-
+"rename"           = "重命名";
 /*
  * main view controller
  */
