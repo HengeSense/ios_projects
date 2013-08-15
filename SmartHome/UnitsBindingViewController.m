@@ -38,6 +38,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+#pragma mark initializations
+
 - (void)initDefaults {
 }
 
@@ -61,6 +64,17 @@
     }
 }
 
+#pragma mark -
+#pragma mark services
+
+- (void)showMainView {
+    self.app.rootViewController.needLoadMainViewController = YES;
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+#pragma mark -
+#pragma mark events
+
 - (void)btnDownPressed:(id)sender {
     [self showMainView];
 }
@@ -71,6 +85,9 @@
     [self presentModalViewController:qrCodeViewController animated:YES];
 }
 
+#pragma mark -
+#pragma mark QR Code scanner delegate
+
 - (void)qrCodeSanningSuccess:(NSString *)result {
     NSLog(@"%@", result);
     //process qr code
@@ -80,11 +97,6 @@
     [self showMainView];
     //if error
     //do something...
-}
-
-- (void)showMainView {
-    self.app.rootViewController.needLoadMainViewController = YES;
-    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end
