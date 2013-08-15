@@ -39,7 +39,6 @@
 }
 
 - (void)initDefaults {
-    
 }
 
 - (void)initUI {
@@ -63,8 +62,7 @@
 }
 
 - (void)btnDownPressed:(id)sender {
-    self.app.rootViewController.needLoadMainViewController = YES;
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self showMainView];
 }
 
 - (void)btnQRCodeScannerPressed:(id)sender {
@@ -75,15 +73,18 @@
 
 - (void)qrCodeSanningSuccess:(NSString *)result {
     NSLog(@"%@", result);
-    
     //process qr code
     //show processing...
     
     //if success
-    [self btnDownPressed:nil];
+    [self showMainView];
     //if error
     //do something...
 }
 
+- (void)showMainView {
+    self.app.rootViewController.needLoadMainViewController = YES;
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
 
 @end
