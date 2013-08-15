@@ -7,8 +7,6 @@
 //
 
 #import "RegisterViewController.h"
-#import "QRCodeScannerViewController.h"
-#import "UIViewController+UIViewControllerExtension.h"
 
 @interface RegisterViewController ()
 
@@ -127,7 +125,7 @@
     
     if ([input isEqualToString:verificationCode]) {
         
-        [self.navigationController pushViewController:[[QRCodeScannerViewController alloc] init] animated:YES];
+        [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
         self.settings.isValid = YES;
         self.settings.accountPhone = accountPhone;
         [self.settings saveSettings];

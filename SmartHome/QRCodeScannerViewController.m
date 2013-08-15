@@ -7,18 +7,19 @@
 //
 
 #import "QRCodeScannerViewController.h"
-#import "UIViewController+UIViewControllerExtension.h"
-#import "ZBarCameraSimulator.h"
+#import "NSString+StringUtils.h"
+
+#define SCANNER_VIEW_LENGTH 235
 
 @interface QRCodeScannerViewController ()
 
 @end
 
-@implementation QRCodeScannerViewController{
-    UIButton *btnDone;
-    UILabel *lblTitle;
-    UIButton *btnZbarScan;
-    UITextField *txtZbarCode;
+@implementation QRCodeScannerViewController {
+    ZBarReaderView *readerView;
+    UIImageView *scannerFrame;
+    UIImageView *scannerLine;
+    BOOL scannerLineMoving;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,6 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initDefaults];
+    [self initUI];
 }
 
 - (void)initDefaults {
@@ -46,99 +49,111 @@
 }
 
 - (void)initUI {
-    [super initUI];
-
-    //zbar scanner button
-    if(btnZbarScan == nil) {
-        btnZbarScan = [[UIButton alloc] initWithFrame:CGRectMake(120.0f, 150.0f, 150.0f, 40.0f)];
-        [btnZbarScan setTitle:NSLocalizedString(@"zbar_scanner", @"") forState:UIControlStateNormal];
-        [btnZbarScan addTarget:self action:@selector(btnZbarScanPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnZbarScan];
+    if(readerView == nil) {
+        readerView = [[ZBarReaderView alloc] init];
+        readerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 44);
+        readerView.readerDelegate = self;
+        
+        //close flash light
+        readerView.torchMode = 0;
+        readerView.tracksSymbols = NO;
+        
+        //sanner region
+        CGRect rectForScannerView = CGRectMake((readerView.center.x - SCANNER_VIEW_LENGTH / 2), (readerView.center.y - SCANNER_VIEW_LENGTH / 2), SCANNER_VIEW_LENGTH, SCANNER_VIEW_LENGTH);
+        
+        //set scanner frame
+        scannerFrame = [[UIImageView alloc] initWithFrame:rectForScannerView];
+        scannerFrame.image = [UIImage imageNamed:@"bg_scanner_view.png"];
+        [readerView addSubview:scannerFrame];
+        
+        scannerLine = [[UIImageView alloc] initWithFrame:CGRectMake(rectForScannerView.origin.x, rectForScannerView.origin.y, SCANNER_VIEW_LENGTH, 10)];
+        scannerLine.image = [UIImage imageNamed:@"line_scanner.png"];
+        [readerView addSubview:scannerLine];
+        
+        UILabel *lblTips = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        lblTips.text = @"";
+        
+        [readerView addSubview:lblTips];
+        
+        //set scanner region
+        readerView.scanCrop = [self regionRectForScanner:rectForScannerView readerViewBounds:readerView.bounds];
+        [self.view addSubview:readerView];
+        
+        UIImageView *bottomBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 44 - 20, [UIScreen mainScreen].bounds.size.width, 44)];
+        bottomBar.image = [UIImage imageNamed:@"bg_bottom_bar.png"];
+        
+        UIButton *btnBack = [[UIButton alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 44 - 20, 64, 44)];
+        [btnBack setBackgroundImage:[UIImage imageNamed:@"btn_scanner_view_back.png"] forState:UIControlStateNormal];
+        [btnBack addTarget:self action:@selector(btnBackPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:bottomBar];
+        [self.view addSubview:btnBack];
     }
-    
-    if(lblTitle == nil) {
-        //text view with zbar code for user custom
-        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 200.0f, 90.0f, 24.0f)];
-        lblTitle.text = @"will remove";
-        lblTitle.textColor = [UIColor whiteColor];
-        [self.view addSubview:lblTitle];
-    }
-    
-    if(txtZbarCode == nil) {
-        txtZbarCode = [[UITextField alloc] initWithFrame:CGRectMake(130.0f, 200.0f, 180.0f, 24.0f)];
-        [txtZbarCode setBackgroundColor:[UIColor whiteColor]];
-        [self.view addSubview:txtZbarCode];
-    }
-    
-    //done button to main view
-    if(btnDone == nil) {
-        btnDone = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 120, 48)];
-        [btnDone setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
-        [btnDone addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnDone];
-    }
-}
-
-#pragma mark -
-#pragma mark delegate
-
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-//    id<NSFastEnumeration> results = [info objectForKey:ZBarReaderControllerResults];
-//    ZBarSymbol *symbol = nil;
-//    for(symbol in results) break;
-//    [picker dismissModalViewControllerAnimated: YES];
-//    [self zbarCodeScanningSuccess:symbol.data];
-//}
-
--(CGRect)getScanCrop:(CGRect)rect readerViewBounds:(CGRect)readerViewBounds
-{
-    CGFloat x,y,width,height;
-    
-    x = rect.origin.x / readerViewBounds.size.width;
-    y = rect.origin.y / readerViewBounds.size.height;
-    width = rect.size.width / readerViewBounds.size.width;
-    height = rect.size.height / readerViewBounds.size.height;
-    
-    return CGRectMake(x, y, width, height);
-}
-- (void)zbarCodeScanningSuccess:(NSString *)zbarCode {
-    NSLog(@">>>>>>> %@", zbarCode);
-    txtZbarCode.text = zbarCode;
+    [readerView start];
 }
 
 #pragma mark -
 #pragma mark events
 
-- (void)btnDownPressed:(id)sender {
-    self.app.rootViewController.needLoadMainViewController = YES;
-    [self.navigationController popToRootViewControllerAnimated:NO];
+- (void)btnBackPressed:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)btnZbarScanPressed:(id)sender {
+#pragma mark -
+#pragma mark scanner view
 
-    ZBarReaderView *readerView = [[ZBarReaderView alloc] init];
-    readerView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
-    readerView.readerDelegate = self;
-    //关闭闪光灯
-    readerView.torchMode = 0;
-    //扫描区域
-    CGRect scanMaskRect = CGRectMake(60, CGRectGetMidY(readerView.frame) - 126, 200, 200);
-    
-    [self.view addSubview:readerView];
-    //扫描区域计算
-    readerView.scanCrop = [self getScanCrop:scanMaskRect readerViewBounds:readerView.bounds];
+- (void)f {
+    NSTimer *timer = [NSTimer timerWithTimeInterval:0.1f target:self selector:@selector(f:) userInfo:nil repeats:YES];
 
-    [readerView start];
 }
-- (void)readerView:(ZBarReaderView *)readerView didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image
-{
+
+- (void)sannerLineUpDownMoving {
+//    if(scannerLineMoving) {
+        CGRect rect = scannerLine.frame;
+        CGFloat y = rect.origin.y - 100;
+        scannerLine.frame = CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height);
+//    }
+}
+
+- (void)beginScannerAnimation {
+
+}
+
+- (void)endScannerAnimation {
+//    [timer invalidate];
+}
+
+
+#pragma mark -
+#pragma mark QR Code calc
+
+-(CGRect)regionRectForScanner:(CGRect)scannerView readerViewBounds:(CGRect)readerView_ {
+//    CGFloat x, y, width, height;
+//    x = scannerView.origin.y / readerView_.size.height;
+//    y = 1 - (scannerView.origin.x + scannerView.size.width) / readerView_.size.width;
+//    width = (scannerView.origin.y + scannerView.size.height) / readerView_.size.height;
+//    height = 1 - scannerView.origin.x / readerView_.size.width;
+//    return CGRectMake(x, y, width, height);
+//    
+    CGFloat x, y, width, height;
+    x = scannerView.origin.x / readerView_.size.width;
+    y = scannerView.origin.y / readerView_.size.height;
+    width = scannerView.size.width / readerView_.size.width;
+    height = scannerView.size.height / readerView_.size.height;
+    return CGRectMake(x, y, width, height);
+}
+
+#pragma mark -
+#pragma mark zbar delegate
+
+- (void)readerView:(ZBarReaderView *)readerView_ didReadSymbols:(ZBarSymbolSet *)symbols fromImage:(UIImage *)image {
+    NSString *result = [NSString emptyString];
     for (ZBarSymbol *symbol in symbols) {
-        NSLog(@"%@", symbol.data);
+        result = symbol.data;
         break;
     }
-    
-    [readerView stop];
-    [readerView removeFromSuperview];
+    [readerView_ stop];
+    NSLog(result);
 }
 
 @end

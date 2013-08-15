@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "ZBarReaderView.h"
-#import "ZBarSymbol.h"
-#import "BaseViewController.h"
 
-@interface QRCodeScannerViewController : BaseViewController<ZBarReaderViewDelegate>
-
+@interface QRCodeScannerViewController : UIViewController<ZBarReaderViewDelegate>
 
 @end
