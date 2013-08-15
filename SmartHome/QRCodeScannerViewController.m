@@ -103,8 +103,22 @@
 #pragma mark scanner view
 
 - (void)f {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:0.1f target:self selector:@selector(f:) userInfo:nil repeats:YES];
-
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:0.1f target:self selector:@selector(f:) userInfo:nil repeats:YES];
+//    
+//    
+//    
+//    
+//    CGFloat yMin = readerView.scanCrop.origin.y;
+//    CGFloat yMax = readerView.scanCrop.origin.y + SCANNER_VIEW_LENGTH;
+//    CGFloat y = scannerLine.frame.origin.y;
+//    
+//    if(y >= yMax) {
+//        y--;
+//    } else {
+//        y++;
+//    }
+//    
+//    
 }
 
 - (void)sannerLineUpDownMoving {
@@ -115,13 +129,8 @@
 //    }
 }
 
-- (void)beginScannerAnimation {
 
-}
 
-- (void)endScannerAnimation {
-//    [timer invalidate];
-}
 
 
 #pragma mark -
