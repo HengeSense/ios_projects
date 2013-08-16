@@ -8,9 +8,6 @@
 
 #import "ModifyInfoViewController.h"
 
-#define DONE_BUTTON_WIDTH  44
-#define DONE_BUTTON_HEIGHT 44
-
 @interface ModifyInfoViewController ()
 
 @end
@@ -46,9 +43,6 @@
 
 - (void)initUI {
     [super initUI];
-    self.topbar.rightButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - DONE_BUTTON_WIDTH, 0, DONE_BUTTON_WIDTH, DONE_BUTTON_HEIGHT);
-    [self.topbar.rightButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
-    [self.topbar.rightButton addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)btnDownPressed:(id)sender {
