@@ -8,6 +8,8 @@
 
 #import "UnitsBindingViewController.h"
 
+#import "Test.h"
+
 @interface UnitsBindingViewController ()
 
 @end
@@ -62,6 +64,18 @@
         [btnDone addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnDone];
     }
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 50, 120, 21)];
+    [btn addTarget:self action:@selector(fff) forControlEvents:UIControlEventTouchUpInside];
+    
+    [btn setTitle:@"test" forState:UIControlStateNormal];
+    
+    [self.view addSubview:btn];
+}
+
+- (void)fff {
+    Test *t = [[Test alloc] initWithIPAddress:@"127.0.0.1" andPort:8888];
+    [t connect];
 }
 
 #pragma mark -
