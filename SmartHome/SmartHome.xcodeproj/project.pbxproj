@@ -107,7 +107,7 @@
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
 		F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08D17BDD00B0040B80A /* LoginViewController.m */; };
-		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
+		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
 		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
 		F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */; };
@@ -295,8 +295,8 @@
 		F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoViewController.m; sourceTree = "<group>"; };
 		F20AE08C17BDD00B0040B80A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F20AE08D17BDD00B0040B80A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		F20B36CB17B87CF1009286D6 /* MainControllersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainControllersView.h; sourceTree = "<group>"; };
-		F20B36CC17B87CF1009286D6 /* MainControllersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainControllersView.m; sourceTree = "<group>"; };
+		F20B36CB17B87CF1009286D6 /* MyDevicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesView.h; sourceTree = "<group>"; };
+		F20B36CC17B87CF1009286D6 /* MyDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
 		F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesViewController.m; sourceTree = "<group>"; };
 		F237167E17B349650057C95B /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -492,8 +492,8 @@
 				6F0FAEC917AF832700B75D3E /* DrawerView.m */,
 				6F8A722B17B23E91002BA8C5 /* ConversationView.h */,
 				6F8A722C17B23E91002BA8C5 /* ConversationView.m */,
-				F20B36CB17B87CF1009286D6 /* MainControllersView.h */,
-				F20B36CC17B87CF1009286D6 /* MainControllersView.m */,
+				F20B36CB17B87CF1009286D6 /* MyDevicesView.h */,
+				F20B36CC17B87CF1009286D6 /* MyDevicesView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -923,7 +923,7 @@
 				6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */,
 				6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */,
 				6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */,
-				F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */,
+				F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */,
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 				F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */,
 				6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */,

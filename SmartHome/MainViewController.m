@@ -10,7 +10,7 @@
 #import "MainView.h"
 #import "HistoricalDataView.h"
 #import "SceneModeView.h"
-#import "MainControllersView.h"
+#import "MyDevicesView.h"
 #import "TopbarView.h"
 #import "ViewsPool.h"
 
@@ -43,7 +43,7 @@
     drawerItems = [NSMutableArray array];
     
     DrawerNavigationItem *mainView = [[DrawerNavigationItem alloc] init];
-    DrawerNavigationItem *mainControllersView = [[DrawerNavigationItem alloc] init];
+    DrawerNavigationItem *myDevicesView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *sceneModeView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *historicalView = [[DrawerNavigationItem alloc] init];
      
@@ -51,9 +51,9 @@
     mainView.itemTitle = NSLocalizedString(@"main_view", @"");
     mainView.itemImageName = @"";
         
-    mainControllersView.itemIdentifier = @"mainControllersView";
-    mainControllersView.itemTitle = NSLocalizedString(@"my_devices", @"");
-    mainControllersView.itemImageName = @"";
+    myDevicesView.itemIdentifier = @"myDevicesView";
+    myDevicesView.itemTitle = NSLocalizedString(@"my_devices", @"");
+    myDevicesView.itemImageName = @"";
     
     sceneModeView.itemIdentifier = @"sceneModeView";
     sceneModeView.itemTitle = NSLocalizedString(@"scene_mode", @"");
@@ -64,7 +64,7 @@
     historicalView.itemImageName = @"";
     
     [drawerItems addObject:mainView];
-    [drawerItems addObject:mainControllersView];
+    [drawerItems addObject:myDevicesView];
     [drawerItems addObject:sceneModeView];
     [drawerItems addObject:historicalView];
 }
@@ -114,8 +114,8 @@
         if([@"mainView" isEqualToString:item.itemIdentifier]) {
             view = [[MainView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
             view.topbar.titleLabel.text = NSLocalizedString(@"main_view.title", @"");
-        } else if([@"mainControllersView" isEqualToString:item.itemIdentifier]) {
-            view = [[MainControllersView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+        } else if([@"myDevicesView" isEqualToString:item.itemIdentifier]) {
+            view = [[MyDevicesView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
             view.topbar.titleLabel.text = NSLocalizedString(@"my_devices.title", @"");
         } else if([@"sceneModeView" isEqualToString:item.itemIdentifier]) {
             view = [[SceneModeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
