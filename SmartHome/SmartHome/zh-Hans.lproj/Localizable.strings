@@ -26,6 +26,11 @@
 "historical_data.title"               = "历史数据";
 
 /*
+ * drawer view
+ */
+"account.setting"    =   "账号设置";
+
+/*
  * main view controller
  */
 "main_view"                     = "主界面";

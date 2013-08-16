@@ -11,7 +11,10 @@
 #import "DrawerNavigationItem.h"
 #import "ViewsPool.h"
 
+#define ACCOUNT_VIEW_HEIGHT 0
+
 @implementation DrawerView {
+    UIView *accountView;
     UITableView *tblNavigationItems;
     NSArray *navigationItems;
     ViewsPool *viewsPool;
@@ -35,12 +38,28 @@
 }
 
 - (void)initDefaults {
-    entryHeight = ([UIScreen mainScreen].bounds.size.height - 20) / 4;
+    entryHeight = ([UIScreen mainScreen].bounds.size.height - ACCOUNT_VIEW_HEIGHT - 20) / 4;
 }
 
 - (void)initUI {
+    if(accountView == nil) {
+        accountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, ACCOUNT_VIEW_HEIGHT)];
+        UIImageView *imgHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        UILabel *lblMessage1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        UILabel *lblMessage2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        lblMessage1.text = @"苍井空";
+        lblMessage2.text = NSLocalizedString(@"account.setting", @"");
+        
+//        [accountView addSubview:imgHeader];
+//        [accountView addSubview:lblMessage1];
+//        [accountView addSubview:lblMessage2];
+//        [self addSubview:accountView];
+    }
+    
     if(tblNavigationItems == nil) {
-        tblNavigationItems = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
+        tblNavigationItems = [[UITableView alloc]
+            initWithFrame:CGRectMake(0, ACCOUNT_VIEW_HEIGHT, self.frame.size.width,
+            self.frame.size.height - ACCOUNT_VIEW_HEIGHT) style:UITableViewStylePlain];
         tblNavigationItems.dataSource = self;
         tblNavigationItems.delegate = self;
         tblNavigationItems.scrollEnabled = NO;

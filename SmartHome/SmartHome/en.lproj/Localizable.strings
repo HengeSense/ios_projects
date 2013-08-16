@@ -25,6 +25,11 @@
 "historical_data.title"               = "History Data";
 
 /*
+ * drawer view
+ */
+"account.setting"    =   "Account Setting";
+
+/*
  * main view controller
  */
 "main.view"                     = "Main View";
