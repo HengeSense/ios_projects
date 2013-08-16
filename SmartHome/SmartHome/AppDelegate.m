@@ -21,21 +21,20 @@
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
     
-    self.settings.accountPhone = @"";
-    self.settings.isValid = NO;
-    [self.settings saveSettings];
-    
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
     navigationController.delegate = rootViewController;
 
-    if(self.settings.isValid) {
+    if(self.settings.isValid && self.settings.hasUnitBinding) {
         [rootViewController.navigationController pushViewController:
             [[MainViewController alloc] init] animated:NO];
-    } else {
+    } else if(self.settings.isValid && !self.settings.hasUnitBinding) {
         [rootViewController.navigationController pushViewController:
          [[UnitsBindingViewController alloc] init] animated:NO];
+    } else {
+        [rootViewController.navigationController pushViewController:
+         [[RegisterViewController alloc] init] animated:NO];
     }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

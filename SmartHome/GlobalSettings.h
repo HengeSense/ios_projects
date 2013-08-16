@@ -13,7 +13,8 @@
 @interface GlobalSettings : NSObject
 
 @property (strong, nonatomic) NSString *accountPhone;
-@property (assign, nonatomic) Boolean isValid;
+@property (assign, nonatomic) BOOL isValid;
+@property (assign, nonatomic) BOOL hasUnitBinding;
 
 - (NSDictionary *)toDictionary;
 - (void)saveSettings;
