@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "ZBarReaderView.h"
 
-@protocol QRCodeScannerDelegate <NSObject>
+@protocol QRCodeProcessorDelegate <NSObject>
 
-- (void)qrCodeSanningSuccess:(NSString *)result;
+//you must execute [scannerViewController dismissModalViewControllerAnimated:YES] after you
+//process the result string
+- (void)qrCodeScannerSuccess:(NSString *)result scanner:(UIViewController *)scannerViewController;
 
 @end
 
 @interface QRCodeScannerViewController : UIViewController<ZBarReaderViewDelegate>
 
-@property (assign, nonatomic) id<QRCodeScannerDelegate> delegate;
+@property(assign, nonatomic) id<QRCodeProcessorDelegate> delegate;
 
 @end
+
+

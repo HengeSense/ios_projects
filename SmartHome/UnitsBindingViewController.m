@@ -80,23 +80,23 @@
 }
 
 - (void)btnQRCodeScannerPressed:(id)sender {
-    QRCodeScannerViewController *qrCodeViewController = [[QRCodeScannerViewController alloc] init];
-    qrCodeViewController.delegate = self;
-    [self presentModalViewController:qrCodeViewController animated:YES];
+    QRCodeScannerViewController *scannerViewController = [[QRCodeScannerViewController alloc] init];
+    scannerViewController.delegate = self;
+    [self presentModalViewController:scannerViewController animated:YES];
 }
 
 #pragma mark -
-#pragma mark QR Code scanner delegate
+#pragma mark QR code delegate
 
-- (void)qrCodeSanningSuccess:(NSString *)result {
-    NSLog(@"%@", result);
-    //process qr code
-    //show processing...
-    
-    //if success
+- (void)qrCodeScannerSuccess:(NSString *)result scanner:(UIViewController *)scannerViewController {
+    NSLog(@"processing qr code %@", result);
+    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(test:) userInfo:scannerViewController repeats:NO];
+}
+
+- (void)test:(NSTimer *)timer {
+    UIViewController *viewController = timer.userInfo;
     [self showMainView];
-    //if error
-    //do something...
+    [viewController dismissModalViewControllerAnimated:YES];
 }
 
 @end

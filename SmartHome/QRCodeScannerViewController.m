@@ -10,6 +10,7 @@
 #import "NSString+StringUtils.h"
 
 #define SCANNER_VIEW_LENGTH 235
+#define INDICATOR_VIEW_TAG 10012
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
     MoveDirectionDown,
@@ -25,6 +26,8 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
     UIImageView *scannerFrame;
     UIImageView *scannerLine;
     MoveDirection moveDirection;
+    
+    UIView *lockView;
 }
 
 @synthesize delegate;
@@ -65,6 +68,16 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
         readerView.torchMode = 0;
         readerView.tracksSymbols = NO;
         
+        UIButton *btnFlashLight = [[UIButton alloc] initWithFrame:CGRectMake(20, 25, 30, 30)];
+        [btnFlashLight setBackgroundImage:[UIImage imageNamed:@"btn_flash_light.png"] forState:UIControlStateNormal];
+        [btnFlashLight addTarget:self action:@selector(btnFlashLightPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [readerView addSubview:btnFlashLight];
+        
+        UIButton *btnInfo = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-50, 24, 30, 30)];
+        [btnInfo setBackgroundImage:[UIImage imageNamed:@"btn_info.png"] forState:UIControlStateNormal];
+//        [btnInfo addTarget:self action:@selector(btnFlashLightPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [readerView addSubview:btnInfo];
+        
         //sanner region
         CGRect rectForScannerView = CGRectMake((readerView.center.x - SCANNER_VIEW_LENGTH / 2), (readerView.center.y - SCANNER_VIEW_LENGTH / 2), SCANNER_VIEW_LENGTH, SCANNER_VIEW_LENGTH);
         
@@ -76,7 +89,7 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
         scannerLine = [[UIImageView alloc] initWithFrame:CGRectMake(rectForScannerView.origin.x, rectForScannerView.origin.y, SCANNER_VIEW_LENGTH, 10)];
         scannerLine.image = [UIImage imageNamed:@"line_scanner.png"];
         [readerView addSubview:scannerLine];
-        
+
         UILabel *lblTips = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 235, 21)];
         lblTips.text = NSLocalizedString(@"qr_code.tips", @"");
         lblTips.textAlignment = NSTextAlignmentCenter;
@@ -91,10 +104,13 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
         [self.view addSubview:readerView];
         
         UIImageView *bottomBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 44 - 20, [UIScreen mainScreen].bounds.size.width, 44)];
-        bottomBar.image = [UIImage imageNamed:@"bg_bottom_bar.png"];
+        bottomBar.image = [UIImage imageNamed:@"bg_bottom_bar_black.png"];
         
-        UIButton *btnBack = [[UIButton alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 44 - 20, 64, 44)];
-        [btnBack setBackgroundImage:[UIImage imageNamed:@"btn_scanner_view_back.png"] forState:UIControlStateNormal];
+        UIButton *btnBack = [[UIButton alloc] initWithFrame:CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 44 - 12, 48, 27)];
+        [btnBack setBackgroundImage:[UIImage imageNamed:@"btn_done_black.png"] forState:UIControlStateNormal];
+        [btnBack setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
+        btnBack.titleLabel.font = [UIFont systemFontOfSize:14.f];
+        btnBack.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 1, 0);
         [btnBack addTarget:self action:@selector(btnBackPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.view addSubview:bottomBar];
@@ -109,6 +125,15 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 
 - (void)btnBackPressed:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)btnFlashLightPressed:(id)sender {
+    if(readerView == nil) return;
+    if(readerView.torchMode == 0) {
+        readerView.torchMode = 1;
+    } else if(readerView.torchMode == 1) {
+        readerView.torchMode = 0;
+    }
 }
 
 #pragma mark -
@@ -129,6 +154,52 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
         scannerLine.center = CGPointMake(scannerLine.center.x, scannerLine.center.y+1);
     } else {
         scannerLine.center = CGPointMake(scannerLine.center.x, scannerLine.center.y-1);
+    }
+}
+
+- (void)lockView {
+    if(lockView == nil) {
+        lockView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        lockView.backgroundColor = [UIColor blackColor];
+        lockView.alpha = 0.8f;
+        
+        UIView  *processingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 220, 44)];
+        processingView.center = CGPointMake(scannerFrame.center.x, scannerFrame.center.y + 20);
+        processingView.backgroundColor = [UIColor clearColor];
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(15, 0, 44, 44)];
+        indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        indicator.backgroundColor = [UIColor clearColor];
+        indicator.tag = INDICATOR_VIEW_TAG;
+        [processingView addSubview:indicator];
+        
+        UILabel *lblMessage = [[UILabel alloc] initWithFrame:CGRectMake(70, 7, 140, 30)];
+        lblMessage.textColor = [UIColor whiteColor];
+        lblMessage.font = [UIFont boldSystemFontOfSize:18.f];
+        lblMessage.backgroundColor = [UIColor clearColor];
+        lblMessage.text = NSLocalizedString(@"processing.tips", @"");
+        [processingView addSubview:lblMessage];
+        
+        [lockView addSubview:processingView];
+    }
+    scannerLine.hidden = YES;
+    UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)[lockView viewWithTag:INDICATOR_VIEW_TAG];
+    if(indicator != nil) {
+        [indicator startAnimating];
+    }
+    [[UIApplication sharedApplication].keyWindow addSubview:lockView];
+}
+
+- (void)unlockViewAndRestart:(BOOL)restart {
+    if(lockView != nil) {
+        UIActivityIndicatorView *indicator = (UIActivityIndicatorView *)[lockView viewWithTag:INDICATOR_VIEW_TAG];
+        if(indicator != nil) {
+            [indicator stopAnimating];
+        }
+        [lockView removeFromSuperview];
+        if(restart) {
+            scannerLine.hidden = NO;
+            [readerView start];
+        }
     }
 }
 
@@ -158,10 +229,25 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
         break;
     }
     [readerView_ stop];
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(qrCodeSanningSuccess:)]) {
-        [self.delegate qrCodeSanningSuccess:result];
+    [self lockView];
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(qrCodeScannerSuccess:scanner:)]) {
+        [self.delegate qrCodeScannerSuccess:result scanner:self];
+    } else {
+        [self dismissModalViewControllerAnimated:YES];
     }
-    [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark override
+
+- (void)dismissModalViewControllerAnimated:(BOOL)animated {
+    [self unlockViewAndRestart:NO];
+    [super dismissModalViewControllerAnimated:YES];
+}
+
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
+    [self unlockViewAndRestart:NO];
+    [super dismissViewControllerAnimated:flag completion:completion];
 }
 
 @end
