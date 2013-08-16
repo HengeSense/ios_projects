@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "RegisterViewController.h"
+#import "UnitsBindingViewController.h"
+#import "LoginViewController.h"
 
 @implementation AppDelegate
 
@@ -34,7 +35,7 @@
          [[UnitsBindingViewController alloc] init] animated:NO];
     } else {
         [rootViewController.navigationController pushViewController:
-         [[RegisterViewController alloc] init] animated:NO];
+         [[LoginViewController alloc] init] animated:NO];
     }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
