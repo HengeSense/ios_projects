@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "CustomTextFieldView.h"
+#import "LongButton.h"
 #define LINE_HIGHT 5
 @interface LoginViewController ()
 
@@ -74,9 +75,12 @@
 
 
     passwordField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, password.frame.origin.y+LINE_HIGHT+20)];
+    [passwordField setSecureTextEntry:YES];
     [self.view addSubview:passwordField];
     
-
+    loginBtn = [LongButton buttonWithPoint:CGPointMake(5, passwordField.frame.origin.y+passwordField.bounds.size.height+LINE_HIGHT)];
+    [loginBtn setTitle:NSLocalizedString(@"login", @"") forState:UIControlStateNormal];
+    [self.view addSubview:loginBtn];
     
 }
 @end
