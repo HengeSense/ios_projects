@@ -49,22 +49,27 @@
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
 //    if(self.delegate == nil) return;
-    NSLog(@"fuck ...");
-    
-    
 
     switch(eventCode) {
         case NSStreamEventNone:
+            NSLog(@"none  empty ....");
             break;
         case NSStreamEventOpenCompleted:
+            NSLog(@"opened ....");
             break;
         case NSStreamEventHasBytesAvailable:
+            NSLog(@"has bytes available");
             break;
         case NSStreamEventHasSpaceAvailable:
+            NSLog(@"has space avalible");
             break;
         case NSStreamEventEndEncountered:
+            NSLog(@"end ....");
+            [self close];
             break;
         case NSStreamEventErrorOccurred:
+            NSLog(@"error ....");
+            [self close];
             break;
         default:
             break;
