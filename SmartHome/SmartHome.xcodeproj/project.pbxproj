@@ -109,7 +109,6 @@
 		F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08D17BDD00B0040B80A /* LoginViewController.m */; };
 		F20AE09017BE05BC0040B80A /* bg_text_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20AE08F17BE05BC0040B80A /* bg_text_field@2x.png */; };
 		F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */; };
-		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
 		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
 		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
@@ -117,6 +116,8 @@
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
 		F237F60B17B234760057C95B /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F60A17B234760057C95B /* XMLElement.m */; };
 		F237F61117B3314E0057C95B /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F237F61017B3314E0057C95B /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
+		F2BB0EF717BE1C4E004E14B1 /* long_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BB0EF617BE1C4E004E14B1 /* long_button@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,8 +302,6 @@
 		F20AE08F17BE05BC0040B80A /* bg_text_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_text_field@2x.png"; sourceTree = "<group>"; };
 		F20AE09217BE0D5B0040B80A /* CustomTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextFieldView.h; sourceTree = "<group>"; };
 		F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextFieldView.m; sourceTree = "<group>"; };
-		F20B36CB17B87CF1009286D6 /* MainControllersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainControllersView.h; sourceTree = "<group>"; };
-		F20B36CC17B87CF1009286D6 /* MainControllersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainControllersView.m; sourceTree = "<group>"; };
 		F20B36CB17B87CF1009286D6 /* MyDevicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesView.h; sourceTree = "<group>"; };
 		F20B36CC17B87CF1009286D6 /* MyDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
@@ -316,6 +315,9 @@
 		F237F60A17B234760057C95B /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
 		F237F60F17B3314E0057C95B /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		F237F61017B3314E0057C95B /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		F2BB0EF317BE1B7E004E14B1 /* LongButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongButton.h; sourceTree = "<group>"; };
+		F2BB0EF417BE1B7E004E14B1 /* LongButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongButton.m; sourceTree = "<group>"; };
+		F2BB0EF617BE1C4E004E14B1 /* long_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "long_button@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +420,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				F2BB0EF217BE1B2A004E14B1 /* buttons */,
 				F20AE09117BE0CC50040B80A /* text_field */,
 				6FEB91E617BB83CE007C04A1 /* temperature_view */,
 				6F0FAF4C17AF9C7B00B75D3E /* cells */,
@@ -429,6 +432,7 @@
 		6F0FAE9E17AF7FF700B75D3E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F2BB0EF617BE1C4E004E14B1 /* long_button@2x.png */,
 				6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */,
 				F20AE08F17BE05BC0040B80A /* bg_text_field@2x.png */,
 				6FEB91D817BB5457007C04A1 /* btn_back@2x.png */,
@@ -798,6 +802,15 @@
 			name = text_field;
 			sourceTree = "<group>";
 		};
+		F2BB0EF217BE1B2A004E14B1 /* buttons */ = {
+			isa = PBXGroup;
+			children = (
+				F2BB0EF317BE1B7E004E14B1 /* LongButton.h */,
+				F2BB0EF417BE1B7E004E14B1 /* LongButton.m */,
+			);
+			name = buttons;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -884,6 +897,7 @@
 				6F1BE41B17BD18A6003C973D /* btn_flash_light@2x.png in Resources */,
 				6F1BE41D17BD1B40003C973D /* btn_info@2x.png in Resources */,
 				F20AE09017BE05BC0040B80A /* bg_text_field@2x.png in Resources */,
+				F2BB0EF717BE1C4E004E14B1 /* long_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,6 +969,7 @@
 				F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */,
 				F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */,
 				6F984F7917BDD71C007F90A2 /* AccountSettingViewController.m in Sources */,
+				F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

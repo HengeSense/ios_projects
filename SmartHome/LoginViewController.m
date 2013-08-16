@@ -7,7 +7,8 @@
 //
 
 #import "LoginViewController.h"
-
+#import "CustomTextFieldView.h"
+#define LINE_HIGHT 5
 @interface LoginViewController ()
 
 @end
@@ -48,24 +49,34 @@
 -(void) initUI{
     [super initUI];
     //CGFloat screenHight = self.view.bounds.size.height;
-    CGFloat screenWidth = self.view.bounds.size.width;
+    //CGFloat screenWidth = self.view.bounds.size.width;
+    [self registerTapGestureToResignKeyboard];
+    
     username = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 100, 20)];
     username.backgroundColor = [UIColor clearColor];
     username.text = NSLocalizedString(@"username:", @"");
+    username.font= [UIFont systemFontOfSize:12];
     username.textColor = [UIColor whiteColor];
     [self.view addSubview:username];
     
-    usernameField = [[UITextField alloc] initWithFrame:CGRectMake(5, 120, 616/2, 96/2)];
-    [usernameField setBackground:[UIImage imageNamed:@"bg_text_field.png"]];
+    usernameField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, username.frame.origin.y+LINE_HIGHT+20)];
     [self.view addSubview:usernameField];
     
-    password = [[UILabel alloc] initWithFrame:CGRectMake(10, 230, 100, 20)];
+
+    
+    password = [[UILabel alloc] initWithFrame:CGRectMake(10, usernameField.frame.origin.y+usernameField.bounds.size.height+LINE_HIGHT, 100, 20)];
     password.text = NSLocalizedString(@"password:", @"");
     password.textColor = [UIColor whiteColor];
     password.backgroundColor = [UIColor clearColor];
+    password.font= [UIFont systemFontOfSize:12];
     [self.view addSubview:password];
     
+
+
+    passwordField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, password.frame.origin.y+LINE_HIGHT+20)];
+    [self.view addSubview:passwordField];
     
+
     
 }
 @end

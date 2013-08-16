@@ -60,5 +60,5 @@
  *login view controller
  */
 
-"username:"          = "登陆名";
-"password:"          = "登陆密码";
+"username:"          = "登陆名:";
+"password:"          = "登陆密码:";

@@ -60,5 +60,5 @@
  *login view controller
  */
 
-"username:"          = "username";
-"password:"          ="passname";
+"username:"          = "username:";
+"password:"          ="passname:";
