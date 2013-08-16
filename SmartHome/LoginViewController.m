@@ -12,7 +12,18 @@
 
 @end
 
-@implementation LoginViewController
+@implementation LoginViewController{
+    UILabel *username;
+    UILabel *password;
+    UILabel *rememberPassword;
+    
+    UITextField *usernameField;
+    UITextField *passwordField;
+    
+    UIButton *rememberBtn;
+    UIButton *loginBtn;
+    UIButton *registerBtn;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,5 +45,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void) initUI{
+    [super initUI];
+    //CGFloat screenHight = self.view.bounds.size.height;
+    CGFloat screenWidth = self.view.bounds.size.width;
+    username = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 100, 20)];
+    username.backgroundColor = [UIColor clearColor];
+    username.text = NSLocalizedString(@"username:", @"");
+    username.textColor = [UIColor whiteColor];
+    [self.view addSubview:username];
+    
+    usernameField = [[UITextField alloc] initWithFrame:CGRectMake(5, 120, 616/2, 96/2)];
+    [usernameField setBackground:[UIImage imageNamed:@"bg_text_field.png"]];
+    [self.view addSubview:usernameField];
+    
+    password = [[UILabel alloc] initWithFrame:CGRectMake(10, 230, 100, 20)];
+    password.text = NSLocalizedString(@"password:", @"");
+    password.textColor = [UIColor whiteColor];
+    password.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:password];
+    
+    
+    
+}
 @end

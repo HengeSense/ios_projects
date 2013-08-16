@@ -106,6 +106,8 @@
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
 		F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08D17BDD00B0040B80A /* LoginViewController.m */; };
+		F20AE09017BE05BC0040B80A /* bg_text_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20AE08F17BE05BC0040B80A /* bg_text_field@2x.png */; };
+		F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */; };
 		F20B36CD17B87CF1009286D6 /* MainControllersView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MainControllersView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
 		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
@@ -292,6 +294,9 @@
 		F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoViewController.m; sourceTree = "<group>"; };
 		F20AE08C17BDD00B0040B80A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F20AE08D17BDD00B0040B80A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		F20AE08F17BE05BC0040B80A /* bg_text_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_text_field@2x.png"; sourceTree = "<group>"; };
+		F20AE09217BE0D5B0040B80A /* CustomTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextFieldView.h; sourceTree = "<group>"; };
+		F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextFieldView.m; sourceTree = "<group>"; };
 		F20B36CB17B87CF1009286D6 /* MainControllersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainControllersView.h; sourceTree = "<group>"; };
 		F20B36CC17B87CF1009286D6 /* MainControllersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainControllersView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
@@ -407,6 +412,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				F20AE09117BE0CC50040B80A /* text_field */,
 				6FEB91E617BB83CE007C04A1 /* temperature_view */,
 				6F0FAF4C17AF9C7B00B75D3E /* cells */,
 				6F0FAEA517AF803800B75D3E /* drawer_navigation */,
@@ -418,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */,
+				F20AE08F17BE05BC0040B80A /* bg_text_field@2x.png */,
 				6FEB91D817BB5457007C04A1 /* btn_back@2x.png */,
 				6FEB91E217BB7AAB007C04A1 /* bg_topbar_first_level@2x.png */,
 				6FEB91E417BB7C6C007C04A1 /* btn_drawer_nav@2x.png */,
@@ -774,6 +781,15 @@
 			name = temperature_view;
 			sourceTree = "<group>";
 		};
+		F20AE09117BE0CC50040B80A /* text_field */ = {
+			isa = PBXGroup;
+			children = (
+				F20AE09217BE0D5B0040B80A /* CustomTextFieldView.h */,
+				F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */,
+			);
+			name = text_field;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -859,6 +875,7 @@
 				6F1BE41917BD1413003C973D /* btn_done_black@2x.png in Resources */,
 				6F1BE41B17BD18A6003C973D /* btn_flash_light@2x.png in Resources */,
 				6F1BE41D17BD1B40003C973D /* btn_info@2x.png in Resources */,
+				F20AE09017BE05BC0040B80A /* bg_text_field@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +945,7 @@
 				6F1EE66D17BCD41500580760 /* Test.m in Sources */,
 				F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */,
 				F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */,
+				F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

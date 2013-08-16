@@ -26,7 +26,7 @@
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
     navigationController.delegate = rootViewController;
-
+    settings.isValid = NO;
     if(self.settings.isValid && self.settings.hasUnitBinding) {
         [rootViewController.navigationController pushViewController:
             [[MainViewController alloc] init] animated:NO];
