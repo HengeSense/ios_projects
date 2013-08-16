@@ -8,6 +8,8 @@
 
 #import "AlertView.h"
 
+#define KEY_WINDOW [UIApplication sharedApplication].keyWindow
+
 @implementation AlertView
 
 - (id)initWithFrame:(CGRect)frame
@@ -20,8 +22,7 @@
 
 + (AlertView *)currentAlertView {
     static AlertView *currentAlertView;
-    if(currentAlertView == nil) {
-        
+    if(currentAlertView == nil) {   
     }
     return currentAlertView;
 }
