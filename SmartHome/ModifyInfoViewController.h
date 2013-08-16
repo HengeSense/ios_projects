@@ -8,6 +8,14 @@
 
 #import "NavViewController.h"
 
+@protocol TextViewDelegate <NSObject>
+
+- (void)textViewHasBeenSetting:(NSString *)string;
+
+@end
+
 @interface ModifyInfoViewController : NavViewController
+
+@property (assign, nonatomic) id<TextViewDelegate> delegate;
 
 @end

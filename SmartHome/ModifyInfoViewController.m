@@ -14,6 +14,8 @@
 
 @implementation ModifyInfoViewController
 
+@synthesize delegate;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,6 +35,21 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)initDefaults {
+    
+}
+
+- (void)initUI {
+    [super initUI];
+}
+
+- (void)btnDownPressed:(id)sender {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(textViewHasBeenSetting:)]) {
+        [self.delegate textViewHasBeenSetting:@"  "];
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

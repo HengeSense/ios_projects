@@ -1,5 +1,5 @@
 //
-//  MainControllersView.h
+//  MyDevicesView.h
 //  SmartHome
 //
 //  Created by hadoop user account on 12/08/13.
@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
-@interface MainControllersView : NavigationView <UITableViewDelegate, UITableViewDataSource>
+
+@interface MyDevicesView : NavigationView <UITableViewDelegate, UITableViewDataSource>
 
 @end
