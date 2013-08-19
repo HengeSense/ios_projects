@@ -13,12 +13,14 @@
 #define ACCOUNT_PHONE_KEY    @"account.phone.key"
 #define IS_VALID_KEY         @"is.valid.key"
 #define UNIT_BINDING_KEY     @"unit.binding.key"
+#define ACCOUNT_PWD_KEY      @"account.pwd"
 
 @implementation GlobalSettings
 
 @synthesize accountPhone;
-@synthesize isValid;
 @synthesize hasUnitBinding;
+@synthesize accountPassword;
+@synthesize isValid;
 
 - (id)init {
     self = [super init];
@@ -30,17 +32,25 @@
             self.isValid = NO;
             self.hasUnitBinding = NO;
             self.accountPhone = [NSString emptyString];
+            self.accountPassword = [NSString emptyString];
         } else {
             //already have a setting file
             //need to fill object property
             NSString *acc_phone_obj = [settings notNSNullObjectForKey:ACCOUNT_PHONE_KEY];
             NSString *is_valid_obj  = [settings notNSNullObjectForKey:IS_VALID_KEY];
             NSString *has_unit_obj  = [settings notNSNullObjectForKey:UNIT_BINDING_KEY];
+            NSString *acc_pwd_obj   = [settings notNSNullObjectForKey:ACCOUNT_PWD_KEY];
             
             if(![NSString isBlank:acc_phone_obj]) {
                 self.accountPhone = acc_phone_obj;
             } else {
                 self.accountPhone = [NSString emptyString];
+            }
+            
+            if(![NSString isBlank:acc_pwd_obj]) {
+                self.accountPassword = acc_pwd_obj;
+            } else {
+                self.accountPassword = [NSString emptyString];
             }
             
             if(![NSString isBlank:is_valid_obj]) {
@@ -70,6 +80,7 @@
     [dictionary setObject:(self.isValid ? @"yes" : @"no") forKey:IS_VALID_KEY];
     [dictionary setObject:(self.hasUnitBinding ? @"yes" : @"no") forKey:UNIT_BINDING_KEY];
     [dictionary setObject:self.accountPhone forKey:ACCOUNT_PHONE_KEY];
+    [dictionary setObject:self.accountPassword forKey:ACCOUNT_PWD_KEY];
     
     return dictionary;
 }

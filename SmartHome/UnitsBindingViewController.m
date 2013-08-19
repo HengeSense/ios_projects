@@ -8,7 +8,7 @@
 
 #import "UnitsBindingViewController.h"
 
-#import "Test.h"
+#import "ClientSocket.h"
 
 @interface UnitsBindingViewController ()
 
@@ -74,8 +74,8 @@
 }
 
 - (void)fff {
-    Test *t = [[Test alloc] initWithIPAddress:@"127.0.0.1" andPort:8888];
-    [t connect];
+    ClientSocket *socket = [[ClientSocket alloc] initWithIPAddress:@"127.0.0.1" andPort:8888];
+    [socket connect];
 }
 
 #pragma mark -

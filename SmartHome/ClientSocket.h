@@ -1,5 +1,5 @@
 //
-//  Test.h
+//  ClientSocket.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/15/13.
@@ -10,9 +10,21 @@
 
 @protocol ClientSocketDelegate <NSObject>
 
+// maybe call twice, one for input stream another for output stream
+- (void)streamConnectionDidOpen:(NSStream *)stream;
+
+- (void)didReceiveData:(NSData *)data stream:(NSStream *)stream;
+
+/*
+- (void)outputStreamIsReady;
+ */
+
+- (void)connectionEnded;
+- (void)connectionError:(NSError *)error;
+
 @end
 
-@interface Test : NSObject<NSStreamDelegate>
+@interface ClientSocket : NSObject<NSStreamDelegate>
 
 @property (assign, nonatomic) id<ClientSocketDelegate> delegate;
 @property (strong, nonatomic) NSString *ipAddress;
