@@ -82,5 +82,6 @@
     [loginBtn setTitle:NSLocalizedString(@"login", @"") forState:UIControlStateNormal];
     [self.view addSubview:loginBtn];
     
+//    rememberBtn = [[UIButton alloc] initWithFrame]
 }
 @end
