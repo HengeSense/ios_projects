@@ -12,6 +12,8 @@
 #import "KeychainItemWrapper.h"
 #import "MainViewController.h"
 #define LINE_HIGHT 5
+#define INDENTIFER_KEY_WRAPPER @"rememberService"
+
 @interface LoginViewController ()
 
 @end
@@ -56,8 +58,8 @@
     //CGFloat screenHight = self.view.bounds.size.height;
     //CGFloat screenWidth = self.view.bounds.size.width;
     [self registerTapGestureToResignKeyboard];
-    static NSString *indentiferKeyWrapper = @"rememberService";
-    keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:indentiferKeyWrapper accessGroup:nil];
+
+    keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
     NSString *service = [keyWrapper objectForKey:(__bridge id)kSecAttrService];
     
     
@@ -88,6 +90,7 @@
     
     loginBtn = [LongButton buttonWithPoint:CGPointMake(5, passwordField.frame.origin.y+passwordField.bounds.size.height+LINE_HIGHT)];
     [loginBtn setTitle:NSLocalizedString(@"login", @"") forState:UIControlStateNormal];
+    [loginBtn addTarget:self action:@selector(loginBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginBtn];
     
     rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 38/2, 40/2)];
@@ -103,7 +106,8 @@
     rememberPassword.textColor = [UIColor whiteColor];
     [self.view addSubview:rememberPassword];
     
-    if (service!=NULL) {
+    
+    if ([service isEqualToString:INDENTIFER_KEY_WRAPPER]) {
         rememberBtn.selected = YES;
         [usernameField setText:[keyWrapper objectForKey:(__bridge id) kSecAttrAccount]];
         [passwordField setText:[keyWrapper objectForKey:(__bridge id) kSecValueData]];
@@ -115,7 +119,7 @@
 }
 -(void) loginBtnTouchInside{
     if(rememberBtn.selected){
-        [keyWrapper setObject:@"rememberService" forKey:(__bridge id) kSecAttrService];
+        [keyWrapper setObject:INDENTIFER_KEY_WRAPPER forKey:(__bridge id) kSecAttrService];
         [keyWrapper setObject:usernameField.text forKey:(__bridge id) kSecAttrAccount];
         [keyWrapper setObject:passwordField.text forKey:(__bridge id) kSecValueData];
     }
