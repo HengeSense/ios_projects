@@ -20,7 +20,7 @@
 }
 
 +(UIButton *) buttonWithPoint:(CGPoint) point{
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(point.x, point.y, 616/2, 96/2)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(point.x, point.y, 622/2, 98/2)];
     [button setBackgroundImage:[UIImage imageNamed:@"long_button.png"] forState:UIControlStateNormal];
     return button;
     

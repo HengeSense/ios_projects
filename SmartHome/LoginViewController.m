@@ -11,6 +11,7 @@
 #import "LongButton.h"
 #import "KeychainItemWrapper.h"
 #import "MainViewController.h"
+#import "RegisterViewController.h"
 #define LINE_HIGHT 5
 #define INDENTIFER_KEY_WRAPPER @"rememberService"
 
@@ -93,7 +94,7 @@
     [loginBtn addTarget:self action:@selector(loginBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginBtn];
     
-    rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 38/2, 40/2)];
+    rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 40/2, 38/2)];
     [rememberBtn setBackgroundImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
     [rememberBtn setBackgroundImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
     [rememberBtn addTarget:self action:@selector(rememberBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
@@ -106,6 +107,12 @@
     rememberPassword.textColor = [UIColor whiteColor];
     [self.view addSubview:rememberPassword];
     
+    registerBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-5-146/2, rememberBtn.frame.origin.y, 146/2, 52/2)];
+    [registerBtn setBackgroundImage:[UIImage imageNamed:@"reg_new.png"] forState:UIControlStateNormal];
+    registerBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [registerBtn setTitle:NSLocalizedString(@"reg.new", @"") forState:UIControlStateNormal];
+    [registerBtn addTarget:self action:@selector(registerBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:registerBtn];
     
     if ([service isEqualToString:INDENTIFER_KEY_WRAPPER]) {
         rememberBtn.selected = YES;
@@ -122,7 +129,12 @@
         [keyWrapper setObject:INDENTIFER_KEY_WRAPPER forKey:(__bridge id) kSecAttrService];
         [keyWrapper setObject:usernameField.text forKey:(__bridge id) kSecAttrAccount];
         [keyWrapper setObject:passwordField.text forKey:(__bridge id) kSecValueData];
+    }else{
+        
     }
     [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+}
+-(void)registerBtnTouchInside{
+    [self.navigationController pushViewController:[[RegisterViewController alloc] init] animated:YES];
 }
 @end

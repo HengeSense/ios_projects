@@ -64,3 +64,4 @@
 "password:"          = "登陆密码:";
 "login"             ="登陆";
 "remember.password" = "记住密码";
+"reg.new"           ="注册新用户";
