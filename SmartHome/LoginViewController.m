@@ -9,6 +9,8 @@
 #import "LoginViewController.h"
 #import "CustomTextFieldView.h"
 #import "LongButton.h"
+#import "KeychainItemWrapper.h"
+#import "MainViewController.h"
 #define LINE_HIGHT 5
 @interface LoginViewController ()
 
@@ -25,6 +27,8 @@
     UIButton *rememberBtn;
     UIButton *loginBtn;
     UIButton *registerBtn;
+    
+    KeychainItemWrapper *keyWrapper;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,6 +56,10 @@
     //CGFloat screenHight = self.view.bounds.size.height;
     //CGFloat screenWidth = self.view.bounds.size.width;
     [self registerTapGestureToResignKeyboard];
+    static NSString *indentiferKeyWrapper = @"rememberService";
+    keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:indentiferKeyWrapper accessGroup:nil];
+    NSString *service = [keyWrapper objectForKey:(__bridge id)kSecAttrService];
+    
     
     username = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 100, 20)];
     username.backgroundColor = [UIColor clearColor];
@@ -82,6 +90,35 @@
     [loginBtn setTitle:NSLocalizedString(@"login", @"") forState:UIControlStateNormal];
     [self.view addSubview:loginBtn];
     
-//    rememberBtn = [[UIButton alloc] initWithFrame]
+    rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 38/2, 40/2)];
+    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
+    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
+    [rememberBtn addTarget:self action:@selector(rememberBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:rememberBtn];
+    
+    rememberPassword = [[UILabel alloc]  initWithFrame:CGRectMake(5+rememberBtn.frame.size.width+LINE_HIGHT, rememberBtn.frame.origin.y, 100, 20)];
+    rememberPassword.font = [UIFont systemFontOfSize:12];
+    rememberPassword.backgroundColor = [UIColor clearColor];
+    rememberPassword.text = NSLocalizedString(@"remember.password", @"");
+    rememberPassword.textColor = [UIColor whiteColor];
+    [self.view addSubview:rememberPassword];
+    
+    if (service!=NULL) {
+        rememberBtn.selected = YES;
+        [usernameField setText:[keyWrapper objectForKey:(__bridge id) kSecAttrAccount]];
+        [passwordField setText:[keyWrapper objectForKey:(__bridge id) kSecValueData]];
+    }
+    
+}
+-(void) rememberBtnTouchInside{
+    rememberBtn.selected = !rememberBtn.selected;
+}
+-(void) loginBtnTouchInside{
+    if(rememberBtn.selected){
+        [keyWrapper setObject:@"rememberService" forKey:(__bridge id) kSecAttrService];
+        [keyWrapper setObject:usernameField.text forKey:(__bridge id) kSecAttrAccount];
+        [keyWrapper setObject:passwordField.text forKey:(__bridge id) kSecValueData];
+    }
+    [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
 }
 @end
