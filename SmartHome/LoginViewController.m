@@ -82,6 +82,6 @@
     [loginBtn setTitle:NSLocalizedString(@"login", @"") forState:UIControlStateNormal];
     [self.view addSubview:loginBtn];
     
-//    rememberBtn = [[UIButton alloc] initWithFrame]
+    rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 38/2, 40/2)];
 }
 @end
