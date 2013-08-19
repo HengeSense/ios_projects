@@ -83,5 +83,21 @@
     [self.view addSubview:loginBtn];
     
     rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 38/2, 40/2)];
+    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
+    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
+    [rememberBtn addTarget:self action:@selector(rememberBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:rememberBtn];
+    
+    rememberPassword = [[UILabel alloc]  initWithFrame:CGRectMake(5+rememberBtn.frame.size.width+LINE_HIGHT, rememberBtn.frame.origin.y, 100, 20)];
+    rememberPassword.font = [UIFont systemFontOfSize:12];
+    rememberPassword.backgroundColor = [UIColor clearColor];
+    rememberPassword.text = NSLocalizedString(@"remember.password", @"");
+    rememberPassword.textColor = [UIColor whiteColor];
+    [self.view addSubview:rememberPassword];
+    
+    
+}
+-(void) rememberBtnTouchInside{
+    rememberBtn.selected = !rememberBtn.selected;
 }
 @end
