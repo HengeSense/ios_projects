@@ -130,7 +130,7 @@
         [keyWrapper setObject:usernameField.text forKey:(__bridge id) kSecAttrAccount];
         [keyWrapper setObject:passwordField.text forKey:(__bridge id) kSecValueData];
     }else{
-        
+        [keyWrapper setObject:[NSString emptyString] forKey:(__bridge id) kSecAttrService];
     }
     [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
 }

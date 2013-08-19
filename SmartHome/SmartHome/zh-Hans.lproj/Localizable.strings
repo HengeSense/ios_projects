@@ -53,9 +53,9 @@
 /*
  * register view controller
  */
-"phone_number_register"           = "手机号码注册";
+"phone_number_register"           = "手机号码注册:";
 "get_verification_code"           = "获取验证码";
-"verification_code"               = "验证码";
+"verification_code"               = "验证码:";
 /*
  *login view controller
  */

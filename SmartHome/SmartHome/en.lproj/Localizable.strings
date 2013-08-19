@@ -53,9 +53,9 @@
 /*
  * register view controller
  */
-"phone_number_register"           = "Phone number register";
+"phone_number_register"           = "Phone number register:";
 "get_verification_code"           = "Get Verification Code";
-"verification_code"               = "Verification Code";
+"verification_code"               = "Verification Code:";
 /*
  *login view controller
  */
