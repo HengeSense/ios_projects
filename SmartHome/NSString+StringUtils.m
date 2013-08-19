@@ -7,6 +7,7 @@
 //
 
 #import "NSString+StringUtils.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (StringUtils)
 
@@ -63,6 +64,18 @@
     }
     
     return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+}
+
++ (NSString *)md5HexDigest:(NSString *)str {
+    if(str == nil) return nil;
+    const char *original_str = str.UTF8String;
+    unsigned char result[16];
+    CC_MD5(original_str, strlen(original_str), result);
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++) {
+        [hash appendFormat:@"%02X", result[i]];
+    }
+    return [[hash lowercaseString] substringWithRange:NSMakeRange(8, 16)];
 }
 
 + (NSString *)emptyString {

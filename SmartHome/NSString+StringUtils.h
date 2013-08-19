@@ -15,5 +15,6 @@
 + (NSString *)trim:(NSString *)str;
 + (NSString *)stringEncodeWithBase64:(NSString *)str;
 + (NSString *)emptyString;
++ (NSString *)md5HexDigest:(NSString *)str;
 
 @end
