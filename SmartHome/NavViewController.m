@@ -7,6 +7,7 @@
 //
 
 #import "NavViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
 @interface NavViewController ()
 
@@ -45,8 +46,8 @@
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar_second_level.png"]];
     self.topbar.leftButton.frame = CGRectMake(0, 0, 61, 30);
     self.topbar.leftButton.center = CGPointMake(37.5, 22);
-    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateNormal];
-    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.png"] forState:UIControlStateHighlighted];
+    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateNormal];
+    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateHighlighted];
     self.topbar.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 1, 0);
     [self.topbar.leftButton setTitle:NSLocalizedString(@"back", @"") forState:UIControlStateNormal];
 
@@ -56,11 +57,12 @@
 }
 
 - (void)generateBackgroundView {
-    UIImageView *backgroundImageView = [[UIImageView alloc]
-        initWithFrame:CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width,
-        ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - 20))];
-    backgroundImageView.image = [UIImage imageNamed:@"bg.png"];
-    [self.view addSubview:backgroundImageView];
+//    UIImageView *backgroundImageView = [[UIImageView alloc]
+//        initWithFrame:CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width,
+//        ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - 20))];
+//    backgroundImageView.image = [UIImage imageNamed:@"bg.png"];
+//    [self.view addSubview:backgroundImageView];
+     self.view.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
 }
 
 - (void)backToPreViewController {

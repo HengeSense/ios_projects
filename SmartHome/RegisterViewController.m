@@ -61,7 +61,7 @@
     
     sendButton = [LongButton buttonWithPoint:CGPointMake(10, phoneNumber.frame.origin.y+phoneNumber.frame.size.height+LINE_HEIGHT)];
     [sendButton setTitle:NSLocalizedString(@"get_verification_code", @"") forState:UIControlStateNormal];
-    [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
+    [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sendButton];
     
     UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20,sendButton.frame.origin.y+sendButton.frame.size.height+LINE_HEIGHT, 150, 20)];
@@ -77,7 +77,7 @@
     
     UIButton *okButton = [LongButton buttonWithPoint:CGPointMake(10, verification.frame.size.height+verification.frame.origin.y+LINE_HEIGHT)];
     [okButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
-    [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchDown];
+    [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:okButton];
     
     resendTimeInterval = 60;
@@ -107,7 +107,6 @@
     if(accountPhone!=nil&&verificationCode!=nil){
         [smsService sendMessage:verificationCode for: accountPhone success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
     }
-    [smsService sendMessage:verificationCode for: accountPhone success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
 }
 -(void) checkVerificationCode{
     

@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "NavViewController.h"
 
-@interface LoginViewController : BaseViewController
+@interface LoginViewController : NavViewController
 
 @end

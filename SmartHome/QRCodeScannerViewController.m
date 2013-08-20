@@ -119,7 +119,6 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
     [readerView start];
     [self startScannerAnimating];
 }
-
 #pragma mark -
 #pragma mark events
 
