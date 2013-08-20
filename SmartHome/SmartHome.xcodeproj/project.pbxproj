@@ -472,27 +472,13 @@
 		6F0FAE9E17AF7FF700B75D3E /* images */ = {
 			isa = PBXGroup;
 			children = (
-				F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */,
-				F22E425317C30806000FD247 /* bg_topbar@2x.png */,
-				6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */,
-				F22DF72E17C2052E00BF7C3A /* btn_register@2x.png */,
-				F22E425117C306E9000FD247 /* btn_back@2x.jpg */,
-				F22DF72A17C1FFE300BF7C3A /* btn_orange@2x.png */,
-				6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */,
-				6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */,
-				F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */,
-				6FEB91E417BB7C6C007C04A1 /* btn_drawer_nav@2x.png */,
-				F22DF72C17C2009500BF7C3A /* txt_main@2x.png */,
-				6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */,
-				6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */,
-				6F6AB3A317C31C06001F1D33 /* btn_scanner@2x.png */,
-				6F1BE41C17BD1B40003C973D /* btn_info@2x.png */,
-				6F1BE41A17BD18A6003C973D /* btn_flash_light@2x.png */,
-				6F1BE41817BD1413003C973D /* btn_done_black@2x.png */,
-				6F1BE41617BD11B6003C973D /* bg_bottom_bar_black@2x.png */,
-				6F1EE66417BC73FE00580760 /* bg_scanner_view@2x.png */,
-				6F1EE66517BC73FE00580760 /* line_scanner@2x.png */,
-				6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */,
+				6F6AB3B317C331A9001F1D33 /* conversation_view */,
+				6F6AB3B217C3319E001F1D33 /* scanner_view */,
+				6F6AB3B117C3317D001F1D33 /* bars_background */,
+				6F6AB3B017C33123001F1D33 /* views_background */,
+				6F6AB3AF17C33101001F1D33 /* checkbox */,
+				6F6AB3AE17C330F0001F1D33 /* textbox */,
+				6F6AB3AD17C330C3001F1D33 /* button */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -775,6 +761,76 @@
 				6FDF756617B8D78F004EF7FD /* ImageFactory.m */,
 			);
 			name = ui_utils;
+			sourceTree = "<group>";
+		};
+		6F6AB3AD17C330C3001F1D33 /* button */ = {
+			isa = PBXGroup;
+			children = (
+				6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */,
+				6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */,
+				6FEB91E417BB7C6C007C04A1 /* btn_drawer_nav@2x.png */,
+				6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */,
+				6F6AB3A317C31C06001F1D33 /* btn_scanner@2x.png */,
+				6F1BE41C17BD1B40003C973D /* btn_info@2x.png */,
+				6F1BE41A17BD18A6003C973D /* btn_flash_light@2x.png */,
+				6F1BE41817BD1413003C973D /* btn_done_black@2x.png */,
+				F22DF72E17C2052E00BF7C3A /* btn_register@2x.png */,
+				F22E425117C306E9000FD247 /* btn_back@2x.jpg */,
+				F22DF72A17C1FFE300BF7C3A /* btn_orange@2x.png */,
+			);
+			name = button;
+			sourceTree = "<group>";
+		};
+		6F6AB3AE17C330F0001F1D33 /* textbox */ = {
+			isa = PBXGroup;
+			children = (
+				F22DF72C17C2009500BF7C3A /* txt_main@2x.png */,
+			);
+			name = textbox;
+			sourceTree = "<group>";
+		};
+		6F6AB3AF17C33101001F1D33 /* checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */,
+				F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */,
+			);
+			name = checkbox;
+			sourceTree = "<group>";
+		};
+		6F6AB3B017C33123001F1D33 /* views_background */ = {
+			isa = PBXGroup;
+			children = (
+				6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */,
+			);
+			name = views_background;
+			sourceTree = "<group>";
+		};
+		6F6AB3B117C3317D001F1D33 /* bars_background */ = {
+			isa = PBXGroup;
+			children = (
+				F22E425317C30806000FD247 /* bg_topbar@2x.png */,
+				6F1BE41617BD11B6003C973D /* bg_bottom_bar_black@2x.png */,
+			);
+			name = bars_background;
+			sourceTree = "<group>";
+		};
+		6F6AB3B217C3319E001F1D33 /* scanner_view */ = {
+			isa = PBXGroup;
+			children = (
+				6F1EE66417BC73FE00580760 /* bg_scanner_view@2x.png */,
+				6F1EE66517BC73FE00580760 /* line_scanner@2x.png */,
+			);
+			name = scanner_view;
+			sourceTree = "<group>";
+		};
+		6F6AB3B317C331A9001F1D33 /* conversation_view */ = {
+			isa = PBXGroup;
+			children = (
+				6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */,
+				6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */,
+			);
+			name = conversation_view;
 			sourceTree = "<group>";
 		};
 		6F984F7A17BE1EC5007F90A2 /* alert_view */ = {
