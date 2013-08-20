@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
 @interface BaseViewController ()
 
@@ -59,10 +60,11 @@
 }
 
 - (void)initUI {
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
-     CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 20)];
-    backgroundImageView.image = [UIImage imageNamed:@"bg.png"];
-    [self.view addSubview:backgroundImageView];
+//    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
+//     CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 20)];
+//    backgroundImageView.image = [UIImage imageNamed:@"bg.png"];
+//    [self.view addSubview:backgroundImageView];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
 }
 
 @end

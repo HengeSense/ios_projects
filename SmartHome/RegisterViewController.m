@@ -7,7 +7,9 @@
 //
 
 #import "RegisterViewController.h"
-
+#import "CustomTextFieldView.h"
+#import "LongButton.h"
+#define LINE_HEIGHT 5
 @interface RegisterViewController ()
 
 @end
@@ -44,45 +46,37 @@
 
 - (void)initUI {
     [super initUI];
-    
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    
     [self registerTapGestureToResignKeyboard];
     
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/3, 120, 30)];
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];
     [text setText:NSLocalizedString(@"phone_number_register", @"")];
-    [text setBackgroundColor:[UIColor whiteColor]];
+    text.font = [UIFont systemFontOfSize:12];
+    text.backgroundColor = [UIColor clearColor];
+    text.textColor = [UIColor whiteColor];
     [self.view addSubview:text];
     
-    phoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(150, screenHeight/3, screenWidth-160, 30)];
-    [phoneNumber setBackgroundColor:[UIColor whiteColor]];
+    phoneNumber = [CustomTextFieldView textFieldWithPoint:CGPointMake(10, text.frame.origin.y+20+LINE_HEIGHT)];
     [self.view addSubview:phoneNumber];
     phoneNumber.keyboardType = UIKeyboardTypePhonePad;
     
-    sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
-    sendButton.center = self.view.center;
-    sendButton.backgroundColor = [UIColor whiteColor];
-    [sendButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    sendButton = [LongButton buttonWithPoint:CGPointMake(10, phoneNumber.frame.origin.y+phoneNumber.frame.size.height+LINE_HEIGHT)];
     [sendButton setTitle:NSLocalizedString(@"get_verification_code", @"") forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:sendButton];
     
-    UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20, screenHeight/2+50, 80, 30)];
+    UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20,sendButton.frame.origin.y+sendButton.frame.size.height+LINE_HEIGHT, 150, 20)];
     [text2 setText:NSLocalizedString(@"verification_code", @"")];
-    [text setBackgroundColor:[UIColor whiteColor]];
+    [text2 setBackgroundColor:[UIColor clearColor]];
+    text2.font = [UIFont systemFontOfSize:12];
+    text2.textColor = [UIColor whiteColor];
     [self.view addSubview:text2];
     
-    verification = [[UITextField alloc] initWithFrame:CGRectMake(120, screenHeight/2+50, 100, 30)];
-    [verification setBackgroundColor:[UIColor whiteColor]];
-    verification.keyboardType = UIKeyboardTypePhonePad;
+    verification = [CustomTextFieldView textFieldWithPoint:CGPointMake(10, text2.frame.size.height+text2.frame.origin.y+LINE_HEIGHT)];
     [self.view addSubview:verification];
+    verification.keyboardType = UIKeyboardTypeNamePhonePad;
     
-    
-    UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(120, screenHeight/2+100, 100, 40)];
-    okButton.backgroundColor = [UIColor whiteColor];
-    [okButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [okButton setTitle:NSLocalizedString(@"ok", @"") forState:UIControlStateNormal];
+    UIButton *okButton = [LongButton buttonWithPoint:CGPointMake(10, verification.frame.size.height+verification.frame.origin.y+LINE_HEIGHT)];
+    [okButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
     [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:okButton];
     
