@@ -10,7 +10,7 @@
 
 @implementation JsonUtils
 
-- (id)createDictionaryFromJson:(NSData *)json {
++ (id)createDictionaryFromJson:(NSData *)json {
     if(json == nil) return nil;
     NSError *error = nil;
     id object = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:&error];
@@ -20,7 +20,7 @@
     return nil;
 }
 
-- (NSData *)createJsonDataFromDictionary:(NSDictionary *)dictionary {
++ (NSData *)createJsonDataFromDictionary:(NSDictionary *)dictionary {
     NSError *error = nil;
     NSData *json = [NSJSONSerialization dataWithJSONObject:dictionary options:NSJSONWritingPrettyPrinted error:&error];
     if(error) return nil;

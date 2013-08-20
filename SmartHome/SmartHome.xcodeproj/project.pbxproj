@@ -89,6 +89,7 @@
 		6FA1DD7C17C1BBD40016AC4E /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1DD7B17C1BBD40016AC4E /* NetworkUtils.m */; };
 		6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240217B482F50042EA41 /* BaseViewController.m */; };
 		6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240617B4B4500042EA41 /* ViewUtils.m */; };
+		6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4CFE817C249F200EC98F9 /* BitUtils.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
 		6FD8A72017B22980009C7493 /* SpeechRecognitionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71F17B22980009C7493 /* SpeechRecognitionUtil.m */; };
 		6FD8A72217B229C4009C7493 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */; };
@@ -280,6 +281,8 @@
 		6FB4240217B482F50042EA41 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		6FB4240517B4B4500042EA41 /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
 		6FB4240617B4B4500042EA41 /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
+		6FD4CFE717C249F200EC98F9 /* BitUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitUtils.h; sourceTree = "<group>"; };
+		6FD4CFE817C249F200EC98F9 /* BitUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitUtils.m; sourceTree = "<group>"; };
 		6FD8A71517B0DD6F009C7493 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		6FD8A71617B0DD6F009C7493 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		6FD8A71E17B22980009C7493 /* SpeechRecognitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechRecognitionUtil.h; sourceTree = "<group>"; };
@@ -493,6 +496,8 @@
 				6FA1DD7B17C1BBD40016AC4E /* NetworkUtils.m */,
 				6F17672F17C1FA15007AED0C /* JsonUtils.h */,
 				6F17673017C1FA15007AED0C /* JsonUtils.m */,
+				6FD4CFE717C249F200EC98F9 /* BitUtils.h */,
+				6FD4CFE817C249F200EC98F9 /* BitUtils.m */,
 			);
 			name = commons;
 			sourceTree = "<group>";
@@ -1034,6 +1039,7 @@
 				6F17672E17C1F7CA007AED0C /* DeviceCommand.m in Sources */,
 				6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */,
 				F22DF72817C1EAA500BF7C3A /* KeychainItemWrapper.m in Sources */,
+				6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,6 @@
 //
 
 #import "CommunicationMessage.h"
-#import "NSString+StringUtils.h"
 
 #define DATA_HEADER_LENGTH   1
 #define DATA_LENGTH_LENGTH   4
@@ -32,45 +31,38 @@
     [self addDataHeaderFor:message];
     
     NSData *dataDomain = [JsonUtils createJsonDataFromDictionary:[self.deviceCommand toDictionary]];
-    
+
     //append data length
     NSUInteger totalLength = DATA_HEADER_LENGTH + DATA_LENGTH_LENGTH + DEVICE_NO_LENGTH + dataDomain.length + MD5_LENGTH;
+
     uint8_t dataLength[4];
-    [self int2Bytes:totalLength bytes:dataLength];
+    [BitUtils int2Bytes:totalLength bytes:dataLength];
     [message appendBytes:dataLength length:4];
     
     //append device number
     [self addDeviceNumberFor:message];
-    
+
     //append message content
     [message appendData:dataDomain];
     
     //append md5
-    [self addMD5For:message];
+    [self addMD5Using:dataDomain for:(NSMutableData *)message];
     
     return message;
 }
 
 - (void)addDataHeaderFor:(NSMutableData *)message {
     uint8_t header[1];
-    header[0] = 127;
+    header[0] = 126;
     [message appendBytes:header length:1];
 }
 
-- (void)int2Bytes:(NSUInteger)number bytes:(uint8_t *)bytes {
-    bytes[0] = number & 0xff;
-    bytes[1] = number >> 8  & 0xff;
-    bytes[2] = number >> 16 & 0xff;
-    bytes[3] = number >> 24 & 0xff;
-}
-
 - (void)addDeviceNumberFor:(NSMutableData *)message {
-    
+    [message appendData:[[NSString stringWithFormat:@"%@", @"aa-bb-cc-dd-ee-ff"] dataUsingEncoding:NSUTF8StringEncoding ]];
 }
 
-- (void)addMD5For:(NSMutableData *)message {
-    NSString *str = [[NSString alloc] initWithData:message encoding:NSUTF8StringEncoding];
-    [message appendData:[[NSString md5HexDigest:str] dataUsingEncoding:NSUTF8StringEncoding]];
+- (void)addMD5Using:(NSData *)data for:(NSMutableData *)message {
+    [message appendData:[[NSString md5HexDigest:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]] dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 @end

@@ -8,8 +8,10 @@
 
 #import "UnitsBindingViewController.h"
 #import "NSString+StringUtils.h"
-
+#import "DeviceCommand.h"
+#import "CommunicationMessage.h"
 #import "ClientSocket.h"
+#import "BitUtils.h"
 
 @interface UnitsBindingViewController ()
 
@@ -75,17 +77,8 @@
 }
 
 - (void)fff {
-    
-    
-    NSString *str = [NSString md5HexDigest:@"hello"];
-    NSUInteger le = [str dataUsingEncoding:NSUTF8StringEncoding].length;
-    
-    NSLog(@"the string is %@ and length is %d", str, le);
-    
-    
-    /*
-    ClientSocket *socket = [[ClientSocket alloc] initWithIPAddress:@"127.0.0.1" andPort:8888];
-    [socket connect];*/
+    ClientSocket *socket = [[ClientSocket alloc] initWithIPAddress:@"172.16.8.123" andPort:6969];
+    [socket connect];
 }
 
 #pragma mark -

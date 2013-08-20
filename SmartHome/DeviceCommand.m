@@ -23,15 +23,13 @@
 
 - (NSDictionary *)toDictionary {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:self.deviceCode forKey:@"deviceCode"];
-    [json setObject:self.className forKey:@"_className"];
-    [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
-    [json setObject:self.appKey forKey:@"appKey"];
-    [json setObject:self.security forKey:@"security"];
+    [json setObject:@"dsfdsf" forKey:@"deviceCode"];
+    [json setObject:@"com.hentre.smarthome.repository.command.ViewZKInfoCommand" forKey:@"_className"];
+    [json setObject:@"2424" forKey:@"masterDeviceCode"];
+    [json setObject:@"" forKey:@"appKey"];
+    [json setObject:@"" forKey:@"security"];
     [json setObject:[NSNumber numberWithLong:self.commandTime] forKey:@"commandTime"];
     return json;
 }
-
-
 
 @end

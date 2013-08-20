@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DeviceCommand.h"
+#import "NSString+StringUtils.h"
+#import "BitUtils.h"
 #import "JsonUtils.h"
 
 @interface CommunicationMessage : NSObject

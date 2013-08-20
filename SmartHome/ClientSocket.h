@@ -34,5 +34,6 @@
 - (id)initWithIPAddress:(NSString *)ip andPort:(NSInteger)portNumber;
 
 - (void)connect;
+- (void)writeData:(NSData *)data;
 
 @end
