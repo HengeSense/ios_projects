@@ -60,8 +60,8 @@
  *login view controller
  */
 
-"username:"          = "username:";
-"password:"          ="passname:";
-"login"             = "login";
-"remember.password" = "remember";
-"reg.new"           ="new account";
+"username"                        = "username:";
+"password"                        = "passname:";
+"login"                           = "login";
+"remember_password"               = "remember";
+"register_new_user"               = "new account";

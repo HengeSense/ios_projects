@@ -60,8 +60,8 @@
  *login view controller
  */
 
-"username:"          = "登陆名:";
-"password:"          = "登陆密码:";
-"login"             ="登陆";
-"remember.password" = "记住密码";
-"reg.new"           ="注册新用户";
+"username"                 =  "登录名:";
+"password"                 =  "登录密码:";
+"login"                    =  "登录";
+"remember_password"        =  "记住密码";
+"register_new_user"        =  "注册新用户";

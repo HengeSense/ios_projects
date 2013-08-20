@@ -66,7 +66,7 @@
     
     username = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 100, 20)];
     username.backgroundColor = [UIColor clearColor];
-    username.text = NSLocalizedString(@"username:", @"");
+    username.text = NSLocalizedString(@"username", @"");
     username.font= [UIFont systemFontOfSize:12];
     username.textColor = [UIColor whiteColor];
     [self.view addSubview:username];
@@ -77,7 +77,7 @@
 
     
     password = [[UILabel alloc] initWithFrame:CGRectMake(10, usernameField.frame.origin.y+usernameField.bounds.size.height+LINE_HIGHT, 100, 20)];
-    password.text = NSLocalizedString(@"password:", @"");
+    password.text = NSLocalizedString(@"password", @"");
     password.textColor = [UIColor whiteColor];
     password.backgroundColor = [UIColor clearColor];
     password.font= [UIFont systemFontOfSize:12];
@@ -101,14 +101,14 @@
     rememberPassword = [[UILabel alloc]  initWithFrame:CGRectMake(5+rememberBtn.frame.size.width+LINE_HIGHT, rememberBtn.frame.origin.y, 100, 20)];
     rememberPassword.font = [UIFont systemFontOfSize:12];
     rememberPassword.backgroundColor = [UIColor clearColor];
-    rememberPassword.text = NSLocalizedString(@"remember.password", @"");
+    rememberPassword.text = NSLocalizedString(@"remember_password", @"");
     rememberPassword.textColor = [UIColor whiteColor];
     [self.view addSubview:rememberPassword];
     
     registerBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-5-146/2, rememberBtn.frame.origin.y, 146/2, 52/2)];
     [registerBtn setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateNormal];
     registerBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-    [registerBtn setTitle:NSLocalizedString(@"reg.new", @"") forState:UIControlStateNormal];
+    [registerBtn setTitle:NSLocalizedString(@"register_new_user", @"") forState:UIControlStateNormal];
     [registerBtn addTarget:self action:@selector(registerBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registerBtn];
     
