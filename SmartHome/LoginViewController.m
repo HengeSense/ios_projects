@@ -12,6 +12,8 @@
 #import "KeychainItemWrapper.h"
 #import "MainViewController.h"
 #import "RegisterViewController.h"
+#import "UIColor+ExtentionForHexString.h"
+
 #define LINE_HIGHT 5
 #define INDENTIFER_KEY_WRAPPER @"rememberService"
 
@@ -54,15 +56,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(void) initUI{
     [super initUI];
-    //CGFloat screenHight = self.view.bounds.size.height;
-    //CGFloat screenWidth = self.view.bounds.size.width;
     [self registerTapGestureToResignKeyboard];
 
     keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
     NSString *service = [keyWrapper objectForKey:(__bridge id)kSecAttrService];
-    
     
     username = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 100, 20)];
     username.backgroundColor = [UIColor clearColor];
@@ -83,8 +83,6 @@
     password.font= [UIFont systemFontOfSize:12];
     [self.view addSubview:password];
     
-
-
     passwordField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, password.frame.origin.y+LINE_HIGHT+20)];
     [passwordField setSecureTextEntry:YES];
     [self.view addSubview:passwordField];
@@ -95,8 +93,8 @@
     [self.view addSubview:loginBtn];
     
     rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 40/2, 38/2)];
-    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
-    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
+    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"cbx_unchecked.png"] forState:UIControlStateNormal];
+    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"cbx_checked.png"] forState:UIControlStateSelected];
     [rememberBtn addTarget:self action:@selector(rememberBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:rememberBtn];
     
@@ -108,7 +106,7 @@
     [self.view addSubview:rememberPassword];
     
     registerBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-5-146/2, rememberBtn.frame.origin.y, 146/2, 52/2)];
-    [registerBtn setBackgroundImage:[UIImage imageNamed:@"reg_new.png"] forState:UIControlStateNormal];
+    [registerBtn setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateNormal];
     registerBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     [registerBtn setTitle:NSLocalizedString(@"reg.new", @"") forState:UIControlStateNormal];
     [registerBtn addTarget:self action:@selector(registerBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];

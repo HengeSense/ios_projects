@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "NavViewController.h"
 #import "QRCodeScannerViewController.h"
 
-@interface UnitsBindingViewController : BaseViewController<QRCodeProcessorDelegate>
+@interface UnitsBindingViewController : NavViewController<QRCodeProcessorDelegate>
 
 @end

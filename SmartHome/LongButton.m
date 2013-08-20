@@ -14,17 +14,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
 
-+(UIButton *) buttonWithPoint:(CGPoint) point{
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(point.x, point.y, 622/2, 98/2)];
-    [button setBackgroundImage:[UIImage imageNamed:@"long_button.png"] forState:UIControlStateNormal];
++ (UIButton *)buttonWithPoint:(CGPoint)point {
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(point.x, point.y, 622 / 2, 98 / 2)];
+    [button setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
     return button;
-    
 }
-
 
 @end

@@ -9,7 +9,10 @@
 #import "RegisterViewController.h"
 #import "CustomTextFieldView.h"
 #import "LongButton.h"
+#import "UIColor+ExtentionForHexString.h"
+
 #define LINE_HEIGHT 5
+
 @interface RegisterViewController ()
 
 @end
@@ -46,6 +49,7 @@
 
 - (void)initUI {
     [super initUI];
+    
     [self registerTapGestureToResignKeyboard];
     
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];

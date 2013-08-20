@@ -51,6 +51,10 @@
 
 - (void)initUI {
     [super initUI];
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
+        CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width, ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - 20))];
+    backgroundImageView.image = [UIImage imageNamed:@"bg_scanner.png"];
+    [self.view addSubview:backgroundImageView];
     
     //QR Code scanner button
     if(btnQRCodeScanner == nil) {

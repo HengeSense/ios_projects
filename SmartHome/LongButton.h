@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LongButton : UIButton
-+(UIButton *) buttonWithPoint:(CGPoint) point;
+
++ (UIButton *)buttonWithPoint:(CGPoint)point;
+
 @end

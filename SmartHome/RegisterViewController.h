@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "XMLElement.h"
 #import "GDataXMLNode.h"
-#import "BaseViewController.h"
+#import "NavViewController.h"
 #import "UnitsBindingViewController.h"
 
-@interface RegisterViewController : BaseViewController<NSXMLParserDelegate>
+@interface RegisterViewController : NavViewController<NSXMLParserDelegate>
 
 @property (strong,nonatomic) NSXMLParser *xmlParser;
 @property (strong,nonatomic) NSTimer *sendTimer;
