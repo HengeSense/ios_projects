@@ -14,6 +14,7 @@
 "back"             = "back";
 "done"             = "Done";
 "rename"           = "rename";
+"skip"             = "skip";
 "processing.tips"  = "Wait for processing...";
 
 /*

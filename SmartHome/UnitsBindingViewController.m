@@ -7,14 +7,7 @@
 //
 
 #import "UnitsBindingViewController.h"
-
 #import "ExtranetClientSocket.h"
-#import "NSString+StringUtils.h"
-#import "DeviceCommand.h"
-#import "CommunicationMessage.h"
-#import "ClientSocket.h"
-#import "BitUtils.h"
-#import "DirectionButton.h"
 
 @interface UnitsBindingViewController ()
 
@@ -56,15 +49,24 @@
 - (void)initUI {
     [super initUI];
     
-    self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"");
-    self.topbar.titleLabel.font = [UIFont systemFontOfSize:18];
+    [self.topbar.leftButton removeFromSuperview];
+
+    self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width-101/2-8, 8, 101/2, 59/2)];
+    [self.topbar addSubview:self.topbar.rightButton];
+    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
+    [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];
+    self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
+    self.topbar.rightButton.titleLabel.textColor = [UIColor lightTextColor];
+    [self.topbar.rightButton addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.topbar.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
+    
+    self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"btn_done.png");
+    
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
         CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width, ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - 20))];
     backgroundImageView.image = [UIImage imageNamed:@"bg_scanner.png"];
     [self.view addSubview:backgroundImageView];
     
-    UIImageView *scannerShadow;
-    UIImageView *finderShadow;
     //QR Code scanner button
     if(btnQRCodeScanner == nil) {
         btnQRCodeScanner = [[UIButton alloc] initWithFrame:CGRectMake(25, 150, 253/2, 88/2)];
@@ -78,23 +80,15 @@
         [btnAutoSearch setBackgroundImage:[UIImage imageNamed:@"btn_finder.png"] forState:UIControlStateNormal];
         [self.view addSubview:btnAutoSearch];
     }
+    
     //add button shadow
-    scannerShadow = [[UIImageView alloc] initWithFrame:CGRectMake(25, btnQRCodeScanner.frame.origin.y+btnQRCodeScanner.frame.size.height, 253/2, 88/2)];
+    UIImageView *scannerShadow = [[UIImageView alloc] initWithFrame:CGRectMake(25, btnQRCodeScanner.frame.origin.y+btnQRCodeScanner.frame.size.height, 253/2, 88/2)];
     scannerShadow.image = [UIImage imageNamed:@"bg_scanner_shadow.png"];
     [self.view addSubview:scannerShadow];
     
-    finderShadow = [[UIImageView alloc] initWithFrame:CGRectMake(25+scannerShadow.frame.size.width+17, scannerShadow.frame.origin.y, 253/2, 88/2)];
+    UIImageView *finderShadow = [[UIImageView alloc] initWithFrame:CGRectMake(25+scannerShadow.frame.size.width+17, scannerShadow.frame.origin.y, 253/2, 88/2)];
     finderShadow.image = [UIImage imageNamed:@"bg_finder_shadow.png"];
     [self.view addSubview:finderShadow];
-    
-    
-    //Done button to main view
-    if(btnDone == nil) {
-        btnDone = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 120, 48)];
-        [btnDone setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
-        [btnDone addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnDone];
-    }
     
     UILabel *lblForBtnScanner = [[UILabel alloc] initWithFrame:CGRectMake(25, scannerShadow.frame.origin.y+scannerShadow.frame.size.height, 253/2, 150)];
     lblForBtnScanner.numberOfLines = 4;

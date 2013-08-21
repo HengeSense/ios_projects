@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "MainView.h"
-#import "HistoricalDataView.h"
+#import "MySettingsView.h"
 #import "SceneModeView.h"
 #import "MyDevicesView.h"
 #import "TopbarView.h"
@@ -124,7 +124,7 @@
             view = [[SceneModeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
             view.topbar.titleLabel.text = NSLocalizedString(@"scene_mode.title", @"");
         } else if([@"settingsView" isEqualToString:item.itemIdentifier]) {
-            view = [[HistoricalDataView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+            view = [[MySettingsView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
             view.topbar.titleLabel.text = NSLocalizedString(@"settings_view.title", @"");
         }
         if(view != nil) {

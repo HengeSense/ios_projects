@@ -40,7 +40,7 @@
 		6F0FAEAC17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAB17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m */; };
 		6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */; };
 		6F0FAEB217AF814000B75D3E /* UIColor+ExtentionForHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEB117AF814000B75D3E /* UIColor+ExtentionForHexString.m */; };
-		6F0FAEBB17AF822000B75D3E /* HistoricalDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEBA17AF822000B75D3E /* HistoricalDataView.m */; };
+		6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEBA17AF822000B75D3E /* MySettingsView.m */; };
 		6F0FAEBE17AF823000B75D3E /* SceneModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEBD17AF823000B75D3E /* SceneModeView.m */; };
 		6F0FAEC117AF823D00B75D3E /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEC017AF823D00B75D3E /* MainView.m */; };
 		6F0FAEC417AF824B00B75D3E /* TopbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEC317AF824B00B75D3E /* TopbarView.m */; };
@@ -110,7 +110,6 @@
 		6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* ConversationView.m */; };
 		6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */; };
 		6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */; };
-		6F984F7917BDD71C007F90A2 /* AccountSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7817BDD71C007F90A2 /* AccountSettingViewController.m */; };
 		6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7C17BE1EEA007F90A2 /* AlertView.m */; };
 		6FA1DD7C17C1BBD40016AC4E /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1DD7B17C1BBD40016AC4E /* NetworkUtils.m */; };
 		6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4240217B482F50042EA41 /* BaseViewController.m */; };
@@ -199,8 +198,8 @@
 		6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtils.m"; sourceTree = "<group>"; };
 		6F0FAEB017AF814000B75D3E /* UIColor+ExtentionForHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ExtentionForHexString.h"; sourceTree = "<group>"; };
 		6F0FAEB117AF814000B75D3E /* UIColor+ExtentionForHexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ExtentionForHexString.m"; sourceTree = "<group>"; };
-		6F0FAEB917AF822000B75D3E /* HistoricalDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoricalDataView.h; sourceTree = "<group>"; };
-		6F0FAEBA17AF822000B75D3E /* HistoricalDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoricalDataView.m; sourceTree = "<group>"; };
+		6F0FAEB917AF822000B75D3E /* MySettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingsView.h; sourceTree = "<group>"; };
+		6F0FAEBA17AF822000B75D3E /* MySettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingsView.m; sourceTree = "<group>"; };
 		6F0FAEBC17AF823000B75D3E /* SceneModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneModeView.h; sourceTree = "<group>"; };
 		6F0FAEBD17AF823000B75D3E /* SceneModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneModeView.m; sourceTree = "<group>"; };
 		6F0FAEBF17AF823D00B75D3E /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
@@ -328,8 +327,6 @@
 		6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationMessage.m; sourceTree = "<group>"; };
 		6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTextMessage.h; sourceTree = "<group>"; };
 		6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTextMessage.m; sourceTree = "<group>"; };
-		6F984F7717BDD71C007F90A2 /* AccountSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSettingViewController.h; sourceTree = "<group>"; };
-		6F984F7817BDD71C007F90A2 /* AccountSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingViewController.m; sourceTree = "<group>"; };
 		6F984F7B17BE1EEA007F90A2 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		6F984F7C17BE1EEA007F90A2 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		6FA1DD7A17C1BBD40016AC4E /* NetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkUtils.h; sourceTree = "<group>"; };
@@ -628,8 +625,8 @@
 			children = (
 				6FD8A71517B0DD6F009C7493 /* NavigationView.h */,
 				6FD8A71617B0DD6F009C7493 /* NavigationView.m */,
-				6F0FAEB917AF822000B75D3E /* HistoricalDataView.h */,
-				6F0FAEBA17AF822000B75D3E /* HistoricalDataView.m */,
+				6F0FAEB917AF822000B75D3E /* MySettingsView.h */,
+				6F0FAEBA17AF822000B75D3E /* MySettingsView.m */,
 				6F0FAEBC17AF823000B75D3E /* SceneModeView.h */,
 				6F0FAEBD17AF823000B75D3E /* SceneModeView.m */,
 				6F0FAEBF17AF823D00B75D3E /* MainView.h */,
@@ -689,8 +686,6 @@
 				F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */,
 				F20AE08C17BDD00B0040B80A /* LoginViewController.h */,
 				F20AE08D17BDD00B0040B80A /* LoginViewController.m */,
-				6F984F7717BDD71C007F90A2 /* AccountSettingViewController.h */,
-				6F984F7817BDD71C007F90A2 /* AccountSettingViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1168,7 +1163,7 @@
 				6F0FAEAC17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m in Sources */,
 				6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */,
 				6F0FAEB217AF814000B75D3E /* UIColor+ExtentionForHexString.m in Sources */,
-				6F0FAEBB17AF822000B75D3E /* HistoricalDataView.m in Sources */,
+				6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */,
 				6F0FAEBE17AF823000B75D3E /* SceneModeView.m in Sources */,
 				6F0FAEC117AF823D00B75D3E /* MainView.m in Sources */,
 				6F0FAEC417AF824B00B75D3E /* TopbarView.m in Sources */,
@@ -1222,7 +1217,6 @@
 				F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */,
 				F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */,
 				F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */,
-				6F984F7917BDD71C007F90A2 /* AccountSettingViewController.m in Sources */,
 				F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */,
 				6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */,
 				6FA1DD7C17C1BBD40016AC4E /* NetworkUtils.m in Sources */,

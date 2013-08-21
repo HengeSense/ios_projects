@@ -1,5 +1,5 @@
 //
-//  HistoricalDataView.h
+//  MySettingsView.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/5/13.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
 
-@interface HistoricalDataView : NavigationView
+@interface MySettingsView : NavigationView
 
 @end
