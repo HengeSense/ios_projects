@@ -475,6 +475,13 @@
 			name = direction_button;
 			sourceTree = "<group>";
 		};
+		6F04210117C4BD5900F7F6AF /* speech_button */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = speech_button;
+			sourceTree = "<group>";
+		};
 		6F0FAE6B17AF7F9F00B75D3E = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +572,7 @@
 		6F0FAE9E17AF7FF700B75D3E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6F04210117C4BD5900F7F6AF /* speech_button */,
 				6F0420E217C4816B00F7F6AF /* camera */,
 				6F0420CD17C4674A00F7F6AF /* drawer_nav_view */,
 				6F6AB3B317C331A9001F1D33 /* conversation_view */,
