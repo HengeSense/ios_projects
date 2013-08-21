@@ -25,6 +25,7 @@
 "scene_mode.title"                    = "情景模式";
 "historical_data.title"               = "历史数据";
 "unit_binding_view.title"             = "绑定主控";
+"settings_view.title"                 = "我的设置";
 
 /*
  * drawer view
@@ -37,7 +38,9 @@
 "main_view"                     = "主界面";
 "my_devices"                    = "我的设备";
 "scene_mode"                    = "情景模式";
+"settings_view"                 = "设置";
 "historical_data"               = "历史数据";
+"settings_view"                 = "我的设置";
 
 /*
  * qr code scanner view controller

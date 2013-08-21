@@ -24,6 +24,7 @@
 "scene_mode.title"                    = "Scene Mode";
 "historical_data.title"               = "History Data";
 "unit_binding_view.title"             = "Device Binding";
+"settings_view.title"                 = "Settings";
 
 /*
  * drawer view
@@ -33,9 +34,10 @@
 /*
  * main view controller
  */
-"main.view"                     = "Main View";
+"main_view"                     = "Main View";
 "my_devices"                    = "My Devices";
 "scene_mode"                    = "Scene Mode";
+"settings_view"                 = "Settings";
 "historical_data"               = "History Data";
 
 /*

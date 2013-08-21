@@ -45,28 +45,32 @@
     DrawerNavigationItem *mainView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *myDevicesView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *sceneModeView = [[DrawerNavigationItem alloc] init];
-    DrawerNavigationItem *historicalView = [[DrawerNavigationItem alloc] init];
+    DrawerNavigationItem *settingsView = [[DrawerNavigationItem alloc] init];
      
     mainView.itemIdentifier = @"mainView";
     mainView.itemTitle = NSLocalizedString(@"main_view", @"");
-    mainView.itemImageName = @"";
+    mainView.itemImageName = @"icon_home_unselected.png";
+    mainView.itemCheckedImageName = @"icon_home_selected.png";
         
     myDevicesView.itemIdentifier = @"myDevicesView";
     myDevicesView.itemTitle = NSLocalizedString(@"my_devices", @"");
-    myDevicesView.itemImageName = @"";
+    myDevicesView.itemImageName = @"icon_devices_unselected.png";
+    myDevicesView.itemCheckedImageName = @"icon_devices_selected.png";
     
     sceneModeView.itemIdentifier = @"sceneModeView";
     sceneModeView.itemTitle = NSLocalizedString(@"scene_mode", @"");
-    sceneModeView.itemImageName = @"";
+    sceneModeView.itemImageName = @"icon_scene_mode_unselected.png";
+    sceneModeView.itemCheckedImageName = @"icon_scene_mode_selected.png";
     
-    historicalView.itemIdentifier = @"historicalView";
-    historicalView.itemTitle = NSLocalizedString(@"historical_data", @"");
-    historicalView.itemImageName = @"";
+    settingsView.itemIdentifier = @"settingsView";
+    settingsView.itemTitle = NSLocalizedString(@"settings_view", @"");
+    settingsView.itemImageName = @"icon_settings_unselected.png";
+    settingsView.itemCheckedImageName = @"icon_settings_selected.png";
     
     [drawerItems addObject:mainView];
     [drawerItems addObject:myDevicesView];
     [drawerItems addObject:sceneModeView];
-    [drawerItems addObject:historicalView];
+    [drawerItems addObject:settingsView];
 }
 
 - (void)initUI {
@@ -87,7 +91,6 @@
         DrawerView *dv = [[DrawerView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) andItems:drawerItems];
         dv.drawerNavigationItemChangedDelegate = self;
         self.leftView = dv;
-        self.leftView.backgroundColor = [UIColor whiteColor];
     }
     
     //parameter of drawer navigation view controller
@@ -120,9 +123,9 @@
         } else if([@"sceneModeView" isEqualToString:item.itemIdentifier]) {
             view = [[SceneModeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
             view.topbar.titleLabel.text = NSLocalizedString(@"scene_mode.title", @"");
-        } else if([@"historicalView" isEqualToString:item.itemIdentifier]) {
+        } else if([@"settingsView" isEqualToString:item.itemIdentifier]) {
             view = [[HistoricalDataView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
-            view.topbar.titleLabel.text = NSLocalizedString(@"historical_data.title", @"");
+            view.topbar.titleLabel.text = NSLocalizedString(@"settings_view.title", @"");
         }
         if(view != nil) {
             view.tag = MAIN_VIEW_TAG;
