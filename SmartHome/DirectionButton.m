@@ -87,7 +87,7 @@
 }
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture {
-    if(self.delegate == nil) return;
+//    if(self.delegate == nil) return;
     
     CGPoint point = [gesture locationInView:self];
     NSLog(@"x=%f y=%f", point.x, point.y);
