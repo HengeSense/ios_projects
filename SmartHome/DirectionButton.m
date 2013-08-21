@@ -87,10 +87,46 @@
 }
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture {
-//    if(self.delegate == nil) return;
+    if(self.delegate == nil) return;
     
     CGPoint point = [gesture locationInView:self];
-    NSLog(@"x=%f y=%f", point.x, point.y);
+    CGFloat x = point.x,y=point.y;
+    CGFloat x0 = x-71,y0=y-71;
+    
+    BOOL isCenter = x0*x0 + y0*y0 <= 31.5*31.5,
+    isTop = x0/y0>-1&&x0/y0<1&&y0<0&&!isCenter,
+    isLeft = (x0/y0>1||x0/y0<-1)&&x0<0&&!isCenter,
+    isBottom = (x0/y0>-1&&x0/y0<1)&&y0>0&&!isCenter,
+    isRight = (x0/y0>1||x0/y0<-1)&&x0>0&&!isCenter;
+    
+    
+    
+    NSLog(@"x=%f y=%f,iscenter = %d", x, y,isCenter);
+    
+    
+    if (isCenter) {
+        if([self.delegate respondsToSelector:@selector(centerButtonClicked)]){
+            [self.delegate centerButtonClicked];
+        }
+    }else if(isTop){
+        if([self.delegate respondsToSelector:@selector(topButtonClicked)]){
+            [self.delegate topButtonClicked];
+        }
+    }else if (isLeft){
+        if([self.delegate respondsToSelector:@selector(leftButtonClicked)]){
+            [self.delegate leftButtonClicked];
+        }
+    }else if (isBottom){
+        if([self.delegate respondsToSelector:@selector(bottomButtonClicked)]){
+            [self.delegate bottomButtonClicked];
+        }
+    }else if(isRight){
+        if([self.delegate respondsToSelector:@selector(rightButtonClicked)]){
+            [self.delegate rightButtonClicked];
+        }
+    }else{
+        return;
+    }
     
 //    if is clicked on left button
 //    if([self.delegate respondsToSelector:@selector(leftButtonClicked)]) {
