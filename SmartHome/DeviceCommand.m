@@ -7,15 +7,16 @@
 //
 
 #import "DeviceCommand.h"
+#import "NSString+StringUtils.h"
 
 @implementation DeviceCommand
 
 @synthesize deviceCode;
 @synthesize className;
+@synthesize commandTime;
 @synthesize masterDeviceCode;
 @synthesize appKey;
 @synthesize security;
-@synthesize commandTime;
 
 - (void)initWithDictionary:(NSDictionary *)json {
     
@@ -23,12 +24,12 @@
 
 - (NSDictionary *)toDictionary {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:@"dsfdsf" forKey:@"deviceCode"];
+    [json setObject:@"iphone4s" forKey:@"deviceCode"];
     [json setObject:@"com.hentre.smarthome.repository.command.ViewZKInfoCommand" forKey:@"_className"];
-    [json setObject:@"2424" forKey:@"masterDeviceCode"];
-    [json setObject:@"" forKey:@"appKey"];
-    [json setObject:@"" forKey:@"security"];
-    [json setObject:[NSNumber numberWithLong:self.commandTime] forKey:@"commandTime"];
+    [json setObject:@"fieldunit" forKey:@"masterDeviceCode"];
+    [json setObject:@"smarthome" forKey:@"appKey"];
+    [json setObject:@"123321" forKey:@"security"];
+    [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     return json;
 }
 

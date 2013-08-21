@@ -12,6 +12,11 @@
 #import "BitUtils.h"
 #import "JsonUtils.h"
 
+#define DATA_HEADER_LENGTH   1
+#define DATA_LENGTH_LENGTH   4
+#define DEVICE_NO_LENGTH     17
+#define MD5_LENGTH           16
+
 @interface CommunicationMessage : NSObject
 
 @property (strong, nonatomic) DeviceCommand *deviceCommand;

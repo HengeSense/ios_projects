@@ -1,0 +1,170 @@
+//
+//  ExtranetClientSocket.m
+//  SmartHome
+//
+//  Created by Zhao yang on 8/20/13.
+//  Copyright (c) 2013 hentre. All rights reserved.
+//
+
+#import "ExtranetClientSocket.h"
+#import "CommunicationMessage.h"
+
+#define BUFFER_SIZE 1024
+
+@implementation ExtranetClientSocket {
+    NSMutableData *receivedData;
+}
+
+@synthesize messageHandlerDelegate;
+
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
+    
+     if(eventCode == NSStreamEventHasBytesAvailable) {
+        if(aStream != nil && aStream == self.inputStream) {
+            
+            //initialization data
+            if(receivedData == nil) {
+                receivedData = [NSMutableData data];
+            }
+            
+            //read header data (one byte)
+            uint8_t header[DATA_HEADER_LENGTH];
+            int bytesRead = [self.inputStream read:header maxLength:DATA_HEADER_LENGTH];
+            if(bytesRead != DATA_HEADER_LENGTH) {
+                //unkonw exception, maybe server client is closed...
+                NSLog(@"unkonw exception, maybe server client is closed...");
+                return;
+            }
+            
+            //header data was matched
+            if(header[0] == 126) {
+                if(receivedData.length != 0) {
+                    //will discard received data before
+                    //because this is a new package
+                    receivedData = [NSMutableData data];
+                    
+                    NSLog(@"will discard received data before");
+                }
+                [receivedData appendBytes:header length:DATA_HEADER_LENGTH];
+                [self readAllDataToMemory];
+            } else {
+                if(receivedData.length != 0) {
+                    NSLog(@"append data");
+                    [receivedData appendBytes:header length:DATA_HEADER_LENGTH];
+                    [self readAllDataToMemory];
+                } else {
+                    //this is a bad request
+                    [self close];
+                    return;
+                }
+            }
+            
+            //data has been writted to memory, now process it
+            [self processReceivedData];
+        }
+    } else if(eventCode == NSStreamEventHasSpaceAvailable) {
+        
+        // test
+        static NSString *str = @"";
+        if([@"" isEqualToString:str]) {
+            if(aStream != nil && aStream == self.outputStream) {
+                NSLog(@" has space available");
+                CommunicationMessage *ms =   [[CommunicationMessage alloc] init];
+                ms.deviceCommand = [[DeviceCommand alloc] init];
+                ms.deviceCommand.deviceCode = @"iphone4s";
+                ms.deviceCommand.className = @"com.hentre.smarthome.repository.command.ViewZKInfoCommand";
+                ms.deviceCommand.commandTime = [[NSDate alloc] init];
+                ms.deviceCommand.security = @"123456";
+                ms.deviceCommand.appKey = @"smarthome";
+                ms.deviceCommand.masterDeviceCode = @"fieldunit";
+                
+                //
+                NSData *ddd =  [ms generateData];
+                [self writeData:ddd];
+                
+            }
+            str = @"full";
+        }
+        
+        
+    } else if(eventCode == NSStreamEventOpenCompleted) {
+        NSLog(@"%@ opened", aStream == self.inputStream ? @"input stream" : @"output stream");
+    } else if(eventCode == NSStreamEventEndEncountered) {
+        [self close];
+    } else if(eventCode == NSStreamEventErrorOccurred) {
+        [self close];
+    } else if(eventCode == NSStreamEventNone) {
+        //no event
+    } else {
+        //unknow event code , ignore this
+    }
+}
+
+- (void)readAllDataToMemory {
+    uint8_t buffer[BUFFER_SIZE];
+    while(self.inputStream != nil && self.inputStream.hasBytesAvailable) {
+        NSInteger bytesHasRead = [self.inputStream read:buffer maxLength:BUFFER_SIZE];
+        [receivedData appendBytes:buffer length:bytesHasRead];
+    }
+}
+
+- (void)processReceivedData {
+    if(receivedData == nil || receivedData.length == 0) return;
+    if(receivedData.length > 5) {
+        uint8_t bytes[5];
+        [receivedData getBytes:bytes length:5];
+        if(bytes[0] == 126) {
+            NSUInteger messageTotalLength = [BitUtils bytes2Int:bytes range:NSMakeRange(1, 4)];
+            if(receivedData.length >= messageTotalLength) {
+                NSData *dataMessage = [receivedData subdataWithRange:NSMakeRange(5, messageTotalLength-5)];
+                [self unPackageMessage:dataMessage];
+                if(receivedData.length > messageTotalLength) {
+                    //more than one message, need continue to process received data
+                    NSLog(@"more than one message, need continue to process received data");
+                    receivedData = [NSMutableData dataWithData:[receivedData subdataWithRange:NSMakeRange(messageTotalLength, receivedData.length - messageTotalLength)]];
+                    [self processReceivedData];
+                }
+            } else {
+                // less than one message , continue to watting for input stream
+                NSLog(@"less than one message");
+            }
+        } else {
+            //data header error
+            //need to handle this error
+            NSLog(@"data header error need to handle this error");
+        }
+    } else {
+        //don't need to process , continue to watting for input stream
+        NSLog(@"don't need process");
+    }
+}
+
+- (void)unPackageMessage:(NSData *)data {
+    if(data.length > 17 + 16) {
+        NSData *data_device_no = [data subdataWithRange:NSMakeRange(0, 17)];
+        NSData *data_body = [data subdataWithRange:NSMakeRange(17, data.length - 17 - 16)];
+        NSData *data_md5 = [data subdataWithRange:NSMakeRange(data.length - 16, 16)];
+        
+        NSString *messageBody = [[NSString alloc] initWithData:data_body encoding:NSUTF8StringEncoding];
+        NSString *md5Str = [[NSString alloc] initWithData:data_md5 encoding:NSUTF8StringEncoding];
+        
+        if([[NSString md5HexDigest:messageBody] isEqualToString:md5Str]) {
+            //good message
+            NSLog(messageBody);
+        } else {
+            //bad message
+        }
+    } else {
+        //message is too small (less than one byte...), need discard this message
+    }
+}
+
+- (void)writeData:(NSData *)data {
+    if(self.outputStream != nil) {
+        if([self.outputStream hasSpaceAvailable]) {
+            [self.outputStream write:data.bytes maxLength:data.length];
+        }
+    }
+}
+
+@end

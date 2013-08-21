@@ -12,5 +12,6 @@
 
 + (NSUInteger)bytes2Int:(uint8_t *)bytes;
 + (void)int2Bytes:(NSUInteger)number bytes:(uint8_t *)bytes;
++ (NSUInteger)bytes2Int:(uint8_t *)bytes range:(NSRange)range;
 
 @end

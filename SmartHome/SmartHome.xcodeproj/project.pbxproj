@@ -82,6 +82,8 @@
 		6F6AB3A517C31C16001F1D33 /* btn_finder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */; };
 		6F6AB3AB17C31CB4001F1D33 /* bg_finder_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */; };
 		6F6AB3AC17C31CB4001F1D33 /* bg_scanner_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */; };
+		6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */; };
+		6F6AB3B917C39ED9001F1D33 /* IntranetClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AB3B817C39ED9001F1D33 /* IntranetClientSocket.m */; };
 		6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */; };
 		6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282717B3DF3D00D0C1E3 /* RootViewController.m */; };
 		6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */; };
@@ -269,6 +271,10 @@
 		6F6AB3A817C31C29001F1D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = "en.lproj/btn_finder@2x.png"; sourceTree = "<group>"; };
 		6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_finder_shadow@2x.png"; sourceTree = "<group>"; };
 		6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner_shadow@2x.png"; sourceTree = "<group>"; };
+		6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtranetClientSocket.h; sourceTree = "<group>"; };
+		6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtranetClientSocket.m; sourceTree = "<group>"; };
+		6F6AB3B717C39ED9001F1D33 /* IntranetClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntranetClientSocket.h; sourceTree = "<group>"; };
+		6F6AB3B817C39ED9001F1D33 /* IntranetClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntranetClientSocket.m; sourceTree = "<group>"; };
 		6F8927BF17B3976A00D0C1E3 /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
 		6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
 		6F89282617B3DF3D00D0C1E3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -902,6 +908,10 @@
 			children = (
 				6F1EE66B17BCD41500580760 /* ClientSocket.h */,
 				6F1EE66C17BCD41500580760 /* ClientSocket.m */,
+				6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */,
+				6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */,
+				6F6AB3B717C39ED9001F1D33 /* IntranetClientSocket.h */,
+				6F6AB3B817C39ED9001F1D33 /* IntranetClientSocket.m */,
 			);
 			name = socket;
 			sourceTree = "<group>";
@@ -1114,6 +1124,8 @@
 				6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */,
 				F22DF72817C1EAA500BF7C3A /* KeychainItemWrapper.m in Sources */,
 				6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */,
+				6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */,
+				6F6AB3B917C39ED9001F1D33 /* IntranetClientSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

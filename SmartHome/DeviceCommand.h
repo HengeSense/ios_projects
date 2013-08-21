@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSString *masterDeviceCode;
 @property (strong, nonatomic) NSString *appKey;
 @property (strong, nonatomic) NSString *security;
-@property (assign, nonatomic) long commandTime;
+@property (strong, nonatomic) NSDate *commandTime;
 
 - (void)initWithDictionary:(NSDictionary *)json;
 - (NSDictionary *)toDictionary;

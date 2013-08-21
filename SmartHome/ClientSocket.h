@@ -8,32 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol ClientSocketDelegate <NSObject>
-
-// maybe call twice, one for input stream another for output stream
-- (void)streamConnectionDidOpen:(NSStream *)stream;
-
-- (void)didReceiveData:(NSData *)data stream:(NSStream *)stream;
-
-/*
-- (void)outputStreamIsReady;
- */
-
-- (void)connectionEnded;
-- (void)connectionError:(NSError *)error;
-
-@end
 
 @interface ClientSocket : NSObject<NSStreamDelegate>
 
-@property (assign, nonatomic) id<ClientSocketDelegate> delegate;
 @property (strong, nonatomic) NSString *ipAddress;
+@property (strong, nonatomic, readonly) NSInputStream *inputStream;
+@property (strong, nonatomic, readonly) NSOutputStream *outputStream;
 @property (assign, nonatomic) NSInteger port;
 
 
 - (id)initWithIPAddress:(NSString *)ip andPort:(NSInteger)portNumber;
 
 - (void)connect;
-- (void)writeData:(NSData *)data;
+- (void)close;
+
 
 @end

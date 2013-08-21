@@ -7,6 +7,8 @@
 //
 
 #import "UnitsBindingViewController.h"
+
+#import "ExtranetClientSocket.h"
 #import "NSString+StringUtils.h"
 #import "DeviceCommand.h"
 #import "CommunicationMessage.h"
@@ -81,7 +83,8 @@
 }
 
 - (void)fff {
-    ClientSocket *socket = [[ClientSocket alloc] initWithIPAddress:@"172.16.8.123" andPort:6969];
+    
+    ExtranetClientSocket *socket = [[ExtranetClientSocket alloc] initWithIPAddress:@"127.0.0.1" andPort:8888];
     [socket connect];
 }
 

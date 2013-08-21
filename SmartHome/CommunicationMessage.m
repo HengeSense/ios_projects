@@ -8,11 +8,6 @@
 
 #import "CommunicationMessage.h"
 
-#define DATA_HEADER_LENGTH   1
-#define DATA_LENGTH_LENGTH   4
-#define DEVICE_NO_LENGTH     17
-#define MD5_LENGTH           16
-
 @implementation CommunicationMessage
 
 - (id)initWithDeviceCommand:(DeviceCommand *)command {
@@ -35,9 +30,9 @@
     //append data length
     NSUInteger totalLength = DATA_HEADER_LENGTH + DATA_LENGTH_LENGTH + DEVICE_NO_LENGTH + dataDomain.length + MD5_LENGTH;
 
-    uint8_t dataLength[4];
+    uint8_t dataLength[DATA_LENGTH_LENGTH];
     [BitUtils int2Bytes:totalLength bytes:dataLength];
-    [message appendBytes:dataLength length:4];
+    [message appendBytes:dataLength length:DATA_LENGTH_LENGTH];
     
     //append device number
     [self addDeviceNumberFor:message];
@@ -52,13 +47,14 @@
 }
 
 - (void)addDataHeaderFor:(NSMutableData *)message {
-    uint8_t header[1];
+    uint8_t header[DATA_HEADER_LENGTH];
     header[0] = 126;
-    [message appendBytes:header length:1];
+    [message appendBytes:header length:DATA_HEADER_LENGTH];
 }
 
 - (void)addDeviceNumberFor:(NSMutableData *)message {
-    [message appendData:[[NSString stringWithFormat:@"%@", @"aa-bb-cc-dd-ee-ff"] dataUsingEncoding:NSUTF8StringEncoding ]];
+    NSString *key = [NSString stringWithFormat:@"%@%@", self.deviceCommand.deviceCode, self.deviceCommand.appKey];
+    [message appendData:[[NSString stringWithFormat:@"%@1", [NSString md5HexDigest:key]] dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)addMD5Using:(NSData *)data for:(NSMutableData *)message {
