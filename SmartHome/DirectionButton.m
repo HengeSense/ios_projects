@@ -15,6 +15,7 @@
     UIImageView *imgTopButton;
     UIImageView *imgBottomButton;
     UIImageView *imgCenterButton;
+    UITapGestureRecognizer *tapGesture;
 }
 
 @synthesize delegate;
@@ -78,6 +79,24 @@
         imgCenterButton.image = [UIImage imageNamed:@"btn_camera_center.png"];
         [self addSubview:imgCenterButton];
     }
+    
+    if(tapGesture == nil) {
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        [self addGestureRecognizer:tapGesture];
+    }
 }
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)gesture {
+    if(self.delegate == nil) return;
+    
+    CGPoint point = [gesture locationInView:self];
+    NSLog(@"x=%f y=%f", point.x, point.y);
+    
+//    if is clicked on left button
+//    if([self.delegate respondsToSelector:@selector(leftButtonClicked)]) {
+//        [self.delegate leftButtonClicked];
+//    }
+}
+
 
 @end
