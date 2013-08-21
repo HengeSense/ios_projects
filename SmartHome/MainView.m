@@ -11,6 +11,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
 #import "DeviceAffectViewController.h"
+#import "AirConditionViewController.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              75
@@ -79,8 +80,8 @@
 #pragma mark notification && affect button
 
 - (void)btnShowAffectDevicePressed:(id)sender {
-    DeviceAffectViewController *deviceAffectViewController = [[DeviceAffectViewController alloc] init];
-    [self.ownerController.navigationController pushViewController:deviceAffectViewController animated:YES];
+    //DeviceAffectViewController *deviceAffectViewController = [[DeviceAffectViewController alloc] init];
+    [self.ownerController.navigationController pushViewController:[[AirConditionViewController alloc] init] animated:YES];
 }
 
 - (void)btnShowNotificationDevicePressed:(id)sender {
