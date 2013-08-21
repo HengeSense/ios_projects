@@ -265,10 +265,10 @@
 		6F1EE66917BC787900580760 /* UnitsBindingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsBindingViewController.m; sourceTree = "<group>"; };
 		6F1EE66B17BCD41500580760 /* ClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientSocket.h; sourceTree = "<group>"; };
 		6F1EE66C17BCD41500580760 /* ClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientSocket.m; sourceTree = "<group>"; };
-		6F6AB3A217C31C06001F1D33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/btn_scanner@2x.png"; sourceTree = "<group>"; };
-		6F6AB3A417C31C0C001F1D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = "en.lproj/btn_scanner@2x.png"; sourceTree = "<group>"; };
-		6F6AB3A617C31C16001F1D33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/btn_finder@2x.png"; sourceTree = "<group>"; };
-		6F6AB3A817C31C29001F1D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = "en.lproj/btn_finder@2x.png"; sourceTree = "<group>"; };
+		6F6AB3A217C31C06001F1D33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/btn_scanner@2x.png"; sourceTree = "<group>"; };
+		6F6AB3A417C31C0C001F1D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/btn_scanner@2x.png"; sourceTree = "<group>"; };
+		6F6AB3A617C31C16001F1D33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/btn_finder@2x.png"; sourceTree = "<group>"; };
+		6F6AB3A817C31C29001F1D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/btn_finder@2x.png"; sourceTree = "<group>"; };
 		6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_finder_shadow@2x.png"; sourceTree = "<group>"; };
 		6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner_shadow@2x.png"; sourceTree = "<group>"; };
 		6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtranetClientSocket.h; sourceTree = "<group>"; };
@@ -361,6 +361,8 @@
 		F237F61017B3314E0057C95B /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		F2BB0EF317BE1B7E004E14B1 /* LongButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongButton.h; sourceTree = "<group>"; };
 		F2BB0EF417BE1B7E004E14B1 /* LongButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongButton.m; sourceTree = "<group>"; };
+		F2D8E8C217C468D200090E5B /* QCheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QCheckBox.h; path = SmartHome/QCheckBox.h; sourceTree = "<group>"; };
+		F2D8E8C317C468D200090E5B /* QCheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QCheckBox.m; path = SmartHome/QCheckBox.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -948,6 +950,8 @@
 			children = (
 				F2BB0EF317BE1B7E004E14B1 /* LongButton.h */,
 				F2BB0EF417BE1B7E004E14B1 /* LongButton.m */,
+				F2D8E8C217C468D200090E5B /* QCheckBox.h */,
+				F2D8E8C317C468D200090E5B /* QCheckBox.m */,
 			);
 			name = buttons;
 			sourceTree = "<group>";
