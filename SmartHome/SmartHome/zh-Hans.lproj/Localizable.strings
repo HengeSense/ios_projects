@@ -65,3 +65,7 @@
 "login"                    =  "登录";
 "remember_password"        =  "记住密码";
 "register_new_user"        =  "注册新用户";
+/*
+ *uinitsbinding view controller
+ */
+"scanner.and.finder" = "扫一扫与自动寻找";

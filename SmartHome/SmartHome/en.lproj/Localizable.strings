@@ -65,3 +65,7 @@
 "login"                           = "login";
 "remember_password"               = "remember";
 "register_new_user"               = "new account";
+/*
+ *uinitsbinding view controller
+ */
+"scanner.and.finder" = "scanner and finder";
