@@ -14,6 +14,7 @@
 #import "CommunicationMessage.h"
 #import "ClientSocket.h"
 #import "BitUtils.h"
+#import "DirectionButton.h"
 
 @interface UnitsBindingViewController ()
 
@@ -120,6 +121,10 @@
     [btn setTitle:@"test" forState:UIControlStateNormal];
     
     [self.view addSubview:btn];
+    
+   [self.view addSubview: [DirectionButton directionButtonWithPoint:CGPointMake(160, 100)]];
+    
+    
 }
 
 - (void)fff {

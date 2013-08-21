@@ -10,6 +10,7 @@
 #import "DrawerNavItemCell.h"
 #import "DrawerNavigationItem.h"
 #import "ViewsPool.h"
+#import "UIColor+ExtentionForHexString.h"
 
 #define ACCOUNT_VIEW_HEIGHT 0
 
@@ -63,6 +64,7 @@
         tblNavigationItems.dataSource = self;
         tblNavigationItems.delegate = self;
         tblNavigationItems.scrollEnabled = NO;
+        tblNavigationItems.backgroundColor = [UIColor colorWithHexString:@"3a3e47"];
         [self addSubview:tblNavigationItems];
     }
 }
