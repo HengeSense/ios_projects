@@ -40,7 +40,7 @@
                 if(receivedData.length != 0) {
                     //will discard received data before
                     //i think this is a new package
-                    [self notifyHandlerDataDiscard:receivedData];
+                    [self performSelectorOnMainThread:@selector(notifyHandlerDataDiscard:) withObject:receivedData waitUntilDone:NO];
                     receivedData = [NSMutableData data];
                 }
                 [receivedData appendBytes:header length:DATA_HEADER_LENGTH];
@@ -53,8 +53,8 @@
                 } else {
                     //this is a bad request, header data was not matched
                     //and has never received data before
+                    [self performSelectorOnMainThread:@selector(notifyHandlerDataError) withObject:nil waitUntilDone:NO];
                     [self close];
-                    [self notifyHandlerDataError:DataErrorBadRequest];
                     return;
                 }
             }
@@ -126,8 +126,8 @@
         } else {
             //data header error
             //need to handle this error
+            [self performSelectorOnMainThread:@selector(notifyHandlerDataError:) withObject:nil waitUntilDone:NO];
             [self close];
-            [self notifyHandlerDataError:DataErrorBadHeader];
         }
     } else {
         //don't need to process , continue to watting for input stream
@@ -139,7 +139,7 @@
     //16 is the length of md5 string
     //others is the content length
     if(data.length > 17 + 16) {
-        NSData *data_device_no = [data subdataWithRange:NSMakeRange(0, 17)];
+//        NSData *data_device_no = [data subdataWithRange:NSMakeRange(0, 17)];
         NSData *data_body = [data subdataWithRange:NSMakeRange(17, data.length - 17 - 16)];
         NSData *data_md5 = [data subdataWithRange:NSMakeRange(data.length - 16, 16)];
         
@@ -148,14 +148,14 @@
         
         if([[NSString md5HexDigest:messageBody] isEqualToString:md5Str]) {
             //good message
-            [self notifyHandlerMessageReceived:messageBody];
+            [self performSelectorOnMainThread:@selector(notifyHandlerMessageReceived:) withObject:messageBody waitUntilDone:NO];
         } else {
             //bad message , not valid from md5
-            [self notifyHandlerDataDiscard:data];
+            [self performSelectorOnMainThread:@selector(notifyHandlerDataDiscard:) withObject:data waitUntilDone:NO];
         }
     } else {
         //message is too small (less than one byte...), need discard this message
-        [self notifyHandlerDataDiscard:data];
+        [self performSelectorOnMainThread:@selector(notifyHandlerDataDiscard:) withObject:data waitUntilDone:NO];
     }
 }
 
@@ -170,16 +170,18 @@
 #pragma mark -
 #pragma mark message handler delegate
 
-- (void)notifyHandlerDataError:(DataError)error {
+- (void)notifyHandlerDataError {
     if(self.messageHandlerDelegate != nil) {
-        if([self.messageHandlerDelegate respondsToSelector:@selector(clientSocketWithError:)]) {
+        if([self.messageHandlerDelegate respondsToSelector:@selector(clientSocketMessageReadError)]) {
+            [self.messageHandlerDelegate clientSocketMessageReadError];
         }
     }
 }
 
 - (void)notifyHandlerDataDiscard:(NSData *)data {
     if(self.messageHandlerDelegate != nil) {
-        if([self.messageHandlerDelegate respondsToSelector:@selector(clientSocketWithWarning:)]) {
+        if([self.messageHandlerDelegate respondsToSelector:@selector(clientSocketMessageDiscard:)]) {
+            [self.messageHandlerDelegate clientSocketMessageDiscard:data];
         }
     }
 }
@@ -187,7 +189,7 @@
 - (void)notifyHandlerMessageReceived:(NSString *)message {
     if(self.messageHandlerDelegate != nil) {
         if([self.messageHandlerDelegate respondsToSelector:@selector(clientSocketWithReceivedMessage:)]) {
-            
+            [self.messageHandlerDelegate clientSocketWithReceivedMessage:message];
         }
     }
 }

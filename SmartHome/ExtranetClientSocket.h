@@ -8,15 +8,15 @@
 
 #import "ClientSocket.h"
 
-typedef NS_ENUM(NSUInteger, DataError) {
-    DataErrorBadHeader,
-    DataErrorBadRequest
-};
-
 @protocol MessageHandler <NSObject>
 
-- (void)clientSocketWithError:(DataError)error;
-- (void)clientSocketWithWarning:(NSData *)dataDiscard;
+// message read error , and socket need close
+- (void)clientSocketMessageReadError;
+
+// only discard not valid message, socket should not be close
+- (void)clientSocketMessageDiscard:(NSData *)discardMessage;
+
+// success received message
 - (void)clientSocketWithReceivedMessage:(NSString *)messages;
 
 @end
