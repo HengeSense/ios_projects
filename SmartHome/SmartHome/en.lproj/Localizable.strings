@@ -23,6 +23,7 @@
 "my_devices.title"                    = "My Devices";
 "scene_mode.title"                    = "Scene Mode";
 "historical_data.title"               = "History Data";
+"unit_binding_view.title"             = "Device Binding";
 
 /*
  * drawer view
@@ -65,7 +66,11 @@
 "login"                           = "login";
 "remember_password"               = "remember";
 "register_new_user"               = "new account";
+
 /*
- *uinitsbinding view controller
+ * units binding view
  */
-"scanner.and.finder" = "scanner and finder";
+"scanner_button_tips"      = "    You can use scanner button to binding devices in wifi environment";
+"auto_search_button_tips"  = "    You can use auto search button to binding devices in no wifi environment";
+
+

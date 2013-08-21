@@ -24,6 +24,7 @@
 "my_devices.title"                    = "我的设备";
 "scene_mode.title"                    = "情景模式";
 "historical_data.title"               = "历史数据";
+"unit_binding_view.title"             = "绑定主控";
 
 /*
  * drawer view
@@ -56,16 +57,18 @@
 "phone_number_register"           = "手机号码注册:";
 "get_verification_code"           = "获取验证码";
 "verification_code"               = "验证码:";
-/*
- *login view controller
- */
 
+/*
+ * login view controller
+ */
 "username"                 =  "登录名:";
 "password"                 =  "登录密码:";
 "login"                    =  "登录";
 "remember_password"        =  "记住密码";
 "register_new_user"        =  "注册新用户";
+
 /*
- *uinitsbinding view controller
+ * units binding view
  */
-"scanner.and.finder" = "扫一扫与自动寻找";
+"scanner_button_tips"      = "    在有无线网络的情况下，你可以采用功能扫一扫将主控设备录入手机。";
+"auto_search_button_tips"  = "    在没有无线网络的情况下，你可以采用自动寻找功能将主控录入手机。";
