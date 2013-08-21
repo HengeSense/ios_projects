@@ -22,6 +22,7 @@
     ViewsPool *viewsPool;
     CGFloat entryHeight;
     BOOL isChanging;
+    NSUInteger checkedRowIndex;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -62,7 +63,7 @@
         lblMessage1.backgroundColor = [UIColor clearColor];
         lblMessage2.backgroundColor = [UIColor clearColor];
         lblMessage1.font = [UIFont systemFontOfSize:13.f];
-        lblMessage2.font = [UIFont systemFontOfSize:11.f];
+        lblMessage2.font = [UIFont systemFontOfSize:10.f];
         lblMessage1.textColor = [UIColor colorWithHexString:@"#898e9a"];
         lblMessage2.textColor = [UIColor colorWithHexString:@"#898e9a"];
         UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, ACCOUNT_VIEW_HEIGHT-2, 120, 2)];
@@ -97,6 +98,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"DrawerNavItemCell";
     DrawerNavItemCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    DrawerNavigationItem *item = [navigationItems objectAtIndex:indexPath.row];
     if(cell == nil) {
         NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"DrawerNavItemCell" owner:self options:nil];
         cell = [arr objectAtIndex:0];
@@ -110,10 +112,9 @@
             imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
             [cell addSubview:imgSeperatorLine];
         }
-        cell.lblPart.textColor = [UIColor colorWithHexString:@"#eff4ff"];
+        cell.lblPart.textColor = [UIColor colorWithHexString:@"#898e9a"];
     }
     
-    DrawerNavigationItem *item = [navigationItems objectAtIndex:indexPath.row];
     if(item) {
         cell.imgPart.image = [UIImage imageNamed:item.itemImageName];
         cell.lblPart.text = item.itemTitle;
