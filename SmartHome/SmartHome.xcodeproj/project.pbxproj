@@ -27,6 +27,8 @@
 		6F0420F817C4A9EC00F7F6AF /* img_header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420F717C4A9EC00F7F6AF /* img_header@2x.png */; };
 		6F0420FA17C4ADB900F7F6AF /* btn_drawer_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420F917C4ADB900F7F6AF /* btn_drawer_nav@2x.png */; };
 		6F0420FC17C4B25C00F7F6AF /* btn_done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420FB17C4B25C00F7F6AF /* btn_done@2x.png */; };
+		6F0420FF17C4BC9D00F7F6AF /* btn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420FD17C4BC9C00F7F6AF /* btn_device@2x.png */; };
+		6F04210017C4BC9D00F7F6AF /* btn_scene@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420FE17C4BC9D00F7F6AF /* btn_scene@2x.png */; };
 		6F0FAE7817AF7F9F00B75D3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7717AF7F9F00B75D3E /* UIKit.framework */; };
 		6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */; };
 		6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7B17AF7F9F00B75D3E /* CoreGraphics.framework */; };
@@ -177,6 +179,8 @@
 		6F0420F717C4A9EC00F7F6AF /* img_header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_header@2x.png"; sourceTree = "<group>"; };
 		6F0420F917C4ADB900F7F6AF /* btn_drawer_nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_drawer_nav@2x.png"; sourceTree = "<group>"; };
 		6F0420FB17C4B25C00F7F6AF /* btn_done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_done@2x.png"; sourceTree = "<group>"; };
+		6F0420FD17C4BC9C00F7F6AF /* btn_device@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_device@2x.png"; sourceTree = "<group>"; };
+		6F0420FE17C4BC9D00F7F6AF /* btn_scene@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_scene@2x.png"; sourceTree = "<group>"; };
 		6F0FAE7417AF7F9F00B75D3E /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0FAE7717AF7F9F00B75D3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -861,6 +865,8 @@
 				6F0420F917C4ADB900F7F6AF /* btn_drawer_nav@2x.png */,
 				6F0420FB17C4B25C00F7F6AF /* btn_done@2x.png */,
 				6F1BE41817BD1413003C973D /* btn_done_black@2x.png */,
+				6F0420FD17C4BC9C00F7F6AF /* btn_device@2x.png */,
+				6F0420FE17C4BC9D00F7F6AF /* btn_scene@2x.png */,
 				F22DF72E17C2052E00BF7C3A /* btn_register@2x.png */,
 				F22E425117C306E9000FD247 /* btn_back@2x.jpg */,
 				F22DF72A17C1FFE300BF7C3A /* btn_orange@2x.png */,
@@ -1146,6 +1152,8 @@
 				6F0420F817C4A9EC00F7F6AF /* img_header@2x.png in Resources */,
 				6F0420FA17C4ADB900F7F6AF /* btn_drawer_nav@2x.png in Resources */,
 				6F0420FC17C4B25C00F7F6AF /* btn_done@2x.png in Resources */,
+				6F0420FF17C4BC9D00F7F6AF /* btn_device@2x.png in Resources */,
+				6F04210017C4BC9D00F7F6AF /* btn_scene@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
