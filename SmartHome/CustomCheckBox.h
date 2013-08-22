@@ -7,13 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol CustomCheckBoxDelegate <NSObject>
--(void) checkBoxTouchInside;
-
-
-@end
 
 @interface CustomCheckBox : UIButton
-@property (assign,nonatomic) id<CustomCheckBoxDelegate> delegate;
 +(UIButton *) checkBoxWithPoint:(CGPoint)point;
 @end

@@ -14,7 +14,6 @@
 #import "RegisterViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 
-
 #define LINE_HIGHT 5
 #define INDENTIFER_KEY_WRAPPER @"rememberService"
 
@@ -63,7 +62,7 @@
     [self registerTapGestureToResignKeyboard];
 
     keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
-    NSString *service = [keyWrapper objectForKey:(__bridge id)kSecAttrService];
+    NSString *service = [keyWrapper objectForKey:(__bridge_transfer id)kSecAttrService];
     
     username = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 100, 20)];
     username.backgroundColor = [UIColor clearColor];
@@ -93,10 +92,9 @@
     [loginBtn addTarget:self action:@selector(loginBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginBtn];
     
-    rememberBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT, 40/2, 38/2)];
-    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"cbx_unchecked.png"] forState:UIControlStateNormal];
-    [rememberBtn setBackgroundImage:[UIImage imageNamed:@"cbx_checked.png"] forState:UIControlStateSelected];
+    rememberBtn = [CustomCheckBox checkBoxWithPoint:CGPointMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT)];
     [rememberBtn addTarget:self action:@selector(rememberBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.view addSubview:rememberBtn];
     
     rememberPassword = [[UILabel alloc]  initWithFrame:CGRectMake(5+rememberBtn.frame.size.width+LINE_HIGHT, rememberBtn.frame.origin.y, 100, 20)];
@@ -115,21 +113,21 @@
     
     if ([service isEqualToString:INDENTIFER_KEY_WRAPPER]) {
         rememberBtn.selected = YES;
-        [usernameField setText:[keyWrapper objectForKey:(__bridge id) kSecAttrAccount]];
-        [passwordField setText:[keyWrapper objectForKey:(__bridge id) kSecValueData]];
+        [usernameField setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecAttrAccount]];
+        [passwordField setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecValueData]];
     }
     
 }
 -(void) rememberBtnTouchInside{
-    rememberBtn.selected = !rememberBtn.selected;
+    rememberBtn.selected =!rememberBtn.selected;
 }
 -(void) loginBtnTouchInside{
     if(rememberBtn.selected){
-        [keyWrapper setObject:INDENTIFER_KEY_WRAPPER forKey:(__bridge id) kSecAttrService];
-        [keyWrapper setObject:usernameField.text forKey:(__bridge id) kSecAttrAccount];
-        [keyWrapper setObject:passwordField.text forKey:(__bridge id) kSecValueData];
+        [keyWrapper setObject:INDENTIFER_KEY_WRAPPER forKey:(__bridge_transfer id) kSecAttrService];
+        [keyWrapper setObject:usernameField.text forKey:(__bridge_transfer id) kSecAttrAccount];
+        [keyWrapper setObject:passwordField.text forKey:(__bridge_transfer id) kSecValueData];
     }else{
-        [keyWrapper setObject:[NSString emptyString] forKey:(__bridge id) kSecAttrService];
+        [keyWrapper setObject:[NSString emptyString] forKey:(__bridge_transfer id) kSecAttrService];
     }
     [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
 }

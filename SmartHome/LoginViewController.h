@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "CustomCheckBox.h"
 
 @interface LoginViewController : BaseViewController
 
