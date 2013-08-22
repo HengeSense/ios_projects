@@ -94,6 +94,7 @@
     CGFloat x0 = x-71,y0=y-71;
     
     BOOL isCenter = x0*x0 + y0*y0 <= 31.5*31.5,
+    outOfBounds = x0*x0 + y0*y0 >= 70.25*70.25,
     isTop = x0/y0>-1&&x0/y0<1&&y0<0&&!isCenter,
     isLeft = (x0/y0>1||x0/y0<-1)&&x0<0&&!isCenter,
     isBottom = (x0/y0>-1&&x0/y0<1)&&y0>0&&!isCenter,
@@ -101,26 +102,26 @@
     
     
     
-    NSLog(@"x=%f y=%f,iscenter = %d", x, y,isCenter);
+    NSLog(@"x=%f y=%f", x, y);
     
     
     if (isCenter) {
         if([self.delegate respondsToSelector:@selector(centerButtonClicked)]){
             [self.delegate centerButtonClicked];
         }
-    }else if(isTop){
+    }else if(isTop&&!outOfBounds){
         if([self.delegate respondsToSelector:@selector(topButtonClicked)]){
             [self.delegate topButtonClicked];
         }
-    }else if (isLeft){
+    }else if (isLeft&&!outOfBounds){
         if([self.delegate respondsToSelector:@selector(leftButtonClicked)]){
             [self.delegate leftButtonClicked];
         }
-    }else if (isBottom){
+    }else if (isBottom&&!outOfBounds){
         if([self.delegate respondsToSelector:@selector(bottomButtonClicked)]){
             [self.delegate bottomButtonClicked];
         }
-    }else if(isRight){
+    }else if(isRight&&!outOfBounds){
         if([self.delegate respondsToSelector:@selector(rightButtonClicked)]){
             [self.delegate rightButtonClicked];
         }
@@ -128,10 +129,6 @@
         return;
     }
     
-//    if is clicked on left button
-//    if([self.delegate respondsToSelector:@selector(leftButtonClicked)]) {
-//        [self.delegate leftButtonClicked];
-//    }
 }
 
 

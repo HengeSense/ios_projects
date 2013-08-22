@@ -7,12 +7,17 @@
 //
 
 #import "CameraAdjustViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
 @interface CameraAdjustViewController ()
 
 @end
 
-@implementation CameraAdjustViewController
+@implementation CameraAdjustViewController{
+    UIImageView *cameraImage;
+    UIView *cameraView;
+}
+
 @synthesize directionButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,9 +37,19 @@
 
 -(void) initUI{
     [super initUI];
-    directionButton = [DirectionButton directionButtonWithPoint:CGPointMake(90, self.view.frame.size.height-90-141)];
+    self.topbar.titleLabel.text = NSLocalizedString(@"camera.adjust", @"");
+    cameraView = [[UIView alloc] initWithFrame:CGRectMake(3, 47, self.view.bounds.size.width-6, self.view.bounds.size.height-90)];
+    cameraView.backgroundColor = [UIColor colorWithHexString:@"#1a1a1f"];
+    [self.view addSubview:cameraView];
+    
+    cameraImage = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, cameraView.frame.size.width-6, cameraView.frame.size.height-90-100)];
+    cameraImage.image = [UIImage imageNamed:@"camera_image.jpg"];
+    [cameraView addSubview:cameraImage];
+    
+    directionButton = [DirectionButton directionButtonWithPoint:CGPointMake(90,cameraView.frame.size.height-141-30)];
     directionButton.delegate = self;
-    [self.view addSubview:directionButton];
+    [cameraView addSubview:directionButton];
+    
     
 }
 - (void)didReceiveMemoryWarning

@@ -75,5 +75,8 @@
  */
 "scanner_button_tips"      = "    You can use scanner button to binding devices in wifi environment";
 "auto_search_button_tips"  = "    You can use auto search button to binding devices in no wifi environment";
-
+/*
+ *camera adjust view controller
+ */
+"camera.adjust"     ="Camera Adjust";
 

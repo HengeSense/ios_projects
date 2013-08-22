@@ -76,3 +76,8 @@
  */
 "scanner_button_tips"      = "    在有无线网络的情况下，你可以采用功能扫一扫将主控设备录入手机。";
 "auto_search_button_tips"  = "    在没有无线网络的情况下，你可以采用自动寻找功能将主控录入手机。";
+/*
+ *camera adjust view controller
+ */
+"camera.adjust"     ="摄像头调整";
+ 
