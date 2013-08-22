@@ -156,6 +156,7 @@
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F2D8E8C717C48EA500090E5B /* CameraAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */; };
+		F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -407,6 +408,7 @@
 		F2D8E8C317C468D200090E5B /* QCheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QCheckBox.m; path = SmartHome/QCheckBox.m; sourceTree = "<group>"; };
 		F2D8E8C517C48EA500090E5B /* CameraAdjustViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraAdjustViewController.h; sourceTree = "<group>"; };
 		F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraAdjustViewController.m; sourceTree = "<group>"; };
+		F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "camera_image@2x.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,6 +461,7 @@
 				6F0420E317C4817800F7F6AF /* bg_camera@2x.png */,
 				6F0420E417C4817800F7F6AF /* btn_camera_bottom@2x.png */,
 				6F0420E517C4817800F7F6AF /* btn_camera_center@2x.png */,
+				F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */,
 				6F0420E617C4817800F7F6AF /* btn_camera_right@2x.png */,
 				6F0420F117C4824900F7F6AF /* btn_camera_left@2x.png */,
 				6F0420E717C4817800F7F6AF /* btn_camera_top@2x.png */,
@@ -693,8 +696,6 @@
 				F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */,
 				F20AE08C17BDD00B0040B80A /* LoginViewController.h */,
 				F20AE08D17BDD00B0040B80A /* LoginViewController.m */,
-				6F984F7717BDD71C007F90A2 /* AccountSettingViewController.h */,
-				6F984F7817BDD71C007F90A2 /* AccountSettingViewController.m */,
 				F2D8E8C517C48EA500090E5B /* CameraAdjustViewController.h */,
 				F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */,
 			);
@@ -1161,6 +1162,7 @@
 				6F0420FC17C4B25C00F7F6AF /* btn_done@2x.png in Resources */,
 				6F0420FF17C4BC9D00F7F6AF /* btn_device@2x.png in Resources */,
 				6F04210017C4BC9D00F7F6AF /* btn_scene@2x.png in Resources */,
+				F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
