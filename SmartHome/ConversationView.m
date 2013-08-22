@@ -72,7 +72,8 @@
     
     if(welcomeView == nil) {
         //还需要一个遮罩层 实现动画
-        welcomeView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, self.frame.size.width, 70)];
+        welcomeView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, 220, 70)];
+        welcomeView.center = CGPointMake(self.center.x, welcomeView.center.y);
         welcomeView.tag = WELCOME_VIEW_TAG;
         welcomeView.backgroundColor = [UIColor clearColor];
         
@@ -90,8 +91,8 @@
         lblWelcomeTitle2.backgroundColor = [UIColor clearColor];
         [lblWelcomeTitle2 sizeToFit];
         
-        lblWelcomeTitle1.center = CGPointMake(160, 20);
-        lblWelcomeTitle2.center = CGPointMake(160, 50);
+        lblWelcomeTitle1.center = CGPointMake(110, 20);
+        lblWelcomeTitle2.center = CGPointMake(110, 50);
 
         [welcomeView addSubview:lblWelcomeTitle1];
         [welcomeView addSubview:lblWelcomeTitle2];
@@ -115,7 +116,7 @@
     }
     [UIView animateWithDuration:0.3f
                      animations:^{
-                         welcomeView.frame = CGRectMake(0, 0, self.frame.size.width, 70);
+                         welcomeView.frame = CGRectMake(welcomeView.frame.origin.x, 0, welcomeView.frame.size.width, 70);
                      }
                      completion:^(BOOL finished){
                      }];
@@ -125,7 +126,7 @@
     UIView *view = [self viewWithTag:WELCOME_VIEW_TAG];
     if(view != nil) {
         [view removeFromSuperview];
-        welcomeView.frame = CGRectMake(0, 200, self.frame.size.width, 70);
+        welcomeView.frame = CGRectMake(welcomeView.frame.origin.x, 200, welcomeView.frame.size.width, 70);
     }
 }
 

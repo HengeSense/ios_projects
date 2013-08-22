@@ -10,4 +10,6 @@
 
 @interface Device : NSObject
 
+@property (strong, nonatomic) NSString *deviceName;
+
 @end
