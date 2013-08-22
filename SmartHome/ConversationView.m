@@ -61,7 +61,7 @@
     }
     
     if(tblMessages == nil) {
-        tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.frame.size.width, self.frame.size.height-10) style:UITableViewStylePlain];
+        tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 14, self.frame.size.width, self.frame.size.height-14) style:UITableViewStylePlain];
         tblMessages.backgroundColor = [UIColor clearColor];
         tblMessages.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblMessages.delegate = self;
@@ -98,7 +98,7 @@
     }
 
     UIButton *btnCloseSelf = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44/2, 45/2)];
-    btnCloseSelf.center = CGPointMake(self.frame.size.width-5, 5);
+    btnCloseSelf.center = CGPointMake(self.frame.size.width-7, 7);
     [btnCloseSelf setBackgroundImage:[UIImage imageNamed:@"btn_speech_close.png"] forState:UIControlStateNormal];
     [btnCloseSelf setBackgroundImage:[UIImage imageNamed:@"btn_speech_close.png"] forState:UIControlStateHighlighted];
     [btnCloseSelf addTarget:containerView action:@selector(hideSpeechView) forControlEvents:UIControlEventTouchUpInside];

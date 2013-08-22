@@ -50,16 +50,9 @@
 
 - (void)initUI {
     [super initUI];
-
-    if(btnShowAffectDevice == nil) {
-        btnShowAffectDevice = [[UIButton alloc] initWithFrame:CGRectMake(200, 150, 120, 30)];
-        [btnShowAffectDevice setTitle:@"影响" forState:UIControlStateNormal];
-        [btnShowAffectDevice addTarget:self action:@selector(btnShowAffectDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btnShowAffectDevice];
-    }
     
     if(btnShowNotification == nil) {
-        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 200, 120, 30)];
+        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
         [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
         [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnShowNotification];
@@ -76,11 +69,6 @@
 
 #pragma mark -
 #pragma mark notification && affect button
-
-- (void)btnShowAffectDevicePressed:(id)sender {
-    //DeviceAffectViewController *deviceAffectViewController = [[DeviceAffectViewController alloc] init];
-    [self.ownerController.navigationController pushViewController:[[AirConditionViewController alloc] init] animated:YES];
-}
 
 - (void)btnShowNotificationDevicePressed:(id)sender {
     NotificationViewController *notificationViewController = [[NotificationViewController alloc] init];
