@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
-#import "CustomCheckBox.h"
+
 
 @interface AirConditionViewController : NavViewController 
 

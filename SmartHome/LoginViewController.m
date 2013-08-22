@@ -64,7 +64,7 @@
     keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
     NSString *service = [keyWrapper objectForKey:(__bridge_transfer id)kSecAttrService];
     
-    username = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, 100, 20)];
+    username = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
     username.backgroundColor = [UIColor clearColor];
     username.text = NSLocalizedString(@"username", @"");
     username.font= [UIFont systemFontOfSize:12];
@@ -72,6 +72,7 @@
     [self.view addSubview:username];
     
     usernameField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, username.frame.origin.y+LINE_HIGHT+20)];
+
     [self.view addSubview:usernameField];
     
 

@@ -7,17 +7,17 @@
 //
 
 #import "AirConditionViewController.h"
+#import "RadioButton.h"
+#define RADIO_MARGIN 60
 
-#define BOX_MARGIN_LEFT 60
-#define BOX_MARGIN_TOP 20
 @interface AirConditionViewController ()
 
 @end
 
 @implementation AirConditionViewController{
-    CustomCheckBox *makeHotBox;
-    CustomCheckBox *makeCoolBox;
-    CustomCheckBox *closeBox;
+    UIButton *makeHot;
+    UIButton *makeCool;
+    UIButton *close;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,11 +42,13 @@
 }
 -(void) initUI{
     [super initUI];
-    UIView *checkBoard = [[UIView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, (self.view.frame.size.height-44)/4)];
+    UIView *checkBoard = [[UIView alloc] initWithFrame:CGRectMake(3, 44, self.view.frame.size.width-6, (self.view.frame.size.height-44)/4)];
     checkBoard.backgroundColor = [UIColor whiteColor];
     
+    makeHot = [RadioButton buttonWithPoint:CGPointMake(RADIO_MARGIN, RADIO_MARGIN)];
+    
 //    CALayer
-    [checkBoard addSubview:makeHotBox];
+    [checkBoard addSubview:makeHot];
     
     
     

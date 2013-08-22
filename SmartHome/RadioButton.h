@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RadioButton : UIButton
++(UIButton *) buttonWithPoint:(CGPoint)point;
 
 @end

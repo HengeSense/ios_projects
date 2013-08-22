@@ -22,7 +22,8 @@
 + (UITextField *)textFieldWithPoint:(CGPoint)point{
     UITextField *text = [[UITextField alloc] initWithFrame:CGRectMake(point.x, point.y, 616/2, 96/2)];
     [text setBackground:[UIImage imageNamed:@"txt_main.png"]];
-//    text.font = [UIFont systemFontOfSize:30];
+    text.font = [UIFont systemFontOfSize:24];
+    text.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     return text;
 
     

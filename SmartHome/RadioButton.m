@@ -27,5 +27,11 @@
     // Drawing code
 }
 */
++(UIButton *)buttonWithPoint:(CGPoint)point{
+    UIButton *radioButton = [[UIButton alloc] initWithFrame:CGRectMake(point.x, point.y, 40/2, 40/2)];
+    [radioButton setBackgroundImage:[UIImage imageNamed:@"btn_off.png"] forState:UIControlStateNormal];
+    [radioButton setBackgroundImage:[UIImage imageNamed:@"btn_on.png"] forState:UIControlStateSelected];
+    return radioButton;
+}
 
 @end
