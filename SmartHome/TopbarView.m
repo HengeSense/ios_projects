@@ -23,15 +23,23 @@
     return self;
 }
 
-+ (TopbarView *)topBarWithImage:(UIImage *)img {
++ (TopbarView *)topBarWithImage:(UIImage *)img shadow:(BOOL)needShadow {
+    CGFloat height = needShadow ? TOP_BAR_HEIGHT : 44;
+    
     TopbarView *topbar =
-        [[TopbarView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TOP_BAR_HEIGHT)];
+        [[TopbarView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, height)];
     
     if(img != nil) {
         UIImageView *backgroundImageView =
-            [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TOP_BAR_HEIGHT)];
+            [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44)];
         backgroundImageView.image = img;
         [topbar addSubview:backgroundImageView];
+    }
+    
+    if(needShadow) {
+        UIImageView *shadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 44, [UIScreen mainScreen].bounds.size.width, 5 / 2)];
+        shadowView.image = [UIImage imageNamed:@"bg_shadow.png"];
+        [topbar addSubview:shadowView];
     }
     
     return topbar;
@@ -39,7 +47,7 @@
 
 - (UIButton *)leftButton {
     if(leftButton == nil) {
-        leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, TOP_BAR_HEIGHT)];
+        leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
         [self addSubview:leftButton];
     }
     return leftButton;
@@ -48,7 +56,7 @@
 - (UIButton *)rightButton {
     if(rightButton == nil) {
         rightButton = [[UIButton alloc]
-            initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 44), 0, 44, TOP_BAR_HEIGHT)];
+            initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - 44), 0, 44, 44)];
         [self addSubview:rightButton];
     }
     return rightButton;
@@ -56,7 +64,7 @@
 
 - (UILabel *)titleLabel {
     if(titleLabel == nil) {
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, TOP_BAR_HEIGHT)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
         titleLabel.center = self.center;
         titleLabel.textColor = [UIColor lightTextColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;

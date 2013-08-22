@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
 
-@interface SceneModeView : NavigationView<UITableViewDataSource>
+@interface SceneModeView : NavigationView<UITableViewDataSource, UITableViewDelegate>
 
 @end

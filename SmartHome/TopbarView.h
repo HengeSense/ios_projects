@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define TOP_BAR_HEIGHT 44
+#define TOP_BAR_HEIGHT 46.5
 
 @interface TopbarView : UIView
 
@@ -16,6 +16,6 @@
 @property (strong, nonatomic) UIButton *rightButton;
 @property (strong, nonatomic) UILabel *titleLabel;
 
-+ (TopbarView *)topBarWithImage:(UIImage *)img;
++ (TopbarView *)topBarWithImage:(UIImage *)img shadow:(BOOL)needShadow;
 
 @end

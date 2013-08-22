@@ -25,6 +25,8 @@
     UIButton *btnAutoSearch;
 }
 
+@synthesize topbar;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -53,21 +55,8 @@
 }
 
 - (void)initUI {
-    [super initUI];
-    
-    [self.topbar.leftButton removeFromSuperview];
-
-    self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width-101/2-8, 8, 101/2, 59/2)];
-    [self.topbar addSubview:self.topbar.rightButton];
-    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
-    [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];
-    self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
-    self.topbar.rightButton.titleLabel.textColor = [UIColor lightTextColor];
-    [self.topbar.rightButton addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.topbar.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
-    
-    self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"btn_done.png");
-    
+    [self generateTopbar];
+        
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
         CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width, ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - 20))];
     backgroundImageView.image = [UIImage imageNamed:@"bg_scanner.png"];
@@ -112,17 +101,24 @@
     lblForBtnAutoSearch.text = NSLocalizedString(@"auto_search_button_tips", @"");
     [self.view addSubview:lblForBtnAutoSearch];
     
-    
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 50, 120, 21)];
     [btn addTarget:self action:@selector(fff) forControlEvents:UIControlEventTouchUpInside];
     [btn setTitle:@"test" forState:UIControlStateNormal];
     [self.view addSubview:btn];
+}
 
-    
-    
-    
-
-
+- (void)generateTopbar {
+    self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:NO];
+    self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, 8, 101/2, 59/2)];
+    [self.topbar addSubview:self.topbar.rightButton];
+    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
+    [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];
+    self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
+    self.topbar.rightButton.titleLabel.textColor = [UIColor lightTextColor];
+    [self.topbar.rightButton addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.topbar.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
+    [self.view addSubview:self.topbar];
+    self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"btn_done.png");
 }
 
 - (void)fff {

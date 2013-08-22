@@ -97,10 +97,10 @@
         [welcomeView addSubview:lblWelcomeTitle2];
     }
 
-    UIButton *btnCloseSelf = [[UIButton alloc] initWithFrame:CGRectMake(320-60, 320, 60, 25)];
-    btnCloseSelf.backgroundColor = [UIColor redColor];
-    [btnCloseSelf setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnCloseSelf setTitle:@"close" forState:UIControlStateNormal];
+    UIButton *btnCloseSelf = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44/2, 45/2)];
+    btnCloseSelf.center = CGPointMake(self.frame.size.width-5, 5);
+    [btnCloseSelf setBackgroundImage:[UIImage imageNamed:@"btn_speech_close.png"] forState:UIControlStateNormal];
+    [btnCloseSelf setBackgroundImage:[UIImage imageNamed:@"btn_speech_close.png"] forState:UIControlStateHighlighted];
     [btnCloseSelf addTarget:containerView action:@selector(hideSpeechView) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnCloseSelf];
 }
