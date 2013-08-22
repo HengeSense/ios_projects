@@ -168,6 +168,7 @@
 		F2D8E8C717C48EA500090E5B /* CameraAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */; };
 		F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */; };
 		F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */; };
+		F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8D717C5BBB600090E5B /* RadioButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -438,6 +439,8 @@
 		F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "camera_image@2x.jpg"; sourceTree = "<group>"; };
 		F2D8E8CB17C5AA4500090E5B /* CustomCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCheckBox.h; sourceTree = "<group>"; };
 		F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCheckBox.m; sourceTree = "<group>"; };
+		F2D8E8D617C5BBB600090E5B /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
+		F2D8E8D717C5BBB600090E5B /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,6 +594,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				F2D8E8D517C5BB8F00090E5B /* radio_button */,
 				F2D8E8CA17C5A9FE00090E5B /* check_boxes */,
 				6FBD013117C4DFAB002D5618 /* switch_button */,
 				6F0420ED17C481AB00F7F6AF /* direction_button */,
@@ -1120,6 +1124,15 @@
 			name = check_boxes;
 			sourceTree = "<group>";
 		};
+		F2D8E8D517C5BB8F00090E5B /* radio_button */ = {
+			isa = PBXGroup;
+			children = (
+				F2D8E8D617C5BBB600090E5B /* RadioButton.h */,
+				F2D8E8D717C5BBB600090E5B /* RadioButton.m */,
+			);
+			name = radio_button;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1328,6 +1341,7 @@
 				6FBD013D17C4E10A002D5618 /* TVSwitchButton.m in Sources */,
 				6FBD014017C4E119002D5618 /* CameraSwitchButton.m in Sources */,
 				F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */,
+				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
