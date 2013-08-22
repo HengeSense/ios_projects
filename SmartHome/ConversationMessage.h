@@ -22,6 +22,6 @@ typedef NS_ENUM(NSInteger, MESSAGE_OWNER) {
 
 // methods
 
-- (UIView *)viewWithMessage;
+- (UIView *)viewWithMessage:(CGFloat)tblConversationWidth;
 
 @end
