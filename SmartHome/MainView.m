@@ -82,7 +82,7 @@
 
 - (void)btnShowAffectDevicePressed:(id)sender {
     //DeviceAffectViewController *deviceAffectViewController = [[DeviceAffectViewController alloc] init];
-    [self.ownerController.navigationController pushViewController:[[CameraAdjustViewController alloc] init] animated:YES];
+    [self.ownerController.navigationController pushViewController:[[AirConditionViewController alloc] init] animated:YES];
 }
 
 - (void)btnShowNotificationDevicePressed:(id)sender {

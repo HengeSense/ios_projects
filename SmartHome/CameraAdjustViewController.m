@@ -7,6 +7,7 @@
 //
 
 #import "CameraAdjustViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
 @interface CameraAdjustViewController ()
 
@@ -38,7 +39,7 @@
     [super initUI];
     self.topbar.titleLabel.text = NSLocalizedString(@"camera.adjust", @"");
     cameraView = [[UIView alloc] initWithFrame:CGRectMake(3, 47, self.view.bounds.size.width-6, self.view.bounds.size.height-90)];
-    cameraView.backgroundColor = [UIColor blackColor];
+    cameraView.backgroundColor = [UIColor colorWithHexString:@"#1a1a1f"];
     [self.view addSubview:cameraView];
     
     cameraImage = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, cameraView.frame.size.width-6, cameraView.frame.size.height-90-100)];
