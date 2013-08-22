@@ -45,7 +45,7 @@
     UIView *checkBoard = [[UIView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, (self.view.frame.size.height-44)/4)];
     checkBoard.backgroundColor = [UIColor whiteColor];
     
-    CALayer
+//    CALayer
     [checkBoard addSubview:makeHotBox];
     
     
