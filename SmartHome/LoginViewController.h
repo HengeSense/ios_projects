@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 #import "CustomCheckBox.h"
 
-@interface LoginViewController : BaseViewController
+@interface LoginViewController : BaseViewController<UITextFieldDelegate>
 
 @end

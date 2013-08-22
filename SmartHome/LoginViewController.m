@@ -72,7 +72,6 @@
     [self.view addSubview:username];
     
     usernameField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, username.frame.origin.y+LINE_HIGHT+20)];
-
     [self.view addSubview:usernameField];
     
 
@@ -86,6 +85,8 @@
     
     passwordField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, password.frame.origin.y+LINE_HIGHT+20)];
     [passwordField setSecureTextEntry:YES];
+    passwordField.returnKeyType = UIReturnKeyJoin;
+    passwordField.delegate =self;
     [self.view addSubview:passwordField];
     
     loginBtn = [LongButton buttonWithPoint:CGPointMake(5, passwordField.frame.origin.y+passwordField.bounds.size.height+LINE_HIGHT)];
@@ -121,6 +122,13 @@
 }
 -(void) rememberBtnTouchInside{
     rememberBtn.selected =!rememberBtn.selected;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField;{
+    if([textField isEqual:passwordField]){
+        [textField resignFirstResponder];
+        [self loginBtnTouchInside];
+    }
+    return YES;
 }
 -(void) loginBtnTouchInside{
     if(rememberBtn.selected){

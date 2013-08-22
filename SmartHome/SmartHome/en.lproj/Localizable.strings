@@ -79,4 +79,11 @@
  *camera adjust view controller
  */
 "camera.adjust"     ="Camera Adjust";
+/*
+ *air condition view controller
+ */
+"make.hot" = "make hot";
+"make.cool" = "make cool";
+"close" = "close";
+"air.condition.setting" = "air condition setting";
 

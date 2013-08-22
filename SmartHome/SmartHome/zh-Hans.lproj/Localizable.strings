@@ -80,4 +80,11 @@
  *camera adjust view controller
  */
 "camera.adjust"     ="摄像头调整";
+/*
+ *air condition view controller
+ */
+"make.hot" = "制热";
+"make.cool" = "制冷";
+"close" = "关";
+"air.condition.setting" = "空调设置";
  
