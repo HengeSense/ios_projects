@@ -31,6 +31,7 @@
 		6F04210017C4BC9D00F7F6AF /* btn_scene@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420FE17C4BC9D00F7F6AF /* btn_scene@2x.png */; };
 		6F0F475117C5B99C0057F9A4 /* btn_speech_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F475017C5B99C0057F9A4 /* btn_speech_close@2x.png */; };
 		6F0F475317C5C3280057F9A4 /* bg_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F475217C5C3280057F9A4 /* bg_shadow@2x.png */; };
+		6F0F475917C5ECC00057F9A4 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F475817C5ECC00057F9A4 /* Device.m */; };
 		6F0FAE7817AF7F9F00B75D3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7717AF7F9F00B75D3E /* UIKit.framework */; };
 		6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */; };
 		6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7B17AF7F9F00B75D3E /* CoreGraphics.framework */; };
@@ -199,6 +200,8 @@
 		6F0420FE17C4BC9D00F7F6AF /* btn_scene@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_scene@2x.png"; sourceTree = "<group>"; };
 		6F0F475017C5B99C0057F9A4 /* btn_speech_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_close@2x.png"; sourceTree = "<group>"; };
 		6F0F475217C5C3280057F9A4 /* bg_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_shadow@2x.png"; sourceTree = "<group>"; };
+		6F0F475717C5ECC00057F9A4 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		6F0F475817C5ECC00057F9A4 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		6F0FAE7417AF7F9F00B75D3E /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0FAE7717AF7F9F00B75D3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -522,6 +525,41 @@
 			name = speech_button;
 			sourceTree = "<group>";
 		};
+		6F0F475417C5EC790057F9A4 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				6F0FAF5417AFA3C800B75D3E /* DrawerNavigationItem.h */,
+				6F0FAF5517AFA3C800B75D3E /* DrawerNavigationItem.m */,
+				6F92A1E817B7D5B6009AD656 /* ConversationMessage.h */,
+				6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */,
+				6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */,
+				6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */,
+				6F17672917C1E232007AED0C /* CommunicationMessage.h */,
+				6F17672A17C1E232007AED0C /* CommunicationMessage.m */,
+			);
+			name = ui;
+			sourceTree = "<group>";
+		};
+		6F0F475517C5EC840057F9A4 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				6F17672C17C1F7CA007AED0C /* DeviceCommand.h */,
+				6F17672D17C1F7CA007AED0C /* DeviceCommand.m */,
+				6F0F475717C5ECC00057F9A4 /* Device.h */,
+				6F0F475817C5ECC00057F9A4 /* Device.m */,
+			);
+			name = service;
+			sourceTree = "<group>";
+		};
+		6F0F475617C5EC940057F9A4 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				F237F60917B234760057C95B /* XMLElement.h */,
+				F237F60A17B234760057C95B /* XMLElement.m */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
 		6F0FAE6B17AF7F9F00B75D3E = {
 			isa = PBXGroup;
 			children = (
@@ -662,18 +700,9 @@
 		6F0FAEA117AF800A00B75D3E /* models */ = {
 			isa = PBXGroup;
 			children = (
-				6F0FAF5417AFA3C800B75D3E /* DrawerNavigationItem.h */,
-				6F0FAF5517AFA3C800B75D3E /* DrawerNavigationItem.m */,
-				F237F60917B234760057C95B /* XMLElement.h */,
-				F237F60A17B234760057C95B /* XMLElement.m */,
-				6F92A1E817B7D5B6009AD656 /* ConversationMessage.h */,
-				6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */,
-				6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */,
-				6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */,
-				6F17672917C1E232007AED0C /* CommunicationMessage.h */,
-				6F17672A17C1E232007AED0C /* CommunicationMessage.m */,
-				6F17672C17C1F7CA007AED0C /* DeviceCommand.h */,
-				6F17672D17C1F7CA007AED0C /* DeviceCommand.m */,
+				6F0F475617C5EC940057F9A4 /* util */,
+				6F0F475517C5EC840057F9A4 /* service */,
+				6F0F475417C5EC790057F9A4 /* ui */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -1350,6 +1379,7 @@
 				6FBD014017C4E119002D5618 /* CameraSwitchButton.m in Sources */,
 				F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */,
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
+				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,7 +49,8 @@
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateHighlighted];
     self.topbar.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 1, 0);
     [self.topbar.leftButton setTitle:NSLocalizedString(@"back", @"") forState:UIControlStateNormal];
-
+    [self.topbar.leftButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
+    [self.topbar.leftButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateHighlighted];
     self.topbar.leftButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
     [self.topbar.leftButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.topbar];
