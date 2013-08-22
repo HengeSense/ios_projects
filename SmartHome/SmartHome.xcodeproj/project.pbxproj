@@ -168,6 +168,9 @@
 		F2D8E8C717C48EA500090E5B /* CameraAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */; };
 		F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */; };
 		F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */; };
+		F2D8E8D217C5B90E00090E5B /* off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8CF17C5B90E00090E5B /* off@2x.png */; };
+		F2D8E8D317C5B90E00090E5B /* on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8D017C5B90E00090E5B /* on@2x.png */; };
+		F2D8E8D417C5B90E00090E5B /* onoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8D117C5B90E00090E5B /* onoff@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -438,6 +441,9 @@
 		F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "camera_image@2x.jpg"; sourceTree = "<group>"; };
 		F2D8E8CB17C5AA4500090E5B /* CustomCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCheckBox.h; sourceTree = "<group>"; };
 		F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCheckBox.m; sourceTree = "<group>"; };
+		F2D8E8CF17C5B90E00090E5B /* off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "off@2x.png"; sourceTree = "<group>"; };
+		F2D8E8D017C5B90E00090E5B /* on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "on@2x.png"; sourceTree = "<group>"; };
+		F2D8E8D117C5B90E00090E5B /* onoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onoff@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -607,6 +613,7 @@
 		6F0FAE9E17AF7FF700B75D3E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F2D8E8CE17C5B8E200090E5B /* switchs */,
 				6F04210117C4BD5900F7F6AF /* speech_button */,
 				6F0420E217C4816B00F7F6AF /* camera */,
 				6F0420CD17C4674A00F7F6AF /* drawer_nav_view */,
@@ -1120,6 +1127,16 @@
 			name = check_boxes;
 			sourceTree = "<group>";
 		};
+		F2D8E8CE17C5B8E200090E5B /* switchs */ = {
+			isa = PBXGroup;
+			children = (
+				F2D8E8CF17C5B90E00090E5B /* off@2x.png */,
+				F2D8E8D017C5B90E00090E5B /* on@2x.png */,
+				F2D8E8D117C5B90E00090E5B /* onoff@2x.png */,
+			);
+			name = switchs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1239,6 +1256,9 @@
 				6F35114C17C5B80D005CD097 /* btn_on@2x.png in Resources */,
 				6F35114D17C5B80D005CD097 /* btn_switch@2x.png in Resources */,
 				F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */,
+				F2D8E8D217C5B90E00090E5B /* off@2x.png in Resources */,
+				F2D8E8D317C5B90E00090E5B /* on@2x.png in Resources */,
+				F2D8E8D417C5B90E00090E5B /* onoff@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
