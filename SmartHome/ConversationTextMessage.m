@@ -23,11 +23,9 @@
 
 @synthesize textMessage;
 
-- (UIView *)viewWithMessage {    
+- (UIView *)viewWithMessage:(CGFloat)tblConversationWidth {
     if(messageView != nil) return messageView;
     if([NSString isEmpty:self.textMessage]) return nil;
-    
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
     //generated text view
 
@@ -59,7 +57,7 @@
     }
 
     messageView = [[UIView alloc] initWithFrame:
-                   CGRectMake(((self.messageOwner == MESSAGE_OWNER_THEIRS) ? BubbleSpace : (screenWidth - backgroundImage.frame.size.width - BubbleSpace)), 0, backgroundImage.frame.size.width, backgroundImage.frame.size.height)];
+                   CGRectMake(((self.messageOwner == MESSAGE_OWNER_THEIRS) ? BubbleSpace : (tblConversationWidth - backgroundImage.frame.size.width - BubbleSpace)), 0, backgroundImage.frame.size.width, backgroundImage.frame.size.height)];
     messageView.backgroundColor = [UIColor clearColor];
     [messageView addSubview:backgroundImage];
     [messageView addSubview:textView];

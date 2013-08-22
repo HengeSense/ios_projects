@@ -15,6 +15,7 @@
 @implementation ConversationView {
     UIView *containerView;
     UIView *welcomeView;
+    UIImageView *backgroundImageView;
     UITableView *tblMessages;
     NSMutableArray *messages;
 }
@@ -51,11 +52,16 @@
 }
 
 - (void)initUI {
-    self.alpha = 1.f;
-    self.backgroundColor = [UIColor blackColor];
+//    self.alpha = 1.f;
+//    self.backgroundColor = [UIColor blackColor];
+    if(backgroundImageView == nil) {
+        backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        backgroundImageView.image = [[UIImage imageNamed:@"bg_speech.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+        [self addSubview:backgroundImageView];
+    }
     
     if(tblMessages == nil) {
-        tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) style:UITableViewStylePlain];
+        tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.frame.size.width, self.frame.size.height-10) style:UITableViewStylePlain];
         tblMessages.backgroundColor = [UIColor clearColor];
         tblMessages.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblMessages.delegate = self;
@@ -66,7 +72,7 @@
     
     if(welcomeView == nil) {
         //还需要一个遮罩层 实现动画
-        welcomeView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, 320, 70)];
+        welcomeView = [[UIView alloc] initWithFrame:CGRectMake(0, 200, self.frame.size.width, 70)];
         welcomeView.tag = WELCOME_VIEW_TAG;
         welcomeView.backgroundColor = [UIColor clearColor];
         
@@ -109,7 +115,7 @@
     }
     [UIView animateWithDuration:0.3f
                      animations:^{
-                         welcomeView.frame = CGRectMake(0, 0, 320, 70);
+                         welcomeView.frame = CGRectMake(0, 0, self.frame.size.width, 70);
                      }
                      completion:^(BOOL finished){
                      }];
@@ -119,7 +125,7 @@
     UIView *view = [self viewWithTag:WELCOME_VIEW_TAG];
     if(view != nil) {
         [view removeFromSuperview];
-        welcomeView.frame = CGRectMake(0, 200, 320, 70);
+        welcomeView.frame = CGRectMake(0, 200, self.frame.size.width, 70);
     }
 }
 
@@ -155,7 +161,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ConversationMessage *message = [messages objectAtIndex:indexPath.row];
     if(message != nil) {
-        UIView *messageView = [message viewWithMessage];
+        UIView *messageView = [message viewWithMessage:self.frame.size.width];
         if(messageView != nil) {
             return messageView.frame.size.height + 15;
         }
@@ -176,7 +182,7 @@
     }
     ConversationMessage *message = [messages objectAtIndex:indexPath.row];
     if(message != nil) {
-        messageView = [message viewWithMessage];
+        messageView = [message viewWithMessage:self.frame.size.width];
         if(messageView != nil) {
             messageView.tag = CELL_CONTENT_VIEW_TAG;
             [cell addSubview:messageView];

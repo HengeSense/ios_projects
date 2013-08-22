@@ -12,7 +12,7 @@
 
 @synthesize messageOwner;
 
-- (UIView *)viewWithMessage {
+- (UIView *)viewWithMessage:(CGFloat)tblConversationWidth {
     return nil;
 }
 

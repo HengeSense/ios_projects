@@ -15,8 +15,8 @@
 #import "CameraAdjustViewController.h"
 
 #define SPEECH_VIEW_TAG                  46001
-#define SPEECH_BUTTON_WIDTH              75
-#define SPEECH_BUTTON_HEIGHT             111
+#define SPEECH_BUTTON_WIDTH              174
+#define SPEECH_BUTTON_HEIGHT             186
 #define DELAY_START_LISTENING_DURATION   0.6f
 #define RECORD_BEGIN_SOUND_ID            1113
 #define RECORD_END_SOUND_ID              1114
@@ -31,10 +31,6 @@
     UIButton *btnShowNotification;
     UIButton *btnShowAffectDevice;
 }
-
-@synthesize temperature;
-@synthesize humidity;
-@synthesize pm25;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -70,8 +66,8 @@
     }
     
     if(btnSpeech == nil) {
-        btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 10), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
-        [btnSpeech setBackgroundImage:[UIImage imageNamed:@"record_animate_00.png"] forState:UIControlStateNormal];
+        btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 3), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
+        [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
         [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnSpeech];
     }
@@ -104,7 +100,7 @@
     [self.ownerController disableGestureForDrawerView];
     [UIView animateWithDuration:0.3f
                 animations:^{
-                    view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+                    view.frame = CGRectMake(view.frame.origin.x, 12, view.frame.size.width, view.frame.size.height);
                 }
                 completion:^(BOOL finished) {
                     speechViewState = SpeechViewStateOpenned;
@@ -115,12 +111,12 @@
 
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
-    CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 20;
+    CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 12;
     ConversationView *view = [self speechView];
     speechViewState = SpeechViewStateClosing;
     [UIView animateWithDuration:0.3f
                      animations:^{
-                         view.frame = CGRectMake(0, (0 - viewHeight), view.frame.size.width, view.frame.size.height);
+                         view.frame = CGRectMake(view.frame.origin.x, (0 - viewHeight - 12), view.frame.size.width, view.frame.size.height);
                      }
                      completion:^(BOOL finished) {
                          [[self speechView] hideWelcomeMessage];
@@ -210,23 +206,12 @@
 
 - (ConversationView *)speechView {
     if(speechView == nil) {
-        CGFloat viewHeight = self.frame.size.height - 111/2 - 20;
-        speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight), self.frame.size.width, viewHeight) andContainerView:self];
+        CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT/2 - 15 - 12;
+        speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight - 12), 601/2, viewHeight) andContainerView:self];
+        speechView.center = CGPointMake(self.center.x, speechView.center.y);
         speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;
-}
-
-- (void)setTemperature:(NSInteger)temperature {
-    
-}
-
-- (void)setHumidity:(NSUInteger)humidity {
-    
-}
-
-- (void)setPm25:(NSInteger)pm25 {
-    
 }
 
 @end
