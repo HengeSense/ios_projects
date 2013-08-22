@@ -30,6 +30,7 @@
 		6F0420FF17C4BC9D00F7F6AF /* btn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420FD17C4BC9C00F7F6AF /* btn_device@2x.png */; };
 		6F04210017C4BC9D00F7F6AF /* btn_scene@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420FE17C4BC9D00F7F6AF /* btn_scene@2x.png */; };
 		6F0F475117C5B99C0057F9A4 /* btn_speech_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F475017C5B99C0057F9A4 /* btn_speech_close@2x.png */; };
+		6F0F475317C5C3280057F9A4 /* bg_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F475217C5C3280057F9A4 /* bg_shadow@2x.png */; };
 		6F0FAE7817AF7F9F00B75D3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7717AF7F9F00B75D3E /* UIKit.framework */; };
 		6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */; };
 		6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7B17AF7F9F00B75D3E /* CoreGraphics.framework */; };
@@ -197,6 +198,7 @@
 		6F0420FD17C4BC9C00F7F6AF /* btn_device@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_device@2x.png"; sourceTree = "<group>"; };
 		6F0420FE17C4BC9D00F7F6AF /* btn_scene@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_scene@2x.png"; sourceTree = "<group>"; };
 		6F0F475017C5B99C0057F9A4 /* btn_speech_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_close@2x.png"; sourceTree = "<group>"; };
+		6F0F475217C5C3280057F9A4 /* bg_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_shadow@2x.png"; sourceTree = "<group>"; };
 		6F0FAE7417AF7F9F00B75D3E /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0FAE7717AF7F9F00B75D3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -955,6 +957,7 @@
 			children = (
 				6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */,
 				6F3F2D3917C5AEC7003C3848 /* bg_speech@2x.png */,
+				6F0F475217C5C3280057F9A4 /* bg_shadow@2x.png */,
 			);
 			name = views_background;
 			sourceTree = "<group>";
@@ -1256,6 +1259,7 @@
 				6F35114D17C5B80D005CD097 /* btn_switch@2x.png in Resources */,
 				F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */,
 				6F0F475117C5B99C0057F9A4 /* btn_speech_close@2x.png in Resources */,
+				6F0F475317C5C3280057F9A4 /* bg_shadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

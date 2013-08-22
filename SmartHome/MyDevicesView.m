@@ -10,7 +10,7 @@
 #import "DevicesViewController.h"
 
 @implementation MyDevicesView {
-    UITableView *mainTableView;
+    UITableView *tblUnits;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -28,34 +28,28 @@
 
 - (void)initUI {
     [super initUI];
-    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.frame.size.width, self.frame.size.height-44) style:UITableViewStylePlain];
-    [self addSubview:mainTableView];
-    mainTableView.dataSource = self;
-    mainTableView.delegate = self;    
+    if(tblUnits == nil) {
+        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, self.frame.size.width, self.frame.size.height-self.topbar.bounds.size.height) style:UITableViewStylePlain];
+        tblUnits.backgroundColor = [UIColor clearColor];
+        tblUnits.dataSource = self;
+        tblUnits.delegate = self;
+        [self addSubview:tblUnits];
+    }
 }
+
+#pragma mark -
+#pragma mark table view delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIdentifier = @"cellIdentifer";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
-        cell.textLabel.text = [NSString stringWithFormat:@"主控%ld",(long)indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    
-    return cell;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
-    DevicesViewController *devicesViewController = [[DevicesViewController alloc] init];
-    devicesViewController.curCell = curCell;
-    [self.ownerController.navigationController pushViewController:devicesViewController animated:YES];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return nil;
 }
 
 @end
