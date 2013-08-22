@@ -45,7 +45,6 @@
     cameraImage = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, cameraView.frame.size.width-6, cameraView.frame.size.height-90-100)];
     cameraImage.image = [UIImage imageNamed:@"camera_image.jpg"];
     [cameraView addSubview:cameraImage];
-    
     directionButton = [DirectionButton directionButtonWithPoint:CGPointMake(90,cameraView.frame.size.height-141-30)];
     directionButton.delegate = self;
     [cameraView addSubview:directionButton];

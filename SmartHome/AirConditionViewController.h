@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
-#import "QCheckBox.h"
+#import "CustomCheckBox.h"
 
-@interface AirConditionViewController : NavViewController <QCheckBoxDelegate>
+@interface AirConditionViewController : NavViewController 
 
 @end

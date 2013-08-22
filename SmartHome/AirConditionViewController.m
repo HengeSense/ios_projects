@@ -15,9 +15,9 @@
 @end
 
 @implementation AirConditionViewController{
-    QCheckBox *makeHotBox;
-    QCheckBox *makeCoolBox;
-    QCheckBox *closeBox;
+    CustomCheckBox *makeHotBox;
+    CustomCheckBox *makeCoolBox;
+    CustomCheckBox *closeBox;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,14 +45,7 @@
     UIView *checkBoard = [[UIView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, (self.view.frame.size.height-44)/4)];
     checkBoard.backgroundColor = [UIColor whiteColor];
     
-    makeHotBox = [[QCheckBox alloc] initWithDelegate:self];
-    makeHotBox.frame = CGRectMake(BOX_MARGIN_LEFT, BOX_MARGIN_TOP, 80,40);
-    [makeHotBox setTitle:NSLocalizedString(@"make.hot", @"") forState:UIControlStateNormal];
-    [makeHotBox setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [makeHotBox setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-    [makeHotBox setBackgroundImage:[UIImage imageNamed:@"cbx_checked.png"] forState:UIControlStateSelected];
-    [makeHotBox setBackgroundImage:[UIImage imageNamed:@"cbx_unchecked.png"] forState:UIControlStateNormal];
-    [makeHotBox setTransform:CGAffineTransformMakeRotation(-M_PI/2)];
+    
     [checkBoard addSubview:makeHotBox];
     
     
