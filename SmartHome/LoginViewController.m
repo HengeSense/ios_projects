@@ -36,6 +36,9 @@
     KeychainItemWrapper *keyWrapper;
 }
 
+#pragma mark -
+#pragma initializations
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,9 +63,13 @@
 -(void) initUI{
     [super initUI];
     [self registerTapGestureToResignKeyboard];
-
-    keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
-    NSString *service = [keyWrapper objectForKey:(__bridge_transfer id)kSecAttrService];
+    
+    NSString *service = [NSString emptyString];
+    
+    if(keyWrapper == nil) {
+        keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
+        service = [keyWrapper objectForKey:(__bridge_transfer id)kSecAttrService];
+    }
     
     if(lblUserName == nil) {
         lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
@@ -77,8 +84,7 @@
         txtUserName = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, (lblUserName.frame.origin.y + LINE_HIGHT + 20))];
         txtUserName.keyboardType = UIKeyboardTypeASCIICapable;
         txtUserName.returnKeyType = UIReturnKeyNext;
-        txtUserName.textColor = [UIColor darkGrayColor];
-        txtUserName.font = [UIFont systemFontOfSize:18.f];
+        txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;
         txtUserName.delegate = self;
         [self.view addSubview:txtUserName];
     }
@@ -95,10 +101,9 @@
     if(txtPassword == nil) {
         txtPassword = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, (lblPassword.frame.origin.y + LINE_HIGHT + 20))];
         [txtPassword setSecureTextEntry:YES];
-        txtPassword.textColor = [UIColor darkGrayColor];
-        txtPassword.font = [UIFont systemFontOfSize:18.f];
         txtPassword.returnKeyType = UIReturnKeyJoin;
         txtPassword.delegate =self;
+        txtPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.view addSubview:txtPassword];
     }
     
@@ -140,18 +145,11 @@
     }
 }
 
+#pragma mark -
+#pragma mark services
+
 - (void)btnRememberPressed {
     btnRemember.selected = !btnRemember.selected;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if(textField == txtPassword) {
-        [textField resignFirstResponder];
-        [self login];
-    } else if(textField == txtUserName) {
-        [txtPassword becomeFirstResponder];
-    }
-    return YES;
 }
 
 - (void)login {
@@ -167,6 +165,26 @@
 
 -(void)showRegisterViewController {
     [self.navigationController pushViewController:[[RegisterViewController alloc] init] animated:YES];
+}
+
+#pragma mark -
+#pragma mark text field delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(textField == txtPassword) {
+        [textField resignFirstResponder];
+        [self login];
+    } else if(textField == txtUserName) {
+        [txtPassword becomeFirstResponder];
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (range.location >= 20)
+        return NO; // return NO to not change text
+    return YES;
 }
 
 @end

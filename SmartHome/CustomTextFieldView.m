@@ -20,12 +20,24 @@
 }
 
 + (UITextField *)textFieldWithPoint:(CGPoint)point{
-    UITextField *text = [[UITextField alloc] initWithFrame:CGRectMake(point.x, point.y, 616/2, 96/2)];
+    CustomTextFieldView *text = [[CustomTextFieldView alloc] initWithFrame:CGRectMake(point.x, point.y, 616 / 2, 96 / 2)];
     [text setBackground:[UIImage imageNamed:@"txt_main.png"]];
-    text.font = [UIFont systemFontOfSize:24];
-    text.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    text.font = [UIFont systemFontOfSize:18.f];
+    text.textColor = [UIColor darkTextColor];
+    text.borderStyle = UITextBorderStyleNone;
     return text;
-
-    
 }
+
+- (CGRect)textRectForBounds:(CGRect)bounds {
+    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + 12, bounds.size.width - 15, bounds.size.height);
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds {
+    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + 12, bounds.size.width - 15, bounds.size.height);
+}
+
+- (CGRect)clearButtonRectForBounds:(CGRect)bounds {
+    return CGRectMake(bounds.origin.x + 135, bounds.origin.y - 1, bounds.size.width, bounds.size.height);
+}
+
 @end
