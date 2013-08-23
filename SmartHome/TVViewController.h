@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TVViewController : UIViewController
+#import "NavViewController.h"
+@interface TVViewController : NavViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
