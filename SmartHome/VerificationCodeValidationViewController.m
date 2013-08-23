@@ -61,7 +61,7 @@
     }
     
     if(txtVerificationCode == nil) {
-        txtVerificationCode = [SMTextField textFieldWithPoint:CGPointMake(10, lblVerificationCode.frame.origin.y + 30)];
+        txtVerificationCode = [SMTextField textFieldWithPoint:CGPointMake(6, lblVerificationCode.frame.origin.y + 30)];
         txtVerificationCode.keyboardType = UIKeyboardTypeNumberPad;
         txtVerificationCode.clearButtonMode = UITextFieldViewModeWhileEditing;
         txtVerificationCode.delegate = self;
@@ -69,7 +69,7 @@
     }
     
     if(btnNext == nil) {
-        btnNext = [LongButton buttonWithPoint:CGPointMake(10, txtVerificationCode.frame.origin.y +txtVerificationCode.frame.size.height + 5)];
+        btnNext = [LongButton buttonWithPoint:CGPointMake(5, txtVerificationCode.frame.origin.y +txtVerificationCode.frame.size.height + 5)];
         [btnNext setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
         [btnNext addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnNext];

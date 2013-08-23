@@ -29,7 +29,6 @@
     UITextField *txtUserName;
     UITextField *txtPassword;
     
-    UIButton *btnRemember;
     UIButton *btnLogin;
     UIButton *btnRegister;
     
@@ -114,23 +113,8 @@
         [self.view addSubview:btnLogin];
     }
     
-    if(btnRemember == nil) {
-        btnRemember = [CustomCheckBox checkBoxWithPoint:CGPointMake(5, btnLogin.frame.origin.y + btnLogin.bounds.size.height + LINE_HIGHT)];
-        [btnRemember addTarget:self action:@selector(btnRememberPressed) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnRemember];
-    }
-    
-    if(lblRemeberPassword == nil) {
-        lblRemeberPassword = [[UILabel alloc]  initWithFrame:CGRectMake((5 + btnRemember.frame.size.width + LINE_HIGHT), btnRemember.frame.origin.y, 100, 20)];
-        lblRemeberPassword.font = [UIFont systemFontOfSize:16];
-        lblRemeberPassword.backgroundColor = [UIColor clearColor];
-        lblRemeberPassword.text = NSLocalizedString(@"remember_password", @"");
-        lblRemeberPassword.textColor = [UIColor lightTextColor];
-        [self.view addSubview:lblRemeberPassword];
-    }
-    
     if(btnRegister == nil) {
-        btnRegister = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 5 - 146 / 2), btnRemember.frame.origin.y, 146 / 2, 52 / 2)];
+        btnRegister = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 5 - 146 / 2), 300, 146 / 2, 52 / 2)];
         [btnRegister setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateNormal];
         [btnRegister setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateHighlighted];
         btnRegister.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -140,13 +124,6 @@
         [self.view addSubview:btnRegister];
     }
     
-    if ([service isEqualToString:INDENTIFER_KEY_WRAPPER]) {
-        btnRemember.selected = YES;
-        [txtUserName setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecAttrAccount]];
-        [txtPassword setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecValueData]];
-    }
-    
-    
     txtUserName.text = @"admin";
     txtPassword.text = @"admin";
 }
@@ -154,20 +131,9 @@
 #pragma mark -
 #pragma mark services
 
-- (void)btnRememberPressed {
-    btnRemember.selected = !btnRemember.selected;
-}
-
 - (void)login {
     if(![txtUserName.text isEqualToString:@"admin"] && ![txtPassword.text isEqualToString:@"admin"]) {
         return;
-    }
-    if(btnRemember.selected) {
-        [keyWrapper setObject:INDENTIFER_KEY_WRAPPER forKey:(__bridge_transfer id) kSecAttrService];
-        [keyWrapper setObject:txtUserName.text forKey:(__bridge_transfer id) kSecAttrAccount];
-        [keyWrapper setObject:txtPassword.text forKey:(__bridge_transfer id) kSecValueData];
-    } else {
-        [keyWrapper setObject:[NSString emptyString] forKey:(__bridge_transfer id) kSecAttrService];
     }
     [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
 }

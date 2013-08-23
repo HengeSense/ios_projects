@@ -64,7 +64,7 @@
     }
     
     if(txtPhoneNumber == nil) {
-        txtPhoneNumber = [SMTextField textFieldWithPoint:CGPointMake(10, lblPhoneNumber.frame.origin.y + 30)];
+        txtPhoneNumber = [SMTextField textFieldWithPoint:CGPointMake(6, lblPhoneNumber.frame.origin.y + 30)];
         txtPhoneNumber.keyboardType = UIKeyboardTypeNumberPad;
         txtPhoneNumber.clearButtonMode = UITextFieldViewModeWhileEditing;
         txtPhoneNumber.delegate = self;
@@ -72,7 +72,7 @@
     }
     
     if(btnVerificationCodeSender == nil) {
-        btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(10, txtPhoneNumber.frame.origin.y +txtPhoneNumber.frame.size.height + 5)];
+        btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(5, txtPhoneNumber.frame.origin.y +txtPhoneNumber.frame.size.height + 5)];
         [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
         [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnVerificationCodeSender];
