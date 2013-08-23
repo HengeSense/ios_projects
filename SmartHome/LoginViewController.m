@@ -143,6 +143,10 @@
         [txtUserName setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecAttrAccount]];
         [txtPassword setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecValueData]];
     }
+    
+    
+    txtUserName.text = @"admin";
+    txtPassword.text = @"admin";
 }
 
 #pragma mark -
@@ -153,6 +157,9 @@
 }
 
 - (void)login {
+    if(![txtUserName.text isEqualToString:@"admin"] && ![txtPassword.text isEqualToString:@"admin"]) {
+        return;
+    }
     if(btnRemember.selected) {
         [keyWrapper setObject:INDENTIFER_KEY_WRAPPER forKey:(__bridge_transfer id) kSecAttrService];
         [keyWrapper setObject:txtUserName.text forKey:(__bridge_transfer id) kSecAttrAccount];
