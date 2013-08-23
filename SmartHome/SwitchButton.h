@@ -13,7 +13,7 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *status;
 
-+ (SwitchButton *)buttonWithTitle:(NSString *)t andStatus:(NSString *)status;
++ (SwitchButton *)buttonWithPoint:(CGPoint)point;
 
 - (void)initDefaults;
 - (void)initUI;

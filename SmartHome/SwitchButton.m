@@ -39,7 +39,7 @@
 
 - (void)initUI {
     if(btn == nil) {
-        btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
     }
     
     if(lblTitle == nil) {
