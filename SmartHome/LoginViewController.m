@@ -75,8 +75,8 @@
         lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
         lblUserName.backgroundColor = [UIColor clearColor];
         lblUserName.text = NSLocalizedString(@"username", @"");
-        lblUserName.font= [UIFont systemFontOfSize:12];
-        lblUserName.textColor = [UIColor whiteColor];
+        lblUserName.font= [UIFont systemFontOfSize:16];
+        lblUserName.textColor = [UIColor lightTextColor];
         [self.view addSubview:lblUserName];
     }
     
@@ -92,9 +92,9 @@
     if(lblPassword == nil) {
         lblPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, (txtUserName.frame.origin.y + txtUserName.bounds.size.height + LINE_HIGHT), 100, 20)];
         lblPassword.text = NSLocalizedString(@"password", @"");
-        lblPassword.textColor = [UIColor whiteColor];
+        lblPassword.textColor = [UIColor lightTextColor];
         lblPassword.backgroundColor = [UIColor clearColor];
-        lblPassword.font= [UIFont systemFontOfSize:12];
+        lblPassword.font= [UIFont systemFontOfSize:16];
         [self.view addSubview:lblPassword];
     }
     
@@ -122,18 +122,20 @@
     
     if(lblRemeberPassword == nil) {
         lblRemeberPassword = [[UILabel alloc]  initWithFrame:CGRectMake((5 + btnRemember.frame.size.width + LINE_HIGHT), btnRemember.frame.origin.y, 100, 20)];
-        lblRemeberPassword.font = [UIFont systemFontOfSize:12];
+        lblRemeberPassword.font = [UIFont systemFontOfSize:16];
         lblRemeberPassword.backgroundColor = [UIColor clearColor];
         lblRemeberPassword.text = NSLocalizedString(@"remember_password", @"");
-        lblRemeberPassword.textColor = [UIColor whiteColor];
+        lblRemeberPassword.textColor = [UIColor lightTextColor];
         [self.view addSubview:lblRemeberPassword];
     }
     
     if(btnRegister == nil) {
         btnRegister = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 5 - 146 / 2), btnRemember.frame.origin.y, 146 / 2, 52 / 2)];
         [btnRegister setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateNormal];
-        btnRegister.titleLabel.font = [UIFont systemFontOfSize:12];
+        [btnRegister setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateHighlighted];
+        btnRegister.titleLabel.font = [UIFont systemFontOfSize:13];
         [btnRegister setTitle:NSLocalizedString(@"register_new_user", @"") forState:UIControlStateNormal];
+        btnRegister.titleLabel.textColor = [UIColor lightTextColor];
         [btnRegister addTarget:self action:@selector(showRegisterViewController) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnRegister];
     }
