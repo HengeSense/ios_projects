@@ -76,7 +76,7 @@
 		6F0FAF0A17AF879A00B75D3E /* TVSpeechSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0917AF879A00B75D3E /* TVSpeechSettingViewController.m */; };
 		6F0FAF0D17AF87AC00B75D3E /* TVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */; };
 		6F0FAF1017AF87BD00B75D3E /* AirconditionAdjustmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */; };
-		6F0FAF1317AF87CD00B75D3E /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1217AF87CC00B75D3E /* RegisterViewController.m */; };
+		6F0FAF1317AF87CD00B75D3E /* VerificationCodeSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */; };
 		6F0FAF1617AF87DE00B75D3E /* QRCodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */; };
 		6F0FAF3717AF882600B75D3E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1817AF882600B75D3E /* .gitignore */; };
 		6F0FAF3817AF882600B75D3E /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAF3017AF882600B75D3E /* libzbar.a */; };
@@ -133,6 +133,7 @@
 		6FB66D5C17C702610002D6C5 /* icon_device_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5A17C702610002D6C5 /* icon_device_off@2x.png */; };
 		6FB66D5D17C702610002D6C5 /* icon_device_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5B17C702610002D6C5 /* icon_device_on@2x.png */; };
 		6FB66D5F17C703970002D6C5 /* btn_speech_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5E17C703970002D6C5 /* btn_speech_close@2x.png */; };
+		6FB66D6217C745820002D6C5 /* AccountService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB66D6117C745820002D6C5 /* AccountService.m */; };
 		6FBD013417C4E034002D5618 /* SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013317C4E034002D5618 /* SwitchButton.m */; };
 		6FBD013717C4E051002D5618 /* ToggleSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013617C4E051002D5618 /* ToggleSwitchButton.m */; };
 		6FBD013A17C4E0B8002D5618 /* AirconditionSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */; };
@@ -282,8 +283,8 @@
 		6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVViewController.m; sourceTree = "<group>"; };
 		6F0FAF0E17AF87BD00B75D3E /* AirconditionAdjustmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirconditionAdjustmentViewController.h; sourceTree = "<group>"; };
 		6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirconditionAdjustmentViewController.m; sourceTree = "<group>"; };
-		6F0FAF1117AF87CC00B75D3E /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		6F0FAF1217AF87CC00B75D3E /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationCodeSendViewController.h; sourceTree = "<group>"; };
+		6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationCodeSendViewController.m; sourceTree = "<group>"; };
 		6F0FAF1417AF87DE00B75D3E /* QRCodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScannerViewController.h; sourceTree = "<group>"; };
 		6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScannerViewController.m; sourceTree = "<group>"; };
 		6F0FAF1817AF882600B75D3E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -384,6 +385,8 @@
 		6FB66D5A17C702610002D6C5 /* icon_device_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_device_off@2x.png"; sourceTree = "<group>"; };
 		6FB66D5B17C702610002D6C5 /* icon_device_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_device_on@2x.png"; sourceTree = "<group>"; };
 		6FB66D5E17C703970002D6C5 /* btn_speech_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_close@2x.png"; sourceTree = "<group>"; };
+		6FB66D6017C745820002D6C5 /* AccountService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountService.h; sourceTree = "<group>"; };
+		6FB66D6117C745820002D6C5 /* AccountService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountService.m; sourceTree = "<group>"; };
 		6FBD013217C4E034002D5618 /* SwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchButton.h; sourceTree = "<group>"; };
 		6FBD013317C4E034002D5618 /* SwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchButton.m; sourceTree = "<group>"; };
 		6FBD013517C4E051002D5618 /* ToggleSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleSwitchButton.h; sourceTree = "<group>"; };
@@ -727,6 +730,8 @@
 				F237168417B3715C0057C95B /* SmsService.m */,
 				6F89282917B3F2D000D0C1E3 /* ServiceBase.h */,
 				6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */,
+				6FB66D6017C745820002D6C5 /* AccountService.h */,
+				6FB66D6117C745820002D6C5 /* AccountService.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -783,8 +788,8 @@
 				6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */,
 				6F0FAF0E17AF87BD00B75D3E /* AirconditionAdjustmentViewController.h */,
 				6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */,
-				6F0FAF1117AF87CC00B75D3E /* RegisterViewController.h */,
-				6F0FAF1217AF87CC00B75D3E /* RegisterViewController.m */,
+				6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */,
+				6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */,
 				6F0FAF1417AF87DE00B75D3E /* QRCodeScannerViewController.h */,
 				6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */,
 				F205B78117B0EEE2003EC863 /* NavViewController.h */,
@@ -1375,7 +1380,7 @@
 				6F0FAF0A17AF879A00B75D3E /* TVSpeechSettingViewController.m in Sources */,
 				6F0FAF0D17AF87AC00B75D3E /* TVViewController.m in Sources */,
 				6F0FAF1017AF87BD00B75D3E /* AirconditionAdjustmentViewController.m in Sources */,
-				6F0FAF1317AF87CD00B75D3E /* RegisterViewController.m in Sources */,
+				6F0FAF1317AF87CD00B75D3E /* VerificationCodeSendViewController.m in Sources */,
 				6F0FAF1617AF87DE00B75D3E /* QRCodeScannerViewController.m in Sources */,
 				6F0FAF4F17AF9C8F00B75D3E /* DrawerNavItemCell.m in Sources */,
 				6F0FAF5617AFA3C800B75D3E /* DrawerNavigationItem.m in Sources */,
@@ -1432,6 +1437,7 @@
 				F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */,
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
 				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,
+				6FB66D6217C745820002D6C5 /* AccountService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,23 +1,23 @@
 //
-//  RegisterViewController.m
+//  VerificationCodeSendViewController.m
 //  SmartHome
 //
 //  Created by Zhao yang on 8/5/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "RegisterViewController.h"
+#import "VerificationCodeSendViewController.h"
 #import "SMTextField.h"
 #import "LongButton.h"
 #import "UIColor+ExtentionForHexString.h"
 
 #define LINE_HEIGHT 5
 
-@interface RegisterViewController ()
+@interface VerificationCodeSendViewController ()
 
 @end
 
-@implementation RegisterViewController{
+@implementation VerificationCodeSendViewController{
     UITextField *phoneNumber;
     UITextField *verification;
     UIButton *sendButton;
@@ -26,8 +26,10 @@
     @private NSString *verificationCode;
 
 }
-@synthesize xmlParser = _xmlParser;
+
 @synthesize sendTimer;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -104,14 +106,11 @@
         resendTimeInterval = 60;
     }
 }
--(void) send{
-    verificationCode = [NSString stringWithFormat:@"%i",[self randomIntBetween:100000 andLargerInt:999999]];
-    SmsService *smsService = self.smsService;
-    accountPhone = phoneNumber.text;
-    if(accountPhone!=nil&&verificationCode!=nil){
-        [smsService sendMessage:verificationCode for: accountPhone success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
-    }
+
+-(void)send{
+    [self.accountService sendVerificationCodeFor:phoneNumber.text success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
 }
+
 -(void) checkVerificationCode{
     
     NSString *input = verification.text;
@@ -135,21 +134,8 @@
 
     NSLog(@"%d", resp.statusCode);
     if(resp.statusCode == 200) {
-       NSData *data = resp.body;
-        GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:data options:0 error:NULL];
-        NSArray *nodes =[doc nodesForXPath:@"//Result" error:nil];
-        NSString *result = nil;
-        for (GDataXMLElement *element in nodes) {
-           
-            result = element.stringValue;
-            
-        }
-        if([result isEqualToString:@"1"]){
-            NSLog(@"ok");
-            
-        }else if([@"" isEqualToString:result]){
-            NSLog(@"wrong");
-        }
+ NSString *str=       [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
+        NSLog(str);
         
     
     } else {

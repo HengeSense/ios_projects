@@ -1,5 +1,5 @@
 //
-//  RegisterViewController.h
+//  VerificationCodeSendViewController.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/5/13.
@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "XMLElement.h"
-#import "GDataXMLNode.h"
 #import "NavViewController.h"
 #import "UnitsBindingViewController.h"
 
-@interface RegisterViewController : NavViewController<NSXMLParserDelegate>
+@interface VerificationCodeSendViewController : NavViewController
 
-@property (strong,nonatomic) NSXMLParser *xmlParser;
 @property (strong,nonatomic) NSTimer *sendTimer;
+
 
 @end

@@ -10,9 +10,10 @@
 #import "NSString+StringUtils.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
-#import "DeviceAffectViewController.h"
 #import "AirConditionViewController.h"
 #import "CameraAdjustViewController.h"
+
+#import "SwitchButton.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              174
@@ -65,6 +66,15 @@
         [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnSpeech];
     }
+    
+    
+    SwitchButton *sb = [SwitchButton buttonWithPoint:CGPointMake(100, 100)];
+    [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
+    [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
+    sb.status = @"on";
+    [self addSubview:sb];
+    
+    
 }
 
 #pragma mark -

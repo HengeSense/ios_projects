@@ -11,7 +11,7 @@
 #import "LongButton.h"
 #import "KeychainItemWrapper.h"
 #import "MainViewController.h"
-#import "RegisterViewController.h"
+#import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 
 #define LINE_HIGHT 5
@@ -171,7 +171,7 @@
 }
 
 -(void)showRegisterViewController {
-    [self.navigationController pushViewController:[[RegisterViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[VerificationCodeSendViewController alloc] init] animated:YES];
 }
 
 #pragma mark -

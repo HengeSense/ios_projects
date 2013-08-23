@@ -40,15 +40,17 @@
 - (void)initUI {
     if(btn == nil) {
         btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
+        [self addSubview:btn];
     }
     
     if(lblTitle == nil) {
-        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 29, 40, 21)];
+        [self addSubview:lblTitle];
     }
 }
 
 + (SwitchButton *)buttonWithPoint:(CGPoint)point {
-    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 0, 0)];
+    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 40, 50)];
     return switchButton;
 }
 
@@ -67,8 +69,14 @@
     if(image == nil || btn == nil) return;
     [btn setBackgroundImage:image forState:UIControlStateNormal];
     [btn setBackgroundImage:image forState:UIControlStateHighlighted];
+    status = s;
 }
 
+- (void)setTitle:(NSString *)t {
+    if([NSString isBlank:t]) t = [NSString emptyString];
+    if(lblTitle == nil) return;
+    lblTitle.text = t;
+}
 
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
     if(btn != nil) {

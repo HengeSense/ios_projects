@@ -13,7 +13,7 @@
 
 @implementation AppDelegate
 
-@synthesize smsService;
+@synthesize accountService;
 @synthesize settings;
 @synthesize rootViewController;
 
@@ -75,11 +75,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (SmsService *)smsService {
-    if(smsService == nil) {
-        smsService = [[SmsService alloc] init];
+- (AccountService *)accountService {
+    if(accountService == nil) {
+        accountService = [[AccountService alloc] init];
     }
-    return smsService;
+    return accountService;
 }
 
 - (RootViewController *)rootViewController {

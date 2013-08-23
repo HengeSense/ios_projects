@@ -10,18 +10,16 @@
 
 @implementation UIViewController (UIViewControllerExtension)
 
-
 - (GlobalSettings *)settings {
     return self.app.settings;
 }
 
-- (SmsService *)smsService {
-    return self.app.smsService;
+- (AccountService *)accountService {
+    return self.app.accountService;
 }
 
 - (AppDelegate *)app {
     return [UIApplication sharedApplication].delegate;
 }
-
 
 @end
