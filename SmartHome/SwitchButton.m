@@ -7,14 +7,19 @@
 //
 
 #import "SwitchButton.h"
+#import "NSString+StringUtils.h"
 
 @implementation SwitchButton {
     UIButton *btn;
     UILabel *lblTitle;
+    NSMutableDictionary *statusImage;
 }
 
-@synthesize iconImageName;
 @synthesize title;
+@synthesize status;
+
+#pragma mark -
+#pragma mark initializations
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -27,7 +32,9 @@
 }
 
 - (void)initDefaults {
-    
+    if(statusImage == nil) {
+        statusImage = [NSMutableDictionary dictionary];
+    }
 }
 
 - (void)initUI {
@@ -40,17 +47,33 @@
     }
 }
 
++ (SwitchButton *)buttonWithPoint:(CGPoint)point {
+    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 0, 0)];
+    return switchButton;
+}
+
+#pragma mark -
+#pragma mark services
+
+- (void)registerImage:(UIImage *)img forStatus:(NSString *)s {
+    if(statusImage == nil) return;
+    [statusImage setObject:img forKey:s];
+}
+
+- (void)setStatus:(NSString *)s {
+    if([NSString isEmpty:status]) return;
+    if(statusImage == nil) return;
+    UIImage *image = [statusImage objectForKey:s];
+    if(image == nil || btn == nil) return;
+    [btn setBackgroundImage:image forState:UIControlStateNormal];
+    [btn setBackgroundImage:image forState:UIControlStateHighlighted];
+}
+
+
 - (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
     if(btn != nil) {
         [btn addTarget:target action:action forControlEvents:controlEvents];
     }
-}
-
-+ (SwitchButton *)buttonWithTitle:(NSString *)t andImageName:(NSString *)imageName {
-    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    switchButton.iconImageName = imageName;
-    switchButton.title = t;
-    return switchButton;
 }
 
 @end
