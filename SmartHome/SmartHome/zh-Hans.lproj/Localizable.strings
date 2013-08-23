@@ -87,4 +87,9 @@
 "make.cool" = "制冷";
 "close" = "关";
 "air.condition.setting" = "空调设置";
- 
+/*
+ *tv view controller
+ */
+"power.switch"  = "电源开关";
+
+

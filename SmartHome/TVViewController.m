@@ -54,7 +54,10 @@
     }
 
     if(indexPath.row == 0){
-        tvSwitch = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        tvSwitch = [[UIButton alloc] initWithFrame:CGRectMake(CELL_HEIGHT, CELL_HEIGHT/2,39/2,44/2)];
+        [tvSwitch setBackgroundImage:[UIImage imageNamed:@"btn_switch.png"] forState:UIControlStateNormal];
+        [tvCell.contentView addSubview:tvSwitch];
+        tvCell.textLabel.text = NSLocalizedString(@"power.switch", @"");
         
     }else{
         tvCell.textLabel.text = [NSString stringWithFormat:@"cctv-%i",indexPath.row];

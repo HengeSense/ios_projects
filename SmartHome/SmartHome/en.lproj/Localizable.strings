@@ -86,4 +86,8 @@
 "make.cool" = "make cool";
 "close" = "close";
 "air.condition.setting" = "air condition setting";
+/*
+ *tv view controller
+ */
+"power.switch"  = "Power Switch";
 
