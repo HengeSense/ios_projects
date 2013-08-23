@@ -7,28 +7,28 @@
 //
 
 #import "VerificationCodeSendViewController.h"
+#import "VerificationCodeValidationViewController.h"
 #import "SMTextField.h"
 #import "LongButton.h"
-#import "UIColor+ExtentionForHexString.h"
 
-#define LINE_HEIGHT 5
+
 
 @interface VerificationCodeSendViewController ()
 
 @end
 
 @implementation VerificationCodeSendViewController{
-    UITextField *phoneNumber;
+    UITextField *txtPhoneNumber;
+    UILabel *lblPhoneNumber;
+    UIButton *btnVerificationCodeSender;
+    VerificationCodeValidationViewController *verificationCodeValidationViewController;
+    
     UITextField *verification;
-    UIButton *sendButton;
+
     NSTimeInterval resendTimeInterval;
     NSString *accountPhone;
     @private NSString *verificationCode;
-
 }
-
-@synthesize sendTimer;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,24 +52,35 @@
 - (void)initUI {
     [super initUI];
     
-    [self registerTapGestureToResignKeyboard];
+    self.topbar.titleLabel.text = NSLocalizedString(@"verification_code_send.title", @"");
     
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 100, 20)];
-    [text setText:NSLocalizedString(@"phone_number_register", @"")];
-    text.font = [UIFont systemFontOfSize:12];
-    text.backgroundColor = [UIColor clearColor];
-    text.textColor = [UIColor whiteColor];
-    [self.view addSubview:text];
+    if(lblPhoneNumber == nil) {
+        lblPhoneNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, 60, 250, 20)];
+        [lblPhoneNumber setText:NSLocalizedString(@"phone_number_register", @"")];
+        lblPhoneNumber.font = [UIFont systemFontOfSize:16];
+        lblPhoneNumber.backgroundColor = [UIColor clearColor];
+        lblPhoneNumber.textColor = [UIColor lightTextColor];
+        [self.view addSubview:lblPhoneNumber];
+    }
     
-    phoneNumber = [SMTextField textFieldWithPoint:CGPointMake(10, text.frame.origin.y+20+LINE_HEIGHT)];
-    [self.view addSubview:phoneNumber];
-    phoneNumber.keyboardType = UIKeyboardTypePhonePad;
+    if(txtPhoneNumber == nil) {
+        txtPhoneNumber = [SMTextField textFieldWithPoint:CGPointMake(10, lblPhoneNumber.frame.origin.y + 30)];
+        txtPhoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+        txtPhoneNumber.clearButtonMode = UITextFieldViewModeWhileEditing;
+        txtPhoneNumber.delegate = self;
+        [self.view addSubview:txtPhoneNumber];
+    }
     
-    sendButton = [LongButton buttonWithPoint:CGPointMake(10, phoneNumber.frame.origin.y+phoneNumber.frame.size.height+LINE_HEIGHT)];
-    [sendButton setTitle:NSLocalizedString(@"get_verification_code", @"") forState:UIControlStateNormal];
-    [sendButton addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:sendButton];
+    if(btnVerificationCodeSender == nil) {
+        btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(10, txtPhoneNumber.frame.origin.y +txtPhoneNumber.frame.size.height + 5)];
+        [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
+        [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnVerificationCodeSender];
+    }
     
+    [txtPhoneNumber becomeFirstResponder];
+    
+    /*
     UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20,sendButton.frame.origin.y+sendButton.frame.size.height+LINE_HEIGHT, 150, 20)];
     [text2 setText:NSLocalizedString(@"verification_code", @"")];
     [text2 setBackgroundColor:[UIColor clearColor]];
@@ -86,15 +97,17 @@
     [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:okButton];
     
-    resendTimeInterval = 60;
+    resendTimeInterval = 60;*/
 }
-
+/*
 - (void)sendVerificationCode {
     [sendButton setEnabled:NO];
     sendTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendTimeCountDown) userInfo:nil repeats:YES];
     [self send];
     
-}
+}*/
+
+/*
 -(void) sendTimeCountDown{
     if((long)resendTimeInterval>0){
        resendTimeInterval = resendTimeInterval-1;
@@ -107,10 +120,45 @@
     }
 }
 
--(void)send{
-    [self.accountService sendVerificationCodeFor:phoneNumber.text success:@selector(handleSendSuccess:) failed:@selector(handleSendfailed:) target:self callback:nil];
+*/
+
+#pragma mark -
+#pragma mark service
+
+- (void)sendVerificationCode {
+    [self.accountService sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
 }
 
+- (void)verificationCodeSendSuccess:(RestResponse *)resp {
+    NSLog(@"%d", resp.statusCode);
+    if(resp.statusCode == 200) {
+        NSString *str=       [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
+        NSLog(str);
+        [self.navigationController pushViewController:[self nextViewController] animated:YES];
+    } else {
+        [self verificationCodeSendError:resp];
+    }
+}
+
+- (VerificationCodeValidationViewController *)nextViewController {
+    if(verificationCodeValidationViewController == nil) {
+        verificationCodeValidationViewController = [[VerificationCodeValidationViewController alloc] init];
+    }
+    return verificationCodeValidationViewController;
+}
+
+- (void)verificationCodeSendError:(RestResponse *)resp {
+    NSLog(@"error %d", resp.statusCode);
+}
+
+#pragma mark -
+#pragma mark text field delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return range.location < 11;
+}
+
+/*
 -(void) checkVerificationCode{
     
     NSString *input = verification.text;
@@ -130,27 +178,17 @@
         [checkAlert show];
     }
 }
--(void) handleSendSuccess:(RestResponse *) resp{
+*/
 
-    NSLog(@"%d", resp.statusCode);
-    if(resp.statusCode == 200) {
- NSString *str=       [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
-        NSLog(str);
-        
-    
-    } else {
-        [self handleSendfailed:resp];
-    }
-}
--(void) handleSendfailed:(RestResponse *) resp{
-        NSLog(@"error %d", resp.statusCode);
-         
-}
+
+
+
+/*
 - (int)randomIntBetween:(int)num1 andLargerInt:(int)num2 {
     int startVal = num1 * 10000;
     int endVal = num2 * 10000;
     int randomValue = startVal + (arc4random() % (endVal - startVal));
     return randomValue /10000;
-}
+}*/
 
 @end

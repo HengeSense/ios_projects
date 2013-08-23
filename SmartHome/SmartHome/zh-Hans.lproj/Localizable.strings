@@ -16,6 +16,7 @@
 "done"             = "完成";
 "rename"           = "重命名";
 "skip"             = "跳过";
+"next_step"        = "下一步";
 "processing.tips"  = "处理中,请稍后...";
 
 /*
@@ -27,6 +28,8 @@
 "historical_data.title"               = "历史数据";
 "unit_binding_view.title"             = "绑定主控";
 "settings_view.title"                 = "我的设置";
+"verification_code_send.title"        = "验证手机号码";
+"verification_validation.title"       = "填写验证码";
 
 /*
  * drawer view
@@ -58,9 +61,9 @@
 /*
  * register view controller
  */
-"phone_number_register"           = "手机号码注册:";
-"get_verification_code"           = "获取验证码";
+"phone_number_register"           = "请输入手机号码:";
 "verification_code"               = "验证码:";
+"verification_code_enter.tips"    = "请输入收到的短信验证码:";
 
 /*
  * login view controller
@@ -76,10 +79,12 @@
  */
 "scanner_button_tips"      = "    在有无线网络的情况下，你可以采用功能扫一扫将主控设备录入手机。";
 "auto_search_button_tips"  = "    在没有无线网络的情况下，你可以采用自动寻找功能将主控录入手机。";
+
 /*
  *camera adjust view controller
  */
 "camera.adjust"     ="摄像头调整";
+
 /*
  *air condition view controller
  */
@@ -87,6 +92,7 @@
 "make.cool" = "制冷";
 "close" = "关";
 "air.condition.setting" = "空调设置";
+
 /*
  *tv view controller
  */

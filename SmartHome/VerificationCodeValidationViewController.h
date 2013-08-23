@@ -8,6 +8,6 @@
 
 #import "NavViewController.h"
 
-@interface VerificationCodeValidationViewController : NavViewController
+@interface VerificationCodeValidationViewController : NavViewController<UITextFieldDelegate>
 
 @end

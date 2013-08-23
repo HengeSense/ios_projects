@@ -10,9 +10,7 @@
 #import "NavViewController.h"
 #import "UnitsBindingViewController.h"
 
-@interface VerificationCodeSendViewController : NavViewController
-
-@property (strong,nonatomic) NSTimer *sendTimer;
+@interface VerificationCodeSendViewController : NavViewController<UITextFieldDelegate>
 
 
 @end

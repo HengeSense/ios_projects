@@ -10,6 +10,7 @@
 #import "NSString+StringUtils.h"
 
 #define SMS_URL @"http://172.16.8.162:6868/FrontServer-1.0/auth/regist"
+#define MD5_KEY @"FFFF"
 
 @implementation AccountService
 
@@ -22,8 +23,7 @@
 }
 
 - (void)sendVerificationCodeFor:(NSString *)phoneNumber success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    NSString *key = [phoneNumber substringFromIndex:7];
-    NSString *checkCode = [NSString stringWithFormat:@"%@%@", phoneNumber, [NSString md5HexDigest:key]];
+    NSString *checkCode = [NSString md5HexDigest:[NSString stringWithFormat:@"%@%@", phoneNumber, MD5_KEY]];
     NSString *url = [NSString stringWithFormat:@"?mobileCode=%@&checkCode=%@", phoneNumber, checkCode];
     
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
