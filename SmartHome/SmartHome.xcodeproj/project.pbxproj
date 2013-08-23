@@ -134,6 +134,7 @@
 		6FB66D5D17C702610002D6C5 /* icon_device_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5B17C702610002D6C5 /* icon_device_on@2x.png */; };
 		6FB66D5F17C703970002D6C5 /* btn_speech_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5E17C703970002D6C5 /* btn_speech_close@2x.png */; };
 		6FB66D6217C745820002D6C5 /* AccountService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB66D6117C745820002D6C5 /* AccountService.m */; };
+		6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */; };
 		6FBD013417C4E034002D5618 /* SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013317C4E034002D5618 /* SwitchButton.m */; };
 		6FBD013717C4E051002D5618 /* ToggleSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013617C4E051002D5618 /* ToggleSwitchButton.m */; };
 		6FBD013A17C4E0B8002D5618 /* AirconditionSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */; };
@@ -387,6 +388,8 @@
 		6FB66D5E17C703970002D6C5 /* btn_speech_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_close@2x.png"; sourceTree = "<group>"; };
 		6FB66D6017C745820002D6C5 /* AccountService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountService.h; sourceTree = "<group>"; };
 		6FB66D6117C745820002D6C5 /* AccountService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountService.m; sourceTree = "<group>"; };
+		6FB66D6317C751570002D6C5 /* VerificationCodeValidationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationCodeValidationViewController.h; sourceTree = "<group>"; };
+		6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationCodeValidationViewController.m; sourceTree = "<group>"; };
 		6FBD013217C4E034002D5618 /* SwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchButton.h; sourceTree = "<group>"; };
 		6FBD013317C4E034002D5618 /* SwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchButton.m; sourceTree = "<group>"; };
 		6FBD013517C4E051002D5618 /* ToggleSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleSwitchButton.h; sourceTree = "<group>"; };
@@ -814,6 +817,8 @@
 				F20AE08D17BDD00B0040B80A /* LoginViewController.m */,
 				F2D8E8C517C48EA500090E5B /* CameraAdjustViewController.h */,
 				F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */,
+				6FB66D6317C751570002D6C5 /* VerificationCodeValidationViewController.h */,
+				6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1438,6 +1443,7 @@
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
 				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,
 				6FB66D6217C745820002D6C5 /* AccountService.m in Sources */,
+				6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
