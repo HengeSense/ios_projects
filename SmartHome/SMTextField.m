@@ -1,14 +1,14 @@
 //
-//  CustomTextFieldView.m
+//  SMTextField.h
 //  SmartHome
 //
 //  Created by hadoop user account on 16/08/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "CustomTextFieldView.h"
+#import "SMTextField.h"
 
-@implementation CustomTextFieldView
+@implementation SMTextField
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -20,7 +20,7 @@
 }
 
 + (UITextField *)textFieldWithPoint:(CGPoint)point{
-    CustomTextFieldView *text = [[CustomTextFieldView alloc] initWithFrame:CGRectMake(point.x, point.y, 616 / 2, 96 / 2)];
+    SMTextField *text = [[SMTextField alloc] initWithFrame:CGRectMake(point.x, point.y, 616 / 2, 96 / 2)];
     [text setBackground:[UIImage imageNamed:@"txt_main.png"]];
     text.font = [UIFont systemFontOfSize:18.f];
     text.textColor = [UIColor darkTextColor];

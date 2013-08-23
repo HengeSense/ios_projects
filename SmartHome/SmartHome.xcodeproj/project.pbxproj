@@ -158,7 +158,7 @@
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
 		F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08D17BDD00B0040B80A /* LoginViewController.m */; };
-		F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */; };
+		F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* SMTextField.m */; };
 		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
 		F22DF72017C1AEE600BF7C3A /* cbx_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */; };
@@ -430,8 +430,8 @@
 		F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoViewController.m; sourceTree = "<group>"; };
 		F20AE08C17BDD00B0040B80A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F20AE08D17BDD00B0040B80A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		F20AE09217BE0D5B0040B80A /* CustomTextFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextFieldView.h; sourceTree = "<group>"; };
-		F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextFieldView.m; sourceTree = "<group>"; };
+		F20AE09217BE0D5B0040B80A /* SMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTextField.h; sourceTree = "<group>"; };
+		F20AE09317BE0D5B0040B80A /* SMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTextField.m; sourceTree = "<group>"; };
 		F20B36CB17B87CF1009286D6 /* MyDevicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDevicesView.h; sourceTree = "<group>"; };
 		F20B36CC17B87CF1009286D6 /* MyDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
@@ -1167,8 +1167,8 @@
 		F20AE09117BE0CC50040B80A /* text_field */ = {
 			isa = PBXGroup;
 			children = (
-				F20AE09217BE0D5B0040B80A /* CustomTextFieldView.h */,
-				F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */,
+				F20AE09217BE0D5B0040B80A /* SMTextField.h */,
+				F20AE09317BE0D5B0040B80A /* SMTextField.m */,
 			);
 			name = text_field;
 			sourceTree = "<group>";
@@ -1411,7 +1411,7 @@
 				6F1EE66D17BCD41500580760 /* ClientSocket.m in Sources */,
 				F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */,
 				F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */,
-				F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */,
+				F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */,
 				F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */,
 				6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */,
 				6FA1DD7C17C1BBD40016AC4E /* NetworkUtils.m in Sources */,

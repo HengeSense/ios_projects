@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "CustomTextFieldView.h"
+#import "SMTextField.h"
 #import "LongButton.h"
 #import "KeychainItemWrapper.h"
 #import "MainViewController.h"
@@ -81,7 +81,7 @@
     }
     
     if(txtUserName == nil) {
-        txtUserName = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, (lblUserName.frame.origin.y + LINE_HIGHT + 20))];
+        txtUserName = [SMTextField textFieldWithPoint:CGPointMake(5, (lblUserName.frame.origin.y + LINE_HIGHT + 20))];
         txtUserName.keyboardType = UIKeyboardTypeASCIICapable;
         txtUserName.returnKeyType = UIReturnKeyNext;
         txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -99,7 +99,7 @@
     }
     
     if(txtPassword == nil) {
-        txtPassword = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, (lblPassword.frame.origin.y + LINE_HIGHT + 20))];
+        txtPassword = [SMTextField textFieldWithPoint:CGPointMake(5, (lblPassword.frame.origin.y + LINE_HIGHT + 20))];
         [txtPassword setSecureTextEntry:YES];
         txtPassword.returnKeyType = UIReturnKeyJoin;
         txtPassword.delegate =self;

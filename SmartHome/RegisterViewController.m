@@ -7,7 +7,7 @@
 //
 
 #import "RegisterViewController.h"
-#import "CustomTextFieldView.h"
+#import "SMTextField.h"
 #import "LongButton.h"
 #import "UIColor+ExtentionForHexString.h"
 
@@ -59,7 +59,7 @@
     text.textColor = [UIColor whiteColor];
     [self.view addSubview:text];
     
-    phoneNumber = [CustomTextFieldView textFieldWithPoint:CGPointMake(10, text.frame.origin.y+20+LINE_HEIGHT)];
+    phoneNumber = [SMTextField textFieldWithPoint:CGPointMake(10, text.frame.origin.y+20+LINE_HEIGHT)];
     [self.view addSubview:phoneNumber];
     phoneNumber.keyboardType = UIKeyboardTypePhonePad;
     
@@ -75,7 +75,7 @@
     text2.textColor = [UIColor whiteColor];
     [self.view addSubview:text2];
     
-    verification = [CustomTextFieldView textFieldWithPoint:CGPointMake(10, text2.frame.size.height+text2.frame.origin.y+LINE_HEIGHT)];
+    verification = [SMTextField textFieldWithPoint:CGPointMake(10, text2.frame.size.height+text2.frame.origin.y+LINE_HEIGHT)];
     [self.view addSubview:verification];
     verification.keyboardType = UIKeyboardTypeNamePhonePad;
     
