@@ -9,6 +9,9 @@
 #import "VerificationCodeValidationViewController.h"
 #import "NSDictionary+NSNullUtility.h"
 #import "LongButton.h"
+#import "MainViewController.h"
+#import "UnitsBindingViewController.h"
+#import "NSString+StringUtils.h"
 #import "SMTextField.h"
 #import "JsonUtils.h"
 
@@ -99,9 +102,9 @@
     }
     
     if(lblCountDown == nil) {
-        lblCountDown = [[UILabel alloc] initWithFrame:CGRectMake(btnResend.frame.origin.x + btnResend.frame.size.width + 10, btnNext.frame.origin.y + btnNext.frame.size.height + 15, 20, 21)];
+        lblCountDown = [[UILabel alloc] initWithFrame:CGRectMake(btnResend.frame.origin.x + btnResend.frame.size.width + 10, btnNext.frame.origin.y + btnNext.frame.size.height + 15, 50, 21)];
         lblCountDown.font = [UIFont systemFontOfSize:14.f];
-        lblCountDown.textAlignment = NSTextAlignmentCenter;
+        lblCountDown.textAlignment = NSTextAlignmentLeft;
         lblCountDown.textColor = [UIColor lightTextColor];
         lblCountDown.backgroundColor = [UIColor clearColor];
         lblCountDown.text = [NSString emptyString];
@@ -175,29 +178,62 @@
 }
 
 - (void)submitVerificationCode {
-    
-    
+    if([NSString isBlank:txtVerificationCode.text] || txtVerificationCode.text.length != 6) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_error", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+        return;
+    }
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    [self.accountService registerWithPhoneNumber:self.phoneNumberToValidation checkCode:txtVerificationCode.text success:@selector(registerSuccessfully:) failed:@selector(registerFailed:) target:self callback:nil];
 }
 
-- (void)registerSuccessfully:(RestResponse *)resp {
+- (void)registerSuccessfully:(RestResponse *)resp {    
     if(resp.statusCode == 200) {
-        
-        
-        if(self.settings.anyUnitsBinding) {
-            
-        } else {
-            
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            NSString *result = [json notNSNullObjectForKey:@"id"];
+            if(result != nil) {
+                if([@"1" isEqualToString:result]) {
+                    NSString *secretKey = [json notNSNullObjectForKey:@"security"];
+                    if(![NSString isBlank:secretKey]) {
+                        [[AlertView currentAlertView] dismissAlertView];
+                        self.settings.secretKey = secretKey;
+                        self.settings.account = self.phoneNumberToValidation;
+                        self.settings.password = txtVerificationCode.text;
+                        [self.settings saveSettings];
+                        if(self.settings.anyUnitsBinding) {
+                            self.app.rootViewController.needLoadMainViewController = YES;
+                            [self.navigationController popToRootViewControllerAnimated:NO];
+                        } else {
+                            [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
+                        }
+                        return;
+                    }
+                } else if([@"-1" isEqualToString:result]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"none_verification_code", @"") forType:AlertViewTypeFailed];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    return;
+                } else if([@"-2" isEqualToString:result]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_expire", @"") forType:AlertViewTypeFailed];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    return;
+                } else if([@"-3" isEqualToString:result]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_error", @"") forType:AlertViewTypeFailed];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    return;
+                }
+            }
         }
-        
-        
     }
+    [self registerFailed:resp];
 }
 
 - (void)registerFailed:(RestResponse *)resp {
     if(resp.statusCode == 1001) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeSuccess];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
     } else {
-        
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
     }
     [[AlertView currentAlertView] delayDismissAlertView];
 }

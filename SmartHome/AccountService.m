@@ -28,8 +28,8 @@
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 
-- (void)registerWithPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode UDID:(NSString *)UDID phoneType:(NSString *)phoneType success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    NSString *url = [NSString stringWithFormat:@"/confirm?mobileCode=%@&checkCode=%@&phoneType=%@", @"", @"", @""];
+- (void)registerWithPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
+    NSString *url = [NSString stringWithFormat:@"/confirm?mobileCode=%@&checkCode=%@&phoneType=%@&mac=%@&appKey=%@", phoneNumber, checkCode, PHONE_TYPE, [UIDevice currentDevice].identifierForVendor.UUIDString, APP_KEY];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 

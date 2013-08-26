@@ -71,6 +71,9 @@
 "phone_has_been_register"         = "手机已被注册";
 "phone_format_invalid"            = "号码格式错误";
 "send_success"                    = "已发送";
+"verification_code_error"         = "验证码错误";
+"verification_code_expire"        = "验证码已过期";
+"none_verification_code"          = "请先获取验证码";
 
 /*
  * login view controller

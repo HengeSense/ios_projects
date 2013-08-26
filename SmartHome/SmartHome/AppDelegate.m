@@ -26,7 +26,7 @@
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
     navigationController.delegate = rootViewController;
-    
+
     BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
     
     if(hasLogin) {

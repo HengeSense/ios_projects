@@ -59,7 +59,7 @@
 -(void) initUI{
     [super initUI];
     [self registerTapGestureToResignKeyboard];
-    
+        
     if(lblUserName == nil) {
         lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
         lblUserName.backgroundColor = [UIColor clearColor];
@@ -156,13 +156,14 @@
     
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(loginSuccess) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(loginSuccess) userInfo:nil repeats:NO];
 }
 
 - (void)loginSuccess {
     [[AlertView currentAlertView] dismissAlertView];
     if(self.settings.anyUnitsBinding) {
-        [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+        self.app.rootViewController.needLoadMainViewController = YES;
+        [self.navigationController popToRootViewControllerAnimated:NO];
     } else {
         [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
     }

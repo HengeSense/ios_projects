@@ -69,7 +69,10 @@
 "verification_code"               = "Verification Code:";
 "phone_has_been_register"         = "The phone number has been registered.";
 "phone_format_invalid"            = "Phone number was incorrect";
+"verification_code_error"         = "Verification code error";
 "send_success"                    = "Send successfully";
+"verification_code_expire"        = "Verification code was expired";
+"none_verification_code"          = "Please get verification code first";
 
 /*
  *login view controller
