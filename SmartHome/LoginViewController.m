@@ -143,8 +143,7 @@
 //need to be deleted in production, only used for debug or test
 - (void)fastLogin {
     [[AlertView currentAlertView] dismissAlertView];
-    self.app.rootViewController.needLoadMainViewController = YES;
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
 }
 
 - (void)login {
