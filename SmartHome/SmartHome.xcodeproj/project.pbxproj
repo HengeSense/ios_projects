@@ -159,6 +159,7 @@
 		F20AE09417BE0D5B0040B80A /* CustomTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* CustomTextFieldView.m */; };
 		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
+		F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178BFD17CAEC6F0043400F /* PageableScrollView.m */; };
 		F22DF72017C1AEE600BF7C3A /* cbx_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */; };
 		F22DF72217C1AEFB00BF7C3A /* cbx_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */; };
 		F22DF72817C1EAA500BF7C3A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F22DF72717C1EAA500BF7C3A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -432,6 +433,8 @@
 		F20B36CC17B87CF1009286D6 /* MyDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
 		F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesViewController.m; sourceTree = "<group>"; };
+		F2178BFC17CAEC6F0043400F /* PageableScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableScrollView.h; sourceTree = "<group>"; };
+		F2178BFD17CAEC6F0043400F /* PageableScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageableScrollView.m; sourceTree = "<group>"; };
 		F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cbx_unchecked@2x.png"; sourceTree = "<group>"; };
 		F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cbx_checked@2x.png"; sourceTree = "<group>"; };
 		F22DF72317C1CA3500BF7C3A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -664,6 +667,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				F2178BFB17CAEC1A0043400F /* pageable_scroll_view */,
 				F2D8E8D517C5BB8F00090E5B /* radio_button */,
 				F2D8E8CA17C5A9FE00090E5B /* check_boxes */,
 				6FBD013117C4DFAB002D5618 /* switch_button */,
@@ -1159,6 +1163,15 @@
 			name = text_field;
 			sourceTree = "<group>";
 		};
+		F2178BFB17CAEC1A0043400F /* pageable_scroll_view */ = {
+			isa = PBXGroup;
+			children = (
+				F2178BFC17CAEC6F0043400F /* PageableScrollView.h */,
+				F2178BFD17CAEC6F0043400F /* PageableScrollView.m */,
+			);
+			name = pageable_scroll_view;
+			sourceTree = "<group>";
+		};
 		F22DF72517C1EAA500BF7C3A /* KeyChainItemWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1416,6 +1429,7 @@
 				F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */,
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
 				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,
+				F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
