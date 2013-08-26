@@ -65,8 +65,6 @@
         lblMessage.textAlignment = NSTextAlignmentCenter;
         lblMessage.font = [UIFont systemFontOfSize:15.f];
         lblMessage.textColor = [UIColor whiteColor];
-        
-        lblMessage.text = @"发送成功";
         [self addSubview:lblMessage];
     }
 }
