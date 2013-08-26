@@ -21,6 +21,7 @@
 + (UIButton *)buttonWithPoint:(CGPoint)point {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(point.x, point.y, 622 / 2, 98 / 2)];
     [button setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateHighlighted];
     return button;
 }
 

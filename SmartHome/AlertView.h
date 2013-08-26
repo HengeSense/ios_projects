@@ -8,12 +8,30 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, AlertViewState) {
+    AlertViewStateReady,
+    AlertViewStateWillAppear,
+    AlertViewStateDidAppear,
+    AlertViewStateWillDisappear
+};
+
 typedef NS_ENUM(NSUInteger, AlertViewType) {
-    AlertViewTypeLoading
+    AlertViewTypeNone,
+    AlertViewTypeLoading,
+    AlertViewTypeSuccess,
+    AlertViewTypeFailed
 };
 
 @interface AlertView : UIView
 
+@property (assign, nonatomic, readonly) AlertViewType alertViewType;
+@property (assign, nonatomic) AlertViewState alertViewState;
+
 + (AlertView *)currentAlertView;
+
+- (void)setMessage:(NSString *)message forType:(AlertViewType)type;
+- (void)alertAutoDisappear:(BOOL)autoDisappear lockView:(UIView *)lockView;
+- (void)delayDismissAlertView;
+- (void)dismissAlertView;
 
 @end

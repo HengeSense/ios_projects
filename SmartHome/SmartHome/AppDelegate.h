@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SmsService.h"
 #import "GlobalSettings.h"
+#import "AccountService.h"
 #import "RootViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) SmsService *smsService;
+@property (strong, nonatomic) AccountService *accountService;
 @property (strong, nonatomic) GlobalSettings *settings;
 @property (strong, nonatomic) RootViewController *rootViewController;
 

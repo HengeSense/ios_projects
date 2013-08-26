@@ -7,34 +7,32 @@
 //
 
 #import "LoginViewController.h"
-#import "CustomTextFieldView.h"
+#import "SMTextField.h"
 #import "LongButton.h"
-#import "KeychainItemWrapper.h"
 #import "MainViewController.h"
-#import "RegisterViewController.h"
+#import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 
 #define LINE_HIGHT 5
-#define INDENTIFER_KEY_WRAPPER @"rememberService"
 
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController{
-    UILabel *username;
-    UILabel *password;
-    UILabel *rememberPassword;
+    UILabel *lblUserName;
+    UILabel *lblPassword;
     
-    UITextField *usernameField;
-    UITextField *passwordField;
+    UITextField *txtUserName;
+    UITextField *txtPassword;
     
-    UIButton *rememberBtn;
-    UIButton *loginBtn;
-    UIButton *registerBtn;
-    
-    KeychainItemWrapper *keyWrapper;
+    UIButton *btnLogin;
+    UIButton *btnRegister;
+    UIButton *btnFindPassword;
 }
+
+#pragma mark -
+#pragma initializations
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,87 +58,130 @@
 -(void) initUI{
     [super initUI];
     [self registerTapGestureToResignKeyboard];
-
-    keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
-    NSString *service = [keyWrapper objectForKey:(__bridge_transfer id)kSecAttrService];
     
-    username = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
-    username.backgroundColor = [UIColor clearColor];
-    username.text = NSLocalizedString(@"username", @"");
-    username.font= [UIFont systemFontOfSize:12];
-    username.textColor = [UIColor whiteColor];
-    [self.view addSubview:username];
-    
-    usernameField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, username.frame.origin.y+LINE_HIGHT+20)];
-    [self.view addSubview:usernameField];
-    
-
-    
-    password = [[UILabel alloc] initWithFrame:CGRectMake(10, usernameField.frame.origin.y+usernameField.bounds.size.height+LINE_HIGHT, 100, 20)];
-    password.text = NSLocalizedString(@"password", @"");
-    password.textColor = [UIColor whiteColor];
-    password.backgroundColor = [UIColor clearColor];
-    password.font= [UIFont systemFontOfSize:12];
-    [self.view addSubview:password];
-    
-    passwordField = [CustomTextFieldView textFieldWithPoint:CGPointMake(5, password.frame.origin.y+LINE_HIGHT+20)];
-    [passwordField setSecureTextEntry:YES];
-    passwordField.returnKeyType = UIReturnKeyJoin;
-    passwordField.delegate =self;
-    [self.view addSubview:passwordField];
-    
-    loginBtn = [LongButton buttonWithPoint:CGPointMake(5, passwordField.frame.origin.y+passwordField.bounds.size.height+LINE_HIGHT)];
-    [loginBtn setTitle:NSLocalizedString(@"login", @"") forState:UIControlStateNormal];
-    [loginBtn addTarget:self action:@selector(loginBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:loginBtn];
-    
-    rememberBtn = [CustomCheckBox checkBoxWithPoint:CGPointMake(5, loginBtn.frame.origin.y+loginBtn.bounds.size.height+LINE_HIGHT)];
-    [rememberBtn addTarget:self action:@selector(rememberBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:rememberBtn];
-    
-    rememberPassword = [[UILabel alloc]  initWithFrame:CGRectMake(5+rememberBtn.frame.size.width+LINE_HIGHT, rememberBtn.frame.origin.y, 100, 20)];
-    rememberPassword.font = [UIFont systemFontOfSize:12];
-    rememberPassword.backgroundColor = [UIColor clearColor];
-    rememberPassword.text = NSLocalizedString(@"remember_password", @"");
-    rememberPassword.textColor = [UIColor whiteColor];
-    [self.view addSubview:rememberPassword];
-    
-    registerBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-5-146/2, rememberBtn.frame.origin.y, 146/2, 52/2)];
-    [registerBtn setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateNormal];
-    registerBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-    [registerBtn setTitle:NSLocalizedString(@"register_new_user", @"") forState:UIControlStateNormal];
-    [registerBtn addTarget:self action:@selector(registerBtnTouchInside) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:registerBtn];
-    
-    if ([service isEqualToString:INDENTIFER_KEY_WRAPPER]) {
-        rememberBtn.selected = YES;
-        [usernameField setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecAttrAccount]];
-        [passwordField setText:[keyWrapper objectForKey:(__bridge_transfer id) kSecValueData]];
+    if(lblUserName == nil) {
+        lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
+        lblUserName.backgroundColor = [UIColor clearColor];
+        lblUserName.text = NSLocalizedString(@"username", @"");
+        lblUserName.font= [UIFont systemFontOfSize:16];
+        lblUserName.textColor = [UIColor lightTextColor];
+        [self.view addSubview:lblUserName];
     }
     
+    if(txtUserName == nil) {
+        txtUserName = [SMTextField textFieldWithPoint:CGPointMake(5, (lblUserName.frame.origin.y + LINE_HIGHT + 20))];
+        txtUserName.keyboardType = UIKeyboardTypeASCIICapable;
+        txtUserName.returnKeyType = UIReturnKeyNext;
+        txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;
+        txtUserName.delegate = self;
+        [self.view addSubview:txtUserName];
+    }
+    
+    if(lblPassword == nil) {
+        lblPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, (txtUserName.frame.origin.y + txtUserName.bounds.size.height + LINE_HIGHT), 100, 20)];
+        lblPassword.text = NSLocalizedString(@"password", @"");
+        lblPassword.textColor = [UIColor lightTextColor];
+        lblPassword.backgroundColor = [UIColor clearColor];
+        lblPassword.font= [UIFont systemFontOfSize:16];
+        [self.view addSubview:lblPassword];
+    }
+    
+    if(txtPassword == nil) {
+        txtPassword = [SMTextField textFieldWithPoint:CGPointMake(5, (lblPassword.frame.origin.y + LINE_HIGHT + 20))];
+        [txtPassword setSecureTextEntry:YES];
+        txtPassword.returnKeyType = UIReturnKeyJoin;
+        txtPassword.delegate =self;
+        txtPassword.clearButtonMode = UITextFieldViewModeWhileEditing;
+        [self.view addSubview:txtPassword];
+    }
+    
+    if(btnLogin == nil) {
+        btnLogin = [LongButton buttonWithPoint:CGPointMake(5, txtPassword.frame.origin.y + (txtPassword.bounds.size.height + LINE_HIGHT))];
+        [btnLogin setTitle:NSLocalizedString(@"login", @"") forState:UIControlStateNormal];
+        [btnLogin addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnLogin];
+    }
+    
+    if(btnFindPassword == nil) {
+        btnFindPassword = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 34, 146 / 2, 26)];
+        btnFindPassword.center = CGPointMake(self.view.center.x - 50, btnFindPassword.center.y);
+        btnFindPassword.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btnFindPassword setTitle:NSLocalizedString(@"find_password", @"") forState:UIControlStateNormal];
+        btnFindPassword.titleLabel.textColor = [UIColor whiteColor];
+        [self.view addSubview:btnFindPassword];
+    }
+    
+    if(btnRegister == nil) {
+        btnRegister = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 34, 146 / 2, 26)];
+        btnRegister.center = CGPointMake(self.view.center.x + 50, btnRegister.center.y);
+        btnRegister.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btnRegister setTitle:NSLocalizedString(@"register_new_user", @"") forState:UIControlStateNormal];
+        btnRegister.titleLabel.textColor = [UIColor whiteColor];
+        [btnRegister addTarget:self action:@selector(showRegisterViewController) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnRegister];
+    }
+    
+    UILabel *lblSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10, 26)];
+    lblSeperator.center = CGPointMake(self.view.center.x, btnRegister.center.y);
+    lblSeperator.text = @"|";
+    lblSeperator.textColor = [UIColor whiteColor];
+    lblSeperator.textAlignment = NSTextAlignmentCenter;
+    lblSeperator.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:lblSeperator];
+    
+    //
+    txtUserName.text = @"admin";
+    txtPassword.text = @"admin";
 }
--(void) rememberBtnTouchInside{
-    rememberBtn.selected =!rememberBtn.selected;
+
+#pragma mark -
+#pragma mark services
+
+- (void)login {
+    NSString *userName = [NSString trim:txtUserName.text];
+    NSString *password = [NSString trim:txtPassword.text];
+    
+    if([NSString isBlank:userName]) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"username_not_blank", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        return;
+    }
+    
+    if([NSString isBlank:password]) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"password_not_blank", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        return;
+    }
+    
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeLoading];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(loginSuccess) userInfo:nil repeats:NO];
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField;{
-    if([textField isEqual:passwordField]){
+
+- (void)loginSuccess {
+    [[AlertView currentAlertView] dismissAlertView];
+    [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+}
+
+-(void)showRegisterViewController {
+    [self.navigationController pushViewController:[[VerificationCodeSendViewController alloc] init] animated:YES];
+}
+
+#pragma mark -
+#pragma mark text field delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(textField == txtPassword) {
         [textField resignFirstResponder];
-        [self loginBtnTouchInside];
+        [self login];
+    } else if(textField == txtUserName) {
+        [txtPassword becomeFirstResponder];
     }
     return YES;
 }
--(void) loginBtnTouchInside{
-    if(rememberBtn.selected){
-        [keyWrapper setObject:INDENTIFER_KEY_WRAPPER forKey:(__bridge_transfer id) kSecAttrService];
-        [keyWrapper setObject:usernameField.text forKey:(__bridge_transfer id) kSecAttrAccount];
-        [keyWrapper setObject:passwordField.text forKey:(__bridge_transfer id) kSecValueData];
-    }else{
-        [keyWrapper setObject:[NSString emptyString] forKey:(__bridge_transfer id) kSecAttrService];
-    }
-    [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return range.location < 20;
 }
--(void)registerBtnTouchInside{
-    [self.navigationController pushViewController:[[RegisterViewController alloc] init] animated:YES];
-}
+
 @end

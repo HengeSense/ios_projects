@@ -7,6 +7,7 @@
 //
 
 #import "MySettingsView.h"
+#import "AlertView.h"
 
 @implementation MySettingsView
 
@@ -24,11 +25,23 @@
 
 - (void)initUI {
     [super initUI];
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 25)];
-    lbl.text = @"我的设置页面";
-    lbl.center = CGPointMake(160, 240);
-    [self addSubview:lbl];
+
+    [self addSubview: [[UITextField alloc] initWithFrame:CGRectMake(100, 100, 120, 25)]];
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 120, 25)];
+    [btn setTitle:@"测试自动的Alert" forState:UIControlStateNormal];
+    [btn addTarget:self  action:@selector(autoDis) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btn];
 }
 
+- (void)autoDis {
+    [[AlertView currentAlertView] setMessage:@"操作成功" forType:AlertViewTypeLoading];
+    [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+}
+
+- (void)test {
+    [[AlertView currentAlertView] setMessage:@"处理成功" forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] delayDismissAlertView];
+}
 
 @end

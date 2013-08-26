@@ -15,6 +15,8 @@
 "done"             = "Done";
 "rename"           = "rename";
 "skip"             = "skip";
+"next_step"        = "Next step";
+"please_wait"      = "Please wait";
 "processing.tips"  = "Wait for processing...";
 
 /*
@@ -26,6 +28,8 @@
 "historical_data.title"               = "History Data";
 "unit_binding_view.title"             = "Device Binding";
 "settings_view.title"                 = "Settings";
+"verification_code_send.title"        = "Validation Phone Number";
+"verification_validation.title"       = "Enter verfication code";
 
 /*
  * drawer view
@@ -57,28 +61,35 @@
 /*
  * register view controller
  */
-"phone_number_register"           = "Phone number register:";
-"get_verification_code"           = "Get Verification Code";
+"phone_number_register"           = "Please enter your phone number:";
+"verification_code_enter.tips"    = "Please enter verification code that you received:";
+"resend_verification_code"        = "Resend verification code";
 "verification_code"               = "Verification Code:";
+
 /*
  *login view controller
  */
 
-"username"                        = "username:";
-"password"                        = "passname:";
-"login"                           = "login";
-"remember_password"               = "remember";
-"register_new_user"               = "new account";
+"username"                        = "Username:";
+"password"                        = "Password:";
+"login"                           = "Login";
+"remember_password"               = "Remember Password";
+"register_new_user"               = "Register";
+"find_password"                   = "Forgot Password";
+"username_not_blank"              = "The user name can not be a blank";
+"password_not_blank"              = "The password can not be a blank";
 
 /*
  * units binding view
  */
 "scanner_button_tips"      = "    You can use scanner button to binding devices in wifi environment";
 "auto_search_button_tips"  = "    You can use auto search button to binding devices in no wifi environment";
+
 /*
  *camera adjust view controller
  */
 "camera.adjust"     ="Camera Adjust";
+
 /*
  *air condition view controller
  */
@@ -86,6 +97,7 @@
 "make.cool" = "make cool";
 "close" = "close";
 "air.condition.setting" = "air condition setting";
+
 /*
  *tv view controller
  */

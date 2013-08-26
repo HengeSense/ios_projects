@@ -1,5 +1,5 @@
 //
-//  CustomTextFieldView.h
+//  SMTextField.h
 //  SmartHome
 //
 //  Created by hadoop user account on 16/08/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomTextFieldView : UITextField
+@interface SMTextField : UITextField
 
 + (UITextField *)textFieldWithPoint:(CGPoint)point;
 

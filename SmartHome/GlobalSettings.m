@@ -18,8 +18,10 @@
 @implementation GlobalSettings
 
 @synthesize accountPhone;
-@synthesize hasUnitBinding;
 @synthesize accountPassword;
+@synthesize secretKey;
+
+@synthesize hasUnitBinding;
 @synthesize isValid;
 
 - (id)init {
