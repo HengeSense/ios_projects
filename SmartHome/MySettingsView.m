@@ -35,7 +35,7 @@
 }
 
 - (void)autoDis {
-    [[AlertView currentAlertView] setMessage:@"操作成功" forType:AlertViewTypeLoading];
+    [[AlertView currentAlertView] setMessage:@"操作成功" forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
 }
 

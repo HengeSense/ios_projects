@@ -17,6 +17,8 @@
 "skip"             = "skip";
 "next_step"        = "Next step";
 "please_wait"      = "Please wait";
+"unknow_error"     = "System error";
+"request_timeout"  = "Request timeout";
 "processing.tips"  = "Wait for processing...";
 
 /*
@@ -65,6 +67,9 @@
 "verification_code_enter.tips"    = "Please enter verification code that you received:";
 "resend_verification_code"        = "Resend verification code";
 "verification_code"               = "Verification Code:";
+"phone_has_been_register"         = "The phone number has been registered.";
+"phone_format_invalid"            = "Phone number was incorrect";
+"send_success"                    = "Send successfully";
 
 /*
  *login view controller
