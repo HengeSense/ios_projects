@@ -27,9 +27,17 @@
     return imgBubbleMine;
 }
 
-- (UIImage *)imageForNumber:(NSInteger)number {
-    if(number < 0 || number > 9) return nil;
-    return [UIImage imageNamed:[NSString stringWithFormat:@"num_%d.png", number]];
+- (UIImage *)imageForCellWithIdentifier:(NSString *)identifier selected:(BOOL)selected {
+    if(identifier == nil) return nil;
+    if([@"topCellIdentifier" isEqualToString:identifier]) {
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", @"bg_cell_top", selected ? @"_selected" : @""]];
+    } else if([@"cellIdentifier" isEqualToString:identifier]) {
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", @"bg_cell_center", selected ? @"_selected" : @""]];
+    } else if([@"bottomCellIdentifier" isEqualToString:identifier]) {
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", @"bg_cell_footer", selected ? @"_selected" : @""]];
+    } else {
+        return nil;
+    }
 }
 
 + (ImageFactory *)sharedImageFactory {

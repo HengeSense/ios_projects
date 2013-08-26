@@ -86,6 +86,8 @@
 "find_password"            =  "找回密码";
 "username_not_blank"       =  "用户名不能为空";
 "password_not_blank"       =  "密码不能为空";
+"name_or_pwd_error"        =  "账号或密码错误";
+"login_later"              =  "请稍后再登录";
 
 /*
  * units binding view
@@ -94,21 +96,30 @@
 "auto_search_button_tips"  = "    在没有无线网络的情况下，你可以采用自动寻找功能将主控录入手机。";
 
 /*
- *camera adjust view controller
+ * camera adjust view controller
  */
 "camera.adjust"     ="摄像头调整";
 
 /*
  *air condition view controller
  */
-"make.hot" = "制热";
-"make.cool" = "制冷";
-"close" = "关";
-"air.condition.setting" = "空调设置";
+"make.hot"                 = "制热";
+"make.cool"                = "制冷";
+"close"                    = "关";
+"air.condition.setting"    = "空调设置";
 
 /*
- *tv view controller
+ * tv view controller
  */
 "power.switch"  = "电源开关";
+
+/*
+ * settings view
+ */
+"push_settings"      =   "推送设置";
+"account_logout"     =   "账号注销";
+"feed_back"          =   "意见反馈";
+"about_us"           =   "关于";
+
 
 

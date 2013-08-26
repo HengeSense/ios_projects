@@ -138,7 +138,7 @@
 }
 
 - (void)verificationCodeSendError:(RestResponse *)resp {
-    if(resp.statusCode == 1001) {
+    if(abs(resp.statusCode) == 1001) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeSuccess];
     } else {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeSuccess];

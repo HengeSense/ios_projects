@@ -230,7 +230,7 @@
 }
 
 - (void)registerFailed:(RestResponse *)resp {
-    if(resp.statusCode == 1001) {
+    if(abs(resp.statusCode) == 1001) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
     } else {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];

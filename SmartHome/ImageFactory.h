@@ -14,6 +14,6 @@
 
 - (UIImage *)imageForBubbleMine;
 - (UIImage *)imageForBubbleTheirs;
-- (UIImage *)imageForNumber:(NSInteger)number;
+- (UIImage *)imageForCellWithIdentifier:(NSString *)identifier selected:(BOOL)selected;
 
 @end

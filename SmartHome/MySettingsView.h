@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
 
-@interface MySettingsView : NavigationView
+@interface MySettingsView : NavigationView<UITableViewDataSource, UITableViewDelegate>
 
 @end
