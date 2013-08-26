@@ -10,7 +10,8 @@
 #import "VerificationCodeValidationViewController.h"
 #import "SMTextField.h"
 #import "LongButton.h"
-
+#import "JsonUtils.h"
+#import "NSDictionary+NSNullUtility.h"
 
 
 @interface VerificationCodeSendViewController ()
@@ -79,53 +80,21 @@
     }
     
     [txtPhoneNumber becomeFirstResponder];
-    
-    /*
-    UILabel *text2 = [[UILabel alloc] initWithFrame:CGRectMake(20,sendButton.frame.origin.y+sendButton.frame.size.height+LINE_HEIGHT, 150, 20)];
-    [text2 setText:NSLocalizedString(@"verification_code", @"")];
-    [text2 setBackgroundColor:[UIColor clearColor]];
-    text2.font = [UIFont systemFontOfSize:12];
-    text2.textColor = [UIColor whiteColor];
-    [self.view addSubview:text2];
-    
-    verification = [SMTextField textFieldWithPoint:CGPointMake(10, text2.frame.size.height+text2.frame.origin.y+LINE_HEIGHT)];
-    [self.view addSubview:verification];
-    verification.keyboardType = UIKeyboardTypeNamePhonePad;
-    
-    UIButton *okButton = [LongButton buttonWithPoint:CGPointMake(10, verification.frame.size.height+verification.frame.origin.y+LINE_HEIGHT)];
-    [okButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
-    [okButton addTarget:self action:@selector(checkVerificationCode) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:okButton];
-    
-    resendTimeInterval = 60;*/
 }
-/*
-- (void)sendVerificationCode {
-    [sendButton setEnabled:NO];
-    sendTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendTimeCountDown) userInfo:nil repeats:YES];
-    [self send];
-    
-}*/
-
-/*
--(void) sendTimeCountDown{
-    if((long)resendTimeInterval>0){
-       resendTimeInterval = resendTimeInterval-1;
-        [sendButton setTitle:[NSString stringWithFormat:@"%li",(long)resendTimeInterval] forState:UIControlStateNormal];
-    }else{
-        [sendButton setTitle:@"resend" forState:UIControlStateNormal];
-        [sendTimer invalidate];
-        [sendButton setEnabled:YES];
-        resendTimeInterval = 60;
-    }
-}
-
-*/
 
 #pragma mark -
 #pragma mark service
 
 - (void)sendVerificationCode {
+    
+//    VerificationCodeValidationViewController *cc = [self nextViewController];
+//    cc.phoneNumberToValidation = @"18692251910";
+//    cc.countDown = 20;
+//    [self.navigationController pushViewController:cc animated:YES];
+//    
+//    
+//    return;
+    
     [self.accountService sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
 }
 
@@ -134,17 +103,36 @@
     if(resp.statusCode == 200) {
         NSString *str=       [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
         NSLog(str);
-        [self.navigationController pushViewController:[self nextViewController] animated:YES];
+        
+//        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+//        if(json != nil) {
+//            NSString *_id_ = [json notNSNullObjectForKey:@"id"];
+//            if(_id_ != nil) {
+//                if([@"1" isEqualToString:_id_]) {
+//                    [self.navigationController pushViewController:[self nextViewController] animated:YES];
+//                    return;
+//                } else if([@"-3" isEqualToString:_id_] || [@"-4" isEqualToString:_id_]) {
+//                    
+//                } else if([@"-1" isEqualToString:_id_]) {
+//                    
+//                } else if([@"-2" isEqualToString:_id_]) {
+//                    
+//                } else {
+//                    
+//                }
+//            }
+//        }
+        
+        
+        //error
+        
     } else {
         [self verificationCodeSendError:resp];
     }
 }
 
 - (VerificationCodeValidationViewController *)nextViewController {
-    if(verificationCodeValidationViewController == nil) {
-        verificationCodeValidationViewController = [[VerificationCodeValidationViewController alloc] init];
-    }
-    return verificationCodeValidationViewController;
+    return [[VerificationCodeValidationViewController alloc] init];
 }
 
 - (void)verificationCodeSendError:(RestResponse *)resp {
@@ -157,38 +145,5 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return range.location < 11;
 }
-
-/*
--(void) checkVerificationCode{
-    
-    NSString *input = verification.text;
-    NSLog(@"verificationCode=%@ and input=%@",verificationCode,input);
-    if(verificationCode == NULL){
-        return ;
-    }
-    
-    if ([input isEqualToString:verificationCode]) {
-        
-        [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
-        self.settings.isValid = YES;
-        self.settings.accountPhone = accountPhone;
-        [self.settings saveSettings];
-    }else{
-        UIAlertView *checkAlert = [[UIAlertView alloc] initWithTitle:@"error" message:@"check.verification.code.error" delegate:nil cancelButtonTitle:NSLocalizedString(@"retry", @"") otherButtonTitles:nil];
-        [checkAlert show];
-    }
-}
-*/
-
-
-
-
-/*
-- (int)randomIntBetween:(int)num1 andLargerInt:(int)num2 {
-    int startVal = num1 * 10000;
-    int endVal = num2 * 10000;
-    int randomValue = startVal + (arc4random() % (endVal - startVal));
-    return randomValue /10000;
-}*/
 
 @end

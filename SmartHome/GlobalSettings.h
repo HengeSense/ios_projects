@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) NSString *accountPhone;
 @property (strong, nonatomic) NSString *accountPassword;
+@property (strong, nonatomic) NSString *secretKey;
 @property (assign, nonatomic) BOOL isValid;
 @property (assign, nonatomic) BOOL hasUnitBinding;
 

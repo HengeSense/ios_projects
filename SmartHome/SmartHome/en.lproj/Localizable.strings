@@ -62,17 +62,19 @@
  */
 "phone_number_register"           = "Please enter your phone number:";
 "verification_code_enter.tips"    = "Please enter verification code that you received:";
+"resend_verification_code"        = "Resend verification code";
 "verification_code"               = "Verification Code:";
 
 /*
  *login view controller
  */
 
-"username"                        = "username:";
-"password"                        = "passname:";
-"login"                           = "login";
-"remember_password"               = "remember";
-"register_new_user"               = "new account";
+"username"                        = "Username:";
+"password"                        = "Password:";
+"login"                           = "Login";
+"remember_password"               = "Remember Password";
+"register_new_user"               = "Register";
+"find_password"                   = "Forgot Password";
 
 /*
  * units binding view

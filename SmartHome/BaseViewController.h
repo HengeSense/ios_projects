@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AlertView.h"
 #import "UIViewController+UIViewControllerExtension.h"
 
 @interface BaseViewController : UIViewController

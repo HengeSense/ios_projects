@@ -9,13 +9,11 @@
 #import "LoginViewController.h"
 #import "SMTextField.h"
 #import "LongButton.h"
-#import "KeychainItemWrapper.h"
 #import "MainViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 
 #define LINE_HIGHT 5
-#define INDENTIFER_KEY_WRAPPER @"rememberService"
 
 @interface LoginViewController ()
 
@@ -24,15 +22,13 @@
 @implementation LoginViewController{
     UILabel *lblUserName;
     UILabel *lblPassword;
-    UILabel *lblRemeberPassword;
     
     UITextField *txtUserName;
     UITextField *txtPassword;
     
     UIButton *btnLogin;
     UIButton *btnRegister;
-    
-    KeychainItemWrapper *keyWrapper;
+    UIButton *btnFindPassword;
 }
 
 #pragma mark -
@@ -62,13 +58,6 @@
 -(void) initUI{
     [super initUI];
     [self registerTapGestureToResignKeyboard];
-    
-    NSString *service = [NSString emptyString];
-    
-    if(keyWrapper == nil) {
-        keyWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:INDENTIFER_KEY_WRAPPER accessGroup:nil];
-        service = [keyWrapper objectForKey:(__bridge_transfer id)kSecAttrService];
-    }
     
     if(lblUserName == nil) {
         lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
@@ -113,17 +102,34 @@
         [self.view addSubview:btnLogin];
     }
     
+    if(btnFindPassword == nil) {
+        btnFindPassword = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 34, 146 / 2, 26)];
+        btnFindPassword.center = CGPointMake(self.view.center.x - 50, btnFindPassword.center.y);
+        btnFindPassword.titleLabel.font = [UIFont systemFontOfSize:14];
+        [btnFindPassword setTitle:NSLocalizedString(@"find_password", @"") forState:UIControlStateNormal];
+        btnFindPassword.titleLabel.textColor = [UIColor whiteColor];
+        [self.view addSubview:btnFindPassword];
+    }
+    
     if(btnRegister == nil) {
-        btnRegister = [[UIButton alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 5 - 146 / 2), 300, 146 / 2, 52 / 2)];
-        [btnRegister setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateNormal];
-        [btnRegister setBackgroundImage:[UIImage imageNamed:@"btn_register.png"] forState:UIControlStateHighlighted];
-        btnRegister.titleLabel.font = [UIFont systemFontOfSize:13];
+        btnRegister = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 34, 146 / 2, 26)];
+        btnRegister.center = CGPointMake(self.view.center.x + 50, btnRegister.center.y);
+        btnRegister.titleLabel.font = [UIFont systemFontOfSize:14];
         [btnRegister setTitle:NSLocalizedString(@"register_new_user", @"") forState:UIControlStateNormal];
-        btnRegister.titleLabel.textColor = [UIColor lightTextColor];
+        btnRegister.titleLabel.textColor = [UIColor whiteColor];
         [btnRegister addTarget:self action:@selector(showRegisterViewController) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnRegister];
     }
     
+    UILabel *lblSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 10, 26)];
+    lblSeperator.center = CGPointMake(self.view.center.x, btnRegister.center.y);
+    lblSeperator.text = @"|";
+    lblSeperator.textColor = [UIColor whiteColor];
+    lblSeperator.textAlignment = NSTextAlignmentCenter;
+    lblSeperator.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:lblSeperator];
+    
+    //
     txtUserName.text = @"admin";
     txtPassword.text = @"admin";
 }
@@ -132,9 +138,33 @@
 #pragma mark services
 
 - (void)login {
+    NSString *userName = [NSString trim:txtUserName.text];
+    NSString *password = [NSString trim:txtPassword.text];
+    
+    if([NSString isBlank:userName]) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        return;
+    }
+    
+    if([NSString isBlank:password]) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        return;
+    }
+    
+    
     if(![txtUserName.text isEqualToString:@"admin"] && ![txtPassword.text isEqualToString:@"admin"]) {
         return;
     }
+    
+    [[AlertView currentAlertView] setMessage:@"验证码已失效" forType:AlertViewTypeLoading];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(loginSuccess) userInfo:nil repeats:NO];
+}
+
+- (void)loginSuccess {
+    [[AlertView currentAlertView] dismissAlertView];
     [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
 }
 

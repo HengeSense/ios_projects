@@ -63,6 +63,7 @@
  */
 "phone_number_register"           = "请输入手机号码:";
 "verification_code"               = "验证码:";
+"resend_verification_code"        = "重新发送验证码";
 "verification_code_enter.tips"    = "请输入收到的短信验证码:";
 
 /*
@@ -72,7 +73,8 @@
 "password"                 =  "登录密码:";
 "login"                    =  "登录";
 "remember_password"        =  "记住密码";
-"register_new_user"        =  "注册新用户";
+"register_new_user"        =  "注册账号";
+"find_password"            =  "找回密码";
 
 /*
  * units binding view

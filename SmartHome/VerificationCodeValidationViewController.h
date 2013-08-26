@@ -10,4 +10,7 @@
 
 @interface VerificationCodeValidationViewController : NavViewController<UITextFieldDelegate>
 
+@property (strong, nonatomic) NSString *phoneNumberToValidation;
+@property (assign, nonatomic) NSUInteger countDown;
+
 @end
