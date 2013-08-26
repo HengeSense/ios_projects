@@ -86,6 +86,12 @@
 #pragma mark service
 
 - (void)sendVerificationCode {
+    if([NSString isBlank:txtPhoneNumber.text] || [NSString trim:txtPhoneNumber.text].length != 11) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_format_invalid", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+        return;
+    }
+    
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     [self.accountService sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];

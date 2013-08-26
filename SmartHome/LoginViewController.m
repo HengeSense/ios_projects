@@ -10,6 +10,7 @@
 #import "SMTextField.h"
 #import "LongButton.h"
 #import "MainViewController.h"
+#import "UnitsBindingViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 
@@ -160,7 +161,11 @@
 
 - (void)loginSuccess {
     [[AlertView currentAlertView] dismissAlertView];
-    [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+    if(self.settings.anyUnitsBinding) {
+        [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+    } else {
+        [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
+    }
 }
 
 -(void)showRegisterViewController {

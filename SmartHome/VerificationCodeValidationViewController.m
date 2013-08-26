@@ -182,6 +182,14 @@
 - (void)registerSuccessfully:(RestResponse *)resp {
     if(resp.statusCode == 200) {
         
+        
+        if(self.settings.anyUnitsBinding) {
+            
+        } else {
+            
+        }
+        
+        
     }
 }
 
