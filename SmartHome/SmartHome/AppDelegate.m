@@ -27,19 +27,20 @@
     [navigationController setNavigationBarHidden:YES];
     navigationController.delegate = rootViewController;
     
-    self.settings.isValid = NO;
+    BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
     
-    if(self.settings.isValid && self.settings.hasUnitBinding) {
-        [rootViewController.navigationController pushViewController:
-            [[MainViewController alloc] init] animated:NO];
-    } else if(self.settings.isValid && !self.settings.hasUnitBinding) {
-        [rootViewController.navigationController pushViewController:
-         [[UnitsBindingViewController alloc] init] animated:NO];
+    if(hasLogin) {
+        if(self.settings.anyUnitsBinding) {
+            [rootViewController.navigationController pushViewController:
+             [[MainViewController alloc] init] animated:NO];
+        } else {
+            [rootViewController.navigationController pushViewController:
+             [[UnitsBindingViewController alloc] init] animated:NO];
+        }
     } else {
         [rootViewController.navigationController pushViewController:
          [[LoginViewController alloc] init] animated:NO];
     }
-    
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navigationController;

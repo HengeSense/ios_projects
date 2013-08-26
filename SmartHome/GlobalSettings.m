@@ -10,19 +10,18 @@
 #import "NSString+StringUtils.h"
 #import "NSDictionary+NSNullUtility.h"
 
-#define ACCOUNT_PHONE_KEY    @"account.phone.key"
-#define IS_VALID_KEY         @"is.valid.key"
-#define UNIT_BINDING_KEY     @"unit.binding.key"
-#define ACCOUNT_PWD_KEY      @"account.pwd"
+#define GLOBAL_SETTINGS_KEY       @"global_settings.key"
+#define ACCOUNT_KEY               @"account.key"
+#define PASSWORD_KEY              @"password.key"
+#define SECRET_KEY_KEY            @"secret_key.key"
+#define ANY_UNITS_BINDING_KEY     @"any_units_binding.key"
 
 @implementation GlobalSettings
 
-@synthesize accountPhone;
-@synthesize accountPassword;
+@synthesize account;
+@synthesize password;
 @synthesize secretKey;
-
-@synthesize hasUnitBinding;
-@synthesize isValid;
+@synthesize anyUnitsBinding;
 
 - (id)init {
     self = [super init];
@@ -31,43 +30,42 @@
         NSDictionary *settings = [defaults objectForKey:GLOBAL_SETTINGS_KEY];
         if(settings == nil) {
             //no settings file before
-            self.isValid = NO;
-            self.hasUnitBinding = NO;
-            self.accountPhone = [NSString emptyString];
-            self.accountPassword = [NSString emptyString];
+            self.anyUnitsBinding = NO;
+            self.account = [NSString emptyString];
+            self.password = [NSString emptyString];
+            self.secretKey = [NSString emptyString];
         } else {
             //already have a setting file
             //need to fill object property
-            NSString *acc_phone_obj = [settings notNSNullObjectForKey:ACCOUNT_PHONE_KEY];
-            NSString *is_valid_obj  = [settings notNSNullObjectForKey:IS_VALID_KEY];
-            NSString *has_unit_obj  = [settings notNSNullObjectForKey:UNIT_BINDING_KEY];
-            NSString *acc_pwd_obj   = [settings notNSNullObjectForKey:ACCOUNT_PWD_KEY];
             
-            if(![NSString isBlank:acc_phone_obj]) {
-                self.accountPhone = acc_phone_obj;
+            NSString *account_obj = [settings notNSNullObjectForKey:ACCOUNT_KEY];
+            NSString *password_obj = [settings notNSNullObjectForKey:PASSWORD_KEY];
+            NSString *secret_key_obj = [settings notNSNullObjectForKey:SECRET_KEY_KEY];
+            NSString *any_unit_binding_obj  = [settings notNSNullObjectForKey:ANY_UNITS_BINDING_KEY];
+            
+            if(![NSString isBlank:account_obj]) {
+                self.account = account_obj;
             } else {
-                self.accountPhone = [NSString emptyString];
+                self.account = [NSString emptyString];
             }
             
-            if(![NSString isBlank:acc_pwd_obj]) {
-                self.accountPassword = acc_pwd_obj;
+            if(![NSString isBlank:password_obj]) {
+                self.password = password_obj;
             } else {
-                self.accountPassword = [NSString emptyString];
+                self.password = [NSString emptyString];
             }
             
-            if(![NSString isBlank:is_valid_obj]) {
-                if([@"yes" isEqualToString:is_valid_obj]) {
-                    self.isValid = YES;
-                } else {
-                    self.isValid = NO;
-                }
+            if(![NSString isBlank:secret_key_obj]) {
+                self.secretKey = secret_key_obj;
+            } else {
+                self.secretKey = [NSString emptyString];
             }
             
-            if(![NSString isBlank:has_unit_obj]) {
-                if([@"yes" isEqualToString:has_unit_obj]) {
-                    self.hasUnitBinding = YES;
+            if(![NSString isBlank:any_unit_binding_obj]) {
+                if([@"yes" isEqualToString:any_unit_binding_obj]) {
+                    self.anyUnitsBinding = YES;
                 } else {
-                    self.hasUnitBinding = NO;
+                    self.anyUnitsBinding = NO;
                 }
             }
         }
@@ -78,12 +76,10 @@
 - (NSDictionary *)toDictionary {
     //convert self to a dictionary
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    
-    [dictionary setObject:(self.isValid ? @"yes" : @"no") forKey:IS_VALID_KEY];
-    [dictionary setObject:(self.hasUnitBinding ? @"yes" : @"no") forKey:UNIT_BINDING_KEY];
-    [dictionary setObject:self.accountPhone forKey:ACCOUNT_PHONE_KEY];
-    [dictionary setObject:self.accountPassword forKey:ACCOUNT_PWD_KEY];
-    
+    [dictionary setObject:self.account forKey:ACCOUNT_KEY];
+    [dictionary setObject:self.password forKey:PASSWORD_KEY];
+    [dictionary setObject:self.secretKey forKey:SECRET_KEY_KEY];
+    [dictionary setObject:(self.anyUnitsBinding ? @"yes" : @"no") forKey:ANY_UNITS_BINDING_KEY];
     return dictionary;
 }
 

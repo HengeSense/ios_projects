@@ -7,13 +7,6 @@
 //
 
 #import "UnitsBindingViewController.h"
-#import "ExtranetClientSocket.h"
-#import "NSString+StringUtils.h"
-#import "DeviceCommand.h"
-#import "CommunicationMessage.h"
-#import "ClientSocket.h"
-#import "BitUtils.h"
-
 
 @interface UnitsBindingViewController ()
 
@@ -100,11 +93,6 @@
     lblForBtnAutoSearch.numberOfLines = 5;
     lblForBtnAutoSearch.text = NSLocalizedString(@"auto_search_button_tips", @"");
     [self.view addSubview:lblForBtnAutoSearch];
-    
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 50, 120, 21)];
-    [btn addTarget:self action:@selector(fff) forControlEvents:UIControlEventTouchUpInside];
-    [btn setTitle:@"test" forState:UIControlStateNormal];
-    [self.view addSubview:btn];
 }
 
 - (void)generateTopbar {
@@ -119,12 +107,6 @@
     self.topbar.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
     [self.view addSubview:self.topbar];
     self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"btn_done.png");
-}
-
-- (void)fff {
-    
-    ExtranetClientSocket *socket = [[ExtranetClientSocket alloc] initWithIPAddress:@"127.0.0.1" andPort:8888];
-    [socket connect];
 }
 
 #pragma mark -
