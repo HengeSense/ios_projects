@@ -799,8 +799,6 @@
 				6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */,
 				6F0FAF0E17AF87BD00B75D3E /* AirconditionAdjustmentViewController.h */,
 				6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */,
-				6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */,
-				6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */,
 				6F0FAF1417AF87DE00B75D3E /* QRCodeScannerViewController.h */,
 				6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */,
 				F205B78117B0EEE2003EC863 /* NavViewController.h */,
@@ -825,6 +823,8 @@
 				F20AE08D17BDD00B0040B80A /* LoginViewController.m */,
 				F2D8E8C517C48EA500090E5B /* CameraAdjustViewController.h */,
 				F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */,
+				6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */,
+				6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */,
 				6FB66D6317C751570002D6C5 /* VerificationCodeValidationViewController.h */,
 				6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */,
 			);

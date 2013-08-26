@@ -25,7 +25,11 @@
 - (void)sendVerificationCodeFor:(NSString *)phoneNumber success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
     NSString *checkCode = [NSString md5HexDigest:[NSString stringWithFormat:@"%@%@", phoneNumber, MD5_KEY]];
     NSString *url = [NSString stringWithFormat:@"?mobileCode=%@&checkCode=%@", phoneNumber, checkCode];
-    
+    [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
+}
+
+- (void)registerWithPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode UDID:(NSString *)UDID phoneType:(NSString *)phoneType success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
+    NSString *url = [NSString stringWithFormat:@"/confirm?mobileCode=%@&checkCode=%@&phoneType=%@", @"", @"", @""];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 

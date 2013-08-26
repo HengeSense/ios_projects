@@ -65,8 +65,6 @@
         lblMessage.textAlignment = NSTextAlignmentCenter;
         lblMessage.font = [UIFont systemFontOfSize:15.f];
         lblMessage.textColor = [UIColor whiteColor];
-        
-        lblMessage.text = @"发送成功";
         [self addSubview:lblMessage];
     }
 }
@@ -88,7 +86,7 @@
         lockedView = lockView;
     }
     [KEY_WINDOW addSubview:self];
-    if(self.alertViewType == AlertViewTypeLoading) {
+    if(self.alertViewType == AlertViewTypeWaitting) {
         if(!indicatorView.isAnimating) {
             [indicatorView startAnimating];
         }
@@ -144,7 +142,7 @@
             imgTips.hidden = YES;
             lblMessage.text = [NSString emptyString];
             break;
-        case AlertViewTypeLoading:
+        case AlertViewTypeWaitting:
             indicatorView.hidden = NO;
             imgTips.hidden = YES;
             break;

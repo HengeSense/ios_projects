@@ -153,7 +153,7 @@
         return;
     }
     
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeLoading];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(loginSuccess) userInfo:nil repeats:NO];
 }

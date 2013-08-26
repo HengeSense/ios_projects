@@ -86,49 +86,43 @@
 #pragma mark service
 
 - (void)sendVerificationCode {
-    
-//    VerificationCodeValidationViewController *cc = [self nextViewController];
-//    cc.phoneNumberToValidation = @"18692251910";
-//    cc.countDown = 20;
-//    [self.navigationController pushViewController:cc animated:YES];
-//    
-//    
-//    return;
-    
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     [self.accountService sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
 }
 
 - (void)verificationCodeSendSuccess:(RestResponse *)resp {
-    NSLog(@"%d", resp.statusCode);
     if(resp.statusCode == 200) {
-        NSString *str=       [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
-        NSLog(str);
-        
-//        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
-//        if(json != nil) {
-//            NSString *_id_ = [json notNSNullObjectForKey:@"id"];
-//            if(_id_ != nil) {
-//                if([@"1" isEqualToString:_id_]) {
-//                    [self.navigationController pushViewController:[self nextViewController] animated:YES];
-//                    return;
-//                } else if([@"-3" isEqualToString:_id_] || [@"-4" isEqualToString:_id_]) {
-//                    
-//                } else if([@"-1" isEqualToString:_id_]) {
-//                    
-//                } else if([@"-2" isEqualToString:_id_]) {
-//                    
-//                } else {
-//                    
-//                }
-//            }
-//        }
-        
-        
-        //error
-        
-    } else {
-        [self verificationCodeSendError:resp];
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            NSString *_id_ = [json notNSNullObjectForKey:@"id"];
+            if(_id_ != nil) {
+                if([@"1" isEqualToString:_id_] || [@"-3" isEqualToString:_id_] || [@"-4" isEqualToString:_id_]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"send_success", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    VerificationCodeValidationViewController *nextViewController = [self nextViewController];
+                    nextViewController.phoneNumberToValidation = txtPhoneNumber.text;
+                    if([@"1" isEqualToString:_id_]) {
+                        nextViewController.countDown = 60;
+                    } else {
+                        NSLog(@" not 60");
+                        nextViewController.countDown = 60;
+                    }
+                    [self.navigationController pushViewController:nextViewController animated:YES];
+                    return;
+                } else if([@"-1" isEqualToString:_id_]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_format_invalid", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    return;
+                } else if([@"-2" isEqualToString:_id_]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_has_been_register", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    return;
+                }
+            }
+        }
     }
+    [self verificationCodeSendError:resp];
 }
 
 - (VerificationCodeValidationViewController *)nextViewController {
@@ -136,7 +130,12 @@
 }
 
 - (void)verificationCodeSendError:(RestResponse *)resp {
-    NSLog(@"error %d", resp.statusCode);
+    if(resp.statusCode == 1001) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeSuccess];
+    } else {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeSuccess];
+    }
+    [[AlertView currentAlertView] delayDismissAlertView];
 }
 
 #pragma mark -

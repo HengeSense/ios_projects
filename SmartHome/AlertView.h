@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, AlertViewState) {
 
 typedef NS_ENUM(NSUInteger, AlertViewType) {
     AlertViewTypeNone,
-    AlertViewTypeLoading,
+    AlertViewTypeWaitting,
     AlertViewTypeSuccess,
     AlertViewTypeFailed
 };

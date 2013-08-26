@@ -7,8 +7,10 @@
 //
 
 #import "VerificationCodeValidationViewController.h"
+#import "NSDictionary+NSNullUtility.h"
 #import "LongButton.h"
 #import "SMTextField.h"
+#import "JsonUtils.h"
 
 @interface VerificationCodeValidationViewController ()
 
@@ -111,7 +113,7 @@
 #pragma mark service
 
 - (void)startCountDown {
-    if(countDown <= 2) {
+    if(self.countDown <= 1) {
         lblCountDown.text = [NSString emptyString];
         btnResend.enabled = YES;
     } else {
@@ -121,8 +123,8 @@
 }
 
 - (void)countDownTimer {
-    if(countDown > 1) {
-        countDown--;
+    if(self.countDown > 1) {
+        self.countDown--;
         lblCountDown.text = [NSString stringWithFormat:@"%d", self.countDown];
     } else {
         if(countDownTimer != nil) {
@@ -134,16 +136,58 @@
 }
 
 - (void)resendVerificationCode {
-    NSLog(@"resend");
-    
-    //if success
-    self.countDown = 60;
-    lblCountDown.text = [NSString stringWithFormat:@"%d", self.countDown];
-    [self startCountDown];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    [self.accountService sendVerificationCodeFor:self.phoneNumberToValidation success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
+}
+
+- (void)verificationCodeSendSuccess:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            NSString *_id_ = [json notNSNullObjectForKey:@"id"];
+            if(_id_ != nil) {
+                if([@"1" isEqualToString:_id_]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"send_success", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    self.countDown = 60;
+                    lblCountDown.text = [NSString stringWithFormat:@"%d", self.countDown];
+                    [self startCountDown];
+                    return;
+                }
+            }
+        }
+    }
+    [self verificationCodeSendError:resp];
+}
+
+- (void)verificationCodeSendError:(RestResponse *)resp {
+    if(resp.statusCode == 1001) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeSuccess];
+    } else {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeSuccess];
+    }
+    [[AlertView currentAlertView] delayDismissAlertView];
 }
 
 - (void)submitVerificationCode {
+    
+    
+}
 
+- (void)registerSuccessfully:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        
+    }
+}
+
+- (void)registerFailed:(RestResponse *)resp {
+    if(resp.statusCode == 1001) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeSuccess];
+    } else {
+        
+    }
+    [[AlertView currentAlertView] delayDismissAlertView];
 }
 
 #pragma mark -
