@@ -142,13 +142,13 @@
     NSString *password = [NSString trim:txtPassword.text];
     
     if([NSString isBlank:userName]) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"username_not_blank", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
         return;
     }
     
     if([NSString isBlank:password]) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"password_not_blank", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
         return;
     }
@@ -158,7 +158,7 @@
         return;
     }
     
-    [[AlertView currentAlertView] setMessage:@"验证码已失效" forType:AlertViewTypeLoading];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeLoading];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(loginSuccess) userInfo:nil repeats:NO];
 }

@@ -17,6 +17,7 @@
 "rename"           = "重命名";
 "skip"             = "跳过";
 "next_step"        = "下一步";
+"please_wait"      = "请稍后";
 "processing.tips"  = "处理中,请稍后...";
 
 /*
@@ -75,6 +76,8 @@
 "remember_password"        =  "记住密码";
 "register_new_user"        =  "注册账号";
 "find_password"            =  "找回密码";
+"username_not_blank"       =  "用户名不能为空";
+"password_not_blank"       =  "密码不能为空";
 
 /*
  * units binding view

@@ -16,6 +16,7 @@
 "rename"           = "rename";
 "skip"             = "skip";
 "next_step"        = "Next step";
+"please_wait"      = "Please wait";
 "processing.tips"  = "Wait for processing...";
 
 /*
@@ -75,6 +76,8 @@
 "remember_password"               = "Remember Password";
 "register_new_user"               = "Register";
 "find_password"                   = "Forgot Password";
+"username_not_blank"              = "The user name can not be a blank";
+"password_not_blank"              = "The password can not be a blank";
 
 /*
  * units binding view
