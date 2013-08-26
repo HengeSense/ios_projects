@@ -167,6 +167,7 @@
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
 		F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178BFD17CAEC6F0043400F /* PageableScrollView.m */; };
 		F2178C0117CB06720043400F /* PageableNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0017CB06720043400F /* PageableNavView.m */; };
+		F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0317CB3CEB0043400F /* ScrollNavButton.m */; };
 		F22DF72017C1AEE600BF7C3A /* cbx_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */; };
 		F22DF72217C1AEFB00BF7C3A /* cbx_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */; };
 		F22DF72917C1F5FB00BF7C3A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22DF72317C1CA3500BF7C3A /* Security.framework */; };
@@ -451,6 +452,8 @@
 		F2178BFD17CAEC6F0043400F /* PageableScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageableScrollView.m; sourceTree = "<group>"; };
 		F2178BFF17CB06720043400F /* PageableNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableNavView.h; sourceTree = "<group>"; };
 		F2178C0017CB06720043400F /* PageableNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageableNavView.m; sourceTree = "<group>"; };
+		F2178C0217CB3CEB0043400F /* ScrollNavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollNavButton.h; sourceTree = "<group>"; };
+		F2178C0317CB3CEB0043400F /* ScrollNavButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollNavButton.m; sourceTree = "<group>"; };
 		F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cbx_unchecked@2x.png"; sourceTree = "<group>"; };
 		F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cbx_checked@2x.png"; sourceTree = "<group>"; };
 		F22DF72317C1CA3500BF7C3A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1216,6 +1219,8 @@
 			children = (
 				F2BB0EF317BE1B7E004E14B1 /* LongButton.h */,
 				F2BB0EF417BE1B7E004E14B1 /* LongButton.m */,
+				F2178C0217CB3CEB0043400F /* ScrollNavButton.h */,
+				F2178C0317CB3CEB0043400F /* ScrollNavButton.m */,
 			);
 			name = buttons;
 			sourceTree = "<group>";
@@ -1466,6 +1471,7 @@
 				6FB66D6217C745820002D6C5 /* AccountService.m in Sources */,
 				6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */,
 				F2178C0117CB06720043400F /* PageableNavView.m in Sources */,
+				F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

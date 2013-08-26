@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PageableNavView : UIView
-
+@protocol PageableNavViewDelegate<NSObject>
+-(void) panAndTouchAccessoryBehavior;
+@end
+@interface PageableNavView : UIView<UIScrollViewDelegate>
+@property(assign,nonatomic) id<PageableNavViewDelegate> delegate;
+@property(strong,nonatomic) UIScrollView *pageableNavView;
 @end

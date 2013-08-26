@@ -10,6 +10,7 @@
 
 @implementation PageableScrollView
 @synthesize pageableScrollView;
+@synthesize delegate;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -31,7 +32,6 @@
     }
     return self;
 }
-
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -43,6 +43,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //    self.pageableScrollView.alpha = 0.5f;
+    if ([self.delegate respondsToSelector:@selector(accessoryBehavior)] ) {
+        [self.delegate accessoryBehavior];
+    }
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     self.pageableScrollView.alpha = 1.0f;

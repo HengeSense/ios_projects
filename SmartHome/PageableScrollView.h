@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol PageableSCrollViewDelegate
+@protocol PageableSCrollViewDelegate <NSObject>
 -(void) accessoryBehavior;
 @end
 @interface PageableScrollView : UIView<UIScrollViewDelegate>
 @property (strong,nonatomic) UIScrollView *pageableScrollView;
+@property (assign,nonatomic) id<PageableSCrollViewDelegate> delegate;
 @end

@@ -14,7 +14,6 @@
 #import "CameraAdjustViewController.h"
 
 #import "SwitchButton.h"
-#import "PageableScrollView.h"
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              174
 #define SPEECH_BUTTON_HEIGHT             186
@@ -28,6 +27,7 @@
     ConversationView *speechView;
     SpeechRecognitionUtil *speechRecognitionUtil;
     PageableScrollView *pageableScrollView;
+    PageableNavView *pageableNavView;
     
     UIButton *btnSpeech;
     UIButton *btnShowNotification;
@@ -73,6 +73,11 @@
         pageableScrollView.backgroundColor = [UIColor whiteColor];
         [self addSubview:pageableScrollView];
     }
+    
+    if (pageableNavView == nil) {
+        
+    }
+    
     SwitchButton *sb = [SwitchButton buttonWithPoint:CGPointMake(100, 100)];
     [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
     [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
@@ -218,4 +223,10 @@
     return speechView;
 }
 
+-(void) accessoryBehavior{
+    
+}
+-(void) panAndTouchAccessoryBehavior{
+    
+}
 @end
