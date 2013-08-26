@@ -83,19 +83,23 @@
     }
     
     if(btnResend == nil) {
-        btnResend = [[UIButton alloc] initWithFrame:CGRectMake(0, btnNext.frame.origin.y + btnNext.frame.size.height + 15, 120, 21)];
+        btnResend = [[UIButton alloc] initWithFrame:CGRectMake(0, btnNext.frame.origin.y + btnNext.frame.size.height + 15, 257/2, 48/2)];
         btnResend.center = CGPointMake(self.view.center.x, btnResend.center.y);
-//        [btnResend setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-//        [btnResend setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
+        [btnResend setBackgroundImage:[UIImage imageNamed:@"btn_dark_small.png"] forState:UIControlStateNormal];
+        [btnResend setBackgroundImage:[UIImage imageNamed:@"btn_dark_small.png"] forState:UIControlStateHighlighted];
 //        [btnResend setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateDisabled];
         [btnResend addTarget:self action:@selector(resendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
-        btnResend.titleLabel.font = [UIFont systemFontOfSize:14.f];
+        btnResend.titleLabel.font = [UIFont systemFontOfSize:12.f];
+//btnResend.titleLabel.s
+        
+        [btnResend setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btnResend setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [btnResend setTitle:NSLocalizedString(@"resend_verification_code", @"") forState:UIControlStateNormal];
         [self.view addSubview:btnResend];
     }
     
     if(lblCountDown == nil) {
-        lblCountDown = [[UILabel alloc] initWithFrame:CGRectMake(btnResend.frame.origin.x + btnResend.frame.size.width + 10, btnNext.frame.origin.y + btnNext.frame.size.height + 14, 20, 21)];
+        lblCountDown = [[UILabel alloc] initWithFrame:CGRectMake(btnResend.frame.origin.x + btnResend.frame.size.width + 10, btnNext.frame.origin.y + btnNext.frame.size.height + 15, 20, 21)];
         lblCountDown.font = [UIFont systemFontOfSize:14.f];
         lblCountDown.textAlignment = NSTextAlignmentCenter;
         lblCountDown.textColor = [UIColor lightTextColor];

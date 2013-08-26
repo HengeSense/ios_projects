@@ -80,7 +80,6 @@ timeoutInterval=_timeoutInterval, auth=_auth;
 - (void)executeForUrl:(NSString *)u method:(NSString *)m headers:(NSDictionary *)h body : (NSData *) b success:(SEL)s error:(SEL)e for:(NSObject *)obj callback:(id)cb {
     
     @try {
-        NSLog(@"%@", [self getFullUrl:u] );
         NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [self getFullUrl:u] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:self.timeoutInterval];
         request.HTTPMethod = m;
         if(h != nil) {
