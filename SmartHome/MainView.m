@@ -12,8 +12,8 @@
 #import "NotificationViewController.h"
 #import "AirConditionViewController.h"
 #import "CameraAdjustViewController.h"
-
 #import "SwitchButton.h"
+
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              174
 #define SPEECH_BUTTON_HEIGHT             186
@@ -68,7 +68,7 @@
         [self addSubview:btnSpeech];
     }
     
-    if (pageableScrollView ==nil) {
+    if (pageableScrollView == nil) {
         pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 280, 200)];
         pageableScrollView.backgroundColor = [UIColor whiteColor];
         [self addSubview:pageableScrollView];
@@ -156,6 +156,7 @@
     }
 }
 
+// 确保录音提示音已经结束,防止提示语进入识别范围
 - (void)delayStartListening {
     [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
 }
@@ -223,10 +224,12 @@
     return speechView;
 }
 
--(void) accessoryBehavior{
+- (void)accessoryBehavior {
     
 }
--(void) panAndTouchAccessoryBehavior{
+
+- (void)panAndTouchAccessoryBehavior {
     
 }
+
 @end
