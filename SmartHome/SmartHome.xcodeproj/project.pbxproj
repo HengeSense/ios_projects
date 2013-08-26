@@ -166,6 +166,7 @@
 		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
 		F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178BFD17CAEC6F0043400F /* PageableScrollView.m */; };
+		F2178C0117CB06720043400F /* PageableNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0017CB06720043400F /* PageableNavView.m */; };
 		F22DF72017C1AEE600BF7C3A /* cbx_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */; };
 		F22DF72217C1AEFB00BF7C3A /* cbx_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */; };
 		F22DF72917C1F5FB00BF7C3A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F22DF72317C1CA3500BF7C3A /* Security.framework */; };
@@ -448,6 +449,8 @@
 		F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesViewController.m; sourceTree = "<group>"; };
 		F2178BFC17CAEC6F0043400F /* PageableScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableScrollView.h; sourceTree = "<group>"; };
 		F2178BFD17CAEC6F0043400F /* PageableScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageableScrollView.m; sourceTree = "<group>"; };
+		F2178BFF17CB06720043400F /* PageableNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableNavView.h; sourceTree = "<group>"; };
+		F2178C0017CB06720043400F /* PageableNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageableNavView.m; sourceTree = "<group>"; };
 		F22DF71F17C1AEE600BF7C3A /* cbx_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cbx_unchecked@2x.png"; sourceTree = "<group>"; };
 		F22DF72117C1AEFB00BF7C3A /* cbx_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cbx_checked@2x.png"; sourceTree = "<group>"; };
 		F22DF72317C1CA3500BF7C3A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1202,17 +1205,10 @@
 			children = (
 				F2178BFC17CAEC6F0043400F /* PageableScrollView.h */,
 				F2178BFD17CAEC6F0043400F /* PageableScrollView.m */,
+				F2178BFF17CB06720043400F /* PageableNavView.h */,
+				F2178C0017CB06720043400F /* PageableNavView.m */,
 			);
 			name = pageable_scroll_view;
-			sourceTree = "<group>";
-		};
-		F22DF72517C1EAA500BF7C3A /* KeyChainItemWrapper */ = {
-			isa = PBXGroup;
-			children = (
-				F22DF72617C1EAA500BF7C3A /* KeychainItemWrapper.h */,
-				F22DF72717C1EAA500BF7C3A /* KeychainItemWrapper.m */,
-			);
-			path = KeyChainItemWrapper;
 			sourceTree = "<group>";
 		};
 		F2BB0EF217BE1B2A004E14B1 /* buttons */ = {
@@ -1469,6 +1465,7 @@
 				F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */,
 				6FB66D6217C745820002D6C5 /* AccountService.m in Sources */,
 				6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */,
+				F2178C0117CB06720043400F /* PageableNavView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
