@@ -25,9 +25,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "123"
-         endingLineNumber = "123"
-         landmarkName = "-hideSpeechView"
-         landmarkType = "5">
+         endingLineNumber = "123">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -38,9 +36,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "121"
-         endingLineNumber = "121"
-         landmarkName = "@implementation MainView"
-         landmarkType = "3">
+         endingLineNumber = "121">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -77,9 +73,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "135"
-         endingLineNumber = "135"
-         landmarkName = "-hideSpeechView"
-         landmarkType = "5">
+         endingLineNumber = "135">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

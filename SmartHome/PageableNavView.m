@@ -64,9 +64,10 @@
     
 }
 -(void) pageVertical:(NSArray *) navItems{
-    self.pageableNavView.showsVerticalScrollIndicator = NO;
+    self.pageableNavView.pagingEnabled = YES;
+//    self.pageableNavView.showsVerticalScrollIndicator = NO;
     __block CGRect pageableNavRect = self.pageableNavView.frame;
-   
+    self.pageableNavView.contentSize = CGSizeMake(pageableNavRect.size.width,navItems.count*101/2+(navItems.count-1)*ITEM_MARGIN);
     [navItems enumerateObjectsUsingBlock:^(__strong UIButton *obj,NSUInteger index,BOOL *stop){
         obj.frame = CGRectMake(pageableNavRect.origin.x, pageableNavRect.origin.y, obj.frame.size.width, obj.frame.size.height);
         [self.pageableNavView addSubview:obj];

@@ -13,4 +13,7 @@
 @interface PageableNavView : UIView<UIScrollViewDelegate>
 @property(assign,nonatomic) id<PageableNavViewDelegate> delegate;
 @property(strong,nonatomic) UIScrollView *pageableNavView;
+
+-(id)initWithFrame:(CGRect)frame andNavItemsForHorizontal:(NSArray *) navItems;
+-(id)initWithFrame:(CGRect)frame andNavItemsForVertical:(NSArray *) navItems;
 @end
