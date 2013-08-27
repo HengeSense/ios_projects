@@ -8,17 +8,26 @@
 
 #import "AirConditionViewController.h"
 #import "RadioButton.h"
+#import <QuartzCore/QuartzCore.h>
+
 #define RADIO_MARGIN 60
 #define LABEL_MARGIN_TOP 20
 #define RADIO_CENTER 10
+
 @interface AirConditionViewController ()
 
 @end
 
 @implementation AirConditionViewController{
-    UIButton *makeHot;
-    UIButton *makeCool;
-    UIButton *close;
+    UIView *backgroundView;
+    
+    UILabel *lblHot;
+    UILabel *lblCool;
+    UILabel *lblClose;
+    
+    UIButton *btnHot;
+    UIButton *btnCool;
+    UIButton *btnClose;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,64 +52,69 @@
 }
 -(void) initUI{
     [super initUI];
-    self.topbar.titleLabel.text = [NSString stringWithFormat:@"%@%@",@"客厅",NSLocalizedString(@"air.condition.setting",@"")];
-    CGFloat topbarHeight = self.topbar.frame.size.height;
-    UIView *checkBoard = [[UIView alloc] initWithFrame:CGRectMake(3, topbarHeight, self.view.frame.size.width-6, (self.view.frame.size.height-topbarHeight)/4)];
-    checkBoard.backgroundColor = [UIColor whiteColor];
     
-    if(makeHot ==nil){
-        makeHot = [RadioButton buttonWithPoint:CGPointMake(RADIO_MARGIN, RADIO_MARGIN)];
-        [makeHot addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
-        makeHot.selected = YES;
+    self.topbar.titleLabel.text = NSLocalizedString(@"aircondition_setting.title",@"");
+    
+    if(backgroundView == nil) {
+        backgroundView = [[UIView alloc] initWithFrame:CGRectMake(3, self.topbar.frame.size.height, (self.view.frame.size.width - 6), (self.view.frame.size.height - self.topbar.frame.size.height) / 4)];
+        backgroundView.layer.cornerRadius = 8;
+        backgroundView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:backgroundView];
     }
-    UILabel *hotLabel = [[UILabel alloc] initWithFrame:CGRectMake(makeHot.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
-    hotLabel.text = NSLocalizedString(@"make.hot", @"");
-    hotLabel.textColor = [UIColor blackColor];
-    hotLabel.textAlignment = UITextAlignmentCenter;
-    hotLabel.backgroundColor = [UIColor clearColor];
-    [checkBoard addSubview:hotLabel];
     
-    
-    if(makeCool==nil){
-        makeCool = [RadioButton buttonWithPoint:CGPointMake(makeHot.frame.origin.x+makeHot.frame.size.width+RADIO_MARGIN, RADIO_MARGIN)];
-        [makeCool addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
+    if(btnHot == nil) {
+        btnHot = [RadioButton buttonWithPoint:CGPointMake(RADIO_MARGIN, RADIO_MARGIN)];
+        [btnHot addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
+        btnHot.selected = YES;
+        [backgroundView addSubview:btnHot];
     }
-    UILabel *coolLabel = [[UILabel alloc] initWithFrame:CGRectMake(makeCool.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
-    coolLabel.text = NSLocalizedString(@"make.cool", @"");
-    coolLabel.textColor = [UIColor blackColor];
-    coolLabel.textAlignment = UITextAlignmentCenter;
-    coolLabel.backgroundColor = [UIColor clearColor];
-    [checkBoard addSubview:coolLabel];
     
-    
-    if(close == nil){
-        close = [RadioButton buttonWithPoint:CGPointMake(makeCool.frame.origin.x+makeCool.frame.size.width+RADIO_MARGIN, RADIO_MARGIN)];
-        [close addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
+    if(lblHot == nil) {
+        lblHot = [[UILabel alloc] initWithFrame:CGRectMake(btnHot.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
+        lblHot.text = NSLocalizedString(@"heating", @"");
+        lblHot.textColor = [UIColor blackColor];
+        lblHot.textAlignment = UITextAlignmentCenter;
+        lblHot.backgroundColor = [UIColor clearColor];
+        [backgroundView addSubview:lblHot];
     }
-    UILabel *closeLabel = [[UILabel alloc] initWithFrame:CGRectMake(close.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
-    closeLabel.text = NSLocalizedString(@"close", @"");
-    closeLabel.textColor = [UIColor blackColor];
-    closeLabel.textAlignment = UITextAlignmentCenter;
-    closeLabel.backgroundColor = [UIColor clearColor];
-    [checkBoard addSubview:closeLabel];
     
-    [checkBoard addSubview:makeHot];
-    [checkBoard addSubview:makeCool];
-    [checkBoard addSubview:close];
+    if(btnCool==nil){
+        btnCool = [RadioButton buttonWithPoint:CGPointMake(btnHot.frame.origin.x+btnHot.frame.size.width+RADIO_MARGIN, RADIO_MARGIN)];
+        [btnCool addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
+        [backgroundView addSubview:btnCool];
+    }
+    
+    if(lblCool == nil) {
+        lblCool = [[UILabel alloc] initWithFrame:CGRectMake(btnCool.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
+        lblCool.text = NSLocalizedString(@"refrigeration", @"");
+        lblCool.textColor = [UIColor blackColor];
+        lblCool.textAlignment = UITextAlignmentCenter;
+        lblCool.backgroundColor = [UIColor clearColor];
+        [backgroundView addSubview:lblCool];
+    }
     
     
+    if(btnClose == nil){
+        btnClose = [RadioButton buttonWithPoint:CGPointMake(btnCool.frame.origin.x+btnCool.frame.size.width+RADIO_MARGIN, RADIO_MARGIN)];
+        [btnClose addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
+        [backgroundView addSubview:btnClose];
+    }
     
-    
-    [self.view addSubview:checkBoard];
-    
-    
-    
+    if(lblClose == nil) {
+        lblClose = [[UILabel alloc] initWithFrame:CGRectMake(btnClose.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
+        lblClose.text = NSLocalizedString(@"close", @"");
+        lblClose.textColor = [UIColor blackColor];
+        lblClose.textAlignment = UITextAlignmentCenter;
+        lblClose.backgroundColor = [UIColor clearColor];
+        [backgroundView addSubview:lblClose];
+    }
 }
--(void) radioTouchInside:(UIButton *) radio{
-    makeHot.selected =NO;
-    makeCool.selected = NO;
-    close.selected = NO;
+
+- (void)radioTouchInside:(UIButton *)radio {
+    btnHot.selected =NO;
+    btnCool.selected = NO;
+    btnClose.selected = NO;
     radio.selected =!radio.selected;
-    
 }
+
 @end

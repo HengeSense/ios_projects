@@ -32,6 +32,7 @@
 "settings_view.title"                 = "Settings";
 "verification_code_send.title"        = "Validation Phone Number";
 "verification_validation.title"       = "Enter verfication code";
+"aircondition_setting.title"          = "Aircondition Setting";
 
 /*
  * drawer view
@@ -103,10 +104,9 @@
 /*
  * air condition view controller
  */
-"make.hot"               = "make hot";
-"make.cool"              = "make cool";
-"close"                  = "close";
-"air.condition.setting"  = "air condition setting";
+"heating"                           =  "heating";
+"refrigeration"                     =  "refrigeration";
+"close"                             =  "close";
 
 /*
  * tv view controller

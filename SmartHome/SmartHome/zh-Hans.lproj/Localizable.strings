@@ -33,6 +33,7 @@
 "settings_view.title"                 = "我的设置";
 "verification_code_send.title"        = "验证手机号码";
 "verification_validation.title"       = "填写验证码";
+"aircondition_setting.title"          = "空调设置";
 
 /*
  * drawer view
@@ -103,10 +104,9 @@
 /*
  *air condition view controller
  */
-"make.hot"                 = "制热";
-"make.cool"                = "制冷";
-"close"                    = "关";
-"air.condition.setting"    = "空调设置";
+"heating"                           =  "制热";
+"refrigeration"                     =  "制冷";
+"close"                             =  "关";
 
 /*
  * tv view controller
