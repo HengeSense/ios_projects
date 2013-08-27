@@ -110,10 +110,16 @@
     
 }
 -(void) scrollNavButtonAction:(UIButton *)sender{
+    __block NSInteger curNav;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
         obj.selected = NO;
+        if ([obj isEqual:sender]) {
+            curNav = idx;
+        }
     }];
     sender.selected = YES;
+    pageableScrollView.pageableScrollView.contentOffset = CGPointMake(curNav*pageableScrollView.pageableScrollView.frame.size.width*curNav, pageableScrollView.pageableScrollView.contentOffset.y);
+    
     
 }
 -(void) accessoryBehavior{
@@ -121,12 +127,16 @@
     CGFloat xOffset = pageableScrollView.pageableScrollView.contentOffset.x;
     CGPoint navOffset = pageableNavView.pageableNavView.contentOffset;
     CGFloat navHeight = 59/2+10;
+    
     NSInteger curPage = xOffset/itemWidth;
     [self scrollNavButtonAction:[navItems objectAtIndex:curPage]];
-//    if (<#condition#>) {
-//        <#statements#>
-//    }
-
+    CGFloat curNavYOffset = navHeight*curPage;
+    if (navOffset.y+pageableNavView.pageableNavView.frame.size.height<curNavYOffset) {
+        pageableNavView.pageableNavView.contentOffset = CGPointMake(navOffset.x, navOffset.y+navHeight);
+    }
+    if(navOffset.y>curNavYOffset){
+        pageableNavView.pageableNavView.contentOffset = CGPointMake(navOffset.x, navOffset.y-navHeight);
+    }
 }
 -(void) panAndTouchAccessoryBehavior{
     
