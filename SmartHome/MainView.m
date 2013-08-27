@@ -103,9 +103,9 @@
 //    
     
     SwitchButton *sb = [CameraSwitchButton buttonWithPoint:CGPointMake(100, 100) owner:self.ownerController];
-    [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
-    [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
     sb.status = @"on";
+    sb.title = @"摄像头";
+    [self addSubview:sb];
     
 }
 -(void) scrollNavButtonAction:(UIButton *)sender{
