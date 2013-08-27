@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ScrollNavButton : UIButton
-
++(UIButton *) buttonWithNothing;
 @end

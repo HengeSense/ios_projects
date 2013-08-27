@@ -14,6 +14,7 @@
 #import "CameraAdjustViewController.h"
 
 #import "SwitchButton.h"
+#import "ScrollNavButton.h"
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              174
 #define SPEECH_BUTTON_HEIGHT             186
@@ -28,6 +29,7 @@
     SpeechRecognitionUtil *speechRecognitionUtil;
     PageableScrollView *pageableScrollView;
     PageableNavView *pageableNavView;
+    NSArray *navItems;
     
     UIButton *btnSpeech;
     UIButton *btnShowNotification;
@@ -69,12 +71,33 @@
     }
     
     if (pageableScrollView ==nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 280, 200)];
+        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 240, 200)];
         pageableScrollView.backgroundColor = [UIColor whiteColor];
+        pageableScrollView.delegate = self;
         [self addSubview:pageableScrollView];
     }
     
     if (pageableNavView == nil) {
+        UIButton *btn1 = [ScrollNavButton buttonWithNothing];
+        [btn1 setTitle:@"客厅" forState:UIControlStateNormal];
+        btn1.selected = YES;
+        UIButton *btn2 = [ScrollNavButton buttonWithNothing];
+        [btn2 setTitle:@"主卧" forState:UIControlStateNormal];
+        UIButton *btn3 = [ScrollNavButton buttonWithNothing];
+        [btn3 setTitle:@"次卧" forState:UIControlStateNormal];
+        UIButton *btn4 = [ScrollNavButton buttonWithNothing];
+        [btn4 setTitle:@"厨房" forState:UIControlStateNormal];
+        UIButton *btn5 = [ScrollNavButton buttonWithNothing];
+        [btn5 setTitle:@"浴室" forState:UIControlStateNormal];
+        
+        navItems = [[NSArray alloc]initWithObjects:btn1,btn2,btn3,btn4,btn5, nil];
+        [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
+            [obj addTarget:self action:@selector(scrollNavButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        }];
+        pageableNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(250, 100, 101/2, 200) andNavItemsForVertical:navItems];
+        [self addSubview:pageableNavView];
+        
+
         
     }
     
@@ -86,7 +109,28 @@
     
     
 }
+-(void) scrollNavButtonAction:(UIButton *)sender{
+    [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
+        obj.selected = NO;
+    }];
+    sender.selected = YES;
+    
+}
+-(void) accessoryBehavior{
+    CGFloat itemWidth = pageableScrollView.pageableScrollView.frame.size.width;
+    CGFloat xOffset = pageableScrollView.pageableScrollView.contentOffset.x;
+    CGPoint navOffset = pageableNavView.pageableNavView.contentOffset;
+    CGFloat navHeight = 59/2+10;
+    NSInteger curPage = xOffset/itemWidth;
+    [self scrollNavButtonAction:[navItems objectAtIndex:curPage]];
+//    if (<#condition#>) {
+//        <#statements#>
+//    }
 
+}
+-(void) panAndTouchAccessoryBehavior{
+    
+}
 #pragma mark -
 #pragma mark notification && affect button
 
@@ -223,10 +267,5 @@
     return speechView;
 }
 
--(void) accessoryBehavior{
-    
-}
--(void) panAndTouchAccessoryBehavior{
-    
-}
+
 @end

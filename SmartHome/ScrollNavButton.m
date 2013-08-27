@@ -27,5 +27,10 @@
     // Drawing code
 }
 */
-
++(UIButton *) buttonWithNothing{
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 101/2, 59/2)];
+    [button setBackgroundImage:[UIImage imageNamed:@"btn_done_black.png"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateSelected];
+    return button;
+}
 @end
