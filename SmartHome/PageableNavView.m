@@ -7,7 +7,7 @@
 //
 
 #import "PageableNavView.h"
-#define ITEM_MARGIN 20
+
 @implementation PageableNavView
 - (id)initWithFrame:(CGRect)frame
 {
@@ -62,6 +62,10 @@
     __block CGRect pageableNavRect = self.pageableNavView.frame;
     self.pageableNavView.contentSize = CGSizeMake(pageableNavRect.size.width,navItems.count*59/2+(navItems.count-1)*ITEM_MARGIN);
     [navItems enumerateObjectsUsingBlock:^(__strong UIButton *obj,NSUInteger index,BOOL *stop){
+        if (index == 0) {
+            obj.selected = YES;
+            obj.titleLabel.font = [UIFont systemFontOfSize:18];
+        }
         obj.frame = CGRectMake(pageableNavRect.origin.x, pageableNavRect.origin.y, obj.frame.size.width, obj.frame.size.height);
         [self.pageableNavView addSubview:obj];
         pageableNavRect.origin.y += obj.frame.size.height+ITEM_MARGIN;

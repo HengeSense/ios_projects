@@ -47,7 +47,7 @@
     }
     
     if(lblTitle == nil) {
-        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 31, 80, 21)];
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 31, 70, 21)];
         lblTitle.center = CGPointMake(self.bounds.size.width / 2, lblTitle.center.y);
         lblTitle.font = [UIFont systemFontOfSize:13.f];
         lblTitle.textAlignment = NSTextAlignmentCenter;
@@ -58,7 +58,7 @@
 }
 
 + (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {
-    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
+    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 70, 52)];
     switchButton.ownerController = owner;
     return switchButton;
 }

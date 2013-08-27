@@ -8,7 +8,7 @@
 
 #import "PageableScrollView.h"
 #import "ScrollNavButton.h"
-#define MARGIN_X 10
+#define MARGIN_X 0
 #define MARGIN_Y 12
 #define SCROLL_ITEM_WIDTH 240
 #define SCROLL_ITEM_HEIGHT 180
@@ -27,17 +27,7 @@
         // Initialization code
         self.pageableScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         self.pageableScrollView.delegate = self;
-        
-        UIImageView *img1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_image.jpg"]];
-        UIImageView *img2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_image.jpg"]];
-        UIImageView *img3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_image.jpg"]];
-        UIImageView *img4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_image.jpg"]];
-        UIImageView *img5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"camera_image.jpg"]];
-        
-        NSArray *imgs = [[NSArray alloc] initWithObjects:img1,img2,img3,img4,img5, nil];
-        [self pageWithViews:imgs];
         [self addSubview:pageableScrollView];
-
     }
     return self;
 }
@@ -116,27 +106,30 @@
     __block NSInteger curNav;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
         obj.selected = NO;
+        obj.titleLabel.font = [UIFont systemFontOfSize:16];
         if ([obj isEqual:sender]) {
             curNav = idx;
         }
     }];
     sender.selected = YES;
-    [self.pageableScrollView scrollRectToVisible:CGRectMake(self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.frame.origin.y,SCROLL_ITEM_WIDTH, SCROLL_ITEM_WIDTH) animated:YES];
-//    self.pageableScrollView.contentOffset = CGPointMake(curNav*self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.contentOffset.y);
-//    
+    sender.titleLabel.font = [UIFont systemFontOfSize:18];
+    [self.pageableScrollView scrollRectToVisible:CGRectMake(self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.frame.origin.y,SCROLL_ITEM_WIDTH, SCROLL_ITEM_WIDTH) animated:YES];  
     
 }
 -(void) accessoryBehavior{
     CGFloat itemWidth = self.pageableScrollView.frame.size.width;
     CGFloat xOffset = self.pageableScrollView.contentOffset.x;
     CGPoint navOffset = self.pageNavView.pageableNavView.contentOffset;
-    CGFloat navHeight = 59/2+10;
+    CGFloat navHeight = 30+ITEM_MARGIN;
     
     NSInteger curPage = xOffset/itemWidth;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
         obj.selected = NO;
+        obj.titleLabel.font = [UIFont systemFontOfSize:16];
         if (curPage == idx) {
             obj.selected = YES;
+            obj.titleLabel.font = [UIFont systemFontOfSize:18];
+
         }
     }];
     CGFloat curNavYOffset = navHeight*curPage;
