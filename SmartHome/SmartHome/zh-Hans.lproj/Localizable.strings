@@ -98,7 +98,7 @@
 /*
  * camera adjust view controller
  */
-"camera.adjust"     ="摄像头调整";
+"camera_adjust"            = "摄像头调整";
 
 /*
  *air condition view controller
