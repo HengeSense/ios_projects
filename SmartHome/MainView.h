@@ -12,7 +12,6 @@
 #import "SpeechRecognitionUtil.h"
 
 #import "PageableScrollView.h"
-#import "PageableNavView.h"
 typedef NS_ENUM(NSInteger, SpeechViewState) {
     SpeechViewStateOpenning   = 1,
     SpeechViewStateOpenned    = 2,
@@ -28,7 +27,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     RecognizerStateProceesing
 };
 
-@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate,PageableNavViewDelegate,PageableSCrollViewDelegate>
+@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate>
 
 - (void)showSpeechView;
 - (void)hideSpeechView;

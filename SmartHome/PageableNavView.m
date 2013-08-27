@@ -7,16 +7,14 @@
 //
 
 #import "PageableNavView.h"
-#define ITEM_MARGIN 10
+#define ITEM_MARGIN 20
 @implementation PageableNavView
-@synthesize delegate;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         self.pageableNavView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        self.pageableNavView.delegate = self;
         [self addSubview:self.pageableNavView];
     }
     return self;
@@ -28,7 +26,6 @@
     self = [super initWithFrame:frame];
     if(self){
         self.pageableNavView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        self.pageableNavView.delegate = self;
         [self pageHorizontal:navItems];
         [self addSubview:self.pageableNavView];
     }
@@ -42,7 +39,6 @@
     if(self){
         
         self.pageableNavView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        self.pageableNavView.delegate = self;
         [self pageVertical:navItems];
         [self addSubview:self.pageableNavView];
     }
@@ -50,9 +46,6 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //    self.pageableScrollView.alpha = 0.5f;
-    if ([self.delegate respondsToSelector:@selector(panAndTouchAccessoryBehavior)] ) {
-        [self.delegate panAndTouchAccessoryBehavior];
-    }
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     self.pageableNavView.alpha = 1.0f;
