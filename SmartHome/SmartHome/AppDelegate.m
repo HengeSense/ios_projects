@@ -46,6 +46,8 @@
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     
+    [self registerForRemoteNotifications];
+    
     return YES;
 }
 							
@@ -75,6 +77,25 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"token");
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"fail token");
+}
+
+#pragma mark -
+#pragma mark services
+
+- (void)registerForRemoteNotifications {
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];
+}
+
+
+#pragma mark -
+#pragma getter and setters
 
 - (AccountService *)accountService {
     if(accountService == nil) {
