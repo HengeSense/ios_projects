@@ -93,7 +93,6 @@
         [backgroundView addSubview:lblCool];
     }
     
-    
     if(btnClose == nil){
         btnClose = [RadioButton buttonWithPoint:CGPointMake(btnCool.frame.origin.x+btnCool.frame.size.width+RADIO_MARGIN, RADIO_MARGIN)];
         [btnClose addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];

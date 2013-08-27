@@ -7,6 +7,7 @@
 //
 
 #import "AirconditionSwitchButton.h"
+#import "AirConditionViewController.h"
 
 @implementation AirconditionSwitchButton
 
@@ -14,7 +15,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
@@ -30,7 +30,8 @@
 }
 
 - (void)btnPressed:(id)sender {
-    
+    AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
+    [self.ownerController presentModalViewController:airConditionViewController animated:YES];
 }
 
 @end

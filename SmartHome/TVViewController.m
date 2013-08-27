@@ -7,8 +7,10 @@
 //
 
 #import "TVViewController.h"
+
 #define CELL_HEIGHT 93
 #define CELL_WIDTH 624
+
 @interface TVViewController ()
 
 @end
@@ -32,24 +34,36 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
 -(void) initUI{
     [super initUI];
-    tvTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, CELL_WIDTH / 2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
-    tvTable.dataSource = self;
-    tvTable.delegate = self;
-    tvTable.backgroundColor = [UIColor whiteColor];
     self.topbar.titleLabel.text = @"客厅电视机设置";
-
     
-    [self.view addSubview:tvTable];
-    
+    if(tvTable == nil) {
+        tvTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, CELL_WIDTH / 2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        tvTable.dataSource = self;
+        tvTable.delegate = self;
+        tvTable.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:tvTable];
+    }
 }
+
+#pragma mark -
+#pragma mark table view delegate
+
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
+
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *tvCellIndendifier = @"tvcell";
     UITableViewCell *tvCell = [tableView dequeueReusableCellWithIdentifier:tvCellIndendifier];
@@ -66,22 +80,14 @@
     }else{
         tvCell.textLabel.text = [NSString stringWithFormat:@"cctv-%i",indexPath.row];
     }
-//    CALayer *tableLayer = (__bridge_transfer )self.view.layer);//self.view.layer;
-    
-//    tvCell set
     return tvCell;
 }
+
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         return CELL_HEIGHT;
     }
     return CELL_HEIGHT/2;
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

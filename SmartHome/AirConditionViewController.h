@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NavViewController.h"
+#import "PopViewController.h"
 
-
-@interface AirConditionViewController : NavViewController 
+@interface AirConditionViewController : PopViewController
 
 @end
