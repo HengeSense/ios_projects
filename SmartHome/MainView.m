@@ -68,20 +68,22 @@
         [self addSubview:btnSpeech];
     }
     
-    if (pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 280, 200)];
-        pageableScrollView.backgroundColor = [UIColor whiteColor];
-        [self addSubview:pageableScrollView];
-    }
-    
-    if (pageableNavView == nil) {
-        
-    }
+//    if (pageableScrollView == nil) {
+//        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 280, 200)];
+//        pageableScrollView.backgroundColor = [UIColor whiteColor];
+//        [self addSubview:pageableScrollView];
+//    }
+//    
+//    if (pageableNavView == nil) {
+//        
+//    }
     
     SwitchButton *sb = [SwitchButton buttonWithPoint:CGPointMake(100, 100)];
     [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
     [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
     sb.status = @"on";
+    
+    sb.title = @"客厅空调";
     [self addSubview:sb];
     
     
