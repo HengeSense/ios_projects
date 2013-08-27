@@ -8,9 +8,9 @@
 
 #import "PageableScrollView.h"
 #import "ScrollNavButton.h"
-#define MARGIN_X 20
+#define MARGIN_X 10
 #define MARGIN_Y 12
-#define SCROLL_ITEM_WIDTH 280
+#define SCROLL_ITEM_WIDTH 240
 #define SCROLL_ITEM_HEIGHT 180
 #define GROUP_ITEM_WIDRH 80
 #define GROUP_ITEM_HEIGHT 52
@@ -54,20 +54,23 @@
         __block UIView *scrollItem = [[UIView alloc] initWithFrame:scrollRect];
         __block CGPoint lastOrigin = CGPointMake(0, 0);
         [obj enumerateObjectsUsingBlock:^(__strong UIView *obj, NSUInteger idx, BOOL *stop) {
-            if ((idx+1)%3==0) {
-                obj.frame = CGRectMake(0, lastOrigin.y+MARGIN_Y, obj.frame.size.width, obj.frame.size.height);
-                lastOrigin.x = 0;
-                lastOrigin.y +=MARGIN_Y;
+            if ((idx+1)%4==0) {
+                obj.frame = CGRectMake(0, lastOrigin.y+MARGIN_Y+obj.frame.size.height, obj.frame.size.width, obj.frame.size.height);
+                lastOrigin.x = MARGIN_X+obj.frame.size.width;
+                lastOrigin.y +=MARGIN_Y+obj.frame.size.height;
             }else{
-                obj.frame = CGRectMake(lastOrigin.x+MARGIN_X, lastOrigin.y, obj.frame.size.width, obj.frame.size.height);
-                lastOrigin.x +=MARGIN_X;
+                obj.frame = CGRectMake(lastOrigin.x, lastOrigin.y, obj.frame.size.width, obj.frame.size.height);
+                lastOrigin.x +=MARGIN_X+obj.frame.size.width;
             }
             [scrollItem addSubview:obj];
         }];
         [mutableScrollArr addObject:scrollItem];
     }];
+    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    self.pageableScrollView.delegate = self;
     [self pageWithViews:mutableScrollArr];
-    pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X, point.y, 101/2, 59/2) andNavItemsForVertical:mutableNavArr];
+    [self addSubview:self.pageableScrollView];
+    self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X, point.y, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
     navItems = mutableNavArr;
     return self;
 }
@@ -87,16 +90,17 @@
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     self.pageableScrollView.alpha = 1.0f;
+    [self accessoryBehavior];
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;{
     self.pageableScrollView.alpha = 1.0f;
 }
 -(void) pageWithViews:(NSArray *) views{
     self.pageableScrollView.pagingEnabled = YES;
-    self.pageableScrollView.showsHorizontalScrollIndicator = NO;
+//    self.pageableScrollView.showsHorizontalScrollIndicator = NO;
     CGFloat multiple = (CGFloat) views.count;
     NSInteger groupCount = views.count/3;
-    CGFloat contentHeight = groupCount>3?SCROLL_ITEM_HEIGHT:groupCount*(GROUP_ITEM_HEIGHT+MARGIN_Y)-MARGIN_Y;
+    CGFloat contentHeight = groupCount<3?SCROLL_ITEM_HEIGHT:groupCount*(GROUP_ITEM_HEIGHT+MARGIN_Y)-MARGIN_Y;
     self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,contentHeight);
     __block CGRect pageableRect = self.pageableScrollView.frame;
     [views enumerateObjectsUsingBlock:^(__strong UIView *obj,NSUInteger index,BOOL *stop){
@@ -117,8 +121,9 @@
         }
     }];
     sender.selected = YES;
-    self.pageableScrollView.contentOffset = CGPointMake(curNav*self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.contentOffset.y);
-    
+    [self.pageableScrollView scrollRectToVisible:CGRectMake(self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.frame.origin.y,SCROLL_ITEM_WIDTH, SCROLL_ITEM_WIDTH) animated:YES];
+//    self.pageableScrollView.contentOffset = CGPointMake(curNav*self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.contentOffset.y);
+//    
     
 }
 -(void) accessoryBehavior{
@@ -128,7 +133,12 @@
     CGFloat navHeight = 59/2+10;
     
     NSInteger curPage = xOffset/itemWidth;
-    [self scrollNavButtonAction:[navItems objectAtIndex:curPage]];
+    [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
+        obj.selected = NO;
+        if (curPage == idx) {
+            obj.selected = YES;
+        }
+    }];
     CGFloat curNavYOffset = navHeight*curPage;
     if (navOffset.y+pageNavView.pageableNavView.frame.size.height<curNavYOffset) {
         self.pageNavView.pageableNavView.contentOffset = CGPointMake(navOffset.x, navOffset.y+navHeight);

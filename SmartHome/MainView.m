@@ -69,14 +69,60 @@
         [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnSpeech];
     }
+    SwitchButton *sb1 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb1.status = @"on";
+    sb1.title = @"摄像头";
     
-//    NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObj
-//    if (pageableScrollView ==nil) {
-//        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 240, 200)];
-//        pageableScrollView.backgroundColor = [UIColor whiteColor];
-//        [self addSubview:pageableScrollView];
-//        [self addSubview:pageableScrollView.pageNavView];
-//    }
+    SwitchButton *sb2 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb2.status = @"on";
+    sb2.title = @"摄像头";
+    
+    SwitchButton *sb3 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb3.status = @"on";
+    sb3.title = @"摄像头";
+    
+    SwitchButton *sb4 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb4.status = @"on";
+    sb4.title = @"摄像头";
+    
+    SwitchButton *sb5 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb5.status = @"on";
+    sb5.title = @"摄像头";
+    
+    SwitchButton *sb6 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb6.status = @"on";
+    sb6.title = @"摄像头";
+    
+    SwitchButton *sb7 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb7.status = @"on";
+    sb7.title = @"摄像头";
+    
+    SwitchButton *sb8 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb8.status = @"on";
+    sb8.title = @"摄像头";
+    
+    SwitchButton *sb9 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb9.status = @"on";
+    sb9.title = @"摄像头";
+    
+    SwitchButton *sb10 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb10.status = @"on";
+    sb10.title = @"摄像头";
+
+    NSArray *devices1 = [[NSArray alloc] initWithObjects:sb1,nil];
+    NSArray *devices2 = [[NSArray alloc] initWithObjects:sb2,sb3,nil];
+    NSArray *devices3 = [[NSArray alloc] initWithObjects:sb4,sb5,sb6,nil];
+    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,nil];
+
+    NSArray *objArr = [[NSArray alloc] initWithObjects:devices1,devices2,devices3,devices4, nil];
+    NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅",@"主卧",@"次卧",@"安防", nil];
+    NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObjects:objArr forKeys:keyArr];
+    if (pageableScrollView ==nil) {
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(10, 100) andDictionary:scrollDictionary];
+        pageableScrollView.backgroundColor = [UIColor clearColor];
+        [self addSubview:pageableScrollView];
+        [self addSubview:pageableScrollView.pageNavView];
+    }
     
     
 //        UIButton *btn1 = [ScrollNavButton buttonWithNothing];
@@ -136,10 +182,8 @@
 //    }
 //    
     
-    SwitchButton *sb = [CameraSwitchButton buttonWithPoint:CGPointMake(10, 30) owner:self.ownerController];
-    sb.status = @"on";
-    sb.title = @"摄像头";
-    [self addSubview:sb];
+        
+//    [self addSubview:sb];
     
 }
 #pragma mark -

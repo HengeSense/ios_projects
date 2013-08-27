@@ -20,7 +20,7 @@
     return self;
 }
 -(id)initWithFrame:(CGRect)frame andNavItemsForHorizontal:(NSArray *) navItems {
-    if (frame.size.width<100) {
+    if (frame.size.height<100) {
         frame.size.height = 100;
     }
     self = [super initWithFrame:frame];
