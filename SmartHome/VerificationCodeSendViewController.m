@@ -91,7 +91,6 @@
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
         return;
     }
-    
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     [self.accountService sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
@@ -101,26 +100,29 @@
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
         if(json != nil) {
-            NSString *_id_ = [json notNSNullObjectForKey:@"id"];
-            if(_id_ != nil) {
-                if([@"1" isEqualToString:_id_] || [@"-3" isEqualToString:_id_] || [@"-4" isEqualToString:_id_]) {
-                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"send_success", @"") forType:AlertViewTypeSuccess];
-                    [[AlertView currentAlertView] delayDismissAlertView];
+            NSString *result = [json notNSNullObjectForKey:@"id"];
+            if(result != nil) {
+                if([@"1" isEqualToString:result] || [@"-3" isEqualToString:result] || [@"-4" isEqualToString:result]) {
+                    [[AlertView currentAlertView] dismissAlertView];
                     VerificationCodeValidationViewController *nextViewController = [self nextViewController];
                     nextViewController.phoneNumberToValidation = txtPhoneNumber.text;
-                    if([@"1" isEqualToString:_id_]) {
+                    if([@"1" isEqualToString:result]) {
                         nextViewController.countDown = 60;
                     } else {
-                        NSLog(@" not 60");
-                        nextViewController.countDown = 60;
+                        NSNumber *num = (NSNumber *)[json notNSNullObjectForKey:@"wait"];
+                        if(num != nil) {
+                            nextViewController.countDown = num.integerValue;
+                        } else {
+                            nextViewController.countDown = 60;
+                        }
                     }
                     [self.navigationController pushViewController:nextViewController animated:YES];
                     return;
-                } else if([@"-1" isEqualToString:_id_]) {
+                } else if([@"-1" isEqualToString:result]) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_format_invalid", @"") forType:AlertViewTypeSuccess];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
-                } else if([@"-2" isEqualToString:_id_]) {
+                } else if([@"-2" isEqualToString:result]) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_has_been_register", @"") forType:AlertViewTypeSuccess];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
@@ -136,7 +138,7 @@
 }
 
 - (void)verificationCodeSendError:(RestResponse *)resp {
-    if(resp.statusCode == 1001) {
+    if(abs(resp.statusCode) == 1001) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeSuccess];
     } else {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeSuccess];

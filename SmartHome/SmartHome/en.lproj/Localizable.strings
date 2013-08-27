@@ -69,7 +69,10 @@
 "verification_code"               = "Verification Code:";
 "phone_has_been_register"         = "The phone number has been registered.";
 "phone_format_invalid"            = "Phone number was incorrect";
+"verification_code_error"         = "Verification code error";
 "send_success"                    = "Send successfully";
+"verification_code_expire"        = "Verification code was expired";
+"none_verification_code"          = "Please get verification code first";
 
 /*
  *login view controller
@@ -83,6 +86,8 @@
 "find_password"                   = "Forgot Password";
 "username_not_blank"              = "The user name can not be a blank";
 "password_not_blank"              = "The password can not be a blank";
+"name_or_pwd_error"               =  "Username or password is incorrect";
+"login_later"                     =  "Please login later";
 
 /*
  * units binding view
@@ -96,15 +101,26 @@
 "camera.adjust"     ="Camera Adjust";
 
 /*
- *air condition view controller
+ * air condition view controller
  */
-"make.hot" = "make hot";
-"make.cool" = "make cool";
-"close" = "close";
-"air.condition.setting" = "air condition setting";
+"make.hot"               = "make hot";
+"make.cool"              = "make cool";
+"close"                  = "close";
+"air.condition.setting"  = "air condition setting";
 
 /*
- *tv view controller
+ * tv view controller
  */
 "power.switch"  = "Power Switch";
+
+/*
+ * settings view
+ */
+"push_settings"      =   "Push settings";
+"account_logout"     =   "Logout";
+"feed_back"          =   "Feed back";
+"about_us"           =   "About us";
+
+
+
 

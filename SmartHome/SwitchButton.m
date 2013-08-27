@@ -40,17 +40,23 @@
 - (void)initUI {
     if(btn == nil) {
         btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
+        btn.center = CGPointMake(self.bounds.size.width / 2, btn.center.y);
         [self addSubview:btn];
     }
     
     if(lblTitle == nil) {
-        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 29, 40, 21)];
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 31, 80, 21)];
+        lblTitle.center = CGPointMake(self.bounds.size.width / 2, lblTitle.center.y);
+        lblTitle.font = [UIFont systemFontOfSize:13.f];
+        lblTitle.textAlignment = NSTextAlignmentCenter;
+        lblTitle.textColor = [UIColor lightTextColor];
+        lblTitle.backgroundColor = [UIColor clearColor];
         [self addSubview:lblTitle];
     }
 }
 
 + (SwitchButton *)buttonWithPoint:(CGPoint)point {
-    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 40, 50)];
+    SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
     return switchButton;
 }
 
@@ -63,13 +69,13 @@
 }
 
 - (void)setStatus:(NSString *)s {
-    if([NSString isEmpty:status]) return;
+    if([NSString isEmpty:s]) return;
+    status = s;
     if(statusImage == nil) return;
     UIImage *image = [statusImage objectForKey:s];
     if(image == nil || btn == nil) return;
     [btn setBackgroundImage:image forState:UIControlStateNormal];
     [btn setBackgroundImage:image forState:UIControlStateHighlighted];
-    status = s;
 }
 
 - (void)setTitle:(NSString *)t {

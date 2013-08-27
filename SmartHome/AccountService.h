@@ -12,6 +12,8 @@
 
 - (void)sendVerificationCodeFor:(NSString *)phoneNumber success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
 
-- (void)registerWithPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode UDID:(NSString *)UDID phoneType:(NSString *)phoneType success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
+- (void)registerWithPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
+
+- (void)loginWithAccount:(NSString *)account password:(NSString *)pwd success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
 
 @end

@@ -83,6 +83,13 @@
     return dictionary;
 }
 
+- (void)clearAuth {
+    self.secretKey = [NSString emptyString];
+    self.account = [NSString emptyString];
+    self.password = [NSString emptyString];
+    [self saveSettings];
+}
+
 - (void)saveSettings {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[self toDictionary] forKey:GLOBAL_SETTINGS_KEY];

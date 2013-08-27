@@ -12,12 +12,12 @@
 #import "NotificationViewController.h"
 #import "AirConditionViewController.h"
 #import "CameraAdjustViewController.h"
-
 #import "SwitchButton.h"
 #import "ScrollNavButton.h"
+
 #define SPEECH_VIEW_TAG                  46001
-#define SPEECH_BUTTON_WIDTH              174
-#define SPEECH_BUTTON_HEIGHT             186
+#define SPEECH_BUTTON_WIDTH              195
+#define SPEECH_BUTTON_HEIGHT             198
 #define DELAY_START_LISTENING_DURATION   0.6f
 #define RECORD_BEGIN_SOUND_ID            1113
 #define RECORD_END_SOUND_ID              1114
@@ -101,11 +101,13 @@
         
     }
     
-    SwitchButton *sb = [SwitchButton buttonWithPoint:CGPointMake(100, 100)];
-    [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
-    [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
-    sb.status = @"on";
-    [self addSubview:sb];
+//    SwitchButton *sb = [SwitchButton buttonWithPoint:CGPointMake(100, 100)];
+//    [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
+//    [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
+//    sb.status = @"on";
+//    
+//    sb.title = @"客厅空调";
+//    [self addSubview:sb];
     
     
 }
@@ -210,6 +212,7 @@
     }
 }
 
+// 确保录音提示音已经结束,防止提示语进入识别范围
 - (void)delayStartListening {
     [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
 }
@@ -276,6 +279,5 @@
     }
     return speechView;
 }
-
 
 @end

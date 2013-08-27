@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "RestClient.h"
 
+#define APP_KEY     @"A001"
+#define PHONE_TYPE  @"IOS"
+
 @interface ServiceBase : NSObject
 
 @property (strong, nonatomic) RestClient *client;

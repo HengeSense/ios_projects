@@ -13,6 +13,8 @@
 #import "UnitsBindingViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
+#import "NSDictionary+NSNullUtility.h"
+#import "JsonUtils.h"
 
 #define LINE_HIGHT 5
 
@@ -59,7 +61,7 @@
 -(void) initUI{
     [super initUI];
     [self registerTapGestureToResignKeyboard];
-    
+        
     if(lblUserName == nil) {
         lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
         lblUserName.backgroundColor = [UIColor clearColor];
@@ -131,14 +133,30 @@
     [self.view addSubview:lblSeperator];
     
     //
-    txtUserName.text = @"admin";
-    txtPassword.text = @"admin";
+    txtUserName.text = @"administrator";
+    txtPassword.text = @"hentre2012";
 }
 
 #pragma mark -
 #pragma mark services
 
+//need to be deleted in production, only used for debug or test
+- (void)fastLogin {
+    [[AlertView currentAlertView] dismissAlertView];
+    [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
+}
+
 - (void)login {
+    //need to be deleted in production, only used for debug or test
+    if([@"administrator" isEqualToString:txtUserName.text]) {
+        if([@"hentre2012" isEqualToString:txtPassword.text]) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
+            [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+            [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(fastLogin) userInfo:nil repeats:NO];
+            return;
+        }
+    }
+    
     NSString *userName = [NSString trim:txtUserName.text];
     NSString *password = [NSString trim:txtPassword.text];
     
@@ -156,16 +174,53 @@
     
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(loginSuccess) userInfo:nil repeats:NO];
+    [self.accountService loginWithAccount:userName password:password success:@selector(loginSuccess:) failed:@selector(loginFailed:) target:self callback:nil];
 }
 
-- (void)loginSuccess {
-    [[AlertView currentAlertView] dismissAlertView];
-    if(self.settings.anyUnitsBinding) {
-        [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
-    } else {
-        [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
+- (void)loginSuccess:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            NSString *result = [json notNSNullObjectForKey:@"id"];
+            if(![NSString isBlank:result]) {
+                if([@"1" isEqualToString:result]) {
+                    NSString *secretKey = [json notNSNullObjectForKey:@"security"];
+                    if(![NSString isBlank:secretKey]) {
+                        self.settings.account = txtUserName.text;
+                        self.settings.password = txtPassword.text;
+                        self.settings.secretKey = secretKey;
+                        [self.settings saveSettings];
+                        [[AlertView currentAlertView] dismissAlertView];
+                        if(self.settings.anyUnitsBinding) {
+                            self.app.rootViewController.needLoadMainViewController = YES;
+                            [self.navigationController popToRootViewControllerAnimated:NO];
+                        } else {
+                            [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
+                        }
+                        return;
+                    }
+                } else if([@"-1" isEqualToString:result] || [@"-2" isEqualToString:result]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"name_or_pwd_error", @"") forType:AlertViewTypeFailed];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    return;
+                } else if([@"-3" isEqualToString:result] || [@"-4" isEqualToString:result]) {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"login_later", @"") forType:AlertViewTypeFailed];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    return;
+                }
+            } 
+        }
     }
+    [self loginFailed:resp];
+}
+
+- (void)loginFailed:(RestResponse *)resp {
+    if(abs(resp.statusCode) == 1001) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
+    } else {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
+    }
+    [[AlertView currentAlertView] delayDismissAlertView];
 }
 
 -(void)showRegisterViewController {
