@@ -74,8 +74,8 @@
     sb.status = @"on";
     sb.title = @"摄像头";
     [self addSubview:sb];
-    
 }
+
 -(void) scrollNavButtonAction:(UIButton *)sender{
     __block NSInteger curNav;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
@@ -86,9 +86,8 @@
     }];
     sender.selected = YES;
     pageableScrollView.pageableScrollView.contentOffset = CGPointMake(curNav*pageableScrollView.pageableScrollView.frame.size.width*curNav, pageableScrollView.pageableScrollView.contentOffset.y);
-    
-    
 }
+
 -(void) accessoryBehavior{
     CGFloat itemWidth = pageableScrollView.pageableScrollView.frame.size.width;
     CGFloat xOffset = pageableScrollView.pageableScrollView.contentOffset.x;
@@ -105,12 +104,14 @@
         pageableNavView.pageableNavView.contentOffset = CGPointMake(navOffset.x, navOffset.y-navHeight);
     }
 }
+
 -(void) panAndTouchAccessoryBehavior{
     SwitchButton *sb = [CameraSwitchButton buttonWithPoint:CGPointMake(10, 30) owner:self.ownerController];
     sb.status = @"on";
     sb.title = @"摄像头";
     [self addSubview:sb];
 }
+
 #pragma mark -
 #pragma mark notification && affect button
 
