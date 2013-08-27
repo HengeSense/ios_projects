@@ -14,11 +14,10 @@
 @end
 
 @implementation CameraAdjustViewController{
-    UIImageView *cameraImage;
-    UIView *cameraView;
+    UIImageView *imgCameraShots;
+    UIView *backgroundView;
+    DirectionButton *btnDirection;
 }
-
-@synthesize directionButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,40 +36,58 @@
 
 -(void) initUI{
     [super initUI];
+    
     self.topbar.titleLabel.text = NSLocalizedString(@"camera.adjust", @"");
-    cameraView = [[UIView alloc] initWithFrame:CGRectMake(3, 47, self.view.bounds.size.width-6, self.view.bounds.size.height-90)];
-    cameraView.backgroundColor = [UIColor colorWithHexString:@"#1a1a1f"];
-    [self.view addSubview:cameraView];
+    if(backgroundView == nil) {
+        backgroundView = [[UIView alloc] initWithFrame:CGRectMake(3, self.topbar.bounds.size.height + 1, self.view.bounds.size.width - 6, self.view.bounds.size.height - self.topbar.bounds.size.height - 3)];
+        backgroundView.backgroundColor = [UIColor colorWithHexString:@"#1a1a1f"];
+        [self.view addSubview:backgroundView];
+    }
     
-    cameraImage = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, cameraView.frame.size.width-6, cameraView.frame.size.height-90-100)];
-    cameraImage.image = [UIImage imageNamed:@"camera_image.jpg"];
-    [cameraView addSubview:cameraImage];
-    directionButton = [DirectionButton directionButtonWithPoint:CGPointMake(90,cameraView.frame.size.height-141-30)];
-    directionButton.delegate = self;
-    [cameraView addSubview:directionButton];
+    if(imgCameraShots == nil) {
+        imgCameraShots = [[UIImageView alloc] initWithFrame:CGRectMake(0, 6, 300, 200)];
+        imgCameraShots.center = CGPointMake(backgroundView.center.x - 2, imgCameraShots.center.y);
+        imgCameraShots.image = [UIImage imageNamed:@"camera_image.jpg"];
+        [backgroundView addSubview:imgCameraShots];
+    }
     
-    
+    if(btnDirection == nil) {
+        btnDirection = [DirectionButton directionButtonWithPoint:CGPointMake(90, self.view.bounds.size.height - self.topbar.bounds.size.height - 150)];
+        btnDirection.delegate = self;
+        [backgroundView addSubview:btnDirection];
+    }
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)leftButtonClicked{
-    NSLog(@"leftClicked");
-}
-- (void)rightButtonClicked{
-    NSLog(@"rightClicked");
-}
-- (void)centerButtonClicked{
-    NSLog(@"centerClicked");
-}
-- (void)topButtonClicked{
-    NSLog(@"topClicked");
-}
-- (void)bottomButtonClicked{
-    NSLog(@"bottomClicked");
+
+- (void)btnDownPressed:(id)sender {
+    
 }
 
+#pragma mark -
+#pragma mark direction button delegate
+
+- (void)leftButtonClicked {
+    NSLog(@"leftClicked");
+}
+
+- (void)rightButtonClicked {
+    NSLog(@"rightClicked");
+}
+
+- (void)centerButtonClicked {
+    NSLog(@"centerClicked");
+}
+
+- (void)topButtonClicked {
+    NSLog(@"topClicked");
+}
+- (void)bottomButtonClicked {
+    NSLog(@"bottomClicked");
+}
 
 @end

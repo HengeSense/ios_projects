@@ -11,8 +11,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
 #import "AirConditionViewController.h"
-#import "CameraAdjustViewController.h"
-#import "SwitchButton.h"
+#import "CameraSwitchButton.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -78,7 +77,7 @@
 //        
 //    }
     
-    SwitchButton *sb = [SwitchButton buttonWithPoint:CGPointMake(100, 100)];
+    SwitchButton *sb = [CameraSwitchButton buttonWithPoint:CGPointMake(100, 100) owner:self.ownerController];
     [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
     [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
     sb.status = @"on";
