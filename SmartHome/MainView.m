@@ -11,7 +11,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
 #import "AirConditionViewController.h"
-#import "CameraAdjustViewController.h"
+#import "CameraSwitchButton.h"
 #import "SwitchButton.h"
 
 
@@ -71,12 +71,12 @@
     }
     
 //    NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObj
-    if (pageableScrollView ==nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 240, 200)];
-        pageableScrollView.backgroundColor = [UIColor whiteColor];
-        [self addSubview:pageableScrollView];
-        [self addSubview:pageableScrollView.pageNavView];
-    }
+//    if (pageableScrollView ==nil) {
+//        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 240, 200)];
+//        pageableScrollView.backgroundColor = [UIColor whiteColor];
+//        [self addSubview:pageableScrollView];
+//        [self addSubview:pageableScrollView.pageNavView];
+//    }
     
     
 //        UIButton *btn1 = [ScrollNavButton buttonWithNothing];
@@ -101,10 +101,45 @@
 //    [sb registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
 //    [sb registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
 //    sb.status = @"on";
+
+
 //    
-//    sb.title = @"客厅空调";
-//    [self addSubview:sb];
+//    if (pageableScrollView ==nil) {
+//        pageableScrollView = [[PageableScrollView alloc] initWithFrame:CGRectMake(5, 100, 240, 200)];
+//        pageableScrollView.backgroundColor = [UIColor whiteColor];
+//        pageableScrollView.delegate = self;
+//        [self addSubview:pageableScrollView];
+//    }
+//    
+//    if (pageableNavView == nil) {
+//        UIButton *btn1 = [ScrollNavButton buttonWithNothing];
+//        [btn1 setTitle:@"客厅" forState:UIControlStateNormal];
+//        btn1.selected = YES;
+//        UIButton *btn2 = [ScrollNavButton buttonWithNothing];
+//        [btn2 setTitle:@"主卧" forState:UIControlStateNormal];
+//        UIButton *btn3 = [ScrollNavButton buttonWithNothing];
+//        [btn3 setTitle:@"次卧" forState:UIControlStateNormal];
+//        UIButton *btn4 = [ScrollNavButton buttonWithNothing];
+//        [btn4 setTitle:@"厨房" forState:UIControlStateNormal];
+//        UIButton *btn5 = [ScrollNavButton buttonWithNothing];
+//        [btn5 setTitle:@"浴室" forState:UIControlStateNormal];
+//        
+//        navItems = [[NSArray alloc]initWithObjects:btn1,btn2,btn3,btn4,btn5, nil];
+//        [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
+//            [obj addTarget:self action:@selector(scrollNavButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+//        }];
+//        pageableNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(250, 100, 101/2, 200) andNavItemsForVertical:navItems];
+//        [self addSubview:pageableNavView];
+//        
+//
+//        
+//    }
+//    
     
+    SwitchButton *sb = [CameraSwitchButton buttonWithPoint:CGPointMake(10, 30) owner:self.ownerController];
+    sb.status = @"on";
+    sb.title = @"摄像头";
+    [self addSubview:sb];
     
 }
 #pragma mark -

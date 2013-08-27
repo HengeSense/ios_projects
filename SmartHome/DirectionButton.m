@@ -46,36 +46,36 @@
     }
     
     if(imgLeftButton == nil) {
-        imgLeftButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 81/2, 182/2)];
-        imgLeftButton.center = CGPointMake(imgLeftButton.center.x, backgroundImageView.center.y);
+        imgLeftButton = [[UIImageView alloc] initWithFrame:CGRectMake(4, 0, 81/2, 182/2)];
+        imgLeftButton.center = CGPointMake(imgLeftButton.center.x, backgroundImageView.center.y-1);
         imgLeftButton.image = [UIImage imageNamed:@"btn_camera_left.png"];
         [self addSubview:imgLeftButton];
     }
     
     if(imgRightButton == nil) {
-        imgRightButton = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width-81/2, 0, 81/2, 182/2)];
-        imgRightButton.center = CGPointMake(imgRightButton.center.x, backgroundImageView.center.y);
+        imgRightButton = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width- 81 / 2 - 6) , 0, 81/2, 182/2)];
+        imgRightButton.center = CGPointMake(imgRightButton.center.x, backgroundImageView.center.y - 1);
         imgRightButton.image = [UIImage imageNamed:@"btn_camera_right.png"];
         [self addSubview:imgRightButton];
     }
     
     if(imgTopButton == nil) {
-        imgTopButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 182/2, 81/2)];
-        imgTopButton.center = CGPointMake(backgroundImageView.center.x, imgTopButton.center.y);
+        imgTopButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 4, 182/2, 81/2)];
+        imgTopButton.center = CGPointMake(backgroundImageView.center.x - 1, imgTopButton.center.y);
         imgTopButton.image = [UIImage imageNamed:@"btn_camera_top.png"];
         [self addSubview:imgTopButton];
     }
     
     if(imgBottomButton == nil) {
-        imgBottomButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.frame.size.height-81/2, 182/2, 81/2)];
-        imgBottomButton.center = CGPointMake(backgroundImageView.center.x, imgBottomButton.center.y);
+        imgBottomButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 81 / 2 - 6), 182/2, 81/2)];
+        imgBottomButton.center = CGPointMake(backgroundImageView.center.x - 1, imgBottomButton.center.y);
         imgBottomButton.image = [UIImage imageNamed:@"btn_camera_bottom.png"];
         [self addSubview:imgBottomButton];
     }
     
     if(imgCenterButton == nil) {
         imgCenterButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 126/2, 126/2)];
-        imgCenterButton.center = backgroundImageView.center;
+        imgCenterButton.center = CGPointMake(backgroundImageView.center.x - 1, backgroundImageView.center.y - 1);
         imgCenterButton.image = [UIImage imageNamed:@"btn_camera_center.png"];
         [self addSubview:imgCenterButton];
     }
@@ -93,43 +93,36 @@
     CGFloat x = point.x,y=point.y;
     CGFloat x0 = x-71,y0=y-71;
     
-    BOOL isCenter = x0*x0 + y0*y0 <= 31.5*31.5,
+    BOOL isCenter = x0 * x0 + y0 * y0 <= 31.5 * 31.5,
     outOfBounds = x0*x0 + y0*y0 >= 70.25*70.25,
-    isTop = x0/y0>-1&&x0/y0<1&&y0<0&&!isCenter,
-    isLeft = (x0/y0>1||x0/y0<-1)&&x0<0&&!isCenter,
-    isBottom = (x0/y0>-1&&x0/y0<1)&&y0>0&&!isCenter,
-    isRight = (x0/y0>1||x0/y0<-1)&&x0>0&&!isCenter;
+    isTop = x0 / y0 > -1 && x0 / y0 < 1 && y0 < 0 && !isCenter,
+    isLeft = (x0 / y0 > 1 || x0 / y0 < -1) && x0 < 0 && !isCenter,
+    isBottom = (x0 / y0 > - 1 && x0 / y0 < 1) && y0 > 0 && !isCenter,
+    isRight = (x0 / y0 > 1 || x0 / y0 < -1) && x0 > 0 && !isCenter;
     
-    
-    
-    NSLog(@"x=%f y=%f", x, y);
-    
-    
-    if (isCenter) {
-        if([self.delegate respondsToSelector:@selector(centerButtonClicked)]){
+    if(isCenter) {
+        if([self.delegate respondsToSelector:@selector(centerButtonClicked)]) {
             [self.delegate centerButtonClicked];
         }
-    }else if(isTop&&!outOfBounds){
-        if([self.delegate respondsToSelector:@selector(topButtonClicked)]){
+    } else if(isTop&&!outOfBounds) {
+        if([self.delegate respondsToSelector:@selector(topButtonClicked)]) {
             [self.delegate topButtonClicked];
         }
-    }else if (isLeft&&!outOfBounds){
-        if([self.delegate respondsToSelector:@selector(leftButtonClicked)]){
+    } else if (isLeft&&!outOfBounds) {
+        if([self.delegate respondsToSelector:@selector(leftButtonClicked)]) {
             [self.delegate leftButtonClicked];
         }
-    }else if (isBottom&&!outOfBounds){
-        if([self.delegate respondsToSelector:@selector(bottomButtonClicked)]){
+    } else if (isBottom&&!outOfBounds) {
+        if([self.delegate respondsToSelector:@selector(bottomButtonClicked)]) {
             [self.delegate bottomButtonClicked];
         }
-    }else if(isRight&&!outOfBounds){
-        if([self.delegate respondsToSelector:@selector(rightButtonClicked)]){
+    } else if(isRight&&!outOfBounds) {
+        if([self.delegate respondsToSelector:@selector(rightButtonClicked)]) {
             [self.delegate rightButtonClicked];
         }
-    }else{
+    } else {
         return;
     }
-    
 }
-
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CameraSwitchButton.h"
+#import "CameraAdjustViewController.h"
 
 @implementation CameraSwitchButton
 
@@ -14,9 +15,28 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
+}
+
+- (void)initDefaults {
+    [super initDefaults];
+}
+
+- (void)initUI {
+    [super initUI];
+    [self registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
+    [self registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
+}
+
+- (void)btnPressed:(id)sender {
+    [self.ownerController presentModalViewController:[[CameraAdjustViewController alloc] init] animated:YES];
+}
+
++ (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {
+    SwitchButton *switchButton = [[CameraSwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
+    switchButton.ownerController = owner;
+    return switchButton;
 }
 
 @end

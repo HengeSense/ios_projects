@@ -17,6 +17,7 @@
 
 @synthesize title;
 @synthesize status;
+@synthesize ownerController;
 
 #pragma mark -
 #pragma mark initializations
@@ -41,6 +42,7 @@
     if(btn == nil) {
         btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
         btn.center = CGPointMake(self.bounds.size.width / 2, btn.center.y);
+        [btn addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
     }
     
@@ -55,8 +57,9 @@
     }
 }
 
-+ (SwitchButton *)buttonWithPoint:(CGPoint)point {
++ (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {
     SwitchButton *switchButton = [[SwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
+    switchButton.ownerController = owner;
     return switchButton;
 }
 
@@ -88,6 +91,13 @@
     if(btn != nil) {
         [btn addTarget:target action:action forControlEvents:controlEvents];
     }
+}
+
+#pragma mark -
+#pragma mark event
+
+- (void)btnPressed:(id)sender {
+    
 }
 
 @end

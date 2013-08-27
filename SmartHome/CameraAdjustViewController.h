@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NavViewController.h"
+#import "PopViewController.h"
 #import "DirectionButton.h"
-@interface CameraAdjustViewController : NavViewController<DirectionButtonDelegate>
-@property (strong,nonatomic) DirectionButton *directionButton;
+
+@interface CameraAdjustViewController : PopViewController<DirectionButtonDelegate>
+
+
 @end
