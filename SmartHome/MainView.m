@@ -15,8 +15,8 @@
 #import "SwitchButton.h"
 
 #define SPEECH_VIEW_TAG                  46001
-#define SPEECH_BUTTON_WIDTH              174
-#define SPEECH_BUTTON_HEIGHT             186
+#define SPEECH_BUTTON_WIDTH              195
+#define SPEECH_BUTTON_HEIGHT             198
 #define DELAY_START_LISTENING_DURATION   0.6f
 #define RECORD_BEGIN_SOUND_ID            1113
 #define RECORD_END_SOUND_ID              1114
