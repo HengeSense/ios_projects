@@ -97,7 +97,7 @@
 }
 -(void) pageWithViews:(NSArray *) views{
     self.pageableScrollView.pagingEnabled = YES;
-//    self.pageableScrollView.showsHorizontalScrollIndicator = NO;
+    self.pageableScrollView.showsHorizontalScrollIndicator = NO;
     CGFloat multiple = (CGFloat) views.count;
     NSInteger groupCount = views.count/3;
     CGFloat contentHeight = groupCount<3?SCROLL_ITEM_HEIGHT:groupCount*(GROUP_ITEM_HEIGHT+MARGIN_Y)-MARGIN_Y;
