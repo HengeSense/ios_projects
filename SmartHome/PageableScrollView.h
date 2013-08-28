@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PageableNavView.h"
-@interface PageableScrollView : UIView<UIScrollViewDelegate>
+#import "PopViewController.h"
+
+@interface PageableScrollView : UIView<UIScrollViewDelegate, StatusChangeDelegate>
+
 @property (strong,nonatomic) UIScrollView *pageableScrollView;
 @property (strong,nonatomic) PageableNavView *pageNavView;
 

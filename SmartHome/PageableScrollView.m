@@ -141,4 +141,8 @@
     }
 }
 
+- (void)notifyStatusChangedFor:(NSString *)deviceID status:(NSString *)status {
+    
+}
+
 @end
