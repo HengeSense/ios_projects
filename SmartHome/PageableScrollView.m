@@ -8,6 +8,7 @@
 
 #import "PageableScrollView.h"
 #import "ScrollNavButton.h"
+#import "SwitchButton.h"
 #define MARGIN_X 0
 #define MARGIN_Y 12
 #define SCROLL_ITEM_WIDTH 240
@@ -16,6 +17,10 @@
 #define GROUP_ITEM_HEIGHT 52
 @implementation PageableScrollView{
     NSArray *navItems;
+    NSDictionary *deviceDictionary;
+    UIImageView *leftBoundsShadow;
+    UIImageView *rightBoundsShadow;
+    
 }
 @synthesize pageableScrollView;
 @synthesize pageNavView;
@@ -32,7 +37,7 @@
     return self;
 }
 -(id)initWithPoint:(CGPoint) point andDictionary:(NSDictionary *) dictionary{
-    self = [super initWithFrame:CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+    self = [super initWithFrame:CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH+20, SCROLL_ITEM_HEIGHT)];
     __block NSMutableArray *mutableNavArr = [[NSMutableArray alloc] initWithObjects: nil];
     __block NSMutableArray *mutableScrollArr = [[NSMutableArray alloc] initWithObjects:nil];
     [dictionary enumerateKeysAndObjectsUsingBlock:^(__strong NSString *key, __strong NSArray *obj, BOOL *stop) {
@@ -56,12 +61,20 @@
         }];
         [mutableScrollArr addObject:scrollItem];
     }];
-    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
     self.pageableScrollView.delegate = self;
     [self pageWithViews:mutableScrollArr];
     [self addSubview:self.pageableScrollView];
-    self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X, point.y, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
+    self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X+20, point.y, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
     navItems = mutableNavArr;
+    
+    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
+    leftBoundsShadow.frame = CGRectMake(10, 0, 10, SCROLL_ITEM_HEIGHT);
+    rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
+    rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH, 0, 10, SCROLL_ITEM_HEIGHT);
+    [self addSubview:leftBoundsShadow];
+    [self addSubview:rightBoundsShadow];
+    leftBoundsShadow.hidden = YES;
     return self;
 }
 /*
@@ -72,7 +85,6 @@
     // Drawing code
 }
 */
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //    self.pageableScrollView.alpha = 0.5f;
     [self accessoryBehavior];
@@ -139,10 +151,28 @@
     if(navOffset.y>curNavYOffset){
         self.pageNavView.pageableNavView.contentOffset = CGPointMake(navOffset.x, navOffset.y-navHeight);
     }
+    
+    if (xOffset <= 0) {
+        rightBoundsShadow.hidden = NO;
+        leftBoundsShadow.hidden = YES;
+    }else if (xOffset<self.pageableScrollView.contentSize.width-SCROLL_ITEM_WIDTH){
+        leftBoundsShadow.hidden = NO;
+        rightBoundsShadow.hidden = NO;
+    }else{
+        leftBoundsShadow.hidden = NO;
+        rightBoundsShadow.hidden = YES;
+    }
 }
 
 - (void)notifyStatusChangedFor:(NSString *)deviceID status:(NSString *)status {
-    
+    [deviceDictionary enumerateKeysAndObjectsUsingBlock:^(id key, __strong NSArray *obj, BOOL *stop) {
+        [obj enumerateObjectsUsingBlock:^(__strong SwitchButton *obj, NSUInteger idx, BOOL *stop) {
+            if ([obj.deviceID isEqualToString:deviceID]) {
+                obj.status = status;
+                return ;
+            }
+        }];
+    }];
 }
 
 @end

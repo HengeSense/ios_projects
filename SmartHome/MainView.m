@@ -141,7 +141,7 @@
     NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObjects:objArr forKeys:keyArr];
     
     if(pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(10, 170) andDictionary:scrollDictionary];
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, 170) andDictionary:scrollDictionary];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
         [self addSubview:pageableScrollView.pageNavView];
