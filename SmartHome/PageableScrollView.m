@@ -75,6 +75,11 @@
     [self addSubview:leftBoundsShadow];
     [self addSubview:rightBoundsShadow];
     leftBoundsShadow.hidden = YES;
+    rightBoundsShadow.hidden = YES;
+    if (dictionary.count>1) {
+        rightBoundsShadow.hidden = NO;
+    }
+    
     return self;
 }
 /*
@@ -86,7 +91,6 @@
 }
 */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    self.pageableScrollView.alpha = 0.5f;
     [self accessoryBehavior];
     
 }
