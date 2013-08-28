@@ -13,9 +13,4 @@
 
 @interface UIViewController (UIViewControllerExtension)
 
-
-@property (strong, nonatomic, readonly) AppDelegate *app;
-@property (strong, nonatomic, readonly) GlobalSettings *settings;
-@property (strong, nonatomic, readonly) AccountService *accountService;
-
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AsyncUdpSocket.h"
 
-@interface DeviceFinder : NSObject
+@interface DeviceFinder : NSObject<AsyncUdpSocketDelegate>
+
++ (void)startFindingDevice;
 
 @end

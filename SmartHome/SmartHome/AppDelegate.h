@@ -17,6 +17,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) AccountService *accountService;
+//@property (strong, nonatomic)
 @property (strong, nonatomic) GlobalSettings *settings;
 @property (strong, nonatomic) RootViewController *rootViewController;
 

@@ -10,7 +10,9 @@
 #import "PopViewController.h"
 #import "DirectionButton.h"
 
-@interface CameraAdjustViewController : PopViewController<DirectionButtonDelegate>
+#import "ExtranetClientSocket.h"
+
+@interface CameraAdjustViewController : PopViewController<DirectionButtonDelegate, MessageHandler>
 
 
 @end

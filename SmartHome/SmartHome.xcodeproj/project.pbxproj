@@ -169,6 +169,13 @@
 		6FD8A72F17B22AD8009C7493 /* ParagraphBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A72E17B22AD8009C7493 /* ParagraphBuilder.m */; };
 		6FD8A73317B23543009C7493 /* RestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73217B23543009C7493 /* RestClient.m */; };
 		6FD8A73617B2356F009C7493 /* RestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73517B2356F009C7493 /* RestResponse.m */; };
+		6FDD0EC817CDD369000D95E8 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0EC717CDD369000D95E8 /* AsyncUdpSocket.m */; };
+		6FDD0ECB17CDEA93000D95E8 /* NSObject+SMExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0ECA17CDEA93000D95E8 /* NSObject+SMExtension.m */; };
+		6FDD0ED117CDECBA000D95E8 /* TCPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED017CDECBA000D95E8 /* TCPService.m */; };
+		6FDD0ED717CDED30000D95E8 /* feed_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED317CDED30000D95E8 /* feed_back@2x.png */; };
+		6FDD0ED817CDED30000D95E8 /* icon_about_us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED417CDED30000D95E8 /* icon_about_us@2x.png */; };
+		6FDD0ED917CDED30000D95E8 /* icon_logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */; };
+		6FDD0EDA17CDED30000D95E8 /* icon_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED617CDED30000D95E8 /* icon_notification@2x.png */; };
 		6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */; };
 		6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */; };
 		6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF756617B8D78F004EF7FD /* ImageFactory.m */; };
@@ -440,8 +447,6 @@
 		6FD6C64717CC539200BDA327 /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
 		6FD6C64817CC539200BDA327 /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
 		6FD6C64B17CC5B4B00BDA327 /* test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test@2x.png"; sourceTree = "<group>"; };
-		6FD6C64E17CCDF4700BDA327 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
-		6FD6C64F17CCDF4700BDA327 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		6FD6C65317CCE1CC00BDA327 /* DeviceFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceFinder.h; sourceTree = "<group>"; };
 		6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceFinder.m; sourceTree = "<group>"; };
 		6FD6C65917CCF9F100BDA327 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -463,6 +468,16 @@
 		6FD8A73217B23543009C7493 /* RestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestClient.m; sourceTree = "<group>"; };
 		6FD8A73417B2356E009C7493 /* RestResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestResponse.h; sourceTree = "<group>"; };
 		6FD8A73517B2356F009C7493 /* RestResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestResponse.m; sourceTree = "<group>"; };
+		6FDD0EC617CDD369000D95E8 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		6FDD0EC717CDD369000D95E8 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		6FDD0EC917CDEA93000D95E8 /* NSObject+SMExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SMExtension.h"; sourceTree = "<group>"; };
+		6FDD0ECA17CDEA93000D95E8 /* NSObject+SMExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SMExtension.m"; sourceTree = "<group>"; };
+		6FDD0ECF17CDECBA000D95E8 /* TCPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPService.h; sourceTree = "<group>"; };
+		6FDD0ED017CDECBA000D95E8 /* TCPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPService.m; sourceTree = "<group>"; };
+		6FDD0ED317CDED30000D95E8 /* feed_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feed_back@2x.png"; sourceTree = "<group>"; };
+		6FDD0ED417CDED30000D95E8 /* icon_about_us@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_about_us@2x.png"; sourceTree = "<group>"; };
+		6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_logout@2x.png"; sourceTree = "<group>"; };
+		6FDD0ED617CDED30000D95E8 /* icon_notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_notification@2x.png"; sourceTree = "<group>"; };
 		6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_theirs@2x.png"; sourceTree = "<group>"; };
 		6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mine@2x.png"; sourceTree = "<group>"; };
 		6FDF756517B8D78F004EF7FD /* ImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFactory.h; sourceTree = "<group>"; };
@@ -746,6 +761,7 @@
 		6F0FAE9E17AF7FF700B75D3E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6FDD0ED217CDECC4000D95E8 /* settings_view */,
 				6FD6C64A17CC5B0E00BDA327 /* test */,
 				6F48EEEB17C8A87700C85D9B /* alert_view */,
 				6FB66D5917C702360002D6C5 /* device */,
@@ -778,6 +794,8 @@
 				6F17673017C1FA15007AED0C /* JsonUtils.m */,
 				6FD4CFE717C249F200EC98F9 /* BitUtils.h */,
 				6FD4CFE817C249F200EC98F9 /* BitUtils.m */,
+				6FDD0EC917CDEA93000D95E8 /* NSObject+SMExtension.h */,
+				6FDD0ECA17CDEA93000D95E8 /* NSObject+SMExtension.m */,
 			);
 			name = commons;
 			sourceTree = "<group>";
@@ -1189,8 +1207,8 @@
 		6FD6C64D17CCDF3700BDA327 /* AsyncUdpSocket */ = {
 			isa = PBXGroup;
 			children = (
-				6FD6C64E17CCDF4700BDA327 /* AsyncUdpSocket.h */,
-				6FD6C64F17CCDF4700BDA327 /* AsyncUdpSocket.m */,
+				6FDD0EC617CDD369000D95E8 /* AsyncUdpSocket.h */,
+				6FDD0EC717CDD369000D95E8 /* AsyncUdpSocket.m */,
 			);
 			name = AsyncUdpSocket;
 			sourceTree = "<group>";
@@ -1213,6 +1231,8 @@
 			children = (
 				6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */,
 				6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */,
+				6FDD0ECF17CDECBA000D95E8 /* TCPService.h */,
+				6FDD0ED017CDECBA000D95E8 /* TCPService.m */,
 			);
 			name = tcp;
 			sourceTree = "<group>";
@@ -1268,6 +1288,17 @@
 				6FD8A73517B2356F009C7493 /* RestResponse.m */,
 			);
 			name = rest;
+			sourceTree = "<group>";
+		};
+		6FDD0ED217CDECC4000D95E8 /* settings_view */ = {
+			isa = PBXGroup;
+			children = (
+				6FDD0ED317CDED30000D95E8 /* feed_back@2x.png */,
+				6FDD0ED417CDED30000D95E8 /* icon_about_us@2x.png */,
+				6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */,
+				6FDD0ED617CDED30000D95E8 /* icon_notification@2x.png */,
+			);
+			name = settings_view;
 			sourceTree = "<group>";
 		};
 		6FEB91CD17BB201C007C04A1 /* socket */ = {
@@ -1486,6 +1517,10 @@
 				6FD6C64C17CC5B4B00BDA327 /* test@2x.png in Resources */,
 				F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */,
 				F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */,
+				6FDD0ED717CDED30000D95E8 /* feed_back@2x.png in Resources */,
+				6FDD0ED817CDED30000D95E8 /* icon_about_us@2x.png in Resources */,
+				6FDD0ED917CDED30000D95E8 /* icon_logout@2x.png in Resources */,
+				6FDD0EDA17CDED30000D95E8 /* icon_notification@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1582,6 +1617,9 @@
 				6FD6C64917CC539200BDA327 /* PopViewController.m in Sources */,
 				6FD6C65517CCE1CC00BDA327 /* DeviceFinder.m in Sources */,
 				6FD6C65B17CCF9F100BDA327 /* Reachability.m in Sources */,
+				6FDD0EC817CDD369000D95E8 /* AsyncUdpSocket.m in Sources */,
+				6FDD0ECB17CDEA93000D95E8 /* NSObject+SMExtension.m in Sources */,
+				6FDD0ED117CDECBA000D95E8 /* TCPService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

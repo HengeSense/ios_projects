@@ -9,6 +9,8 @@
 #import "CameraAdjustViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+ExtentionForHexString.h"
+#import "DeviceFinder.h"
+#import "ExtranetClientSocket.h"
 
 @interface CameraAdjustViewController ()
 
@@ -71,6 +73,19 @@
     
 }
 
+
+- (void)clientSocketMessageDiscard:(NSData *)discardMessage {
+    NSLog(@"discard");
+}
+
+- (void)clientSocketMessageReadError {
+    NSLog(@"error");
+}
+
+- (void)clientSocketWithReceivedMessage:(NSString *)messages {
+    NSLog(@"good");
+}
+
 #pragma mark -
 #pragma mark direction button delegate
 
@@ -84,6 +99,8 @@
 
 - (void)centerButtonClicked {
     NSLog(@"centerClicked");
+    
+    [[[ExtranetClientSocket alloc] initWithIPAddress:@"172.16.8.16" andPort:6969] connect];
 }
 
 - (void)topButtonClicked {

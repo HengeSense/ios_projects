@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
 #import "TopbarView.h"
+#import "NSObject+SMExtension.h"
 
 @interface NavigationView : UIView
 

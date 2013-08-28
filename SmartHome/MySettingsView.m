@@ -48,7 +48,7 @@
             break;
         case 1:
             //logout
-            [self.ownerController.settings clearAuth];
+            [self.settings clearAuth];
             break;
         case 2:
             break;

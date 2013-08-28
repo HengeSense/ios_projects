@@ -14,6 +14,7 @@
 @synthesize deviceCode;
 @synthesize className;
 @synthesize commandTime;
+@synthesize phoneNumber;
 @synthesize masterDeviceCode;
 @synthesize appKey;
 @synthesize security;
@@ -24,11 +25,12 @@
 
 - (NSDictionary *)toDictionary {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:@"iphone4s" forKey:@"deviceCode"];
-    [json setObject:@"com.hentre.smarthome.repository.command.ViewZKInfoCommand" forKey:@"_className"];
-    [json setObject:@"fieldunit" forKey:@"masterDeviceCode"];
-    [json setObject:@"smarthome" forKey:@"appKey"];
-    [json setObject:@"123321" forKey:@"security"];
+    [json setObject:self.deviceCode forKey:@"deviceCode"];
+    [json setObject:self.className forKey:@"_className"];
+    [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
+    [json setObject:self.appKey forKey:@"appKey"];
+    [json setObject:self.phoneNumber forKey:@"phoneNumber"];
+    [json setObject:self.security forKey:@"security"];
     [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     return json;
 }
