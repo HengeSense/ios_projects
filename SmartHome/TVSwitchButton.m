@@ -7,6 +7,7 @@
 //
 
 #import "TVSwitchButton.h"
+#import "TVViewController.h"
 
 @implementation TVSwitchButton
 
@@ -30,7 +31,15 @@
 }
 
 - (void)btnPressed:(id)sender {
-    
+    TVViewController *tvViewController = [[TVViewController alloc] init];
+    tvViewController.delegate = [self findContainerView];
+    [self.ownerController presentModalViewController:tvViewController animated:YES];
+}
+
++ (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {
+    SwitchButton *switchButton = [[TVSwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
+    switchButton.ownerController = owner;
+    return switchButton;
 }
 
 @end

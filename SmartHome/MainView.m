@@ -10,8 +10,10 @@
 #import "NSString+StringUtils.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
+
 #import "CameraSwitchButton.h"
 #import "AirconditionSwitchButton.h"
+#import "TVSwitchButton.h"
 
 
 #define SPEECH_VIEW_TAG                  46001
@@ -113,9 +115,9 @@
     sb11.status = @"off";
     sb11.title = @"卧室空调";
     
-    SwitchButton *sb12 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    SwitchButton *sb12 = [TVSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb12.status = @"on";
-    sb12.title = @"卧室空调";
+    sb12.title = @"电视机";
     
     SwitchButton *sb13 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb13.status = @"off";
