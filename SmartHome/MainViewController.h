@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DrawerViewController.h"
 #import "DrawerView.h"
+#import "UIViewController+UIViewControllerExtension.h"
 
 @interface MainViewController : DrawerViewController<DrawerNavigationItemChangedDelegate>
 

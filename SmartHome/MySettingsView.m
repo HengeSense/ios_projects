@@ -43,7 +43,20 @@
 #pragma mark table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    switch (indexPath.row) {
+        case 0:
+            break;
+        case 1:
+            //logout
+            [self.ownerController.settings clearAuth];
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
