@@ -99,7 +99,7 @@
 }
 
 - (void)startMonitorNetworks {
-	Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+	Reachability* reach = [Reachability reachabilityWithHostname:@"www.baidu.com"];
     
 	// Here we set up a NSNotification observer. The Reachability that caused the notification
 	// is passed in the object parameter

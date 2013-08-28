@@ -31,7 +31,7 @@
 
 - (void)btnPressed:(id)sender {
     AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
-//    airConditionViewController.delegate = self.superview.superview;
+    airConditionViewController.delegate = [self findContainerView];
     [self.ownerController presentModalViewController:airConditionViewController animated:YES];
 }
 

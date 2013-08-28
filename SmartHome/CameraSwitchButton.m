@@ -30,7 +30,9 @@
 }
 
 - (void)btnPressed:(id)sender {
-    [self.ownerController presentModalViewController:[[CameraAdjustViewController alloc] init] animated:YES];
+    CameraAdjustViewController *cameraView = [[CameraAdjustViewController alloc] init];
+    cameraView.delegate = [self findContainerView];
+    [self.ownerController presentModalViewController:cameraView animated:YES];
 }
 
 + (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {

@@ -9,6 +9,8 @@
 #import "SwitchButton.h"
 #import "NSString+StringUtils.h"
 
+#import "PageableNavView.h"
+
 @implementation SwitchButton {
     UIButton *btn;
     UILabel *lblTitle;
@@ -99,6 +101,15 @@
 
 - (void)btnPressed:(id)sender {
     
+}
+
+- (PageableScrollView *)findContainerView {
+    UIView *view = self.superview.superview.superview;
+    if(view != nil && [view isMemberOfClass:[PageableScrollView class]]) {
+        PageableScrollView *p_view = (PageableScrollView *)view;
+        return p_view;
+    }
+    return nil;
 }
 
 @end
