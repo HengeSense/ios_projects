@@ -119,7 +119,6 @@
 		6F6AB3AB17C31CB4001F1D33 /* bg_finder_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */; };
 		6F6AB3AC17C31CB4001F1D33 /* bg_scanner_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */; };
 		6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */; };
-		6F6AB3B917C39ED9001F1D33 /* IntranetClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AB3B817C39ED9001F1D33 /* IntranetClientSocket.m */; };
 		6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */; };
 		6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282717B3DF3D00D0C1E3 /* RootViewController.m */; };
 		6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */; };
@@ -159,6 +158,8 @@
 		6FD4CFEB17C312BD00EC98F9 /* bg_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */; };
 		6FD6C64917CC539200BDA327 /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C64817CC539200BDA327 /* PopViewController.m */; };
 		6FD6C64C17CC5B4B00BDA327 /* test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD6C64B17CC5B4B00BDA327 /* test@2x.png */; };
+		6FD6C65517CCE1CC00BDA327 /* DeviceFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */; };
+		6FD6C65B17CCF9F100BDA327 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C65A17CCF9F100BDA327 /* Reachability.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
 		6FD8A72017B22980009C7493 /* SpeechRecognitionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71F17B22980009C7493 /* SpeechRecognitionUtil.m */; };
 		6FD8A72217B229C4009C7493 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */; };
@@ -378,8 +379,6 @@
 		6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner_shadow@2x.png"; sourceTree = "<group>"; };
 		6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtranetClientSocket.h; sourceTree = "<group>"; };
 		6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtranetClientSocket.m; sourceTree = "<group>"; };
-		6F6AB3B717C39ED9001F1D33 /* IntranetClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntranetClientSocket.h; sourceTree = "<group>"; };
-		6F6AB3B817C39ED9001F1D33 /* IntranetClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntranetClientSocket.m; sourceTree = "<group>"; };
 		6F8927BF17B3976A00D0C1E3 /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
 		6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
 		6F89282617B3DF3D00D0C1E3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
@@ -441,6 +440,10 @@
 		6FD6C64B17CC5B4B00BDA327 /* test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test@2x.png"; sourceTree = "<group>"; };
 		6FD6C64E17CCDF4700BDA327 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		6FD6C64F17CCDF4700BDA327 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		6FD6C65317CCE1CC00BDA327 /* DeviceFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceFinder.h; sourceTree = "<group>"; };
+		6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceFinder.m; sourceTree = "<group>"; };
+		6FD6C65917CCF9F100BDA327 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6FD6C65A17CCF9F100BDA327 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6FD8A71517B0DD6F009C7493 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		6FD8A71617B0DD6F009C7493 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		6FD8A71E17B22980009C7493 /* SpeechRecognitionUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeechRecognitionUtil.h; sourceTree = "<group>"; };
@@ -778,12 +781,9 @@
 		6F0FAEA017AF800500B75D3E /* services */ = {
 			isa = PBXGroup;
 			children = (
-				F237168317B3715C0057C95B /* SmsService.h */,
-				F237168417B3715C0057C95B /* SmsService.m */,
-				6F89282917B3F2D000D0C1E3 /* ServiceBase.h */,
-				6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */,
-				6FB66D6017C745820002D6C5 /* AccountService.h */,
-				6FB66D6117C745820002D6C5 /* AccountService.m */,
+				6FD6C65217CCE1B100BDA327 /* udp */,
+				6FD6C65117CCE19E00BDA327 /* tcp */,
+				6FD6C65017CCE19500BDA327 /* rest */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -875,6 +875,7 @@
 		6F0FAEA417AF802000B75D3E /* third */ = {
 			isa = PBXGroup;
 			children = (
+				6FD6C65617CCF78900BDA327 /* Reachability */,
 				6FD6C64D17CCDF3700BDA327 /* AsyncUdpSocket */,
 				6F0FAF1717AF882600B75D3E /* ZBarSDK */,
 				6F0FAECB17AF836600B75D3E /* EGOTableViewPullRefresh */,
@@ -1188,6 +1189,46 @@
 			name = AsyncUdpSocket;
 			sourceTree = "<group>";
 		};
+		6FD6C65017CCE19500BDA327 /* rest */ = {
+			isa = PBXGroup;
+			children = (
+				F237168317B3715C0057C95B /* SmsService.h */,
+				F237168417B3715C0057C95B /* SmsService.m */,
+				6F89282917B3F2D000D0C1E3 /* ServiceBase.h */,
+				6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */,
+				6FB66D6017C745820002D6C5 /* AccountService.h */,
+				6FB66D6117C745820002D6C5 /* AccountService.m */,
+			);
+			name = rest;
+			sourceTree = "<group>";
+		};
+		6FD6C65117CCE19E00BDA327 /* tcp */ = {
+			isa = PBXGroup;
+			children = (
+				6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */,
+				6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */,
+			);
+			name = tcp;
+			sourceTree = "<group>";
+		};
+		6FD6C65217CCE1B100BDA327 /* udp */ = {
+			isa = PBXGroup;
+			children = (
+				6FD6C65317CCE1CC00BDA327 /* DeviceFinder.h */,
+				6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */,
+			);
+			name = udp;
+			sourceTree = "<group>";
+		};
+		6FD6C65617CCF78900BDA327 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				6FD6C65917CCF9F100BDA327 /* Reachability.h */,
+				6FD6C65A17CCF9F100BDA327 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		6FD8A71D17B22961009C7493 /* speech_recognition */ = {
 			isa = PBXGroup;
 			children = (
@@ -1228,10 +1269,6 @@
 			children = (
 				6F1EE66B17BCD41500580760 /* ClientSocket.h */,
 				6F1EE66C17BCD41500580760 /* ClientSocket.m */,
-				6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */,
-				6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */,
-				6F6AB3B717C39ED9001F1D33 /* IntranetClientSocket.h */,
-				6F6AB3B817C39ED9001F1D33 /* IntranetClientSocket.m */,
 			);
 			name = socket;
 			sourceTree = "<group>";
@@ -1518,7 +1555,6 @@
 				6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */,
 				6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */,
 				6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */,
-				6F6AB3B917C39ED9001F1D33 /* IntranetClientSocket.m in Sources */,
 				6F0420F017C481EC00F7F6AF /* DirectionButton.m in Sources */,
 				F2D8E8C717C48EA500090E5B /* CameraAdjustViewController.m in Sources */,
 				6FBD013417C4E034002D5618 /* SwitchButton.m in Sources */,
@@ -1536,6 +1572,8 @@
 				F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */,
 				6FBB9A2017CB90B500E32485 /* SMCell.m in Sources */,
 				6FD6C64917CC539200BDA327 /* PopViewController.m in Sources */,
+				6FD6C65517CCE1CC00BDA327 /* DeviceFinder.m in Sources */,
+				6FD6C65B17CCF9F100BDA327 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

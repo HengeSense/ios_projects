@@ -10,4 +10,6 @@
 
 @interface AirconditionSwitchButton : SwitchButton
 
++ (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner;
+
 @end

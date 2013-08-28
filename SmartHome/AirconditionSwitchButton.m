@@ -34,4 +34,10 @@
     [self.ownerController presentModalViewController:airConditionViewController animated:YES];
 }
 
++ (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {
+    SwitchButton *switchButton = [[AirconditionSwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
+    switchButton.ownerController = owner;
+    return switchButton;
+}
+
 @end

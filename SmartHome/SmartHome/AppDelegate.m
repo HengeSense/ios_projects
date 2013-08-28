@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Reachability.h"
 #import "MainViewController.h"
 #import "UnitsBindingViewController.h"
 #import "LoginViewController.h"
@@ -22,6 +23,7 @@
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
     
+    // determine first view controller
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
@@ -46,7 +48,10 @@
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     
+    // register for remote notifications
     [self registerForRemoteNotifications];
+    
+    [self startMonitorNetworks];
     
     return YES;
 }
@@ -91,6 +96,34 @@
 
 - (void)registerForRemoteNotifications {
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];
+}
+
+- (void)startMonitorNetworks {
+	Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+	// Here we set up a NSNotification observer. The Reachability that caused the notification
+	// is passed in the object parameter
+	[[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+	[reach startNotifier];
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification {
+    Reachability *reach = notification.object;
+    if(reach == nil) return;
+    if(reach.isReachable) {
+        if(reach.isReachableViaWiFi) {
+            // wifi
+            NSLog(@"reach via wifi");
+        } else if(reach.isReachableViaWWAN) {
+            // wwan
+            NSLog(@"reach via wwan");
+        }
+    } else {
+        // not reachable
+        NSLog(@"not reach");
+    }
 }
 
 

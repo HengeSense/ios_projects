@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GlobalSettings.h"
+#import "ExtranetClientSocket.h"
 #import "AccountService.h"
 #import "RootViewController.h"
 

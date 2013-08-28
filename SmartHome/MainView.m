@@ -10,9 +10,8 @@
 #import "NSString+StringUtils.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
-#import "AirConditionViewController.h"
 #import "CameraSwitchButton.h"
-#import "SwitchButton.h"
+#import "AirconditionSwitchButton.h"
 
 
 #define SPEECH_VIEW_TAG                  46001
@@ -69,13 +68,14 @@
         [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnSpeech];
     }
+    
     SwitchButton *sb1 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb1.status = @"on";
     sb1.title = @"摄像头";
     
-    SwitchButton *sb2 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    SwitchButton *sb2 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb2.status = @"on";
-    sb2.title = @"摄像头";
+    sb2.title = @"客厅空调";
     
     SwitchButton *sb3 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb3.status = @"on";
@@ -105,45 +105,46 @@
     sb9.status = @"on";
     sb9.title = @"摄像头";
     
-    SwitchButton *sb10 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    SwitchButton *sb10 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb10.status = @"on";
-    sb10.title = @"摄像头";
+    sb10.title = @"卧室空调";
+    
+    SwitchButton *sb11 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb11.status = @"off";
+    sb11.title = @"卧室空调";
+    
+    SwitchButton *sb12 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb12.status = @"on";
+    sb12.title = @"卧室空调";
+    
+    SwitchButton *sb13 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb13.status = @"off";
+    sb13.title = @"卧室空调";
 
+    SwitchButton *sb14 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb14.status = @"on";
+    sb14.title = @"卧室空调";
+    
+    SwitchButton *sb15 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb15.status = @"off";
+    sb15.title = @"卧室空调";
+    
     NSArray *devices1 = [[NSArray alloc] initWithObjects:sb1,nil];
     NSArray *devices2 = [[NSArray alloc] initWithObjects:sb2,sb3,nil];
     NSArray *devices3 = [[NSArray alloc] initWithObjects:sb4,sb5,sb6,nil];
-    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,nil];
+    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,sb11, sb12, sb13,sb14,sb15, nil];
 
     NSArray *objArr = [[NSArray alloc] initWithObjects:devices1,devices2,devices3,devices4, nil];
     NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅",@"主卧",@"次卧",@"安防", nil];
     NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObjects:objArr forKeys:keyArr];
-    if (pageableScrollView ==nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(10, 100) andDictionary:scrollDictionary];
+    
+    if(pageableScrollView == nil) {
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(10, 170) andDictionary:scrollDictionary];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
         [self addSubview:pageableScrollView.pageNavView];
     }
-    
-    
-//        UIButton *btn1 = [ScrollNavButton buttonWithNothing];
-//        [btn1 setTitle:@"客厅" forState:UIControlStateNormal];
-//        btn1.selected = YES;
-//        UIButton *btn2 = [ScrollNavButton buttonWithNothing];
-//        [btn2 setTitle:@"主卧" forState:UIControlStateNormal];
-//        UIButton *btn3 = [ScrollNavButton buttonWithNothing];
-//        [btn3 setTitle:@"次卧" forState:UIControlStateNormal];
-//        UIButton *btn4 = [ScrollNavButton buttonWithNothing];
-//        [btn4 setTitle:@"厨房" forState:UIControlStateNormal];
-//        UIButton *btn5 = [ScrollNavButton buttonWithNothing];
-//        [btn5 setTitle:@"浴室" forState:UIControlStateNormal];
-    
-        
-        
-
 }
-
-
-
 
 #pragma mark -
 #pragma mark notification && affect button
