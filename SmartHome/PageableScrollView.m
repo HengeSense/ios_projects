@@ -61,18 +61,18 @@
         }];
         [mutableScrollArr addObject:scrollItem];
     }];
-    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
     self.pageableScrollView.delegate = self;
     [self pageWithViews:mutableScrollArr];
     [self addSubview:self.pageableScrollView];
     self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X+20, point.y, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
     navItems = mutableNavArr;
     
-    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
-    leftBoundsShadow.frame = CGRectMake(10, 0, 10, SCROLL_ITEM_HEIGHT);
+//    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
+//    leftBoundsShadow.frame = CGRectMake(10, 0, 10, SCROLL_ITEM_HEIGHT);
     rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
     rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH, 0, 10, SCROLL_ITEM_HEIGHT);
-    [self addSubview:leftBoundsShadow];
+//    [self addSubview:leftBoundsShadow];
     [self addSubview:rightBoundsShadow];
     leftBoundsShadow.hidden = YES;
     rightBoundsShadow.hidden = YES;
@@ -82,25 +82,19 @@
     
     return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self accessoryBehavior];
     
 }
+
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    self.pageableScrollView.alpha = 1.0f;
     [self accessoryBehavior];
 }
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;{
-    self.pageableScrollView.alpha = 1.0f;
 }
+
 -(void) pageWithViews:(NSArray *) views{
     self.pageableScrollView.pagingEnabled = YES;
     self.pageableScrollView.showsHorizontalScrollIndicator = NO;
@@ -110,14 +104,13 @@
     self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,contentHeight);
     __block CGRect pageableRect = self.pageableScrollView.frame;
     [views enumerateObjectsUsingBlock:^(__strong UIView *obj,NSUInteger index,BOOL *stop){
-        
-        
         obj.frame = pageableRect;
         [self.pageableScrollView addSubview:obj];
         pageableRect.origin.x += pageableRect.size.width;
         
     }];
 }
+
 -(void) scrollNavButtonAction:(UIButton *)sender{
     __block NSInteger curNav;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
@@ -129,9 +122,9 @@
     }];
     sender.selected = YES;
     sender.titleLabel.font = [UIFont systemFontOfSize:18];
-    [self.pageableScrollView scrollRectToVisible:CGRectMake(self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.frame.origin.y,SCROLL_ITEM_WIDTH, SCROLL_ITEM_WIDTH) animated:YES];  
-    
+    [self.pageableScrollView scrollRectToVisible:CGRectMake(self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.frame.origin.y,SCROLL_ITEM_WIDTH, SCROLL_ITEM_WIDTH) animated:YES];
 }
+
 -(void) accessoryBehavior{
     CGFloat itemWidth = self.pageableScrollView.frame.size.width;
     CGFloat xOffset = self.pageableScrollView.contentOffset.x;
@@ -158,12 +151,12 @@
     
     if (xOffset <= 0) {
         rightBoundsShadow.hidden = NO;
-        leftBoundsShadow.hidden = YES;
+//        leftBoundsShadow.hidden = YES;
     }else if (xOffset<self.pageableScrollView.contentSize.width-SCROLL_ITEM_WIDTH){
-        leftBoundsShadow.hidden = NO;
+//        leftBoundsShadow.hidden = NO;
         rightBoundsShadow.hidden = NO;
     }else{
-        leftBoundsShadow.hidden = NO;
+//        leftBoundsShadow.hidden = NO;
         rightBoundsShadow.hidden = YES;
     }
 }

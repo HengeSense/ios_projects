@@ -17,5 +17,6 @@
 
 - (NSDictionary *)toDictionary;
 - (void)saveSettings;
+- (void)clearAuth;
 
 @end

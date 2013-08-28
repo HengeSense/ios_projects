@@ -9,6 +9,9 @@
 #import "ExtranetClientSocket.h"
 #import "CommunicationMessage.h"
 
+
+#import "AppDelegate.h"
+
 #define BUFFER_SIZE 1024
 
 @implementation ExtranetClientSocket {
@@ -69,14 +72,18 @@
         if([@"" isEqualToString:str]) {
             if(aStream != nil && aStream == self.outputStream) {
                 NSLog(@" has space available");
+             AppDelegate *de =   [UIApplication sharedApplication].delegate;
+
+                
                 CommunicationMessage *ms =   [[CommunicationMessage alloc] init];
                 ms.deviceCommand = [[DeviceCommand alloc] init];
-                ms.deviceCommand.deviceCode = @"iphone4s";
-                ms.deviceCommand.className = @"com.hentre.smarthome.repository.command.ViewZKInfoCommand";
+                ms.deviceCommand.deviceCode = @"E9-A5-3B-4F";
+                ms.deviceCommand.className = @"FindZKListCommand";
                 ms.deviceCommand.commandTime = [[NSDate alloc] init];
-                ms.deviceCommand.security = @"123456";
-                ms.deviceCommand.appKey = @"smarthome";
+                ms.deviceCommand.security = @"f0dbc6f8-8fd9-4a81-93cc-ea8321463dda";
+                ms.deviceCommand.appKey = @"A001";
                 ms.deviceCommand.masterDeviceCode = @"fieldunit";
+                ms.deviceCommand.phoneNumber = @"13873100530";
                 
                 //
                 NSData *ddd =  [ms generateData];
@@ -148,6 +155,7 @@
         
         if([[NSString md5HexDigest:messageBody] isEqualToString:md5Str]) {
             //good message
+            NSLog(messageBody);
             [self performSelectorOnMainThread:@selector(notifyHandlerMessageReceived:) withObject:messageBody waitUntilDone:NO];
         } else {
             //bad message , not valid from md5

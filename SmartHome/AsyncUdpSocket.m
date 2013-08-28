@@ -1,6 +1,6 @@
 //
 //  AsyncUdpSocket.m
-//  
+//
 //  This class is in the public domain.
 //  Originally created by Robbie Hanson on Wed Oct 01 2008.
 //  Updated and maintained by Deusty Designs and the Mac development community.
@@ -122,7 +122,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * The AsyncSendPacket encompasses the instructions for a single send/write.
-**/
+ **/
 @interface AsyncSendPacket : NSObject
 {
 @public
@@ -156,7 +156,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * The AsyncReceivePacket encompasses the instructions for a single receive/read.
-**/
+ **/
 @interface AsyncReceivePacket : NSObject
 {
 @public
@@ -389,7 +389,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * See the header file for a full explanation of this method.
-**/
+ **/
 - (BOOL)moveToRunLoop:(NSRunLoop *)runLoop
 {
 	NSAssert((theRunLoop == NULL) || (theRunLoop == CFRunLoopGetCurrent()),
@@ -431,7 +431,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * See the header file for a full explanation of this method.
-**/
+ **/
 - (BOOL)setRunLoopModes:(NSArray *)runLoopModes
 {
 	NSAssert((theRunLoop == NULL) || (theRunLoop == CFRunLoopGetCurrent()),
@@ -485,7 +485,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
  * The data structure is of type sockaddr_in for IPv4 and sockaddr_in6 for IPv6.
  *
  * Returns zero on success, or one of the error codes listed in gai_strerror if an error occurs (as per getaddrinfo).
-**/
+ **/
 - (int)convertForBindHost:(NSString *)host
 					 port:(UInt16)port
 			 intoAddress4:(NSData **)address4
@@ -588,11 +588,11 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
  * The data structure is of type sockaddr_in for IPv4 and sockaddr_in6 for IPv6.
  *
  * Returns zero on success, or one of the error codes listed in gai_strerror if an error occurs (as per getaddrinfo).
-**/
+ **/
 - (int)convertForSendHost:(NSString *)host
-					  port:(UInt16)port
-			  intoAddress4:(NSData **)address4
-				  address6:(NSData **)address6
+                     port:(UInt16)port
+             intoAddress4:(NSData **)address4
+                 address6:(NSData **)address6
 {
 	if(host == nil || ([host length] == 0))
 	{
@@ -628,8 +628,8 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 	else
 	{
 		NSString *portStr = [NSString stringWithFormat:@"%hu", port];
-
-#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_5		
+        
+#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_5
 		@synchronized (getaddrinfoLock)
 #endif
 		{
@@ -710,10 +710,10 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 /**
  * Binds the underlying socket(s) to the given port.
  * The socket(s) will be able to receive data on any interface.
- * 
+ *
  * On success, returns YES.
  * Otherwise returns NO, and sets errPtr. If you don't care about the error, you can pass nil for errPtr.
-**/
+ **/
 - (BOOL)bindToPort:(UInt16)port error:(NSError **)errPtr
 {
 	return [self bindToAddress:nil port:port error:errPtr];
@@ -722,13 +722,13 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 /**
  * Binds the underlying socket(s) to the given address and port.
  * The sockets(s) will be able to receive data only on the given interface.
- * 
+ *
  * To receive data on any interface, pass nil or "".
  * To receive data only on the loopback interface, pass "localhost" or "loopback".
- * 
+ *
  * On success, returns YES.
  * Otherwise returns NO, and sets errPtr. If you don't care about the error, you can pass nil for errPtr.
-**/
+ **/
 - (BOOL)bindToAddress:(NSString *)host port:(UInt16)port error:(NSError **)errPtr
 {
 	if(theFlags & kDidClose)
@@ -831,10 +831,10 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
  * Connects the underlying UDP socket to the given host and port.
  * If an IPv4 address is resolved, the IPv4 socket is connected, and the IPv6 socket is invalidated and released.
  * If an IPv6 address is resolved, the IPv6 socket is connected, and the IPv4 socket is invalidated and released.
- * 
+ *
  * On success, returns YES.
  * Otherwise returns NO, and sets errPtr. If you don't care about the error, you can pass nil for errPtr.
-**/
+ **/
 - (BOOL)connectToHost:(NSString *)host onPort:(UInt16)port error:(NSError **)errPtr
 {
 	if(theFlags & kDidClose)
@@ -930,13 +930,13 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
  * Connects the underlying UDP socket to the remote address.
  * If the address is an IPv4 address, the IPv4 socket is connected, and the IPv6 socket is invalidated and released.
  * If the address is an IPv6 address, the IPv6 socket is connected, and the IPv4 socket is invalidated and released.
- * 
+ *
  * The address is a native address structure, as may be returned from API's such as Bonjour.
  * An address may be created manually by simply wrapping a sockaddr_in or sockaddr_in6 in an NSData object.
- * 
+ *
  * On success, returns YES.
  * Otherwise returns NO, and sets errPtr. If you don't care about the error, you can pass nil for errPtr.
-**/
+ **/
 - (BOOL)connectToAddress:(NSData *)remoteAddr error:(NSError **)errPtr
 {
 	if (theFlags & kDidClose)
@@ -1020,7 +1020,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
  *
  * Group should be a multicast IP address (eg. @"239.255.250.250" for IPv4).
  * Address is local interface for IPv4, but currently defaults under IPv6.
-**/
+ **/
 - (BOOL)joinMulticastGroup:(NSString *)group error:(NSError **)errPtr
 {
 	return [self joinMulticastGroup:group withAddress:nil error:errPtr];
@@ -1066,7 +1066,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 	
 	// Get multicast address (group)
 	NSData *group4 = nil, *group6 = nil;
-
+    
 	error = [self convertForBindHost:group port:0 intoAddress4:&group4 address6:&group6];
 	if(error)
 	{
@@ -1093,7 +1093,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 		imreq.imr_interface = nativeAddress->sin_addr;
 		
 		// JOIN multicast group on default interface
-		error = setsockopt(CFSocketGetNative(theSocket4), IPPROTO_IP, IP_ADD_MEMBERSHIP, 
+		error = setsockopt(CFSocketGetNative(theSocket4), IPPROTO_IP, IP_ADD_MEMBERSHIP,
 						   (const void *)&imreq, sizeof(struct ip_mreq));
 		if(error)
 		{
@@ -1122,7 +1122,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 		imreq.ipv6mr_interface = 0;
 		
 		// JOIN multicast group on default interface
-		error = setsockopt(CFSocketGetNative(theSocket6), IPPROTO_IP, IPV6_JOIN_GROUP, 
+		error = setsockopt(CFSocketGetNative(theSocket6), IPPROTO_IP, IPV6_JOIN_GROUP,
 						   (const void *)&imreq, sizeof(struct ipv6_mreq));
 		if(error)
 		{
@@ -1159,19 +1159,19 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 /**
  * By default, the underlying socket in the OS will not allow you to send broadcast messages.
  * In order to send broadcast messages, you need to enable this functionality in the socket.
- * 
+ *
  * A broadcast is a UDP message to addresses like "192.168.255.255" or "255.255.255.255" that is
  * delivered to every host on the network.
  * The reason this is generally disabled by default is to prevent
  * accidental broadcast messages from flooding the network.
-**/
+ **/
 - (BOOL)enableBroadcast:(BOOL)flag error:(NSError **)errPtr
 {
 	if (theSocket4)
 	{
 		int value = flag ? 1 : 0;
 		int error = setsockopt(CFSocketGetNative(theSocket4), SOL_SOCKET, SO_BROADCAST,
-						   (const void *)&value, sizeof(value));
+                               (const void *)&value, sizeof(value));
 		if(error)
 		{
 			if(errPtr)
@@ -1328,7 +1328,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 /**
  * Returns a standard error object for the current errno value.
  * Errno is used for low-level BSD socket errors.
-**/
+ **/
 - (NSError *)getErrnoError
 {
 	NSString *errorMsg = [NSString stringWithUTF8String:strerror(errno)];
@@ -1340,7 +1340,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 /**
  * Returns a standard error message for a CFSocket error.
  * Unfortunately, CFSocket offers no feedback on its errors.
-**/
+ **/
 - (NSError *)getSocketError
 {
 	NSString *errMsg = @"General CFSocket error";
@@ -1740,7 +1740,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 	{
 		NSLog(@"Error - Could not get CFSocketNativeHandle from CFSocketRef");
 		return NO;
-	} 
+	}
 	
 	fd_set fds;
 	FD_ZERO(&fds);
@@ -1765,7 +1765,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * Puts a maybeDequeueSend on the run loop.
-**/
+ **/
 - (void)scheduleDequeueSend
 {
 	if((theFlags & kDequeueSendScheduled) == 0)
@@ -1778,7 +1778,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 /**
  * This method starts a new send, if needed.
  * It is called when a user requests a send.
-**/
+ **/
 - (void)maybeDequeueSend
 {
 	// Unset the flag indicating a call to this method is scheduled
@@ -1796,7 +1796,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 			if(theCurrentSend->timeout >= 0.0)
 			{
 				theSendTimer = [NSTimer timerWithTimeInterval:theCurrentSend->timeout
-													   target:self 
+													   target:self
 													 selector:@selector(doSendTimeout:)
 													 userInfo:nil
 													  repeats:NO];
@@ -1826,7 +1826,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * This method is called when a new read is taken from the read queue or when new data becomes available on the stream.
-**/
+ **/
 - (void)doSend:(CFSocketRef)theSocket
 {
 	if(theCurrentSend != nil)
@@ -1910,7 +1910,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * Ends the current send, and all associated variables such as the send timer.
-**/
+ **/
 - (void)endCurrentSend
 {
 	NSAssert (theCurrentSend, @"Trying to end current send when there is no current send.");
@@ -1963,7 +1963,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 	{
 		NSLog(@"Error - Could not get CFSocketNativeHandle from CFSocketRef");
 		return NO;
-	} 
+	}
 	
 	fd_set fds;
 	FD_ZERO(&fds);
@@ -1978,7 +1978,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * Puts a maybeDequeueReceive on the run loop.
-**/
+ **/
 - (void)scheduleDequeueReceive
 {
 	if((theFlags & kDequeueReceiveScheduled) == 0)
@@ -1990,7 +1990,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 
 /**
  * Starts a new receive operation if needed
-**/
+ **/
 - (void)maybeDequeueReceive
 {
 	// Unset the flag indicating a call to this method is scheduled
@@ -2073,7 +2073,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 			// If the app or user ignores the received data, we'll continue this do-while loop.
 			appIgnoredReceivedData = NO;
 			userIgnoredReceivedData = NO;
-		
+            
 			if([self hasBytesAvailable:theSocket])
 			{
 				ssize_t result;
@@ -2283,14 +2283,14 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 /**
  * This is the callback we setup for CFSocket.
  * This method does nothing but forward the call to it's Objective-C counterpart
-**/
+ **/
 static void MyCFSocketCallback(CFSocketRef sref, CFSocketCallBackType type, CFDataRef address, const void *pData, void *pInfo)
 {
 	@autoreleasepool {
-	
+        
 		AsyncUdpSocket *theSocket = (__bridge AsyncUdpSocket *)pInfo;
 		[theSocket doCFSocketCallback:type forSocket:sref withAddress:(__bridge NSData *)address withData:pData];
-	
+        
 	}
 }
 

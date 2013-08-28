@@ -10,16 +10,4 @@
 
 @implementation UIViewController (UIViewControllerExtension)
 
-- (GlobalSettings *)settings {
-    return self.app.settings;
-}
-
-- (AccountService *)accountService {
-    return self.app.accountService;
-}
-
-- (AppDelegate *)app {
-    return [UIApplication sharedApplication].delegate;
-}
-
 @end

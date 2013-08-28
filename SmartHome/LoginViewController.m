@@ -197,6 +197,10 @@
                         } else {
                             [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
                         }
+                        
+                        NSLog([[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
+                        
+                        
                         return;
                     }
                 } else if([@"-1" isEqualToString:result] || [@"-2" isEqualToString:result]) {
