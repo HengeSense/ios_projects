@@ -10,6 +10,7 @@
 
 @interface SwitchButton : UIView
 
+@property (strong, nonatomic) NSString *deviceID;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) UIViewController *ownerController;

@@ -17,6 +17,7 @@
 
 @synthesize title;
 @synthesize status;
+@synthesize deviceID;
 @synthesize ownerController;
 
 #pragma mark -

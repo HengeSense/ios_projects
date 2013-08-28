@@ -16,6 +16,7 @@
 
 @synthesize topbar;
 @synthesize preViewController;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
