@@ -44,7 +44,7 @@
         __block UIView *scrollItem = [[UIView alloc] initWithFrame:scrollRect];
         __block CGPoint lastOrigin = CGPointMake(0, 0);
         [obj enumerateObjectsUsingBlock:^(__strong UIView *obj, NSUInteger idx, BOOL *stop) {
-            if ((idx+1)%4==0) {
+            if (idx%3==0&&idx/3>=1) {
                 obj.frame = CGRectMake(0, lastOrigin.y+MARGIN_Y+obj.frame.size.height, obj.frame.size.width, obj.frame.size.height);
                 lastOrigin.x = MARGIN_X+obj.frame.size.width;
                 lastOrigin.y +=MARGIN_Y+obj.frame.size.height;
