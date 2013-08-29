@@ -61,18 +61,18 @@
         }];
         [mutableScrollArr addObject:scrollItem];
     }];
-    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
     self.pageableScrollView.delegate = self;
     [self pageWithViews:mutableScrollArr];
     [self addSubview:self.pageableScrollView];
     self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X+20, point.y, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
     navItems = mutableNavArr;
     
-//    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
-//    leftBoundsShadow.frame = CGRectMake(10, 0, 10, SCROLL_ITEM_HEIGHT);
+    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
+    leftBoundsShadow.frame = CGRectMake(10, 0, 10, SCROLL_ITEM_HEIGHT);
     rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
     rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH, 0, 10, SCROLL_ITEM_HEIGHT);
-//    [self addSubview:leftBoundsShadow];
+    [self addSubview:leftBoundsShadow];
     [self addSubview:rightBoundsShadow];
     leftBoundsShadow.hidden = YES;
     rightBoundsShadow.hidden = YES;
@@ -151,12 +151,12 @@
     
     if (xOffset <= 0) {
         rightBoundsShadow.hidden = NO;
-//        leftBoundsShadow.hidden = YES;
+        leftBoundsShadow.hidden = YES;
     }else if (xOffset<self.pageableScrollView.contentSize.width-SCROLL_ITEM_WIDTH){
-//        leftBoundsShadow.hidden = NO;
+        leftBoundsShadow.hidden = NO;
         rightBoundsShadow.hidden = NO;
     }else{
-//        leftBoundsShadow.hidden = NO;
+        leftBoundsShadow.hidden = NO;
         rightBoundsShadow.hidden = YES;
     }
 }
