@@ -98,7 +98,7 @@
 
     }
     if (deviceCount == nil) {
-        deviceCount = [[UIImageView alloc] initWithImage:@"<#string#>"]
+//        deviceCount = [[UIImageView alloc] initWithImage:@"11"];
     }
     if (messageCount == nil) {
         
