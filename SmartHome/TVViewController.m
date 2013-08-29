@@ -69,10 +69,13 @@
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *topCellIdentifier = @"topCellIdentifier";
     static NSString *commonCellIdentifier = @"cellIdentifier";
+    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
     NSString *tvCellIdentifier;
     
     if (indexPath.row == 0) {
         tvCellIdentifier = topCellIdentifier;
+    }else if(indexPath.row == 9){
+        tvCellIdentifier = bottomCellIdentifier;
     }else{
         tvCellIdentifier = commonCellIdentifier;
     }

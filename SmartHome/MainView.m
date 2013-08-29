@@ -35,6 +35,15 @@
     UIButton *btnSpeech;
     UIButton *btnShowNotification;
     UIButton *btnShowAffectDevice;
+    UIButton *btnMain;
+    UIButton *btnScene;
+    UIButton *btnMessage;
+    
+    UILabel *messageLable;
+    UILabel *timeLable;
+    
+    UIImageView *deviceCount;
+    UIImageView *messageCount;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -55,13 +64,52 @@
 
 - (void)initUI {
     [super initUI];
-    
-    if(btnShowNotification == nil) {
-        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
-        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
-        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btnShowNotification];
+//    btnMain = [[UIButton alloc] initWithFrame:CGRectMake(40, self.topbar.frame.size.height+20, 168/2, 179/2)];
+//    [btnMain setBackgroundImage:[UIImage imageNamed:@"btn_device.png"] forState:UIControlStateNormal];
+//    [self addSubview:btnMain];
+//    
+//    btnScene = [[UIButton alloc] initWithFrame:CGRectMake(btnMain.frame.origin.x+btnMain.frame.size.width+40, btnMain.frame.origin.y, 168/2, 179/2)];
+//    [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
+//    [self addSubview:btnScene];
+//
+    if (btnMessage == nil) {
+        btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(30, 120, 25/2, 30/2)];
+        [btnMessage setBackgroundImage:[UIImage imageNamed:@"icon_sound"] forState:UIControlStateNormal];
+        [self addSubview:btnMessage];
+
     }
+    if (messageLable == nil) {
+        messageLable = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
+        messageLable.backgroundColor = [UIColor clearColor];
+        messageLable.font = [UIFont systemFontOfSize:14];
+        messageLable.text = @"有人闯入房屋!";
+        messageLable.textColor = [UIColor lightTextColor];
+        [self addSubview:messageLable];
+
+    }
+    if (timeLable == nil) {
+        timeLable = [[UILabel alloc]initWithFrame:CGRectMake(messageLable.frame.origin.x, messageLable.frame.origin.y+messageLable.frame.size.height, 100, 10)];
+        timeLable.backgroundColor =[UIColor clearColor];
+        timeLable.text = @"16:54pm";
+        timeLable.font = [UIFont systemFontOfSize:12];
+        timeLable.textColor = [UIColor lightTextColor];
+        [self addSubview: timeLable];
+
+    }
+    if (deviceCount == nil) {
+        deviceCount = [[UIImageView alloc] initWithImage:@"<#string#>"]
+    }
+    if (messageCount == nil) {
+        
+        [self addSubview:messageCount];
+        
+    }
+    //    if(btnShowNotification == nil) {
+//        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
+//        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
+//        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:btnShowNotification];
+//    }
     
     if(btnSpeech == nil) {
         btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
