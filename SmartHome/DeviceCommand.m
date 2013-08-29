@@ -25,20 +25,33 @@
 
 - (NSDictionary *)toDictionary {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    if(self.deviceCode) {
+    if(![NSString isBlank:self.deviceCode]) {
         [json setObject:self.deviceCode forKey:@"deviceCode"];
     }
-    if(self.className != nil) {
+    if(![NSString isBlank:self.className]) {
         [json setObject:self.className forKey:@"_className"];
     }
-    if(self.masterDeviceCode != nil) {
+    if(![NSString isBlank:self.masterDeviceCode]) {
         [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
     }
-    [json setObject:self.appKey forKey:@"appKey"];
-    [json setObject:self.phoneNumber forKey:@"phoneNumber"];
-    [json setObject:self.security forKey:@"security"];
-    [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
+    if(![NSString isBlank:self.appKey]) {
+        [json setObject:self.appKey forKey:@"appKey"];
+    }
+    if(![NSString isBlank:self.phoneNumber]) {
+        [json setObject:self.phoneNumber forKey:@"phoneNumber"];
+    }
+    if(![NSString isBlank:self.security]) {
+        [json setObject:self.security forKey:@"security"];
+    }
+    if(self.commandTime != nil) {
+        [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
+    }
     return json;
+}
+
+- (NSString *)description {
+    
+    return nil;
 }
 
 @end

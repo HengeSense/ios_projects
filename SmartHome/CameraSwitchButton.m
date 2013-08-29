@@ -25,8 +25,8 @@
 
 - (void)initUI {
     [super initUI];
-    [self registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
-    [self registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
+    [self registerImage:[UIImage imageNamed:@"icon_camera_off.png"] forStatus:@"off"];
+    [self registerImage:[UIImage imageNamed:@"icon_camera_on.png"] forStatus:@"on"];
 }
 
 - (void)btnPressed:(id)sender {

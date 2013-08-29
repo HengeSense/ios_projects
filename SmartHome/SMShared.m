@@ -1,14 +1,14 @@
 //
-//  NSObject+SMExtension.m
+//  SMShared.m
 //  SmartHome
 //
-//  Created by Zhao yang on 8/28/13.
+//  Created by Zhao yang on 8/29/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "NSObject+SMExtension.h"
+#import "SMShared.h"
 
-@implementation NSObject (SMExtension)
+@implementation SMShared
 
 - (GlobalSettings *)settings {
     return self.app.settings;
@@ -20,6 +20,14 @@
 
 - (AppDelegate *)app {
     return [UIApplication sharedApplication].delegate;
+}
+
++ (SMShared *)current {
+    static SMShared *shared;
+    if(shared == nil) {
+        shared = [[SMShared alloc] init];
+    }
+    return shared;
 }
 
 @end

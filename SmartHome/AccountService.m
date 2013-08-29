@@ -29,12 +29,12 @@
 }
 
 - (void)registerWithPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    NSString *url = [NSString stringWithFormat:@"/regist/confirm?mobileCode=%@&checkCode=%@&phoneType=%@&mac=%@&appKey=%@", phoneNumber, checkCode, PHONE_TYPE, [UIDevice currentDevice].identifierForVendor.UUIDString, APP_KEY];
+    NSString *url = [NSString stringWithFormat:@"/regist/confirm?mobileCode=%@&checkCode=%@&phoneType=%@&mac=%@&appKey=%@", phoneNumber, checkCode, PHONE_TYPE, phoneNumber, APP_KEY];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 
 - (void)loginWithAccount:(NSString *)account password:(NSString *)pwd success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    NSString *url = [NSString stringWithFormat:@"/login?mobileCode=%@&pwd=%@&deviceCode=%@&appKey=%@", account, pwd, [UIDevice currentDevice].identifierForVendor.UUIDString, APP_KEY];
+    NSString *url = [NSString stringWithFormat:@"/login?mobileCode=%@&pwd=%@&deviceCode=%@&appKey=%@", account, pwd, account, APP_KEY];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
                      

@@ -29,6 +29,12 @@
     [self registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
 }
 
++ (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {
+    SwitchButton *switchButton = [[ToggleSwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
+    switchButton.ownerController = owner;
+    return switchButton;
+}
+
 - (void)btnPressed:(id)sender {
     
 }

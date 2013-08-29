@@ -24,5 +24,6 @@
 @interface ExtranetClientSocket : ClientSocket
 
 @property (assign, nonatomic) id<MessageHandler> messageHandlerDelegate;
+@property (assign, nonatomic, readonly) BOOL isConnect;
 
 @end

@@ -25,8 +25,8 @@
 
 - (void)initUI {
     [super initUI];
-    [self registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:@"off"];
-    [self registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:@"on"];
+    [self registerImage:[UIImage imageNamed:@"icon_aircondition_off.png"] forStatus:@"off"];
+    [self registerImage:[UIImage imageNamed:@"icon_aircondition_on.png"] forStatus:@"on"];
 }
 
 - (void)btnPressed:(id)sender {

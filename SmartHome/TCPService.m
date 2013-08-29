@@ -8,6 +8,32 @@
 
 #import "TCPService.h"
 
-@implementation TCPService
+@implementation TCPService {
+    ExtranetClientSocket *socket;
+}
+
+- (id)init {
+    self = [super init];
+    if(self) {
+        
+    }
+    return self;
+}
+
+- (void)executeCommand:(DeviceCommand *)command {
+    
+}
+
+- (void)clientSocketMessageDiscard:(NSData *)discardMessage {
+    
+}
+
+- (void)clientSocketMessageReadError {
+    
+}
+
+- (void)clientSocketWithReceivedMessage:(NSString *)messages {
+    
+}
 
 @end

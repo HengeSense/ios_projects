@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DeviceCommand.h"
+#import "ExtranetClientSocket.h"
 
-@interface TCPService : NSObject
+@interface TCPService : NSObject<MessageHandler>
+
+- (void)executeCommand:(DeviceCommand *)command;
 
 @end
