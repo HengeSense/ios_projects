@@ -14,6 +14,7 @@
 #import "CameraSwitchButton.h"
 #import "AirconditionSwitchButton.h"
 #import "TVSwitchButton.h"
+#import "UIColor+ExtentionForHexString.h"
 #import "ToggleSwitchButton.h"
 
 
@@ -42,6 +43,8 @@
     
     UILabel *messageLable;
     UILabel *timeLable;
+    UILabel *numOfDevice;
+    UILabel *numOfMessage;
     
     UIImageView *deviceCount;
     UIImageView *messageCount;
@@ -97,13 +100,35 @@
         [self addSubview: timeLable];
 
     }
+    
     if (deviceCount == nil) {
-//        deviceCount = [[UIImageView alloc] initWithImage:@"11"];
+        deviceCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"device_count.png"]];
+        deviceCount.frame = CGRectMake(messageLable.frame.origin.x+messageLable.frame.size.width+40, messageLable.frame.origin.y, 44/2, 46/2);
+        [self addSubview:deviceCount];
+    }
+    
+    if (numOfDevice == nil) {
+        numOfDevice = [[UILabel alloc] initWithFrame:CGRectMake(deviceCount.frame.origin.x+deviceCount.frame.size.width+5, messageLable.frame.origin.y, 20, 20)];
+        numOfDevice.text = @"5";
+        numOfDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
+        numOfDevice.font = [UIFont systemFontOfSize:14];
+        numOfDevice.backgroundColor = [UIColor clearColor];
+        [self addSubview:numOfDevice];
+        
     }
     if (messageCount == nil) {
-        
+        messageCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_count.png"]];
+        messageCount.frame = CGRectMake(numOfDevice.frame.origin.x+30, numOfDevice.frame.origin.y, 44/2, 46/2);
         [self addSubview:messageCount];
         
+    }
+    if (numOfMessage == nil) {
+        numOfMessage = [[UILabel alloc] initWithFrame:CGRectMake(messageCount.frame.origin.x+messageCount.frame.size.width+5, messageCount.frame.origin.y, 20, 20)];
+        numOfMessage.text = @"5";
+        numOfMessage.textColor = [UIColor colorWithHexString:@"dfa800"];
+        numOfMessage.backgroundColor = [UIColor clearColor];
+        numOfMessage.font = [UIFont systemFontOfSize:14];
+        [self addSubview:numOfMessage];
     }
     //    if(btnShowNotification == nil) {
 //        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
