@@ -93,15 +93,19 @@
     
     switch (indexPath.row) {
         case 0:
+            cell.imageView.image = [UIImage imageNamed:@"icon_notification.png"];
             cell.textLabel.text = NSLocalizedString(@"push_settings", @"");
             break;
         case 1:
+            cell.imageView.image = [UIImage imageNamed:@"icon_logout.png"];
             cell.textLabel.text = NSLocalizedString(@"account_logout", @"");
             break;
         case 2:
+            cell.imageView.image = [UIImage imageNamed:@"icon_feed_back.png"];
             cell.textLabel.text = NSLocalizedString(@"feed_back", @"");
             break;
         case 3:
+            cell.imageView.image = [UIImage imageNamed:@"icon_about_us.png"];
             cell.textLabel.text = NSLocalizedString(@"about_us", @"");
             break;
         default:

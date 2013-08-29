@@ -16,6 +16,9 @@
 #import "NSDictionary+NSNullUtility.h"
 #import "JsonUtils.h"
 
+
+#import "BitUtils.h"
+
 #define LINE_HIGHT 5
 
 @interface LoginViewController ()
@@ -59,7 +62,9 @@
 }
 
 -(void) initUI{
+    
     [super initUI];
+    
     [self registerTapGestureToResignKeyboard];
         
     if(lblUserName == nil) {

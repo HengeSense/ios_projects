@@ -99,8 +99,9 @@
 
 - (void)centerButtonClicked {
     NSLog(@"centerClicked");
-    
-    [[[ExtranetClientSocket alloc] initWithIPAddress:@"172.16.8.16" andPort:6969] connect];
+    ExtranetClientSocket *ff = [[ExtranetClientSocket alloc] initWithIPAddress:@"172.16.8.123" andPort:6969];
+    ff.messageHandlerDelegate = self;
+    [ff connect];
 }
 
 - (void)topButtonClicked {

@@ -25,9 +25,15 @@
 
 - (NSDictionary *)toDictionary {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:self.deviceCode forKey:@"deviceCode"];
-    [json setObject:self.className forKey:@"_className"];
-    [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
+    if(self.deviceCode) {
+        [json setObject:self.deviceCode forKey:@"deviceCode"];
+    }
+    if(self.className != nil) {
+        [json setObject:self.className forKey:@"_className"];
+    }
+    if(self.masterDeviceCode != nil) {
+        [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
+    }
     [json setObject:self.appKey forKey:@"appKey"];
     [json setObject:self.phoneNumber forKey:@"phoneNumber"];
     [json setObject:self.security forKey:@"security"];

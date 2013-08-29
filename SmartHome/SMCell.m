@@ -44,7 +44,7 @@
     self.backgroundView = [[UIView alloc] initWithFrame:self.bounds];
     self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
     self.textLabel.font = [UIFont systemFontOfSize:16.f];
-    self.textLabel.textColor = [UIColor darkGrayColor];
+    self.textLabel.textColor = [UIColor blackColor];
     self.textLabel.highlightedTextColor = [UIColor darkGrayColor];
     
     if(backgroundImageView == nil) {
