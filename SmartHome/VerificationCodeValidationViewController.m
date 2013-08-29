@@ -145,7 +145,7 @@
 - (void)resendVerificationCode {
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [self.accountService sendVerificationCodeFor:self.phoneNumberToValidation success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
+    [[SMShared current].accountService sendVerificationCodeFor:self.phoneNumberToValidation success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
 }
 
 - (void)verificationCodeSendSuccess:(RestResponse *)resp {
@@ -185,7 +185,7 @@
     }
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [self.accountService registerWithPhoneNumber:self.phoneNumberToValidation checkCode:txtVerificationCode.text success:@selector(registerSuccessfully:) failed:@selector(registerFailed:) target:self callback:nil];
+    [[SMShared current].accountService registerWithPhoneNumber:self.phoneNumberToValidation checkCode:txtVerificationCode.text success:@selector(registerSuccessfully:) failed:@selector(registerFailed:) target:self callback:nil];
 }
 
 - (void)registerSuccessfully:(RestResponse *)resp {    
@@ -196,14 +196,16 @@
             if(result != nil) {
                 if([@"1" isEqualToString:result]) {
                     NSString *secretKey = [json notNSNullObjectForKey:@"security"];
-                    if(![NSString isBlank:secretKey]) {
+                    NSString *tcpAddress = [json notNSNullObjectForKey:@"tcp"];
+                    if(![NSString isBlank:secretKey] && ![NSString isBlank:tcpAddress]) {
                         [[AlertView currentAlertView] dismissAlertView];
-                        self.settings.secretKey = secretKey;
-                        self.settings.account = self.phoneNumberToValidation;
-                        self.settings.password = txtVerificationCode.text;
-                        [self.settings saveSettings];
-                        if(self.settings.anyUnitsBinding) {
-                            self.app.rootViewController.needLoadMainViewController = YES;
+                        [SMShared current].settings.secretKey = secretKey;
+                        [SMShared current].settings.account = self.phoneNumberToValidation;
+                        [SMShared current].settings.password = txtVerificationCode.text;
+                        [SMShared current].settings.tcpAddress = tcpAddress;
+                        [[SMShared current].settings saveSettings];
+                        if([SMShared current].settings.anyUnitsBinding) {
+                            [SMShared current].app.rootViewController.needLoadMainViewController = YES;
                             [self.navigationController popToRootViewControllerAnimated:NO];
                         } else {
                             [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];

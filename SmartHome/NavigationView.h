@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
 #import "TopbarView.h"
-#import "NSObject+SMExtension.h"
+#import "SMShared.h"
 
 @interface NavigationView : UIView
 

@@ -113,7 +113,7 @@
 #pragma mark services
 
 - (void)showMainView {
-    self.app.rootViewController.needLoadMainViewController = YES;
+    [SMShared current].app.rootViewController.needLoadMainViewController = YES;
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 

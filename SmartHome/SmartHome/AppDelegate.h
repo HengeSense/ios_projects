@@ -10,14 +10,14 @@
 #import "GlobalSettings.h"
 #import "ExtranetClientSocket.h"
 #import "AccountService.h"
+#import "TCPService.h"
 #import "RootViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) AccountService *accountService;
-//@property (strong, nonatomic)
+@property (strong, nonatomic) TCPService *tcpService;
 @property (strong, nonatomic) GlobalSettings *settings;
 @property (strong, nonatomic) RootViewController *rootViewController;
 

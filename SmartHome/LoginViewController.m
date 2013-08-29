@@ -179,10 +179,11 @@
     
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [self.accountService loginWithAccount:userName password:password success:@selector(loginSuccess:) failed:@selector(loginFailed:) target:self callback:nil];
+    [[SMShared current].accountService loginWithAccount:userName password:password success:@selector(loginSuccess:) failed:@selector(loginFailed:) target:self callback:nil];
 }
 
 - (void)loginSuccess:(RestResponse *)resp {
+    NSLog([[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
         if(json != nil) {
@@ -190,22 +191,20 @@
             if(![NSString isBlank:result]) {
                 if([@"1" isEqualToString:result]) {
                     NSString *secretKey = [json notNSNullObjectForKey:@"security"];
-                    if(![NSString isBlank:secretKey]) {
-                        self.settings.account = txtUserName.text;
-                        self.settings.password = txtPassword.text;
-                        self.settings.secretKey = secretKey;
-                        [self.settings saveSettings];
+                    NSString *tcpAddress = [json notNSNullObjectForKey:@"tcp"];
+                    if(![NSString isBlank:secretKey] && ![NSString isBlank:tcpAddress]) {
+                        [SMShared current].settings.account = txtUserName.text;
+                        [SMShared current].settings.password = txtPassword.text;
+                        [SMShared current].settings.secretKey = secretKey;
+                        [SMShared current].settings.tcpAddress = tcpAddress;
+                        [[SMShared current].settings saveSettings];
                         [[AlertView currentAlertView] dismissAlertView];
-                        if(self.settings.anyUnitsBinding) {
-                            self.app.rootViewController.needLoadMainViewController = YES;
+                        if([SMShared current].settings.anyUnitsBinding) {
+                            [SMShared current].app.rootViewController.needLoadMainViewController = YES;
                             [self.navigationController popToRootViewControllerAnimated:NO];
                         } else {
                             [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
                         }
-                        
-                        NSLog([[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
-                        
-                        
                         return;
                     }
                 } else if([@"-1" isEqualToString:result] || [@"-2" isEqualToString:result]) {
@@ -224,6 +223,7 @@
 }
 
 - (void)loginFailed:(RestResponse *)resp {
+    NSLog([[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
     if(abs(resp.statusCode) == 1001) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
     } else {

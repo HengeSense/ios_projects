@@ -8,10 +8,6 @@
 
 #import "ExtranetClientSocket.h"
 #import "CommunicationMessage.h"
-#import "NSObject+SMExtension.h"
-
-
-
 
 #define BUFFER_SIZE 1024
 
@@ -20,6 +16,14 @@
 }
 
 @synthesize messageHandlerDelegate;
+@synthesize isConnect;
+
+- (void)connect {
+    if(receivedData != nil) {
+        receivedData = nil;
+    }
+    [super connect];
+}
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
     
@@ -75,18 +79,16 @@
                 NSLog(@" has space available");
                 
 
-                
-
                 CommunicationMessage *ms =   [[CommunicationMessage alloc] init];
-                ms.deviceCommand = [[DeviceCommand alloc] init];
-                ms.deviceCommand.deviceCode = [UIDevice currentDevice].identifierForVendor.UUIDString;
-                ms.deviceCommand.className = @"FindZKListCommand";
-                ms.deviceCommand.commandTime = [[NSDate alloc] init];
-                ms.deviceCommand.security = self.settings.secretKey;
-                ms.deviceCommand.appKey = @"A001";
-                ms.deviceCommand.masterDeviceCode = @"fieldunit";
-                ms.deviceCommand.phoneNumber = self.settings.account;
-                    
+//                ms.deviceCommand = [[DeviceCommand alloc] init];
+//                ms.deviceCommand.deviceCode = [UIDevice currentDevice].identifierForVendor.UUIDString;
+//                ms.deviceCommand.className = @"FindZKListCommand";
+//                ms.deviceCommand.commandTime = [[NSDate alloc] init];
+//                ms.deviceCommand.security = self.settings.secretKey;
+//                ms.deviceCommand.appKey = @"A001";
+//                ms.deviceCommand.masterDeviceCode = @"fieldunit";
+//                ms.deviceCommand.phoneNumber = self.settings.account;
+//                    
                     //
                 NSData *ddd =  [ms generateData];
                 [self writeData:ddd];
@@ -202,6 +204,14 @@
             [self.messageHandlerDelegate clientSocketWithReceivedMessage:message];
         }
     }
+}
+
+- (BOOL)isConnect {
+    if(self.inputStream == nil || self.outputStream == nil) return NO;
+//    BOOL inClosed = self.inputStream.streamStatus == NSStreamStatusNotOpen || self.inputStream.streamStatus == NSStreamStatusClosed;
+    
+    
+    return NO;
 }
 
 #pragma mark -

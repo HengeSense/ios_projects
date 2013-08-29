@@ -15,6 +15,7 @@
 #import "AirconditionSwitchButton.h"
 #import "TVSwitchButton.h"
 #import "UIColor+ExtentionForHexString.h"
+#import "ToggleSwitchButton.h"
 
 
 #define SPEECH_VIEW_TAG                  46001
@@ -171,12 +172,12 @@
     sb7.status = @"on";
     sb7.title = @"摄像头";
     
-    SwitchButton *sb8 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    SwitchButton *sb8 = [ToggleSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb8.status = @"on";
-    sb8.title = @"摄像头";
+    sb8.title = @"开关";
     
     SwitchButton *sb9 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb9.status = @"on";
+    sb9.status = @"off";
     sb9.title = @"摄像头";
     
     SwitchButton *sb10 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];

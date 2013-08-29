@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AlertView.h"
-#import "NSObject+SMExtension.h"
+#import "SMShared.h"
 
 @interface BaseViewController : UIViewController
 

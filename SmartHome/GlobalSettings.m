@@ -15,12 +15,14 @@
 #define PASSWORD_KEY              @"password.key"
 #define SECRET_KEY_KEY            @"secret_key.key"
 #define ANY_UNITS_BINDING_KEY     @"any_units_binding.key"
+#define TCP_ADDRESS_KEY           @"tcp_address.key"
 
 @implementation GlobalSettings
 
 @synthesize account;
 @synthesize password;
 @synthesize secretKey;
+@synthesize tcpAddress;
 @synthesize anyUnitsBinding;
 
 - (id)init {
@@ -34,6 +36,7 @@
             self.account = [NSString emptyString];
             self.password = [NSString emptyString];
             self.secretKey = [NSString emptyString];
+            self.tcpAddress = [NSString emptyString];
         } else {
             //already have a setting file
             //need to fill object property
@@ -42,6 +45,7 @@
             NSString *password_obj = [settings notNSNullObjectForKey:PASSWORD_KEY];
             NSString *secret_key_obj = [settings notNSNullObjectForKey:SECRET_KEY_KEY];
             NSString *any_unit_binding_obj  = [settings notNSNullObjectForKey:ANY_UNITS_BINDING_KEY];
+            NSString *tcp_address_obj = [settings notNSNullObjectForKey:TCP_ADDRESS_KEY];
             
             if(![NSString isBlank:account_obj]) {
                 self.account = account_obj;
@@ -68,6 +72,12 @@
                     self.anyUnitsBinding = NO;
                 }
             }
+            
+            if(![NSString isBlank:tcp_address_obj]) {
+                self.tcpAddress = tcp_address_obj;
+            } else {
+                self.tcpAddress = [NSString emptyString];
+            }
         }
     }
     return self;
@@ -80,6 +90,7 @@
     [dictionary setObject:self.password forKey:PASSWORD_KEY];
     [dictionary setObject:self.secretKey forKey:SECRET_KEY_KEY];
     [dictionary setObject:(self.anyUnitsBinding ? @"yes" : @"no") forKey:ANY_UNITS_BINDING_KEY];
+    [dictionary setObject:self.tcpAddress forKey:TCP_ADDRESS_KEY];
     return dictionary;
 }
 

@@ -48,7 +48,7 @@
             break;
         case 1:
             //logout
-            [self.settings clearAuth];
+            [[SMShared current].settings clearAuth];
             break;
         case 2:
             break;
