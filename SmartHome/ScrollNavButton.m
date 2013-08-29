@@ -32,6 +32,8 @@
     [button setBackgroundColor:[UIColor clearColor]];
     [button setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
+
     return button;
 }
 @end

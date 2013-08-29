@@ -131,10 +131,15 @@
     sb15.status = @"off";
     sb15.title = @"卧室空调";
     
+    SwitchButton *sb16 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb16.status = @"off";
+    sb16.title = @"卧室空调";
+
+    
     NSArray *devices1 = [[NSArray alloc] initWithObjects:sb1,nil];
     NSArray *devices2 = [[NSArray alloc] initWithObjects:sb2,sb3,nil];
     NSArray *devices3 = [[NSArray alloc] initWithObjects:sb4,sb5,sb6,nil];
-    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,sb11, sb12, sb13,sb14,sb15, nil];
+    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,sb11, sb12, sb13,sb14,sb15,sb16, nil];
 
     NSArray *objArr = [[NSArray alloc] initWithObjects:devices1,devices2,devices3,devices4, nil];
     NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅",@"主卧",@"次卧",@"安防", nil];
