@@ -41,12 +41,17 @@
     __block NSMutableArray *mutableNavArr = [[NSMutableArray alloc] initWithObjects: nil];
     __block NSMutableArray *mutableScrollArr = [[NSMutableArray alloc] initWithObjects:nil];
     [dictionary enumerateKeysAndObjectsUsingBlock:^(__strong NSString *key, __strong NSArray *obj, BOOL *stop) {
+        NSInteger groupCount = obj.count/9+1;
+        CGFloat contentHeight = groupCount*SCROLL_ITEM_HEIGHT;
         UIButton *navBtn = [ScrollNavButton buttonWithNothing];
         [navBtn setTitle:key forState:UIControlStateNormal];
         [navBtn addTarget:self action:@selector(scrollNavButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [mutableNavArr addObject:navBtn];
         CGRect scrollRect = CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH,SCROLL_ITEM_HEIGHT);
-        __block UIView *scrollItem = [[UIView alloc] initWithFrame:scrollRect];
+        __block UIScrollView *scrollItem = [[UIScrollView alloc] initWithFrame:scrollRect];
+        scrollItem.contentSize = CGSizeMake(SCROLL_ITEM_WIDTH, contentHeight);
+        scrollItem.showsVerticalScrollIndicator = NO;
+        scrollItem.pagingEnabled = YES;
         __block CGPoint lastOrigin = CGPointMake(0, 0);
         [obj enumerateObjectsUsingBlock:^(__strong UIView *obj, NSUInteger idx, BOOL *stop) {
             if (idx%3==0&&idx/3>=1) {
@@ -61,17 +66,20 @@
         }];
         [mutableScrollArr addObject:scrollItem];
     }];
-    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
     self.pageableScrollView.delegate = self;
+    CGFloat multiple = (CGFloat) dictionary.count;
+    
+    self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
     [self pageWithViews:mutableScrollArr];
     [self addSubview:self.pageableScrollView];
     self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X+20, point.y, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
     navItems = mutableNavArr;
     
     leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
-    leftBoundsShadow.frame = CGRectMake(10, 0, 10, SCROLL_ITEM_HEIGHT);
+    leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
     rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
-    rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH, 0, 10, SCROLL_ITEM_HEIGHT);
+    rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH-10, 0, 10, SCROLL_ITEM_HEIGHT);
     [self addSubview:leftBoundsShadow];
     [self addSubview:rightBoundsShadow];
     leftBoundsShadow.hidden = YES;
@@ -98,10 +106,6 @@
 -(void) pageWithViews:(NSArray *) views{
     self.pageableScrollView.pagingEnabled = YES;
     self.pageableScrollView.showsHorizontalScrollIndicator = NO;
-    CGFloat multiple = (CGFloat) views.count;
-    NSInteger groupCount = views.count/3;
-    CGFloat contentHeight = groupCount<3?SCROLL_ITEM_HEIGHT:groupCount*(GROUP_ITEM_HEIGHT+MARGIN_Y)-MARGIN_Y;
-    self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,contentHeight);
     __block CGRect pageableRect = self.pageableScrollView.frame;
     [views enumerateObjectsUsingBlock:^(__strong UIView *obj,NSUInteger index,BOOL *stop){
         obj.frame = pageableRect;

@@ -36,6 +36,15 @@
     UIButton *btnSpeech;
     UIButton *btnShowNotification;
     UIButton *btnShowAffectDevice;
+    UIButton *btnMain;
+    UIButton *btnScene;
+    UIButton *btnMessage;
+    
+    UILabel *messageLable;
+    UILabel *timeLable;
+    
+    UIImageView *deviceCount;
+    UIImageView *messageCount;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -56,13 +65,52 @@
 
 - (void)initUI {
     [super initUI];
-    
-    if(btnShowNotification == nil) {
-        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
-        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
-        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btnShowNotification];
+//    btnMain = [[UIButton alloc] initWithFrame:CGRectMake(40, self.topbar.frame.size.height+20, 168/2, 179/2)];
+//    [btnMain setBackgroundImage:[UIImage imageNamed:@"btn_device.png"] forState:UIControlStateNormal];
+//    [self addSubview:btnMain];
+//    
+//    btnScene = [[UIButton alloc] initWithFrame:CGRectMake(btnMain.frame.origin.x+btnMain.frame.size.width+40, btnMain.frame.origin.y, 168/2, 179/2)];
+//    [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
+//    [self addSubview:btnScene];
+//
+    if (btnMessage == nil) {
+        btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(30, 120, 25/2, 30/2)];
+        [btnMessage setBackgroundImage:[UIImage imageNamed:@"icon_sound"] forState:UIControlStateNormal];
+        [self addSubview:btnMessage];
+
     }
+    if (messageLable == nil) {
+        messageLable = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
+        messageLable.backgroundColor = [UIColor clearColor];
+        messageLable.font = [UIFont systemFontOfSize:14];
+        messageLable.text = @"有人闯入房屋!";
+        messageLable.textColor = [UIColor lightTextColor];
+        [self addSubview:messageLable];
+
+    }
+    if (timeLable == nil) {
+        timeLable = [[UILabel alloc]initWithFrame:CGRectMake(messageLable.frame.origin.x, messageLable.frame.origin.y+messageLable.frame.size.height, 100, 10)];
+        timeLable.backgroundColor =[UIColor clearColor];
+        timeLable.text = @"16:54pm";
+        timeLable.font = [UIFont systemFontOfSize:12];
+        timeLable.textColor = [UIColor lightTextColor];
+        [self addSubview: timeLable];
+
+    }
+    if (deviceCount == nil) {
+        deviceCount = [[UIImageView alloc] initWithImage:@"<#string#>"]
+    }
+    if (messageCount == nil) {
+        
+        [self addSubview:messageCount];
+        
+    }
+    //    if(btnShowNotification == nil) {
+//        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
+//        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
+//        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:btnShowNotification];
+//    }
     
     if(btnSpeech == nil) {
         btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
@@ -132,10 +180,15 @@
     sb15.status = @"off";
     sb15.title = @"卧室空调";
     
+    SwitchButton *sb16 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    sb16.status = @"off";
+    sb16.title = @"卧室空调";
+
+    
     NSArray *devices1 = [[NSArray alloc] initWithObjects:sb1,nil];
     NSArray *devices2 = [[NSArray alloc] initWithObjects:sb2,sb3,nil];
     NSArray *devices3 = [[NSArray alloc] initWithObjects:sb4,sb5,sb6,nil];
-    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,sb11, sb12, sb13,sb14,sb15, nil];
+    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,sb11, sb12, sb13,sb14,sb15,sb16, nil];
 
     NSArray *objArr = [[NSArray alloc] initWithObjects:devices1,devices2,devices3,devices4, nil];
     NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅",@"主卧",@"次卧",@"安防", nil];

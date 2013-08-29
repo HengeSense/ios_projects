@@ -7,7 +7,7 @@
 //
 
 #import "TVViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
 #define CELL_HEIGHT 93
 #define CELL_WIDTH 624
 
@@ -45,10 +45,12 @@
     self.topbar.titleLabel.text = @"客厅电视机设置";
     
     if(tvTable == nil) {
-        tvTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, CELL_WIDTH / 2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        tvTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        tvTable.center = CGPointMake(self.view.center.x, tvTable.center.y);
         tvTable.dataSource = self;
         tvTable.delegate = self;
-        tvTable.backgroundColor = [UIColor whiteColor];
+        tvTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tvTable.backgroundColor = [UIColor clearColor];
         [self.view addSubview:tvTable];
     }
 }
@@ -65,32 +67,47 @@
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *tvCellIndendifier = @"tvcell";
-    UITableViewCell *tvCell = [tableView dequeueReusableCellWithIdentifier:tvCellIndendifier];
-    if (tvCell == nil) {
-        tvCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tvCellIndendifier];
+    static NSString *topCellIdentifier = @"topCellIdentifier";
+    static NSString *commonCellIdentifier = @"cellIdentifier";
+    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
+    NSString *tvCellIdentifier;
+    
+    if (indexPath.row == 0) {
+        tvCellIdentifier = topCellIdentifier;
+    }else if(indexPath.row == 9){
+        tvCellIdentifier = bottomCellIdentifier;
+    }else{
+        tvCellIdentifier = commonCellIdentifier;
     }
-
+    
+    UITableViewCell *tvCell = [tableView dequeueReusableCellWithIdentifier:tvCellIdentifier];
+    if (tvCell == nil) {
+        tvCell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tvCellIdentifier];
+    }
+    
     if(indexPath.row == 0){
-        tvSwitch = [[UIButton alloc] initWithFrame:CGRectMake(CELL_HEIGHT/2, CELL_HEIGHT/4,39/2,44/2)];
+        tvSwitch = [[UIButton alloc] initWithFrame:CGRectMake(10, CELL_HEIGHT/4-5,39/2,44/2)];
         [tvSwitch setBackgroundImage:[UIImage imageNamed:@"btn_switch.png"] forState:UIControlStateNormal];
         UIView *content = [[UIView alloc] initWithFrame:tvCell.contentView.bounds];
-        content.backgroundColor = [UIColor redColor];
+        [content addSubview:tvSwitch];
+        UILabel *switchLabel = [[UILabel alloc] initWithFrame:CGRectMake(tvSwitch.frame.origin.x+39/2+10, tvSwitch.frame.origin.y, 100, 20)];
+        switchLabel.text = NSLocalizedString(@"power.switch", @"");
+        switchLabel.font = [UIFont systemFontOfSize:14];
+        [content addSubview:switchLabel];
         [tvCell addSubview:content];
-        //[tvCell.contentView addSubview:tvSwitch];
-        tvCell.textLabel.text = NSLocalizedString(@"power.switch", @"");
-        
+        NSLog(@"%@,%@,%@",NSStringFromCGRect(tvCell.frame),NSStringFromCGRect(tvCell.contentView.frame),NSStringFromCGRect(tableView.frame));
     }else{
+        tvCell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tvCellIdentifier];
         tvCell.textLabel.text = [NSString stringWithFormat:@"cctv-%i",indexPath.row];
+        tvCell.frame = CGRectMake(0, 0, SM_CELL_WIDTH/2, CELL_HEIGHT);
+        NSLog(@"%@,%@,%@",NSStringFromCGRect(tvCell.frame),NSStringFromCGRect(tvCell.contentView.frame),NSStringFromCGRect(tableView.frame));
     }
+
     return tvCell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        return CELL_HEIGHT;
-    }
-    return CELL_HEIGHT/2;
+    return SM_CELL_HEIGHT/2;
 }
 
 @end
