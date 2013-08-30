@@ -10,9 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+ExtentionForHexString.h"
 #import "DeviceFinder.h"
+
+
 #import "ExtranetClientSocket.h"
-
-
 #import "CommunicationMessage.h"
 #import "SMShared.h"
 #import "JsonUtils.h"
