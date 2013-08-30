@@ -10,4 +10,5 @@
 
 @implementation Memory
 @synthesize units;
+@synthesize usersRegisterForUnitsUpdate;
 @end

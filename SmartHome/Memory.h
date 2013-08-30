@@ -11,5 +11,6 @@
 @interface Memory : NSObject
 
 @property (strong, nonatomic) NSArray *units;
+@property (strong,nonatomic) NSMutableArray *usersRegisterForUnitsUpdate;
 
 @end

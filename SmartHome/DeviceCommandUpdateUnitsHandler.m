@@ -14,9 +14,15 @@
     if(![command isMemberOfClass:[DeviceCommandUpdateUnits class]]) return;
     DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
     // do service here
+//    __block NSMutableArray *newUnits
+//    [SMShared current].memory.units = updateUnitsCommand.units;
     
-//    [SMShared current].memory
     
+    
+}
+- (void) registerForUpdate:(id) user{
+    Memory *memory = [SMShared current].memory;
+    [memory.usersRegisterForUnitsUpdate addObject:user];
 }
 
 @end
