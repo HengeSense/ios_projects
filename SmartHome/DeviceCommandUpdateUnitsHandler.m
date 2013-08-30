@@ -7,23 +7,30 @@
 //
 
 #import "DeviceCommandUpdateUnitsHandler.h"
-
+#import "Unit.h"
+#define DELEFGATE_METHOD @selector(updateUnits:)
 @implementation DeviceCommandUpdateUnitsHandler
+@synthesize delegate;
 
 - (void)handle:(DeviceCommand *)command {
     if(![command isMemberOfClass:[DeviceCommandUpdateUnits class]]) return;
     DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
     // do service here
     Memory *memory = [SMShared current].memory;
-   // NSArray *users = memory getSubscriptionsFor:<#(NSString *)#>
-//    __block NSMutableArray *newUnits
-//    [SMShared current].memory.units = updateUnitsCommand.units;
+    NSArray *newUnits = [memory replaceWithUnits:updateUnitsCommand.units];
+    NSArray *users = [memory getSubscriptionsFor:[DeviceCommandUpdateUnitsHandler class]];
+    [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([self.delegate isEqual:obj]&&[obj respondsToSelector:DELEFGATE_METHOD]) {
+            [obj performSelector:DELEFGATE_METHOD withObject:newUnits];
+        }
+    }];
     
     
     
 }
-- (void) registerForUpdate:(id) user{
+- (void) registerUsersForUnitsUpdate:(id)user{
     Memory *memory = [SMShared current].memory;
+    [memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:user];
 }
 
 @end

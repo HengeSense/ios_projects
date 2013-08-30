@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Unit.h"
 @interface Memory : NSObject
 
 @property (strong, nonatomic) NSArray *units;
@@ -17,5 +17,6 @@
 
 - (void)subscribeHandler:(Class)handler for:(id)obj;
 - (NSArray *)getSubscriptionsFor:(Class)handler;
-
+- (NSArray *) replaceWithUnits:(NSArray *) units;
+- (void) unSubscribeHandler:(Class) handler for:(id) obj;
 @end

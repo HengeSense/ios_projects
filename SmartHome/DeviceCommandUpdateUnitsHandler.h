@@ -8,8 +8,10 @@
 
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandUpdateUnits.h"
-#import "MainView.h"
-
+@protocol UpdateUnitsHandlerDelegate<NSObject>
+- (void) updateUnits:(NSArray *) uints;
+@end
 @interface DeviceCommandUpdateUnitsHandler : DeviceCommandHandler
-
+@property (assign,nonatomic) id<UpdateUnitsHandlerDelegate> delegate;
+-(void) registerUsersForUnitsUpdate:(id) user;
 @end
