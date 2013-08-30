@@ -12,44 +12,39 @@
 @synthesize units = _units;
 @synthesize subscriptions;
 
-
-    
 - (void)subscribeHandler:(Class)handler for:(id)obj {
-    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:handler];
+    if(obj == nil || handler == nil) return;
+    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
     if(subscriptions_ == nil) {
         subscriptions_ = [NSMutableArray array];
+        [subscriptions_ addObject:obj];
+        [self.subscriptions setObject:subscriptions_ forKey:[handler description]];
+        return;
     }
-    [subscriptions_ addObject:obj];
-    [self.subscriptions setObject:subscriptions_ forKey:(id)handler];
+    BOOL found = NO;
+    for(int i=0; i<subscriptions_.count; i++) {
+        if(obj == [subscriptions_ objectAtIndex:i]) {
+            found = YES;
+            break;
+        }
+    }
+    if(!found) {
+        [subscriptions_ addObject:obj];
+    }
 }
 
--(void) setUnits:(NSArray *)units{
-    if(units == nil){
-        units = [NSArray new];
-    }
-    _units = units;
-}
 - (NSArray *)getSubscriptionsFor:(Class)handler {
-    NSArray *subscriptions_ = [self.subscriptions objectForKey:handler];
-    if (subscriptions_ == nil) {
-        subscriptions_ = [NSArray new];
+    if(handler == nil) return nil;
+    return [self.subscriptions objectForKey:[handler description]];
+}
+
+- (void)unSubscribeHandler:(Class)handler for:(id)obj {
+    if(obj == nil || handler == nil) return;
+    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
+    if(subscriptions_ != nil) {
+        [subscriptions_ removeObject:obj];
     }
-    return subscriptions_;
 }
-
-- (NSMutableDictionary *)subscriptions {
-    if(subscriptions == nil) {
-        subscriptions = [NSMutableDictionary dictionary];
-    }
-    return subscriptions;
-}
-
--(void) unSubscribeHandler:(Class)handler for:(id)obj{
-    NSMutableArray *handlerArr = [self.subscriptions objectForKey:handler];
-    [handlerArr removeObject:obj];
-    [self.subscriptions setObject:handlerArr forKey:obj];
-}
-
 - (NSArray *) replaceWithUnits:(NSArray *) updateUnits{
     NSArray *memoryUnits = self.units;
     NSArray *receiveUnits = updateUnits;

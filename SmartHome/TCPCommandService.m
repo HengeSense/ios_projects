@@ -10,19 +10,7 @@
 
 
 /*
- CommunicationMessage *ms =   [[CommunicationMessage alloc] init];
- //                ms.deviceCommand = [[DeviceCommand alloc] init];
- //                ms.deviceCommand.deviceCode = [UIDevice currentDevice].identifierForVendor.UUIDString;
- //                ms.deviceCommand.className = @"FindZKListCommand";
- //                ms.deviceCommand.commandTime = [[NSDate alloc] init];
- //                ms.deviceCommand.security = self.settings.secretKey;
- //                ms.deviceCommand.appKey = @"A001";
- //                ms.deviceCommand.masterDeviceCode = @"fieldunit";
- //                ms.deviceCommand.phoneNumber = self.settings.account;
- //
- //
- NSData *ddd =  [ms generateData];
- [self writeData:ddd];
+ 
  
  */
 

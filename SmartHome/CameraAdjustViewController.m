@@ -12,6 +12,13 @@
 #import "DeviceFinder.h"
 #import "ExtranetClientSocket.h"
 
+
+#import "CommunicationMessage.h"
+#import "SMShared.h"
+#import "JsonUtils.h"
+#import "DeviceCommandUpdateUnits.h"
+#import "NSDictionary+NSNullUtility.h"
+
 @interface CameraAdjustViewController ()
 
 @end
@@ -20,6 +27,10 @@
     UIImageView *imgCameraShots;
     UIView *backgroundView;
     DirectionButton *btnDirection;
+    
+    
+    
+    ExtranetClientSocket *ff;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -83,7 +94,23 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSString *)messages {
-    NSLog(@"good");
+    
+    NSLog(messages);
+    
+NSDictionary *ddd=    [JsonUtils createDictionaryFromJson: [messages dataUsingEncoding:NSUTF8StringEncoding]];
+    if(ddd != nil) {
+
+           DeviceCommandUpdateUnits *ccc= [[DeviceCommandUpdateUnits alloc] initWithDictionary:ddd];
+        NSLog(@"units count %d", ccc.units.count);
+        
+        
+Unit *u =        [ccc.units objectAtIndex:0];
+Zone *zone=        [u.zones objectForKey:@"zone1"];
+        NSLog(        @"%d", zone.accessories);
+//        NSLog(@"device count %d",         zone.accessories.count);
+        
+    }
+    
 }
 
 #pragma mark -
@@ -99,9 +126,24 @@
 
 - (void)centerButtonClicked {
     NSLog(@"centerClicked");
-    ExtranetClientSocket *ff = [[ExtranetClientSocket alloc] initWithIPAddress:@"172.16.8.123" andPort:6969];
+    ff = [[ExtranetClientSocket alloc] initWithIPAddress:@"172.16.8.16" andPort:6969];
     ff.messageHandlerDelegate = self;
+    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(testj) userInfo:nil repeats:NO];
     [ff connect];
+    }
+
+- (void)testj {
+    NSLog(@"go %@", [SMShared current].settings.account);
+    CommunicationMessage *ms =   [[CommunicationMessage alloc] init];
+    ms.deviceCommand = [[DeviceCommand alloc] init];
+    ms.deviceCommand.deviceCode = [SMShared current].settings.account;
+    ms.deviceCommand.className = @"FindZKListCommand";
+    ms.deviceCommand.commandTime = [[NSDate alloc] init];
+    ms.deviceCommand.security = [SMShared current].settings.secretKey;
+    ms.deviceCommand.appKey = @"A001";
+    ms.deviceCommand.masterDeviceCode = @"fieldunit";
+    NSData *ddd =  [ms generateData];
+    [ff writeData:ddd];
 }
 
 - (void)topButtonClicked {
