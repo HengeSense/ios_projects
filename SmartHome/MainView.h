@@ -31,5 +31,5 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 
 - (void)showSpeechView;
 - (void)hideSpeechView;
-
+@property NSDictionary *devicesDictionary;
 @end
