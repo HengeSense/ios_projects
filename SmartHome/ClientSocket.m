@@ -26,7 +26,7 @@
 }
 
 - (void)connect {
-    [self close];
+//    [self close];
     
     CFReadStreamRef readStream = NULL;
     CFWriteStreamRef writeStream = NULL;

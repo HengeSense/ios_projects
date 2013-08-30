@@ -25,17 +25,14 @@
             self.localIP = [json notNSNullObjectForKey:@"localip"];
             self.name = [json notNSNullObjectForKey:@"name"];
 //            self.updateTime =
-            
             NSDictionary *_zones_ = [json notNSNullObjectForKey:@"zones"];
-            if(_zones_ != nil && [_zones_ isMemberOfClass:[NSDictionary class]]) {
-                NSEnumerator *enumerator = _zones_.objectEnumerator;
-                for(NSDictionary *dic in enumerator) {
-                    
+            NSEnumerator *enumerator = _zones_.keyEnumerator;
+            for(NSString *key in enumerator) {
+                NSDictionary *_zone_ = [_zones_ objectForKey:key];
+                if(_zone_ != nil) {
+                    [self.zones setObject:[[Zone alloc] initWithJson:_zone_] forKey:key];
                 }
-                
             }
-            
-//            self.zones
         }
     }
     return self;

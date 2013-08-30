@@ -18,13 +18,13 @@
     if(self) {
         if(json != nil) {
             self.name = [json notNSNullObjectForKey:@"name"];
-             NSDictionary *_accessories_ = [json notNSNullObjectForKey:@"accessories"];
+            NSDictionary *_accessories_ = [json notNSNullObjectForKey:@"accessories"];
             if(_accessories_ != nil) {
-                NSEnumerator *enumerator = _accessories_.objectEnumerator;
-                for(NSDictionary *_accessory_ in enumerator) {
-                    Device *device = [[Device alloc] initWithJson:_accessory_];
-                    if(device != nil) {
-                        
+                NSEnumerator *enumerator = _accessories_.keyEnumerator;
+                for(NSString *key in enumerator) {
+                    NSDictionary *_device_ = [_accessories_ objectForKey:key];
+                    if(_device_ != nil) {
+                        [self.accessories setObject:[[Device alloc] initWithJson:_device_] forKey:key];
                     }
                 }
             }
@@ -32,8 +32,6 @@
     }
     return self;
 }
-
-
 
 - (NSMutableDictionary *)accessories {
     if(accessories == nil) {
