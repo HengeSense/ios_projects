@@ -26,4 +26,6 @@
 @property (assign, nonatomic) id<MessageHandler> messageHandlerDelegate;
 @property (assign, nonatomic, readonly) BOOL isConnect;
 
+- (void)writeData:(NSData *)data;
+
 @end
