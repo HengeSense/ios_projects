@@ -10,7 +10,8 @@
 
 @implementation DeviceCommandHandler
 
-- (void)handle:(NSString *)json {
+- (void)handle:(DeviceCommand *)command {
+    
     
 }
 

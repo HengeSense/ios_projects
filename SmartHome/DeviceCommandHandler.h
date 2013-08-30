@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DeviceCommand.h"
 
 @interface DeviceCommandHandler : NSObject
 
-- (void)handle:(NSString *)json;
+- (void)handle:(DeviceCommand *)command;
 
 @end

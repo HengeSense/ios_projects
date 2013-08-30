@@ -10,4 +10,6 @@
 
 @interface DeviceCommandUpdateUnits : DeviceCommand
 
+@property (strong, nonatomic) NSArray *l;
+
 @end

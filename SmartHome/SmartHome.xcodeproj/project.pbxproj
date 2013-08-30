@@ -202,6 +202,7 @@
 		F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* SMTextField.m */; };
 		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
+		F20C788017D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */; };
 		F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178BFD17CAEC6F0043400F /* PageableScrollView.m */; };
 		F2178C0117CB06720043400F /* PageableNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0017CB06720043400F /* PageableNavView.m */; };
 		F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0317CB3CEB0043400F /* ScrollNavButton.m */; };
@@ -529,6 +530,8 @@
 		F20B36CC17B87CF1009286D6 /* MyDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
 		F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesViewController.m; sourceTree = "<group>"; };
+		F20C787E17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateUnitsHandler.h; sourceTree = "<group>"; };
+		F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateUnitsHandler.m; sourceTree = "<group>"; };
 		F2178BFC17CAEC6F0043400F /* PageableScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableScrollView.h; sourceTree = "<group>"; };
 		F2178BFD17CAEC6F0043400F /* PageableScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageableScrollView.m; sourceTree = "<group>"; };
 		F2178BFF17CB06720043400F /* PageableNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableNavView.h; sourceTree = "<group>"; };
@@ -1250,6 +1253,8 @@
 			children = (
 				6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */,
 				6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */,
+				F20C787E17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.h */,
+				F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1702,6 +1707,7 @@
 				6FD081BC17CF3E580089A1ED /* DeviceCommandHandler.m in Sources */,
 				6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */,
 				6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */,
+				F20C788017D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
