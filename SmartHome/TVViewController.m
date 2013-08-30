@@ -95,19 +95,17 @@
         switchLabel.font = [UIFont systemFontOfSize:14];
         [content addSubview:switchLabel];
         [tvCell addSubview:content];
-        NSLog(@"%@,%@,%@",NSStringFromCGRect(tvCell.frame),NSStringFromCGRect(tvCell.contentView.frame),NSStringFromCGRect(tableView.frame));
     }else{
         tvCell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tvCellIdentifier];
         tvCell.textLabel.text = [NSString stringWithFormat:@"cctv-%i",indexPath.row];
         tvCell.frame = CGRectMake(0, 0, SM_CELL_WIDTH/2, CELL_HEIGHT);
-        NSLog(@"%@,%@,%@",NSStringFromCGRect(tvCell.frame),NSStringFromCGRect(tvCell.contentView.frame),NSStringFromCGRect(tableView.frame));
     }
 
     return tvCell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return SM_CELL_HEIGHT/2;
+    return SM_CELL_HEIGHT / 2;
 }
 
 @end

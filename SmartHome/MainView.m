@@ -26,28 +26,16 @@
 #define RECORD_END_SOUND_ID              1114
 
 @implementation MainView {
+    NSArray *navItems;
+    
     SpeechViewState speechViewState;
     RecognizerState recognizerState;
     ConversationView *speechView;
     SpeechRecognitionUtil *speechRecognitionUtil;
     PageableScrollView *pageableScrollView;
     PageableNavView *pageableNavView;
-    NSArray *navItems;
-    
+    UIView *notificationView;
     UIButton *btnSpeech;
-    UIButton *btnShowNotification;
-    UIButton *btnShowAffectDevice;
-    UIButton *btnMain;
-    UIButton *btnScene;
-    UIButton *btnMessage;
-    
-    UILabel *messageLable;
-    UILabel *timeLable;
-    UILabel *numOfDevice;
-    UILabel *numOfMessage;
-    
-    UIImageView *deviceCount;
-    UIImageView *messageCount;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -69,23 +57,6 @@
 - (void)initUI {
     [super initUI];
     CGFloat bottom = self.bounds.size.height;
-//    btnMain = [[UIButton alloc] initWithFrame:CGRectMake(40, self.topbar.frame.size.height+20, 168/2, 179/2)];
-//    [btnMain setBackgroundImage:[UIImage imageNamed:@"btn_device.png"] forState:UIControlStateNormal];
-//    [self addSubview:btnMain];
-//    
-//    btnScene = [[UIButton alloc] initWithFrame:CGRectMake(btnMain.frame.origin.x+btnMain.frame.size.width+40, btnMain.frame.origin.y, 168/2, 179/2)];
-//    [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
-//    [self addSubview:btnScene];
-//
-
-        //    if(btnShowNotification == nil) {
-
-    //    if(btnShowNotification == nil) {
-//        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
-//        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
-//        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
-//        [self addSubview:btnShowNotification];
-//    }
     
     if(btnSpeech == nil) {
         btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
@@ -94,6 +65,8 @@
         [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnSpeech];
     }
+    
+    /* mock data begin -------------- */
     
     SwitchButton *sb1 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb1.status = @"on";
@@ -169,65 +142,64 @@
     NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅",@"主卧",@"次卧",@"安防", nil];
     NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObjects:objArr forKeys:keyArr];
     
+     /* mock data end -------------- */
+    
     if(pageableScrollView == nil) {
         pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, bottom-198/2-10-180) andDictionary:scrollDictionary];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
         [self addSubview:pageableScrollView.pageNavView];
-        if (btnMessage == nil) {
-            btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(30,pageableScrollView.frame.origin.y-30-25/2, 25/2, 30/2)];
-            [btnMessage setBackgroundImage:[UIImage imageNamed:@"icon_sound"] forState:UIControlStateNormal];
-            [self addSubview:btnMessage];
-            
-        }
-        if (messageLable == nil) {
-            messageLable = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
-            messageLable.backgroundColor = [UIColor clearColor];
-            messageLable.font = [UIFont systemFontOfSize:14];
-            messageLable.text = @"有人闯入房屋!";
-            messageLable.textColor = [UIColor lightTextColor];
-            [self addSubview:messageLable];
-            
-        }
-        if (timeLable == nil) {
-            timeLable = [[UILabel alloc]initWithFrame:CGRectMake(messageLable.frame.origin.x, messageLable.frame.origin.y+messageLable.frame.size.height, 100, 10)];
-            timeLable.backgroundColor =[UIColor clearColor];
-            timeLable.text = @"16:54pm";
-            timeLable.font = [UIFont systemFontOfSize:12];
-            timeLable.textColor = [UIColor lightTextColor];
-            [self addSubview: timeLable];
-            
-        }
-        if (deviceCount == nil) {
-            deviceCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"device_count.png"]];
-            deviceCount.frame = CGRectMake(messageLable.frame.origin.x+messageLable.frame.size.width+40, messageLable.frame.origin.y, 44/2, 46/2);
-            [self addSubview:deviceCount];
-            
-        }
-        if (numOfDevice == nil) {
-            numOfDevice = [[UILabel alloc] initWithFrame:CGRectMake(deviceCount.frame.origin.x+deviceCount.frame.size.width+5, messageLable.frame.origin.y, 20, 20)];
-            numOfDevice.text = @"5";
-            numOfDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
-            numOfDevice.font = [UIFont systemFontOfSize:14];
-            numOfDevice.backgroundColor = [UIColor clearColor];
-            [self addSubview:numOfDevice];
-            
-        }
-        if (messageCount == nil) {
-            messageCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_count.png"]];
-            messageCount.frame = CGRectMake(numOfDevice.frame.origin.x+30, numOfDevice.frame.origin.y, 44/2, 46/2);
-            [self addSubview:messageCount];
-            
-        }
-        if (numOfMessage == nil) {
-            numOfMessage = [[UILabel alloc] initWithFrame:CGRectMake(messageCount.frame.origin.x+messageCount.frame.size.width+5, messageCount.frame.origin.y, 20, 20)];
-            numOfMessage.text = @"5";
-            numOfMessage.textColor = [UIColor colorWithHexString:@"dfa800"];
-            numOfMessage.backgroundColor = [UIColor clearColor];
-            numOfMessage.font = [UIFont systemFontOfSize:14];
-            [self addSubview:numOfMessage];
-        }
-
+    }
+    
+    if(notificationView == nil) {
+        notificationView = [[UIView alloc] initWithFrame:CGRectMake(10, (pageableScrollView.frame.origin.y - 40 - 25/2), [UIScreen mainScreen].bounds.size.width, 40)];
+        
+        UIButton *btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25/2, 30/2)];
+        btnMessage.center = CGPointMake(btnMessage.center.x, notificationView.bounds.size.height / 2);
+        [btnMessage setBackgroundImage:[UIImage imageNamed:@"icon_sound"] forState:UIControlStateNormal];
+        [notificationView addSubview:btnMessage];
+    
+        UILabel *lblMessage = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
+        lblMessage.backgroundColor = [UIColor clearColor];
+        lblMessage.font = [UIFont systemFontOfSize:14];
+        lblMessage.text = @"有人闯入房屋!";
+        lblMessage.textColor = [UIColor lightTextColor];
+        [notificationView addSubview:lblMessage];
+    
+        UILabel *lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
+        lblTime.backgroundColor =[UIColor clearColor];
+        lblTime.text = @"16:54pm";
+        lblTime.font = [UIFont systemFontOfSize:12];
+        lblTime.textColor = [UIColor lightTextColor];
+        [notificationView addSubview: lblTime];
+        
+        UIImageView *imgAffectDevice = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"device_count.png"]];
+        imgAffectDevice.frame = CGRectMake(lblMessage.frame.origin.x+lblMessage.frame.size.width + 40, 0, 44/2, 46/2);
+        imgAffectDevice.center = CGPointMake(imgAffectDevice.center.x, notificationView.bounds.size.height / 2);
+        [notificationView addSubview:imgAffectDevice];
+        
+        UILabel *lblAffectDevice = [[UILabel alloc] initWithFrame:CGRectMake(imgAffectDevice.frame.origin.x+imgAffectDevice.frame.size.width + 5, 0, 20, 20)];
+        lblAffectDevice.center = CGPointMake(lblAffectDevice.center.x, notificationView.bounds.size.height / 2);
+        lblAffectDevice.text = @"5";
+        lblAffectDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
+        lblAffectDevice.font = [UIFont systemFontOfSize:14];
+        lblAffectDevice.backgroundColor = [UIColor clearColor];
+        [notificationView addSubview:lblAffectDevice];
+    
+        UIImageView *imgMessageCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_count.png"]];
+        imgMessageCount.frame = CGRectMake(lblAffectDevice.frame.origin.x+30, 0, 44/2, 46/2);
+        imgMessageCount.center = CGPointMake(imgMessageCount.center.x, notificationView.bounds.size.height / 2);
+        [notificationView addSubview:imgMessageCount];
+    
+        UILabel *lblMessageCount = [[UILabel alloc] initWithFrame:CGRectMake(imgMessageCount.frame.origin.x+imgMessageCount.frame.size.width+5, 0, 20, 20)];
+        lblMessageCount.center = CGPointMake(lblMessageCount.center.x, notificationView.bounds.size.height /2 );
+        lblMessageCount.text = @"5";
+        lblMessageCount.textColor = [UIColor colorWithHexString:@"dfa800"];
+        lblMessageCount.backgroundColor = [UIColor clearColor];
+        lblMessageCount.font = [UIFont systemFontOfSize:14];
+        [notificationView addSubview:lblMessageCount];
+        
+        [self addSubview:notificationView];
     }
 }
 
