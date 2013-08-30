@@ -19,8 +19,4 @@
     
 }
 
-+ (NSString *)handlerName {
-    return @"updateUnitsHandler";
-}
-
 @end

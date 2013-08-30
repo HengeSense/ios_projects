@@ -14,8 +14,4 @@
     
 }
 
-+ (NSString *)handlerName {
-    return @"";
-}
-
 @end
