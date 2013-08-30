@@ -13,18 +13,38 @@
 @synthesize units;
 @synthesize subscriptions;
 
-
-    
 - (void)subscribeHandler:(Class)handler for:(id)obj {
-//    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:handlerName];
-//    if(subscriptions_ == nil) {
-//        subscriptions_ = [NSMutableArray array];
-//    }
+    if(obj == nil || handler == nil) return;
+    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
+    if(subscriptions_ == nil) {
+        subscriptions_ = [NSMutableArray array];
+        [subscriptions_ addObject:obj];
+        [self.subscriptions setObject:subscriptions_ forKey:[handler description]];
+        return;
+    }
+    BOOL found = NO;
+    for(int i=0; i<subscriptions_.count; i++) {
+        if(obj == [subscriptions_ objectAtIndex:i]) {
+            found = YES;
+            break;
+        }
+    }
+    if(!found) {
+        [subscriptions_ addObject:obj];
+    }
 }
 
-
 - (NSArray *)getSubscriptionsFor:(Class)handler {
-    return nil;
+    if(handler == nil) return nil;
+    return [self.subscriptions objectForKey:[handler description]];
+}
+
+- (void)unSubscribeHandler:(Class)handler for:(id)obj {
+    if(obj == nil || handler == nil) return;
+    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
+    if(subscriptions_ != nil) {
+        [subscriptions_ removeObject:obj];
+    }
 }
 
 - (NSMutableDictionary *)subscriptions {
