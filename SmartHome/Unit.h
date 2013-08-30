@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSDictionary+NSNullUtility.h"
+#import "Zone.h"
 
 @interface Unit : NSObject
 
@@ -16,6 +18,8 @@
 @property (strong, nonatomic) NSDate *updateTime;
 
 // Collections of zones
-@property (strong, nonatomic) NSDictionary *zones;
+@property (strong, nonatomic) NSMutableDictionary *zones;
+
+- (id)initWithJson:(NSDictionary *)json;
 
 @end

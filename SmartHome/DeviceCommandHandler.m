@@ -9,8 +9,13 @@
 #import "DeviceCommandHandler.h"
 
 @implementation DeviceCommandHandler
+
 - (void)handle:(DeviceCommand *)command {
     
+}
+
++ (NSString *)handlerName {
+    return @"";
 }
 
 @end

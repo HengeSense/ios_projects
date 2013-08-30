@@ -14,6 +14,8 @@
     if(![command isMemberOfClass:[DeviceCommandUpdateUnits class]]) return;
     DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
     // do service here
+    Memory *memory = [SMShared current].memory;
+   // NSArray *users = memory getSubscriptionsFor:<#(NSString *)#>
 //    __block NSMutableArray *newUnits
 //    [SMShared current].memory.units = updateUnitsCommand.units;
     
@@ -22,7 +24,10 @@
 }
 - (void) registerForUpdate:(id) user{
     Memory *memory = [SMShared current].memory;
-    [memory.usersRegisterForUnitsUpdate addObject:user];
+}
+
++ (NSString *)handlerName {
+    return @"updateUnitsHandler";
 }
 
 @end

@@ -11,6 +11,11 @@
 @interface Memory : NSObject
 
 @property (strong, nonatomic) NSArray *units;
-@property (strong,nonatomic) NSMutableArray *usersRegisterForUnitsUpdate;
+
+
+@property (strong, nonatomic) NSMutableDictionary *subscriptions;
+
+- (void)subscribeHandler:(NSString *)handlerName for:(id)obj;
+- (NSArray *)getSubscriptionsFor:(NSString *)handlerName;
 
 @end

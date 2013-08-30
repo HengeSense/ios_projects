@@ -17,4 +17,6 @@
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSString *type;
 
+- (id)initWithJson:(NSDictionary *)json;
+
 @end

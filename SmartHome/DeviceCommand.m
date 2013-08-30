@@ -26,15 +26,17 @@
 - (id)initWithDictionary:(NSDictionary *)json {
     self = [super init];
     if(self) {
-        self.deviceCode = [json notNSNullObjectForKey:@"deviceCode"];
-        self.className = [json notNSNullObjectForKey:@"_className"];
-        self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
-        self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
-        self.security = [json notNSNullObjectForKey:@"security"];
-        self.result = [json notNSNullObjectForKey:@"id"];
-        NSNumber *timestamp = [json notNSNullObjectForKey:@"commandTime"];
-        if(timestamp != nil) {
-            self.commandTime = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue];
+        if(json != nil) {
+            self.deviceCode = [json notNSNullObjectForKey:@"deviceCode"];
+            self.className = [json notNSNullObjectForKey:@"_className"];
+            self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
+            self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
+            self.security = [json notNSNullObjectForKey:@"security"];
+            self.result = [json notNSNullObjectForKey:@"id"];
+            NSNumber *timestamp = [json notNSNullObjectForKey:@"commandTime"];
+            if(timestamp != nil) {
+                self.commandTime = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue];
+            }
         }
     }
     return self;
