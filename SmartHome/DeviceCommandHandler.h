@@ -15,6 +15,4 @@
 
 - (void)handle:(DeviceCommand *)command;
 
-+ (NSString *)handlerName;
-
 @end

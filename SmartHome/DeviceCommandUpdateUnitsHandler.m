@@ -26,8 +26,4 @@
     Memory *memory = [SMShared current].memory;
 }
 
-+ (NSString *)handlerName {
-    return @"updateUnitsHandler";
-}
-
 @end
