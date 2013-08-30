@@ -10,6 +10,7 @@
 #import "DeviceCommand.h"
 #import "SMShared.h"
 
+
 @interface DeviceCommandHandler : NSObject
 
 - (void)handle:(DeviceCommand *)command;
