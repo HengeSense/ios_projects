@@ -180,7 +180,7 @@
 		6FD8A73317B23543009C7493 /* RestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73217B23543009C7493 /* RestClient.m */; };
 		6FD8A73617B2356F009C7493 /* RestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A73517B2356F009C7493 /* RestResponse.m */; };
 		6FDD0EC817CDD369000D95E8 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0EC717CDD369000D95E8 /* AsyncUdpSocket.m */; };
-		6FDD0ED117CDECBA000D95E8 /* TCPService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED017CDECBA000D95E8 /* TCPService.m */; };
+		6FDD0ED117CDECBA000D95E8 /* TCPCommandService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED017CDECBA000D95E8 /* TCPCommandService.m */; };
 		6FDD0ED717CDED30000D95E8 /* icon_feed_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED317CDED30000D95E8 /* icon_feed_back@2x.png */; };
 		6FDD0ED817CDED30000D95E8 /* icon_about_us@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED417CDED30000D95E8 /* icon_about_us@2x.png */; };
 		6FDD0ED917CDED30000D95E8 /* icon_logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */; };
@@ -495,8 +495,8 @@
 		6FD8A73517B2356F009C7493 /* RestResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestResponse.m; sourceTree = "<group>"; };
 		6FDD0EC617CDD369000D95E8 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		6FDD0EC717CDD369000D95E8 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
-		6FDD0ECF17CDECBA000D95E8 /* TCPService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPService.h; sourceTree = "<group>"; };
-		6FDD0ED017CDECBA000D95E8 /* TCPService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPService.m; sourceTree = "<group>"; };
+		6FDD0ECF17CDECBA000D95E8 /* TCPCommandService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCommandService.h; sourceTree = "<group>"; };
+		6FDD0ED017CDECBA000D95E8 /* TCPCommandService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPCommandService.m; sourceTree = "<group>"; };
 		6FDD0ED317CDED30000D95E8 /* icon_feed_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_back@2x.png"; sourceTree = "<group>"; };
 		6FDD0ED417CDED30000D95E8 /* icon_about_us@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_about_us@2x.png"; sourceTree = "<group>"; };
 		6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_logout@2x.png"; sourceTree = "<group>"; };
@@ -1254,6 +1254,8 @@
 				6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */,
 				6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */,
 				6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */,
+				6FDD0ECF17CDECBA000D95E8 /* TCPCommandService.h */,
+				6FDD0ED017CDECBA000D95E8 /* TCPCommandService.m */,
 			);
 			name = communications;
 			sourceTree = "<group>";
@@ -1294,8 +1296,6 @@
 			children = (
 				6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */,
 				6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */,
-				6FDD0ECF17CDECBA000D95E8 /* TCPService.h */,
-				6FDD0ED017CDECBA000D95E8 /* TCPService.m */,
 			);
 			name = tcp;
 			sourceTree = "<group>";
@@ -1692,7 +1692,7 @@
 				6FD6C65517CCE1CC00BDA327 /* DeviceFinder.m in Sources */,
 				6FD6C65B17CCF9F100BDA327 /* Reachability.m in Sources */,
 				6FDD0EC817CDD369000D95E8 /* AsyncUdpSocket.m in Sources */,
-				6FDD0ED117CDECBA000D95E8 /* TCPService.m in Sources */,
+				6FDD0ED117CDECBA000D95E8 /* TCPCommandService.m in Sources */,
 				6FD081B917CF3E030089A1ED /* DeviceCommandDeliveryService.m in Sources */,
 				6FD081BC17CF3E580089A1ED /* DeviceCommandHandler.m in Sources */,
 				6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */,

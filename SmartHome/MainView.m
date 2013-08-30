@@ -77,7 +77,10 @@
 //    [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
 //    [self addSubview:btnScene];
 //
+
         //    if(btnShowNotification == nil) {
+
+    //    if(btnShowNotification == nil) {
 //        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
 //        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
 //        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];

@@ -13,6 +13,8 @@
 
 @implementation ExtranetClientSocket {
     NSMutableData *receivedData;
+    BOOL inOpen;
+    BOOL outOpen;
 }
 
 @synthesize messageHandlerDelegate;
@@ -72,32 +74,15 @@
             [self processReceivedData];
         }
     } else if(eventCode == NSStreamEventHasSpaceAvailable) {
-        // test
-        static NSString *str = @"";
-        if([@"" isEqualToString:str]) {
-            if(aStream != nil && aStream == self.outputStream) {
-                NSLog(@" has space available");
-                
-
-                CommunicationMessage *ms =   [[CommunicationMessage alloc] init];
-//                ms.deviceCommand = [[DeviceCommand alloc] init];
-//                ms.deviceCommand.deviceCode = [UIDevice currentDevice].identifierForVendor.UUIDString;
-//                ms.deviceCommand.className = @"FindZKListCommand";
-//                ms.deviceCommand.commandTime = [[NSDate alloc] init];
-//                ms.deviceCommand.security = self.settings.secretKey;
-//                ms.deviceCommand.appKey = @"A001";
-//                ms.deviceCommand.masterDeviceCode = @"fieldunit";
-//                ms.deviceCommand.phoneNumber = self.settings.account;
-//                    
-                    //
-                NSData *ddd =  [ms generateData];
-                [self writeData:ddd];
-                
-            }
-            str = @"full";
+        if(aStream == self.outputStream) {
+            
         }
     } else if(eventCode == NSStreamEventOpenCompleted) {
-        NSLog(@"%@ opened", aStream == self.inputStream ? @"input stream" : @"output stream");
+        if(aStream == self.inputStream) {
+            inOpen = YES;
+        } else if(aStream == self.outputStream) {
+            outOpen = YES;
+        }
     } else if(eventCode == NSStreamEventEndEncountered) {
         [self close];
     } else if(eventCode == NSStreamEventErrorOccurred) {
@@ -207,18 +192,17 @@
 }
 
 - (BOOL)isConnect {
-    if(self.inputStream == nil || self.outputStream == nil) return NO;
-//    BOOL inClosed = self.inputStream.streamStatus == NSStreamStatusNotOpen || self.inputStream.streamStatus == NSStreamStatusClosed;
-    
-    
-    return NO;
+    return inOpen && outOpen;
 }
 
 #pragma mark -
 #pragma mark override super method
 
 - (void)close {
+    NSLog(@"socket was closed");
     receivedData = nil;
+    inOpen = NO;
+    outOpen = NO;
     [super close];
 }
 

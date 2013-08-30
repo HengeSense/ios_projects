@@ -17,7 +17,6 @@
 @synthesize accountService;
 @synthesize settings;
 @synthesize rootViewController;
-@synthesize tcpService;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {   
@@ -123,20 +122,16 @@
         }
     } else {
         // not reachable
-        NSLog(@"not reach");
+        if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
+            NSLog(@"local wifi");
+        } else {
+            NSLog(@"can't find any network environment");
+        }
     }
 }
-
 
 #pragma mark -
 #pragma getter and setters
-
-- (TCPService *)tcpService {
-    if(tcpService == nil) {
-        tcpService = [[TCPService alloc] init];
-    }
-    return tcpService;
-}
 
 - (AccountService *)accountService {
     if(accountService == nil) {

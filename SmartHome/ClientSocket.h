@@ -22,5 +22,4 @@
 - (void)connect;
 - (void)close;
 
-
 @end

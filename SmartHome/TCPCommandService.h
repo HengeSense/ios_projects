@@ -1,5 +1,5 @@
 //
-//  TCPService.h
+//  TCPCommandService.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/28/13.
@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DeviceCommand.h"
+#import "DeviceCommandDeliveryService.h"
+#import "CommunicationMessage.h"
 #import "ExtranetClientSocket.h"
 
-@interface TCPService : NSObject<MessageHandler>
+@interface TCPCommandService : DeviceCommandDeliveryService<MessageHandler>
 
-- (void)executeCommand:(DeviceCommand *)command;
 
 @end
