@@ -12,7 +12,6 @@
 
 - (void)handle:(DeviceCommand *)command {
     
-    
 }
 
 @end

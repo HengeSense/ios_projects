@@ -8,6 +8,7 @@
 
 #import "DeviceCommand.h"
 #import "NSString+StringUtils.h"
+#import "JsonUtils.h"
 
 @implementation DeviceCommand
 
@@ -19,7 +20,12 @@
 @synthesize appKey;
 @synthesize security;
 
+
 - (void)initWithDictionary:(NSDictionary *)json {
+//    NSString *d_code = [json notNSNullObjectForKey:@"deviceCode"];
+//NSString *d_code = [json notNSNullObjectForKey:@"deviceCode"];
+//NSString *d_code = [json notNSNullObjectForKey:@"deviceCode"];
+//    NSString *d_code = [json notNSNullObjectForKey:@"deviceCode"];
     
 }
 

@@ -7,9 +7,10 @@
 //
 
 #import "DeviceCommand.h"
+#import "Home.h"
 
 @interface DeviceCommandUpdateUnits : DeviceCommand
 
-@property (strong, nonatomic) NSArray *l;
+@property (strong, nonatomic) NSArray *homes;
 
 @end

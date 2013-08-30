@@ -12,9 +12,9 @@
 
 - (void)handle:(DeviceCommand *)command {
     if(![command isMemberOfClass:[DeviceCommandUpdateUnits class]]) return;
+    DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
     
-    //
-    
+    // do service here
 }
 
 @end
