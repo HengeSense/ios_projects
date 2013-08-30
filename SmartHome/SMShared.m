@@ -22,6 +22,10 @@
     return [UIApplication sharedApplication].delegate;
 }
 
+- (Memory *)memory {
+    return self.app.memory;
+}
+
 + (SMShared *)current {
     static SMShared *shared;
     if(shared == nil) {

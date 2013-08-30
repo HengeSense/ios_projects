@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DeviceCommand.h"
+#import "SMShared.h"
 
 @interface DeviceCommandHandler : NSObject
 

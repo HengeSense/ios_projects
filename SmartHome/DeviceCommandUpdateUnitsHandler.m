@@ -14,6 +14,9 @@
     if(![command isMemberOfClass:[DeviceCommandUpdateUnits class]]) return;
     DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
     // do service here
+    
+//    [SMShared current].memory
+    
 }
 
 @end
