@@ -12,6 +12,6 @@
 @interface DeviceCommandUpdateUnits : DeviceCommand
 
 // Collections of units
-@property (strong, nonatomic) NSArray *units;
+@property (strong, nonatomic) NSMutableArray *units;
 
 @end

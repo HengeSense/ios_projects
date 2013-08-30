@@ -10,16 +10,39 @@
 
 @implementation DeviceCommandUpdateUnits
 
+@synthesize units;
+
 - (id)initWithDictionary:(NSDictionary *)json {
-    return [super initWithDictionary:json];
-
-
-    
+    self = [super initWithDictionary:json];
+    if(self) {
+        if(json != nil) {
+            NSArray *_units_ = [json notNSNullObjectForKey:@"zKList"];
+            if(_units_ != nil && [_units_ isMemberOfClass:[NSArray class]]) {
+                for(int i=0; i<_units_.count; i++) {
+                    NSDictionary *_unit_ = [_units_ objectAtIndex:i];
+                    if(_unit_ != nil) {
+                        Unit *unit = [[Unit alloc] initWithJson:_unit_];
+                        if(unit != nil) {
+                            [self.units addObject:unit];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return self;
 }
 
 - (NSDictionary *)toDictionary {
 
     return nil;
+}
+
+- (NSMutableArray *)units {
+    if(units == nil) {
+        units = [NSMutableArray array];
+    }
+    return units;
 }
 
 
