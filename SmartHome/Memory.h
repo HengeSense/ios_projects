@@ -13,7 +13,7 @@
 @property (strong, nonatomic) NSArray *units;
 @property (strong, nonatomic) NSMutableDictionary *subscriptions;
 
-- (void)subscribeHandler:(NSString *)handlerName for:(id)obj;
-- (NSArray *)getSubscriptionsFor:(NSString *)handlerName;
+- (void)subscribeHandler:(Class)handler for:(id)obj;
+- (NSArray *)getSubscriptionsFor:(Class)handler;
 
 @end

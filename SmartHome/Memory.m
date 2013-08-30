@@ -13,14 +13,17 @@
 @synthesize units;
 @synthesize subscriptions;
 
-- (void)subscribeHandler:(NSString *)handlerName for:(id)obj {
-    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:handlerName];
-    if(subscriptions_ == nil) {
-        subscriptions_ = [NSMutableArray array];
-    }
+
+    
+- (void)subscribeHandler:(Class)handler for:(id)obj {
+//    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:handlerName];
+//    if(subscriptions_ == nil) {
+//        subscriptions_ = [NSMutableArray array];
+//    }
 }
 
-- (NSArray *)getSubscriptionsFor:(NSString *)handlerName {
+
+- (NSArray *)getSubscriptionsFor:(Class)handler {
     return nil;
 }
 
