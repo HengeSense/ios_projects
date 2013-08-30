@@ -68,6 +68,7 @@
 
 - (void)initUI {
     [super initUI];
+    CGFloat bottom = self.bounds.size.height;
 //    btnMain = [[UIButton alloc] initWithFrame:CGRectMake(40, self.topbar.frame.size.height+20, 168/2, 179/2)];
 //    [btnMain setBackgroundImage:[UIImage imageNamed:@"btn_device.png"] forState:UIControlStateNormal];
 //    [self addSubview:btnMain];
@@ -76,60 +77,7 @@
 //    [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
 //    [self addSubview:btnScene];
 //
-    if (btnMessage == nil) {
-        btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(30, 120, 25/2, 30/2)];
-        [btnMessage setBackgroundImage:[UIImage imageNamed:@"icon_sound"] forState:UIControlStateNormal];
-        [self addSubview:btnMessage];
-
-    }
-    if (messageLable == nil) {
-        messageLable = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
-        messageLable.backgroundColor = [UIColor clearColor];
-        messageLable.font = [UIFont systemFontOfSize:14];
-        messageLable.text = @"有人闯入房屋!";
-        messageLable.textColor = [UIColor lightTextColor];
-        [self addSubview:messageLable];
-
-    }
-    if (timeLable == nil) {
-        timeLable = [[UILabel alloc]initWithFrame:CGRectMake(messageLable.frame.origin.x, messageLable.frame.origin.y+messageLable.frame.size.height, 100, 10)];
-        timeLable.backgroundColor =[UIColor clearColor];
-        timeLable.text = @"16:54pm";
-        timeLable.font = [UIFont systemFontOfSize:12];
-        timeLable.textColor = [UIColor lightTextColor];
-        [self addSubview: timeLable];
-
-    }
-    if (deviceCount == nil) {
-        deviceCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"device_count.png"]];
-        deviceCount.frame = CGRectMake(messageLable.frame.origin.x+messageLable.frame.size.width+40, messageLable.frame.origin.y, 44/2, 46/2);
-        [self addSubview:deviceCount];
-    
-    }
-    if (numOfDevice == nil) {
-        numOfDevice = [[UILabel alloc] initWithFrame:CGRectMake(deviceCount.frame.origin.x+deviceCount.frame.size.width+5, messageLable.frame.origin.y, 20, 20)];
-        numOfDevice.text = @"5";
-        numOfDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
-        numOfDevice.font = [UIFont systemFontOfSize:14];
-        numOfDevice.backgroundColor = [UIColor clearColor];
-        [self addSubview:numOfDevice];
-        
-    }
-    if (messageCount == nil) {
-        messageCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_count.png"]];
-        messageCount.frame = CGRectMake(numOfDevice.frame.origin.x+30, numOfDevice.frame.origin.y, 44/2, 46/2);
-        [self addSubview:messageCount];
-        
-    }
-    if (numOfMessage == nil) {
-        numOfMessage = [[UILabel alloc] initWithFrame:CGRectMake(messageCount.frame.origin.x+messageCount.frame.size.width+5, messageCount.frame.origin.y, 20, 20)];
-        numOfMessage.text = @"5";
-        numOfMessage.textColor = [UIColor colorWithHexString:@"dfa800"];
-        numOfMessage.backgroundColor = [UIColor clearColor];
-        numOfMessage.font = [UIFont systemFontOfSize:14];
-        [self addSubview:numOfMessage];
-    }
-    //    if(btnShowNotification == nil) {
+        //    if(btnShowNotification == nil) {
 //        btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(200, 80, 120, 30)];
 //        [btnShowNotification setTitle:@"通知" forState:UIControlStateNormal];
 //        [btnShowNotification addTarget:self action:@selector(btnShowNotificationDevicePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -219,10 +167,64 @@
     NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObjects:objArr forKeys:keyArr];
     
     if(pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, 170) andDictionary:scrollDictionary];
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, bottom-198/2-10-180) andDictionary:scrollDictionary];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
         [self addSubview:pageableScrollView.pageNavView];
+        if (btnMessage == nil) {
+            btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(30,pageableScrollView.frame.origin.y-30-25/2, 25/2, 30/2)];
+            [btnMessage setBackgroundImage:[UIImage imageNamed:@"icon_sound"] forState:UIControlStateNormal];
+            [self addSubview:btnMessage];
+            
+        }
+        if (messageLable == nil) {
+            messageLable = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
+            messageLable.backgroundColor = [UIColor clearColor];
+            messageLable.font = [UIFont systemFontOfSize:14];
+            messageLable.text = @"有人闯入房屋!";
+            messageLable.textColor = [UIColor lightTextColor];
+            [self addSubview:messageLable];
+            
+        }
+        if (timeLable == nil) {
+            timeLable = [[UILabel alloc]initWithFrame:CGRectMake(messageLable.frame.origin.x, messageLable.frame.origin.y+messageLable.frame.size.height, 100, 10)];
+            timeLable.backgroundColor =[UIColor clearColor];
+            timeLable.text = @"16:54pm";
+            timeLable.font = [UIFont systemFontOfSize:12];
+            timeLable.textColor = [UIColor lightTextColor];
+            [self addSubview: timeLable];
+            
+        }
+        if (deviceCount == nil) {
+            deviceCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"device_count.png"]];
+            deviceCount.frame = CGRectMake(messageLable.frame.origin.x+messageLable.frame.size.width+40, messageLable.frame.origin.y, 44/2, 46/2);
+            [self addSubview:deviceCount];
+            
+        }
+        if (numOfDevice == nil) {
+            numOfDevice = [[UILabel alloc] initWithFrame:CGRectMake(deviceCount.frame.origin.x+deviceCount.frame.size.width+5, messageLable.frame.origin.y, 20, 20)];
+            numOfDevice.text = @"5";
+            numOfDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
+            numOfDevice.font = [UIFont systemFontOfSize:14];
+            numOfDevice.backgroundColor = [UIColor clearColor];
+            [self addSubview:numOfDevice];
+            
+        }
+        if (messageCount == nil) {
+            messageCount = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_count.png"]];
+            messageCount.frame = CGRectMake(numOfDevice.frame.origin.x+30, numOfDevice.frame.origin.y, 44/2, 46/2);
+            [self addSubview:messageCount];
+            
+        }
+        if (numOfMessage == nil) {
+            numOfMessage = [[UILabel alloc] initWithFrame:CGRectMake(messageCount.frame.origin.x+messageCount.frame.size.width+5, messageCount.frame.origin.y, 20, 20)];
+            numOfMessage.text = @"5";
+            numOfMessage.textColor = [UIColor colorWithHexString:@"dfa800"];
+            numOfMessage.backgroundColor = [UIColor clearColor];
+            numOfMessage.font = [UIFont systemFontOfSize:14];
+            [self addSubview:numOfMessage];
+        }
+
     }
 }
 
