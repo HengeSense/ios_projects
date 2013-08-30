@@ -10,4 +10,17 @@
 
 @implementation DeviceCommandUpdateUnits
 
+- (id)initWithDictionary:(NSDictionary *)json {
+    return [super initWithDictionary:json];
+
+
+    
+}
+
+- (NSDictionary *)toDictionary {
+
+    return nil;
+}
+
+
 @end

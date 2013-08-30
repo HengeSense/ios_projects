@@ -192,17 +192,15 @@
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
         if(json != nil) {
-            NSString *result = [json notNSNullObjectForKey:@"id"];
-            if(result != nil) {
-                if([@"1" isEqualToString:result]) {
-                    NSString *secretKey = [json notNSNullObjectForKey:@"security"];
-                    NSString *tcpAddress = [json notNSNullObjectForKey:@"tcp"];
-                    if(![NSString isBlank:secretKey] && ![NSString isBlank:tcpAddress]) {
+            DeviceCommand *command = [[DeviceCommand alloc] initWithDictionary:json];
+            if(command != nil && ![NSString isBlank:command.result]) {
+                if([@"1" isEqualToString:command.result]) {
+                    if(![NSString isBlank:command.security] && ![NSString isBlank:command.tcpAddress]) {
                         [[AlertView currentAlertView] dismissAlertView];
-                        [SMShared current].settings.secretKey = secretKey;
+                        [SMShared current].settings.secretKey = command.security;
                         [SMShared current].settings.account = self.phoneNumberToValidation;
                         [SMShared current].settings.password = txtVerificationCode.text;
-                        [SMShared current].settings.tcpAddress = tcpAddress;
+                        [SMShared current].settings.tcpAddress = command.tcpAddress;
                         [[SMShared current].settings saveSettings];
                         if([SMShared current].settings.anyUnitsBinding) {
                             [SMShared current].app.rootViewController.needLoadMainViewController = YES;
@@ -212,15 +210,15 @@
                         }
                         return;
                     }
-                } else if([@"-1" isEqualToString:result]) {
+                } else if([@"-1" isEqualToString:command.result]) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"none_verification_code", @"") forType:AlertViewTypeFailed];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
-                } else if([@"-2" isEqualToString:result]) {
+                } else if([@"-2" isEqualToString:command.result]) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_expire", @"") forType:AlertViewTypeFailed];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
-                } else if([@"-3" isEqualToString:result]) {
+                } else if([@"-3" isEqualToString:command.result]) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_error", @"") forType:AlertViewTypeFailed];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;

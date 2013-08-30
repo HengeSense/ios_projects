@@ -10,6 +10,11 @@
 
 @interface Device : NSObject
 
-@property (strong, nonatomic) NSString *deviceName;
+@property (strong, nonatomic) NSString *eleState;
+@property (strong, nonatomic) NSString *label;
+@property (strong, nonatomic) NSString *mac;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *status;
+@property (strong, nonatomic) NSString *type;
 
 @end

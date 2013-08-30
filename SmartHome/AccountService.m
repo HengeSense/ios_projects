@@ -34,7 +34,7 @@
 }
 
 - (void)loginWithAccount:(NSString *)account password:(NSString *)pwd success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    NSString *url = [NSString stringWithFormat:@"/login?mobileCode=%@&pwd=%@&deviceCode=%@&appKey=%@", account, pwd, account, APP_KEY];
+    NSString *url = [NSString stringWithFormat:@"/login?mobileCode=%@&pwd=%@&deviceCode=%@&appKey=%@&phoneType=%@", account, pwd, account, APP_KEY, PHONE_TYPE];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
                      

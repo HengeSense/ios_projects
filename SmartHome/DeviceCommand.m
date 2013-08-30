@@ -8,9 +8,11 @@
 
 #import "DeviceCommand.h"
 #import "NSString+StringUtils.h"
+#import "JsonUtils.h"
 
 @implementation DeviceCommand
 
+@synthesize result;
 @synthesize deviceCode;
 @synthesize className;
 @synthesize commandTime;
@@ -18,9 +20,24 @@
 @synthesize masterDeviceCode;
 @synthesize appKey;
 @synthesize security;
+@synthesize tcpAddress;
 
-- (void)initWithDictionary:(NSDictionary *)json {
-    
+
+- (id)initWithDictionary:(NSDictionary *)json {
+    self = [super init];
+    if(self) {
+        self.deviceCode = [json notNSNullObjectForKey:@"deviceCode"];
+        self.className = [json notNSNullObjectForKey:@"_className"];
+        self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
+        self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
+        self.security = [json notNSNullObjectForKey:@"security"];
+        self.result = [json notNSNullObjectForKey:@"id"];
+        NSNumber *timestamp = [json notNSNullObjectForKey:@"commandTime"];
+        if(timestamp != nil) {
+            self.commandTime = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue];
+        }
+    }
+    return self;
 }
 
 - (NSDictionary *)toDictionary {
@@ -47,11 +64,6 @@
         [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     }
     return json;
-}
-
-- (NSString *)description {
-    
-    return nil;
 }
 
 @end

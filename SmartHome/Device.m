@@ -10,6 +10,11 @@
 
 @implementation Device
 
-
+@synthesize eleState;
+@synthesize label;
+@synthesize mac;
+@synthesize name;
+@synthesize status;
+@synthesize type;
 
 @end

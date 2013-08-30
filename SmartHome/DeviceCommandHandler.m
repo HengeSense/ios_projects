@@ -11,7 +11,6 @@
 @implementation DeviceCommandHandler
 - (void)handle:(DeviceCommand *)command {
     
-    
 }
 
 @end

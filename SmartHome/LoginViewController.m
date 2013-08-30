@@ -15,9 +15,8 @@
 #import "UIColor+ExtentionForHexString.h"
 #import "NSDictionary+NSNullUtility.h"
 #import "JsonUtils.h"
+#import "DeviceCommand.h"
 
-
-#import "BitUtils.h"
 
 #define LINE_HIGHT 5
 
@@ -138,8 +137,8 @@
     [self.view addSubview:lblSeperator];
     
     //
-    txtUserName.text = @"administrator";
-    txtPassword.text = @"hentre2012";
+    txtUserName.text = @"18692251910";
+    txtPassword.text = @"642568";
 }
 
 #pragma mark -
@@ -153,8 +152,8 @@
 
 - (void)login {
     //need to be deleted in production, only used for debug or test
-    if([@"administrator" isEqualToString:txtUserName.text]) {
-        if([@"hentre2012" isEqualToString:txtPassword.text]) {
+    if([@"" isEqualToString:txtUserName.text]) {
+        if([@"" isEqualToString:txtPassword.text]) {
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
             [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
             [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(fastLogin) userInfo:nil repeats:NO];
@@ -183,20 +182,17 @@
 }
 
 - (void)loginSuccess:(RestResponse *)resp {
-    NSLog([[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
         if(json != nil) {
-            NSString *result = [json notNSNullObjectForKey:@"id"];
-            if(![NSString isBlank:result]) {
-                if([@"1" isEqualToString:result]) {
-                    NSString *secretKey = [json notNSNullObjectForKey:@"security"];
-                    NSString *tcpAddress = [json notNSNullObjectForKey:@"tcp"];
-                    if(![NSString isBlank:secretKey] && ![NSString isBlank:tcpAddress]) {
+            DeviceCommand *command = [[DeviceCommand alloc] initWithDictionary:json];
+            if(command != nil && ![NSString isBlank:command.result]) {
+                if([@"1" isEqualToString:command.result]) {
+                    if(![NSString isBlank:command.security] && ![NSString isBlank:command.tcpAddress]) {
                         [SMShared current].settings.account = txtUserName.text;
                         [SMShared current].settings.password = txtPassword.text;
-                        [SMShared current].settings.secretKey = secretKey;
-                        [SMShared current].settings.tcpAddress = tcpAddress;
+                        [SMShared current].settings.secretKey = command.security;
+                        [SMShared current].settings.tcpAddress = command.tcpAddress;
                         [[SMShared current].settings saveSettings];
                         [[AlertView currentAlertView] dismissAlertView];
                         if([SMShared current].settings.anyUnitsBinding) {
@@ -207,11 +203,11 @@
                         }
                         return;
                     }
-                } else if([@"-1" isEqualToString:result] || [@"-2" isEqualToString:result]) {
+                } else if([@"-1" isEqualToString:command.result] || [@"-2" isEqualToString:command.result]) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"name_or_pwd_error", @"") forType:AlertViewTypeFailed];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
-                } else if([@"-3" isEqualToString:result] || [@"-4" isEqualToString:result]) {
+                } else if([@"-3" isEqualToString:command.result] || [@"-4" isEqualToString:command.result]) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"login_later", @"") forType:AlertViewTypeFailed];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
@@ -223,7 +219,6 @@
 }
 
 - (void)loginFailed:(RestResponse *)resp {
-    NSLog([[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
     if(abs(resp.statusCode) == 1001) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
     } else {
