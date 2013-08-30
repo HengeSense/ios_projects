@@ -1243,6 +1243,8 @@
 		6FD081B517CF231B0089A1ED /* command_handler */ = {
 			isa = PBXGroup;
 			children = (
+				6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */,
+				6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1252,8 +1254,6 @@
 			children = (
 				6FD081B717CF3E030089A1ED /* DeviceCommandDeliveryService.h */,
 				6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */,
-				6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */,
-				6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */,
 				6FDD0ECF17CDECBA000D95E8 /* TCPCommandService.h */,
 				6FDD0ED017CDECBA000D95E8 /* TCPCommandService.m */,
 			);

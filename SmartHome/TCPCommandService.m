@@ -45,9 +45,6 @@
     }
 }
 
-/*
- * override
- */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     CommunicationMessage *message = [[CommunicationMessage alloc] init];
@@ -62,15 +59,15 @@
 #pragma mark message handler
 
 - (void)clientSocketMessageDiscard:(NSData *)discardMessage {
-    
+    NSLog(@"message discard");
 }
 
 - (void)clientSocketMessageReadError {
-    
+    NSLog(@"socket error");
 }
 
 - (void)clientSocketWithReceivedMessage:(NSString *)messages {
-    
+    NSLog(messages);
 }
 
 @end

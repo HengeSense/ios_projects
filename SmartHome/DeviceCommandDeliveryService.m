@@ -10,4 +10,12 @@
 
 @implementation DeviceCommandDeliveryService
 
+- (void)executeDeviceCommand:(DeviceCommand *)command {
+    
+}
+
+- (void)handleDeviceCommand:(DeviceCommand *)command {
+    
+}
+
 @end

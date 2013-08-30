@@ -11,7 +11,10 @@
 
 @interface DeviceCommandDeliveryService : NSObject
 
+//
 - (void)executeDeviceCommand:(DeviceCommand *)command;
+
+//
 - (void)handleDeviceCommand:(DeviceCommand *)command;
 
 @end
