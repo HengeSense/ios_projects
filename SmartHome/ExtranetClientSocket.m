@@ -75,7 +75,6 @@
         }
     } else if(eventCode == NSStreamEventHasSpaceAvailable) {
         if(aStream == self.outputStream) {
-            NSLog(@"avail");
         }
     } else if(eventCode == NSStreamEventOpenCompleted) {
         if(aStream == self.inputStream) {

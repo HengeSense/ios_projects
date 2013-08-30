@@ -91,16 +91,14 @@
     return self;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self accessoryBehavior];
-    
-}
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    [self accessoryBehavior];
+    if(!scrollView.isDecelerating) {
+        [self accessoryBehavior];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;{
+    [self accessoryBehavior];
 }
 
 -(void) pageWithViews:(NSArray *) views{

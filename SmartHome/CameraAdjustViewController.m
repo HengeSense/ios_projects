@@ -106,8 +106,17 @@ NSDictionary *ddd=    [JsonUtils createDictionaryFromJson: [messages dataUsingEn
         
 Unit *u =        [ccc.units objectAtIndex:0];
 Zone *zone=        [u.zones objectForKey:@"zone1"];
-        NSLog(        @"%d", zone.accessories);
+        NSLog(        @"%d", zone.accessories.count);
+        
+Device *dd =        [zone.accessories objectForKey:@"child1"];
+        NSLog(@"%@", dd.name);
+        
+        
 //        NSLog(@"device count %d",         zone.accessories.count);
+
+        
+        
+        
         
     }
     
