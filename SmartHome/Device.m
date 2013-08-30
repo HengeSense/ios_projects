@@ -17,4 +17,14 @@
 @synthesize status;
 @synthesize type;
 
+- (id)initWithJson:(NSDictionary *)json {
+    self = [super init];
+    if(self) {
+        if(json != nil) {
+            
+        }
+    }
+    return self;
+}
+
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSDictionary+NSNullUtility.h"
+#import "Zone.h"
 
 @interface Unit : NSObject
 
