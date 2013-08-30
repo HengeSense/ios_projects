@@ -17,7 +17,6 @@
 @property (strong, nonatomic) NSString *masterDeviceCode;
 @property (strong, nonatomic) NSString *appKey;
 @property (strong, nonatomic) NSString *security;
-@property (strong, nonatomic) NSString *phoneNumber;
 @property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSDate *commandTime;
 

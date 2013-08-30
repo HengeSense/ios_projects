@@ -16,7 +16,6 @@
 @synthesize deviceCode;
 @synthesize className;
 @synthesize commandTime;
-@synthesize phoneNumber;
 @synthesize masterDeviceCode;
 @synthesize appKey;
 @synthesize security;
@@ -55,9 +54,6 @@
     }
     if(![NSString isBlank:self.appKey]) {
         [json setObject:self.appKey forKey:@"appKey"];
-    }
-    if(![NSString isBlank:self.phoneNumber]) {
-        [json setObject:self.phoneNumber forKey:@"phoneNumber"];
     }
     if(![NSString isBlank:self.security]) {
         [json setObject:self.security forKey:@"security"];

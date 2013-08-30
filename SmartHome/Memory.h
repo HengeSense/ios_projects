@@ -17,5 +17,5 @@
 - (void)unSubscribeHandler:(Class)handler for:(id)obj;
 - (NSArray *)getSubscriptionsFor:(Class)handler;
 - (NSArray *) replaceWithUnits:(NSArray *) units;
-- (void) unSubscribeHandler:(Class) handler for:(id) obj;
+
 @end
