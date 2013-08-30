@@ -7,6 +7,7 @@
 //
 
 #import "NavViewController.h"
+#import "DeviceCommand.h"
 
 @interface VerificationCodeValidationViewController : NavViewController<UITextFieldDelegate>
 

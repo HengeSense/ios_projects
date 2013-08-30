@@ -10,4 +10,8 @@
 
 @interface Zone : NSObject
 
+// Collections of devices
+@property (strong, nonatomic) NSDictionary *accessories;
+@property (strong, nonatomic) NSString *name;
+
 @end

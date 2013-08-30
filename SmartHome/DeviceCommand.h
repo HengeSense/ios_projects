@@ -11,15 +11,17 @@
 
 @interface DeviceCommand : NSObject
 
+@property (strong, nonatomic) NSString *result;
 @property (strong, nonatomic) NSString *deviceCode;
 @property (strong, nonatomic) NSString *className;
 @property (strong, nonatomic) NSString *masterDeviceCode;
 @property (strong, nonatomic) NSString *appKey;
 @property (strong, nonatomic) NSString *security;
 @property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSDate *commandTime;
 
-- (void)initWithDictionary:(NSDictionary *)json;
+- (id)initWithDictionary:(NSDictionary *)json;
 - (NSDictionary *)toDictionary;
 
 @end

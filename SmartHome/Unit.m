@@ -1,16 +1,19 @@
 //
-//  Zone.m
+//  Unit.m
 //  SmartHome
 //
 //  Created by Zhao yang on 8/30/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "Zone.h"
+#import "Unit.h"
 
-@implementation Zone
+@implementation Unit
 
-@synthesize accessories;
+@synthesize identifier;
+@synthesize localIP;
 @synthesize name;
+@synthesize updateTime;
+@synthesize zones;
 
 @end
