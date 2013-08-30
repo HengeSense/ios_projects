@@ -665,8 +665,6 @@
 				6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */,
 				6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */,
 				6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */,
-				6F17672917C1E232007AED0C /* CommunicationMessage.h */,
-				6F17672A17C1E232007AED0C /* CommunicationMessage.m */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -684,6 +682,8 @@
 				6F84A77917D04A5700D46BFA /* Zone.m */,
 				6F84A77E17D06D6D00D46BFA /* Unit.h */,
 				6F84A77F17D06D6D00D46BFA /* Unit.m */,
+				6F17672917C1E232007AED0C /* CommunicationMessage.h */,
+				6F17672A17C1E232007AED0C /* CommunicationMessage.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
