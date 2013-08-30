@@ -67,7 +67,7 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSString *)messages {
-    NSLog(messages);
+    NSLog(@"%@",messages);
 }
 
 @end

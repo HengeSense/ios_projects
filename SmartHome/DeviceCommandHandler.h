@@ -12,5 +12,4 @@
 @interface DeviceCommandHandler : NSObject
 
 - (void)handle:(DeviceCommand *)command;
-
 @end

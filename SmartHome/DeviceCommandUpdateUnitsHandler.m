@@ -13,8 +13,6 @@
 - (void)handle:(DeviceCommand *)command {
     if(![command isMemberOfClass:[DeviceCommandUpdateUnits class]]) return;
     
-    //
-    
 }
 
 @end

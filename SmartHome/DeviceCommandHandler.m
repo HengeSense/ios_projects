@@ -9,7 +9,6 @@
 #import "DeviceCommandHandler.h"
 
 @implementation DeviceCommandHandler
-
 - (void)handle:(DeviceCommand *)command {
     
     
