@@ -11,6 +11,7 @@
 #import "ExtranetClientSocket.h"
 #import "AccountService.h"
 #import "RootViewController.h"
+#import "Memory.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,5 +19,6 @@
 @property (strong, nonatomic) AccountService *accountService;
 @property (strong, nonatomic) GlobalSettings *settings;
 @property (strong, nonatomic) RootViewController *rootViewController;
+@property (strong, nonatomic) Memory *memory;
 
 @end

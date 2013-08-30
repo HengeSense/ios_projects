@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "AppDelegate.h"
-#import "GlobalSettings.h"
-#import "AccountService.h"
 
 @interface SMShared : NSObject
 
 @property (strong, nonatomic, readonly) AppDelegate *app;
+@property (strong, nonatomic, readonly) Memory *memory;
 @property (strong, nonatomic, readonly) GlobalSettings *settings;
 @property (strong, nonatomic, readonly) AccountService *accountService;
 

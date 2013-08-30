@@ -16,6 +16,7 @@
 
 @synthesize accountService;
 @synthesize settings;
+@synthesize memory;
 @synthesize rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -138,6 +139,13 @@
         accountService = [[AccountService alloc] init];
     }
     return accountService;
+}
+
+- (Memory *)memory {
+    if(memory == nil) {
+        
+    }
+    return memory;
 }
 
 - (RootViewController *)rootViewController {

@@ -8,7 +8,7 @@
 
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandUpdateUnits.h"
-
+#import "MainView.h"
 @interface DeviceCommandUpdateUnitsHandler : DeviceCommandHandler
 
 @end
