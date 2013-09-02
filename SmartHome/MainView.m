@@ -36,7 +36,10 @@
     PageableNavView *pageableNavView;
     UIView *notificationView;
     UIButton *btnSpeech;
+    DeviceCommandUpdateUnitsHandler *updateHandler;
 }
+@synthesize unitsArr;
+@synthesize defaultUnit;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -52,6 +55,9 @@
     recognizerState = RecognizerStateReady;
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
+    updateHandler.delegate = self;
+    self.unitsArr = [SMShared current].memory.units;
+    self.defaultUnit = [self setDefaultUnitDictionary:self.unitsArr];
 }
 
 - (void)initUI {
@@ -202,7 +208,13 @@
         [self addSubview:notificationView];
     }
 }
-
+-(void)updateUnits:(NSArray *)units{
+    self.unitsArr = units;
+}
+-(NSDictionary *) setDefaultUnitDictionary:(NSArray *) units{
+    
+    return [units objectAtIndex:0];
+}
 #pragma mark -
 #pragma mark notification && affect button
 
