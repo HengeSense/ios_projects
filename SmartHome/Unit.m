@@ -24,7 +24,10 @@
             self.identifier = [json notNSNullObjectForKey:@"id"];
             self.localIP = [json notNSNullObjectForKey:@"localip"];
             self.name = [json notNSNullObjectForKey:@"name"];
-//            self.updateTime =
+            NSNumber *_updateTime_ = [json notNSNullObjectForKey:@"updateTime"];
+            if(_updateTime_ != nil) {
+                self.updateTime = [NSDate dateWithTimeIntervalSince1970:_updateTime_.longLongValue];
+            }
             NSDictionary *_zones_ = [json notNSNullObjectForKey:@"zones"];
             NSEnumerator *enumerator = _zones_.keyEnumerator;
             for(NSString *key in enumerator) {
