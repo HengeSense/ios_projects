@@ -16,7 +16,6 @@
 @synthesize updateTime;
 @synthesize zones;
 
-
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {

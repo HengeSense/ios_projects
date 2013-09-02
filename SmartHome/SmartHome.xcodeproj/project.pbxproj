@@ -129,6 +129,7 @@
 		6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* ConversationView.m */; };
 		6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */; };
 		6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */; };
+		6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F95BF5A17D42B82003A0745 /* RestfulCommandService.m */; };
 		6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7C17BE1EEA007F90A2 /* AlertView.m */; };
 		6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0E1F417CF45DE00154CDE /* SMShared.m */; };
 		6FA1DD7C17C1BBD40016AC4E /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1DD7B17C1BBD40016AC4E /* NetworkUtils.m */; };
@@ -424,6 +425,8 @@
 		6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationMessage.m; sourceTree = "<group>"; };
 		6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTextMessage.h; sourceTree = "<group>"; };
 		6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTextMessage.m; sourceTree = "<group>"; };
+		6F95BF5917D42B82003A0745 /* RestfulCommandService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestfulCommandService.h; sourceTree = "<group>"; };
+		6F95BF5A17D42B82003A0745 /* RestfulCommandService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestfulCommandService.m; sourceTree = "<group>"; };
 		6F984F7B17BE1EEA007F90A2 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		6F984F7C17BE1EEA007F90A2 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		6FA0E1F317CF45DE00154CDE /* SMShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMShared.h; sourceTree = "<group>"; };
@@ -1312,6 +1315,8 @@
 				6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */,
 				6FB66D6017C745820002D6C5 /* AccountService.h */,
 				6FB66D6117C745820002D6C5 /* AccountService.m */,
+				6F95BF5917D42B82003A0745 /* RestfulCommandService.h */,
+				6F95BF5A17D42B82003A0745 /* RestfulCommandService.m */,
 			);
 			name = rest;
 			sourceTree = "<group>";
@@ -1726,6 +1731,7 @@
 				6F84A77A17D04A5700D46BFA /* Zone.m in Sources */,
 				6F84A78017D06D6D00D46BFA /* Unit.m in Sources */,
 				F20C788317D0859C003D50C5 /* Memory.m in Sources */,
+				6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

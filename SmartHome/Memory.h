@@ -10,7 +10,7 @@
 #import "Unit.h"
 @interface Memory : NSObject
 
-@property (strong, nonatomic) NSArray *units;
+@property (strong, nonatomic) NSMutableArray *units;
 @property (strong, nonatomic, readonly) NSMutableDictionary *subscriptions;
 
 - (void)subscribeHandler:(Class)handler for:(id)obj;

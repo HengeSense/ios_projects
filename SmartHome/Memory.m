@@ -7,10 +7,23 @@
 //
 
 #import "Memory.h" 
+
 @implementation Memory
 
 @synthesize units = _units;
 @synthesize subscriptions;
+
+- (id)init {
+    self = [super init];
+    if(self) {
+        [self initDefaults];
+    }
+    return self;
+}
+
+- (void)initDefaults {
+    subscriptions = [NSMutableDictionary dictionary];
+}
 
 - (void)subscribeHandler:(Class)handler for:(id)obj {
     if(obj == nil || handler == nil) return;
@@ -45,20 +58,18 @@
         [subscriptions_ removeObject:obj];
     }
 }
-- (NSArray *) replaceWithUnits:(NSArray *) updateUnits{
-    NSArray *memoryUnits = self.units;
-    NSArray *receiveUnits = updateUnits;
-    __block NSMutableArray *newUnits = [NSMutableArray arrayWithArray:memoryUnits];
-    [receiveUnits enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
+
+- (NSArray *)replaceWithUnits:(NSArray *)updateUnits {
+    [updateUnits enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
         Unit *receiveUnit = obj;
-        [memoryUnits enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
-            if(obj.identifier == receiveUnit.identifier&&obj.updateTime.timeIntervalSince1970<receiveUnit.updateTime.timeIntervalSince1970){
-                [newUnits setObject:receiveUnit atIndexedSubscript:idx];
+        [self.units enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
+            if(obj.identifier == receiveUnit.identifier && obj.updateTime.timeIntervalSince1970 < receiveUnit.updateTime.timeIntervalSince1970){
+                [self.units setObject:receiveUnit atIndexedSubscript:idx];
             }
         }];
         
     }];
-    return newUnits;
-
+    return self.units;
 }
+
 @end
