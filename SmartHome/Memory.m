@@ -10,8 +10,20 @@
 @implementation Memory
 
 @synthesize units = _units;
-@synthesize subscriptions;
+@synthesize subscriptions=_subscriptions;
 
+-(void)setUnits:(NSArray *)units{
+    if (_units == nil) {
+        _units = [NSArray new];
+    }
+    _units = units;
+}
+-(void) setSubscriptions:(NSMutableDictionary *)subscriptions{
+    if (_subscriptions == nil) {
+        _subscriptions = [NSMutableDictionary new];
+    }
+    _subscriptions = subscriptions;
+}
 - (void)subscribeHandler:(Class)handler for:(id)obj {
     if(obj == nil || handler == nil) return;
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
@@ -47,17 +59,26 @@
 }
 - (NSArray *) replaceWithUnits:(NSArray *) updateUnits{
     NSArray *memoryUnits = self.units;
-    NSArray *receiveUnits = updateUnits;
-    __block NSMutableArray *newUnits = [NSMutableArray arrayWithArray:memoryUnits];
-    [receiveUnits enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
-        Unit *receiveUnit = obj;
-        [memoryUnits enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
-            if(obj.identifier == receiveUnit.identifier&&obj.updateTime.timeIntervalSince1970<receiveUnit.updateTime.timeIntervalSince1970){
-                [newUnits setObject:receiveUnit atIndexedSubscript:idx];
+    NSMutableArray *newUnits = [NSMutableArray arrayWithArray:memoryUnits];
+    for (int i = 0;i<memoryUnits.count;++i) {
+        Unit *memoryUnit = [memoryUnits objectAtIndex:i];
+        for (Unit *updateUnit in updateUnits) {
+            if(memoryUnit.identifier == updateUnit.identifier&&memoryUnit.updateTime.timeIntervalSince1970<updateUnit.updateTime.timeIntervalSince1970){
+                [newUnits setObject:updateUnit atIndexedSubscript:i];
+            }else if(![newUnits containsObject:updateUnit]){
+                [newUnits addObject:updateUnit];
             }
-        }];
-        
-    }];
+        }
+    }
+//    [receiveUnits enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
+//        Unit *receiveUnit = obj;
+//        [memoryUnits enumerateObjectsUsingBlock:^(Unit *obj, NSUInteger idx, BOOL *stop) {
+//            if(obj.identifier == receiveUnit.identifier&&obj.updateTime.timeIntervalSince1970<receiveUnit.updateTime.timeIntervalSince1970){
+//                [newUnits setObject:receiveUnit atIndexedSubscript:idx];
+//            }
+//        }];
+//        
+//    }];
     return newUnits;
 
 }

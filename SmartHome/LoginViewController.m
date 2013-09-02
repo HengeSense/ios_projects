@@ -137,8 +137,8 @@
     [self.view addSubview:lblSeperator];
     
     //
-    txtUserName.text = @"18692251910";
-    txtPassword.text = @"642568";
+    txtUserName.text = @"";
+    txtPassword.text = @"";
 }
 
 #pragma mark -
@@ -156,7 +156,7 @@
         if([@"" isEqualToString:txtPassword.text]) {
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
             [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-            [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(fastLogin) userInfo:nil repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(fastLogin) userInfo:nil repeats:NO];
             return;
         }
     }

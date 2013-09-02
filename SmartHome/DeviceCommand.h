@@ -10,6 +10,7 @@
 #import "NSDictionary+NSNullUtility.h"
 #import "SMShared.h"
 #import "ServiceBase.h"
+#import "JsonUtils.h"
 
 @interface DeviceCommand : NSObject
 

@@ -7,7 +7,9 @@
 //
 
 #import "Unit.h"
-
+@interface Unit()
+@property (unsafe_unretained) NSUInteger myHash;
+@end
 @implementation Unit
 
 @synthesize identifier;
@@ -16,10 +18,10 @@
 @synthesize updateTime;
 @synthesize zones;
 
-
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
+        _myHash = (NSUInteger) self;
         if(json != nil) {
             self.identifier = [json notNSNullObjectForKey:@"id"];
             self.localIP = [json notNSNullObjectForKey:@"localip"];
@@ -60,5 +62,10 @@
     }
     return zoneList;
 }
-
+-(BOOL) isEqual:(Unit *)object{
+    return [self.identifier isEqual:object.identifier];
+}
+-(NSUInteger) hash{
+    return self.myHash;
+}
 @end

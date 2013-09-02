@@ -143,7 +143,7 @@
 
 - (Memory *)memory {
     if(memory == nil) {
-        
+        memory = [Memory new];
     }
     return memory;
 }

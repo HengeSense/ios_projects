@@ -8,7 +8,7 @@
 
 #import "DeviceCommand.h"
 #import "NSString+StringUtils.h"
-#import "JsonUtils.h"
+
 
 @implementation DeviceCommand
 
@@ -63,6 +63,8 @@
 
 - (NSString *)appKey {
     return APP_KEY;
+    
+
 }
 
 - (NSString *)security {
