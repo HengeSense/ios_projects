@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSString *commandName;
 @property (strong, nonatomic) NSString *masterDeviceCode;
 @property (strong, nonatomic, readonly) NSString *appKey;
-@property (strong, nonatomic, readonly) NSString *security;
+@property (strong, nonatomic) NSString *security;
 @property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSDate *commandTime;
 

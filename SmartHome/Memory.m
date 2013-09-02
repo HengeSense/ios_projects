@@ -7,10 +7,12 @@
 //
 
 #import "Memory.h" 
+
 @implementation Memory
 
 @synthesize units = _units;
 @synthesize subscriptions=_subscriptions;
+
 
 -(void)setUnits:(NSArray *)units{
     if (_units == nil) {
@@ -24,6 +26,20 @@
     }
     _subscriptions = subscriptions;
 }
+
+- (id)init {
+    self = [super init];
+    if(self) {
+        [self initDefaults];
+    }
+    return self;
+}
+
+- (void)initDefaults {
+    _subscriptions = [NSMutableDictionary dictionary];
+}
+
+
 - (void)subscribeHandler:(Class)handler for:(id)obj {
     if(obj == nil || handler == nil) return;
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
@@ -80,6 +96,6 @@
 //        
 //    }];
     return newUnits;
-
 }
+
 @end

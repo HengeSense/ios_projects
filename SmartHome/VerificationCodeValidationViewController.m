@@ -199,8 +199,8 @@
                         [[AlertView currentAlertView] dismissAlertView];
                         [SMShared current].settings.secretKey = command.security;
                         [SMShared current].settings.account = self.phoneNumberToValidation;
-                        [SMShared current].settings.password = txtVerificationCode.text;
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
+                        [SMShared current].settings.deviceCode = command.deviceCode;
                         [[SMShared current].settings saveSettings];
                         if([SMShared current].settings.anyUnitsBinding) {
                             [SMShared current].app.rootViewController.needLoadMainViewController = YES;

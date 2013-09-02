@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TCPCommandService.h"
+#import "RestfulCommandService.h"
 #import "DeviceCommand.h"
 
 @interface DeviceCommandDeliveryService : NSObject
+
+@property (strong, nonatomic, readonly) TCPCommandService *tcpService;
+@property (strong, nonatomic, readonly) RestfulCommandService *restfulService;
 
 //
 - (void)executeDeviceCommand:(DeviceCommand *)command;

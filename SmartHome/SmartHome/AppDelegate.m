@@ -85,11 +85,11 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"token");
+    NSLog(@"device token is %@", [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding]);
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"fail token");
+    NSLog(@"get device token failed...");
 }
 
 #pragma mark -
@@ -143,7 +143,10 @@
 
 - (Memory *)memory {
     if(memory == nil) {
-        memory = [Memory new];
+
+
+        memory = [[Memory alloc] init];
+
     }
     return memory;
 }

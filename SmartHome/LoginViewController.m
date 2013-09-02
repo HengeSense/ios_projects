@@ -190,9 +190,9 @@
                 if([@"1" isEqualToString:command.result]) {
                     if(![NSString isBlank:command.security] && ![NSString isBlank:command.tcpAddress]) {
                         [SMShared current].settings.account = txtUserName.text;
-                        [SMShared current].settings.password = txtPassword.text;
                         [SMShared current].settings.secretKey = command.security;
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
+                        [SMShared current].settings.deviceCode = command.deviceCode;
                         [[SMShared current].settings saveSettings];
                         [[AlertView currentAlertView] dismissAlertView];
                         if([SMShared current].settings.anyUnitsBinding) {

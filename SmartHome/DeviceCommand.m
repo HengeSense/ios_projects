@@ -30,6 +30,7 @@
             self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
             self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
             self.result = [json notNSNullObjectForKey:@"id"];
+            self.security = [json notNSNullObjectForKey:@"security"];
             NSNumber *timestamp = [json notNSNullObjectForKey:@"commandTime"];
             if(timestamp != nil) {
                 self.commandTime = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue];
@@ -67,8 +68,18 @@
 
 }
 
+- (NSString *)deviceCode {
+    if([NSString isBlank:deviceCode]) {
+        return [SMShared current].settings.deviceCode;
+    }
+    return deviceCode;
+}
+
 - (NSString *)security {
-    return [SMShared current].settings.secretKey;
+    if([NSString isBlank:security]) {
+        return [SMShared current].settings.secretKey;
+    }
+    return security;
 }
 
 @end

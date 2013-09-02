@@ -23,9 +23,17 @@
 
 - (void)initDefaults {
     if(socket == nil) {
-        socket = [[ExtranetClientSocket alloc] init];
+        socket = [[ExtranetClientSocket alloc] initWithIPAddress:@"" andPort:1111];
         socket.messageHandlerDelegate = self;
     }
+}
+
+- (void)connect {
+    [socket connect];
+}
+
+- (void)ff {
+    
 }
 
 - (void)executeDeviceCommand:(DeviceCommand *)command {
