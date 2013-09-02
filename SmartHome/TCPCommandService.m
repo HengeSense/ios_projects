@@ -9,11 +9,6 @@
 #import "TCPCommandService.h"
 
 
-/*
- 
- 
- */
-
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
 }

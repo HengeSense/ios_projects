@@ -22,4 +22,7 @@
 
 - (id)initWithJson:(NSDictionary *)json;
 
+- (NSArray *)zonesAsList;
+- (Zone *)zoneForId:(NSString *)_id_;
+
 @end

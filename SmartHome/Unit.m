@@ -48,4 +48,17 @@
     return zones;
 }
 
+- (Zone *)zoneForId:(NSString *)_id_ {
+    return [self.zones objectForKey:_id_];
+}
+
+- (NSArray *)zonesAsList {
+    NSEnumerator *enumerator = self.zones.keyEnumerator;
+    NSMutableArray *zoneList = [NSMutableArray array];
+    for(NSString *key in enumerator) {
+        [zoneList addObject:[self.zones objectForKey:key]];
+    }
+    return zoneList;
+}
+
 @end

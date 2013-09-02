@@ -18,4 +18,7 @@
 
 - (id)initWithJson:(NSDictionary *)json;
 
+- (NSArray *)devicesAsList;
+- (Device *)deviceForId:(NSString *)_id_;
+
 @end

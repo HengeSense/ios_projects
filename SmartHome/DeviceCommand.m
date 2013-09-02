@@ -14,23 +14,21 @@
 
 @synthesize result;
 @synthesize deviceCode;
-@synthesize className;
+@synthesize commandName;
 @synthesize commandTime;
 @synthesize masterDeviceCode;
 @synthesize appKey;
 @synthesize security;
 @synthesize tcpAddress;
 
-
 - (id)initWithDictionary:(NSDictionary *)json {
     self = [super init];
     if(self) {
         if(json != nil) {
             self.deviceCode = [json notNSNullObjectForKey:@"deviceCode"];
-            self.className = [json notNSNullObjectForKey:@"_className"];
+            self.commandName = [json notNSNullObjectForKey:@"_className"];
             self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
             self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
-            self.security = [json notNSNullObjectForKey:@"security"];
             self.result = [json notNSNullObjectForKey:@"id"];
             NSNumber *timestamp = [json notNSNullObjectForKey:@"commandTime"];
             if(timestamp != nil) {
@@ -41,27 +39,34 @@
     return self;
 }
 
-- (NSDictionary *)toDictionary {
+- (NSMutableDictionary *)toDictionary {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
+    
+    // commons
+    [json setObject:APP_KEY forKey:@"appKey"];
+    [json setObject:[SMShared current].settings.secretKey forKey:@"security"];
+    
     if(![NSString isBlank:self.deviceCode]) {
         [json setObject:self.deviceCode forKey:@"deviceCode"];
     }
-    if(![NSString isBlank:self.className]) {
-        [json setObject:self.className forKey:@"_className"];
+    if(![NSString isBlank:self.commandName]) {
+        [json setObject:self.commandName forKey:@"_className"];
     }
     if(![NSString isBlank:self.masterDeviceCode]) {
         [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
-    }
-    if(![NSString isBlank:self.appKey]) {
-        [json setObject:self.appKey forKey:@"appKey"];
-    }
-    if(![NSString isBlank:self.security]) {
-        [json setObject:self.security forKey:@"security"];
     }
     if(self.commandTime != nil) {
         [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     }
     return json;
+}
+
+- (NSString *)appKey {
+    return APP_KEY;
+}
+
+- (NSString *)security {
+    return [SMShared current].settings.secretKey;
 }
 
 @end

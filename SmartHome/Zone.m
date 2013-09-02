@@ -40,4 +40,17 @@
     return accessories;
 }
 
+- (Device *)deviceForId:(NSString *)_id_ {
+    return [self.accessories objectForKey:_id_];
+}
+
+- (NSArray *)devicesAsList {
+    NSEnumerator *enumerator = self.accessories.keyEnumerator;
+    NSMutableArray *deviceList = [NSMutableArray array];
+    for(NSString *key in enumerator) {
+        [deviceList addObject:[self.accessories objectForKey:key]];
+    }
+    return deviceList;
+}
+
 @end

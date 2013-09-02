@@ -8,19 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "NSDictionary+NSNullUtility.h"
+#import "SMShared.h"
+#import "ServiceBase.h"
 
 @interface DeviceCommand : NSObject
 
 @property (strong, nonatomic) NSString *result;
 @property (strong, nonatomic) NSString *deviceCode;
-@property (strong, nonatomic) NSString *className;
+@property (strong, nonatomic) NSString *commandName;
 @property (strong, nonatomic) NSString *masterDeviceCode;
-@property (strong, nonatomic) NSString *appKey;
-@property (strong, nonatomic) NSString *security;
+@property (strong, nonatomic, readonly) NSString *appKey;
+@property (strong, nonatomic, readonly) NSString *security;
 @property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSDate *commandTime;
 
 - (id)initWithDictionary:(NSDictionary *)json;
-- (NSDictionary *)toDictionary;
+- (NSMutableDictionary *)toDictionary;
 
 @end
