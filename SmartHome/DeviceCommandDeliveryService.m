@@ -21,12 +21,9 @@
  */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
    
-    
-    [self.tcpService executeDeviceCommand:command];
-    
-    
-}
 
+    [self.tcpService executeDeviceCommand:command];
+}
 
 /*
  *
@@ -37,6 +34,7 @@
 - (void)handleDeviceCommand:(DeviceCommand *)command {
     
 }
+
 
 #pragma mark -
 #pragma mark getter and setters

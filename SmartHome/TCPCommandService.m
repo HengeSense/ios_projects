@@ -32,6 +32,10 @@
     [socket connect];
 }
 
+- (void)ff {
+    
+}
+
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     CommunicationMessage *message = [[CommunicationMessage alloc] init];
