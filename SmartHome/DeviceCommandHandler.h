@@ -11,7 +11,7 @@
 #import "SMShared.h"
 
 
-@interface DeviceCommandHandler : NSObject
+@interface DeviceCommandHandler : NSObject<NSCopying>
 
 - (void)handle:(DeviceCommand *)command;
 

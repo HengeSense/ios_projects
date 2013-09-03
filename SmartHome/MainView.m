@@ -16,7 +16,7 @@
 #import "TVSwitchButton.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "ToggleSwitchButton.h"
-
+#import "JsonUtils.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -55,9 +55,14 @@
     recognizerState = RecognizerStateReady;
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
+    if (updateHandler == nil) {
+        updateHandler = [[DeviceCommandUpdateUnitsHandler alloc] init];
+    }
+    [updateHandler registerUsersForUnitsUpdate:self];
     updateHandler.delegate = self;
     self.unitsArr = [SMShared current].memory.units;
     self.defaultUnit = [self setDefaultUnitDictionary:self.unitsArr];
+    
 }
 
 - (void)initUI {
@@ -162,6 +167,7 @@
         UIButton *btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25/2, 30/2)];
         btnMessage.center = CGPointMake(btnMessage.center.x, notificationView.bounds.size.height / 2);
         [btnMessage setBackgroundImage:[UIImage imageNamed:@"icon_sound"] forState:UIControlStateNormal];
+        [btnMessage addTarget:self action:@selector(testCommand) forControlEvents:UIControlEventTouchUpInside];
         [notificationView addSubview:btnMessage];
     
         UILabel *lblMessage = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
@@ -220,11 +226,44 @@
 
 -(void)updateUnits:(NSArray *)units{
     self.unitsArr = units;
+    [self setDefaultUnitDictionary:units];
+    
+    CGPoint point = pageableScrollView.frame.origin;
+    [pageableScrollView removeFromSuperview];
+    [pageableNavView removeFromSuperview];
+    
+    pageableScrollView = nil;
+    pageableNavView = nil;
+    
+    pageableScrollView = [[PageableScrollView alloc] initWithPoint:point andDictionary:defaultUnit];
+    pageableScrollView.backgroundColor = [UIColor clearColor];
+    [self addSubview:pageableScrollView];
+    [self addSubview:pageableScrollView.pageNavView];
+
+    
+    
 }
 
 -(NSDictionary *) setDefaultUnitDictionary:(NSArray *) units{
-    
-    return [units objectAtIndex:0];
+    NSDictionary *zones = [[units objectAtIndex:0] zones];
+    NSEnumerator *enumerator = zones.keyEnumerator;
+    NSMutableArray *objects = [NSMutableArray new];
+    NSMutableArray *keys = [NSMutableArray new];
+    for (NSString *key in enumerator) {
+        Zone *zone = [zones objectForKey:key];
+        [keys addObject:zone.name];
+        NSMutableArray *switchBtns = [NSMutableArray new];
+        NSArray *accessories = [zone devicesAsList];
+        for (Device *device in accessories) {
+            SwitchButton *sb = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+            sb.status = device.status;
+            sb.title = device.name;
+            [switchBtns addObject:sb];
+        }
+        [objects addObject:switchBtns];
+    }
+    NSDictionary *deviceDictionary = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+    return deviceDictionary;
 }
 
 #pragma mark -
@@ -235,6 +274,18 @@
     [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 
+- (void) testCommand{
+    NSString *json = @"{\"zkList\":[{\"identifier\":\"123\",\"name\":\"永安小区\",\"localIP\":\"172.16.8.16\",\"updateTime\":\"2013.9.1\",\"zones\":{\"zone1\":{\"name\":\"客厅\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"on\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"客厅摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"}}}}}],\"appKey\":\"\",\"deviceCode\":\"\",\"result\":\"\",\"commandName\":\"\",\"masterDeviceCode\":\"\",\"commandTime\":\"\",\"tcpAddress\":\"\",\"security\":\"\"}";
+    
+
+    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+//    ,\"zone2\":{\"name\":\"卧室\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"off\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"卧室摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"}}
+//    ,{\"identifier\":\"133\",\"name\":\"永不安小区\",\"localIP\":\"172.16.8.16\",\"updateTime\":\"2013.9.1\",\"zones\":{\"zone1\":{\"name\":\"客厅\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"on\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"客厅摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"}}},\"zone2\":{\"name\":\"卧室\",\"accessories\":{\"device1\":{\"eleState\":\"off\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"off\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"卧室摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"}}}}}
+    
+//    NSLog(@"%@",[JsonUtils createDictionaryFromJson:data]);
+    DeviceCommand *command = [[DeviceCommandUpdateUnits alloc] initWithDictionary:[JsonUtils createDictionaryFromJson:data]];
+    [updateHandler handle:command];
+}
 #pragma mark -
 #pragma mark speech view
 

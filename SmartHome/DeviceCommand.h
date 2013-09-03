@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSDictionary+NSNullUtility.h"
 #import "ServiceBase.h"
+#import "JsonUtils.h"
 
 @interface DeviceCommand : NSObject
 

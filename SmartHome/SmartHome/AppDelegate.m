@@ -144,7 +144,10 @@
 
 - (Memory *)memory {
     if(memory == nil) {
+
+
         memory = [[Memory alloc] init];
+
     }
     return memory;
 }

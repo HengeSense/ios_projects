@@ -18,6 +18,7 @@
     // do service here
     Memory *memory = [SMShared current].memory;
     NSArray *newUnits = [memory replaceWithUnits:updateUnitsCommand.units];
+    NSLog(@"newUnits=%@,updateUnits=%@",newUnits,updateUnitsCommand.units);
     NSArray *users = [memory getSubscriptionsFor:[DeviceCommandUpdateUnitsHandler class]];
     [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if ([self.delegate isEqual:obj]&&[obj respondsToSelector:DELEFGATE_METHOD]) {
