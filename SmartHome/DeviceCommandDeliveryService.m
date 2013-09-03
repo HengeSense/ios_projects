@@ -12,22 +12,29 @@
 
 @synthesize tcpService;
 @synthesize restfulService;
+@synthesize isService;
+
+- (id)init {
+    self = [super init];
+    if(self) {
+        isService = NO;
+    }
+    return self;
+}
 
 /*
- *
  *
  *
  *
  */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
    
-
+    // will determine using tcp or rest service to execute device command
+    
     [self.tcpService executeDeviceCommand:command];
 }
 
 /*
- *
- *
  *
  *
  */
@@ -35,6 +42,25 @@
     
 }
 
+- (void)startService {
+    if(!self.isService) {
+        isService = YES;
+        if(![self.tcpService isConnect]) {
+            [self performSelectorInBackground:@selector(startTcp) withObject:nil];
+        }
+    }
+}
+
+- (void)stopService {
+    if(self.isService) {
+        [self.tcpService disconnect];
+        isService = NO;
+    }
+}
+
+- (void)startTcp {
+    [self.tcpService connect];
+}
 
 #pragma mark -
 #pragma mark getter and setters

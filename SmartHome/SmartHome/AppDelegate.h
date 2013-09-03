@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GlobalSettings.h"
-#import "ExtranetClientSocket.h"
 #import "AccountService.h"
+#import "DeviceCommandDeliveryService.h"
 #import "RootViewController.h"
 #import "Memory.h"
 
@@ -20,5 +20,6 @@
 @property (strong, nonatomic) GlobalSettings *settings;
 @property (strong, nonatomic) RootViewController *rootViewController;
 @property (strong, nonatomic) Memory *memory;
+@property (strong, nonatomic) DeviceCommandDeliveryService *deviceCommandDeliveryService;
 
 @end

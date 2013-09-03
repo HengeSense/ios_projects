@@ -137,7 +137,6 @@
     SwitchButton *sb16 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb16.status = @"off";
     sb16.title = @"卧室空调";
-
     
     NSArray *devices1 = [[NSArray alloc] initWithObjects:sb1,nil];
     NSArray *devices2 = [[NSArray alloc] initWithObjects:sb2,sb3,nil];
@@ -151,7 +150,7 @@
      /* mock data end -------------- */
     
     if(pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, bottom-198/2-10-180) andDictionary:scrollDictionary];
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (bottom - 198 / 2 - 190)) andDictionary:scrollDictionary];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
         [self addSubview:pageableScrollView.pageNavView];
@@ -207,14 +206,27 @@
         
         [self addSubview:notificationView];
     }
+    
+   /*
+    [[SMShared current].deliveryService startService];
+    DeviceCommand *command = [[DeviceCommand alloc] init];
+    command.commandName = @"AccountMQListCommand";
+    for(int i=0; i<5; i++) {
+        [[SMShared current].deliveryService executeDeviceCommand:command];
+    }
+    [[SMShared current].deliveryService stopService];
+   */ 
 }
+
 -(void)updateUnits:(NSArray *)units{
     self.unitsArr = units;
 }
+
 -(NSDictionary *) setDefaultUnitDictionary:(NSArray *) units{
     
     return [units objectAtIndex:0];
 }
+
 #pragma mark -
 #pragma mark notification && affect button
 

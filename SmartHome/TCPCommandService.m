@@ -7,10 +7,13 @@
 //
 
 #import "TCPCommandService.h"
-
+#import "NSString+StringUtils.h"
+#import "SMShared.h"
 
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
+    SMCommandQueue *queue;
+    BOOL isFlushing;
 }
 
 - (id)init {
@@ -23,8 +26,16 @@
 
 - (void)initDefaults {
     if(socket == nil) {
-        socket = [[ExtranetClientSocket alloc] initWithIPAddress:@"" andPort:1111];
+        NSString *tcpAddress = [SMShared current].settings.tcpAddress;
+        NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
+        NSString *addr = [addressSet objectAtIndex:0];
+        NSString *port = [addressSet objectAtIndex:1];
+        socket = [[ExtranetClientSocket alloc] initWithIPAddress:addr andPort:port.integerValue];
         socket.messageHandlerDelegate = self;
+    }
+    
+    if(queue == nil) {
+        queue = [[SMCommandQueue alloc] init];
     }
 }
 
@@ -32,25 +43,54 @@
     [socket connect];
 }
 
-- (void)ff {
-    
+- (void)disconnect {
+    [socket close];
+}
+
+- (BOOL)isConnect {
+    if(socket == nil) return NO;
+    return socket.isConnect;
 }
 
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
-    CommunicationMessage *message = [[CommunicationMessage alloc] init];
-    message.deviceCommand = command;
-    NSData *data = [message generateData];
-    if(data != nil) {
-        [socket writeData:data];
+    [queue pushCommand:command];
+    if(!isFlushing) {
+        [self flushQueue];
+    }
+}
+
+- (void)flushQueue {
+    if(self.isConnect && [socket canWrite] && queue.count > 0) {
+        isFlushing = YES;
+        NSMutableData *dataToSender = [NSMutableData data];
+        DeviceCommand *command = [queue popup];
+        while (command != nil) {
+            CommunicationMessage *message = [[CommunicationMessage alloc] init];
+            message.deviceCommand = command;
+            NSData *data = [message generateData];
+            if(data != nil) {
+                [dataToSender appendData:data];
+            }
+            command = [queue popup];
+        }
+        if(dataToSender.length > 0) {
+            [socket writeData:dataToSender];
+        }
+        isFlushing = NO;
     }
 }
 
 #pragma mark -
 #pragma mark message handler
 
+- (void)clientSocketSenderReady {
+    [self flushQueue];
+}
+
 - (void)clientSocketMessageDiscard:(NSData *)discardMessage {
-    NSLog(@"message discard");
+    NSString *str =    [[NSString alloc] initWithData:discardMessage encoding:NSUTF8StringEncoding];
+    NSLog(@"the message was discard ---->%@", str);
 }
 
 - (void)clientSocketMessageReadError {

@@ -15,11 +15,15 @@
 
 @property (strong, nonatomic, readonly) TCPCommandService *tcpService;
 @property (strong, nonatomic, readonly) RestfulCommandService *restfulService;
+@property (assign, nonatomic, readonly) BOOL isService;
 
 //
 - (void)executeDeviceCommand:(DeviceCommand *)command;
 
 //
 - (void)handleDeviceCommand:(DeviceCommand *)command;
+
+- (void)startService;
+- (void)stopService;
 
 @end

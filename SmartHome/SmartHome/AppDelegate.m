@@ -16,6 +16,7 @@
 
 @synthesize accountService;
 @synthesize settings;
+@synthesize deviceCommandDeliveryService;
 @synthesize memory;
 @synthesize rootViewController;
 
@@ -146,6 +147,13 @@
         memory = [[Memory alloc] init];
     }
     return memory;
+}
+
+- (DeviceCommandDeliveryService *)deviceCommandDeliveryService {
+    if(deviceCommandDeliveryService == nil) {
+        deviceCommandDeliveryService = [[DeviceCommandDeliveryService alloc] init];
+    }
+    return deviceCommandDeliveryService;
 }
 
 - (RootViewController *)rootViewController {

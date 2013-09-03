@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "NSDictionary+NSNullUtility.h"
-#import "SMShared.h"
 #import "ServiceBase.h"
 
 @interface DeviceCommand : NSObject

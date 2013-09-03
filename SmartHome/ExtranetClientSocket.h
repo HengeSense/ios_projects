@@ -19,6 +19,9 @@
 // success received message
 - (void)clientSocketWithReceivedMessage:(NSString *)messages;
 
+//
+- (void)clientSocketSenderReady;
+
 @end
 
 @interface ExtranetClientSocket : ClientSocket
@@ -26,6 +29,7 @@
 @property (assign, nonatomic) id<MessageHandler> messageHandlerDelegate;
 @property (assign, nonatomic, readonly) BOOL isConnect;
 
+- (BOOL)canWrite;
 - (void)writeData:(NSData *)data;
 
 @end

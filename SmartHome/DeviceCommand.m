@@ -9,6 +9,7 @@
 #import "DeviceCommand.h"
 #import "NSString+StringUtils.h"
 #import "JsonUtils.h"
+#import "SMShared.h"
 
 @implementation DeviceCommand
 

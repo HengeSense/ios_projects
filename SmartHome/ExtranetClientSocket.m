@@ -75,6 +75,9 @@
         }
     } else if(eventCode == NSStreamEventHasSpaceAvailable) {
         if(aStream == self.outputStream) {
+            if([self.messageHandlerDelegate respondsToSelector:@selector(clientSocketSenderReady)]) {
+                [self.messageHandlerDelegate clientSocketSenderReady];
+            }
         }
     } else if(eventCode == NSStreamEventOpenCompleted) {
         if(aStream == self.inputStream) {
@@ -115,6 +118,8 @@
                     //more than one message, need continue to process received data
                     receivedData = [NSMutableData dataWithData:[receivedData subdataWithRange:NSMakeRange(messageTotalLength, receivedData.length - messageTotalLength)]];
                     [self processReceivedData];
+                } else if(receivedData.length == messageTotalLength) {
+                    receivedData = [NSMutableData data];
                 }
             } else {
                 // less than one message , continue to watting for input stream
@@ -155,12 +160,12 @@
     }
 }
 
+- (BOOL)canWrite {
+    return self.outputStream.hasSpaceAvailable;
+}
+
 - (void)writeData:(NSData *)data {
-    if(self.outputStream != nil) {
-        if([self.outputStream hasSpaceAvailable]) {
-            [self.outputStream write:data.bytes maxLength:data.length];
-        }
-    }
+    [self.outputStream write:data.bytes maxLength:data.length];
 }
 
 #pragma mark -

@@ -15,6 +15,7 @@
 @property (strong, nonatomic, readonly) Memory *memory;
 @property (strong, nonatomic, readonly) GlobalSettings *settings;
 @property (strong, nonatomic, readonly) AccountService *accountService;
+@property (strong, nonatomic, readonly) DeviceCommandDeliveryService *deliveryService;
 
 + (SMShared *)current;
 
