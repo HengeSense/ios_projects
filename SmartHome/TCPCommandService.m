@@ -9,6 +9,7 @@
 #import "TCPCommandService.h"
 #import "NSString+StringUtils.h"
 #import "SMShared.h"
+#import "CommandFactory.h"
 
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
@@ -89,16 +90,19 @@
 }
 
 - (void)clientSocketMessageDiscard:(NSData *)discardMessage {
-    NSString *str =    [[NSString alloc] initWithData:discardMessage encoding:NSUTF8StringEncoding];
-    NSLog(@"the message was discard ---->%@", str);
+    NSLog(@"some socket data will discard, the length is %d .", discardMessage.length);
 }
 
 - (void)clientSocketMessageReadError {
-    NSLog(@"socket error");
+    NSLog(@"socket reading error.");
 }
 
-- (void)clientSocketWithReceivedMessage:(NSString *)messages {
-    NSLog(@"%@",messages);
+- (void)clientSocketWithReceivedMessage:(NSData *)messages {
+    NSDictionary *json = [JsonUtils createDictionaryFromJson:messages];
+    DeviceCommand *command = [CommandFactory commandFromJson:json];
+    if(command != nil) {
+        [[SMShared current].deliveryService handleDeviceCommand:command];
+    }
 }
 
 @end

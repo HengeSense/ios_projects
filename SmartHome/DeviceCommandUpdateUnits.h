@@ -8,6 +8,7 @@
 
 #import "DeviceCommand.h"
 #import "Unit.h"
+
 @interface DeviceCommandUpdateUnits : DeviceCommand
 
 // Collections of units

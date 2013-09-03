@@ -17,7 +17,7 @@
 - (void)clientSocketMessageDiscard:(NSData *)discardMessage;
 
 // success received message
-- (void)clientSocketWithReceivedMessage:(NSString *)messages;
+- (void)clientSocketWithReceivedMessage:(NSData *)messages;
 
 //
 - (void)clientSocketSenderReady;

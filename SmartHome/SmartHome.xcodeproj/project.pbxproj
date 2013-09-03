@@ -194,6 +194,10 @@
 		6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */; };
 		6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */; };
 		6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF756617B8D78F004EF7FD /* ImageFactory.m */; };
+		6FE3B75D17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B75C17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m */; };
+		6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */; };
+		6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */; };
+		6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */; };
 		6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */; };
 		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
 		F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150B17CDA27F0058DADE /* lineleft@2x.png */; };
@@ -524,6 +528,14 @@
 		6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mine@2x.png"; sourceTree = "<group>"; };
 		6FDF756517B8D78F004EF7FD /* ImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFactory.h; sourceTree = "<group>"; };
 		6FDF756617B8D78F004EF7FD /* ImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFactory.m; sourceTree = "<group>"; };
+		6FE3B75B17D5AD14006FCD7C /* DeviceCommandUpdateAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateAccount.h; sourceTree = "<group>"; };
+		6FE3B75C17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateAccount.m; sourceTree = "<group>"; };
+		6FE3B75E17D5AD32006FCD7C /* CommandFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandFactory.h; sourceTree = "<group>"; };
+		6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandFactory.m; sourceTree = "<group>"; };
+		6FE3B76117D5D54B006FCD7C /* DeviceCommandGetAccountHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetAccountHandler.h; sourceTree = "<group>"; };
+		6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetAccountHandler.m; sourceTree = "<group>"; };
+		6FE3B76417D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateAccountHandler.h; sourceTree = "<group>"; };
+		6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateAccountHandler.m; sourceTree = "<group>"; };
 		6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		6FEB91E717BB843D007C04A1 /* TemperatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureView.h; sourceTree = "<group>"; };
@@ -684,10 +696,7 @@
 		6F0F475517C5EC840057F9A4 /* service */ = {
 			isa = PBXGroup;
 			children = (
-				6F17672C17C1F7CA007AED0C /* DeviceCommand.h */,
-				6F17672D17C1F7CA007AED0C /* DeviceCommand.m */,
-				6F84A77517D047B400D46BFA /* DeviceCommandUpdateUnits.h */,
-				6F84A77617D047B400D46BFA /* DeviceCommandUpdateUnits.m */,
+				6FE3B76717D5D60D006FCD7C /* command */,
 				6F0F475717C5ECC00057F9A4 /* Device.h */,
 				6F0F475817C5ECC00057F9A4 /* Device.m */,
 				6F84A77817D04A5700D46BFA /* Zone.h */,
@@ -698,6 +707,8 @@
 				F20C788217D0859B003D50C5 /* Memory.m */,
 				6F17672917C1E232007AED0C /* CommunicationMessage.h */,
 				6F17672A17C1E232007AED0C /* CommunicationMessage.m */,
+				6FE3B75E17D5AD32006FCD7C /* CommandFactory.h */,
+				6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1280,6 +1291,10 @@
 				6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */,
 				F20C787E17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.h */,
 				F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */,
+				6FE3B76117D5D54B006FCD7C /* DeviceCommandGetAccountHandler.h */,
+				6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */,
+				6FE3B76417D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.h */,
+				6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1290,8 +1305,8 @@
 				6FD6C65217CCE1B100BDA327 /* udp */,
 				6FD6C65117CCE19E00BDA327 /* tcp */,
 				6FD6C65017CCE19500BDA327 /* rest */,
-				6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */,
 				6FD081B717CF3E030089A1ED /* DeviceCommandDeliveryService.h */,
+				6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */,
 				6FDD0ECF17CDECBA000D95E8 /* TCPCommandService.h */,
 				6FDD0ED017CDECBA000D95E8 /* TCPCommandService.m */,
 				6F95BF5917D42B82003A0745 /* RestfulCommandService.h */,
@@ -1403,6 +1418,19 @@
 				6FDD0ED617CDED30000D95E8 /* icon_notification@2x.png */,
 			);
 			name = settings_view;
+			sourceTree = "<group>";
+		};
+		6FE3B76717D5D60D006FCD7C /* command */ = {
+			isa = PBXGroup;
+			children = (
+				6F17672C17C1F7CA007AED0C /* DeviceCommand.h */,
+				6F17672D17C1F7CA007AED0C /* DeviceCommand.m */,
+				6FE3B75B17D5AD14006FCD7C /* DeviceCommandUpdateAccount.h */,
+				6FE3B75C17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m */,
+				6F84A77517D047B400D46BFA /* DeviceCommandUpdateUnits.h */,
+				6F84A77617D047B400D46BFA /* DeviceCommandUpdateUnits.m */,
+			);
+			name = command;
 			sourceTree = "<group>";
 		};
 		6FEB91CD17BB201C007C04A1 /* socket */ = {
@@ -1744,6 +1772,10 @@
 				6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */,
 				6F95BF6117D4A7CD003A0745 /* SMCommandQueue.m in Sources */,
 				F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */,
+				6FE3B75D17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m in Sources */,
+				6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */,
+				6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */,
+				6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

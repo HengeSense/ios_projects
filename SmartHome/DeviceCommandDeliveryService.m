@@ -8,6 +8,10 @@
 
 #import "DeviceCommandDeliveryService.h"
 
+#import "DeviceCommandUpdateUnitsHandler.h"
+#import "DeviceCommandUpdateAccountHandler.h"
+#import "DeviceCommandGetAccountHandler.h"
+
 @implementation DeviceCommandDeliveryService
 
 @synthesize tcpService;
@@ -37,9 +41,25 @@
 /*
  *
  *
+ *
+ *
  */
 - (void)handleDeviceCommand:(DeviceCommand *)command {
     
+    if(!self.isService) return;
+    
+    DeviceCommandHandler *handler = nil;
+    if([@"FindZKListCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandUpdateUnitsHandler alloc] init];
+    } else if([@"AccountUpdateCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandUpdateAccountHandler alloc] init];
+    } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandGetAccountHandler alloc] init];
+    }
+        
+    if(handler != nil) {
+        [handler handle:command];
+    }
 }
 
 - (void)startService {

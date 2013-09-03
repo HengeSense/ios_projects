@@ -13,9 +13,24 @@
 @property (strong, nonatomic) NSMutableArray *units;
 @property (strong, nonatomic, readonly) NSMutableDictionary *subscriptions;
 
+/*
+ *
+ */
 - (void)subscribeHandler:(Class)handler for:(id)obj;
+
+/*
+ *
+ */
 - (void)unSubscribeHandler:(Class)handler for:(id)obj;
+
+/*
+ *
+ */
 - (NSArray *)getSubscriptionsFor:(Class)handler;
-- (NSArray *) replaceWithUnits:(NSArray *) units;
+
+/*
+ *
+ */
+- (NSArray *)replaceWithUnits:(NSArray *)units;
 
 @end

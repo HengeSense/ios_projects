@@ -17,6 +17,8 @@
 #import "UIColor+ExtentionForHexString.h"
 #import "ToggleSwitchButton.h"
 #import "JsonUtils.h"
+#import "CommandFactory.h"
+#import "DeviceCommandUpdateAccount.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -213,15 +215,11 @@
         [self addSubview:notificationView];
     }
     
-   /*
     [[SMShared current].deliveryService startService];
-    DeviceCommand *command = [[DeviceCommand alloc] init];
-    command.commandName = @"AccountMQListCommand";
-    for(int i=0; i<5; i++) {
-        [[SMShared current].deliveryService executeDeviceCommand:command];
-    }
-    [[SMShared current].deliveryService stopService];
-   */ 
+    DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetAccount];
+    [[SMShared current].deliveryService executeDeviceCommand:command];
+
+
 }
 
 -(void)updateUnits:(NSArray *)units{
@@ -245,6 +243,8 @@
 }
 
 -(NSDictionary *) setDefaultUnitDictionary:(NSArray *) units{
+    if(units == nil || units.count == 0) return nil;
+    
     NSDictionary *zones = [[units objectAtIndex:0] zones];
     NSEnumerator *enumerator = zones.keyEnumerator;
     NSMutableArray *objects = [NSMutableArray new];

@@ -149,7 +149,7 @@
         
         if([[NSString md5HexDigest:messageBody] isEqualToString:md5Str]) {
             //good message
-            [self performSelectorOnMainThread:@selector(notifyHandlerMessageReceived:) withObject:messageBody waitUntilDone:NO];
+            [self performSelectorOnMainThread:@selector(notifyHandlerMessageReceived:) withObject:data_body waitUntilDone:NO];
         } else {
             //bad message , not valid from md5
             [self performSelectorOnMainThread:@selector(notifyHandlerDataDiscard:) withObject:data waitUntilDone:NO];
@@ -187,7 +187,7 @@
     }
 }
 
-- (void)notifyHandlerMessageReceived:(NSString *)message {
+- (void)notifyHandlerMessageReceived:(NSData *)message {
     if(self.messageHandlerDelegate != nil) {
         if([self.messageHandlerDelegate respondsToSelector:@selector(clientSocketWithReceivedMessage:)]) {
             [self.messageHandlerDelegate clientSocketWithReceivedMessage:message];
