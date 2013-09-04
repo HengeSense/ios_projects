@@ -18,9 +18,22 @@
     [super handle:command];
     
     NSLog(@" trigger device command update units .");
-    if (command.resultID !=1) return;
+    
+    if(command.resultID != 1) return;
     if(![command isKindOfClass:[DeviceCommandUpdateUnits class]]) return;
     DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
+
+    NSLog(@"units count is %d",     updateUnitsCommand.units.count);
+    Unit *u = [updateUnitsCommand.units objectAtIndex:0];
+    NSLog(@"unit >>> [id=%@, name=%@, status=%@, localPort=%d, localIp=%@, zones.count=%d]",u.identifier, u.name, u.status, u.localPort, u.localIP, u.zones.count);
+    
+    Zone *z = [u.zones objectAtIndex:0];
+    NSLog(@"zone >>> [id=%@, name=%@, devices.count=%d]", z.identifier, z.name, z.devices.count);
+    
+    Device *d = [z.devices objectAtIndex:0];
+    NSLog(@"%@", d.name);
+    
+    return;
     
     Memory *memory = [SMShared current].memory;
     NSArray *newUnits = [memory replaceWithUnits:updateUnitsCommand.units];
@@ -32,6 +45,5 @@
         }
     }];
 }
-
 
 @end

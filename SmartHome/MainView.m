@@ -212,6 +212,10 @@
         
         [self addSubview:notificationView];
     }
+    
+    
+    [[SMShared current].deliveryService executeDeviceCommand:
+     [CommandFactory commandForType:CommandTypeGetUnits]];
 }
 
 #pragma mark -

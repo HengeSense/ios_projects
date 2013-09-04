@@ -8,7 +8,14 @@
 
 #import "TVRemoteControlPanel.h"
 
-@implementation TVRemoteControlPanel
+@implementation TVRemoteControlPanel {
+    UIButton *btnPower;
+    UIButton *btnSignal;
+    NSArray *btnDigitalGroups;
+    UIButton *btnBack;
+    UIButton *btnMenu;
+    DirectionButton *btnDirection;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -17,6 +24,67 @@
         // Initialization code
     }
     return self;
+}
+
++ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point {
+    
+    
+    
+    
+    return nil;
+}
+
+- (void)initUI {
+    if(btnPower == nil) {
+        
+    }
+    
+    if(btnSignal == nil) {
+        
+    }
+    
+    if(btnBack == nil) {
+        
+    }
+    
+    if(btnMenu == nil) {
+        
+    }
+    
+    if(btnDirection == nil) {
+        
+    }
+    
+    if(btnDigitalGroups == nil) {
+        
+    }
+}
+
+- (void)btnPressed:(id)sender {
+    
+}
+
+#pragma mark -
+#pragma mark direction button delegate
+
+- (void)leftButtonClicked {
+    
+}
+
+- (void)rightButtonClicked {
+    
+}
+
+- (void)topButtonClicked {
+    
+}
+
+- (void)bottomButtonClicked {
+    
+}
+
+- (void)centerButtonClicked {
+    
 }
 
 @end

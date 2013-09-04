@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DirectionButton.h"
 
-@interface TVRemoteControlPanel : UIView
+@protocol TVRemoteControlPanelDelegate <NSObject>
+
+- (void)TVRemoteControlBunttonPressed:(NSString *)source;
+
+@end
+
+@interface TVRemoteControlPanel : UIView<DirectionButtonDelegate>
+
 
 @end

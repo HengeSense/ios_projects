@@ -18,7 +18,6 @@
 @synthesize tcpService;
 @synthesize restfulService;
 @synthesize isService;
-@synthesize netWorkTimer;
 
 - (id)init {
     self = [super init];
@@ -30,7 +29,6 @@
 
 - (void)initDefaults {
     isService = NO;
-//    netWorkTimer = [NSTimer scheduledTimerWithTimeInterval:5.f target:self selector:@selector(f) userInfo:nil repeats:YES];
 }
 
 /*

@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic, readonly) TCPCommandService *tcpService;
 @property (strong, nonatomic, readonly) RestfulCommandService *restfulService;
-@property (strong, nonatomic, readonly) NSTimer *netWorkTimer;
 @property (assign, nonatomic, readonly) BOOL isService;
 
 //
