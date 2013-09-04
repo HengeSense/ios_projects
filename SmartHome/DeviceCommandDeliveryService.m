@@ -61,6 +61,8 @@
         handler = [[DeviceCommandUpdateAccountHandler alloc] init];
     } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetAccountHandler alloc] init];
+    } else if([@"AccountMQListCommand" isEqualToString:command.commandName]) {
+        
     }
         
     if(handler != nil) {

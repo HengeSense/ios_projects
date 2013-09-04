@@ -13,7 +13,6 @@
 @synthesize units;
 @synthesize subscriptions;
 
-
 - (id)init {
     self = [super init];
     if(self) {
@@ -26,6 +25,7 @@
     if(self.subscriptions == nil) {
         subscriptions = [NSMutableDictionary dictionary];
     }
+    
     if(self.units == nil) {
         self.units = [NSMutableArray array];
     }

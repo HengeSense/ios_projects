@@ -25,6 +25,10 @@
         return command;
     } else if(type == CommandTypeUpdateUnits) {
         
+    } else if(type == CommandTypeGetNotifications) {
+        DeviceCommand *command = [[DeviceCommand alloc] init];
+        command.commandName = @"AccountMQListCommand";
+        return command;
     }
     
     return nil;
@@ -42,6 +46,8 @@
         command = [[DeviceCommand alloc] initWithDictionary:json];
     } else if([@"AccountProfileCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateAccount alloc] initWithDictionary:json];
+    } else if([@"AccountMQListCommand" isEqualToString:commandName]) {
+        
     }
     
     return command;

@@ -14,6 +14,7 @@
 @interface DeviceCommand : NSObject
 
 @property (strong, nonatomic) NSString *result;
+@property (assign, nonatomic) NSInteger resultID;
 @property (strong, nonatomic) NSString *deviceCode;
 @property (strong, nonatomic) NSString *commandName;
 @property (strong, nonatomic) NSString *masterDeviceCode;

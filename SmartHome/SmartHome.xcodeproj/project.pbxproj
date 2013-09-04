@@ -105,6 +105,7 @@
 		6F159BE717D6E825005CFFEE /* btn_rc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BE617D6E825005CFFEE /* btn_rc@2x.png */; };
 		6F159BEA17D6E84D005CFFEE /* bg_hot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BE917D6E84D005CFFEE /* bg_hot@2x.png */; };
 		6F159BEC17D6E868005CFFEE /* bg_cold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */; };
+		6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BEF17D702F5005CFFEE /* TVRemoteControlPanel.m */; };
 		6F17672B17C1E232007AED0C /* CommunicationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672A17C1E232007AED0C /* CommunicationMessage.m */; };
 		6F17672E17C1F7CA007AED0C /* DeviceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672D17C1F7CA007AED0C /* DeviceCommand.m */; };
 		6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17673017C1FA15007AED0C /* JsonUtils.m */; };
@@ -399,6 +400,8 @@
 		6F159BE617D6E825005CFFEE /* btn_rc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc@2x.png"; sourceTree = "<group>"; };
 		6F159BE917D6E84D005CFFEE /* bg_hot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_hot@2x.png"; sourceTree = "<group>"; };
 		6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cold@2x.png"; sourceTree = "<group>"; };
+		6F159BEE17D702F5005CFFEE /* TVRemoteControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVRemoteControlPanel.h; sourceTree = "<group>"; };
+		6F159BEF17D702F5005CFFEE /* TVRemoteControlPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVRemoteControlPanel.m; sourceTree = "<group>"; };
 		6F17672917C1E232007AED0C /* CommunicationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationMessage.h; sourceTree = "<group>"; };
 		6F17672A17C1E232007AED0C /* CommunicationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationMessage.m; sourceTree = "<group>"; };
 		6F17672C17C1F7CA007AED0C /* DeviceCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommand.h; sourceTree = "<group>"; };
@@ -832,6 +835,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				6F159BED17D6FEA8005CFFEE /* remote_control_view */,
 				F2178BFB17CAEC1A0043400F /* pageable_scroll_view */,
 				F2D8E8D517C5BB8F00090E5B /* radio_button */,
 				F2D8E8CA17C5A9FE00090E5B /* check_boxes */,
@@ -1173,6 +1177,15 @@
 				6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */,
 			);
 			name = aircondition;
+			sourceTree = "<group>";
+		};
+		6F159BED17D6FEA8005CFFEE /* remote_control_view */ = {
+			isa = PBXGroup;
+			children = (
+				6F159BEE17D702F5005CFFEE /* TVRemoteControlPanel.h */,
+				6F159BEF17D702F5005CFFEE /* TVRemoteControlPanel.m */,
+			);
+			name = remote_control_view;
 			sourceTree = "<group>";
 		};
 		6F350AB517CEF69100B796F1 /* icons */ = {
@@ -1832,6 +1845,7 @@
 				6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */,
 				6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */,
 				6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */,
+				6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
