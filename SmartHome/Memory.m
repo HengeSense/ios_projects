@@ -32,12 +32,14 @@
 }
 
 - (void)subscribeHandler:(Class)handler for:(id)obj {
+    NSLog(@"fdsjfidsjf");
     if(obj == nil || handler == nil) return;
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
     if(subscriptions_ == nil) {
         subscriptions_ = [NSMutableArray array];
         [subscriptions_ addObject:obj];
         [self.subscriptions setObject:subscriptions_ forKey:[handler description]];
+        NSLog(@"gogog");
         return;
     }
     BOOL found = NO;
