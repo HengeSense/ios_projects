@@ -13,6 +13,7 @@
 #define RADIO_MARGIN 60
 #define LABEL_MARGIN_TOP 20
 #define RADIO_CENTER 10
+#define CELL_HEIGHT 30
 
 @interface AirConditionViewController ()
 
@@ -51,18 +52,29 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"aircondition_setting.title",@"");
     
     if (temperatureTable == nil) {
-        temperatureTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+40+30, self.view.frame.size.width,self.view.frame.size.height-40-30) style:UITableViewStylePlain];
+        temperatureTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+40+30, self.view.frame.size.width,10*CELL_HEIGHT+47/2) style:UITableViewStylePlain];
         temperatureTable.dataSource = self;
         temperatureTable.delegate = self;
         temperatureTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         temperatureTable.backgroundColor = [UIColor clearColor];
         temperatureTable.showsVerticalScrollIndicator = NO;
+        temperatureTable.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+//        temperatureTable.backgroundColor = [UIColor whiteColor];
+//        temperatureTable.contentSize = CGSizeMake(self.view.frame.size.width, 20*CELL_HEIGHT+47-100);
         [self.view addSubview:temperatureTable];
     }
     if (closeBtn == nil) {
-        closeBtn =[[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, temperatureTable.frame.origin.y-10-78/2, 75/2, 78/2)];
-//        closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:uibuttontype
+        closeBtn =[[UIButton alloc] initWithFrame:CGRectMake(0, temperatureTable.frame.origin.y-78/2, 75/2, 78/2)];
+        closeBtn.center = CGPointMake(self.view.center.x, closeBtn.center.y);
+        [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
+        [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateHighlighted];
+        [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateSelected];
+        [closeBtn addTarget:self action:@selector(closeBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:closeBtn];
     }
+}
+-(void) closeBtnPressed{
+    return;
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -104,14 +116,19 @@
     curIndex = indexPath;
     UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
-        curCell.textLabel.textColor = [UIColor colorWithHexString:@"ce621b"];
+        curCell.backgroundColor = [UIColor colorWithHexString:@"ce621b"];
     }else{
-        curCell.textLabel.textColor = [UIColor colorWithHexString:@"348138"];
+        curCell.backgroundColor = [UIColor colorWithHexString:@"348138"];
     }
+    curCell.textLabel.textColor = [UIColor whiteColor];
     [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(selectDelay) userInfo:nil repeats:NO];
+}
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return  CELL_HEIGHT;
 }
 -(void) selectDelay{
     UITableViewCell *curCell = [temperatureTable cellForRowAtIndexPath:curIndex];
     curCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
+    curCell.backgroundColor = [UIColor clearColor];
 }
 @end
