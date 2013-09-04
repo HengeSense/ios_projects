@@ -47,8 +47,9 @@
     if (infoDictionary == nil) {
         infoDictionary = [[NSMutableDictionary alloc] initWithObjects:values forKeys:titles];
     }
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
 }
+
 - (void)initUI{
     [super initUI];
     self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, 8, 101/2, 59/2)];
@@ -76,11 +77,13 @@
 
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -88,6 +91,7 @@
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  3;
 }
+
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellIdentifier;
     if (indexPath.row == 0) {
@@ -107,9 +111,11 @@
     }
     return result;
 }
+
 -(void) btnDownPressed:(id) sender{
     [checkPassword show];
 }
+
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         NSString *inputPassword = [alertView textFieldAtIndex:0].text;
@@ -130,7 +136,6 @@
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
 }
 
-
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     editCell = [tableView cellForRowAtIndexPath:indexPath];
     editIndex = indexPath;
@@ -140,6 +145,7 @@
     [self presentModalViewController:modifyView animated:YES];
     
 }
+
 -(void) textViewHasBeenSetting:(NSString *)string{
     if ([[titles objectAtIndex:editIndex.row] isEqualToString:NSLocalizedString(@"modify.password", @"")]) {
         if (string !=nil&&![@"" isEqualToString:string]) {
@@ -152,15 +158,15 @@
     }
 }
 
-
 - (void)updateAccount:(DeviceCommandUpdateAccount *)updateCommand {
     if(updateCommand != nil) {
         NSLog(@"%@",        updateCommand.security);
     }
 }
 
--(void) dealloc{
+- (void)backToPreViewController {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
+    [super backToPreViewController];
 }
 
 @end

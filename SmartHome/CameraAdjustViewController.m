@@ -9,15 +9,7 @@
 #import "CameraAdjustViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+ExtentionForHexString.h"
-#import "DeviceFinder.h"
 
-
-#import "ExtranetClientSocket.h"
-#import "CommunicationMessage.h"
-#import "SMShared.h"
-#import "JsonUtils.h"
-#import "DeviceCommandUpdateUnits.h"
-#import "NSDictionary+NSNullUtility.h"
 
 @interface CameraAdjustViewController ()
 
@@ -27,10 +19,6 @@
     UIImageView *imgCameraShots;
     UIView *backgroundView;
     DirectionButton *btnDirection;
-    
-    
-    
-    ExtranetClientSocket *ff;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,42 +73,6 @@
 }
 
 
-- (void)clientSocketMessageDiscard:(NSData *)discardMessage {
-    NSLog(@"discard");
-}
-
-- (void)clientSocketMessageReadError {
-    NSLog(@"error");
-}
-
-- (void)clientSocketWithReceivedMessage:(NSString *)messages {
-    
-    NSLog(messages);
-    
-NSDictionary *ddd=    [JsonUtils createDictionaryFromJson: [messages dataUsingEncoding:NSUTF8StringEncoding]];
-    if(ddd != nil) {
-
-           DeviceCommandUpdateUnits *ccc= [[DeviceCommandUpdateUnits alloc] initWithDictionary:ddd];
-        NSLog(@"units count %d", ccc.units.count);
-        
-        
-Unit *u =        [ccc.units objectAtIndex:0];
-Zone *zone=        [u.zones objectForKey:@"zone1"];
-        NSLog(        @"%d", zone.accessories.count);
-        
-Device *dd =        [zone.accessories objectForKey:@"child1"];
-        NSLog(@"%@", dd.name);
-        
-        
-//        NSLog(@"device count %d",         zone.accessories.count);
-
-        
-        
-        
-        
-    }
-    
-}
 
 #pragma mark -
 #pragma mark direction button delegate
@@ -135,22 +87,6 @@ Device *dd =        [zone.accessories objectForKey:@"child1"];
 
 - (void)centerButtonClicked {
     NSLog(@"centerClicked");
-    ff = [[ExtranetClientSocket alloc] initWithIPAddress:@"172.16.8.16" andPort:6969];
-    ff.messageHandlerDelegate = self;
-    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(testj) userInfo:nil repeats:NO];
-    [ff connect];
-    }
-
-- (void)testj {
-    NSLog(@"go %@", [SMShared current].settings.account);
-    CommunicationMessage *ms =   [[CommunicationMessage alloc] init];
-    ms.deviceCommand = [[DeviceCommand alloc] init];
-    ms.deviceCommand.deviceCode = [SMShared current].settings.account;
-    ms.deviceCommand.commandName = @"FindZKListCommand";
-    ms.deviceCommand.commandTime = [[NSDate alloc] init];
-    ms.deviceCommand.masterDeviceCode = @"fieldunit";
-    NSData *ddd =  [ms generateData];
-    [ff writeData:ddd];
 }
 
 - (void)topButtonClicked {

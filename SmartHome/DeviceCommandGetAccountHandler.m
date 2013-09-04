@@ -21,7 +21,7 @@
     
     if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
-        NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateAccountHandler class]];
+        NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetAccountHandler class]];
         for(int i=0; i<arr.count; i++) {
             if([[arr objectAtIndex:i] respondsToSelector:@selector(updateAccount:)]) {
                 [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(updateAccount:) withObject:deviceCommand waitUntilDone:NO];

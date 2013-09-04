@@ -60,11 +60,9 @@
 - (void)unSubscribeHandler:(Class)handler for:(id)obj {
     if(obj == nil || handler == nil) return;
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
-    NSLog(@"%d", subscriptions_.count);
     if(subscriptions_ != nil) {
         [subscriptions_ removeObject:obj];
     }
-    NSLog(@"%d", subscriptions_.count);
 }
 
 - (NSArray *)replaceWithUnits:(NSArray *)updateUnits {
