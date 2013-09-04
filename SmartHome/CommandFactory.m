@@ -39,9 +39,9 @@
     if([@"FindZKListCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateUnits alloc] initWithDictionary:json];
     } else if([@"AccountUpdateCommand" isEqualToString:commandName]) {
-        command = [[DeviceCommandUpdateAccount alloc] initWithDictionary:json];
-    } else if([@"AccountProfileCommand" isEqualToString:commandName]) {
         command = [[DeviceCommand alloc] initWithDictionary:json];
+    } else if([@"AccountProfileCommand" isEqualToString:commandName]) {
+        command = [[DeviceCommandUpdateAccount alloc] initWithDictionary:json];
     }
     
     return command;
