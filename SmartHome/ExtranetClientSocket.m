@@ -209,7 +209,6 @@
 #pragma mark override super method
 
 - (void)close {
-    NSLog(@"socket was closed");
     receivedData = nil;
     inOpen = NO;
     outOpen = NO;

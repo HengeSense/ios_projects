@@ -13,7 +13,6 @@
 @synthesize units;
 @synthesize subscriptions;
 
-
 - (id)init {
     self = [super init];
     if(self) {
@@ -26,6 +25,7 @@
     if(self.subscriptions == nil) {
         subscriptions = [NSMutableDictionary dictionary];
     }
+    
     if(self.units == nil) {
         self.units = [NSMutableArray array];
     }
@@ -35,7 +35,6 @@
     if(obj == nil || handler == nil) return;
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
     if(subscriptions_ == nil) {
-        NSLog(@"--> %@", [handler description]);
         subscriptions_ = [NSMutableArray array];
         [subscriptions_ addObject:obj];
         [self.subscriptions setObject:subscriptions_ forKey:[handler description]];

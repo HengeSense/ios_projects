@@ -212,7 +212,6 @@
         
         [self addSubview:notificationView];
     }
-    
 }
 
 #pragma mark -

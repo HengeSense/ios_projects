@@ -14,6 +14,7 @@
 @implementation DeviceCommand
 
 @synthesize result;
+@synthesize resultID;
 @synthesize deviceCode;
 @synthesize commandName;
 @synthesize commandTime;
@@ -31,6 +32,12 @@
             self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
             self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
             self.result = [json notNSNullObjectForKey:@"id"];
+            
+            NSNumber *r_id = [json notNSNullObjectForKey:@"resultId"];
+            if(r_id != nil) {
+                self.resultID = r_id.integerValue;
+            }
+            
             self.security = [json notNSNullObjectForKey:@"security"];
             NSNumber *timestamp = [json notNSNullObjectForKey:@"commandTime"];
             if(timestamp != nil) {

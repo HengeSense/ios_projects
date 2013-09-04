@@ -98,6 +98,8 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
+    NSString *receivedJson = [[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding];
+    NSLog(receivedJson);
     NSDictionary *json = [JsonUtils createDictionaryFromJson:messages];
     DeviceCommand *command = [CommandFactory commandFromJson:json];
     if(command != nil) {
@@ -105,6 +107,13 @@
     }
 }
 
+- (void)notifyConnectionClosed {
+    NSLog(@"socket closed");
+}
+
+- (void)notifyConnectionOpened {
+    NSLog(@"socket opened");
+}
 
 
 @end
