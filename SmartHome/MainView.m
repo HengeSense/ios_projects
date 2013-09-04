@@ -235,6 +235,8 @@
 }
 
 -(NSDictionary *) setDefaultUnitDictionary:(NSArray *) units{
+    return nil;
+    /*
     if(units == nil || units.count == 0) return nil;
     
     NSDictionary *zones = [[units objectAtIndex:0] zones];
@@ -255,7 +257,7 @@
         [objects addObject:switchBtns];
     }
     NSDictionary *deviceDictionary = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
-    return deviceDictionary;
+    return deviceDictionary;*/
 }
 
 - (void) testCommand{

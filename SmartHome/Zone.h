@@ -12,13 +12,12 @@
 
 @interface Zone : NSObject
 
-// Collections of devices
-@property (strong, nonatomic) NSMutableDictionary *accessories;
+@property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *identifier;
 
 - (id)initWithJson:(NSDictionary *)json;
 
-- (NSArray *)devicesAsList;
 - (Device *)deviceForId:(NSString *)_id_;
 
 @end

@@ -11,5 +11,6 @@
 @interface NSDictionary (NSNullUtility)
 
 - (id)notNSNullObjectForKey:(id)key;
+- (NSNumber *)numberForKey:(id)key;
 
 @end

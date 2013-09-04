@@ -15,14 +15,12 @@
 @property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSString *localIP;
 @property (strong, nonatomic) NSString *name;
+@property (assign, nonatomic) NSInteger localPort;
+@property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSDate *updateTime;
-
-// Collections of zones
-@property (strong, nonatomic) NSMutableDictionary *zones;
+@property (strong, nonatomic) NSMutableArray *zones;
 
 - (id)initWithJson:(NSDictionary *)json;
-
-- (NSArray *)zonesAsList;
 - (Zone *)zoneForId:(NSString *)_id_;
 
 @end

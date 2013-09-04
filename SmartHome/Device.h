@@ -11,12 +11,20 @@
 
 @interface Device : NSObject
 
-@property (strong, nonatomic) NSString *eleState;
-@property (strong, nonatomic) NSString *label;
-@property (strong, nonatomic) NSString *mac;
+@property (strong, nonatomic) NSString *category;
+@property (assign, nonatomic) NSInteger ep;
+@property (strong, nonatomic) NSString *identifier;
+@property (strong, nonatomic) NSString *ip;
+@property (assign, nonatomic) NSInteger irType;
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *status;
-@property (strong, nonatomic) NSString *type;
+@property (strong, nonatomic) NSString *nwkAddr;
+@property (assign, nonatomic) NSInteger port;
+@property (strong, nonatomic) NSString *pwd;
+@property (assign, nonatomic) NSInteger resolution;
+@property (assign, nonatomic) NSInteger state;
+@property (assign, nonatomic) NSInteger status;
+@property (assign, nonatomic) NSInteger type;
+@property (strong, nonatomic) NSString *user;
 
 - (id)initWithJson:(NSDictionary *)json;
 

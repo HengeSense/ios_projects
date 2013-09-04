@@ -16,4 +16,10 @@
     return obj;
 }
 
+- (NSNumber *)numberForKey:(id)key {
+    NSNumber *number = [self notNSNullObjectForKey:key];
+    if(number != nil) return number;
+    return [NSNumber numberWithInt:0];
+}
+
 @end

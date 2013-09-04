@@ -7,25 +7,26 @@
 //
 
 #import "Zone.h"
+#import "NSString+StringUtils.h"
 
 @implementation Zone
 
-@synthesize accessories;
 @synthesize name;
+@synthesize devices;
+@synthesize identifier;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
         if(json != nil) {
             self.name = [json notNSNullObjectForKey:@"name"];
-            NSDictionary *_accessories_ = [json notNSNullObjectForKey:@"accessories"];
-            if(_accessories_ != nil) {
-                NSEnumerator *enumerator = _accessories_.keyEnumerator;
-                for(NSString *key in enumerator) {
-                    NSDictionary *_device_ = [_accessories_ objectForKey:key];
-                    if(_device_ != nil) {
-                        [self.accessories setObject:[[Device alloc] initWithJson:_device_] forKey:key];
-                    }
+            self.identifier = [json notNSNullObjectForKey:@"code"];
+            NSArray *_devices_ = [json notNSNullObjectForKey:@"devices"];
+            if(_devices_ != nil) {
+                for(int i=0; i<_devices_.count; i++) {
+                    NSDictionary *_device_ = [_devices_ objectAtIndex:i];
+                    Device *device = [[Device alloc] initWithJson:_device_];
+                    [self.devices addObject:device];
                 }
             }
         }
@@ -33,24 +34,22 @@
     return self;
 }
 
-- (NSMutableDictionary *)accessories {
-    if(accessories == nil) {
-        accessories = [NSMutableDictionary dictionary];
+- (NSMutableArray *)devices {
+    if(devices == nil) {
+        devices = [NSMutableArray array];
     }
-    return accessories;
+    return devices;
 }
 
 - (Device *)deviceForId:(NSString *)_id_ {
-    return [self.accessories objectForKey:_id_];
-}
-
-- (NSArray *)devicesAsList {
-    NSEnumerator *enumerator = self.accessories.keyEnumerator;
-    NSMutableArray *deviceList = [NSMutableArray array];
-    for(NSString *key in enumerator) {
-        [deviceList addObject:[self.accessories objectForKey:key]];
+    if([NSString isBlank:_id_]) return nil;
+    for(int i=0; i<self.devices.count; i++) {
+        Device *device = [self.devices objectAtIndex:i];
+        if([_id_ isEqualToString:device.identifier]) {
+            return device;
+        }
     }
-    return deviceList;
+    return nil;
 }
 
 @end

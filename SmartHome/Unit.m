@@ -7,65 +7,64 @@
 //
 
 #import "Unit.h"
+#import "NSString+StringUtils.h"
+
 @interface Unit()
-@property (unsafe_unretained) NSUInteger myHash;
+
 @end
+
 @implementation Unit
 
 @synthesize identifier;
+@synthesize localPort;
 @synthesize localIP;
 @synthesize name;
+@synthesize status;
 @synthesize updateTime;
 @synthesize zones;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
-        _myHash = (NSUInteger) self;
         if(json != nil) {
-            self.identifier = [json notNSNullObjectForKey:@"id"];
-            self.localIP = [json notNSNullObjectForKey:@"localip"];
+            self.identifier = [json notNSNullObjectForKey:@"_id"];
+            self.localIP = [json notNSNullObjectForKey:@"localIp"];
             self.name = [json notNSNullObjectForKey:@"name"];
+            self.localPort = [json numberForKey:@"localPort"].integerValue;
+            self.status = [json notNSNullObjectForKey:@"status"];
+            
             NSNumber *_updateTime_ = [json notNSNullObjectForKey:@"updateTime"];
             if(_updateTime_ != nil) {
                 self.updateTime = [NSDate dateWithTimeIntervalSince1970:_updateTime_.longLongValue];
             }
-            NSDictionary *_zones_ = [json notNSNullObjectForKey:@"zones"];
-            NSEnumerator *enumerator = _zones_.keyEnumerator;
-            for(NSString *key in enumerator) {
-                NSDictionary *_zone_ = [_zones_ objectForKey:key];
-                if(_zone_ != nil) {
-                    [self.zones setObject:[[Zone alloc] initWithJson:_zone_] forKey:key];
-                }
+            
+            NSArray *_zones_ = [json notNSNullObjectForKey:@"zones"];
+            for(int i=0; i<_zones_.count; i++) {
+                NSDictionary *_zone_ = [_zones_ objectAtIndex:i];
+                Zone *zone = [[Zone alloc] initWithJson:_zone_];
+                [self.zones addObject:zone];
             }
         }
     }
     return self;
 }
 
-- (NSMutableDictionary *)zones {
+- (NSMutableArray *)zones {
     if(zones == nil) {
-        zones = [NSMutableDictionary dictionary];
+        zones = [NSMutableArray array];
     }
     return zones;
 }
 
 - (Zone *)zoneForId:(NSString *)_id_ {
-    return [self.zones objectForKey:_id_];
+    if([NSString isBlank:_id_]) return nil;
+    for(int i=0; i<self.zones.count; i++) {
+        Zone *zone = [self.zones objectAtIndex:i];
+        if([_id_ isEqualToString:zone.identifier]) {
+            return zone;
+        }
+    }
+    return nil;
 }
 
-- (NSArray *)zonesAsList {
-    NSEnumerator *enumerator = self.zones.keyEnumerator;
-    NSMutableArray *zoneList = [NSMutableArray array];
-    for(NSString *key in enumerator) {
-        [zoneList addObject:[self.zones objectForKey:key]];
-    }
-    return zoneList;
-}
--(BOOL) isEqual:(Unit *)object{
-    return [self.identifier isEqual:object.identifier];
-}
--(NSUInteger) hash{
-    return self.myHash;
-}
 @end
