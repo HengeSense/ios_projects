@@ -212,14 +212,6 @@
         
         [self addSubview:notificationView];
     }
-    
-    
-    DeviceCommandUpdateAccount *cmd = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
-    cmd.screenName = @"阳阳多";
-    cmd.email = @"zhaoyang@vip.163.com";
-    cmd.oldPwd = @"642568";
-    
-    [[SMShared current].deliveryService executeDeviceCommand:cmd];
 }
 
 #pragma mark -
