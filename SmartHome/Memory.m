@@ -14,12 +14,6 @@
 @synthesize subscriptions=_subscriptions;
 
 
--(void)setUnits:(NSArray *)units{
-    if (_units == nil) {
-        _units = [NSArray new];
-    }
-    _units = units;
-}
 -(void) setSubscriptions:(NSMutableDictionary *)subscriptions{
     if (_subscriptions == nil) {
         _subscriptions = [NSMutableDictionary new];

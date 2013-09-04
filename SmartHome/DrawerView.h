@@ -14,11 +14,15 @@
 - (void)drawerNavigationItemChanged:(DrawerNavigationItem *)item isFirstTime:(BOOL)isFirst;
 
 @end
+@protocol AccountInfoDelegate <NSObject>
 
+-(void) toModifyAccountInfo;
+
+@end
 @interface DrawerView : UIView<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, assign) id<DrawerNavigationItemChangedDelegate> drawerNavigationItemChangedDelegate;
-
+@property (nonatomic,assign) id<AccountInfoDelegate> accountInfoDelegate;
 - (id)initWithFrame:(CGRect)frame andItems:(NSArray *)items;
 
 @end

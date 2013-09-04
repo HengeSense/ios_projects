@@ -12,6 +12,7 @@
  * global
  */
 "ok"               = "好的";
+"cancel"           = "取消";
 "back"             = "返回";
 "done"             = "完成";
 "rename"           = "重命名";
@@ -21,6 +22,7 @@
 "unknow_error"     = "系统错误";
 "request_timeout"  = "请求超时";
 "processing.tips"  = "处理中,请稍后...";
+"the.two.input.is.not.consistent" = "两次输入不一致";
 
 /*
  * title
@@ -120,6 +122,17 @@
 "account_logout"     =   "账号注销";
 "feed_back"          =   "意见反馈";
 "about_us"           =   "关于";
-
-
+/*
+ *user info
+ */
+"nick.name"  = "昵称";
+"user.email" = "邮箱";
+"modify.password" = "修改密码";
+"please.input.old.password" = "请输入旧密码";
+"password.valid" = "密码验证";
+/*
+ * modify info
+ */
+"input.new.password" = "输入新密码:";
+"again.to.makesure"  = "再次输入：";
 

@@ -11,6 +11,7 @@
  * global
  */
 "ok"               = "OK";
+"cancel"           = "Cancel";
 "back"             = "back";
 "done"             = "Done";
 "rename"           = "rename";
@@ -20,6 +21,7 @@
 "unknow_error"     = "System error";
 "request_timeout"  = "Request timeout";
 "processing.tips"  = "Wait for processing...";
+"the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*
  * title
@@ -120,7 +122,18 @@
 "account_logout"     =   "Logout";
 "feed_back"          =   "Feed back";
 "about_us"           =   "About us";
-
-
+/*
+ * user info
+ */
+"screen.name"  = "Nick Name";
+"user.email"    = "Email";
+"modify.password" = "Modify Password";
+"please.input.old.password" = "please input old password";
+"password.valid" = "Password Valid";
+/*
+ * modify info
+ */
+"input.new.password" = "Input New Password:";
+"again.to.makesure"  = "Again To Makesure:";
 
 

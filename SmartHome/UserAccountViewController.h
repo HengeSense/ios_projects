@@ -7,7 +7,8 @@
 //
 
 #import "NavViewController.h"
-
-@interface UserAccountViewController : NavViewController
-
+#import "SMCell.h"
+#import "ModifyInfoViewController.h"
+@interface UserAccountViewController : NavViewController<UITableViewDataSource,UITableViewDelegate,TextViewDelegate,UIAlertViewDelegate>
+@property (nonatomic,strong) NSMutableDictionary *infoDictionary;
 @end

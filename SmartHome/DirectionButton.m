@@ -92,7 +92,6 @@
     CGPoint point = [gesture locationInView:self];
     CGFloat x = point.x,y=point.y;
     CGFloat x0 = x-71,y0=y-71;
-    
     BOOL isCenter = x0 * x0 + y0 * y0 <= 31.5 * 31.5,
     outOfBounds = x0*x0 + y0*y0 >= 70.25*70.25,
     isTop = x0 / y0 > -1 && x0 / y0 < 1 && y0 < 0 && !isCenter,

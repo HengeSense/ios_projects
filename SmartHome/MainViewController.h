@@ -10,6 +10,6 @@
 #import "DrawerViewController.h"
 #import "DrawerView.h"
 
-@interface MainViewController : DrawerViewController<DrawerNavigationItemChangedDelegate>
+@interface MainViewController : DrawerViewController<DrawerNavigationItemChangedDelegate,AccountInfoDelegate>
 
 @end
