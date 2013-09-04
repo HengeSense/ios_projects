@@ -67,7 +67,7 @@
     if(imgTopButton == nil) {
         imgTopButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 4, 182/2, 81/2)];
         imgTopButton.center = CGPointMake(center.x - 1, imgTopButton.center.y);
-        imgTopButton.image = [UIImage imageNamed:@"btn_rc_up.png"];
+        imgTopButton.image = [UIImage imageNamed:@"btn_rc_top.png"];
         [self addSubview:imgTopButton];
     }
     
@@ -80,8 +80,8 @@
     
     if(imgCenterButton == nil) {
         imgCenterButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 126/2, 126/2)];
-        imgCenterButton.center = CGPointMake(center.x - 1,center.y - 1);
-        imgCenterButton.image = [UIImage imageNamed:@"btn_rc_ok.png"];
+        imgCenterButton.center = CGPointMake(center.x - 1,center.y);
+        imgCenterButton.image = [UIImage imageNamed:@"btn_rc_center.png"];
         [self addSubview:imgCenterButton];
     }
     
@@ -97,8 +97,6 @@
         backgroundImageView.image = [UIImage imageNamed:@"bg_camera.png"];
         [self addSubview:backgroundImageView];
     }
-    NSLog(@"bg center %@",NSStringFromCGPoint(backgroundImageView.center));
-    NSLog(@"self center %@",NSStringFromCGPoint(self.center));
     if(imgLeftButton == nil) {
         imgLeftButton = [[UIImageView alloc] initWithFrame:CGRectMake(4, 0, 81/2, 182/2)];
         imgLeftButton.center = CGPointMake(imgLeftButton.center.x, backgroundImageView.center.y-1);

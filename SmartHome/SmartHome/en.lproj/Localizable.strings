@@ -106,8 +106,8 @@
 /*
  * air condition view controller
  */
-"heating"                           =  "heating";
-"refrigeration"                     =  "refrigeration";
+"hot"                               =  "hot";
+"cold"                              =  "cold";
 "close"                             =  "close";
 
 /*

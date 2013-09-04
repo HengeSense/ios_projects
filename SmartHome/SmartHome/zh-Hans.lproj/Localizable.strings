@@ -106,8 +106,8 @@
 /*
  *air condition view controller
  */
-"heating"                           =  "制热";
-"refrigeration"                     =  "制冷";
+"hot"                               =  "制热";
+"cold"                              =  "制冷";
 "close"                             =  "关";
 
 /*

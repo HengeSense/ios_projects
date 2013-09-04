@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "PopViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
-@interface AirConditionViewController : PopViewController
+@interface AirConditionViewController : PopViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

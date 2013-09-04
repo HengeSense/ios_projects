@@ -19,15 +19,10 @@
 @end
 
 @implementation AirConditionViewController{
-    UIView *backgroundView;
+    UIButton *closeBtn;
+    UITableView *temperatureTable;
+    NSIndexPath *curIndex;
     
-    UILabel *lblHot;
-    UILabel *lblCool;
-    UILabel *lblClose;
-    
-    UIButton *btnHot;
-    UIButton *btnCool;
-    UIButton *btnClose;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,65 +50,68 @@
     
     self.topbar.titleLabel.text = NSLocalizedString(@"aircondition_setting.title",@"");
     
-    if(backgroundView == nil) {
-        backgroundView = [[UIView alloc] initWithFrame:CGRectMake(3, self.topbar.frame.size.height, (self.view.frame.size.width - 6), (self.view.frame.size.height - self.topbar.frame.size.height) / 4)];
-        backgroundView.layer.cornerRadius = 8;
-        backgroundView.backgroundColor = [UIColor whiteColor];
-        [self.view addSubview:backgroundView];
+    if (temperatureTable == nil) {
+        temperatureTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+40+30, self.view.frame.size.width,self.view.frame.size.height-40-30) style:UITableViewStylePlain];
+        temperatureTable.dataSource = self;
+        temperatureTable.delegate = self;
+        temperatureTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        temperatureTable.backgroundColor = [UIColor clearColor];
+        temperatureTable.showsVerticalScrollIndicator = NO;
+        [self.view addSubview:temperatureTable];
     }
-    
-    if(btnHot == nil) {
-        btnHot = [RadioButton buttonWithPoint:CGPointMake(RADIO_MARGIN, RADIO_MARGIN)];
-        [btnHot addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
-        btnHot.selected = YES;
-        [backgroundView addSubview:btnHot];
-    }
-    
-    if(lblHot == nil) {
-        lblHot = [[UILabel alloc] initWithFrame:CGRectMake(btnHot.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
-        lblHot.text = NSLocalizedString(@"heating", @"");
-        lblHot.textColor = [UIColor blackColor];
-        lblHot.textAlignment = UITextAlignmentCenter;
-        lblHot.backgroundColor = [UIColor clearColor];
-        [backgroundView addSubview:lblHot];
-    }
-    
-    if(btnCool==nil){
-        btnCool = [RadioButton buttonWithPoint:CGPointMake(btnHot.frame.origin.x+btnHot.frame.size.width+RADIO_MARGIN, RADIO_MARGIN)];
-        [btnCool addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
-        [backgroundView addSubview:btnCool];
-    }
-    
-    if(lblCool == nil) {
-        lblCool = [[UILabel alloc] initWithFrame:CGRectMake(btnCool.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
-        lblCool.text = NSLocalizedString(@"refrigeration", @"");
-        lblCool.textColor = [UIColor blackColor];
-        lblCool.textAlignment = UITextAlignmentCenter;
-        lblCool.backgroundColor = [UIColor clearColor];
-        [backgroundView addSubview:lblCool];
-    }
-    
-    if(btnClose == nil){
-        btnClose = [RadioButton buttonWithPoint:CGPointMake(btnCool.frame.origin.x+btnCool.frame.size.width+RADIO_MARGIN, RADIO_MARGIN)];
-        [btnClose addTarget:self action:@selector(radioTouchInside:) forControlEvents:UIControlEventTouchUpInside];
-        [backgroundView addSubview:btnClose];
-    }
-    
-    if(lblClose == nil) {
-        lblClose = [[UILabel alloc] initWithFrame:CGRectMake(btnClose.frame.origin.x-RADIO_CENTER, LABEL_MARGIN_TOP, 40, 20)];
-        lblClose.text = NSLocalizedString(@"close", @"");
-        lblClose.textColor = [UIColor blackColor];
-        lblClose.textAlignment = UITextAlignmentCenter;
-        lblClose.backgroundColor = [UIColor clearColor];
-        [backgroundView addSubview:lblClose];
+    if (closeBtn == nil) {
+        closeBtn =[[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, temperatureTable.frame.origin.y-10-78/2, 75/2, 78/2)];
+//        closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:uibuttontype
     }
 }
-
-- (void)radioTouchInside:(UIButton *)radio {
-    btnHot.selected =NO;
-    btnCool.selected = NO;
-    btnClose.selected = NO;
-    radio.selected =!radio.selected;
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
 }
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+-(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *temperatureCell = nil;
+    static NSString *cellIdentifier = @"temperatureCellIdentifier";
+    temperatureCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (temperatureCell == nil) {
+        temperatureCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    NSString *type;
+    if (indexPath.section == 0) {
+        type = NSLocalizedString(@"hot", @"");
+        temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
+    }else{
+        type = NSLocalizedString(@"cold", @"");
+        temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
+    }
+    temperatureCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
+    temperatureCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return  temperatureCell;
+}
+-(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIImageView *header = nil;
+    if (section == 0) {
+        header =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_hot.png"]];
+    }else{
+        header =[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_cold.png"]];
+    }
+    header.frame = CGRectMake(0, 0, 640/2, 47/2);
+    return header;
 
+}
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    curIndex = indexPath;
+    UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        curCell.textLabel.textColor = [UIColor colorWithHexString:@"ce621b"];
+    }else{
+        curCell.textLabel.textColor = [UIColor colorWithHexString:@"348138"];
+    }
+    [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(selectDelay) userInfo:nil repeats:NO];
+}
+-(void) selectDelay{
+    UITableViewCell *curCell = [temperatureTable cellForRowAtIndexPath:curIndex];
+    curCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
+}
 @end

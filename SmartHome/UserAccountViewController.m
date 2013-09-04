@@ -64,6 +64,7 @@
     
     if (infoTable == nil) {
         infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        infoTable.center = self.view.center;
         infoTable.delegate = self;
         infoTable.dataSource =self;
         infoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
