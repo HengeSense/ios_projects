@@ -17,7 +17,10 @@
 - (void)clientSocketMessageDiscard:(NSData *)discardMessage;
 
 // success received message
-- (void)clientSocketWithReceivedMessage:(NSString *)messages;
+- (void)clientSocketWithReceivedMessage:(NSData *)messages;
+
+//
+- (void)clientSocketSenderReady;
 
 @end
 
@@ -26,6 +29,7 @@
 @property (assign, nonatomic) id<MessageHandler> messageHandlerDelegate;
 @property (assign, nonatomic, readonly) BOOL isConnect;
 
+- (BOOL)canWrite;
 - (void)writeData:(NSData *)data;
 
 @end

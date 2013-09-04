@@ -195,6 +195,7 @@
                         [SMShared current].settings.deviceCode = command.deviceCode;
                         [[SMShared current].settings saveSettings];
                         [[AlertView currentAlertView] dismissAlertView];
+                        
                         if([SMShared current].settings.anyUnitsBinding) {
                             [SMShared current].app.rootViewController.needLoadMainViewController = YES;
                             [self.navigationController popToRootViewControllerAnimated:NO];

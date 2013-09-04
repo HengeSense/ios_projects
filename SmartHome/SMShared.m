@@ -26,6 +26,10 @@
     return self.app.memory;
 }
 
+- (DeviceCommandDeliveryService *)deliveryService {
+    return self.app.deviceCommandDeliveryService;
+}
+
 + (SMShared *)current {
     static SMShared *shared;
     if(shared == nil) {
