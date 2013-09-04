@@ -38,10 +38,7 @@
     UIView *notificationView;
     UIButton *btnSpeech;
     
-    
-    
-    
-    DeviceCommandUpdateUnitsHandler *updateHandler;
+
 }
 
 @synthesize unitsArr;
@@ -61,11 +58,9 @@
     recognizerState = RecognizerStateReady;
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
-    if (updateHandler == nil) {
-        updateHandler = [[DeviceCommandUpdateUnitsHandler alloc] init];
-    }
-    [updateHandler registerUsersForUnitsUpdate:self];
-    updateHandler.delegate = self;
+    
+
+
     self.unitsArr = [SMShared current].memory.units;
     self.defaultUnit = [self setDefaultUnitDictionary:self.unitsArr];
 }
@@ -270,7 +265,7 @@
     NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
     
     DeviceCommand *command = [[DeviceCommandUpdateUnits alloc] initWithDictionary:[JsonUtils createDictionaryFromJson:data]];
-    [updateHandler handle:command];
+
 }
 
 #pragma mark -

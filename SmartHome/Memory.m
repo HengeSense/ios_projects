@@ -55,7 +55,6 @@
 
 - (NSArray *)getSubscriptionsFor:(Class)handler {
     if(handler == nil) return nil;
-    NSArray *arr = [self.subscriptions objectForKey:[handler description]];
     return [self.subscriptions objectForKey:[handler description]];
 }
 

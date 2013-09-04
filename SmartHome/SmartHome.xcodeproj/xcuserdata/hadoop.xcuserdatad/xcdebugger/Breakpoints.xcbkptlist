@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MainView.m"
-         timestampString = "399797086.467961"
+         timestampString = "399958449.628799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "218"
-         endingLineNumber = "218"
+         startingLineNumber = "213"
+         endingLineNumber = "213"
          landmarkName = "-updateUnits:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DeviceCommandUpdateUnitsHandler.m"
-         timestampString = "399796150.851471"
+         timestampString = "399958449.628799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "16"
-         endingLineNumber = "16"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
          landmarkName = "delegate"
          landmarkType = "19">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MainView.m"
-         timestampString = "399807233.963166"
+         timestampString = "399958449.628799"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "275"
-         endingLineNumber = "275"
+         startingLineNumber = "270"
+         endingLineNumber = "270"
          landmarkName = "-testCommand"
          landmarkType = "5">
       </FileBreakpoint>

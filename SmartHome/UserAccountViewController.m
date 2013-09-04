@@ -160,7 +160,7 @@
 }
 
 -(void) dealloc{
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
 }
 
 @end

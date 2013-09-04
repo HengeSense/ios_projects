@@ -13,7 +13,6 @@
 
 @implementation DeviceCommandUpdateUnitsHandler
 
-@synthesize delegate;
 
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
@@ -28,15 +27,11 @@
     NSLog(@"newUnits=%@,updateUnits=%@",newUnits,updateUnitsCommand.units);
     NSArray *users = [memory getSubscriptionsFor:[DeviceCommandUpdateUnitsHandler class]];
     [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([self.delegate isEqual:obj]&&[obj respondsToSelector:DELEFGATE_METHOD]) {
+        if ([obj respondsToSelector:DELEFGATE_METHOD]) {
             [obj performSelector:DELEFGATE_METHOD withObject:newUnits];
         }
     }];
 }
 
-- (void) registerUsersForUnitsUpdate:(id)user{
-    Memory *memory = [SMShared current].memory;
-    [memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:user];
-}
 
 @end

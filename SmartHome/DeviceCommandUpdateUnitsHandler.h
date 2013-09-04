@@ -16,9 +16,4 @@
 @end
 
 @interface DeviceCommandUpdateUnitsHandler : DeviceCommandHandler
-
-@property (assign,nonatomic) id<UpdateUnitsHandlerDelegate> delegate;
-
-- (void)registerUsersForUnitsUpdate:(id)user;
-
 @end

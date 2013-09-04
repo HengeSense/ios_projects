@@ -10,7 +10,6 @@
 
 @interface DeviceCommandHandler()
 
-@property(unsafe_unretained) NSUInteger myHash;
 
 @end
 
@@ -18,30 +17,10 @@
 
 - (id)init {
     self = [super init];
-    if (self) {
-        _myHash = (NSUInteger) self;
-    }
     return  self;
 }
 
 - (void)handle:(DeviceCommand *)command {
     
 }
-
-- (id)copyWithZone:(NSZone *)zone {
-    id aCopy = [[self.class alloc] init];
-    if (aCopy) {
-        [aCopy setMyHash:self.myHash];
-    }
-    return aCopy;
-}
-
-- (BOOL)isEqual:(id)object {
-    return self.myHash == ((DeviceCommandHandler *) object).myHash;
-}
-
-- (NSUInteger)hash {
-    return _myHash;
-}
-
 @end
