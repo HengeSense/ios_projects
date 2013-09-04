@@ -7,6 +7,7 @@
 //
 
 #import "UserAccountViewController.h"
+#import "CommandFactory.h"
 @interface UserAccountViewController ()
 
 @end
@@ -69,7 +70,7 @@
         [checkPassword setAlertViewStyle:UIAlertViewStyleSecureTextInput];
     }
 
-    
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 - (void)didReceiveMemoryWarning
 {

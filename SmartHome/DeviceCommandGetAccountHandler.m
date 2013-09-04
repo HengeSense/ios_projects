@@ -19,11 +19,14 @@
         //
         return;
     }
+    NSLog(@" trigger device command get account");
     
     if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
-        NSLog(@" trigger device command get account");
+        
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
         
+        NSLog(@" email %@  screenName %@",
+              deviceCommand.email, deviceCommand.screenName);
         
     }
     
