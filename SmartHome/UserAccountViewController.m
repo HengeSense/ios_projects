@@ -8,6 +8,7 @@
 
 #import "UserAccountViewController.h"
 #import "CommandFactory.h"
+#import "DeviceCommandUpdateAccountHandler.h"
 @interface UserAccountViewController ()
 
 @end
@@ -35,7 +36,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
 }
+
 -(void) initDefaults{
     [super initDefaults];
     password = @"123456";
@@ -147,4 +151,9 @@
         editCell.textLabel.text = [[titles objectAtIndex:editIndex.row] stringByAppendingFormat:@" %@",string];
     }
 }
+
+-(void) dealloc{
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
+}
+
 @end

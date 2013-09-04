@@ -25,6 +25,12 @@
         
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
         
+        NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[self class]];
+        
+        NSLog(@"count is %d", arr.count);
+        
+        NSLog(        [[arr objectAtIndex:0] isKindOfClass:[UIViewController class]] ? @"yes" : @"no");
+        
         NSLog(@" email %@  screenName %@",
               deviceCommand.email, deviceCommand.screenName);
         
