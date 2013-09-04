@@ -153,6 +153,7 @@
 }
 
 -(void) dealloc{
+    NSLog(@"ffff");
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
 }
 
