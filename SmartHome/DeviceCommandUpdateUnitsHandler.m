@@ -18,7 +18,9 @@
     [super handle:command];
     
     NSLog(@" trigger device command update units .");
-    
+    if (command) {
+        <#statements#>
+    }
     if(![command isKindOfClass:[DeviceCommandUpdateUnits class]]) return;
     DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
     

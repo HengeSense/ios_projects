@@ -155,12 +155,9 @@
 
 - (void)updateAccount:(DeviceCommandUpdateAccount *)updateCommand {
     if(updateCommand != nil) {
-        NSLog(@"%@",        updateCommand.security);
+        NSLog(@"%@",updateCommand.security);
     }
 }
 
--(void) dealloc{
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
-}
 
 @end
