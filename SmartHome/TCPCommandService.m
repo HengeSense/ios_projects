@@ -98,9 +98,6 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
-    
-    NSLog([[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding]);
-    
     NSDictionary *json = [JsonUtils createDictionaryFromJson:messages];
     DeviceCommand *command = [CommandFactory commandFromJson:json];
     if(command != nil) {
