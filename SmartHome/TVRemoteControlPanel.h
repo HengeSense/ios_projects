@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DirectionButton.h"
+#import "SMButton.h"
 
 @protocol TVRemoteControlPanelDelegate <NSObject>
 

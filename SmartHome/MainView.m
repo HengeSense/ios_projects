@@ -214,8 +214,7 @@
     }
     
     
-    [[SMShared current].deliveryService executeDeviceCommand:
-     [CommandFactory commandForType:CommandTypeGetUnits]];
+[[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
 
 #pragma mark -

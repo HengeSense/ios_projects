@@ -108,6 +108,7 @@
 		6F159BFE17D7176E005CFFEE /* btn_rc_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BF917D7176E005CFFEE /* btn_rc_left@2x.png */; };
 		6F159BFF17D7176E005CFFEE /* btn_rc_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BFA17D7176E005CFFEE /* btn_rc_right@2x.png */; };
 		6F159C0017D7176E005CFFEE /* btn_rc_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BFB17D7176E005CFFEE /* btn_rc_top@2x.png */; };
+		6F159C0317D754BB005CFFEE /* SMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159C0217D754BB005CFFEE /* SMButton.m */; };
 		6F17672B17C1E232007AED0C /* CommunicationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672A17C1E232007AED0C /* CommunicationMessage.m */; };
 		6F17672E17C1F7CA007AED0C /* DeviceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672D17C1F7CA007AED0C /* DeviceCommand.m */; };
 		6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17673017C1FA15007AED0C /* JsonUtils.m */; };
@@ -408,6 +409,8 @@
 		6F159BF917D7176E005CFFEE /* btn_rc_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_left@2x.png"; sourceTree = "<group>"; };
 		6F159BFA17D7176E005CFFEE /* btn_rc_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_right@2x.png"; sourceTree = "<group>"; };
 		6F159BFB17D7176E005CFFEE /* btn_rc_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_top@2x.png"; sourceTree = "<group>"; };
+		6F159C0117D754BB005CFFEE /* SMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMButton.h; sourceTree = "<group>"; };
+		6F159C0217D754BB005CFFEE /* SMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMButton.m; sourceTree = "<group>"; };
 		6F17672917C1E232007AED0C /* CommunicationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationMessage.h; sourceTree = "<group>"; };
 		6F17672A17C1E232007AED0C /* CommunicationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationMessage.m; sourceTree = "<group>"; };
 		6F17672C17C1F7CA007AED0C /* DeviceCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommand.h; sourceTree = "<group>"; };
@@ -853,6 +856,8 @@
 				6FEB91E617BB83CE007C04A1 /* temperature_view */,
 				6F0FAF4C17AF9C7B00B75D3E /* cells */,
 				6F0FAEA517AF803800B75D3E /* drawer_navigation */,
+				6F159C0117D754BB005CFFEE /* SMButton.h */,
+				6F159C0217D754BB005CFFEE /* SMButton.m */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -1858,6 +1863,7 @@
 				6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */,
 				6F159BF317D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.m in Sources */,
 				6F159BF617D708EC005CFFEE /* DeviceCommandReceivedNotifications.m in Sources */,
+				6F159C0317D754BB005CFFEE /* SMButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
