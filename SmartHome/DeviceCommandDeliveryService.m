@@ -11,7 +11,7 @@
 #import "DeviceCommandUpdateUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
-#import "DeviceCommandGetNotificationHandler.h"
+#import "DeviceCommandReceivedNotificationHandler.h"
 
 @implementation DeviceCommandDeliveryService
 
@@ -63,7 +63,7 @@
     } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetAccountHandler alloc] init];
     } else if([@"AccountMQListCommand" isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandGetNotificationHandler alloc] init];
+        handler = [[DeviceCommandReceivedNotificationHandler alloc] init];
     }
         
     if(handler != nil) {

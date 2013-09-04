@@ -24,8 +24,10 @@
         DeviceCommand *command = [[DeviceCommand alloc] init];
         command.commandName = @"AccountProfileCommand";
         return command;
-    } else if(type == CommandTypeUpdateUnits) {
-        
+    } else if(type == CommandTypeGetUnits) {
+        DeviceCommand *command = [[DeviceCommand alloc] init];
+        command.commandName = @"FindZKListCommand";
+        return command;
     } else if(type == CommandTypeGetNotifications) {
         DeviceCommand *command = [[DeviceCommand alloc] init];
         command.commandName = @"AccountMQListCommand";

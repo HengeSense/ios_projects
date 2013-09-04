@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeNone,
     CommandTypeUpdateAccount,
     CommandTypeGetAccount,
-    CommandTypeUpdateUnits,
+    CommandTypeGetUnits,
     CommandTypeGetNotifications,
 };
 

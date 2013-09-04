@@ -101,7 +101,7 @@
 		6F159BEA17D6E84D005CFFEE /* bg_hot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BE917D6E84D005CFFEE /* bg_hot@2x.png */; };
 		6F159BEC17D6E868005CFFEE /* bg_cold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */; };
 		6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BEF17D702F5005CFFEE /* TVRemoteControlPanel.m */; };
-		6F159BF317D70899005CFFEE /* DeviceCommandGetNotificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BF217D70899005CFFEE /* DeviceCommandGetNotificationHandler.m */; };
+		6F159BF317D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BF217D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.m */; };
 		6F159BF617D708EC005CFFEE /* DeviceCommandReceivedNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BF517D708EC005CFFEE /* DeviceCommandReceivedNotifications.m */; };
 		6F159BFC17D7176E005CFFEE /* btn_rc_center@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BF717D7176E005CFFEE /* btn_rc_center@2x.png */; };
 		6F159BFD17D7176E005CFFEE /* btn_rc_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BF817D7176E005CFFEE /* btn_rc_down@2x.png */; };
@@ -399,8 +399,8 @@
 		6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cold@2x.png"; sourceTree = "<group>"; };
 		6F159BEE17D702F5005CFFEE /* TVRemoteControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVRemoteControlPanel.h; sourceTree = "<group>"; };
 		6F159BEF17D702F5005CFFEE /* TVRemoteControlPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVRemoteControlPanel.m; sourceTree = "<group>"; };
-		6F159BF117D70899005CFFEE /* DeviceCommandGetNotificationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetNotificationHandler.h; sourceTree = "<group>"; };
-		6F159BF217D70899005CFFEE /* DeviceCommandGetNotificationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetNotificationHandler.m; sourceTree = "<group>"; };
+		6F159BF117D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandReceivedNotificationHandler.h; sourceTree = "<group>"; };
+		6F159BF217D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandReceivedNotificationHandler.m; sourceTree = "<group>"; };
 		6F159BF417D708EC005CFFEE /* DeviceCommandReceivedNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandReceivedNotifications.h; sourceTree = "<group>"; };
 		6F159BF517D708EC005CFFEE /* DeviceCommandReceivedNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandReceivedNotifications.m; sourceTree = "<group>"; };
 		6F159BF717D7176E005CFFEE /* btn_rc_center@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_center@2x.png"; sourceTree = "<group>"; };
@@ -1360,8 +1360,8 @@
 				6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */,
 				6FE3B76417D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.h */,
 				6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */,
-				6F159BF117D70899005CFFEE /* DeviceCommandGetNotificationHandler.h */,
-				6F159BF217D70899005CFFEE /* DeviceCommandGetNotificationHandler.m */,
+				6F159BF117D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.h */,
+				6F159BF217D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1856,7 +1856,7 @@
 				6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */,
 				6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */,
 				6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */,
-				6F159BF317D70899005CFFEE /* DeviceCommandGetNotificationHandler.m in Sources */,
+				6F159BF317D70899005CFFEE /* DeviceCommandReceivedNotificationHandler.m in Sources */,
 				6F159BF617D708EC005CFFEE /* DeviceCommandReceivedNotifications.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

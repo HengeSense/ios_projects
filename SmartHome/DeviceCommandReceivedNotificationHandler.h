@@ -1,5 +1,5 @@
 //
-//  DeviceCommandGetNotificationHandler.h
+//  DeviceCommandReceivedNotificationHandler.h
 //  SmartHome
 //
 //  Created by Zhao yang on 9/4/13.
@@ -9,6 +9,6 @@
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandReceivedNotifications.h"
 
-@interface DeviceCommandGetNotificationHandler : DeviceCommandHandler
+@interface DeviceCommandReceivedNotificationHandler : DeviceCommandHandler
 
 @end
