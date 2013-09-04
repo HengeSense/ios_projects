@@ -7,7 +7,6 @@
 //
 
 #import "DeviceCommandGetAccountHandler.h"
-#import "DeviceCommandUpdateAccount.h"
 
 
 @implementation DeviceCommandGetAccountHandler
@@ -19,23 +18,16 @@
         //
         return;
     }
-    NSLog(@" trigger device command get account");
     
     if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
-        
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
-        
-        NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[self class]];
-        
-        NSLog(@"count is %d", arr.count);
-        
-        NSLog(        [[arr objectAtIndex:0] isKindOfClass:[UIViewController class]] ? @"yes" : @"no");
-        
-        NSLog(@" email %@  screenName %@",
-              deviceCommand.email, deviceCommand.screenName);
-        
+        NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateAccountHandler class]];
+        for(int i=0; i<arr.count; i++) {
+            if([[arr objectAtIndex:i] respondsToSelector:@selector(updateAccount:)]) {
+                [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(updateAccount:) withObject:deviceCommand waitUntilDone:NO];
+            }
+        }
     }
-    
 }
 
 @end

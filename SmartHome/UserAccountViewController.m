@@ -8,7 +8,8 @@
 
 #import "UserAccountViewController.h"
 #import "CommandFactory.h"
-#import "DeviceCommandUpdateAccountHandler.h"
+#import "DeviceCommandUpdateAccount.h"
+
 @interface UserAccountViewController ()
 
 @end
@@ -36,8 +37,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
 }
 
 -(void) initDefaults{
@@ -48,6 +47,7 @@
     if (infoDictionary == nil) {
         infoDictionary = [[NSMutableDictionary alloc] initWithObjects:values forKeys:titles];
     }
+    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
 }
 - (void)initUI{
     [super initUI];
@@ -152,8 +152,14 @@
     }
 }
 
+
+- (void)updateAccount:(DeviceCommandUpdateAccount *)updateCommand {
+    if(updateCommand != nil) {
+        NSLog(@"%@",        updateCommand.security);
+    }
+}
+
 -(void) dealloc{
-    NSLog(@"ffff");
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
 }
 

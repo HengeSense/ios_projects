@@ -9,6 +9,11 @@
 #import "NavViewController.h"
 #import "SMCell.h"
 #import "ModifyInfoViewController.h"
-@interface UserAccountViewController : NavViewController<UITableViewDataSource,UITableViewDelegate,TextViewDelegate,UIAlertViewDelegate>
+#import "DeviceCommandUpdateAccountHandler.h"
+#import "DeviceCommandGetAccountHandler.h"
+
+@interface UserAccountViewController : NavViewController<UITableViewDataSource,UITableViewDelegate,TextViewDelegate,UIAlertViewDelegate, DeviceCommandGetAccountDelegate>
+
 @property (nonatomic,strong) NSMutableDictionary *infoDictionary;
+
 @end
