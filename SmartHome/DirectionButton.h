@@ -22,6 +22,7 @@
 
 @property (assign, nonatomic) id<DirectionButtonDelegate> delegate;
 
-+ (DirectionButton *)directionButtonWithPoint:(CGPoint)point;
++ (DirectionButton *)cameraDirectionButtonWithPoint:(CGPoint)point;
++ (DirectionButton *)tvDirectionButtonWithPoint:(CGPoint)point;
 
 @end

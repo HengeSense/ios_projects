@@ -9,6 +9,7 @@
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
 #import "DeviceCommandUpdateUnits.h"
+#import "DeviceCommandReceivedNotifications.h"
 
 @implementation CommandFactory
 
@@ -47,7 +48,7 @@
     } else if([@"AccountProfileCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateAccount alloc] initWithDictionary:json];
     } else if([@"AccountMQListCommand" isEqualToString:commandName]) {
-        
+        command = [[DeviceCommandReceivedNotifications alloc] initWithDictionary:json];
     }
     
     return command;

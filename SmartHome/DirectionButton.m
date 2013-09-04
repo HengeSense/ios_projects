@@ -30,8 +30,26 @@
     return self;
 }
 
-+ (DirectionButton *)directionButtonWithPoint:(CGPoint)point {
-    return [[DirectionButton alloc] initWithFrame:CGRectMake(point.x, point.y, 281/2, 282/2)];
+- (id)initWithFrame:(CGRect)frame andType:(NSString *)type
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initDefaults];
+        if([@"tv" isEqualToString:type]) {
+            
+        } else if([@"camera" isEqualToString:type]) {
+            [self initUI];
+        }
+    }
+    return self;
+}
+
++ (DirectionButton *)cameraDirectionButtonWithPoint:(CGPoint)point {
+    return [[DirectionButton alloc] initWithFrame:CGRectMake(point.x, point.y, 281/2, 282/2) andType:@"camera"];
+}
+
++ (DirectionButton *)tvDirectionButtonWithPoint:(CGPoint)point {
+    return [[DirectionButton alloc] initWithFrame:CGRectMake(point.x, point.y, 281/2, 282/2) andType:@"tv"];
 }
 
 - (void)initDefaults {

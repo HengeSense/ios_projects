@@ -56,7 +56,7 @@
     }
     
     if(btnDirection == nil) {
-        btnDirection = [DirectionButton directionButtonWithPoint:CGPointMake(90, imgCameraShots.frame.origin.y + imgCameraShots.bounds.size.height + 20)];
+        btnDirection = [DirectionButton cameraDirectionButtonWithPoint:CGPointMake(90, imgCameraShots.frame.origin.y + imgCameraShots.bounds.size.height + 20)];
         btnDirection.delegate = self;
         [backgroundView addSubview:btnDirection];
     }
