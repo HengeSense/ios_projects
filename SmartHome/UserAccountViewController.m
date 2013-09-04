@@ -37,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
+    
 }
 
 -(void) initDefaults{
@@ -48,6 +48,7 @@
     if (infoDictionary == nil) {
         infoDictionary = [[NSMutableDictionary alloc] initWithObjects:values forKeys:titles];
     }
+    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
 }
 - (void)initUI{
     [super initUI];
