@@ -15,7 +15,6 @@
 - (void)centerButtonClicked;
 - (void)topButtonClicked;
 - (void)bottomButtonClicked;
--()
 @end
 
 @interface DirectionButton : UIView
