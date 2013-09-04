@@ -22,6 +22,12 @@
 //
 - (void)clientSocketSenderReady;
 
+
+@optional
+
+- (void)notifyConnectionClosed;
+- (void)notifyConnectionOpened;
+
 @end
 
 @interface ExtranetClientSocket : ClientSocket

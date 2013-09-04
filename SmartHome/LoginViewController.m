@@ -194,6 +194,12 @@
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
                         [SMShared current].settings.deviceCode = command.deviceCode;
                         [[SMShared current].settings saveSettings];
+                        
+                        //start service
+                        if(![SMShared current].deliveryService.isService) {
+                            [[SMShared current].deliveryService startService];
+                        }
+                        
                         [[AlertView currentAlertView] dismissAlertView];
                         
                         if([SMShared current].settings.anyUnitsBinding) {

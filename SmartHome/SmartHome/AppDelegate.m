@@ -34,6 +34,9 @@
     BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
     
     if(hasLogin) {
+        
+        [self.deviceCommandDeliveryService startService];
+        
         if(self.settings.anyUnitsBinding) {
             [rootViewController.navigationController pushViewController:
              [[MainViewController alloc] init] animated:NO];
@@ -83,6 +86,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [self.deviceCommandDeliveryService stopService];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

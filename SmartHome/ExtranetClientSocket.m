@@ -85,6 +85,12 @@
         } else if(aStream == self.outputStream) {
             outOpen = YES;
         }
+        
+        if(inOpen && outOpen) {
+            if(self.messageHandlerDelegate != nil && [self.messageHandlerDelegate respondsToSelector:@selector(notifyConnectionOpened)]) {
+                [self.messageHandlerDelegate notifyConnectionOpened];
+            }
+        }
     } else if(eventCode == NSStreamEventEndEncountered) {
         [self close];
     } else if(eventCode == NSStreamEventErrorOccurred) {
@@ -208,6 +214,9 @@
     inOpen = NO;
     outOpen = NO;
     [super close];
+    if(self.messageHandlerDelegate != nil && [self.messageHandlerDelegate respondsToSelector:@selector(notifyConnectionClosed)]) {
+        [self.messageHandlerDelegate notifyConnectionClosed];
+    }
 }
 
 @end

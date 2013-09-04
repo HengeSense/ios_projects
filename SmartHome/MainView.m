@@ -28,8 +28,7 @@
 #define RECORD_END_SOUND_ID              1114
 
 @implementation MainView {
-    NSArray *navItems;
-    
+    NSArray *navItems;    
     SpeechViewState speechViewState;
     RecognizerState recognizerState;
     ConversationView *speechView;
@@ -38,8 +37,13 @@
     PageableNavView *pageableNavView;
     UIView *notificationView;
     UIButton *btnSpeech;
+    
+    
+    
+    
     DeviceCommandUpdateUnitsHandler *updateHandler;
 }
+
 @synthesize unitsArr;
 @synthesize defaultUnit;
 
@@ -64,7 +68,6 @@
     updateHandler.delegate = self;
     self.unitsArr = [SMShared current].memory.units;
     self.defaultUnit = [self setDefaultUnitDictionary:self.unitsArr];
-    
 }
 
 - (void)initUI {
@@ -215,12 +218,10 @@
         [self addSubview:notificationView];
     }
     
-    [[SMShared current].deliveryService startService];
-    DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetAccount];
-    [[SMShared current].deliveryService executeDeviceCommand:command];
-
-
 }
+
+#pragma mark -
+#pragma mark units view
 
 -(void)updateUnits:(NSArray *)units{
     self.unitsArr = units;
@@ -237,9 +238,6 @@
     pageableScrollView.backgroundColor = [UIColor clearColor];
     [self addSubview:pageableScrollView];
     [self addSubview:pageableScrollView.pageNavView];
-
-    
-    
 }
 
 -(NSDictionary *) setDefaultUnitDictionary:(NSArray *) units{
@@ -266,26 +264,23 @@
     return deviceDictionary;
 }
 
+- (void) testCommand{
+    NSString *json = @"{\"zkList\":[{\"identifier\":\"123\",\"name\":\"永安小区\",\"localIP\":\"172.16.8.16\",\"updateTime\":\"2013.9.1\",\"zones\":{\"zone1\":{\"name\":\"客厅\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"on\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"客厅摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"}}}}}],\"appKey\":\"\",\"deviceCode\":\"\",\"result\":\"\",\"commandName\":\"\",\"masterDeviceCode\":\"\",\"commandTime\":\"\",\"tcpAddress\":\"\",\"security\":\"\"}";
+    
+    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+    
+    DeviceCommand *command = [[DeviceCommandUpdateUnits alloc] initWithDictionary:[JsonUtils createDictionaryFromJson:data]];
+    [updateHandler handle:command];
+}
+
 #pragma mark -
-#pragma mark notification && affect button
+#pragma mark notification 
 
 - (void)btnShowNotificationDevicePressed:(id)sender {
     NotificationViewController *notificationViewController = [[NotificationViewController alloc] init];
     [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 
-- (void) testCommand{
-    NSString *json = @"{\"zkList\":[{\"identifier\":\"123\",\"name\":\"永安小区\",\"localIP\":\"172.16.8.16\",\"updateTime\":\"2013.9.1\",\"zones\":{\"zone1\":{\"name\":\"客厅\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"on\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"客厅摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"}}}}}],\"appKey\":\"\",\"deviceCode\":\"\",\"result\":\"\",\"commandName\":\"\",\"masterDeviceCode\":\"\",\"commandTime\":\"\",\"tcpAddress\":\"\",\"security\":\"\"}";
-    
-
-    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-//    ,\"zone2\":{\"name\":\"卧室\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"off\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"卧室摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"}}
-//    ,{\"identifier\":\"133\",\"name\":\"永不安小区\",\"localIP\":\"172.16.8.16\",\"updateTime\":\"2013.9.1\",\"zones\":{\"zone1\":{\"name\":\"客厅\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"on\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"客厅摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"}}},\"zone2\":{\"name\":\"卧室\",\"accessories\":{\"device1\":{\"eleState\":\"off\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"off\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"卧室摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"卧室空调\",\"status\":\"正常\",\"type\":\"1\"}}}}}
-    
-//    NSLog(@"%@",[JsonUtils createDictionaryFromJson:data]);
-    DeviceCommand *command = [[DeviceCommandUpdateUnits alloc] initWithDictionary:[JsonUtils createDictionaryFromJson:data]];
-    [updateHandler handle:command];
-}
 #pragma mark -
 #pragma mark speech view
 
@@ -399,6 +394,9 @@
 
 #pragma mark -
 #pragma mark text message processor delegate
+
+
+
 
 
 
