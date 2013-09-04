@@ -17,5 +17,7 @@
 
 @interface TVRemoteControlPanel : UIView<DirectionButtonDelegate>
 
++ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point;
+
 
 @end
