@@ -7,6 +7,7 @@
 //
 
 #import "DeviceCommandGetAccountHandler.h"
+#import "DeviceCommandUpdateAccount.h"
 
 
 @implementation DeviceCommandGetAccountHandler
@@ -19,7 +20,13 @@
         return;
     }
     
-    NSLog(@" trigger device command get account");
+    if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
+        NSLog(@" trigger device command get account");
+        DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
+        
+        
+    }
+    
 }
 
 @end

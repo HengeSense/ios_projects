@@ -19,14 +19,7 @@
         return;
     }
     
-    if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
-        DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
-        
-        
-        NSLog(@" trigger device command update account .");
-        // do service here ...
-    }
-
+    
 }
 
 @end
