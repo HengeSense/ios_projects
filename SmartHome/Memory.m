@@ -35,7 +35,6 @@
     if(obj == nil || handler == nil) return;
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
     if(subscriptions_ == nil) {
-        NSLog(@"--> %@", [handler description]);
         subscriptions_ = [NSMutableArray array];
         [subscriptions_ addObject:obj];
         [self.subscriptions setObject:subscriptions_ forKey:[handler description]];
@@ -61,9 +60,11 @@
 - (void)unSubscribeHandler:(Class)handler for:(id)obj {
     if(obj == nil || handler == nil) return;
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
+    NSLog(@"%d", subscriptions_.count);
     if(subscriptions_ != nil) {
         [subscriptions_ removeObject:obj];
     }
+    NSLog(@"%d", subscriptions_.count);
 }
 
 - (NSArray *)replaceWithUnits:(NSArray *)updateUnits {

@@ -105,6 +105,13 @@
     }
 }
 
+- (void)notifyConnectionClosed {
+    NSLog(@"socket closed");
+}
+
+- (void)notifyConnectionOpened {
+    NSLog(@"socket opened");
+}
 
 
 @end
