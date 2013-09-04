@@ -16,19 +16,12 @@
     UIImageView *imgBottomButton;
     UIImageView *imgCenterButton;
     UITapGestureRecognizer *tapGesture;
+    CGFloat centerRound;
+    CGFloat outRound;
 }
 
 @synthesize delegate;
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self initDefaults];
-        [self initUI];
-    }
-    return self;
-}
 
 - (id)initWithFrame:(CGRect)frame andType:(NSString *)type
 {
@@ -36,9 +29,9 @@
     if (self) {
         [self initDefaults];
         if([@"tv" isEqualToString:type]) {
-            
+            [self initTVTypeUI];
         } else if([@"camera" isEqualToString:type]) {
-            [self initUI];
+            [self initCameraTypeUI];
         }
     }
     return self;
@@ -55,14 +48,57 @@
 - (void)initDefaults {
     
 }
+-(void) initTVTypeUI{
+    CGPoint center = CGPointMake(70, 70.5);
+    if(imgLeftButton == nil) {
+        imgLeftButton = [[UIImageView alloc] initWithFrame:CGRectMake(4, 0, 81/2, 182/2)];
+        imgLeftButton.center = CGPointMake(imgLeftButton.center.x, center.y-1);
+        imgLeftButton.image = [UIImage imageNamed:@"btn_rc_left.png"];
+        [self addSubview:imgLeftButton];
+    }
+    
+    if(imgRightButton == nil) {
+        imgRightButton = [[UIImageView alloc] initWithFrame:CGRectMake((self.frame.size.width- 81 / 2 - 6) , 0, 81/2, 182/2)];
+        imgRightButton.center = CGPointMake(imgRightButton.center.x, center.y - 1);
+        imgRightButton.image = [UIImage imageNamed:@"btn_rc_right.png"];
+        [self addSubview:imgRightButton];
+    }
+    
+    if(imgTopButton == nil) {
+        imgTopButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 4, 182/2, 81/2)];
+        imgTopButton.center = CGPointMake(center.x - 1, imgTopButton.center.y);
+        imgTopButton.image = [UIImage imageNamed:@"btn_rc_up.png"];
+        [self addSubview:imgTopButton];
+    }
+    
+    if(imgBottomButton == nil) {
+        imgBottomButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - 81 / 2 - 6), 182/2, 81/2)];
+        imgBottomButton.center = CGPointMake(center.x - 1, imgBottomButton.center.y);
+        imgBottomButton.image = [UIImage imageNamed:@"btn_rc_down.png"];
+        [self addSubview:imgBottomButton];
+    }
+    
+    if(imgCenterButton == nil) {
+        imgCenterButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 126/2, 126/2)];
+        imgCenterButton.center = CGPointMake(center.x - 1,center.y - 1);
+        imgCenterButton.image = [UIImage imageNamed:@"btn_rc_ok.png"];
+        [self addSubview:imgCenterButton];
+    }
+    
+    if(tapGesture == nil) {
+        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        [self addGestureRecognizer:tapGesture];
+    }
 
-- (void)initUI {
+}
+- (void)initCameraTypeUI {
     if(backgroundImageView == nil) {
         backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         backgroundImageView.image = [UIImage imageNamed:@"bg_camera.png"];
         [self addSubview:backgroundImageView];
     }
-    
+    NSLog(@"bg center %@",NSStringFromCGPoint(backgroundImageView.center));
+    NSLog(@"self center %@",NSStringFromCGPoint(self.center));
     if(imgLeftButton == nil) {
         imgLeftButton = [[UIImageView alloc] initWithFrame:CGRectMake(4, 0, 81/2, 182/2)];
         imgLeftButton.center = CGPointMake(imgLeftButton.center.x, backgroundImageView.center.y-1);
