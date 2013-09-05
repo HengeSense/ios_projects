@@ -41,7 +41,7 @@
 }
 -(id)initWithPoint:(CGPoint) point andUnit:(Unit *) unit owner:(UIViewController *) owner{
     self = [super initWithFrame:CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH+20+101/2, SCROLL_ITEM_HEIGHT)];
-       self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+
     CGFloat multiple = (CGFloat) unit.zones.count;
     
     [self loadDataWithDictionary:unit owner:owner];
@@ -122,6 +122,7 @@
     
     CGFloat multiple = (CGFloat) unit.zones.count;
     if (self.pageableScrollView == nil) {
+        self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
         self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
         [self pageWithViews:mutableScrollArr];
         [self addSubview:self.pageableScrollView];
@@ -157,13 +158,13 @@
     __block NSInteger curNav;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
         obj.selected = NO;
-        obj.titleLabel.font = [UIFont systemFontOfSize:16];
+        obj.titleLabel.font = [UIFont systemFontOfSize:14];
         if ([obj isEqual:sender]) {
             curNav = idx;
         }
     }];
     sender.selected = YES;
-    sender.titleLabel.font = [UIFont systemFontOfSize:18];
+    sender.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.pageableScrollView scrollRectToVisible:CGRectMake(self.pageableScrollView.frame.size.width*curNav, self.pageableScrollView.frame.origin.y,SCROLL_ITEM_WIDTH, SCROLL_ITEM_WIDTH) animated:YES];
 }
 
@@ -176,10 +177,10 @@
     NSInteger curPage = xOffset/itemWidth;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
         obj.selected = NO;
-        obj.titleLabel.font = [UIFont systemFontOfSize:16];
+        obj.titleLabel.font = [UIFont systemFontOfSize:14];
         if (curPage == idx) {
             obj.selected = YES;
-            obj.titleLabel.font = [UIFont systemFontOfSize:18];
+            obj.titleLabel.font = [UIFont systemFontOfSize:16];
 
         }
     }];

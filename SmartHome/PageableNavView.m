@@ -64,7 +64,7 @@
     [navItems enumerateObjectsUsingBlock:^(__strong UIButton *obj,NSUInteger index,BOOL *stop){
         if (index == 0) {
             obj.selected = YES;
-            obj.titleLabel.font = [UIFont systemFontOfSize:18];
+            obj.titleLabel.font = [UIFont systemFontOfSize:16];
         }
         obj.frame = CGRectMake(pageableNavRect.origin.x, pageableNavRect.origin.y, obj.frame.size.width, obj.frame.size.height);
         [self.pageableNavView addSubview:obj];
