@@ -142,4 +142,6 @@
  */
 "input.new.password" = "输入新密码:";
 "again.to.makesure"  = "再次输入：";
+"password.is.modified" = "密码已编辑";
+
 

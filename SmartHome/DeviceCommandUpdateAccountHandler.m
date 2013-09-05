@@ -16,6 +16,9 @@
     
     if(command == nil) {
         //
+//        if (command.resultID) {
+//            <#statements#>
+//        }
         return;
     }
 }

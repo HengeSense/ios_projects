@@ -22,6 +22,7 @@
     NSIndexPath *editIndex;
     UIAlertView *checkPassword;
     NSString *password;
+    BOOL passwordIsModified;
 }
 @synthesize infoDictionary;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,17 +38,31 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
+    command.email = [infoDictionary objectForKey:NSLocalizedString(@"user.email", @"")];
+    command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick.name", @"")];
+    command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify.password", @"")];
+    
+    
+    [[SMShared current].deliveryService executeDeviceCommand:command];
 }
 
 -(void) initDefaults{
     [super initDefaults];
+    NSLog(@"init");
     password = @"123456";
-    values = [[NSMutableArray alloc]initWithObjects:@"哎哟我去",@"330195612@qq.com",@"",nil];
+    values = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",nil];
     titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick.name", @""),NSLocalizedString(@"user.email", @""),NSLocalizedString(@"modify.password", @""), nil];
     if (infoDictionary == nil) {
         infoDictionary = [[NSMutableDictionary alloc] initWithObjects:values forKeys:titles];
     }
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
+    
 }
 
 - (void)initUI{
@@ -75,8 +90,6 @@
         checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password.valid", @"") message:NSLocalizedString(@"please.input.old.password", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
         [checkPassword setAlertViewStyle:UIAlertViewStyleSecureTextInput];
     }
-
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,14 +103,15 @@
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  3;
+    if(values == nil) return 0;
+    return titles.count;
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellIdentifier;
     if (indexPath.row == 0) {
         cellIdentifier = @"topCellIdentifier";
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == titles.count-1){
         cellIdentifier = @"bottomCellIdentifier";
     }else{
         cellIdentifier = @"cellIdentifier";
@@ -105,11 +119,14 @@
     UITableViewCell *result = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(result == nil){
         result = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        result.textLabel.text = [[titles objectAtIndex:indexPath.row] stringByAppendingFormat:@"  %@",[values objectAtIndex:indexPath.row]];
-        UIImageView *accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory.png"]];
-        accessory.frame = CGRectMake(0, 0, 12/2, 23/2);
-        result.accessoryView = accessory; 
+        [result.contentView addSubview:[self viewInCellAtIndexPath:indexPath of:result]];
     }
+    
+    UILabel *lblValue = (UILabel *)[[result.contentView viewWithTag:999] viewWithTag:1000];
+    if(lblValue != nil) {
+        lblValue.text = [values objectAtIndex:indexPath.row];
+    }
+    
     return result;
 }
 
@@ -119,7 +136,7 @@
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        NSString *inputPassword = [alertView textFieldAtIndex:0].text;
+//        NSString *inputPassword = [alertView textFieldAtIndex:0].text;
         
         [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(delayAlert) userInfo:nil repeats:NO];
 //        if ([inputPassword isEqualToString:password]) {
@@ -131,7 +148,42 @@
 //        }
     }
 }
+-(UIView *) viewInCellAtIndexPath:(NSIndexPath *) indexPath of:(UITableViewCell *) cell{
+    NSArray *subViews = cell.contentView.subviews;
+    for (UIView *v in subViews) {
+        [v removeFromSuperview];
+    }
+    UIView *view = [[UIView alloc] initWithFrame:cell.contentView.frame];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0,80 , cell.frame.size.height)];
+    titleLabel.text = [titles objectAtIndex:indexPath.row];
+    [titleLabel setBackgroundColor:[UIColor clearColor]];
+    [view addSubview:titleLabel];
+    
+    
+    UILabel *valueLabel =[[UILabel alloc] initWithFrame:CGRectMake(85, 0,200 ,cell.frame.size.height)];
+    valueLabel.tag = 1000;
+    valueLabel.textAlignment = UITextAlignmentRight;
+    [valueLabel setBackgroundColor:[UIColor clearColor]];
+    [valueLabel setTextColor:[UIColor grayColor]];
+    [valueLabel setFont:[UIFont systemFontOfSize:16]];
+    
+    if (passwordIsModified&&indexPath.row == 2) {
+        valueLabel.text = NSLocalizedString(@"password.is.modified", @"");
+    }else{
+            valueLabel.text = [values objectAtIndex:indexPath.row];
+    }
 
+    [view addSubview:valueLabel];
+
+    
+    UIImageView *accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory.png"]];
+    accessory.frame = CGRectMake(300, 0, 12/2, 23/2);
+    accessory.center = CGPointMake(accessory.center.x, cell.center.y);
+    [view addSubview:accessory];
+    view.tag = 999;
+    return  view;
+
+}
 - (void)delayAlert {
     [[AlertView currentAlertView] setMessage:@"处理中" forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
@@ -149,24 +201,34 @@
 
 -(void) textViewHasBeenSetting:(NSString *)string{
     if ([[titles objectAtIndex:editIndex.row] isEqualToString:NSLocalizedString(@"modify.password", @"")]) {
+        
         if (string !=nil&&![@"" isEqualToString:string]) {
-            [values setObject:string atIndexedSubscript:editIndex.row];
-                    editCell.textLabel.text = [[titles objectAtIndex:editIndex.row] stringByAppendingFormat:@" %@",@"已更改"];
+            passwordIsModified = YES;
+            [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
         }
     }else{
         [values setObject:string atIndexedSubscript:editIndex.row];
-        editCell.textLabel.text = [[titles objectAtIndex:editIndex.row] stringByAppendingFormat:@" %@",string];
+        [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
     }
+    [infoDictionary setValue:string forKey:[titles objectAtIndex:editIndex.row]];
 }
-
 - (void)updateAccount:(DeviceCommandUpdateAccount *)updateCommand {
+
     if(updateCommand != nil) {
-        NSLog(@"%@",updateCommand.security);
+
+        [values setObject:updateCommand.screenName atIndexedSubscript:0];
+        [values setObject:updateCommand.email atIndexedSubscript:1];
+        for (int i=0;i<titles.count;++i) {
+            [infoDictionary setValue:[values objectAtIndex:i] forKey:[titles objectAtIndex:i]];
+        }
+        [infoTable reloadData];
     }
+    return;
 }
 
 - (void)backToPreViewController {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
     [super backToPreViewController];
 }
 

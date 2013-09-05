@@ -140,5 +140,6 @@
  */
 "input.new.password" = "Input New Password:";
 "again.to.makesure"  = "Again To Makesure:";
+"password.is.modified" = "Password Is Editor";
 
 
