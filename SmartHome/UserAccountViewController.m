@@ -42,13 +42,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
-    command.email = [infoDictionary objectForKey:NSLocalizedString(@"user.email", @"")];
-    command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick.name", @"")];
-    command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify.password", @"")];
     
-    
-    [[SMShared current].deliveryService executeDeviceCommand:command];
 }
 
 -(void) initDefaults{
@@ -136,16 +130,18 @@
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-//        NSString *inputPassword = [alertView textFieldAtIndex:0].text;
+        password = [alertView textFieldAtIndex:0].text;
+        
+        DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
+        command.email = [infoDictionary objectForKey:NSLocalizedString(@"user.email", @"")];
+        command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick.name", @"")];
+        command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify.password", @"")];
+        command.oldPwd = password;
+        
+        [[SMShared current].deliveryService executeDeviceCommand:command];
         
         [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(delayAlert) userInfo:nil repeats:NO];
-//        if ([inputPassword isEqualToString:password]) {
-////            checkPassword.hidden = YES;
-//            [[AlertView currentAlertView] setMessage:@"修改成功" forType:AlertViewTypeSuccess];
-//            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
-//        }else{
-//            
-//        }
+        
     }
 }
 -(UIView *) viewInCellAtIndexPath:(NSIndexPath *) indexPath of:(UITableViewCell *) cell{
@@ -188,7 +184,33 @@
     [[AlertView currentAlertView] setMessage:@"处理中" forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
 }
+-(void) didEndUpdateAccount:(DeviceCommandUpdateAccount *)command{
+    if (command == nil) {
+        return;
+    }
+    switch (command.resultID) {
+        case 1:
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.success", @"") forType:AlertViewTypeSuccess];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+            break;
+        case -1:
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.password.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+        case -2:
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"blank.nickname.or.email.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+        case -3:
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.format.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+        case -4:
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.too.frequent.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
 
+        default:
+            break;
+    }
+    
+}
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     editCell = [tableView cellForRowAtIndexPath:indexPath];
     editIndex = indexPath;

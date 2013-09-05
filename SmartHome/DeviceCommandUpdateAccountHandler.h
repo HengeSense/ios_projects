@@ -7,6 +7,11 @@
 //
 
 #import "DeviceCommandHandler.h"
+#import "DeviceCommandUpdateAccount.h"
+
+@protocol DeviceCommandUpdateAccountDelegate<NSObject>
+-(void) didEndUpdateAccount:(DeviceCommandUpdateAccount *) command;
+@end
 
 @interface DeviceCommandUpdateAccountHandler : DeviceCommandHandler
 

@@ -12,7 +12,7 @@
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
 
-@interface UserAccountViewController : NavViewController<UITableViewDataSource,UITableViewDelegate,TextViewDelegate,UIAlertViewDelegate, DeviceCommandGetAccountDelegate>
+@interface UserAccountViewController : NavViewController<UITableViewDataSource,UITableViewDelegate,TextViewDelegate,UIAlertViewDelegate, DeviceCommandGetAccountDelegate,DeviceCommandUpdateAccountDelegate>
 
 @property (nonatomic,strong) NSMutableDictionary *infoDictionary;
 

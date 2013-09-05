@@ -129,10 +129,10 @@
 /*
  * user info
  */
-"screen.name"  = "Nick Name";
+"screen.name"  = "Nickname";
 "user.email"    = "Email";
 "modify.password" = "Modify Password";
-"please.input.old.password" = "please input old password";
+"please.input.old.password" = "Please input old password";
 "password.valid" = "Password Valid";
 
 /*
@@ -141,5 +141,9 @@
 "input.new.password" = "Input New Password:";
 "again.to.makesure"  = "Again To Makesure:";
 "password.is.modified" = "Password Is Editor";
-
+"update.success"     = "Update Success!";
+"update.password.error" = "The password is wrong!";
+"blank.nickname.or.email.error" = "The nickname or email is blank! ";
+"request.format.error"      = "Wrong request format!";
+"request.too.frequent.error" ="Too frequest request!";
 
