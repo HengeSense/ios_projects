@@ -131,16 +131,7 @@
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         password = [alertView textFieldAtIndex:0].text;
-        
-        DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
-        command.email = [infoDictionary objectForKey:NSLocalizedString(@"user.email", @"")];
-        command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick.name", @"")];
-        command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify.password", @"")];
-        command.oldPwd = password;
-        
-        [[SMShared current].deliveryService executeDeviceCommand:command];
-        
-        [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(delayAlert) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(delayProcess) userInfo:nil repeats:NO];
         
     }
 }
@@ -180,31 +171,43 @@
     return  view;
 
 }
-- (void)delayAlert {
+- (void)delayProcess {
     [[AlertView currentAlertView] setMessage:@"处理中" forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    
+    DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
+    command.email = [infoDictionary objectForKey:NSLocalizedString(@"user.email", @"")];
+    command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick.name", @"")];
+    command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify.password", @"")];
+    command.oldPwd = password;
+    [[SMShared current].deliveryService executeDeviceCommand:command];
 }
--(void) didEndUpdateAccount:(DeviceCommandUpdateAccount *)command{
+
+    
+-(void) didEndUpdateAccount:(DeviceCommand *)command{
+    
     if (command == nil) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.success", @"") forType:AlertViewTypeSuccess];
+        [[AlertView currentAlertView] delayDismissAlertView];
         return;
     }
     switch (command.resultID) {
         case 1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.success", @"") forType:AlertViewTypeSuccess];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+            [[AlertView currentAlertView] delayDismissAlertView];
             break;
         case -1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.password.error", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+            [[AlertView currentAlertView] delayDismissAlertView];
         case -2:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"blank.nickname.or.email.error", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+            [[AlertView currentAlertView] delayDismissAlertView];
         case -3:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.format.error", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+            [[AlertView currentAlertView] delayDismissAlertView];
         case -4:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.too.frequent.error", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+            [[AlertView currentAlertView] delayDismissAlertView];
 
         default:
             break;

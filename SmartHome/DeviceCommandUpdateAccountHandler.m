@@ -21,16 +21,13 @@
 //        }
         return;
     }
-    if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
-        DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
-        NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateAccountHandler class]];
-        for(int i=0; i<arr.count; i++) {
-            if([[arr objectAtIndex:i] respondsToSelector:@selector(updateAccount:)]) {
-                [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(didEndUpdateAccount:) withObject:deviceCommand waitUntilDone:NO];
-            }
+
+    NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateAccountHandler class]];
+    for(int i=0; i<arr.count; i++) {
+        if([[arr objectAtIndex:i] respondsToSelector:@selector(didEndUpdateAccount:)]) {
+            [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(didEndUpdateAccount:) withObject:command waitUntilDone:NO];
         }
     }
-
 }
 
 @end

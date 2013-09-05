@@ -15,6 +15,7 @@
 @property (strong,nonatomic) UIScrollView *pageableScrollView;
 @property (strong,nonatomic) PageableNavView *pageNavView;
 
--(id)initWithPoint:(CGPoint) point andDictionary:(NSDictionary *) dictionary;
+-(id)initWithPoint:(CGPoint) point andUnit:(Unit *) unit owner:(UIViewController *) owner;
+-(void) loadDataWithDictionary:(Unit *) unit owner:(UIViewController *) owner;
 
 @end

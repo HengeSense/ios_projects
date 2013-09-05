@@ -19,7 +19,7 @@
 
 @implementation PageableScrollView{
     NSArray *navItems;
-    NSDictionary *deviceDictionary;
+    NSMutableDictionary *deviceDictionary;
     UIImageView *leftBoundsShadow;
     UIImageView *rightBoundsShadow;
     
@@ -39,18 +39,67 @@
     }
     return self;
 }
--(id)initWithPoint:(CGPoint) point andDictionary:(NSDictionary *) dictionary{
-    self = [super initWithFrame:CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH+20, SCROLL_ITEM_HEIGHT)];
+-(id)initWithPoint:(CGPoint) point andUnit:(Unit *) unit owner:(UIViewController *) owner{
+    self = [super initWithFrame:CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH+20+101/2, SCROLL_ITEM_HEIGHT)];
+       self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+    CGFloat multiple = (CGFloat) unit.zones.count;
+    
+    [self loadDataWithDictionary:unit owner:owner];
+    
+    
+    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
+    leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
+    rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
+    rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH-10, 0, 10, SCROLL_ITEM_HEIGHT);
+    [self addSubview:leftBoundsShadow];
+    [self addSubview:rightBoundsShadow];
+    leftBoundsShadow.hidden = YES;
+    rightBoundsShadow.hidden = YES;
+    if (multiple>1) {
+        rightBoundsShadow.hidden = NO;
+    }
+    
+    return self;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if(!scrollView.isDecelerating) {
+        [self accessoryBehavior];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self accessoryBehavior];
+}
+- (void) loadDataWithDictionary:(Unit *) unit owner:(UIViewController *) owner{
+    if (unit == nil) {
+        return;
+    }
+    NSArray *zones = unit.zones;
+    NSMutableArray *rooms = [NSMutableArray new];
+    NSMutableArray *devicesOfRooms = [NSMutableArray new];
+    for (Zone *zone in zones) {
+        NSArray *devices = zone.devices;
+        NSMutableArray *devicesBtn = [NSMutableArray new];
+        [rooms addObject:zone.name];
+        for (Device *device in devices) {
+            DeviceButton *db = [DeviceButton buttonWithDevice:device point:CGPointMake(0, 0) owner:owner];
+            [devicesBtn addObject:db];
+        }
+        [devicesOfRooms addObject:devicesBtn];
+    }
+    deviceDictionary = [[NSMutableDictionary alloc] initWithObjects:devicesOfRooms forKeys:rooms];
+    
     __block NSMutableArray *mutableNavArr = [[NSMutableArray alloc] initWithObjects: nil];
     __block NSMutableArray *mutableScrollArr = [[NSMutableArray alloc] initWithObjects:nil];
-    [dictionary enumerateKeysAndObjectsUsingBlock:^(__strong NSString *key, __strong NSArray *obj, BOOL *stop) {
+    [deviceDictionary enumerateKeysAndObjectsUsingBlock:^(__strong NSString *key, __strong NSArray *obj, BOOL *stop) {
         NSInteger groupCount = obj.count/9+1;
         CGFloat contentHeight = groupCount*SCROLL_ITEM_HEIGHT;
         UIButton *navBtn = [ScrollNavButton buttonWithNothing];
         [navBtn setTitle:key forState:UIControlStateNormal];
         [navBtn addTarget:self action:@selector(scrollNavButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [mutableNavArr addObject:navBtn];
-        CGRect scrollRect = CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH,SCROLL_ITEM_HEIGHT);
+        CGRect scrollRect = CGRectMake(0,0, SCROLL_ITEM_WIDTH,SCROLL_ITEM_HEIGHT);
         __block UIScrollView *scrollItem = [[UIScrollView alloc] initWithFrame:scrollRect];
         scrollItem.contentSize = CGSizeMake(SCROLL_ITEM_WIDTH, contentHeight);
         scrollItem.showsVerticalScrollIndicator = NO;
@@ -69,41 +118,24 @@
         }];
         [mutableScrollArr addObject:scrollItem];
     }];
-    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
-    self.pageableScrollView.delegate = self;
-    CGFloat multiple = (CGFloat) dictionary.count;
     
-    self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
-    [self pageWithViews:mutableScrollArr];
-    [self addSubview:self.pageableScrollView];
-    self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(point.x+SCROLL_ITEM_WIDTH+MARGIN_X+20, point.y, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
+    
+    CGFloat multiple = (CGFloat) unit.zones.count;
+    if (self.pageableScrollView == nil) {
+        self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
+        [self pageWithViews:mutableScrollArr];
+        [self addSubview:self.pageableScrollView];
+    }else{
+        [self removeSubviews:self.pageableScrollView];
+        [self pageWithViews:mutableScrollArr];
+    }
+
+    self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_WIDTH+MARGIN_X+20, 0, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
+    [self addSubview:self.pageNavView];
+
     navItems = mutableNavArr;
-    
-    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
-    leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
-    rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
-    rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH-10, 0, 10, SCROLL_ITEM_HEIGHT);
-    [self addSubview:leftBoundsShadow];
-    [self addSubview:rightBoundsShadow];
-    leftBoundsShadow.hidden = YES;
-    rightBoundsShadow.hidden = YES;
-    if (dictionary.count>1) {
-        rightBoundsShadow.hidden = NO;
-    }
-    
-    return self;
-}
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if(!scrollView.isDecelerating) {
-        [self accessoryBehavior];
-    }
 }
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;{
-    [self accessoryBehavior];
-}
-
 -(void) pageWithViews:(NSArray *) views{
     self.pageableScrollView.pagingEnabled = YES;
     self.pageableScrollView.showsHorizontalScrollIndicator = NO;
@@ -115,7 +147,12 @@
         
     }];
 }
-
+-(void) removeSubviews:(UIView *) v{
+    NSArray *subviews = v.subviews;
+    for (UIView *view in subviews) {
+        [view removeFromSuperview];
+    }
+}
 -(void) scrollNavButtonAction:(UIButton *)sender{
     __block NSInteger curNav;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {

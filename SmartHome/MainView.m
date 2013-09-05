@@ -123,10 +123,9 @@
      /* mock data end -------------- */
     
     if(pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (bottom - 198 / 2 - 190)) andDictionary:scrollDictionary];
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (bottom - 198 / 2 - 190)) andUnit:nil owner:self.ownerController];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
-        [self addSubview:pageableScrollView.pageNavView];
     }
     
     if(notificationView == nil) {
@@ -191,21 +190,13 @@
     self.unitsArr = units;
     [self setDefaultUnitDictionary:units];
     
-    CGPoint point = pageableScrollView.frame.origin;
-    [pageableScrollView removeFromSuperview];
-    [pageableNavView removeFromSuperview];
-    
-    pageableScrollView = nil;
-    pageableNavView = nil;
-    
-    pageableScrollView = [[PageableScrollView alloc] initWithPoint:point andDictionary:defaultUnit];
-    pageableScrollView.backgroundColor = [UIColor clearColor];
-    [self addSubview:pageableScrollView];
-    [self addSubview:pageableScrollView.pageNavView];
+    [pageableScrollView loadDataWithDictionary:defaultUnit owner:self.ownerController];
 }
 
--(NSDictionary *) setDefaultUnitDictionary:(NSArray *) units{
-    return nil;
+-(Unit *) setDefaultUnitDictionary:(NSArray *) units{
+    if(units == nil || units.count == 0) return nil;
+    self.defaultUnit = [units objectAtIndex:0];
+    return self.defaultUnit;
     /*
     if(units == nil || units.count == 0) return nil;
     
