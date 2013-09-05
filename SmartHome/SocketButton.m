@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "ToggleSwitchButton.h"
+#import "SocketButton.h"
 
-@implementation ToggleSwitchButton
+@implementation SocketButton
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -30,7 +30,7 @@
 }
 
 + (SwitchButton *)buttonWithPoint:(CGPoint)point owner:(UIViewController *)owner {
-    SwitchButton *switchButton = [[ToggleSwitchButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
+    SwitchButton *switchButton = [[SocketButton alloc] initWithFrame:CGRectMake(point.x, point.y, 80, 52)];
     switchButton.ownerController = owner;
     return switchButton;
 }

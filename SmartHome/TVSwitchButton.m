@@ -26,7 +26,6 @@
 
 - (void)initUI {
     [super initUI];
-    [self registerImage:[UIImage imageNamed:@"icon_tv_off.png"] forStatus:@"off"];
     [self registerImage:[UIImage imageNamed:@"icon_tv_on.png"] forStatus:@"on"];
 }
 

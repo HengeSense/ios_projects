@@ -25,7 +25,6 @@
 
 - (void)initUI {
     [super initUI];
-    [self registerImage:[UIImage imageNamed:@"icon_aircondition_off.png"] forStatus:@"off"];
     [self registerImage:[UIImage imageNamed:@"icon_aircondition_on.png"] forStatus:@"on"];
 }
 

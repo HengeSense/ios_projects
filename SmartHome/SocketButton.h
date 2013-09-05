@@ -1,5 +1,5 @@
 //
-//  ToggleSwitchButton.h
+//  SocketButton.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/21/13.
@@ -8,6 +8,6 @@
 
 #import "SwitchButton.h"
 
-@interface ToggleSwitchButton : SwitchButton
+@interface SocketButton : SwitchButton
 
 @end

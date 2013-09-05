@@ -87,7 +87,7 @@
     [super initUI];
     self.topbar.titleLabel.text = self.title;
     if (self.title == NSLocalizedString(@"modify.password", @"")) {
-        UILabel *one = [[UILabel alloc]initWithFrame:CGRectMake(10, self.topbar.frame.size.height+20, 150, 20)];
+        UILabel *one = [[UILabel alloc]initWithFrame:CGRectMake(10, self.topbar.frame.size.height+10, 150, 20)];
         one.font = [UIFont systemFontOfSize:14];
         one.backgroundColor = [UIColor clearColor];
         one.textColor = [UIColor lightTextColor];
@@ -119,7 +119,7 @@
         
     }else{
         if (input == nil) {
-            input = [SMTextField textFieldWithPoint:CGPointMake(5, self.topbar.frame.size.height+20)];
+            input = [SMTextField textFieldWithPoint:CGPointMake(5, self.topbar.frame.size.height + 10)];
             input.text = self.value;
             input.delegate = self;
             [self.view addSubview:input];

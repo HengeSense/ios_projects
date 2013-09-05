@@ -25,6 +25,20 @@
 @synthesize nwkAddr;
 @synthesize user;
 
+@synthesize isRemote;
+@synthesize isSccurtain;
+@synthesize isCurtain;
+@synthesize isInlight;
+@synthesize isLightOrInlight;
+@synthesize isAircondition;
+@synthesize isCurtainOrSccurtain;
+@synthesize isLight;
+@synthesize isSocket;
+@synthesize isSTB;
+@synthesize isTV;
+
+@synthesize isOnline;
+
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
@@ -47,6 +61,61 @@
         }
     }
     return self;
+}
+
+- (NSString *)commandString {
+    return [NSString stringWithFormat:@"%@-%@-%d", self.category, self.identifier, self.status];
+}
+
+#pragma mark -
+#pragma mark device type or state
+
+- (BOOL)isLight {
+    return [@"light" isEqualToString:self.category];
+}
+
+- (BOOL)isInlight {
+    return [@"lnlight" isEqualToString:self.category];
+}
+
+- (BOOL)isLightOrInlight {
+    return [self isLight] || [self isInlight];
+}
+
+- (BOOL)isSocket {
+    return [@"socket" isEqualToString:self.category];
+}
+
+- (BOOL)isCurtain {
+    return [@"curtain" isEqualToString:self.category];
+}
+
+- (BOOL)isSccurtain {
+    return [@"sccurtain" isEqualToString:self.category];
+}
+
+- (BOOL)isCurtainOrSccurtain {
+    return [self isCurtain] || [self isSccurtain];
+}
+
+- (BOOL)isRemote {
+    return [@"remote" isEqualToString:self.category];
+}
+
+- (BOOL)isTV {
+    return [self isRemote] && self.irType == 1;
+}
+
+- (BOOL)isAircondition {
+    return [self isRemote] && self.irType == 5;
+}
+
+- (BOOL)isSTB {
+    return [self isRemote] && self.irType == 3;
+}
+
+- (BOOL)isOnline {
+    return self.state == 1;
 }
 
 @end

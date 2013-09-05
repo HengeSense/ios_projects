@@ -171,7 +171,7 @@
 		6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */; };
 		6FBB9A2017CB90B500E32485 /* SMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB9A1F17CB90B500E32485 /* SMCell.m */; };
 		6FBD013417C4E034002D5618 /* SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013317C4E034002D5618 /* SwitchButton.m */; };
-		6FBD013717C4E051002D5618 /* ToggleSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013617C4E051002D5618 /* ToggleSwitchButton.m */; };
+		6FBD013717C4E051002D5618 /* SocketButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013617C4E051002D5618 /* SocketButton.m */; };
 		6FBD013A17C4E0B8002D5618 /* AirconditionSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */; };
 		6FBD013D17C4E10A002D5618 /* TVSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013C17C4E10A002D5618 /* TVSwitchButton.m */; };
 		6FBD014017C4E119002D5618 /* CameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013F17C4E119002D5618 /* CameraSwitchButton.m */; };
@@ -501,8 +501,8 @@
 		6FBB9A1F17CB90B500E32485 /* SMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCell.m; sourceTree = "<group>"; };
 		6FBD013217C4E034002D5618 /* SwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchButton.h; sourceTree = "<group>"; };
 		6FBD013317C4E034002D5618 /* SwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchButton.m; sourceTree = "<group>"; };
-		6FBD013517C4E051002D5618 /* ToggleSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToggleSwitchButton.h; sourceTree = "<group>"; };
-		6FBD013617C4E051002D5618 /* ToggleSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleSwitchButton.m; sourceTree = "<group>"; };
+		6FBD013517C4E051002D5618 /* SocketButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketButton.h; sourceTree = "<group>"; };
+		6FBD013617C4E051002D5618 /* SocketButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketButton.m; sourceTree = "<group>"; };
 		6FBD013817C4E0B8002D5618 /* AirconditionSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirconditionSwitchButton.h; sourceTree = "<group>"; };
 		6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirconditionSwitchButton.m; sourceTree = "<group>"; };
 		6FBD013B17C4E10A002D5618 /* TVSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVSwitchButton.h; sourceTree = "<group>"; };
@@ -1329,8 +1329,8 @@
 			children = (
 				6FBD013217C4E034002D5618 /* SwitchButton.h */,
 				6FBD013317C4E034002D5618 /* SwitchButton.m */,
-				6FBD013517C4E051002D5618 /* ToggleSwitchButton.h */,
-				6FBD013617C4E051002D5618 /* ToggleSwitchButton.m */,
+				6FBD013517C4E051002D5618 /* SocketButton.h */,
+				6FBD013617C4E051002D5618 /* SocketButton.m */,
 				6FBD013817C4E0B8002D5618 /* AirconditionSwitchButton.h */,
 				6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */,
 				6FBD013B17C4E10A002D5618 /* TVSwitchButton.h */,
@@ -1813,7 +1813,7 @@
 				6F0420F017C481EC00F7F6AF /* DirectionButton.m in Sources */,
 				F2D8E8C717C48EA500090E5B /* CameraAdjustViewController.m in Sources */,
 				6FBD013417C4E034002D5618 /* SwitchButton.m in Sources */,
-				6FBD013717C4E051002D5618 /* ToggleSwitchButton.m in Sources */,
+				6FBD013717C4E051002D5618 /* SocketButton.m in Sources */,
 				6FBD013A17C4E0B8002D5618 /* AirconditionSwitchButton.m in Sources */,
 				6FBD013D17C4E10A002D5618 /* TVSwitchButton.m in Sources */,
 				6FBD014017C4E119002D5618 /* CameraSwitchButton.m in Sources */,

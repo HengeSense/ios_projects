@@ -15,7 +15,7 @@
 #import "AirconditionSwitchButton.h"
 #import "TVSwitchButton.h"
 #import "UIColor+ExtentionForHexString.h"
-#import "ToggleSwitchButton.h"
+#import "SocketButton.h"
 #import "JsonUtils.h"
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
@@ -107,7 +107,7 @@
     sb7.status = @"on";
     sb7.title = @"摄像头";
     
-    SwitchButton *sb8 = [ToggleSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
+    SwitchButton *sb8 = [SocketButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
     sb8.status = @"on";
     sb8.title = @"开关";
     
