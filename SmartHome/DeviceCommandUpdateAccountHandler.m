@@ -13,15 +13,6 @@
 
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
-    
-    if(command == nil) {
-        //
-//        if (command.resultID) {
-//            <#statements#>
-//        }
-        return;
-    }
-
     NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateAccountHandler class]];
     for(int i=0; i<arr.count; i++) {
         if([[arr objectAtIndex:i] respondsToSelector:@selector(didEndUpdateAccount:)]) {

@@ -38,7 +38,6 @@
     UIButton *btnSpeech;
 }
 
-@synthesize unitsArr;
 @synthesize defaultUnit;
 
 - (id)initWithFrame:(CGRect)frame
@@ -51,17 +50,18 @@
 
 - (void)initDefaults {
     [super initDefaults];
+    
     speechViewState = SpeechViewStateClosed;
     recognizerState = RecognizerStateReady;
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
-
-    self.unitsArr = [SMShared current].memory.units;
-    self.defaultUnit = [self setDefaultUnitDictionary:self.unitsArr];
+    
+    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:self];
 }
 
 - (void)initUI {
     [super initUI];
+    
     CGFloat bottom = self.bounds.size.height;
     
     if(btnSpeech == nil) {
@@ -71,54 +71,6 @@
         [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnSpeech];
     }
-//    
-//    /* mock data begin -------------- */
-//    
-//    Device *d1 = [[Device alloc] init];
-//    d1.category = @"camera";
-//    d1.name = @"摄像头";
-//    d1.status = 1;
-//    
-//    Device *d2 = [[Device alloc] init];
-//    d2.category = @"socket";
-//    d2.name = @"超级插座";
-//    d2.status = 1;
-//    
-//    Device *d3 = [[Device alloc] init];
-//    d3.category = @"socket";
-//    d3.name = @"山寨插座";
-//    d3.status = 0;
-//    
-//    Device *d4 = [[Device alloc] init];
-//    d4.category = @"remote";
-//    d4.name = @"大电视";
-//    d4.irType = 1;
-//    d4.status = 1;
-//    
-//    Device *d5 = [[Device alloc] init];
-//    d5.category = @"remote";
-//    d5.irType = 3;
-//    d5.name = @"机顶盒";
-//    d5.status = 1;
-//    
-//    Device *d6 = [[Device alloc] init];
-//    d6.category = @"remote";
-//    d6.name = @"小空调";
-//    d6.irType = 5;
-//    d6.status = 1;
-//    
-//    DeviceButton *db1 = [DeviceButton buttonWithDevice:d1 point:CGPointMake(0, 0) owner:self.ownerController];
-//    DeviceButton *db2 = [DeviceButton buttonWithDevice:d2 point:CGPointMake(0, 0) owner:self.ownerController];
-//    DeviceButton *db3 = [DeviceButton buttonWithDevice:d3 point:CGPointMake(0, 0) owner:self.ownerController];
-//    DeviceButton *db4 = [DeviceButton buttonWithDevice:d4 point:CGPointMake(0, 0) owner:self.ownerController];
-//    DeviceButton *db5 = [DeviceButton buttonWithDevice:d5 point:CGPointMake(0, 0) owner:self.ownerController];
-//    DeviceButton *db6 = [DeviceButton buttonWithDevice:d6 point:CGPointMake(0, 0) owner:self.ownerController];
-    
-    
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:self];
-    
-     /* mock data end -------------- */
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     
     if(pageableScrollView == nil) {
         pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (bottom - 198 / 2 - 190)) andUnit:self.defaultUnit owner:self.ownerController];
@@ -178,15 +130,14 @@
         [self addSubview:notificationView];
     }
     
-    
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
 
 #pragma mark -
-#pragma mark units view
+#pragma mark device command upate unit handler
 
 -(void)updateUnits {
     [self setDefaultUnitDictionary:[SMShared current].memory.units];
-    
     [pageableScrollView loadDataWithDictionary:defaultUnit owner:self.ownerController];
 }
 
@@ -197,34 +148,6 @@
     Zone *zone =[self.defaultUnit.zones objectAtIndex:0];
     NSLog(@"zones.count %d  devices.count %d",    self.defaultUnit.zones.count, zone.devices.count);
     return self.defaultUnit;
-    /*
-    if(units == nil || units.count == 0) return nil;
-    
-    NSDictionary *zones = [[units objectAtIndex:0] zones];
-    NSEnumerator *enumerator = zones.keyEnumerator;
-    NSMutableArray *objects = [NSMutableArray new];
-    NSMutableArray *keys = [NSMutableArray new];
-    for (NSString *key in enumerator) {
-        Zone *zone = [zones objectForKey:key];
-        [keys addObject:zone.name];
-        NSMutableArray *switchBtns = [NSMutableArray new];
-        NSArray *accessories = [zone devicesAsList];
-        for (Device *device in accessories) {
-            SwitchButton *sb = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-            sb.status = device.status;
-            sb.title = device.name;
-            [switchBtns addObject:sb];
-        }
-        [objects addObject:switchBtns];
-    }
-    NSDictionary *deviceDictionary = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
-    return deviceDictionary;*/
-}
-
-- (void) testCommand{
-    NSString *json = @"{\"zkList\":[{\"identifier\":\"123\",\"name\":\"永安小区\",\"localIP\":\"172.16.8.16\",\"updateTime\":\"2013.9.1\",\"zones\":{\"zone1\":{\"name\":\"客厅\",\"accessories\":{\"device1\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"},\"device2\":{\"eleState\":\"on\",\"label\":\"摄像头\",\"mac\":\"fffff\",\"name\":\"客厅摄像头\",\"status\":\"正常\",\"type\":\"1\"},\"device3\":{\"eleState\":\"on\",\"label\":\"空调\",\"mac\":\"fffff\",\"name\":\"客厅空调\",\"status\":\"正常\",\"type\":\"1\"}}}}}],\"appKey\":\"\",\"deviceCode\":\"\",\"result\":\"\",\"commandName\":\"\",\"masterDeviceCode\":\"\",\"commandTime\":\"\",\"tcpAddress\":\"\",\"security\":\"\"}";
-    
-    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 #pragma mark -

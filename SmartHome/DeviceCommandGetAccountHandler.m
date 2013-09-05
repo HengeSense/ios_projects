@@ -13,12 +13,6 @@
 
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
-    
-    if(command == nil) {
-        //
-        return;
-    }
-    
     if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
         NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetAccountHandler class]];

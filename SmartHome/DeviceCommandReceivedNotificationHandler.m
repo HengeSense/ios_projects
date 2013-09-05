@@ -12,15 +12,8 @@
 
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
-    
-    if(command == nil) {
-        
-        return;
-    }
-    
     if([command isKindOfClass:[DeviceCommandReceivedNotifications class]]) {
         DeviceCommandReceivedNotifications *receivedNotificationsCommand = (DeviceCommandReceivedNotifications *)command;
-        
         // do service here ...
     }
 }

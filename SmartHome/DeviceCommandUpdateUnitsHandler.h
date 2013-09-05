@@ -16,4 +16,5 @@
 @end
 
 @interface DeviceCommandUpdateUnitsHandler : DeviceCommandHandler
+
 @end
