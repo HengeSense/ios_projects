@@ -71,59 +71,57 @@
         [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnSpeech];
     }
+//    
+//    /* mock data begin -------------- */
+//    
+//    Device *d1 = [[Device alloc] init];
+//    d1.category = @"camera";
+//    d1.name = @"摄像头";
+//    d1.status = 1;
+//    
+//    Device *d2 = [[Device alloc] init];
+//    d2.category = @"socket";
+//    d2.name = @"超级插座";
+//    d2.status = 1;
+//    
+//    Device *d3 = [[Device alloc] init];
+//    d3.category = @"socket";
+//    d3.name = @"山寨插座";
+//    d3.status = 0;
+//    
+//    Device *d4 = [[Device alloc] init];
+//    d4.category = @"remote";
+//    d4.name = @"大电视";
+//    d4.irType = 1;
+//    d4.status = 1;
+//    
+//    Device *d5 = [[Device alloc] init];
+//    d5.category = @"remote";
+//    d5.irType = 3;
+//    d5.name = @"机顶盒";
+//    d5.status = 1;
+//    
+//    Device *d6 = [[Device alloc] init];
+//    d6.category = @"remote";
+//    d6.name = @"小空调";
+//    d6.irType = 5;
+//    d6.status = 1;
+//    
+//    DeviceButton *db1 = [DeviceButton buttonWithDevice:d1 point:CGPointMake(0, 0) owner:self.ownerController];
+//    DeviceButton *db2 = [DeviceButton buttonWithDevice:d2 point:CGPointMake(0, 0) owner:self.ownerController];
+//    DeviceButton *db3 = [DeviceButton buttonWithDevice:d3 point:CGPointMake(0, 0) owner:self.ownerController];
+//    DeviceButton *db4 = [DeviceButton buttonWithDevice:d4 point:CGPointMake(0, 0) owner:self.ownerController];
+//    DeviceButton *db5 = [DeviceButton buttonWithDevice:d5 point:CGPointMake(0, 0) owner:self.ownerController];
+//    DeviceButton *db6 = [DeviceButton buttonWithDevice:d6 point:CGPointMake(0, 0) owner:self.ownerController];
     
-    /* mock data begin -------------- */
     
-    Device *d1 = [[Device alloc] init];
-    d1.category = @"camera";
-    d1.name = @"摄像头";
-    d1.status = 1;
-    
-    Device *d2 = [[Device alloc] init];
-    d2.category = @"socket";
-    d2.name = @"超级插座";
-    d2.status = 1;
-    
-    Device *d3 = [[Device alloc] init];
-    d3.category = @"socket";
-    d3.name = @"山寨插座";
-    d3.status = 0;
-    
-    Device *d4 = [[Device alloc] init];
-    d4.category = @"remote";
-    d4.name = @"大电视";
-    d4.irType = 1;
-    d4.status = 1;
-    
-    Device *d5 = [[Device alloc] init];
-    d5.category = @"remote";
-    d5.irType = 3;
-    d5.name = @"机顶盒";
-    d5.status = 1;
-    
-    Device *d6 = [[Device alloc] init];
-    d6.category = @"remote";
-    d6.name = @"小空调";
-    d6.irType = 5;
-    d6.status = 1;
-    
-    DeviceButton *db1 = [DeviceButton buttonWithDevice:d1 point:CGPointMake(0, 0) owner:self.ownerController];
-    DeviceButton *db2 = [DeviceButton buttonWithDevice:d2 point:CGPointMake(0, 0) owner:self.ownerController];
-    DeviceButton *db3 = [DeviceButton buttonWithDevice:d3 point:CGPointMake(0, 0) owner:self.ownerController];
-    DeviceButton *db4 = [DeviceButton buttonWithDevice:d4 point:CGPointMake(0, 0) owner:self.ownerController];
-    DeviceButton *db5 = [DeviceButton buttonWithDevice:d5 point:CGPointMake(0, 0) owner:self.ownerController];
-    DeviceButton *db6 = [DeviceButton buttonWithDevice:d6 point:CGPointMake(0, 0) owner:self.ownerController];
-    
-    NSArray *devices1 = [[NSArray alloc] initWithObjects:db1,db2,db3,db4,db5,db6,nil];
-
-    NSArray *objArr = [[NSArray alloc] initWithObjects:devices1, nil];
-    NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅", nil];
-    NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObjects:objArr forKeys:keyArr];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:self];
     
      /* mock data end -------------- */
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     
     if(pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (bottom - 198 / 2 - 190)) andUnit:nil owner:self.ownerController];
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (bottom - 198 / 2 - 190)) andUnit:self.defaultUnit owner:self.ownerController];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
     }
@@ -180,15 +178,14 @@
         [self addSubview:notificationView];
     }
     
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+    
 }
 
 #pragma mark -
 #pragma mark units view
 
--(void)updateUnits:(NSArray *)units{
-    self.unitsArr = units;
-    [self setDefaultUnitDictionary:units];
+-(void)updateUnits {
+    [self setDefaultUnitDictionary:[SMShared current].memory.units];
     
     [pageableScrollView loadDataWithDictionary:defaultUnit owner:self.ownerController];
 }
@@ -196,6 +193,9 @@
 -(Unit *) setDefaultUnitDictionary:(NSArray *) units{
     if(units == nil || units.count == 0) return nil;
     self.defaultUnit = [units objectAtIndex:0];
+    
+    Zone *zone =[self.defaultUnit.zones objectAtIndex:0];
+    NSLog(@"zones.count %d  devices.count %d",    self.defaultUnit.zones.count, zone.devices.count);
     return self.defaultUnit;
     /*
     if(units == nil || units.count == 0) return nil;

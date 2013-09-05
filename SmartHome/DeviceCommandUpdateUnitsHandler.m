@@ -19,7 +19,6 @@
     
     NSLog(@" trigger device command update units .");
     
-    if(command.resultID != 1) return;
     if(![command isKindOfClass:[DeviceCommandUpdateUnits class]]) return;
     DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
 
@@ -33,11 +32,17 @@
 //    Device *d = [z.devices objectAtIndex:0];
 //    NSLog(@"%@", d.name);
     
-    return;
     
-    NSArray *newUnits = [[SMShared current].memory updateUnits:updateUnitsCommand.units];
+    [[SMShared current].memory updateUnits:updateUnitsCommand.units];
 
-    NSArray *users = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateUnitsHandler class]];
+    NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
+    if(subscriptions) {
+        for(int i=0; i<subscriptions.count; i++) {
+            if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(updateUnits)]) {
+            [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(updateUnits) withObject:nil waitUntilDone:NO];
+            }
+        }
+    }
 }
 
 @end
