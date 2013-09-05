@@ -65,27 +65,57 @@
     }
 }
 
-- (NSArray *)replaceWithUnits:(NSArray *)updateUnits {
-    if(updateUnits == nil || updateUnits.count == 0) return self.units;
-    if(self.units.count == 0) {
-        [self.units addObjectsFromArray:updateUnits];
-        return self.units;
-    }
-    
-    for(int i=0; i<self.units.count; i++) {
-        Unit *unit = [self.units objectAtIndex:i];
-        for(int j=0; j<updateUnits.count; j++) {
-            Unit *_unit_ = [updateUnits objectAtIndex:j];
-            if([unit.identifier isEqualToString:_unit_.identifier]) {
-               if(_unit_.updateTime.timeIntervalSince1970 > unit.updateTime.timeIntervalSince1970) {
-                
-                   break;
-               }
+- (NSArray *)updateUnits:(NSArray *)newUnits {
+    @synchronized(self) {
+        if(newUnits == nil || newUnits.count == 0) {
+            [self.units removeAllObjects];
+            return self.units;
+        }
+        
+        if(self.units.count == 0) {
+            [self.units addObjectsFromArray:newUnits];
+            return self.units;
+        }
+        
+        NSMutableDictionary *updateList = [NSMutableDictionary dictionary];
+        NSMutableArray *createList = [NSMutableArray array];
+        
+        for(int i=0; i<newUnits.count; i++) {
+            Unit *newUnit = [newUnits objectAtIndex:i];
+            
+            BOOL unitFound = NO;
+            for(int j=0; j<self.units.count; j++) {
+                Unit *oldUnit = [self.units objectAtIndex:j];
+                if([oldUnit.identifier isEqualToString:newUnit.identifier]) {
+                    unitFound = YES;
+                    if(newUnit.updateTime.timeIntervalSince1970 > oldUnit.updateTime.timeIntervalSince1970) {
+                        [updateList setObject:newUnit forKey:[NSNumber numberWithInteger:j].stringValue];
+                        break;
+                    }
+                }
+            }
+            
+            if(!unitFound) {
+                [createList addObject:newUnit];
             }
         }
-    }
         
-    return self.units;
+        if(updateList.count > 0) {
+            NSEnumerator *keyEnumerator = updateList.keyEnumerator;
+            for(NSString *key in keyEnumerator) {
+                NSInteger replaceIndex = [key integerValue];
+                [self.units setObject:[updateList objectForKey:key] atIndexedSubscript:replaceIndex];
+            }
+        }
+        
+        if(createList.count > 0) {
+            for(int i=0; i<createList.count; i++) {
+                [self.units addObject:[createList objectAtIndex:i]];
+            }
+        }
+        
+        return self.units;
+    }
 }
 
 @end

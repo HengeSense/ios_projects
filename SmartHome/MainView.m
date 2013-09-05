@@ -55,8 +55,6 @@
     recognizerState = RecognizerStateReady;
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
-    
-
 
     self.unitsArr = [SMShared current].memory.units;
     self.defaultUnit = [self setDefaultUnitDictionary:self.unitsArr];

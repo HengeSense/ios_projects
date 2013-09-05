@@ -35,15 +35,9 @@
     
     return;
     
-    Memory *memory = [SMShared current].memory;
-    NSArray *newUnits = [memory replaceWithUnits:updateUnitsCommand.units];
-    NSLog(@"newUnits=%@,updateUnits=%@",newUnits,updateUnitsCommand.units);
-    NSArray *users = [memory getSubscriptionsFor:[DeviceCommandUpdateUnitsHandler class]];
-    [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj respondsToSelector:DELEFGATE_METHOD]) {
-            [obj performSelector:DELEFGATE_METHOD withObject:newUnits];
-        }
-    }];
+    NSArray *newUnits = [[SMShared current].memory updateUnits:updateUnitsCommand.units];
+
+    NSArray *users = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateUnitsHandler class]];
 }
 
 @end

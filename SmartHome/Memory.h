@@ -31,6 +31,6 @@
 /*
  *
  */
-- (NSArray *)replaceWithUnits:(NSArray *)units;
+- (NSArray *)updateUnits:(NSArray *)newUnits;
 
 @end
