@@ -21,7 +21,11 @@
 "please_wait"      = "请稍后";
 "unknow_error"     = "系统错误";
 "request_timeout"  = "请求超时";
+"determine"        = "确定";
 "processing.tips"  = "处理中,请稍后...";
+
+
+
 "the.two.input.is.not.consistent" = "两次输入不一致";
 
 /*
@@ -113,7 +117,8 @@
 /*
  * tv view controller
  */
-"power.switch"  = "电源开关";
+"signal_source"     =   "信道来源";
+"menu"              =   "菜单";
 
 /*
  * settings view
@@ -122,6 +127,7 @@
 "account_logout"     =   "账号注销";
 "feed_back"          =   "意见反馈";
 "about_us"           =   "关于";
+
 /*
  *user info
  */
@@ -130,6 +136,7 @@
 "modify.password" = "修改密码";
 "please.input.old.password" = "请输入旧密码";
 "password.valid" = "密码验证";
+
 /*
  * modify info
  */

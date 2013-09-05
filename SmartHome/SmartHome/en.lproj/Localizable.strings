@@ -21,6 +21,7 @@
 "unknow_error"     = "System error";
 "request_timeout"  = "Request timeout";
 "processing.tips"  = "Wait for processing...";
+"determine"        = "OK";
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*
@@ -113,7 +114,9 @@
 /*
  * tv view controller
  */
-"power.switch"  = "Power Switch";
+"signal_source"     =   "Signal";
+"menu"              =   "Menu";
+
 
 /*
  * settings view
@@ -122,6 +125,7 @@
 "account_logout"     =   "Logout";
 "feed_back"          =   "Feed back";
 "about_us"           =   "About us";
+
 /*
  * user info
  */
@@ -130,6 +134,7 @@
 "modify.password" = "Modify Password";
 "please.input.old.password" = "please input old password";
 "password.valid" = "Password Valid";
+
 /*
  * modify info
  */
