@@ -16,4 +16,5 @@
 @property (strong,nonatomic) PageableNavView *pageNavView;
 
 -(id)initWithPoint:(CGPoint) point andDictionary:(NSDictionary *) dictionary;
+
 @end

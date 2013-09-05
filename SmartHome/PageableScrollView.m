@@ -8,13 +8,15 @@
 
 #import "PageableScrollView.h"
 #import "ScrollNavButton.h"
-#import "SwitchButton.h"
+#import "DeviceButton.h"
+
 #define MARGIN_X 0
 #define MARGIN_Y 12
 #define SCROLL_ITEM_WIDTH 240
 #define SCROLL_ITEM_HEIGHT 180
 #define GROUP_ITEM_WIDRH 80
 #define GROUP_ITEM_HEIGHT 52
+
 @implementation PageableScrollView{
     NSArray *navItems;
     NSDictionary *deviceDictionary;
@@ -22,6 +24,7 @@
     UIImageView *rightBoundsShadow;
     
 }
+
 @synthesize pageableScrollView;
 @synthesize pageNavView;
 
@@ -163,15 +166,20 @@
     }
 }
 
-- (void)notifyStatusChangedFor:(NSString *)deviceID status:(NSString *)status {
-    [deviceDictionary enumerateKeysAndObjectsUsingBlock:^(id key, __strong NSArray *obj, BOOL *stop) {
-        [obj enumerateObjectsUsingBlock:^(__strong SwitchButton *obj, NSUInteger idx, BOOL *stop) {
-            if ([obj.deviceID isEqualToString:deviceID]) {
-                obj.status = status;
-                return ;
+- (void)notifyStatusChangedFor:(NSString *)deviceId {
+    if(deviceDictionary == nil) return;
+    NSEnumerator *zonesEnumerator = deviceDictionary.keyEnumerator;
+    for(NSArray *zone in zonesEnumerator) {
+        for(int i=0; i<zone.count; i++) {
+            DeviceButton *btnDevice = [zone objectAtIndex:i];
+            if(btnDevice != nil) {
+                if([deviceId isEqualToString:btnDevice.device.identifier]) {
+                    [btnDevice refresh];
+                    return;
+                }
             }
-        }];
-    }];
+        }
+    }
 }
 
 @end

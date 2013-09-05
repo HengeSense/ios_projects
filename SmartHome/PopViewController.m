@@ -55,9 +55,11 @@
     [self.topbar.rightButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
     self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
     [self.topbar.rightButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-
     [self.view addSubview:self.topbar];
-    self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"btn_done.png");
+    
+    if(![NSString isBlank:self.title]) {
+        self.topbar.titleLabel.text = self.title;
+    }
 }
 
 - (void)dismiss {

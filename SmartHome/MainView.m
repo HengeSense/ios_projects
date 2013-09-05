@@ -6,17 +6,14 @@
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "MainView.h"
-#import "NSString+StringUtils.h"
-#import <AudioToolbox/AudioToolbox.h>
-#import "NotificationViewController.h"
 
-#import "CameraSwitchButton.h"
-#import "AirconditionSwitchButton.h"
-#import "TVSwitchButton.h"
+#import "MainView.h"
+#import "NotificationViewController.h"
+#import "NSString+StringUtils.h"
 #import "UIColor+ExtentionForHexString.h"
-#import "SocketButton.h"
-#import "JsonUtils.h"
+#import <AudioToolbox/AudioToolbox.h>
+
+#import "DeviceButton.h"
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
 
@@ -28,7 +25,8 @@
 #define RECORD_END_SOUND_ID              1114
 
 @implementation MainView {
-    NSArray *navItems;    
+    NSArray *navItems;
+    
     SpeechViewState speechViewState;
     RecognizerState recognizerState;
     ConversationView *speechView;
@@ -36,9 +34,8 @@
     PageableScrollView *pageableScrollView;
     PageableNavView *pageableNavView;
     UIView *notificationView;
-    UIButton *btnSpeech;
     
-
+    UIButton *btnSpeech;
 }
 
 @synthesize unitsArr;
@@ -79,77 +76,50 @@
     
     /* mock data begin -------------- */
     
-    SwitchButton *sb1 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb1.status = @"on";
-    sb1.title = @"摄像头";
+    Device *d1 = [[Device alloc] init];
+    d1.category = @"camera";
+    d1.name = @"摄像头";
+    d1.status = 1;
     
-    SwitchButton *sb2 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb2.status = @"on";
-    sb2.title = @"客厅空调";
+    Device *d2 = [[Device alloc] init];
+    d2.category = @"socket";
+    d2.name = @"超级插座";
+    d2.status = 1;
     
-    SwitchButton *sb3 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb3.status = @"on";
-    sb3.title = @"摄像头";
+    Device *d3 = [[Device alloc] init];
+    d3.category = @"socket";
+    d3.name = @"山寨插座";
+    d3.status = 0;
     
-    SwitchButton *sb4 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb4.status = @"on";
-    sb4.title = @"摄像头";
+    Device *d4 = [[Device alloc] init];
+    d4.category = @"remote";
+    d4.name = @"大电视";
+    d4.irType = 1;
+    d4.status = 1;
     
-    SwitchButton *sb5 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb5.status = @"on";
-    sb5.title = @"摄像头";
+    Device *d5 = [[Device alloc] init];
+    d5.category = @"remote";
+    d5.irType = 3;
+    d5.name = @"机顶盒";
+    d5.status = 1;
     
-    SwitchButton *sb6 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb6.status = @"on";
-    sb6.title = @"摄像头";
+    Device *d6 = [[Device alloc] init];
+    d6.category = @"remote";
+    d6.name = @"小空调";
+    d6.irType = 5;
+    d6.status = 1;
     
-    SwitchButton *sb7 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb7.status = @"on";
-    sb7.title = @"摄像头";
+    DeviceButton *db1 = [DeviceButton buttonWithDevice:d1 point:CGPointMake(0, 0) owner:self.ownerController];
+    DeviceButton *db2 = [DeviceButton buttonWithDevice:d2 point:CGPointMake(0, 0) owner:self.ownerController];
+    DeviceButton *db3 = [DeviceButton buttonWithDevice:d3 point:CGPointMake(0, 0) owner:self.ownerController];
+    DeviceButton *db4 = [DeviceButton buttonWithDevice:d4 point:CGPointMake(0, 0) owner:self.ownerController];
+    DeviceButton *db5 = [DeviceButton buttonWithDevice:d5 point:CGPointMake(0, 0) owner:self.ownerController];
+    DeviceButton *db6 = [DeviceButton buttonWithDevice:d6 point:CGPointMake(0, 0) owner:self.ownerController];
     
-    SwitchButton *sb8 = [SocketButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb8.status = @"on";
-    sb8.title = @"开关";
-    
-    SwitchButton *sb9 = [CameraSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb9.status = @"off";
-    sb9.title = @"摄像头";
-    
-    SwitchButton *sb10 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb10.status = @"on";
-    sb10.title = @"卧室空调";
-    
-    SwitchButton *sb11 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb11.status = @"off";
-    sb11.title = @"卧室空调";
-    
-    SwitchButton *sb12 = [TVSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb12.status = @"on";
-    sb12.title = @"电视机";
-    
-    SwitchButton *sb13 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb13.status = @"off";
-    sb13.title = @"卧室空调";
+    NSArray *devices1 = [[NSArray alloc] initWithObjects:db1,db2,db3,db4,db5,db6,nil];
 
-    SwitchButton *sb14 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb14.status = @"on";
-    sb14.title = @"卧室空调";
-    
-    SwitchButton *sb15 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb15.status = @"off";
-    sb15.title = @"卧室空调";
-    
-    SwitchButton *sb16 = [AirconditionSwitchButton buttonWithPoint:CGPointMake(0, 0) owner:self.ownerController];
-    sb16.status = @"off";
-    sb16.title = @"卧室空调";
-    
-    NSArray *devices1 = [[NSArray alloc] initWithObjects:sb1,nil];
-    NSArray *devices2 = [[NSArray alloc] initWithObjects:sb2,sb3,nil];
-    NSArray *devices3 = [[NSArray alloc] initWithObjects:sb4,sb5,sb6,nil];
-    NSArray *devices4 = [[NSArray alloc] initWithObjects:sb7,sb8,sb9,sb10,sb11, sb12, sb13,sb14,sb15,sb16, nil];
-
-    NSArray *objArr = [[NSArray alloc] initWithObjects:devices1,devices2,devices3,devices4, nil];
-    NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅",@"主卧",@"次卧",@"安防", nil];
+    NSArray *objArr = [[NSArray alloc] initWithObjects:devices1, nil];
+    NSArray *keyArr = [[NSArray alloc] initWithObjects:@"客厅", nil];
     NSDictionary *scrollDictionary = [[NSDictionary alloc] initWithObjects:objArr forKeys:keyArr];
     
      /* mock data end -------------- */

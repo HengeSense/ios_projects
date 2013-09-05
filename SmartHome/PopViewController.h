@@ -11,7 +11,7 @@
 
 @protocol StatusChangeDelegate <NSObject>
 
-- (void)notifyStatusChangedFor:(NSString *)deviceID status:(NSString *)status;
+- (void)notifyStatusChangedFor:(NSString *)deviceId;
 
 @end
 

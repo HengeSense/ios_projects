@@ -1,5 +1,5 @@
 //
-//  CameraAdjustViewController.h
+//  CameraViewController.h
 //  SmartHome
 //
 //  Created by hadoop user account on 21/08/13.
@@ -10,7 +10,7 @@
 #import "PopViewController.h"
 #import "DirectionButton.h"
 
-@interface CameraAdjustViewController : PopViewController<DirectionButtonDelegate>
+@interface CameraViewController : PopViewController<DirectionButtonDelegate>
 
 
 @end

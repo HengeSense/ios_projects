@@ -170,11 +170,7 @@
 		6FB66D6217C745820002D6C5 /* AccountService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB66D6117C745820002D6C5 /* AccountService.m */; };
 		6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */; };
 		6FBB9A2017CB90B500E32485 /* SMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB9A1F17CB90B500E32485 /* SMCell.m */; };
-		6FBD013417C4E034002D5618 /* SwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013317C4E034002D5618 /* SwitchButton.m */; };
-		6FBD013717C4E051002D5618 /* SocketButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013617C4E051002D5618 /* SocketButton.m */; };
-		6FBD013A17C4E0B8002D5618 /* AirconditionSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */; };
-		6FBD013D17C4E10A002D5618 /* TVSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013C17C4E10A002D5618 /* TVSwitchButton.m */; };
-		6FBD014017C4E119002D5618 /* CameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013F17C4E119002D5618 /* CameraSwitchButton.m */; };
+		6FBD013417C4E034002D5618 /* DeviceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013317C4E034002D5618 /* DeviceButton.m */; };
 		6FD081B917CF3E030089A1ED /* DeviceCommandDeliveryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */; };
 		6FD081BC17CF3E580089A1ED /* DeviceCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */; };
 		6FD081C317CF43260089A1ED /* icon_aircondition_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD081BD17CF43260089A1ED /* icon_aircondition_off@2x.png */; };
@@ -243,7 +239,7 @@
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		F2D8E8C717C48EA500090E5B /* CameraAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */; };
+		F2D8E8C717C48EA500090E5B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraViewController.m */; };
 		F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */; };
 		F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */; };
 		F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8D717C5BBB600090E5B /* RadioButton.m */; };
@@ -499,16 +495,8 @@
 		6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationCodeValidationViewController.m; sourceTree = "<group>"; };
 		6FBB9A1E17CB90B500E32485 /* SMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCell.h; sourceTree = "<group>"; };
 		6FBB9A1F17CB90B500E32485 /* SMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCell.m; sourceTree = "<group>"; };
-		6FBD013217C4E034002D5618 /* SwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchButton.h; sourceTree = "<group>"; };
-		6FBD013317C4E034002D5618 /* SwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchButton.m; sourceTree = "<group>"; };
-		6FBD013517C4E051002D5618 /* SocketButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketButton.h; sourceTree = "<group>"; };
-		6FBD013617C4E051002D5618 /* SocketButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketButton.m; sourceTree = "<group>"; };
-		6FBD013817C4E0B8002D5618 /* AirconditionSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirconditionSwitchButton.h; sourceTree = "<group>"; };
-		6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirconditionSwitchButton.m; sourceTree = "<group>"; };
-		6FBD013B17C4E10A002D5618 /* TVSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVSwitchButton.h; sourceTree = "<group>"; };
-		6FBD013C17C4E10A002D5618 /* TVSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVSwitchButton.m; sourceTree = "<group>"; };
-		6FBD013E17C4E119002D5618 /* CameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSwitchButton.h; sourceTree = "<group>"; };
-		6FBD013F17C4E119002D5618 /* CameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSwitchButton.m; sourceTree = "<group>"; };
+		6FBD013217C4E034002D5618 /* DeviceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceButton.h; sourceTree = "<group>"; };
+		6FBD013317C4E034002D5618 /* DeviceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceButton.m; sourceTree = "<group>"; };
 		6FD081B717CF3E030089A1ED /* DeviceCommandDeliveryService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandDeliveryService.h; sourceTree = "<group>"; };
 		6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandDeliveryService.m; sourceTree = "<group>"; };
 		6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandHandler.h; sourceTree = "<group>"; };
@@ -616,8 +604,8 @@
 		F2BB0EF417BE1B7E004E14B1 /* LongButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongButton.m; sourceTree = "<group>"; };
 		F2D8E8C217C468D200090E5B /* QCheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QCheckBox.h; path = SmartHome/QCheckBox.h; sourceTree = "<group>"; };
 		F2D8E8C317C468D200090E5B /* QCheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QCheckBox.m; path = SmartHome/QCheckBox.m; sourceTree = "<group>"; };
-		F2D8E8C517C48EA500090E5B /* CameraAdjustViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraAdjustViewController.h; sourceTree = "<group>"; };
-		F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraAdjustViewController.m; sourceTree = "<group>"; };
+		F2D8E8C517C48EA500090E5B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		F2D8E8C617C48EA500090E5B /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "camera_image@2x.jpg"; sourceTree = "<group>"; };
 		F2D8E8CB17C5AA4500090E5B /* CustomCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCheckBox.h; sourceTree = "<group>"; };
 		F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCheckBox.m; sourceTree = "<group>"; };
@@ -977,8 +965,8 @@
 				F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */,
 				F20AE08C17BDD00B0040B80A /* LoginViewController.h */,
 				F20AE08D17BDD00B0040B80A /* LoginViewController.m */,
-				F2D8E8C517C48EA500090E5B /* CameraAdjustViewController.h */,
-				F2D8E8C617C48EA500090E5B /* CameraAdjustViewController.m */,
+				F2D8E8C517C48EA500090E5B /* CameraViewController.h */,
+				F2D8E8C617C48EA500090E5B /* CameraViewController.m */,
 				6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */,
 				6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */,
 				6FB66D6317C751570002D6C5 /* VerificationCodeValidationViewController.h */,
@@ -1327,16 +1315,8 @@
 		6FBD013117C4DFAB002D5618 /* switch_button */ = {
 			isa = PBXGroup;
 			children = (
-				6FBD013217C4E034002D5618 /* SwitchButton.h */,
-				6FBD013317C4E034002D5618 /* SwitchButton.m */,
-				6FBD013517C4E051002D5618 /* SocketButton.h */,
-				6FBD013617C4E051002D5618 /* SocketButton.m */,
-				6FBD013817C4E0B8002D5618 /* AirconditionSwitchButton.h */,
-				6FBD013917C4E0B8002D5618 /* AirconditionSwitchButton.m */,
-				6FBD013B17C4E10A002D5618 /* TVSwitchButton.h */,
-				6FBD013C17C4E10A002D5618 /* TVSwitchButton.m */,
-				6FBD013E17C4E119002D5618 /* CameraSwitchButton.h */,
-				6FBD013F17C4E119002D5618 /* CameraSwitchButton.m */,
+				6FBD013217C4E034002D5618 /* DeviceButton.h */,
+				6FBD013317C4E034002D5618 /* DeviceButton.m */,
 			);
 			name = switch_button;
 			sourceTree = "<group>";
@@ -1811,12 +1791,8 @@
 				6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */,
 				6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */,
 				6F0420F017C481EC00F7F6AF /* DirectionButton.m in Sources */,
-				F2D8E8C717C48EA500090E5B /* CameraAdjustViewController.m in Sources */,
-				6FBD013417C4E034002D5618 /* SwitchButton.m in Sources */,
-				6FBD013717C4E051002D5618 /* SocketButton.m in Sources */,
-				6FBD013A17C4E0B8002D5618 /* AirconditionSwitchButton.m in Sources */,
-				6FBD013D17C4E10A002D5618 /* TVSwitchButton.m in Sources */,
-				6FBD014017C4E119002D5618 /* CameraSwitchButton.m in Sources */,
+				F2D8E8C717C48EA500090E5B /* CameraViewController.m in Sources */,
+				6FBD013417C4E034002D5618 /* DeviceButton.m in Sources */,
 				F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */,
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
 				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,

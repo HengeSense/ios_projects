@@ -49,8 +49,6 @@
 -(void) initUI{
     [super initUI];
     
-    self.topbar.titleLabel.text = NSLocalizedString(@"aircondition_setting.title",@"");
-    
     if (temperatureTable == nil) {
         temperatureTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+40+30, self.view.frame.size.width,10*CELL_HEIGHT+47/2) style:UITableViewStylePlain];
         temperatureTable.dataSource = self;

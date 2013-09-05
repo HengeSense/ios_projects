@@ -1,21 +1,21 @@
 //
-//  CameraAdjustViewController.m
+//  CameraViewController.m
 //  SmartHome
 //
 //  Created by hadoop user account on 21/08/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "CameraAdjustViewController.h"
+#import "CameraViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+ExtentionForHexString.h"
 
 
-@interface CameraAdjustViewController ()
+@interface CameraViewController ()
 
 @end
 
-@implementation CameraAdjustViewController{
+@implementation CameraViewController{
     UIImageView *imgCameraShots;
     UIView *backgroundView;
     DirectionButton *btnDirection;
@@ -38,7 +38,6 @@
 
 -(void) initUI{
     [super initUI];
-    self.topbar.titleLabel.text = NSLocalizedString(@"camera_adjust", @"");
     
     if(backgroundView == nil) {
         backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, 310, self.view.bounds.size.height - self.topbar.bounds.size.height - 30)];

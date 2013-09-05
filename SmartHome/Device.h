@@ -39,6 +39,7 @@
 @property (assign, nonatomic, readonly) BOOL isTV;                   //红外线-电视机
 @property (assign, nonatomic, readonly) BOOL isAircondition;         //红外线-空调
 @property (assign, nonatomic, readonly) BOOL isSTB;                  //红外线-机顶盒
+@property (assign, nonatomic, readonly) BOOL isCamera;               //摄像头
 
 - (id)initWithJson:(NSDictionary *)json;
 

@@ -36,6 +36,7 @@
 @synthesize isSocket;
 @synthesize isSTB;
 @synthesize isTV;
+@synthesize isCamera;
 
 @synthesize isOnline;
 
@@ -112,6 +113,10 @@
 
 - (BOOL)isSTB {
     return [self isRemote] && self.irType == 3;
+}
+
+- (BOOL)isCamera {
+    return [@"camera" isEqualToString:self.category];
 }
 
 - (BOOL)isOnline {

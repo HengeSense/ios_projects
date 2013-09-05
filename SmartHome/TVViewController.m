@@ -39,7 +39,6 @@
 
 -(void) initUI{
     [super initUI];
-    self.topbar.titleLabel.text = @"客厅电视机设置";
     
     if(remoteControl == nil) {
         remoteControl = [TVRemoteControlPanel pannelWithPoint:CGPointMake(0, self.topbar.bounds.size.height)];

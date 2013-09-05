@@ -54,6 +54,10 @@
     self.topbar.leftButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
     [self.topbar.leftButton addTarget:self action:@selector(backToPreViewController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.topbar];
+    
+    if(![NSString isBlank:self.title]) {
+        self.topbar.titleLabel.text = self.title;
+    }
 }
 
 - (void)backToPreViewController {
