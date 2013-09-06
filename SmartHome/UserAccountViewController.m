@@ -246,9 +246,7 @@
     [infoDictionary setValue:string forKey:[titles objectAtIndex:editIndex.row]];
 }
 - (void)updateAccount:(DeviceCommandUpdateAccount *)updateCommand {
-
     if(updateCommand != nil) {
-
         [values setObject:updateCommand.screenName atIndexedSubscript:0];
         [values setObject:updateCommand.email atIndexedSubscript:1];
         for (int i=0;i<titles.count;++i) {
