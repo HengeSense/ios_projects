@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSDate *updateTime;
 @property (strong, nonatomic) NSMutableArray *zones;
 
+@property (strong, nonatomic, readonly) NSArray *devices;
+
 - (id)initWithJson:(NSDictionary *)json;
 - (Zone *)zoneForId:(NSString *)_id_;
 

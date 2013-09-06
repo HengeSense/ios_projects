@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
 
-@interface DevicesViewController :NavViewController<UITableViewDataSource,UITableViewDelegate>
-@property UITableViewCell *curCell;
+@interface DevicesViewController :NavViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) NSString *unitIdentifier;
+
 @end
