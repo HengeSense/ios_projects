@@ -22,6 +22,7 @@
 @synthesize status;
 @synthesize updateTime;
 @synthesize zones;
+@synthesize devices;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
@@ -65,6 +66,19 @@
         }
     }
     return nil;
+}
+
+- (NSArray *)devices {
+    NSMutableArray *_devices_ = [NSMutableArray array];
+    if(self.zones.count != 0) {
+        for(int i=0; i<self.zones.count; i++) {
+            Zone *zone = [self.zones objectAtIndex:i];
+            if(zone.devices != nil && zone.devices.count > 0) {
+                [_devices_ addObjectsFromArray:zone.devices];
+            }
+        }
+    }
+    return _devices_;
 }
 
 @end

@@ -1,22 +1,18 @@
 //
-//  DevicesViewController.m
+//  DeviceDetailViewController.m
 //  SmartHome
 //
-//  Created by hadoop user account on 13/08/13.
+//  Created by Zhao yang on 9/6/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "DevicesViewController.h"
+#import "DeviceDetailViewController.h"
 
-@interface DevicesViewController ()
+@interface DeviceDetailViewController ()
 
 @end
 
-@implementation DevicesViewController{
-
-}
-
-@synthesize unitIdentifier;
+@implementation DeviceDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,18 +33,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)initUI{
-    [super initUI];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
 }
 
 @end

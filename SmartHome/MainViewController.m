@@ -13,7 +13,7 @@
 #import "MyDevicesView.h"
 #import "TopbarView.h"
 #import "ViewsPool.h"
-#import "UserAccountViewController.h"
+
 #define MAIN_VIEW_TAG 5001
 
 @interface MainViewController ()
@@ -41,7 +41,6 @@
 
 - (void)initDefaults {
     drawerItems = [NSMutableArray array];
-    
 
     DrawerNavigationItem *mainView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *myDevicesView = [[DrawerNavigationItem alloc] init];
@@ -91,7 +90,7 @@
     if(self.leftView == nil) {
         DrawerView *dv = [[DrawerView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) andItems:drawerItems];
         dv.drawerNavigationItemChangedDelegate = self;
-        dv.accountInfoDelegate = self;
+        dv.ownerViewController = self;
         self.leftView = dv;
     }
     
@@ -102,16 +101,7 @@
     //after initial
     [self applyBindings];
 }
--(void) toModifyAccountInfo{
-//    UIView *v = [self.mainView viewWithTag:MAIN_VIEW_TAG];
-//    if(v != nil) [v removeFromSuperview];
-//    [self.mainView addSubview:view];
-//    if(!isFirst) {
-//        [self showMainView:YES];
-//    }
-    [self.navigationController pushViewController:[UserAccountViewController new] animated:YES];
 
-}
 - (void)drawerNavigationItemChanged:(DrawerNavigationItem *)item isFirstTime:(BOOL)isFirst {
     if(item == nil) return;
     if(currentItem != nil) {

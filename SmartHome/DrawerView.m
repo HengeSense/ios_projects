@@ -12,6 +12,7 @@
 #import "ViewsPool.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "UserAccountViewController.h"
+
 #define ACCOUNT_VIEW_HEIGHT 80
 
 @implementation DrawerView {
@@ -24,6 +25,8 @@
     BOOL isChanging;
     NSUInteger checkedRowIndex;
 }
+
+@synthesize ownerViewController;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -74,7 +77,7 @@
         [accountView addSubview:lblMessage2];
         UIButton *accountBackground = [[UIButton alloc] initWithFrame:accountView.bounds];
         accountBackground.backgroundColor = [UIColor clearColor];
-        [accountBackground addTarget:self action:@selector(delegateAction) forControlEvents:UIControlEventTouchUpInside];
+        [accountBackground addTarget:self action:@selector(showAccountView:) forControlEvents:UIControlEventTouchUpInside];
         [accountView addSubview:accountBackground];
         [self addSubview:accountView];
         [self addSubview:imgSeperatorLine];
@@ -95,11 +98,13 @@
         [self addSubview:tblNavigationItems];
     }
 }
--(void)delegateAction{
-    if ([self.accountInfoDelegate respondsToSelector:@selector(toModifyAccountInfo)]) {
-        [self.accountInfoDelegate toModifyAccountInfo];
+
+- (void)showAccountView:(id)sender {
+    if(self.ownerViewController != nil) {
+        [self.ownerViewController.navigationController pushViewController:[[UserAccountViewController alloc] init] animated:YES];
     }
 }
+
 #pragma mark -
 #pragma mark table view delegate && data source
 
