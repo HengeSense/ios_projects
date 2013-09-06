@@ -105,6 +105,8 @@
 		6F159BFF17D7176E005CFFEE /* btn_rc_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BFA17D7176E005CFFEE /* btn_rc_right@2x.png */; };
 		6F159C0017D7176E005CFFEE /* btn_rc_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BFB17D7176E005CFFEE /* btn_rc_top@2x.png */; };
 		6F159C0317D754BB005CFFEE /* SMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159C0217D754BB005CFFEE /* SMButton.m */; };
+		6F167B7D17D99ECE004169CD /* btn_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F167B7C17D99ECE004169CD /* btn_dark@2x.png */; };
+		6F167B8117D9A233004169CD /* SelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F167B8017D9A233004169CD /* SelectionView.m */; };
 		6F17672B17C1E232007AED0C /* CommunicationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672A17C1E232007AED0C /* CommunicationMessage.m */; };
 		6F17672E17C1F7CA007AED0C /* DeviceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672D17C1F7CA007AED0C /* DeviceCommand.m */; };
 		6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17673017C1FA15007AED0C /* JsonUtils.m */; };
@@ -418,6 +420,9 @@
 		6F159BFB17D7176E005CFFEE /* btn_rc_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_top@2x.png"; sourceTree = "<group>"; };
 		6F159C0117D754BB005CFFEE /* SMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMButton.h; sourceTree = "<group>"; };
 		6F159C0217D754BB005CFFEE /* SMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMButton.m; sourceTree = "<group>"; };
+		6F167B7C17D99ECE004169CD /* btn_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_dark@2x.png"; sourceTree = "<group>"; };
+		6F167B7F17D9A233004169CD /* SelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionView.h; sourceTree = "<group>"; };
+		6F167B8017D9A233004169CD /* SelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionView.m; sourceTree = "<group>"; };
 		6F17672917C1E232007AED0C /* CommunicationMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunicationMessage.h; sourceTree = "<group>"; };
 		6F17672A17C1E232007AED0C /* CommunicationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunicationMessage.m; sourceTree = "<group>"; };
 		6F17672C17C1F7CA007AED0C /* DeviceCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommand.h; sourceTree = "<group>"; };
@@ -865,6 +870,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				6F167B7E17D9A213004169CD /* selection_view */,
 				6F159BED17D6FEA8005CFFEE /* remote_control_view */,
 				F2178BFB17CAEC1A0043400F /* pageable_scroll_view */,
 				F2D8E8D517C5BB8F00090E5B /* radio_button */,
@@ -1226,6 +1232,15 @@
 			name = remote_control_view;
 			sourceTree = "<group>";
 		};
+		6F167B7E17D9A213004169CD /* selection_view */ = {
+			isa = PBXGroup;
+			children = (
+				6F167B7F17D9A233004169CD /* SelectionView.h */,
+				6F167B8017D9A233004169CD /* SelectionView.m */,
+			);
+			name = selection_view;
+			sourceTree = "<group>";
+		};
 		6F350AB517CEF69100B796F1 /* icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1272,6 +1287,7 @@
 				F22DF72E17C2052E00BF7C3A /* btn_register@2x.png */,
 				F22E425117C306E9000FD247 /* btn_back@2x.jpg */,
 				F22DF72A17C1FFE300BF7C3A /* btn_orange@2x.png */,
+				6F167B7C17D99ECE004169CD /* btn_dark@2x.png */,
 			);
 			name = button;
 			sourceTree = "<group>";
@@ -1803,6 +1819,7 @@
 				6FC8C07E17D98593003B3904 /* icon_warning@2x.png in Resources */,
 				6FC8C08217D98A90003B3904 /* bg_hot@2x.png in Resources */,
 				6FC8C08417D98B81003B3904 /* bg_cold@2x.png in Resources */,
+				6F167B7D17D99ECE004169CD /* btn_dark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1924,6 +1941,7 @@
 				6F9EDFAA17D8D55800AFDBDF /* MessageFileManager.m in Sources */,
 				F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */,
 				6FC8C07017D975DC003B3904 /* DeviceDetailViewController.m in Sources */,
+				6F167B8117D9A233004169CD /* SelectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
