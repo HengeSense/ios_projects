@@ -57,8 +57,6 @@
         temperatureTable.backgroundColor = [UIColor clearColor];
         temperatureTable.showsVerticalScrollIndicator = NO;
         temperatureTable.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-//        temperatureTable.backgroundColor = [UIColor whiteColor];
-//        temperatureTable.contentSize = CGSizeMake(self.view.frame.size.width, 20*CELL_HEIGHT+47-100);
         [self.view addSubview:temperatureTable];
     }
     if (closeBtn == nil) {
@@ -115,9 +113,9 @@
     curIndex = indexPath;
     UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
-        curCell.backgroundColor = [UIColor colorWithHexString:@"ce621b"];
+        curCell.backgroundColor = [UIColor colorWithHexString:@"aa5923"];
     }else{
-        curCell.backgroundColor = [UIColor colorWithHexString:@"348138"];
+        curCell.backgroundColor = [UIColor colorWithHexString:@"2a6b97"];
     }
     curCell.textLabel.textColor = [UIColor whiteColor];
     [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(selectDelay) userInfo:nil repeats:NO];

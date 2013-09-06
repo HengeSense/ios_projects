@@ -12,7 +12,10 @@
 
 @end
 
-@implementation NotificationViewController
+@implementation NotificationViewController{
+    UITableView *messageTable;
+    NSArray *messageArr;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +31,27 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
-
+-(void)initDefaults{
+    [super initDefaults];
+}
+-(void)initUI{
+    [super initUI];
+    
+    if (messageArr == nil) {
+        Message *m1 = [Message new];
+        m1.content = @"hello!";
+    }
+}
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+-(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *messageCell = nil;
+    return messageCell;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

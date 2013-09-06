@@ -7,8 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef NS_ENUM(NSUInteger, MessageType ){
+    MessageTypeNormal,
+    MessageTypeVerify,
+    MessageTypeWarning
+};
+typedef NS_ENUM(NSUInteger, MessageState){
+    MessageStateRead,
+    MessageStateUnread
+};
 @interface Message : NSObject
 @property (strong,nonatomic) NSString *content;
-@property (strong,nonatomic) NSString *type;
-@property (strong,nonatomic) NSString *state;
+@property (assign,nonatomic) MessageType messageType;
+@property (assign,nonatomic) MessageState *messageState;
 @end

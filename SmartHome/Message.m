@@ -9,5 +9,7 @@
 #import "Message.h"
 
 @implementation Message
-
+@synthesize content;
+@synthesize messageState;
+@synthesize messageType;
 @end
