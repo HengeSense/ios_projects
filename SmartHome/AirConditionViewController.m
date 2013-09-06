@@ -95,6 +95,7 @@
         type = NSLocalizedString(@"cold", @"");
         temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
     }
+    temperatureCell.textLabel.font = [UIFont systemFontOfSize:14];
     temperatureCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
     temperatureCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return  temperatureCell;

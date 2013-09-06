@@ -55,14 +55,7 @@
     }
     return self;
 }
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if(!scrollView.isDecelerating) {
-        [self accessoryBehavior];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [self accessoryBehavior];
 }
 
@@ -88,7 +81,6 @@
     __block NSMutableArray *mutableScrollArr = [[NSMutableArray alloc] initWithObjects:nil];
     [deviceDictionary enumerateKeysAndObjectsUsingBlock:^(__strong NSString *key, __strong NSArray *obj, BOOL *stop) {
         NSInteger groupCount = obj.count%9==0?obj.count/9: obj.count/9+1;
-        NSLog(@"%i",groupCount);
         CGFloat contentHeight = groupCount*SCROLL_ITEM_HEIGHT;
         UIButton *navBtn = [ScrollNavButton buttonWithNothing];
         [navBtn setTitle:key forState:UIControlStateNormal];
