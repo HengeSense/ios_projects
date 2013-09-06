@@ -46,6 +46,8 @@
         ownerController = owner;
         //
         self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+        self.pageableScrollView.delegate = self;
+        [self addSubview:self.pageableScrollView];
         leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
         leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
         rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
@@ -118,16 +120,16 @@
     
     
     CGFloat multiple = (CGFloat) unit.zones.count;
-    if (self.pageableScrollView == nil) {
-        self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
-        self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
-        [self pageWithViews:mutableScrollArr];
-        self.pageableScrollView.delegate = self;
-        [self addSubview:self.pageableScrollView];
-    }else{
-        [self removeSubviews:self.pageableScrollView];
-        [self pageWithViews:mutableScrollArr];
-    }
+
+ 
+
+
+
+
+    [self removeSubviews:self.pageableScrollView];
+    self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
+    [self pageWithViews:mutableScrollArr];
+
 
     self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_WIDTH+MARGIN_X+20, 0, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
     [self addSubview:self.pageNavView];
