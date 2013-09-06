@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef NS_ENUM(NSInteger, MessageType){
     
-};
 @interface Message : NSObject
 @property (strong,nonatomic) NSString *content;
 @property (strong,nonatomic) NSString *type;
