@@ -47,8 +47,6 @@
 
 -(void) initDefaults{
     [super initDefaults];
-    NSLog(@"init");
-    password = @"123456";
     values = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",nil];
     titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick.name", @""),NSLocalizedString(@"user.email", @""),NSLocalizedString(@"modify.password", @""), nil];
     if (infoDictionary == nil) {
@@ -141,8 +139,9 @@
         [v removeFromSuperview];
     }
     UIView *view = [[UIView alloc] initWithFrame:cell.contentView.frame];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0,80 , cell.frame.size.height)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0,80 , cell.frame.size.height)];
     titleLabel.text = [titles objectAtIndex:indexPath.row];
+    titleLabel.font = [UIFont systemFontOfSize:16.f];
     [titleLabel setBackgroundColor:[UIColor clearColor]];
     [view addSubview:titleLabel];
     
@@ -161,12 +160,7 @@
     }
 
     [view addSubview:valueLabel];
-
     
-    UIImageView *accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory.png"]];
-    accessory.frame = CGRectMake(300, 0, 12/2, 23/2);
-    accessory.center = CGPointMake(accessory.center.x, cell.center.y);
-    [view addSubview:accessory];
     view.tag = 999;
     return  view;
 
@@ -215,13 +209,12 @@
     
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     editCell = [tableView cellForRowAtIndexPath:indexPath];
     editIndex = indexPath;
-    
     ModifyInfoViewController *modifyView = [[ModifyInfoViewController alloc] initWithKey:[titles objectAtIndex:indexPath.row] forValue:[values objectAtIndex:indexPath.row] from:self];
     modifyView.textDelegate = self;
     [self presentModalViewController:modifyView animated:YES];
-    
 }
 
 -(void) textViewHasBeenSetting:(NSString *)string{

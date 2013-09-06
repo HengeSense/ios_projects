@@ -12,12 +12,15 @@
 @implementation SMCell {
     UIImageView *backgroundImageView;
     UIImageView *selectedBackgroundImageView;
+    UIImageView *accessoryImageView;
 }
 
 @synthesize isSingle;
 @synthesize isTop;
 @synthesize isCenter;
 @synthesize isBottom;
+@synthesize accessoryViewVisible = _accessoryViewVisible_;
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -55,6 +58,12 @@
     if(selectedBackgroundImageView == nil) {
         selectedBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2)];
         [self.selectedBackgroundView addSubview:selectedBackgroundImageView];
+    }
+   
+    if(accessoryImageView == nil) {
+        accessoryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(295, 17.5, 12/2, 23/2)];
+        accessoryImageView.image = [UIImage imageNamed:@"accessory.png"];
+        [self addSubview:accessoryImageView];
     }
 }
 
@@ -106,6 +115,14 @@
         backgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"bottomCellIdentifier" selected:NO];
         selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"bottomCellIdentifier" selected:YES];
     }
+}
+
+- (BOOL)accessoryViewVisible {
+    return !accessoryImageView.hidden;
+}
+
+- (void)setAccessoryViewVisible:(BOOL)accessoryViewVisible {
+    accessoryImageView.hidden = accessoryViewVisible;
 }
 
 @end

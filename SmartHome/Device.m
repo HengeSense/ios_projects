@@ -108,7 +108,7 @@
 }
 
 - (BOOL)isAircondition {
-    return [self isRemote] && self.irType == 5;
+    return [self isRemote] && self.irType == 4;
 }
 
 - (BOOL)isSTB {

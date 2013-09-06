@@ -18,4 +18,6 @@
 @property (assign, nonatomic) BOOL isCenter;
 @property (assign, nonatomic) BOOL isBottom;
 
+@property (assign, nonatomic) BOOL accessoryViewVisible;
+
 @end

@@ -96,9 +96,7 @@
     SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        UIImageView *accessoryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(295, 17.5, 12/2, 23/2)];
-        accessoryImageView.image = [UIImage imageNamed:@"accessory.png"];
-        [cell addSubview:accessoryImageView];
+        cell.textLabel.font = [UIFont systemFontOfSize:17.f];
     }
     
     switch (indexPath.row) {
