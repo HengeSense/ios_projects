@@ -586,6 +586,10 @@
 		F205157917CF42370058DADE /* device_count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "device_count@2x.png"; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
+		F205E5BB17D977B600280F21 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
+		F205E5BC17D977B600280F21 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
+		F205E5BD17D977B600280F21 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
+		F205E5BE17D977B600280F21 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		F20AE08917BDBD540040B80A /* ModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyInfoViewController.h; sourceTree = "<group>"; };
 		F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoViewController.m; sourceTree = "<group>"; };
 		F20AE08C17BDD00B0040B80A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1007,6 +1011,7 @@
 		6F0FAEA417AF802000B75D3E /* third */ = {
 			isa = PBXGroup;
 			children = (
+				F205E5BA17D9777300280F21 /* MJPopup */,
 				6FD6C65617CCF78900BDA327 /* Reachability */,
 				6FD6C64D17CCDF3700BDA327 /* AsyncUdpSocket */,
 				6F0FAF1717AF882600B75D3E /* ZBarSDK */,
@@ -1525,6 +1530,17 @@
 				6FEB91E817BB843D007C04A1 /* TemperatureView.m */,
 			);
 			name = temperature_view;
+			sourceTree = "<group>";
+		};
+		F205E5BA17D9777300280F21 /* MJPopup */ = {
+			isa = PBXGroup;
+			children = (
+				F205E5BB17D977B600280F21 /* MJPopupBackgroundView.h */,
+				F205E5BC17D977B600280F21 /* MJPopupBackgroundView.m */,
+				F205E5BD17D977B600280F21 /* UIViewController+MJPopupViewController.h */,
+				F205E5BE17D977B600280F21 /* UIViewController+MJPopupViewController.m */,
+			);
+			name = MJPopup;
 			sourceTree = "<group>";
 		};
 		F20AE09117BE0CC50040B80A /* text_field */ = {
