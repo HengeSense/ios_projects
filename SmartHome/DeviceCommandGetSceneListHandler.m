@@ -7,7 +7,22 @@
 //
 
 #import "DeviceCommandGetSceneListHandler.h"
+#import "DeviceCommandUpdateSceneMode.h"
 
 @implementation DeviceCommandGetSceneListHandler
+
+- (void)handle:(DeviceCommand *)command {
+    [super handle:command];
+    if([command isKindOfClass:[DeviceCommandUpdateSceneMode class]]) {
+        DeviceCommandUpdateSceneMode *updateSceneModeCommand = (DeviceCommandUpdateSceneMode *)command;
+        
+        for(SceneMode *sm in updateSceneModeCommand.scenesMode) {
+            NSLog(sm.name);
+        }
+        
+        
+    }
+    
+}
 
 @end

@@ -23,6 +23,7 @@
 @synthesize updateTime;
 @synthesize zones;
 @synthesize devices;
+@synthesize scenesModeList;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];

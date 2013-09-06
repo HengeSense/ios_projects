@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSDate *updateTime;
 @property (strong, nonatomic) NSMutableArray *zones;
+@property (strong, nonatomic) NSMutableArray *scenesModeList;
 
 @property (strong, nonatomic, readonly) NSArray *devices;
 

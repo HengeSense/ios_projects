@@ -23,41 +23,49 @@
 }
 
 - (void)initDefaults {
-
+    if(self.units == nil) {
+        self.units = [NSMutableArray array];
+    }
 }
 
 - (void)subscribeHandler:(Class)handler for:(id)obj {
-    if(obj == nil || handler == nil) return;
-    
-    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
-    if(subscriptions_ == nil) {
-        subscriptions_ = [NSMutableArray array];
-        [subscriptions_ addObject:obj];
-        [self.subscriptions setObject:subscriptions_ forKey:[handler description]];
-        return;
-    }
-    BOOL found = NO;
-    for(int i=0; i<subscriptions_.count; i++) {
-        if(obj == [subscriptions_ objectAtIndex:i]) {
-            found = YES;
-            break;
+    @synchronized(self.subscriptions) {
+        if(obj == nil || handler == nil) return;
+        
+        NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
+        if(subscriptions_ == nil) {
+            subscriptions_ = [NSMutableArray array];
+            [subscriptions_ addObject:obj];
+            [self.subscriptions setObject:subscriptions_ forKey:[handler description]];
+            return;
         }
-    }
-    if(!found) {
-        [subscriptions_ addObject:obj];
+        BOOL found = NO;
+        for(int i=0; i<subscriptions_.count; i++) {
+            if(obj == [subscriptions_ objectAtIndex:i]) {
+                found = YES;
+                break;
+            }
+        }
+        if(!found) {
+            [subscriptions_ addObject:obj];
+        }
     }
 }
 
 - (NSArray *)getSubscriptionsFor:(Class)handler {
-    if(handler == nil) return nil;
-    return [self.subscriptions objectForKey:[handler description]];
+    @synchronized(self.subscriptions) {
+        if(handler == nil) return nil;
+        return [self.subscriptions objectForKey:[handler description]];
+    }
 }
 
 - (void)unSubscribeHandler:(Class)handler for:(id)obj {
-    if(obj == nil || handler == nil) return;
-    NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
-    if(subscriptions_ != nil) {
-        [subscriptions_ removeObject:obj];
+    @synchronized(self.subscriptions) {
+        if(obj == nil || handler == nil) return;
+        NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
+        if(subscriptions_ != nil) {
+            [subscriptions_ removeObject:obj];
+        }
     }
 }
 
@@ -119,13 +127,6 @@
 - (Unit *)currentUnit {
     if(self.units.count == 0) return nil;
     return [self.units objectAtIndex:0];
-}
-
-- (NSMutableArray *)units {
-    if(units == nil) {
-        units = [NSMutableArray array];
-    }
-    return units;
 }
 
 - (NSMutableDictionary *)subscriptions {

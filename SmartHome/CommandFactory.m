@@ -10,6 +10,7 @@
 #import "DeviceCommandUpdateAccount.h"
 #import "DeviceCommandUpdateUnits.h"
 #import "DeviceCommandUpdateNotifications.h"
+#import "DeviceCommandUpdateSceneMode.h"
 
 @implementation CommandFactory
 
@@ -33,7 +34,9 @@
         command.commandName = @"AccountMQListCommand";
         return command;
     } else if(type == CommandTypeGetSceneList) {
-        
+        DeviceCommand *command = [[DeviceCommand alloc] init];
+        command.commandName = @"FindDeviceSceneCommand";
+        return command;
     } else if(type == CommandTypeUpdateDeviceViaVoice) {
         
     } else if(type == CommandTypeUpdateDevice) {
@@ -58,7 +61,7 @@
     } else if([@"AccountMQListCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateNotifications alloc] initWithDictionary:json];
     } else if([@"FindDeviceSceneCommand" isEqualToString:commandName]) {
-        
+        command = [[DeviceCommandUpdateSceneMode alloc] initWithDictionary:json];
     } else if([@"VoiceControlCommand" isEqualToString:commandName]) {
         
     } else if([@"KeyControlCommand" isEqualToString:commandName]) {
