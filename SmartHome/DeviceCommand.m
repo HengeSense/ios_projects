@@ -68,11 +68,14 @@
     if(self.commandTime != nil) {
         [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     }
-    if(self.updateTime != nil) {
-       [json setObject:[NSNumber numberWithLongLong:(long long)self.updateTime.timeIntervalSince1970] forKey:@"updateTime"];
-    } else {
-        [json setObject:[NSNumber numberWithInteger:0] forKey:@"updateTime"];
+    if([@"FindZKListCommand" isEqualToString:commandName] || [@"FindDeviceSceneCommand" isEqualToString:commandName]) {
+        if(self.updateTime != nil) {
+            [json setObject:[NSNumber numberWithLongLong:(long long)self.updateTime.timeIntervalSince1970] forKey:@"updateTime"];
+        } else {
+           [json setObject:[NSNumber numberWithInteger:0] forKey:@"updateTime"];
+        }
     }
+
     return json;
 }
 
