@@ -9,7 +9,7 @@
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
 #import "DeviceCommandUpdateUnits.h"
-#import "DeviceCommandReceivedNotifications.h"
+#import "DeviceCommandUpdateNotifications.h"
 
 @implementation CommandFactory
 
@@ -32,6 +32,12 @@
         DeviceCommand *command = [[DeviceCommand alloc] init];
         command.commandName = @"AccountMQListCommand";
         return command;
+    } else if(type == CommandTypeGetSceneList) {
+        
+    } else if(type == CommandTypeUpdateDeviceViaVoice) {
+        
+    } else if(type == CommandTypeUpdateDevice) {
+        
     }
     
     return nil;
@@ -50,7 +56,13 @@
     } else if([@"AccountProfileCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateAccount alloc] initWithDictionary:json];
     } else if([@"AccountMQListCommand" isEqualToString:commandName]) {
-        command = [[DeviceCommandReceivedNotifications alloc] initWithDictionary:json];
+        command = [[DeviceCommandUpdateNotifications alloc] initWithDictionary:json];
+    } else if([@"FindDeviceSceneCommand" isEqualToString:commandName]) {
+        
+    } else if([@"VoiceControlCommand" isEqualToString:commandName]) {
+        
+    } else if([@"KeyControlCommand" isEqualToString:commandName]) {
+        
     }
     
     return command;

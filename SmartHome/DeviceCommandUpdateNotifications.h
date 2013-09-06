@@ -1,5 +1,5 @@
 //
-//  DeviceCommandReceivedNotifications.h
+//  DeviceCommandUpdateNotifications.h
 //  SmartHome
 //
 //  Created by Zhao yang on 9/4/13.
@@ -8,6 +8,6 @@
 
 #import "DeviceCommand.h"
 
-@interface DeviceCommandReceivedNotifications : DeviceCommand
+@interface DeviceCommandUpdateNotifications : DeviceCommand
 
 @end

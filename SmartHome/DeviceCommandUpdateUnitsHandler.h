@@ -9,9 +9,9 @@
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandUpdateUnits.h"
 
-@protocol UpdateUnitsHandlerDelegate<NSObject>
+@protocol DeviceCommandUpdateUnitsHandlerDelegate<NSObject>
 
-- (void) updateUnits:(NSArray *) uints;
+- (void)notifyUnitsWasUpdate;
 
 @end
 

@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Unit.h"
+
 @interface Memory : NSObject
 
-@property (strong, nonatomic) NSMutableArray *units;
+@property (strong, atomic) NSMutableArray *units;
+@property (strong, atomic, readonly) Unit *currentUnit;
 @property (strong, nonatomic, readonly) NSMutableDictionary *subscriptions;
 
 /*

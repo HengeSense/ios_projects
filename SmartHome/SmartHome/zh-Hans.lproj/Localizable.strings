@@ -124,7 +124,7 @@
  * settings view
  */
 "push_settings"      =   "推送设置";
-"account_logout"     =   "账号注销";
+"account_logout"     =   "退出登录";
 "feed_back"          =   "意见反馈";
 "about_us"           =   "关于";
 
