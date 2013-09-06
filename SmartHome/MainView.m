@@ -163,7 +163,13 @@
 #pragma mark device command upate unit handler
 
 - (void)notifyUnitsWasUpdate {
-    [pageableScrollView loadDataWithDictionary:[SMShared current].memory.currentUnit];
+    @synchronized(self) {
+        Unit *unit = [SMShared current].memory.currentUnit;
+        if(unit != nil && ![NSString isBlank:unit.name]) {
+            self.topbar.titleLabel.text = unit.name;
+        }
+        [pageableScrollView loadDataWithDictionary:unit];
+    }
 }
 
 #pragma mark -
