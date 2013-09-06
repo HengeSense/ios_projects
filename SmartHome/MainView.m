@@ -68,6 +68,7 @@
         btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, 65, 227 / 2, 73 / 2)];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateNormal];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateHighlighted];
+        [btnUnit addTarget:self action:@selector(btnShowUnitsList:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnUnit];
     }
     
@@ -188,6 +189,10 @@
 }
 
 - (void)btnShowSceneList:(id)sender {
+    [SelectionView showWithItems:nil selectedIndex:1 delegate:self];
+}
+
+- (void)btnShowUnitsList:(id)sender {
     [SelectionView showWithItems:nil selectedIndex:1 delegate:self];
 }
 

@@ -31,7 +31,7 @@
 
 - (void)initUI {
     if(tblItems == nil) {
-        tblItems = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 49 - 6 - 10)];
+        tblItems = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, self.bounds.size.width, self.bounds.size.height - 49 - 6 - 10)];
         tblItems.backgroundColor = [UIColor clearColor];
         tblItems.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblItems.scrollEnabled = NO;
@@ -43,6 +43,7 @@
     if(btnCancel == nil) {
         btnCancel = [LongButton darkButtonWithPoint:CGPointMake(0, self.bounds.size.height - 49 - 6)];
         btnCancel.center = CGPointMake(self.center.x, btnCancel.center.y);
+        [btnCancel setTitle:NSLocalizedString(@"cancel", @"") forState:UIControlStateNormal];
         [btnCancel addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnCancel];
     }
@@ -51,7 +52,7 @@
 }
 
 + (void)showWithItems:(NSArray *)items selectedIndex:(NSInteger)index delegate:(id)target {
-    CGFloat height = 5 * 45 + 49 + 6 + 10 + 30;
+    CGFloat height = 1 * 45 + 49 + 6 + 10 + 30;
     
     UIView *lockView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     lockView.backgroundColor = [UIColor blackColor];
@@ -101,7 +102,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 1;
     if(self.items == nil || self.items.count == 0) return 0;
     return self.items.count;
 }
