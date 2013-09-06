@@ -11,5 +11,6 @@
 @interface LongButton : UIButton
 
 + (UIButton *)buttonWithPoint:(CGPoint)point;
++ (UIButton *)darkButtonWithPoint:(CGPoint)point;
 
 @end

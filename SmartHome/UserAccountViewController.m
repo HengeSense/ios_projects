@@ -196,6 +196,7 @@
         [[AlertView currentAlertView] delayDismissAlertView];
         return;
     }
+
     switch (command.resultID) {
         case 1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.success", @"") forType:AlertViewTypeSuccess];
@@ -204,16 +205,19 @@
         case -1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.password.error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
+            break;
         case -2:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"blank.nickname.or.email.error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
+            break;
         case -3:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.format.error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
+            break;
         case -4:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.too.frequent.error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
-
+            break;
         default:
             break;
     }
