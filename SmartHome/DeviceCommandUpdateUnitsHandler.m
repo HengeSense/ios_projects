@@ -19,8 +19,8 @@
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
         if(subscriptions) {
             for(int i=0; i<subscriptions.count; i++) {
-                if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(updateUnits)]) {
-                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(updateUnits) withObject:nil waitUntilDone:NO];
+                if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(notifyUnitsWasUpdate)]) {
+                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyUnitsWasUpdate) withObject:nil waitUntilDone:NO];
                 }
             }
         }
