@@ -34,7 +34,7 @@
     BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
     
     if(hasLogin) {
-        
+        // start service 
         [self.deviceCommandDeliveryService startService];
         
         if(self.settings.anyUnitsBinding) {

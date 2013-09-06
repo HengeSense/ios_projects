@@ -22,7 +22,7 @@
     NSMutableDictionary *deviceDictionary;
     UIImageView *leftBoundsShadow;
     UIImageView *rightBoundsShadow;
-    
+    UIViewController *ownerController;
 }
 
 @synthesize pageableScrollView;
@@ -39,26 +39,23 @@
     }
     return self;
 }
--(id)initWithPoint:(CGPoint) point andUnit:(Unit *) unit owner:(UIViewController *) owner{
-    self = [super initWithFrame:CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH+20+101/2, SCROLL_ITEM_HEIGHT)];
 
-    CGFloat multiple = (CGFloat) unit.zones.count;
-    
-    [self loadDataWithDictionary:unit owner:owner];
-    
-    
-    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
-    leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
-    rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
-    rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH-10, 0, 10, SCROLL_ITEM_HEIGHT);
-    [self addSubview:leftBoundsShadow];
-    [self addSubview:rightBoundsShadow];
-    leftBoundsShadow.hidden = YES;
-    rightBoundsShadow.hidden = YES;
-    if (multiple>1) {
-        rightBoundsShadow.hidden = NO;
+- (id)initWithPoint:(CGPoint)point owner:(UIViewController *)owner {
+    self = [super initWithFrame:CGRectMake(point.x, point.y, SCROLL_ITEM_WIDTH+20+101/2, SCROLL_ITEM_HEIGHT)];
+    if(self) {
+        ownerController = owner;
+        //
+        self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+        leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
+        leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
+        rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
+        rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH-10, 0, 10, SCROLL_ITEM_HEIGHT);
+        [self addSubview:leftBoundsShadow];
+        [self addSubview:rightBoundsShadow];
+        leftBoundsShadow.hidden = YES;
+        rightBoundsShadow.hidden = YES;
+        rightBoundsShadow.hidden = YES;
     }
-    
     return self;
 }
 
@@ -71,10 +68,10 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self accessoryBehavior];
 }
-- (void) loadDataWithDictionary:(Unit *) unit owner:(UIViewController *) owner{
-    if (unit == nil) {
-        return;
-    }
+
+- (void)loadDataWithDictionary:(Unit *)unit {
+    if (unit == nil) return;
+    
     NSArray *zones = unit.zones;
     NSMutableArray *rooms = [NSMutableArray new];
     NSMutableArray *devicesOfRooms = [NSMutableArray new];
@@ -83,7 +80,7 @@
         NSMutableArray *devicesBtn = [NSMutableArray new];
         [rooms addObject:zone.name];
         for (Device *device in devices) {
-            DeviceButton *db = [DeviceButton buttonWithDevice:device point:CGPointMake(0, 0) owner:owner];
+            DeviceButton *db = [DeviceButton buttonWithDevice:device point:CGPointMake(0, 0) owner:ownerController];
             [devicesBtn addObject:db];
         }
         [devicesOfRooms addObject:devicesBtn];

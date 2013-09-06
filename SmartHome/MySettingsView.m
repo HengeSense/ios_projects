@@ -8,10 +8,12 @@
 
 #import "MySettingsView.h"
 #import "AlertView.h"
+#import "LongButton.h"
 #import "SMCell.h"
 
 @implementation MySettingsView {
     UITableView *tblSettings;
+    UIButton *btnLogout;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -37,6 +39,15 @@
         tblSettings.delegate = self;
         [self addSubview:tblSettings];
     }
+    
+    if(btnLogout == nil) {
+        btnLogout = [LongButton buttonWithPoint:CGPointMake(0, 0)];
+        btnLogout.center = CGPointMake(self.bounds.size.width / 2, 222);
+        [btnLogout setTitle:NSLocalizedString(@"account_logout", @"") forState:UIControlStateNormal];
+        btnLogout.titleLabel.textColor = [UIColor whiteColor];
+        [btnLogout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnLogout];
+    }
 }
 
 #pragma mark -
@@ -47,12 +58,8 @@
         case 0:
             break;
         case 1:
-            //logout
-            [[SMShared current].settings clearAuth];
             break;
         case 2:
-            break;
-        case 3:
             break;
         default:
             break;
@@ -60,7 +67,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 3;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -89,30 +96,33 @@
     SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        UIImageView *accessoryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(295, 17.5, 12/2, 23/2)];
+        accessoryImageView.image = [UIImage imageNamed:@"accessory.png"];
+        [cell addSubview:accessoryImageView];
     }
     
     switch (indexPath.row) {
         case 0:
             cell.imageView.image = [UIImage imageNamed:@"icon_notification.png"];
-            cell.textLabel.text = NSLocalizedString(@"push_settings", @"");
+            cell.textLabel.text = [NSString stringWithFormat:@"  %@", NSLocalizedString(@"push_settings", @"")];
             break;
         case 1:
-            cell.imageView.image = [UIImage imageNamed:@"icon_logout.png"];
-            cell.textLabel.text = NSLocalizedString(@"account_logout", @"");
+            cell.imageView.image = [UIImage imageNamed:@"icon_feed_back.png"];
+            cell.textLabel.text = [NSString stringWithFormat:@"  %@", NSLocalizedString(@"feed_back", @"")];
             break;
         case 2:
-            cell.imageView.image = [UIImage imageNamed:@"icon_feed_back.png"];
-            cell.textLabel.text = NSLocalizedString(@"feed_back", @"");
-            break;
-        case 3:
             cell.imageView.image = [UIImage imageNamed:@"icon_about_us.png"];
-            cell.textLabel.text = NSLocalizedString(@"about_us", @"");
+            cell.textLabel.text = [NSString stringWithFormat:@"  %@", NSLocalizedString(@"about_us", @"")];
             break;
         default:
             break;
     }
     
     return cell;
+}
+
+- (void)logout {
+    [[SMShared current].settings clearAuth];
 }
 
 @end

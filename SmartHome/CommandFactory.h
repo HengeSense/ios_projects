@@ -15,6 +15,9 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeGetAccount,
     CommandTypeGetUnits,
     CommandTypeGetNotifications,
+    CommandTypeGetSceneList,
+    CommandTypeUpdateDeviceViaVoice,
+    CommandTypeUpdateDevice,
 };
 
 @interface CommandFactory : NSObject

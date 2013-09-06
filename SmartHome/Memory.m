@@ -11,6 +11,7 @@
 @implementation Memory
 
 @synthesize units;
+@synthesize currentUnit;
 @synthesize subscriptions;
 
 - (id)init {
@@ -22,17 +23,12 @@
 }
 
 - (void)initDefaults {
-    if(self.subscriptions == nil) {
-        subscriptions = [NSMutableDictionary dictionary];
-    }
-    
-    if(self.units == nil) {
-        self.units = [NSMutableArray array];
-    }
+
 }
 
 - (void)subscribeHandler:(Class)handler for:(id)obj {
     if(obj == nil || handler == nil) return;
+    
     NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
     if(subscriptions_ == nil) {
         subscriptions_ = [NSMutableArray array];
@@ -67,6 +63,7 @@
 
 - (NSArray *)updateUnits:(NSArray *)newUnits {
     @synchronized(self) {
+        
         if(newUnits == nil || newUnits.count == 0) {
             [self.units removeAllObjects];
             return self.units;
@@ -115,7 +112,27 @@
         }
         
         return self.units;
+        
     }
+}
+
+- (Unit *)currentUnit {
+    if(self.units.count == 0) return nil;
+    return [self.units objectAtIndex:0];
+}
+
+- (NSMutableArray *)units {
+    if(units == nil) {
+        units = [NSMutableArray array];
+    }
+    return units;
+}
+
+- (NSMutableDictionary *)subscriptions {
+    if(subscriptions == nil) {
+        subscriptions = [NSMutableDictionary dictionary];
+    }
+    return subscriptions;
 }
 
 @end

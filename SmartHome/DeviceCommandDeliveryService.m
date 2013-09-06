@@ -11,7 +11,10 @@
 #import "DeviceCommandUpdateUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
-#import "DeviceCommandReceivedNotificationHandler.h"
+#import "DeviceCommandUpdateNotificationsHandler.h"
+#import "DeviceCommandVoiceControlHandler.h"
+#import "DeviceCommandUpdateDeviceHandler.h"
+#import "DeviceCommandGetSceneListHandler.h"
 
 @implementation DeviceCommandDeliveryService
 
@@ -37,8 +40,7 @@
  *
  */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
-   
-    // will determine using tcp or rest service to execute device command
+    if(!self.isService) return;
     
     [self.tcpService executeDeviceCommand:command];
 }
@@ -61,7 +63,13 @@
     } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetAccountHandler alloc] init];
     } else if([@"AccountMQListCommand" isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandReceivedNotificationHandler alloc] init];
+        handler = [[DeviceCommandUpdateNotificationsHandler alloc] init];
+    } else if([@"FindDeviceSceneCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandGetSceneListHandler alloc] init];
+    } else if([@"VoiceControlCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandVoiceControlHandler alloc] init];
+    } else if([@"KeyControlCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandUpdateDeviceHandler alloc] init];
     }
         
     if(handler != nil) {
@@ -71,10 +79,10 @@
 
 - (void)startService {
     if(!self.isService) {
-        isService = YES;
         if(![self.tcpService isConnect]) {
             [self performSelectorInBackground:@selector(startTcp) withObject:nil];
         }
+        isService = YES;
     }
 }
 
