@@ -125,6 +125,7 @@
         self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
         self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
         [self pageWithViews:mutableScrollArr];
+        self.pageableScrollView.delegate = self;
         [self addSubview:self.pageableScrollView];
     }else{
         [self removeSubviews:self.pageableScrollView];
