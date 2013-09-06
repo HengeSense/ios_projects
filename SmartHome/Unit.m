@@ -50,16 +50,21 @@
     }
     return self;
 }
--(void) encodeWithCoder:(NSCoder *) encoder{
-    [encoder encodeObject:self.identifier forKey:@"indentifier"];
-    [encoder encodeObject:[NSNumber numberWithInteger:self.localPort ] forKey:@"localPort"];
-    [encoder encodeObject:self.localIP forKey:@"localIP"];
-    [encoder encodeObject:self.name forKey:@"name"];
-    [encoder encodeObject:self.status forKey:@"status"];
-    [encoder encodeObject:self.updateTime forKey:@"updateTime"];
-    [encoder encodeObject:self.zones forKey:@"zones"];
-    
-}
+//-(void) encodeWithCoder:(NSCoder *) encoder{
+//    [encoder encodeObject:self.identifier forKey:@"indentifier"];
+//    [encoder encodeObject:[NSNumber numberWithInteger:self.localPort ] forKey:@"localPort"];
+//    [encoder encodeObject:self.localIP forKey:@"localIP"];
+//    [encoder encodeObject:self.name forKey:@"name"];
+//    [encoder encodeObject:self.status forKey:@"status"];
+//    [encoder encodeObject:self.updateTime forKey:@"updateTime"];
+//    [encoder encodeObject:self.zones forKey:@"zones"];
+//    [encoder encodeObject:self.devices forKey:@"device"];
+//    [encoder encodeObject:self.scenesModeList forKey:@"scenesModeList"];
+//    
+//}
+//-(id) initWithCoder:(NSCoder *) decoder{
+//    return  nil;
+//}
 - (NSMutableArray *)zones {
     if(zones == nil) {
         zones = [NSMutableArray array];

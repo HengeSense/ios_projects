@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "NSDictionary+NSNullUtility.h"
 
-@interface Device : NSObject
+@interface Device : NSObject<NSCoding>
 
-@property (strong, nonatomic) NSString *identifier;
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *category;
-@property (strong, nonatomic) NSString *user;
-@property (strong, nonatomic) NSString *ip;
-@property (strong, nonatomic) NSString *nwkAddr;
-@property (strong, nonatomic) NSString *pwd;
+@property (copy, nonatomic) NSString *identifier;
+@property (copy, nonatomic) NSString *name;
+@property (copy, nonatomic) NSString *category;
+@property (copy, nonatomic) NSString *user;
+@property (copy, nonatomic) NSString *ip;
+@property (copy, nonatomic) NSString *nwkAddr;
+@property (copy, nonatomic) NSString *pwd;
 @property (assign, nonatomic) NSInteger ep;
 @property (assign, nonatomic) NSInteger irType;
 @property (assign, nonatomic) NSInteger port;

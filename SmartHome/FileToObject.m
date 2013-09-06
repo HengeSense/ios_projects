@@ -16,6 +16,8 @@
         return nil;
     }
     unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:dataArea];
-    return [unarchiver decodeObjectForKey:key];
+    id result = [unarchiver decodeObjectForKey:key];
+    [unarchiver finishDecoding];
+    return result;
 }
 @end

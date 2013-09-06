@@ -15,6 +15,6 @@
     [archiver encodeObject:object forKey:key];
     [archiver finishEncoding];
     
-    return  [dataArea writeToFile:@"smarthomeArchiver" atomically:YES];
+    return  [dataArea writeToFile:@"smarthomeArchiver" atomically:NO];
 }
 @end

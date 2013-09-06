@@ -71,7 +71,7 @@
     if (btnGetUnit == nil) {
         btnGetUnit = [[UIButton alloc] initWithFrame:CGRectMake(52, 100, 20, 20)];
         btnGetUnit.backgroundColor = [UIColor whiteColor];
-        [btnGetUnit addTarget:self action:@selector(btnGetUnitPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [btnGetUnit addTarget:self action:@selector(btnGetDevicesPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnGetUnit];
     }
     if(btnUnit == nil) {
@@ -177,14 +177,21 @@
     [[SMShared current].deliveryService executeDeviceCommand:cmd];
 }
 
--(void) btnGetUnitPressed:(id) sender{
-    Unit *getFromArchiver;
-    [ObjectToFile objectToFile:[SMShared current].memory.currentUnit forKey:@"currentUnit"];
-    getFromArchiver = [FileToObject fileToObjectForKey:@"currentUnit"];
+-(void) btnGetDevicesPressed:(id) sender{
+    Device *setToArchiver = [[SMShared current].memory.currentUnit.devices objectAtIndex:0];
+    NSLog(@"device name = %@",setToArchiver.name);
+    
+
+    Device *getFromArchiver;
+    BOOL archiver = [ObjectToFile objectToFile:setToArchiver forKey:@"devices"];
+    NSLog(@"%d",archiver);
+    getFromArchiver = [FileToObject fileToObjectForKey:@"devices"];
     if (!getFromArchiver) {
         NSLog(@"failed!");
     }
-    NSLog(@"name = %@,zones.count = %i",getFromArchiver.name,getFromArchiver.zones.count);
+    
+       // NSLog(@"device name = %@",getFromArchiver.name);
+    
 }
 #pragma mark -
 #pragma mark device command upate unit handler
