@@ -222,6 +222,7 @@
 		F205157A17CF42370058DADE /* message_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157817CF42370058DADE /* message_count@2x.png */; };
 		F205157B17CF42370058DADE /* device_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157917CF42370058DADE /* device_count@2x.png */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
+		F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C017D9784800280F21 /* PasswordPopupViewController.m */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
 		F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08D17BDD00B0040B80A /* LoginViewController.m */; };
 		F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* SMTextField.m */; };
@@ -590,6 +591,8 @@
 		F205E5BC17D977B600280F21 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
 		F205E5BD17D977B600280F21 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
 		F205E5BE17D977B600280F21 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
+		F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordPopupViewController.h; sourceTree = "<group>"; };
+		F205E5C017D9784800280F21 /* PasswordPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPopupViewController.m; sourceTree = "<group>"; };
 		F20AE08917BDBD540040B80A /* ModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyInfoViewController.h; sourceTree = "<group>"; };
 		F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoViewController.m; sourceTree = "<group>"; };
 		F20AE08C17BDD00B0040B80A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1312,6 +1315,8 @@
 			children = (
 				6F984F7B17BE1EEA007F90A2 /* AlertView.h */,
 				6F984F7C17BE1EEA007F90A2 /* AlertView.m */,
+				F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */,
+				F205E5C017D9784800280F21 /* PasswordPopupViewController.m */,
 			);
 			name = alert_view;
 			sourceTree = "<group>";
@@ -1884,6 +1889,7 @@
 				6F347A5B17D8B64500B486D3 /* DeviceCommandVoiceControl.m in Sources */,
 				6F457AA817D8D452004CD1A7 /* UnitsFileManager.m in Sources */,
 				6F9EDFAA17D8D55800AFDBDF /* MessageFileManager.m in Sources */,
+				F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
