@@ -13,6 +13,7 @@
 #import "UIColor+ExtentionForHexString.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "SelectionView.h"
+#import "SceneMode.h"
 
 #import "DeviceButton.h"
 #import "CommandFactory.h"
@@ -172,9 +173,7 @@
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     
     
-    DeviceCommand *cmd = [CommandFactory commandForType:CommandTypeGetSceneList];
-    cmd.masterDeviceCode = @"b888e3a309a1";
-    [[SMShared current].deliveryService executeDeviceCommand:cmd];
+    
 }
 
 -(void) btnGetUnitPressed:(id) sender{
@@ -208,11 +207,24 @@
 }
 
 - (void)btnShowSceneList:(id)sender {
-    [SelectionView showWithItems:nil selectedIndex:1 delegate:self];
+    NSMutableArray *sList = [NSMutableArray array];
+    if([SMShared current].memory.currentUnit != nil) {
+        if([SMShared current].memory.currentUnit.scenesModeList != nil) {
+            for(SceneMode *sm in [SMShared current].memory.currentUnit.scenesModeList) {
+                [sList addObject:[[SelectionItem alloc] initWithIdentifier:[NSString stringWithFormat:@"%d", sm.code] andTitle:sm.name]];
+            }
+        }
+    }
+    [SelectionView showWithItems:sList selectedIdentifier:@"" delegate:self];
 }
 
 - (void)btnShowUnitsList:(id)sender {
-    [SelectionView showWithItems:nil selectedIndex:1 delegate:self];
+    NSMutableArray *unitsList = [NSMutableArray array];
+    for(Unit *unit in [SMShared current].memory.units) {
+        [unitsList addObject:[[SelectionItem alloc] initWithIdentifier:unit.identifier andTitle:unit.name]];
+    }
+    NSString *selectedUnitIdentifier = [SMShared current].memory.currentUnit == nil ? [NSString emptyString] : [SMShared current].memory.currentUnit.identifier;
+    [SelectionView showWithItems:unitsList selectedIdentifier:selectedUnitIdentifier delegate:self];
 }
 
 #pragma mark -

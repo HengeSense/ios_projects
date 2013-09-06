@@ -7,6 +7,7 @@
 //
 
 #import "DeviceCommandUpdateUnitsHandler.h"
+#import "CommandFactory.h"
 #import "Unit.h"
 
 @implementation DeviceCommandUpdateUnitsHandler
@@ -23,6 +24,15 @@
                     [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyUnitsWasUpdate) withObject:nil waitUntilDone:NO];
                 }
             }
+        }
+        
+        for(Unit *unit in updateUnitsCommand.units) {
+            DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
+            getSceneListCommand.masterDeviceCode = unit.identifier;
+            if(unit.scenesModeList != nil && unit.scenesModeList.count > 0) {
+                getSceneListCommand.updateTime = unit.sceneUpdateTime;
+            }
+            [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
         }
     }
 }
