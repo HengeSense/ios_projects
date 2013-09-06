@@ -22,6 +22,7 @@
 @synthesize appKey;
 @synthesize security;
 @synthesize tcpAddress;
+@synthesize updateTime;
 
 - (id)initWithDictionary:(NSDictionary *)json {
     self = [super init];
@@ -66,6 +67,11 @@
     }
     if(self.commandTime != nil) {
         [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
+    }
+    if(self.updateTime != nil) {
+       [json setObject:[NSNumber numberWithLongLong:(long long)self.updateTime.timeIntervalSince1970] forKey:@"updateTime"];
+    } else {
+        [json setObject:[NSNumber numberWithInteger:0] forKey:@"updateTime"];
     }
     return json;
 }

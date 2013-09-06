@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSString *security;
 @property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSDate *commandTime;
+@property (strong, nonatomic) NSDate *updateTime;
 
 - (id)initWithDictionary:(NSDictionary *)json;
 - (NSMutableDictionary *)toDictionary;

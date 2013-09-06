@@ -18,6 +18,7 @@
 "skip"             = "skip";
 "next_step"        = "Next step";
 "please_wait"      = "Please wait";
+"please_select"    = "Select";
 "unknow_error"     = "System error";
 "request_timeout"  = "Request timeout";
 "processing.tips"  = "Wait for processing...";

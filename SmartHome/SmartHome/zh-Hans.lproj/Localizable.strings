@@ -19,6 +19,7 @@
 "skip"             = "跳过";
 "next_step"        = "下一步";
 "please_wait"      = "请稍后";
+"please_select"    = "请选择";
 "unknow_error"     = "系统错误";
 "request_timeout"  = "请求超时";
 "determine"        = "确定";

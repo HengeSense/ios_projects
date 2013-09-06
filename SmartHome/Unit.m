@@ -23,13 +23,18 @@
 @synthesize updateTime;
 @synthesize zones;
 @synthesize devices;
-@synthesize scenesModeList;
+@synthesize sceneUpdateTime;
+
+@synthesize scenesModeList = _scenesModeList_;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
         if(json != nil) {
             self.identifier = [json notNSNullObjectForKey:@"_id"];
+            if(self.identifier != nil) {
+                self.identifier = [self.identifier substringToIndex:self.identifier.length-4];
+            }
             self.localIP = [json notNSNullObjectForKey:@"localIp"];
             self.name = [json notNSNullObjectForKey:@"name"];
             self.localPort = [json numberForKey:@"localPort"].integerValue;
@@ -81,6 +86,13 @@
         }
     }
     return nil;
+}
+
+- (NSMutableArray *)scenesModeList {
+    if(_scenesModeList_ == nil) {
+        _scenesModeList_ = [NSMutableArray array];
+    }
+    return _scenesModeList_;
 }
 
 - (NSArray *)devices {

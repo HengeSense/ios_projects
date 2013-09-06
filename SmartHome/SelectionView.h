@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SelectionItem.h"
 
 @protocol SelectionViewDelegate <NSObject>
 
@@ -19,6 +20,6 @@
 @property (strong, nonatomic) NSArray *items;
 
 
-+ (void)showWithItems:(NSArray *)items selectedIndex:(NSInteger)index delegate:(id)target;
++ (void)showWithItems:(NSArray *)items selectedIdentifier:(NSString *)identifier delegate:(id)target;
 
 @end

@@ -100,7 +100,13 @@
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
     NSString *receivedJson = [[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding];
     NSLog(receivedJson);
+    
     NSDictionary *json = [JsonUtils createDictionaryFromJson:messages];
+
+    //don't need to process this message
+    NSNumber *resultID = [json notNSNullObjectForKey:@"resultId"];
+    if(resultID == nil || resultID.integerValue == -100) return;
+    
     DeviceCommand *command = [CommandFactory commandFromJson:json];
     if(command != nil) {
         [[SMShared current].deliveryService handleDeviceCommand:command];
