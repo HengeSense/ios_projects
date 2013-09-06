@@ -45,9 +45,6 @@
     if(self) {
         ownerController = owner;
         //
-        self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
-        self.pageableScrollView.delegate = self;
-        [self addSubview:self.pageableScrollView];
         leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
         leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
         rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
@@ -55,8 +52,6 @@
         [self addSubview:leftBoundsShadow];
         [self addSubview:rightBoundsShadow];
         leftBoundsShadow.hidden = YES;
-        rightBoundsShadow.hidden = YES;
-        rightBoundsShadow.hidden = YES;
     }
     return self;
 }
@@ -92,7 +87,8 @@
     __block NSMutableArray *mutableNavArr = [[NSMutableArray alloc] initWithObjects: nil];
     __block NSMutableArray *mutableScrollArr = [[NSMutableArray alloc] initWithObjects:nil];
     [deviceDictionary enumerateKeysAndObjectsUsingBlock:^(__strong NSString *key, __strong NSArray *obj, BOOL *stop) {
-        NSInteger groupCount = obj.count/9+1;
+        NSInteger groupCount = obj.count%9==0?obj.count/9: obj.count/9+1;
+        NSLog(@"%i",groupCount);
         CGFloat contentHeight = groupCount*SCROLL_ITEM_HEIGHT;
         UIButton *navBtn = [ScrollNavButton buttonWithNothing];
         [navBtn setTitle:key forState:UIControlStateNormal];
@@ -124,11 +120,14 @@
  
 
 
-
-
-    [self removeSubviews:self.pageableScrollView];
+    
+    
+    self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
+    self.pageableScrollView.delegate = self;
     self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
     [self pageWithViews:mutableScrollArr];
+    [self addSubview:self.pageableScrollView];
+
 
 
     self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_WIDTH+MARGIN_X+20, 0, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
