@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) NSArray *items;
 
-- (void)show;
+
++ (void)showWithItems:(NSArray *)items selectedIndex:(NSInteger)index delegate:(id)target;
 
 @end

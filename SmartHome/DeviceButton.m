@@ -100,7 +100,8 @@
             [self registerImage:[UIImage imageNamed:@"icon_light_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_light_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
         } else if(_device_.isCurtainOrSccurtain) {
-            
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
         } else if(_device_.isTV) {
             [self registerImage:[UIImage imageNamed:@"icon_tv_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_tv_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];

@@ -12,6 +12,7 @@
 #import "NSString+StringUtils.h"
 #import "UIColor+ExtentionForHexString.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "SelectionView.h"
 
 #import "DeviceButton.h"
 #import "CommandFactory.h"
@@ -74,6 +75,7 @@
         btnScene = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 227/2 - 15, 65, 227 /2, 73 / 2)];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateHighlighted];
+        [btnScene addTarget:self action:@selector(btnShowSceneList:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnScene];
     }
     
@@ -157,6 +159,11 @@
     }
     
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+    
+    
+    DeviceCommand *cmd = [CommandFactory commandForType:CommandTypeGetSceneList];
+    cmd.masterDeviceCode = @"b888e3a309a1";
+    [[SMShared current].deliveryService executeDeviceCommand:cmd];
 }
 
 #pragma mark -
@@ -173,11 +180,15 @@
 }
 
 #pragma mark -
-#pragma mark notification 
+#pragma mark button pressed
 
 - (void)btnShowNotificationPressed:(id)sender {
     NotificationViewController *notificationViewController = [[NotificationViewController alloc] init];
     [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
+}
+
+- (void)btnShowSceneList:(id)sender {
+    [SelectionView showWithItems:nil selectedIndex:1 delegate:self];
 }
 
 #pragma mark -

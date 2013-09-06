@@ -178,6 +178,11 @@
 		6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */; };
 		6FBB9A2017CB90B500E32485 /* SMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB9A1F17CB90B500E32485 /* SMCell.m */; };
 		6FBD013417C4E034002D5618 /* DeviceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD013317C4E034002D5618 /* DeviceButton.m */; };
+		6FC1021417D9B91500CA08F8 /* line_cell_selection_view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC1021317D9B91500CA08F8 /* line_cell_selection_view@2x.png */; };
+		6FC1021717D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1021617D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m */; };
+		6FC1021A17D9C72F00CA08F8 /* SceneMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1021917D9C72F00CA08F8 /* SceneMode.m */; };
+		6FC1021D17D9D4D900CA08F8 /* icon_curtain_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC1021B17D9D4D900CA08F8 /* icon_curtain_off@2x.png */; };
+		6FC1021E17D9D4D900CA08F8 /* icon_curtain_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC1021C17D9D4D900CA08F8 /* icon_curtain_on@2x.png */; };
 		6FC8C07017D975DC003B3904 /* DeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */; };
 		6FC8C07317D979A1003B3904 /* icon_light_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07117D979A1003B3904 /* icon_light_off@2x.png */; };
 		6FC8C07417D979A1003B3904 /* icon_light_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07217D979A1003B3904 /* icon_light_on@2x.png */; };
@@ -531,6 +536,13 @@
 		6FBB9A1F17CB90B500E32485 /* SMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCell.m; sourceTree = "<group>"; };
 		6FBD013217C4E034002D5618 /* DeviceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceButton.h; sourceTree = "<group>"; };
 		6FBD013317C4E034002D5618 /* DeviceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceButton.m; sourceTree = "<group>"; };
+		6FC1021317D9B91500CA08F8 /* line_cell_selection_view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_cell_selection_view@2x.png"; sourceTree = "<group>"; };
+		6FC1021517D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateSceneMode.h; sourceTree = "<group>"; };
+		6FC1021617D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateSceneMode.m; sourceTree = "<group>"; };
+		6FC1021817D9C72F00CA08F8 /* SceneMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneMode.h; sourceTree = "<group>"; };
+		6FC1021917D9C72F00CA08F8 /* SceneMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneMode.m; sourceTree = "<group>"; };
+		6FC1021B17D9D4D900CA08F8 /* icon_curtain_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_curtain_off@2x.png"; sourceTree = "<group>"; };
+		6FC1021C17D9D4D900CA08F8 /* icon_curtain_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_curtain_on@2x.png"; sourceTree = "<group>"; };
 		6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDetailViewController.h; sourceTree = "<group>"; };
 		6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceDetailViewController.m; sourceTree = "<group>"; };
 		6FC8C07117D979A1003B3904 /* icon_light_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_light_off@2x.png"; sourceTree = "<group>"; };
@@ -781,6 +793,8 @@
 				6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */,
 				F205E5C217D989A200280F21 /* Message.h */,
 				F205E5C317D989A200280F21 /* Message.m */,
+				6FC1021817D9C72F00CA08F8 /* SceneMode.h */,
+				6FC1021917D9C72F00CA08F8 /* SceneMode.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -792,6 +806,7 @@
 				6FB66D5317C6F8F20002D6C5 /* bg_cell_center_selected@2x.png */,
 				6FB66D5417C6F8F20002D6C5 /* bg_cell_footer_selected@2x.png */,
 				6FB66D5517C6F8F20002D6C5 /* bg_cell_top_selected@2x.png */,
+				6FC1021317D9B91500CA08F8 /* line_cell_selection_view@2x.png */,
 				6F0F475C17C5F6180057F9A4 /* bg_cell_center@2x.png */,
 				6F0F475D17C5F6180057F9A4 /* bg_cell_footer@2x.png */,
 				6F0F475E17C5F6180057F9A4 /* bg_cell_top@2x.png */,
@@ -1387,6 +1402,8 @@
 				6FC8C07217D979A1003B3904 /* icon_light_on@2x.png */,
 				6FD081C117CF43260089A1ED /* icon_tv_off@2x.png */,
 				6FC8C07517D979D7003B3904 /* icon_stb_off@2x.png */,
+				6FC1021B17D9D4D900CA08F8 /* icon_curtain_off@2x.png */,
+				6FC1021C17D9D4D900CA08F8 /* icon_curtain_on@2x.png */,
 				6FC8C07617D979D7003B3904 /* icon_stb_on@2x.png */,
 				6FD081C217CF43260089A1ED /* icon_tv_on@2x.png */,
 				6FB66D5B17C702610002D6C5 /* icon_device_on@2x.png */,
@@ -1562,6 +1579,8 @@
 				6F347A5717D8B63500B486D3 /* DeviceCommandUpdateDevice.m */,
 				6F347A5917D8B64500B486D3 /* DeviceCommandVoiceControl.h */,
 				6F347A5A17D8B64500B486D3 /* DeviceCommandVoiceControl.m */,
+				6FC1021517D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.h */,
+				6FC1021617D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -1825,6 +1844,9 @@
 				6FC8C08217D98A90003B3904 /* bg_hot@2x.png in Resources */,
 				6FC8C08417D98B81003B3904 /* bg_cold@2x.png in Resources */,
 				6F167B7D17D99ECE004169CD /* btn_dark@2x.png in Resources */,
+				6FC1021417D9B91500CA08F8 /* line_cell_selection_view@2x.png in Resources */,
+				6FC1021D17D9D4D900CA08F8 /* icon_curtain_off@2x.png in Resources */,
+				6FC1021E17D9D4D900CA08F8 /* icon_curtain_on@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1948,6 +1970,8 @@
 				6FC8C07017D975DC003B3904 /* DeviceDetailViewController.m in Sources */,
 				6F167B8117D9A233004169CD /* SelectionView.m in Sources */,
 				F205E5C417D989A200280F21 /* Message.m in Sources */,
+				6FC1021717D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m in Sources */,
+				6FC1021A17D9C72F00CA08F8 /* SceneMode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
