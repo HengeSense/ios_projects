@@ -8,6 +8,7 @@
 
 #import "UserAccountViewController.h"
 #import "CommandFactory.h"
+#import "LongButton.h"
 #import "DeviceCommandUpdateAccount.h"
 
 @interface UserAccountViewController ()
@@ -22,6 +23,7 @@
     NSIndexPath *editIndex;
     UIAlertView *checkPassword;
     NSString *password;
+    UIButton *btnSubmit;
     BOOL passwordIsModified;
 }
 @synthesize infoDictionary;
@@ -59,28 +61,31 @@
 
 - (void)initUI{
     [super initUI];
-    self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, 8, 101/2, 59/2)];
-    [self.topbar addSubview:self.topbar.rightButton];
-    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
-    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateHighlighted];
-    [self.topbar.rightButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
-    [self.topbar.rightButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateHighlighted];
-    [self.topbar.rightButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
-    self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
-    [self.topbar.rightButton addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.topbar.titleLabel.text = NSLocalizedString(@"account_info.title", @"");
     
     if (infoTable == nil) {
         infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
-        infoTable.center = self.view.center;
+        infoTable.center = CGPointMake(self.view.center.x, infoTable.center.y);
         infoTable.delegate = self;
         infoTable.dataSource =self;
         infoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         infoTable.backgroundColor = [UIColor clearColor];
+        infoTable.scrollEnabled = NO;
         [self.view addSubview:infoTable];
     }
+    
     if(checkPassword == nil){
         checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password.valid", @"") message:NSLocalizedString(@"please.input.old.password", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
         [checkPassword setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    }
+    
+    if(btnSubmit == nil) {
+        btnSubmit = [LongButton buttonWithPoint:CGPointMake(0, 190)];
+        btnSubmit.center = CGPointMake(self.view.center.x, btnSubmit.center.y);
+        [btnSubmit setTitle:NSLocalizedString(@"submit", @"") forState:UIControlStateNormal];
+        [self.view addSubview:btnSubmit];
+        [btnSubmit addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 

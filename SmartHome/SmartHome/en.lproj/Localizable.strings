@@ -22,6 +22,9 @@
 "request_timeout"  = "Request timeout";
 "processing.tips"  = "Wait for processing...";
 "determine"        = "OK";
+"submit"           = "Submit";
+
+
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*
@@ -36,6 +39,7 @@
 "verification_code_send.title"        = "Validation Phone Number";
 "verification_validation.title"       = "Enter verfication code";
 "aircondition_setting.title"          = "Aircondition Setting";
+"account_info.title"                  = "Account Info";
 
 /*
  * drawer view
