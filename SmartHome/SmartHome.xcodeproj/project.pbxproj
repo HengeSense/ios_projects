@@ -96,8 +96,6 @@
 		6F159BE117D6E66C005CFFEE /* btn_rc_power@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BE017D6E66C005CFFEE /* btn_rc_power@2x.png */; };
 		6F159BE317D6E68A005CFFEE /* btn_rc_number@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BE217D6E68A005CFFEE /* btn_rc_number@2x.png */; };
 		6F159BE717D6E825005CFFEE /* btn_rc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BE617D6E825005CFFEE /* btn_rc@2x.png */; };
-		6F159BEA17D6E84D005CFFEE /* bg_hot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BE917D6E84D005CFFEE /* bg_hot@2x.png */; };
-		6F159BEC17D6E868005CFFEE /* bg_cold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */; };
 		6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BEF17D702F5005CFFEE /* TVRemoteControlPanel.m */; };
 		6F159BF317D70899005CFFEE /* DeviceCommandUpdateNotificationsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BF217D70899005CFFEE /* DeviceCommandUpdateNotificationsHandler.m */; };
 		6F159BF617D708EC005CFFEE /* DeviceCommandUpdateNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159BF517D708EC005CFFEE /* DeviceCommandUpdateNotifications.m */; };
@@ -186,6 +184,8 @@
 		6FC8C07C17D98593003B3904 /* icon_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07917D98593003B3904 /* icon_message@2x.png */; };
 		6FC8C07D17D98593003B3904 /* icon_validation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07A17D98593003B3904 /* icon_validation@2x.png */; };
 		6FC8C07E17D98593003B3904 /* icon_warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07B17D98593003B3904 /* icon_warning@2x.png */; };
+		6FC8C08117D98A90003B3904 /* bg_cold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07F17D98A90003B3904 /* bg_cold@2x.png */; };
+		6FC8C08217D98A90003B3904 /* bg_hot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C08017D98A90003B3904 /* bg_hot@2x.png */; };
 		6FD081B917CF3E030089A1ED /* DeviceCommandDeliveryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */; };
 		6FD081BC17CF3E580089A1ED /* DeviceCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */; };
 		6FD081C317CF43260089A1ED /* icon_aircondition_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD081BD17CF43260089A1ED /* icon_aircondition_off@2x.png */; };
@@ -405,8 +405,6 @@
 		6F159BE017D6E66C005CFFEE /* btn_rc_power@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_power@2x.png"; sourceTree = "<group>"; };
 		6F159BE217D6E68A005CFFEE /* btn_rc_number@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_number@2x.png"; sourceTree = "<group>"; };
 		6F159BE617D6E825005CFFEE /* btn_rc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc@2x.png"; sourceTree = "<group>"; };
-		6F159BE917D6E84D005CFFEE /* bg_hot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_hot@2x.png"; sourceTree = "<group>"; };
-		6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cold@2x.png"; sourceTree = "<group>"; };
 		6F159BEE17D702F5005CFFEE /* TVRemoteControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVRemoteControlPanel.h; sourceTree = "<group>"; };
 		6F159BEF17D702F5005CFFEE /* TVRemoteControlPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVRemoteControlPanel.m; sourceTree = "<group>"; };
 		6F159BF117D70899005CFFEE /* DeviceCommandUpdateNotificationsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateNotificationsHandler.h; sourceTree = "<group>"; };
@@ -536,6 +534,8 @@
 		6FC8C07917D98593003B3904 /* icon_message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_message@2x.png"; sourceTree = "<group>"; };
 		6FC8C07A17D98593003B3904 /* icon_validation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_validation@2x.png"; sourceTree = "<group>"; };
 		6FC8C07B17D98593003B3904 /* icon_warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_warning@2x.png"; sourceTree = "<group>"; };
+		6FC8C07F17D98A90003B3904 /* bg_cold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cold@2x.png"; sourceTree = "<group>"; };
+		6FC8C08017D98A90003B3904 /* bg_hot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_hot@2x.png"; sourceTree = "<group>"; };
 		6FD081B717CF3E030089A1ED /* DeviceCommandDeliveryService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandDeliveryService.h; sourceTree = "<group>"; };
 		6FD081B817CF3E030089A1ED /* DeviceCommandDeliveryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandDeliveryService.m; sourceTree = "<group>"; };
 		6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandHandler.h; sourceTree = "<group>"; };
@@ -1211,8 +1211,8 @@
 		6F159BE817D6E82C005CFFEE /* aircondition */ = {
 			isa = PBXGroup;
 			children = (
-				6F159BE917D6E84D005CFFEE /* bg_hot@2x.png */,
-				6F159BEB17D6E868005CFFEE /* bg_cold@2x.png */,
+				6FC8C07F17D98A90003B3904 /* bg_cold@2x.png */,
+				6FC8C08017D98A90003B3904 /* bg_hot@2x.png */,
 			);
 			name = aircondition;
 			sourceTree = "<group>";
@@ -1787,8 +1787,6 @@
 				6F159BE117D6E66C005CFFEE /* btn_rc_power@2x.png in Resources */,
 				6F159BE317D6E68A005CFFEE /* btn_rc_number@2x.png in Resources */,
 				6F159BE717D6E825005CFFEE /* btn_rc@2x.png in Resources */,
-				6F159BEA17D6E84D005CFFEE /* bg_hot@2x.png in Resources */,
-				6F159BEC17D6E868005CFFEE /* bg_cold@2x.png in Resources */,
 				6F159BFC17D7176E005CFFEE /* btn_rc_center@2x.png in Resources */,
 				6F159BFD17D7176E005CFFEE /* btn_rc_down@2x.png in Resources */,
 				6F159BFE17D7176E005CFFEE /* btn_rc_left@2x.png in Resources */,
@@ -1803,6 +1801,8 @@
 				6FC8C07C17D98593003B3904 /* icon_message@2x.png in Resources */,
 				6FC8C07D17D98593003B3904 /* icon_validation@2x.png in Resources */,
 				6FC8C07E17D98593003B3904 /* icon_warning@2x.png in Resources */,
+				6FC8C08117D98A90003B3904 /* bg_cold@2x.png in Resources */,
+				6FC8C08217D98A90003B3904 /* bg_hot@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
