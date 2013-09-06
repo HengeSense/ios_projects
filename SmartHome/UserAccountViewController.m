@@ -180,13 +180,19 @@
     command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify.password", @"")];
     command.oldPwd = password;
     [[SMShared current].deliveryService executeDeviceCommand:command];
+    [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
 }
-
+-(void) delayDimiss{
+    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system.error", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
+    }
+}
     
 -(void) didEndUpdateAccount:(DeviceCommand *)command{
     
     if (command == nil) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.success", @"") forType:AlertViewTypeSuccess];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system.error", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
         return;
     }
