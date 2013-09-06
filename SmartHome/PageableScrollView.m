@@ -12,9 +12,9 @@
 
 #define MARGIN_X 0
 #define MARGIN_Y 12
-#define SCROLL_ITEM_WIDTH 240
+#define SCROLL_ITEM_WIDTH 220 
 #define SCROLL_ITEM_HEIGHT 180
-#define GROUP_ITEM_WIDRH 80
+#define GROUP_ITEM_WIDRH 70
 #define GROUP_ITEM_HEIGHT 52
 
 @implementation PageableScrollView{
