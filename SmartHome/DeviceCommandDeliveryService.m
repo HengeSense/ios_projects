@@ -11,7 +11,7 @@
 #import "DeviceCommandUpdateUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
-#import "DeviceCommandUpdateNotificationsHandler.h"
+#import "DeviceCommandGetNotificationsHandler.h"
 #import "DeviceCommandVoiceControlHandler.h"
 #import "DeviceCommandUpdateDeviceHandler.h"
 #import "DeviceCommandGetSceneListHandler.h"
@@ -63,7 +63,7 @@
     } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetAccountHandler alloc] init];
     } else if([@"AccountMQListCommand" isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandUpdateNotificationsHandler alloc] init];
+        handler = [[DeviceCommandGetNotificationsHandler alloc] init];
     } else if([@"FindDeviceSceneCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetSceneListHandler alloc] init];
     } else if([@"VoiceControlCommand" isEqualToString:command.commandName]) {
