@@ -161,13 +161,13 @@
         [self addSubview:notificationView];
     }
     
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 
 - (void)testDelayGetUnits {
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
 }
 
 - (void)notifyViewUpdate {

@@ -23,5 +23,6 @@
 - (void)initUI;
 
 - (void)notifyViewUpdate;
+- (void)refreshTopbarEvent;
 
 @end

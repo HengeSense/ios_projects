@@ -132,6 +132,8 @@
     [[SMShared current].memory.subscriptions removeAllObjects];
     //clear all units
     [[SMShared current].memory clearUnits];
+    //top bar left button
+    [self.topbar.leftButton removeTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"has_logout", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
     [self.ownerController.navigationController popToRootViewControllerAnimated:YES];

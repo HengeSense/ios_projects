@@ -42,6 +42,7 @@
 @property (assign, nonatomic, readonly) BOOL isCamera;               //摄像头
 
 - (id)initWithJson:(NSDictionary *)json;
+- (NSDictionary *)toJson;
 
 // 获取执行命令的字符串
 - (NSString *)commandString;

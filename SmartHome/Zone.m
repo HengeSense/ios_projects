@@ -34,6 +34,19 @@
     return self;
 }
 
+- (NSDictionary *)toJson {
+    NSMutableDictionary *json = [NSMutableDictionary dictionary];
+    [json setObject:([NSString isBlank:self.name] ? [NSString emptyString] : self.name) forKey:@"name"];
+    [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"code"];
+    NSMutableArray *_devices_ = [NSMutableArray array];
+    for(int i=0; i<self.devices.count; i++) {
+        Device *device = [self.devices objectAtIndex:i];
+        [_devices_ addObject:[device toJson]];
+    }
+    [json setObject:_devices_ forKey:@"devices"];
+    return json;
+}
+
 - (NSMutableArray *)devices {
     if(devices == nil) {
         devices = [NSMutableArray array];

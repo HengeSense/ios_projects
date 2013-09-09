@@ -25,6 +25,8 @@
 @property (strong, nonatomic, readonly) NSArray *devices;
 
 - (id)initWithJson:(NSDictionary *)json;
+- (NSDictionary *)toJson;
+
 - (Zone *)zoneForId:(NSString *)_id_;
 
 @end

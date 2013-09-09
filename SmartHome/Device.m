@@ -7,6 +7,7 @@
 //
 
 #import "Device.h"
+#import "NSString+StringUtils.h"
 
 @implementation Device
 
@@ -61,6 +62,25 @@
         }
     }
     return self;
+}
+
+- (NSDictionary *)toJson {
+    NSMutableDictionary *json = [NSMutableDictionary dictionary];
+    [json setObject:([NSString isBlank:self.category] ? [NSString emptyString] : self.category) forKey:@"category"];
+    [json setObject:[NSNumber numberWithInteger:self.ep] forKey:@"ep"];
+    [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"code"];
+    [json setObject:([NSString isBlank:self.ip] ? [NSString emptyString] : self.ip) forKey:@"ip"];
+    [json setObject:[NSNumber numberWithInteger:self.irType] forKey:@"irType"];
+    [json setObject:[NSNumber numberWithInteger:self.status] forKey:@"status"];
+    [json setObject:[NSNumber numberWithInteger:self.state] forKey:@"state"];
+    [json setObject:[NSNumber numberWithInteger:self.port] forKey:@"port"];
+    [json setObject:([NSString isBlank:self.pwd] ? [NSString emptyString] : self.pwd) forKey:@"pwd"];
+    [json setObject:[NSNumber numberWithInteger:self.resolution] forKey:@"resolution"];
+    [json setObject:[NSNumber numberWithInteger:self.type] forKey:@"type"];
+    [json setObject:([NSString isBlank:self.name] ? [NSString emptyString] : self.name) forKey:@"name"];
+    [json setObject:([NSString isBlank:self.nwkAddr] ? [NSString emptyString] : self.nwkAddr) forKey:@"nwkAddr"];
+    [json setObject:([NSString isBlank:self.user] ? [NSString emptyString] : self.user) forKey:@"user"];
+    return json;
 }
 
 - (NSString *)commandString {

@@ -56,6 +56,31 @@
     return self;
 }
 
+- (NSDictionary *)toJson {
+    NSMutableDictionary *json = [NSMutableDictionary dictionary];
+    
+    [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : [NSString stringWithFormat:@"%@A001", self.identifier]) forKey:@"_id"];
+    [json setObject:([NSString isBlank:self.localIP] ? [NSString emptyString] : self.localIP) forKey:@"localIp"];
+    [json setObject:([NSString isBlank:self.name] ? [NSString emptyString] : self.name) forKey:@"name"];
+    [json setObject:[NSNumber numberWithInteger:self.localPort] forKey:@"localPort"];
+    [json setObject:([NSString isBlank:self.status] ? [NSString emptyString] : self.status) forKey:@"status"];
+    [json setObject:(self.updateTime == nil ? [NSNumber numberWithInteger:0] : [NSNumber numberWithLongLong:self.updateTime.timeIntervalSince1970]) forKey:@"updateTime"];
+    
+    // zones ...
+    NSMutableArray *_zones_ = [NSMutableArray array];
+    for(int i=0; i<self.zones.count; i++) {
+        Zone *zone = [self.zones objectAtIndex:i];
+        [_zones_ addObject:[zone toJson]];
+    }
+    [json setObject:_zones_ forKey:@"zones"];
+    
+    // sceneUpdateTime
+    
+    // scenesModeList
+    
+    return json;
+}
+
 - (NSMutableArray *)zones {
     if(zones == nil) {
         zones = [NSMutableArray array];

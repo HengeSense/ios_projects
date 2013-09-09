@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *identifier;
 
 - (id)initWithJson:(NSDictionary *)json;
+- (NSDictionary *)toJson;
 
 - (Device *)deviceForId:(NSString *)_id_;
 

@@ -139,7 +139,10 @@
             [[ViewsPool sharedPool] putView:view forIdentifier:item.itemIdentifier];
         }
     }
+    
     if(view != nil) {
+        view.ownerController = self;
+        [view refreshTopbarEvent];
         UIView *v = [self.mainView viewWithTag:MAIN_VIEW_TAG];
         if(v != nil) [v removeFromSuperview];
         [self.mainView addSubview:view];

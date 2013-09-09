@@ -43,8 +43,16 @@
         topbar.leftButton.frame = CGRectMake(0, 0, 44, 44);
         [topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_drawer_nav.png"] forState:UIControlStateNormal];
         [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
+        [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
     }
     return topbar;
+}
+
+- (void)refreshTopbarEvent {
+    if(topbar != nil) {
+        [topbar.leftButton removeTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
+        [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 - (void)notifyViewUpdate {
