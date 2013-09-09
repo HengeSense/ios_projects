@@ -7,6 +7,7 @@
 //
 
 #import "DeviceCommandGetNotificationsHandler.h"
+#import "NotificationsFileManager.h"
 
 @implementation DeviceCommandGetNotificationsHandler
 
@@ -17,6 +18,7 @@
         DeviceCommandUpdateNotifications *receivedNotificationsCommand = (DeviceCommandUpdateNotifications *)command;
         // do service here ...
         
+        [[NotificationsFileManager fileManager] writeToDisk:receivedNotificationsCommand.notifications];
     }
 }
 

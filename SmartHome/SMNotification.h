@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSString *mac;
 @property (strong, nonatomic) NSDate *createTime;
+@property (assign, nonatomic) BOOL hasRead;
 @property (strong, nonatomic) NotificationData *data;
 
 @property (assign, nonatomic, readonly) BOOL isInfo;

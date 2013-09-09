@@ -8,6 +8,7 @@
 
 #import "NotificationsFileManager.h"
 #import "SMNotification.h"
+#import "SMShared.h"
 
 @implementation NotificationsFileManager
 
@@ -24,8 +25,23 @@
 - (NSArray *)readFromDisk {
     @synchronized(self) {
         
+        NSURL *url = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"%@-%@",[SMShared current].settings.account, @"notifications"] withExtension:@"sm"];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        if(data == nil) {
+            NSLog(@"data is nil");
+        } else {
+       NSString *s=     [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@">>>>>>>>>%@", s);
+        }
+        
+        
         return nil;
     }
+}
+
+- (NSArray *)readFromDiskInternal {
+    return nil;
 }
 
 - (void)writeToDisk:(NSArray *)notifications {
@@ -34,6 +50,33 @@
             return;
         }
         
+//        NSArray *oldNotifications = [self readFromDiskInternal];
+      /*
+        
+        NSMutableArray *_notifications_ = [NSMutableArray array];
+        for(int i=0; i<notifications.count; i++) {
+            [_notifications_ addObject:[notifications objectAtIndex:i]];
+        }
+        
+        NSLog(@"-111");
+NSData *data =        [JsonUtils createJsonDataFromDictionary:
+        [NSDictionary dictionaryWithObject:_notifications_ forKey:@"notifications"]];
+    
+        NSLog(@"000");
+        NSURL *url = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"%@-%@",[SMShared current].settings.account, @"notifications"] withExtension:@"sm"];
+        
+        NSLog(@"111");
+        BOOL success = [data writeToURL:url atomically:YES];
+        
+        
+        if(!success) {
+            NSLog(@"write notifications to disk failed.");
+        }
+        
+        
+        
+        
+        */
         //保存50条  老的删除
     }
 }
