@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSDictionary+NSNullUtility.h"
 
-@interface Device : NSObject<NSCoding>
+@interface Device : NSObject
 
 @property (copy, nonatomic) NSString *identifier;
 @property (copy, nonatomic) NSString *name;

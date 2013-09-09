@@ -128,6 +128,9 @@
 
 - (void)reallyLogout {
     [[SMShared current].deliveryService stopService];
+    //clear all subscriptions
+    [[SMShared current].memory.subscriptions removeAllObjects];
+    //clear all units
     [[SMShared current].memory clearUnits];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"has_logout", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
