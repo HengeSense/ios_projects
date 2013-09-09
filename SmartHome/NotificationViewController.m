@@ -78,6 +78,10 @@
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  MESSAGE_CELL_HEIGHT;
 }
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NotificationHandlerViewController *handlerViewController = [[NotificationHandlerViewController alloc] initWithMessage:[messageArr objectAtIndex:indexPath.row]];
+    [self presentModalViewController:handlerViewController animated:YES];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

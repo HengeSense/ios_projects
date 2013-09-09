@@ -267,6 +267,7 @@
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
 		F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationHandlerViewController.m */; };
+		F280616B17DDC7BC0064F35B /* button_cf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616A17DDC7BB0064F35B /* button_cf@2x.png */; };
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -683,6 +684,7 @@
 		F280616517DD76A30064F35B /* message_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_accessory@2x.png"; sourceTree = "<group>"; };
 		F280616717DDA7900064F35B /* NotificationHandlerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationHandlerViewController.h; sourceTree = "<group>"; };
 		F280616817DDA7900064F35B /* NotificationHandlerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationHandlerViewController.m; sourceTree = "<group>"; };
+		F280616A17DDC7BB0064F35B /* button_cf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cf@2x.png"; sourceTree = "<group>"; };
 		F288414017D4A35C00B81DD3 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		F288414117D4A35C00B81DD3 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
 		F2BB0EF317BE1B7E004E14B1 /* LongButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongButton.h; sourceTree = "<group>"; };
@@ -1316,6 +1318,7 @@
 		6F6AB3AD17C330C3001F1D33 /* button */ = {
 			isa = PBXGroup;
 			children = (
+				F280616A17DDC7BB0064F35B /* button_cf@2x.png */,
 				6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */,
 				6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */,
 				6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */,
@@ -1897,6 +1900,7 @@
 				6FC1021D17D9D4D900CA08F8 /* icon_curtain_off@2x.png in Resources */,
 				6FC1021E17D9D4D900CA08F8 /* icon_curtain_on@2x.png in Resources */,
 				F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */,
+				F280616B17DDC7BC0064F35B /* button_cf@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "PopViewController.h"
-@interface NotificationHandlerViewController : PopViewController
+#import "SMNotification.h"
+#import "MessageCell.h"
+#import <QuartzCore/QuartzCore.h>
 
+@interface NotificationHandlerViewController : PopViewController
+-(id) initWithMessage:(SMNotification *) smNotification;
+
+@property (strong,nonatomic) SMNotification *message;
 @end

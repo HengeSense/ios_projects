@@ -24,6 +24,7 @@
 "processing.tips"  = "Wait for processing...";
 "determine"        = "OK";
 "submit"           = "Submit";
+"delete"           = "delete";
 
 
 "the.two.input.is.not.consistent" = "The two input is not consistent";
@@ -155,4 +156,8 @@
 /*
  *notification
  */
-"notification.message" = "Notification Message";
+"notification.manager" = "Notification Manager";
+"ms" = "Message Content";
+"cf" = "Validation Message";
+"at" = "Message Content";
+"al" = "Warning Message";

@@ -18,8 +18,6 @@
 #import "DeviceButton.h"
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
-#import "ObjectToFile.h"
-#import "FileToObject.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -41,7 +39,6 @@
     UIButton *btnUnit;
     UIButton *btnScene;
     
-    UIButton *btnGetUnit;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -69,12 +66,6 @@
 #pragma mark -
 #pragma selection button (units && scene)
     
-    if (btnGetUnit == nil) {
-        btnGetUnit = [[UIButton alloc] initWithFrame:CGRectMake(52, 100, 20, 20)];
-        btnGetUnit.backgroundColor = [UIColor whiteColor];
-        [btnGetUnit addTarget:self action:@selector(btnGetDevicesPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btnGetUnit];
-    }
     if(btnUnit == nil) {
         btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, 65, 227 / 2, 73 / 2)];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateNormal];
@@ -179,22 +170,6 @@
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 
--(void) btnGetDevicesPressed:(id) sender{
-    Device *setToArchiver = [[SMShared current].memory.currentUnit.devices objectAtIndex:0];
-    NSLog(@"device name = %@",setToArchiver.name);
-    
-
-    Device *getFromArchiver;
-    BOOL archiver = [ObjectToFile objectToFile:setToArchiver forKey:@"devices"];
-    NSLog(@"%d",archiver);
-    getFromArchiver = [FileToObject fileToObjectForKey:@"devices"];
-    if (!getFromArchiver) {
-        NSLog(@"failed!");
-    }
-    
-       // NSLog(@"device name = %@",getFromArchiver.name);
-    
-}
 
 - (void)testDelayGetUnits {
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];

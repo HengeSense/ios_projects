@@ -25,6 +25,7 @@
 "determine"        = "确定";
 "submit"           = "提交更改";
 "processing.tips"  = "处理中,请稍后...";
+"delete"           = "删除";
 
 
 
@@ -155,5 +156,9 @@
 /*
  *notification
  */
-"notification.message" = "消息管理";
+"notification.manager" = "消息管理";
+"ms" = "消息内容";
+"cf" = "验证消息";
+"at" = "消息内容";
+"al" = "警报内容";
 
