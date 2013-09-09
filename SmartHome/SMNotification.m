@@ -19,6 +19,12 @@
 @synthesize createTime;
 @synthesize data = _data;
 
+@synthesize isInfo;
+@synthesize isValidation;
+@synthesize isMessage;
+@synthesize isWarning;
+@synthesize isInfoOrMessage;
+
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
@@ -59,6 +65,15 @@
 - (BOOL)isInfo {
     if([NSString isBlank:self.type]) return NO;
     return  [@"AT" isEqualToString:self.type];
+}
+
+- (BOOL)isMessage {
+    if([NSString isBlank:self.type]) return NO;
+    return  [@"MS" isEqualToString:self.type];
+}
+
+- (BOOL)isInfoOrMessage {
+    return self.isMessage || self.isInfo;
 }
 
 @end

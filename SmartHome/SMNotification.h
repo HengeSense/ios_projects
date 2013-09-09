@@ -19,6 +19,8 @@
 @property (assign, nonatomic, readonly) BOOL isInfo;
 @property (assign, nonatomic, readonly) BOOL isWarning;
 @property (assign, nonatomic, readonly) BOOL isValidation;
+@property (assign, nonatomic, readonly) BOOL isMessage;
+@property (assign, nonatomic, readonly) BOOL isInfoOrMessage;
 
 - (id)initWithJson:(NSDictionary *)json;
 
