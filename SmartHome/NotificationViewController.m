@@ -64,12 +64,12 @@
 }
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *messageCell = nil;
+    static NSString *messageIdentifier = @"messageCellIdentifier";
+    messageCell = [tableView dequeueReusableCellWithIdentifier:messageIdentifier];
+    if (messageCell == nil) {
+//        messageCell = [mess]
+    }
     return messageCell;
-}
--(UIView *) viewAtIndexPath:(NSIndexPath *) indexPath ofCell:(UITableViewCell *) cell{
-    UIView  *view = [[UIView alloc] initWithFrame:cell.contentView.frame];
-    
-    UIImageView *typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50/2, 39/2)];
 }
 - (void)didReceiveMemoryWarning
 {
