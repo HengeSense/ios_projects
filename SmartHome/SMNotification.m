@@ -32,24 +32,12 @@
         self.mac = [json notNSNullObjectForKey:@"mac"];
         self.type = [json notNSNullObjectForKey:@"type"];
         self.createTime = [json dateForKey:@"createTime"];
-        NSArray *_datas_ = [json notNSNullObjectForKey:@"data"];
-        if(_datas_ != nil && _datas_.count > 0) {
-            for(int i=0; i<_datas_.count; i++) {
-                NSDictionary *_data_ = [_datas_ objectAtIndex:i];
-                if(_data_ != nil) {
-                    [self.data addObject:[[SMNotification alloc] initWithJson:_data_]];
-                }
-            }
+        NSDictionary *_data_ = [json notNSNullObjectForKey:@"data"];
+        if(_data_ != nil) {
+            self.data = [[NotificationData alloc] initWithJson:_data_];
         }
     }
     return self;
-}
-
-- (NSMutableArray *)data {
-    if(_data == nil) {
-        _data = [NSMutableArray array];
-    }
-    return _data;
 }
 
 - (BOOL)isWarning {

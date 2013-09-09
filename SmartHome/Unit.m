@@ -58,7 +58,7 @@
 
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    
+    NSLog(@"-----------------------------------------------0");
     [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : [NSString stringWithFormat:@"%@A001", self.identifier]) forKey:@"_id"];
     [json setObject:([NSString isBlank:self.localIP] ? [NSString emptyString] : self.localIP) forKey:@"localIp"];
     [json setObject:([NSString isBlank:self.name] ? [NSString emptyString] : self.name) forKey:@"name"];
@@ -67,12 +67,16 @@
     [json setObject:(self.updateTime == nil ? [NSNumber numberWithInteger:0] : [NSNumber numberWithLongLong:self.updateTime.timeIntervalSince1970]) forKey:@"updateTime"];
     
     // zones ...
+    NSLog(@"1");
     NSMutableArray *_zones_ = [NSMutableArray array];
     for(int i=0; i<self.zones.count; i++) {
+        NSLog(@"2");
         Zone *zone = [self.zones objectAtIndex:i];
         [_zones_ addObject:[zone toJson]];
+        NSLog(@"3");
     }
     [json setObject:_zones_ forKey:@"zones"];
+    
     
     // sceneUpdateTime
     

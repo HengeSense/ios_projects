@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NotificationData.h"
 
 @interface SMNotification : NSObject
 
@@ -14,7 +15,7 @@
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSString *mac;
 @property (strong, nonatomic) NSDate *createTime;
-@property (strong, nonatomic) NSMutableArray *data;
+@property (strong, nonatomic) NotificationData *data;
 
 @property (assign, nonatomic, readonly) BOOL isInfo;
 @property (assign, nonatomic, readonly) BOOL isWarning;
