@@ -15,6 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        [self initUIWithIdentifier:reuseIdentifier];
     }
     return self;
 }
@@ -36,6 +37,16 @@
     
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 200,MESSAGE_CELL_HEIGHT)];
     textLabel.tag = 1000;
+    textLabel.font =[UIFont systemFontOfSize:12];
+    textLabel.textColor = [UIColor lightTextColor];
+    textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    textLabel.numberOfLines = 0;
+    [view addSubview:textLabel];
+    
+    UIImageView *accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_accessory.png"]];
+    accessory.center = CGPointMake(self.frame.size.width-12, self.center.y);
+    [view addSubview:accessory];
+    [self addSubview:view];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
