@@ -227,6 +227,8 @@
 		6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */; };
 		6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */; };
 		6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF756617B8D78F004EF7FD /* ImageFactory.m */; };
+		6FDFB05617DD7221002E23B1 /* SMNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFB05517DD7221002E23B1 /* SMNotification.m */; };
+		6FDFB05917DD722C002E23B1 /* NotificationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFB05817DD722C002E23B1 /* NotificationData.m */; };
 		6FE3B75D17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B75C17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m */; };
 		6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */; };
 		6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */; };
@@ -239,7 +241,6 @@
 		F205157B17CF42370058DADE /* device_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157917CF42370058DADE /* device_count@2x.png */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C017D9784800280F21 /* PasswordPopupViewController.m */; };
-		F205E5C417D989A200280F21 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C317D989A200280F21 /* Message.m */; };
 		F205E5C917D9C9FA00280F21 /* ObjectToFile.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C817D9C9FA00280F21 /* ObjectToFile.m */; };
 		F205E5CC17D9CE5500280F21 /* FileToObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5CB17D9CE5500280F21 /* FileToObject.m */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
@@ -609,6 +610,10 @@
 		6FDF756317B8BC31004EF7FD /* bubble_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_mine@2x.png"; sourceTree = "<group>"; };
 		6FDF756517B8D78F004EF7FD /* ImageFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFactory.h; sourceTree = "<group>"; };
 		6FDF756617B8D78F004EF7FD /* ImageFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFactory.m; sourceTree = "<group>"; };
+		6FDFB05417DD7221002E23B1 /* SMNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNotification.h; sourceTree = "<group>"; };
+		6FDFB05517DD7221002E23B1 /* SMNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNotification.m; sourceTree = "<group>"; };
+		6FDFB05717DD722C002E23B1 /* NotificationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationData.h; sourceTree = "<group>"; };
+		6FDFB05817DD722C002E23B1 /* NotificationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationData.m; sourceTree = "<group>"; };
 		6FE3B75B17D5AD14006FCD7C /* DeviceCommandUpdateAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateAccount.h; sourceTree = "<group>"; };
 		6FE3B75C17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateAccount.m; sourceTree = "<group>"; };
 		6FE3B75E17D5AD32006FCD7C /* CommandFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandFactory.h; sourceTree = "<group>"; };
@@ -633,8 +638,6 @@
 		F205E5BE17D977B600280F21 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordPopupViewController.h; sourceTree = "<group>"; };
 		F205E5C017D9784800280F21 /* PasswordPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPopupViewController.m; sourceTree = "<group>"; };
-		F205E5C217D989A200280F21 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		F205E5C317D989A200280F21 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		F205E5C717D9C9FA00280F21 /* ObjectToFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectToFile.h; sourceTree = "<group>"; };
 		F205E5C817D9C9FA00280F21 /* ObjectToFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectToFile.m; sourceTree = "<group>"; };
 		F205E5CA17D9CE5500280F21 /* FileToObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileToObject.h; sourceTree = "<group>"; };
@@ -802,10 +805,12 @@
 				6F17672A17C1E232007AED0C /* CommunicationMessage.m */,
 				6FE3B75E17D5AD32006FCD7C /* CommandFactory.h */,
 				6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */,
-				F205E5C217D989A200280F21 /* Message.h */,
-				F205E5C317D989A200280F21 /* Message.m */,
 				6FC1021817D9C72F00CA08F8 /* SceneMode.h */,
 				6FC1021917D9C72F00CA08F8 /* SceneMode.m */,
+				6FDFB05417DD7221002E23B1 /* SMNotification.h */,
+				6FDFB05517DD7221002E23B1 /* SMNotification.m */,
+				6FDFB05717DD722C002E23B1 /* NotificationData.h */,
+				6FDFB05817DD722C002E23B1 /* NotificationData.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -2000,12 +2005,13 @@
 				F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */,
 				6FC8C07017D975DC003B3904 /* DeviceDetailViewController.m in Sources */,
 				6F167B8117D9A233004169CD /* SelectionView.m in Sources */,
-				F205E5C417D989A200280F21 /* Message.m in Sources */,
 				F205E5C917D9C9FA00280F21 /* ObjectToFile.m in Sources */,
 				F205E5CC17D9CE5500280F21 /* FileToObject.m in Sources */,
 				6FC1021717D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m in Sources */,
 				6FC1021A17D9C72F00CA08F8 /* SceneMode.m in Sources */,
 				6FC1022117D9F24E00CA08F8 /* SelectionItem.m in Sources */,
+				6FDFB05617DD7221002E23B1 /* SMNotification.m in Sources */,
+				6FDFB05917DD722C002E23B1 /* NotificationData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2127,6 +2133,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartHome/SmartHome-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
@@ -2155,6 +2162,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartHome/SmartHome-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";

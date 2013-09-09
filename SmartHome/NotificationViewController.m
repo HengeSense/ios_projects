@@ -38,8 +38,6 @@
     [super initUI];
     
     if (messageArr == nil) {
-        Message *m1 = [Message new];
-        m1.content = @"hello!";
     }
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{

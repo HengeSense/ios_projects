@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
-#import "Message.h"
 
 @interface NotificationViewController : NavViewController<UITableViewDataSource,UITableViewDelegate>
 

@@ -68,6 +68,7 @@
     if(self.commandTime != nil) {
         [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     }
+    
     if([@"FindZKListCommand" isEqualToString:commandName] || [@"FindDeviceSceneCommand" isEqualToString:commandName]) {
         if(self.updateTime != nil) {
             [json setObject:[NSNumber numberWithLongLong:(long long)self.updateTime.timeIntervalSince1970] forKey:@"updateTime"];
