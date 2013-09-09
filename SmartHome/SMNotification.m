@@ -9,6 +9,7 @@
 #import "SMNotification.h"
 #import "NSDictionary+NSNullUtility.h"
 #import "NotificationData.h"
+#import "NSString+StringUtils.h"
 
 @implementation SMNotification
 
@@ -43,6 +44,21 @@
         _data = [NSMutableArray array];
     }
     return _data;
+}
+
+- (BOOL)isWarning {
+    if([NSString isBlank:self.type]) return NO;
+    return  [@"AL" isEqualToString:self.type];
+}
+
+- (BOOL)isValidation {
+    if([NSString isBlank:self.type]) return NO;
+    return  [@"CF" isEqualToString:self.type];
+}
+
+- (BOOL)isInfo {
+    if([NSString isBlank:self.type]) return NO;
+    return  [@"AT" isEqualToString:self.type];
 }
 
 @end

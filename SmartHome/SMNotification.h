@@ -16,6 +16,10 @@
 @property (strong, nonatomic) NSDate *createTime;
 @property (strong, nonatomic) NSMutableArray *data;
 
+@property (assign, nonatomic, readonly) BOOL isInfo;
+@property (assign, nonatomic, readonly) BOOL isWarning;
+@property (assign, nonatomic, readonly) BOOL isValidation;
+
 - (id)initWithJson:(NSDictionary *)json;
 
 @end
