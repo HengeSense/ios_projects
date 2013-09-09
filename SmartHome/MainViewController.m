@@ -31,6 +31,11 @@
     [super viewDidLoad];
     [self initDefaults];
     [self initUI];
+    
+    MainView *mainview = (MainView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+    if(mainview) {
+        [mainview notifyUnitsWasUpdate];
+    }
 }
 
 - (void)didReceiveMemoryWarning

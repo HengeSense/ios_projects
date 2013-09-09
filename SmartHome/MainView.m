@@ -170,30 +170,9 @@
         [self addSubview:notificationView];
     }
     
-    
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
     
-    
-    [self notifyUnitsWasUpdate];
-    
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
-}
-
--(void) btnGetDevicesPressed:(id) sender{
-    Device *setToArchiver = [[SMShared current].memory.currentUnit.devices objectAtIndex:0];
-    NSLog(@"device name = %@",setToArchiver.name);
-    
-
-    Device *getFromArchiver;
-    BOOL archiver = [ObjectToFile objectToFile:setToArchiver forKey:@"devices"];
-    NSLog(@"%d",archiver);
-    getFromArchiver = [FileToObject fileToObjectForKey:@"devices"];
-    if (!getFromArchiver) {
-        NSLog(@"failed!");
-    }
-    
-       // NSLog(@"device name = %@",getFromArchiver.name);
-    
 }
 
 - (void)testDelayGetUnits {
@@ -206,6 +185,9 @@
 
 - (void)notifyUnitsWasUpdate {
     @synchronized(self) {
+        
+        NSLog(@"  update units  ");
+        
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
             self.topbar.titleLabel.text = unit.name;
