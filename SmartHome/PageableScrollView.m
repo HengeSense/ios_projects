@@ -45,13 +45,6 @@
     if(self) {
         ownerController = owner;
         //
-        leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
-        leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
-        rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
-        rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH-10, 0, 10, SCROLL_ITEM_HEIGHT);
-        [self addSubview:leftBoundsShadow];
-        [self addSubview:rightBoundsShadow];
-        leftBoundsShadow.hidden = YES;
     }
     return self;
 }
@@ -120,6 +113,14 @@
 
     self.pageNavView = [[PageableNavView alloc] initWithFrame:CGRectMake(SCROLL_ITEM_WIDTH+MARGIN_X+20, 0, 101/2,SCROLL_ITEM_HEIGHT) andNavItemsForVertical:mutableNavArr];
     [self addSubview:self.pageNavView];
+    
+    leftBoundsShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineleft.png"]];
+    leftBoundsShadow.frame = CGRectMake(0, 0, 10, SCROLL_ITEM_HEIGHT);
+    rightBoundsShadow =  [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lineright.png"]];
+    rightBoundsShadow.frame = CGRectMake(SCROLL_ITEM_WIDTH-10, 0, 10, SCROLL_ITEM_HEIGHT);
+    [self addSubview:leftBoundsShadow];
+    [self addSubview:rightBoundsShadow];
+    leftBoundsShadow.hidden = YES;
 
     navItems = mutableNavArr;
 
