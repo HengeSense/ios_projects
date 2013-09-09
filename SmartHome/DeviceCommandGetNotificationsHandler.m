@@ -7,6 +7,7 @@
 //
 
 #import "DeviceCommandGetNotificationsHandler.h"
+#import "NotificationsFileManager.h"
 
 @implementation DeviceCommandGetNotificationsHandler
 
@@ -23,6 +24,7 @@
                 [[notificationSubscripts objectAtIndex:i] performSelectorOnMainThread:@selector(getNotifications) withObject:receivedNotificationsCommand.notifications waitUntilDone:NO];
             }
         }
+        [[NotificationsFileManager fileManager] writeToDisk:receivedNotificationsCommand.notifications];
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import "NotificationData.h"
 #import "NSDictionary+NSNullUtility.h"
+#import "NSString+StringUtils.h"
 
 @implementation NotificationData
 
@@ -25,6 +26,14 @@
         }
     }
     return self;
+}
+
+- (NSDictionary *)toJson {
+    NSMutableDictionary *json = [NSMutableDictionary dictionary];
+    [json setObject:([NSString isBlank:self.masterDeviceCode] ? [NSString emptyString] : self.masterDeviceCode) forKey:@"masterDeviceCode"];
+    [json setObject:([NSString isBlank:self.dataCommandName] ? [NSString emptyString] : self.dataCommandName) forKey:@"className"];
+    [json setObject:([NSString isBlank:self.requestDeviceCode] ? [NSString emptyString] : self.requestDeviceCode) forKey:@"requsetDeviceCode"];
+    return json;
 }
 
 @end
