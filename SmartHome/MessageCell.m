@@ -22,8 +22,9 @@
 -(void) initUIWithMessage:(SMNotification *) message{
 
     UIView  *view = [[UIView alloc] initWithFrame:self.contentView.frame];
+    view.backgroundColor = [UIColor clearColor];
     
-    UIImageView *typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50/2, 39/2)];
+    UIImageView *typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50/2, 39/2)];
     if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]) {
         typeMessage.image = [UIImage imageNamed:@"icon_message.png"];
     }else if([message.type isEqualToString:@"CF"]){
@@ -38,18 +39,20 @@
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
     textLabel.tag = 1000;
     textLabel.font =[UIFont systemFontOfSize:12];
-    textLabel.text = [@"  " stringByAppendingString:message.text];
+    textLabel.text = [@"    " stringByAppendingString:message.text];
     textLabel.textColor = [UIColor lightTextColor];
     textLabel.lineBreakMode = UILineBreakModeWordWrap;
     textLabel.numberOfLines = 0;
+    textLabel.backgroundColor = [UIColor clearColor];
     [view addSubview:textLabel];
     
     UIImageView *accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_accessory.png"]];
-    accessory.center = CGPointMake(self.frame.size.width-12, self.center.y);
+    accessory.center = CGPointMake(self.frame.size.width-12, self.center.y+15);
     [view addSubview:accessory];
     
     view.tag =999;
     [self addSubview:view];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

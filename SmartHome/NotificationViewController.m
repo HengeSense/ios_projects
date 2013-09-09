@@ -36,25 +36,28 @@
 }
 -(void)initUI{
     [super initUI];
-   /*
     if (messageArr == nil) {
-        Message *m1 = [Message new];
-        m1.text = @"hello!";
-        m1.messageType = MessageTypeVerify;
-        Message *m2 = [Message new];
-        m2.text = @"hello!";
-        m2.messageType = MessageTypeVerify;
-        Message *m3 = [Message new];
-        m3.text = @"hello!";
-        m3.messageType = MessageTypeVerify;
-        Message *m4 = [Message new];
-        m4.text = @"hello!";
-        m4.messageType = MessageTypeVerify;
+        SMNotification *s1 = [SMNotification new];
+        s1.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
+        s1.type = @"MS";
+        SMNotification *s2 = [SMNotification new];
+        s2.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
+        s2.type = @"CF";
+        SMNotification *s3 = [SMNotification new];
+        s3.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
+        s3.type = @"AL";
         
-        messageArr = [[NSArray alloc] initWithObjects:m1,m2,m3,m4, nil];
-
-
-    }*/
+        messageArr = [[NSArray alloc] initWithObjects:s1,s2,s3, nil];
+    }
+    
+    if (messageTable == nil) {
+        messageTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        messageTable.dataSource = self;
+        messageTable.delegate = self;
+        messageTable.backgroundColor = [UIColor clearColor];
+        messageTable.separatorColor = [UIColor blackColor];
+        [self.view addSubview:messageTable];
+    }
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -67,9 +70,12 @@
     static NSString *messageIdentifier = @"messageCellIdentifier";
     messageCell = [tableView dequeueReusableCellWithIdentifier:messageIdentifier];
     if (messageCell == nil) {
-//        messageCell = [MessageCell alloc] 
+        messageCell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:messageIdentifier ofMessage:[messageArr objectAtIndex:indexPath.row]];
     }
     return messageCell;
+}
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return  MESSAGE_CELL_HEIGHT;
 }
 - (void)didReceiveMemoryWarning
 {
