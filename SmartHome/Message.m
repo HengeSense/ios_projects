@@ -9,7 +9,18 @@
 #import "Message.h"
 
 @implementation Message
-@synthesize content;
+@synthesize text;
 @synthesize messageState;
 @synthesize messageType;
+@synthesize createTime;
+@synthesize data;
+
+-(id) init{
+    self = [super init];
+    if (self) {
+        self.messageState = MessageStateUnread;
+        self.messageType = MessageTypeNormal;
+    }
+    return self;
+}
 @end

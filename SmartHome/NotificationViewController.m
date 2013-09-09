@@ -39,18 +39,37 @@
     
     if (messageArr == nil) {
         Message *m1 = [Message new];
-        m1.content = @"hello!";
+        m1.text = @"hello!";
+        m1.messageType = MessageTypeVerify;
+        Message *m2 = [Message new];
+        m2.text = @"hello!";
+        m2.messageType = MessageTypeVerify;
+        Message *m3 = [Message new];
+        m3.text = @"hello!";
+        m3.messageType = MessageTypeVerify;
+        Message *m4 = [Message new];
+        m4.text = @"hello!";
+        m4.messageType = MessageTypeVerify;
+        
+        messageArr = [[NSArray alloc] initWithObjects:m1,m2,m3,m4, nil];
+
+
     }
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return messageArr.count;
 }
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *messageCell = nil;
     return messageCell;
+}
+-(UIView *) viewAtIndexPath:(NSIndexPath *) indexPath ofCell:(UITableViewCell *) cell{
+    UIView  *view = [[UIView alloc] initWithFrame:cell.contentView.frame];
+    
+    UIImageView *typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50/2, 39/2)];
 }
 - (void)didReceiveMemoryWarning
 {

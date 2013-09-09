@@ -17,7 +17,9 @@ typedef NS_ENUM(NSUInteger, MessageState){
     MessageStateUnread
 };
 @interface Message : NSObject
-@property (strong,nonatomic) NSString *content;
+@property (strong,nonatomic) NSString *text;
 @property (assign,nonatomic) MessageType messageType;
-@property (assign,nonatomic) MessageState *messageState;
+@property (assign,nonatomic) MessageState messageState;
+@property (strong,nonatomic) NSDate *createTime;
+@property (strong,nonatomic) NSDictionary *data;
 @end
