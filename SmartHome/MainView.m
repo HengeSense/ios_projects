@@ -18,6 +18,7 @@
 #import "DeviceButton.h"
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
+#import "DeviceCommandGetNotificationsHandler.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -39,6 +40,12 @@
     UIButton *btnUnit;
     UIButton *btnScene;
     
+    NSArray *notificationsArr;
+    UILabel *lblMessage;
+    UILabel *lblTime;
+    UILabel *lblAffectDevice;
+    UIButton *btnMessageCount;
+    
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -58,6 +65,7 @@
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
     
     [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
 }
 
 - (void)initUI {
@@ -115,14 +123,14 @@
 //        [btnMessage addTarget:self action:@selector(t) forControlEvents:UIControlEventTouchUpInside];
         [notificationView addSubview:btnMessage];
     
-        UILabel *lblMessage = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
+        lblMessage = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
         lblMessage.backgroundColor = [UIColor clearColor];
         lblMessage.font = [UIFont systemFontOfSize:14];
         lblMessage.text = @"有人闯入房屋!";
         lblMessage.textColor = [UIColor lightTextColor];
         [notificationView addSubview:lblMessage];
     
-        UILabel *lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
+        lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
         lblTime.backgroundColor =[UIColor clearColor];
         lblTime.text = @"16:54pm";
         lblTime.font = [UIFont systemFontOfSize:12];
@@ -134,7 +142,7 @@
         imgAffectDevice.center = CGPointMake(imgAffectDevice.center.x, notificationView.bounds.size.height / 2);
         [notificationView addSubview:imgAffectDevice];
         
-        UILabel *lblAffectDevice = [[UILabel alloc] initWithFrame:CGRectMake(imgAffectDevice.frame.origin.x+imgAffectDevice.frame.size.width + 5, 0, 20, 20)];
+        lblAffectDevice = [[UILabel alloc] initWithFrame:CGRectMake(imgAffectDevice.frame.origin.x+imgAffectDevice.frame.size.width + 5, 0, 20, 20)];
         lblAffectDevice.center = CGPointMake(lblAffectDevice.center.x, notificationView.bounds.size.height / 2);
         lblAffectDevice.text = @"5";
         lblAffectDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
@@ -149,7 +157,7 @@
         [btnNotification addTarget:self action:@selector(btnShowNotificationPressed:) forControlEvents:UIControlEventTouchUpInside];
         [notificationView addSubview:btnNotification];
 
-        UIButton *btnMessageCount = [[UIButton alloc] initWithFrame:CGRectMake(btnNotification.frame.origin.x+btnNotification.frame.size.width+5, 0, 20, 20)];
+        btnMessageCount = [[UIButton alloc] initWithFrame:CGRectMake(btnNotification.frame.origin.x+btnNotification.frame.size.width+5, 0, 20, 20)];
         btnMessageCount.center = CGPointMake(btnMessageCount.center.x, notificationView.bounds.size.height /2 );
         [btnMessageCount setTitle:@"5" forState:UIControlStateNormal];
         [btnMessageCount setTitleColor:[UIColor colorWithHexString:@"dfa800"] forState:UIControlStateNormal];
@@ -169,7 +177,34 @@
 - (void)testDelayGetUnits {
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
 }
-
+-(void) getNotifications:(NSArray *) notifications{
+    if (notifications == nil||notifications.count == 0) {
+        return;
+    }
+    notificationsArr = notifications;
+    NSTimeInterval lastTime = 0;
+    NSTimeInterval alLastTime = 0;
+    SMNotification *displayNotification;
+    SMNotification *lastNotHandlerAlNotification;
+    for (SMNotification *notification in notificationsArr) {
+        if ([notification.createTime timeIntervalSince1970]>lastTime) {
+            lastTime = [notification.createTime timeIntervalSince1970];
+            displayNotification = notification;
+        }
+//        if ([notification.type isEqualToString:@"AL"]&&alLastTime<[notification.createTime timeIntervalSince1970]&&notification) {
+//            [alNotification addObject:notification];
+//            
+//        }
+    }
+    
+//    for (SMNotification *al in alNotification) {
+//        if (al) {
+//            <#statements#>
+//        }
+//    }
+    
+    
+}
 - (void)notifyViewUpdate {
     [self notifyUnitsWasUpdate];
 }

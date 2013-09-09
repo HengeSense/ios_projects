@@ -16,7 +16,13 @@
         NSLog(@"trigger get notification handler...");
         DeviceCommandUpdateNotifications *receivedNotificationsCommand = (DeviceCommandUpdateNotifications *)command;
         // do service here ...
+        NSArray *notificationSubscripts = [[SMShared current].memory.subscriptions objectForKey:self.class];
         
+        for (int i=0; i<notificationSubscripts.count; ++i) {
+            if([[notificationSubscripts objectAtIndex:i] respondsToSelector:@selector(getNotifications)]){
+                [[notificationSubscripts objectAtIndex:i] performSelectorOnMainThread:@selector(getNotifications) withObject:receivedNotificationsCommand.notifications waitUntilDone:NO];
+            }
+        }
     }
 }
 
