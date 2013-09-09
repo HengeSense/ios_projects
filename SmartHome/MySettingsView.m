@@ -106,7 +106,7 @@
             break;
         case 1:
             cell.imageView.image = [UIImage imageNamed:@"icon_feed_back.png"];
-            cell.textLabel.text = [NSString stringWithFormat:@"  %@", NSLocalizedString(@"feed_back", @"")];
+            cell.textLabel.text = [NSString stringWithFormat:@"  %@", NSLocalizedString(@"update_product", @"")];
             break;
         case 2:
             cell.imageView.image = [UIImage imageNamed:@"icon_about_us.png"];

@@ -104,6 +104,21 @@
         [self.view addSubview:deleteButton];
     }else if ([message.type isEqualToString:@"CF"]){
         UIButton *agreeBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, view.frame.size.height+view.frame.origin.y+5, 203/2, 98/2)];
+        agreeBtn.titleLabel.text = NSLocalizedString(@"agree", @"");
+        [self.view addSubview:agreeBtn];
+        
+        UIButton *refuseBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
+        refuseBtn.center = CGPointMake(agreeBtn.center.x+agreeBtn.frame.size.width+5, agreeBtn.center.y);
+        refuseBtn.titleLabel.text = NSLocalizedString(@"refuse", @"");
+        [self.view addSubview:refuseBtn];
+        
+        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
+        deleteBtn.center = CGPointMake(refuseBtn.center.x+refuseBtn.frame.size.width+5, refuseBtn.center.y);
+        deleteBtn.titleLabel.text = NSLocalizedString(@"refuse", @"");
+        [self.view addSubview:deleteBtn];
+
+
+        
     }
     view.tag = CELL_VIEW_TAG;
     [self.view addSubview:view];
