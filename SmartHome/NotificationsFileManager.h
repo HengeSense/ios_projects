@@ -1,5 +1,5 @@
 //
-//  MessageFileManager.h
+//  NotificationsFileManager.h
 //  SmartHome
 //
 //  Created by Zhao yang on 9/5/13.
@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MessageFileManager : NSObject
+@interface NotificationsFileManager : NSObject
 
 - (NSArray *)readFromDisk;
 - (void)writeToDisk:(NSArray *)messages;
+
++ (NotificationsFileManager *)fileManager;
 
 @end

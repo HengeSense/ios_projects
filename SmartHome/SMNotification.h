@@ -24,5 +24,6 @@
 @property (assign, nonatomic, readonly) BOOL isInfoOrMessage;
 
 - (id)initWithJson:(NSDictionary *)json;
+- (NSDictionary *)toJson;
 
 @end

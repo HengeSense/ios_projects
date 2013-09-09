@@ -15,5 +15,6 @@
 @property (strong, nonatomic) NSString *dataCommandName;
 
 - (id)initWithJson:(NSDictionary *)json;
+- (NSDictionary *)toJson;
 
 @end

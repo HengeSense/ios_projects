@@ -40,6 +40,20 @@
     return self;
 }
 
+- (NSDictionary *)toJson {
+    NSMutableDictionary *json = [NSMutableDictionary dictionary];
+    
+    [json setObject:([NSString isBlank:self.text] ? [NSString emptyString] : self.text) forKey:@"text"];
+    [json setObject:([NSString isBlank:self.mac] ? [NSString emptyString] : self.mac) forKey:@"mac"];
+    [json setObject:([NSString isBlank:self.type] ? [NSString emptyString] : self.type) forKey:@"type"];
+    
+    if(self.data != nil) {
+        [json setObject:[self.data toJson] forKey:@"data"];
+    }
+    
+    return json;
+}
+
 - (BOOL)isWarning {
     if([NSString isBlank:self.type]) return NO;
     return  [@"AL" isEqualToString:self.type];

@@ -7,6 +7,7 @@
 //
 
 #import "Memory.h" 
+#import "NSString+StringUtils.h"
 
 @implementation Memory
 
@@ -66,6 +67,25 @@
         if(subscriptions_ != nil) {
             [subscriptions_ removeObject:obj];
         }
+    }
+}
+
+- (void)updateSceneList:(NSString *)unitIdentifier sceneList:(NSArray *)sceneList updateTime:(NSDate *)updateTime {
+    @synchronized(self) {
+        if([NSString isBlank:unitIdentifier]) return;
+        if(self.units != nil && self.units.count > 0) {
+            for(Unit *u in self.units) {
+                if([u.identifier isEqualToString:unitIdentifier]) {
+                    [u.scenesModeList removeAllObjects];
+                    if(sceneList != nil) {
+                        [u.scenesModeList addObjectsFromArray:sceneList];
+                    }
+                    u.sceneUpdateTime = updateTime;
+                    break;
+                }
+            }
+        }
+
     }
 }
 
