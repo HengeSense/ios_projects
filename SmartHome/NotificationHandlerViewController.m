@@ -114,9 +114,8 @@
         
         UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
         deleteBtn.center = CGPointMake(refuseBtn.center.x+refuseBtn.frame.size.width+5, refuseBtn.center.y);
-        deleteBtn.titleLabel.text = NSLocalizedString(@"refuse", @"");
+        deleteBtn.titleLabel.text = NSLocalizedString(@"delete", @"");
         [self.view addSubview:deleteBtn];
-
 
         
     }
