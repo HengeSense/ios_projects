@@ -264,6 +264,8 @@
 		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
 		F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */; };
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
+		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
+		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -675,6 +677,9 @@
 		F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+UIViewControllerExtension.m"; sourceTree = "<group>"; };
 		F237168317B3715C0057C95B /* SmsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsService.h; sourceTree = "<group>"; };
 		F237168417B3715C0057C95B /* SmsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsService.m; sourceTree = "<group>"; };
+		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		F280616317DD6E810064F35B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		F280616517DD76A30064F35B /* message_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_accessory@2x.png"; sourceTree = "<group>"; };
 		F288414017D4A35C00B81DD3 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		F288414117D4A35C00B81DD3 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
 		F2BB0EF317BE1B7E004E14B1 /* LongButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongButton.h; sourceTree = "<group>"; };
@@ -1220,6 +1225,8 @@
 				6F0FAF5217AF9E1E00B75D3E /* DrawerNavItemCell.xib */,
 				6FBB9A1E17CB90B500E32485 /* SMCell.h */,
 				6FBB9A1F17CB90B500E32485 /* SMCell.m */,
+				F280616217DD6E810064F35B /* MessageCell.h */,
+				F280616317DD6E810064F35B /* MessageCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -1281,6 +1288,7 @@
 		6F350AB517CEF69100B796F1 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				F280616517DD76A30064F35B /* message_accessory@2x.png */,
 				F205157817CF42370058DADE /* message_count@2x.png */,
 				F205157917CF42370058DADE /* device_count@2x.png */,
 				6F350AB617CEF69B00B796F1 /* icon_sound@2x.png */,
@@ -1883,6 +1891,7 @@
 				6FC1021417D9B91500CA08F8 /* line_cell_selection_view@2x.png in Resources */,
 				6FC1021D17D9D4D900CA08F8 /* icon_curtain_off@2x.png in Resources */,
 				6FC1021E17D9D4D900CA08F8 /* icon_curtain_on@2x.png in Resources */,
+				F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2012,6 +2021,7 @@
 				6FC1022117D9F24E00CA08F8 /* SelectionItem.m in Sources */,
 				6FDFB05617DD7221002E23B1 /* SMNotification.m in Sources */,
 				6FDFB05917DD722C002E23B1 /* NotificationData.m in Sources */,
+				F280616417DD6E810064F35B /* MessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
