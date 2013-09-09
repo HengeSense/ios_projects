@@ -36,7 +36,7 @@
 }
 -(void)initUI{
     [super initUI];
-    
+   /*
     if (messageArr == nil) {
         Message *m1 = [Message new];
         m1.text = @"hello!";
@@ -54,7 +54,7 @@
         messageArr = [[NSArray alloc] initWithObjects:m1,m2,m3,m4, nil];
 
 
-    }
+    }*/
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

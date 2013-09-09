@@ -22,4 +22,10 @@
     return [NSNumber numberWithInt:0];
 }
 
+- (NSDate *)dateForKey:(id)key {
+    NSNumber *_date_ = [self notNSNullObjectForKey:key];
+    if(_date_ == nil) return nil;
+    return [NSDate dateWithTimeIntervalSince1970:_date_.longLongValue];
+}
+
 @end

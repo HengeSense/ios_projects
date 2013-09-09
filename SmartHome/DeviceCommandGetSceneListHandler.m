@@ -15,12 +15,14 @@
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateSceneMode class]]) {
         DeviceCommandUpdateSceneMode *updateSceneModeCommand = (DeviceCommandUpdateSceneMode *)command;
-        for(Unit *u in [SMShared current].memory.units) {
-            if([u.identifier isEqualToString:updateSceneModeCommand.masterDeviceCode]) {
-                [u.scenesModeList removeAllObjects];
-                [u.scenesModeList addObjectsFromArray:updateSceneModeCommand.scenesMode];
-                u.sceneUpdateTime = updateSceneModeCommand.updateTime;
-                break;
+        if([SMShared current].memory.units != nil && [SMShared current].memory.units.count > 0) {
+            for(Unit *u in [SMShared current].memory.units) {
+                if([u.identifier isEqualToString:updateSceneModeCommand.masterDeviceCode]) {
+                    [u.scenesModeList removeAllObjects];
+                    [u.scenesModeList addObjectsFromArray:updateSceneModeCommand.scenesMode];
+                    u.sceneUpdateTime = updateSceneModeCommand.updateTime;
+                    break;
+                }
             }
         }
     }

@@ -170,10 +170,13 @@
         [self addSubview:notificationView];
     }
     
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+    
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
     
     
+    [self notifyUnitsWasUpdate];
     
+    [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 
 -(void) btnGetDevicesPressed:(id) sender{
@@ -192,6 +195,12 @@
        // NSLog(@"device name = %@",getFromArchiver.name);
     
 }
+
+- (void)testDelayGetUnits {
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+}
+
+
 #pragma mark -
 #pragma mark device command upate unit handler
 

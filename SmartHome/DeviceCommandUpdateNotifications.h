@@ -7,7 +7,10 @@
 //
 
 #import "DeviceCommand.h"
+#import "SMNotification.h"
 
 @interface DeviceCommandUpdateNotifications : DeviceCommand
+
+@property (strong, nonatomic) NSMutableArray *notifications;
 
 @end

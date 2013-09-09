@@ -10,7 +10,6 @@
 #import "NavViewController.h"
 #import "Message.h"
 #import "MessageCell.h"
-
 @interface NotificationViewController : NavViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
