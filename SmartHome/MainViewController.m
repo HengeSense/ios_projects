@@ -32,9 +32,10 @@
     [self initDefaults];
     [self initUI];
     
-    MainView *mainview = (MainView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
-    if(mainview) {
-        [mainview notifyUnitsWasUpdate];
+    NSArray *identifierCollection = [NSArray arrayWithObjects:@"mainView", @"myDevicesView", nil];
+    for(NSString *identifier in identifierCollection) {
+        NavigationView *navView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+        [navView notifyViewUpdate];
     }
 }
 

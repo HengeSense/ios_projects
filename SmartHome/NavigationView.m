@@ -47,4 +47,8 @@
     return topbar;
 }
 
+- (void)notifyViewUpdate {
+    
+}
+
 @end

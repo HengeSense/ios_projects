@@ -179,15 +179,15 @@
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
 
+- (void)notifyViewUpdate {
+    [self notifyUnitsWasUpdate];
+}
 
 #pragma mark -
 #pragma mark device command upate unit handler
 
 - (void)notifyUnitsWasUpdate {
     @synchronized(self) {
-        
-        NSLog(@"  update units  ");
-        
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
             self.topbar.titleLabel.text = unit.name;

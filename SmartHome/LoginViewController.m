@@ -79,7 +79,8 @@
     
     if(txtUserName == nil) {
         txtUserName = [SMTextField textFieldWithPoint:CGPointMake(5, (lblUserName.frame.origin.y + LINE_HIGHT + 20))];
-        txtUserName.keyboardType = UIKeyboardTypeASCIICapable;
+//        txtUserName.keyboardType = UIKeyboardTypeASCIICapable;
+        txtUserName.keyboardType = UIKeyboardTypeNumberPad;
         txtUserName.returnKeyType = UIReturnKeyNext;
         txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;
         txtUserName.delegate = self;
