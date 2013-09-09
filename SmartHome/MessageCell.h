@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Message.h"
+#import "SMNotification.h"
 #define MESSAGE_CELL_HEIGHT 80
 #define TYPE_IMAGE_TAG 1001
 #define TEXT_LABEL_TAG 1000
 #define CELL_VIEW_TAG 999
 @interface MessageCell : UITableViewCell
-
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ofMessage:(SMNotification *) message;
 @end

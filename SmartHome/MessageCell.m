@@ -10,7 +10,7 @@
 
 @implementation MessageCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ofMessage:(Message *) message
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ofMessage:(SMNotification *) message
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -19,16 +19,16 @@
     }
     return self;
 }
--(void) initUIWithMessage:(Message *) message{
+-(void) initUIWithMessage:(SMNotification *) message{
 
     UIView  *view = [[UIView alloc] initWithFrame:self.contentView.frame];
     
     UIImageView *typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50/2, 39/2)];
-    if (message.messageType == MessageTypeNormal) {
+    if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]) {
         typeMessage.image = [UIImage imageNamed:@"icon_message.png"];
-    }else if(message.messageType == MessageTypeVerify){
+    }else if([message.type isEqualToString:@"CF"]){
         typeMessage.image = [UIImage imageNamed:@"icon_validation.png"];
-    }else if(message.messageType == MessageTypeWarning){
+    }else if([message.type isEqualToString:@"AL"]){
         typeMessage.image = [UIImage imageNamed:@"icon_warning"];
     }
     typeMessage.backgroundColor = [UIColor clearColor];

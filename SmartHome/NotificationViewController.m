@@ -67,7 +67,7 @@
     static NSString *messageIdentifier = @"messageCellIdentifier";
     messageCell = [tableView dequeueReusableCellWithIdentifier:messageIdentifier];
     if (messageCell == nil) {
-        messageCell = [mes]
+//        messageCell = [MessageCell alloc] 
     }
     return messageCell;
 }
