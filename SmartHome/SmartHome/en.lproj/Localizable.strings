@@ -22,6 +22,7 @@
 "unknow_error"     = "System error";
 "request_timeout"  = "Request timeout";
 "processing.tips"  = "Wait for processing...";
+"has_logout"       = "Logout";
 "determine"        = "OK";
 "submit"           = "Submit";
 "delete"           = "delete";

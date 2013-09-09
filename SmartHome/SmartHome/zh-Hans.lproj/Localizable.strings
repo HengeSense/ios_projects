@@ -24,6 +24,7 @@
 "request_timeout"  = "请求超时";
 "determine"        = "确定";
 "submit"           = "提交更改";
+"has_logout"       = "已登出";
 "processing.tips"  = "处理中,请稍后...";
 "delete"           = "删除";
 

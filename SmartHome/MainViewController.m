@@ -31,6 +31,12 @@
     [super viewDidLoad];
     [self initDefaults];
     [self initUI];
+    
+    NSArray *identifierCollection = [NSArray arrayWithObjects:@"mainView", @"myDevicesView", nil];
+    for(NSString *identifier in identifierCollection) {
+        NavigationView *navView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+        [navView notifyViewUpdate];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -121,6 +121,20 @@
 
 - (void)logout {
     [[SMShared current].settings clearAuth];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.ownerController.view];
+    [NSTimer scheduledTimerWithTimeInterval:0.7f target:self selector:@selector(reallyLogout) userInfo:nil repeats:NO];
+}
+
+- (void)reallyLogout {
+    [[SMShared current].deliveryService stopService];
+    //clear all subscriptions
+    [[SMShared current].memory.subscriptions removeAllObjects];
+    //clear all units
+    [[SMShared current].memory clearUnits];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"has_logout", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] delayDismissAlertView];
+    [self.ownerController.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

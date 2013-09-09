@@ -13,6 +13,7 @@
 #import "UnitsBindingViewController.h"
 #import "NSString+StringUtils.h"
 #import "SMTextField.h"
+#import "LoginViewController.h"
 #import "JsonUtils.h"
 
 @interface VerificationCodeValidationViewController ()
@@ -203,7 +204,7 @@
                         [SMShared current].settings.deviceCode = command.deviceCode;
                         [[SMShared current].settings saveSettings];
                         if([SMShared current].settings.anyUnitsBinding) {
-                            [SMShared current].app.rootViewController.needLoadMainViewController = YES;
+                            ((LoginViewController *)[SMShared current].app.rootViewController).hasLogin = YES;
                             [self.navigationController popToRootViewControllerAnimated:NO];
                         } else {
                             [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];

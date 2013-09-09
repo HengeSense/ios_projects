@@ -101,13 +101,7 @@
     NSString *receivedJson = [[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding];
     NSLog(receivedJson);
     
-    NSDictionary *json = [JsonUtils createDictionaryFromJson:messages];
-
-    //don't need to process this message
-    NSNumber *resultID = [json notNSNullObjectForKey:@"resultId"];
-    if(resultID == nil || resultID.integerValue == -100) return;
-    
-    DeviceCommand *command = [CommandFactory commandFromJson:json];
+    DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     if(command != nil) {
         [[SMShared current].deliveryService handleDeviceCommand:command];
     }

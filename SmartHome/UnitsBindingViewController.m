@@ -7,6 +7,7 @@
 //
 
 #import "UnitsBindingViewController.h"
+#import "LoginViewController.h"
 
 @interface UnitsBindingViewController ()
 
@@ -113,7 +114,7 @@
 #pragma mark services
 
 - (void)showMainView {
-    [SMShared current].app.rootViewController.needLoadMainViewController = YES;
+    ((LoginViewController *)[SMShared current].app.rootViewController).hasLogin = YES;
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 

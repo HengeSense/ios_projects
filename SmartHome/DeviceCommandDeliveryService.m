@@ -55,6 +55,12 @@
     
     if(!self.isService) return;
     
+    if(command.resultID == -100) {
+        NSLog(@"device command has been ignore .. [ %@ ]", command.commandName);
+        //ignore this command
+        return;
+    }
+    
     DeviceCommandHandler *handler = nil;
     if([@"FindZKListCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateUnitsHandler alloc] init];

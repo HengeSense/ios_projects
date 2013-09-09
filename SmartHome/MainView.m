@@ -161,20 +161,18 @@
         [self addSubview:notificationView];
     }
     
-    
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
-    
-    
-    [self notifyUnitsWasUpdate];
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
-
 
 - (void)testDelayGetUnits {
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
 
+- (void)notifyViewUpdate {
+    [self notifyUnitsWasUpdate];
+}
 
 #pragma mark -
 #pragma mark device command upate unit handler

@@ -22,4 +22,6 @@
 - (void)initDefaults;
 - (void)initUI;
 
+- (void)notifyViewUpdate;
+
 @end

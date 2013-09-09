@@ -62,41 +62,7 @@
     }
     return self;
 }
--(void) encodeWithCoder:(NSCoder *) encoder{
-    [encoder encodeObject:category forKey:@"category"];
-    [encoder encodeInteger:ep forKey:@"ep"];
-    [encoder encodeObject:identifier forKey:@"identifier"];
-    [encoder encodeObject:ip forKey:@"ip"];
-    [encoder encodeInteger:irType forKey:@"irType"];
-    [encoder encodeObject:name forKey:@"name"];
-    [encoder encodeObject:user forKey:@"user"];
-    [encoder encodeObject:nwkAddr forKey:@"nwkAddr"];
-    [encoder encodeObject:pwd forKey:@"pwd"];
-    [encoder encodeInteger:port forKey:@"port"];
-    [encoder encodeInteger:resolution forKey:@"resolution"];
-    [encoder encodeInteger:state forKey:@"state"];
-    [encoder encodeInteger:status forKey:@"status"];
-    [encoder encodeInteger:type forKey:@"type"];
-    
-    
-}
--(id) initWithCoder:(NSCoder *) decoder{
-    identifier = [decoder decodeObjectForKey:@"identifier"];
-    category = [decoder decodeObjectForKey:@"category"];
-    ep = [decoder decodeIntegerForKey:@"ep"];
-    ip = [decoder decodeObjectForKey:@"ip"];
-    irType = [decoder decodeIntegerForKey:@"irType"];
-    status = [decoder decodeIntegerForKey:@"status"];
-    state = [decoder decodeIntegerForKey:@"state"];
-    port = [decoder decodeIntegerForKey:@"port"];
-    pwd = [decoder decodeObjectForKey:@"pwd"];
-    resolution = [decoder decodeIntegerForKey:@"resolution"];
-    type = [decoder decodeIntegerForKey:@"type"];
-    name = [decoder decodeObjectForKey:@"name"];
-    nwkAddr = [decoder decodeObjectForKey:@"nwkAddr"];
-    user = [decoder decodeObjectForKey:@"user"];
-    return  self;
-}
+
 - (NSString *)commandString {
     return [NSString stringWithFormat:@"%@-%@-%d", self.category, self.identifier, self.status];
 }
