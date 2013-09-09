@@ -27,6 +27,8 @@
 "has_logout"       = "已登出";
 "processing.tips"  = "处理中,请稍后...";
 "delete"           = "删除";
+"refuse"           = "拒绝";
+"agree"            = "同意";
 
 
 

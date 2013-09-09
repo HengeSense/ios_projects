@@ -89,42 +89,52 @@
     
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
     textLabel.tag = TEXT_LABEL_TAG;
-    textLabel.font =[UIFont systemFontOfSize:12];
+    UIFont *font = [UIFont systemFontOfSize:12];
+    textLabel.font = font;
     textLabel.text = [@"    " stringByAppendingString:message.text];
     textLabel.textColor = [UIColor lightTextColor];
-    textLabel.lineBreakMode = UILineBreakModeWordWrap;
     textLabel.numberOfLines = 0;
+    CGSize constraint = CGSizeMake(240, 20000.0f);
+    CGSize size = [textLabel.text sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    textLabel.frame = CGRectMake(40, 5, size.width, size.height<MESSAGE_CELL_HEIGHT?MESSAGE_CELL_HEIGHT:size.height*2);
     textLabel.backgroundColor = [UIColor clearColor];
     [view addSubview:textLabel];
+    view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, textLabel.frame.size.height);
+    view.tag = CELL_VIEW_TAG;
+    [self.view addSubview:view];
+
     
     if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]||[message.type isEqualToString:@"AL"]) {
         UIButton *deleteButton = [LongButton buttonWithPoint:CGPointMake(5, view.frame.size.height+view.frame.origin.y+5)];
-        deleteButton.titleLabel.text = NSLocalizedString(@"delete", @"");
+        [deleteButton setTitle: NSLocalizedString(@"delete", @"") forState:UIControlStateNormal];
         [deleteButton addTarget:self action:@selector(deleteBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:deleteButton];
     }else if ([message.type isEqualToString:@"CF"]){
         UIButton *agreeBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, view.frame.size.height+view.frame.origin.y+5, 203/2, 98/2)];
-        agreeBtn.titleLabel.text = NSLocalizedString(@"agree", @"");
+        [agreeBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
+        [agreeBtn setTitle: NSLocalizedString(@"agree", @"") forState:UIControlStateNormal];
         [self.view addSubview:agreeBtn];
         
         UIButton *refuseBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
+        [refuseBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
         refuseBtn.center = CGPointMake(agreeBtn.center.x+agreeBtn.frame.size.width+5, agreeBtn.center.y);
-        refuseBtn.titleLabel.text = NSLocalizedString(@"refuse", @"");
+        [refuseBtn setTitle: NSLocalizedString(@"refuse", @"") forState:UIControlStateNormal];
         [self.view addSubview:refuseBtn];
         
         UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
+        [deleteBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
         deleteBtn.center = CGPointMake(refuseBtn.center.x+refuseBtn.frame.size.width+5, refuseBtn.center.y);
-        deleteBtn.titleLabel.text = NSLocalizedString(@"delete", @"");
+        [deleteBtn setTitle: NSLocalizedString(@"delete", @"") forState:UIControlStateNormal];
         [self.view addSubview:deleteBtn];
 
-        
     }
-    view.tag = CELL_VIEW_TAG;
-    [self.view addSubview:view];
-
+    NSLog(@"%@",NSStringFromCGSize(size));
 }
 -(void) cancel{
     [self dismissModalViewControllerAnimated:YES];
+}
+-(void) deleteBtnPressed:(UIButton *) sender{
+    
 }
 - (void)didReceiveMemoryWarning
 {

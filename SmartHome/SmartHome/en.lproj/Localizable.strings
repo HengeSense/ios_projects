@@ -26,6 +26,9 @@
 "determine"        = "OK";
 "submit"           = "Submit";
 "delete"           = "delete";
+"refuse"           = "refuse";
+"agree"            = "agree";
+
 
 
 "the.two.input.is.not.consistent" = "The two input is not consistent";

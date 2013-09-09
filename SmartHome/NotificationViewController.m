@@ -44,7 +44,7 @@
         s2.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
         s2.type = @"CF";
         SMNotification *s3 = [SMNotification new];
-        s3.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
+        s3.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFFeeeeeeeeeeeee                         eeee                                                           eeeeeeeeeeeeeeeeeeeeeeee           eeeee                eeeee    eeeeeeeeeeee                                 eeeeeee            eee  eeeee         eeeee         eeeeee           eeeeeeeeeeeee       2212121121221212121212121212121212121212121121212212121eof";
         s3.type = @"AL";
         
         messageArr = [[NSArray alloc] initWithObjects:s1,s2,s3, nil];
