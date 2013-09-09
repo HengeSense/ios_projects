@@ -35,4 +35,7 @@
  */
 - (NSArray *)updateUnits:(NSArray *)newUnits;
 
+
+- (void)clearUnits;
+
 @end

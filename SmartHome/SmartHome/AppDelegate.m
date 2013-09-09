@@ -9,8 +9,8 @@
 #import "AppDelegate.h"
 #import "Reachability.h"
 #import "MainViewController.h"
-#import "UnitsBindingViewController.h"
 #import "LoginViewController.h"
+#import "UnitsBindingViewController.h"
 
 @implementation AppDelegate
 
@@ -29,7 +29,7 @@
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
-    navigationController.delegate = rootViewController;
+    navigationController.delegate = ((LoginViewController *)self.rootViewController);
 
     BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
     
@@ -44,9 +44,6 @@
             [rootViewController.navigationController pushViewController:
              [[UnitsBindingViewController alloc] init] animated:NO];
         }
-    } else {
-        [rootViewController.navigationController pushViewController:
-         [[LoginViewController alloc] init] animated:NO];
     }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -164,9 +161,9 @@
     return deviceCommandDeliveryService;
 }
 
-- (RootViewController *)rootViewController {
+- (UIViewController *)rootViewController {
     if(rootViewController == nil) {
-        rootViewController = [[RootViewController alloc] init];
+        rootViewController = [[LoginViewController alloc] init];
     }
     return rootViewController;
 }

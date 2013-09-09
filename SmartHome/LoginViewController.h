@@ -9,6 +9,8 @@
 #import "BaseViewController.h"
 #import "CustomCheckBox.h"
 
-@interface LoginViewController : BaseViewController<UITextFieldDelegate>
+@interface LoginViewController : BaseViewController<UITextFieldDelegate, UINavigationControllerDelegate>
+
+@property (assign, nonatomic) BOOL hasLogin;
 
 @end

@@ -124,6 +124,12 @@
     }
 }
 
+- (void)clearUnits {
+    @synchronized(self) {
+        [self.units removeAllObjects];
+    }
+}
+
 - (Unit *)currentUnit {
     if(self.units.count == 0) return nil;
     return [self.units objectAtIndex:0];

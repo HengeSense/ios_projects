@@ -36,6 +36,8 @@
     UIButton *btnFindPassword;
 }
 
+@synthesize hasLogin;
+
 #pragma mark -
 #pragma initializations
 
@@ -203,8 +205,7 @@
                         [[AlertView currentAlertView] dismissAlertView];
                         
                         if([SMShared current].settings.anyUnitsBinding) {
-                            [SMShared current].app.rootViewController.needLoadMainViewController = YES;
-                            [self.navigationController popToRootViewControllerAnimated:NO];
+                            [self.navigationController pushViewController:[[MainViewController alloc] init] animated:NO];
                         } else {
                             [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
                         }
@@ -253,6 +254,16 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return range.location < 20;
+}
+
+#pragma mark -
+#pragma mark navigation view controller delegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if(viewController == self && self.hasLogin) {
+        self.hasLogin = NO;
+        [self.navigationController pushViewController:[[MainViewController alloc] init] animated:NO];
+    }
 }
 
 @end
