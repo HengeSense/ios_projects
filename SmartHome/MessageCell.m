@@ -33,11 +33,11 @@
         typeMessage.image = [UIImage imageNamed:@"icon_warning"];
     }
     typeMessage.backgroundColor = [UIColor clearColor];
-    typeMessage.tag = 1001;
+    typeMessage.tag = TYPE_IMAGE_TAG;
     [view addSubview:typeMessage];
     
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
-    textLabel.tag = 1000;
+    textLabel.tag = TEXT_LABEL_TAG;
     textLabel.font =[UIFont systemFontOfSize:12];
     textLabel.text = [@"    " stringByAppendingString:message.text];
     textLabel.textColor = [UIColor lightTextColor];
@@ -50,7 +50,7 @@
     accessory.center = CGPointMake(self.frame.size.width-12, self.center.y+15);
     [view addSubview:accessory];
     
-    view.tag =999;
+    view.tag = CELL_VIEW_TAG;
     [self addSubview:view];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }

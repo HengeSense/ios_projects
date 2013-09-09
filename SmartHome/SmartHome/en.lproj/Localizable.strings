@@ -152,4 +152,7 @@
 "request.format.error"      = "Wrong request format!";
 "request.too.frequent.error" ="Too frequest request!";
 "system.error"          = "System error!";
-
+/*
+ *notification
+ */
+"notification.message" = "Notification Message";

@@ -266,6 +266,7 @@
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
+		F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationHandlerViewController.m */; };
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -680,6 +681,8 @@
 		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		F280616317DD6E810064F35B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		F280616517DD76A30064F35B /* message_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_accessory@2x.png"; sourceTree = "<group>"; };
+		F280616717DDA7900064F35B /* NotificationHandlerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationHandlerViewController.h; sourceTree = "<group>"; };
+		F280616817DDA7900064F35B /* NotificationHandlerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationHandlerViewController.m; sourceTree = "<group>"; };
 		F288414017D4A35C00B81DD3 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		F288414117D4A35C00B81DD3 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
 		F2BB0EF317BE1B7E004E14B1 /* LongButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongButton.h; sourceTree = "<group>"; };
@@ -1074,6 +1077,8 @@
 				F288414117D4A35C00B81DD3 /* UserAccountViewController.m */,
 				6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */,
 				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
+				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,
+				F280616817DDA7900064F35B /* NotificationHandlerViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -2022,6 +2027,7 @@
 				6FDFB05617DD7221002E23B1 /* SMNotification.m in Sources */,
 				6FDFB05917DD722C002E23B1 /* NotificationData.m in Sources */,
 				F280616417DD6E810064F35B /* MessageCell.m in Sources */,
+				F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

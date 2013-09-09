@@ -152,4 +152,8 @@
 "request.format.error"      = "请求格式错误!";
 "request.too.frequent.error" ="请求过于频繁!";
 "system.error"          = "系统错误！";
+/*
+ *notification
+ */
+"notification.message" = "消息管理";
 

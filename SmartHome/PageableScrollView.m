@@ -60,6 +60,7 @@
 }
 
 - (void)loadDataWithDictionary:(Unit *)unit {
+    [self removeSubviews:self];
     if (unit == nil) return;
     
     NSArray *zones = unit.zones;

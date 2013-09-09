@@ -58,6 +58,7 @@
         messageTable.separatorColor = [UIColor blackColor];
         [self.view addSubview:messageTable];
     }
+    self.topbar.titleLabel.text = NSLocalizedString(@"notification.manager", @"");
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
