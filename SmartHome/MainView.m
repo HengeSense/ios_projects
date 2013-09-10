@@ -254,7 +254,7 @@
 - (void)notifyUpdateNotifications {
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
     if(notifications == nil || notifications.count == 0) {
-        // no notifications
+        // notifications is empty
     }else {
         // has notifications
     }
