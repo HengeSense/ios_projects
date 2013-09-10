@@ -104,7 +104,7 @@
     }
     
 #pragma mark -
-#pragma mark speech view
+#pragma mark speech button
     
     if(btnSpeech == nil) {
         btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
@@ -182,10 +182,6 @@
         
         [self addSubview:notificationView];
     }
-    
-    
-    
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     
        
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
