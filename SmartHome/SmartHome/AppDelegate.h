@@ -20,5 +20,5 @@
 @property (strong, nonatomic) UIViewController *rootViewController;
 @property (strong, nonatomic) Memory *memory;
 @property (strong, nonatomic) DeviceCommandDeliveryService *deviceCommandDeliveryService;
-@property (strong, nonatomic) NSDateFormatter *dateFormatter;
+
 @end

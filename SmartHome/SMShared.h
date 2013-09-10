@@ -16,7 +16,7 @@
 @property (strong, nonatomic, readonly) GlobalSettings *settings;
 @property (strong, nonatomic, readonly) AccountService *accountService;
 @property (strong, nonatomic, readonly) DeviceCommandDeliveryService *deliveryService;
-@property (strong, nonatomic) NSDateFormatter *dateFormatter;
+
 + (SMShared *)current;
 
 @end

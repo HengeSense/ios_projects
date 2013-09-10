@@ -26,9 +26,6 @@
     return self.app.memory;
 }
 
--(NSDateFormatter *) dateFormatter{
-    return self.app.dateFormatter;
-}
 - (DeviceCommandDeliveryService *)deliveryService {
     return self.app.deviceCommandDeliveryService;
 }

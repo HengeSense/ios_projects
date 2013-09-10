@@ -13,6 +13,7 @@
 #import "UIColor+ExtentionForHexString.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "SelectionView.h"
+#import "SMDateFormatter.h"
 #import "SceneMode.h"
 
 #import "DeviceButton.h"
@@ -146,8 +147,7 @@
     
         lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
         lblTime.backgroundColor =[UIColor clearColor];
-        lblTime.text = [[SMShared current].dateFormatter stringFromDate:displayNotification.createTime];
-        NSLog(@"time = %@",[SMShared current].dateFormatter);
+        lblTime.text = [SMDateFormatter dateToString:displayNotification.createTime format:@"HH:mm:ss"];
         lblTime.font = [UIFont systemFontOfSize:12];
         lblTime.textColor = [UIColor lightTextColor];
         [notificationView addSubview: lblTime];
@@ -193,13 +193,25 @@
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
--(void) tapGestureHandler{
-       [self.ownerController.navigationController presentModalViewController: [[NotificationHandlerViewController alloc] initWithMessage:displayNotification] animated:YES];
-    
-}
+
 - (void)testDelayGetUnits {
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
+
+
+/* 
+ *
+ *
+ *
+ */
+- (void)notifyViewUpdate {
+    [self notifyUnitsWasUpdate];
+    [self notifyUpdateNotifications];
+}
+
+#pragma mark -
+#pragma mark notifications
+
 -(void) updateNotifications:(NSArray *) notifications{
     if (notifications == nil||notifications.count == 0) {
         return;
@@ -229,11 +241,6 @@
 
 }
 
-
-- (void)notifyViewUpdate {
-    [self notifyUnitsWasUpdate];
-    [self notifyUpdateNotifications];
-}
 
 #pragma mark -
 #pragma mark device command upate unit handler
@@ -287,6 +294,11 @@
     }
     NSString *selectedUnitIdentifier = [SMShared current].memory.currentUnit == nil ? [NSString emptyString] : [SMShared current].memory.currentUnit.identifier;
     [SelectionView showWithItems:unitsList selectedIdentifier:selectedUnitIdentifier delegate:self];
+}
+
+// show notification details
+- (void)tapGestureHandler {
+    [self.ownerController.navigationController presentModalViewController:[[NotificationHandlerViewController alloc] initWithMessage:displayNotification] animated:YES];
 }
 
 #pragma mark -
