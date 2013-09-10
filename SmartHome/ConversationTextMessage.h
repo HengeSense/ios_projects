@@ -12,5 +12,7 @@
 @interface ConversationTextMessage : ConversationMessage
 
 @property (strong, nonatomic) NSString *textMessage;
+@property (strong, nonatomic) NSString *statusMessage;
+@property (strong, nonatomic) NSString *timeMessage;
 
 @end

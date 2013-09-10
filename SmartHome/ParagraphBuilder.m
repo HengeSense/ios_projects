@@ -19,10 +19,10 @@
 @synthesize autoFitHeight;
 
 - (void)addParagraphWithAttributedString:
-(NSMutableAttributedString *)str lineSpace:(CGFloat)ls
-                               textAlign:(TEXT_ALIGN)ta /*firstLineIndent:(CGFloat)fli
+        (NSMutableAttributedString *)str lineSpace:(CGFloat)ls
+        textAlign:(TEXT_ALIGN)ta /*firstLineIndent:(CGFloat)fli
 headIndent:(CGFloat)hi*/ lineBreakMode:(LINE_BREAK_MODE)lbm
-                          paragraphSpace:(CGFloat)ps paragraphSpaceBefore:(CGFloat)psb {
+        paragraphSpace:(CGFloat)ps paragraphSpaceBefore:(CGFloat)psb {
     
     //指定为对齐属性
     CTTextAlignment alignment = (CTTextAlignment)ta;

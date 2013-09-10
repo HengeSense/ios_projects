@@ -22,6 +22,8 @@
 }
 
 @synthesize textMessage;
+@synthesize statusMessage;
+@synthesize timeMessage;
 
 - (UIView *)viewWithMessage:(CGFloat)tblConversationWidth {
     if(messageView != nil) return messageView;
@@ -33,6 +35,16 @@
     NSMutableAttributedString *str = [stringBuilder appendStringWithString:self.textMessage
             fontColor:[UIColor darkGrayColor] fontName:DEFAULT_FONT fontSize:15.f fontWidth:0.f fontSpace:0.f
             underLineStyle: UNDER_LINE_STYLE_NONE underLineColor:nil];
+    
+/*    [stringBuilder appendStringWithString:self.textMessage
+            fontColor:[UIColor darkGrayColor] fontName:DEFAULT_FONT fontSize:15.f fontWidth:0.f fontSpace:0.f
+            underLineStyle: UNDER_LINE_STYLE_NONE underLineColor:nil];*/
+    
+    if(![NSString isBlank:self.timeMessage]) {
+        str = [stringBuilder appendStringWithString:[NSString stringWithFormat:@"\r\n%@", self.timeMessage]
+            fontColor:[UIColor lightGrayColor] fontName:DEFAULT_FONT fontSize:12.f fontWidth:0.f fontSpace:0.f
+            underLineStyle: UNDER_LINE_STYLE_NONE underLineColor:nil];
+    }
     
     ParagraphBuilder *paragraph = [[ParagraphBuilder alloc] init];
     paragraph.autoFitHeight = YES;
