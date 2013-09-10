@@ -32,11 +32,6 @@
             if(unit.scenesModeList != nil && unit.scenesModeList.count > 0) {
                 getSceneListCommand.updateTime = unit.sceneUpdateTime;
             }
-            
-            NSData *dd = [JsonUtils createJsonDataFromDictionary:[unit toJson]];
-            NSString *str= [[NSString alloc] initWithData:dd encoding:NSUTF8StringEncoding];
-            NSLog(@">>>>%@", str);
-            
             [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
         }
     }

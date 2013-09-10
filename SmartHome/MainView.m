@@ -18,6 +18,7 @@
 #import "DeviceButton.h"
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
+#import "NotificationsFileManager.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -161,13 +162,18 @@
         [self addSubview:notificationView];
     }
     
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+//    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    
+NSArray *arrr = [[NotificationsFileManager fileManager] readFromDisk];
+    if(arrr != nil) {
+        NSLog(@"has count %d", arrr.count);
+    }
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 
 - (void)testDelayGetUnits {
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
 
 - (void)notifyViewUpdate {
