@@ -19,6 +19,7 @@
 @synthesize deviceCommandDeliveryService;
 @synthesize memory;
 @synthesize rootViewController;
+@synthesize dateFormatter;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {   
@@ -168,4 +169,11 @@
     return rootViewController;
 }
 
+-(NSDateFormatter *) dateFormatter{
+    if (dateFormatter == nil) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter dateFromString:@"HH:mm:ss"];
+    }
+    return dateFormatter;
+}
 @end
