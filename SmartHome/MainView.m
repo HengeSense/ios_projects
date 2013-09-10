@@ -19,6 +19,7 @@
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
 #import "DeviceCommandGetNotificationsHandler.h"
+#import "NotificationsFileManager.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -177,7 +178,7 @@
 - (void)testDelayGetUnits {
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
 }
--(void) getNotifications:(NSArray *) notifications{
+-(void) updateNotifications:(NSArray *) notifications{
     if (notifications == nil||notifications.count == 0) {
         return;
     }
@@ -191,22 +192,27 @@
             lastTime = [notification.createTime timeIntervalSince1970];
             displayNotification = notification;
         }
-//        if ([notification.type isEqualToString:@"AL"]&&alLastTime<[notification.createTime timeIntervalSince1970]&&notification) {
-//            [alNotification addObject:notification];
-//            
-//        }
+        if ([notification.type isEqualToString:@"AL"]&&alLastTime<[notification.createTime timeIntervalSince1970]&&notification.hasRead == NO) {
+            lastNotHandlerAlNotification = notification;
+        }
     }
     
-//    for (SMNotification *al in alNotification) {
-//        if (al) {
-//            <#statements#>
-//        }
-//    }
+    if (lastNotHandlerAlNotification !=nil) {
+        displayNotification = lastNotHandlerAlNotification;
+    }
     
-    
+    lblMessage.text = displayNotification.text;
+    lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
+    btnMessageCount.titleLabel.text = [NSString stringWithFormat:@"%i",notificationsArr.count];
+    return;
+
 }
 - (void)notifyViewUpdate {
     [self notifyUnitsWasUpdate];
+    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
+    notificationsArr = notifications;
+    [self updateNotifications:notifications];
+    
 }
 
 #pragma mark -
