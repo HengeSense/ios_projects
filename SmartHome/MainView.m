@@ -70,7 +70,7 @@
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
     
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     
     if (displayNotification == nil) {

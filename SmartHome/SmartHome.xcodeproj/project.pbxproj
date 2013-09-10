@@ -249,7 +249,7 @@
 		F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* SMTextField.m */; };
 		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
-		F20C788017D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */; };
+		F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */; };
 		F20C788317D0859C003D50C5 /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C788217D0859B003D50C5 /* Memory.m */; };
 		F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178BFD17CAEC6F0043400F /* PageableScrollView.m */; };
 		F2178C0117CB06720043400F /* PageableNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0017CB06720043400F /* PageableNavView.m */; };
@@ -659,8 +659,8 @@
 		F20B36CC17B87CF1009286D6 /* MyDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
 		F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesViewController.m; sourceTree = "<group>"; };
-		F20C787E17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateUnitsHandler.h; sourceTree = "<group>"; };
-		F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateUnitsHandler.m; sourceTree = "<group>"; };
+		F20C787E17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetUnitsHandler.h; sourceTree = "<group>"; };
+		F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnitsHandler.m; sourceTree = "<group>"; };
 		F20C788117D0859A003D50C5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		F20C788217D0859B003D50C5 /* Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memory.m; sourceTree = "<group>"; };
 		F2178BFC17CAEC6F0043400F /* PageableScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableScrollView.h; sourceTree = "<group>"; };
@@ -1463,8 +1463,8 @@
 			children = (
 				6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */,
 				6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */,
-				F20C787E17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.h */,
-				F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */,
+				F20C787E17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.h */,
+				F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */,
 				6FE3B76117D5D54B006FCD7C /* DeviceCommandGetAccountHandler.h */,
 				6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */,
 				6FE3B76417D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.h */,
@@ -2003,7 +2003,7 @@
 				6FD081BC17CF3E580089A1ED /* DeviceCommandHandler.m in Sources */,
 				6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */,
 				6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */,
-				F20C788017D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m in Sources */,
+				F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */,
 				6F84A77A17D04A5700D46BFA /* Zone.m in Sources */,
 				6F84A78017D06D6D00D46BFA /* Unit.m in Sources */,
 				F20C788317D0859C003D50C5 /* Memory.m in Sources */,

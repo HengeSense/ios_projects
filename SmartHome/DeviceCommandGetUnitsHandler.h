@@ -1,5 +1,5 @@
 //
-//  DeviceCommandUpdateUnitsHandler.h
+//  DeviceCommandGetUnitsHandler.h
 //  SmartHome
 //
 //  Created by hadoop user account on 30/08/13.
@@ -9,12 +9,12 @@
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandUpdateUnits.h"
 
-@protocol DeviceCommandUpdateUnitsHandlerDelegate<NSObject>
+@protocol DeviceCommandGetUnitsHandlerDelegate<NSObject>
 
 - (void)notifyUnitsWasUpdate;
 
 @end
 
-@interface DeviceCommandUpdateUnitsHandler : DeviceCommandHandler
+@interface DeviceCommandGetUnitsHandler : DeviceCommandHandler
 
 @end
