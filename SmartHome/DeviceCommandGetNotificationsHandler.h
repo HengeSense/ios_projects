@@ -9,6 +9,12 @@
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandUpdateNotifications.h"
 
+@protocol DeviceCommandGetNotificationsHandlerDelegate <NSObject>
+
+- (void)notifyUpdateNotifications;
+
+@end
+
 @interface DeviceCommandGetNotificationsHandler : DeviceCommandHandler
 
 @end

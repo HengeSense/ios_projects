@@ -16,12 +16,16 @@
     if([command isKindOfClass:[DeviceCommandUpdateNotifications class]]) {
         NSLog(@"trigger get notification handler...");
         DeviceCommandUpdateNotifications *receivedNotificationsCommand = (DeviceCommandUpdateNotifications *)command;
-        // do service here ...
-        NSArray *notificationSubscripts = [[SMShared current].memory getSubscriptionsFor:self.class];
-        
-        for (int i=0; i<notificationSubscripts.count; ++i) {
-        }
         [[NotificationsFileManager fileManager] writeToDisk:receivedNotificationsCommand.notifications];
+        
+        NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
+        if(subscriptions != nil) {
+            for(int i=0; i<subscriptions.count; i++) {
+                if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(notifyUpdateNotifications)]) {
+                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyUpdateNotifications) withObject:nil waitUntilDone:NO];
+                }
+            }
+        }
     }
 }
 

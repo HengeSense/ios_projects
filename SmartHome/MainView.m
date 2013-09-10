@@ -18,6 +18,7 @@
 #import "DeviceButton.h"
 #import "CommandFactory.h"
 #import "DeviceCommandUpdateAccount.h"
+#import "NotificationsFileManager.h"
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "NotificationsFileManager.h"
 #import "NotificationHandlerViewController.h"           
@@ -188,6 +189,8 @@
         tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)];
     }
     [lblMessage addGestureRecognizer:tapGesture];    
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 -(void) tapGestureHandler{
@@ -195,7 +198,7 @@
     
 }
 - (void)testDelayGetUnits {
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
 -(void) updateNotifications:(NSArray *) notifications{
     if (notifications == nil||notifications.count == 0) {
@@ -225,12 +228,11 @@
     return;
 
 }
+
+
 - (void)notifyViewUpdate {
     [self notifyUnitsWasUpdate];
-    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
-    notificationsArr = notifications;
-   // [self updateNotifications:notifications];
-    
+    [self notifyUpdateNotifications];
 }
 
 #pragma mark -
@@ -243,6 +245,18 @@
             self.topbar.titleLabel.text = unit.name;
         }
         [pageableScrollView loadDataWithDictionary:unit];
+    }
+}
+
+#pragma mark
+#pragma mark device command get notifications handler
+
+- (void)notifyUpdateNotifications {
+    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
+    if(notifications == nil || notifications.count == 0) {
+        // no notifications
+    }else {
+        // has notifications
     }
 }
 
