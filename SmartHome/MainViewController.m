@@ -34,7 +34,7 @@
     
     NSArray *identifierCollection = [NSArray arrayWithObjects:@"mainView", @"myDevicesView", nil];
     for(NSString *identifier in identifierCollection) {
-        NavigationView *navView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+        NavigationView *navView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:identifier];
         [navView notifyViewUpdate];
     }
 }

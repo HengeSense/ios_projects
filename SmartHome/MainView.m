@@ -170,12 +170,7 @@
         [self addSubview:notificationView];
     }
     
-//    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
-    
-NSArray *arrr = [[NotificationsFileManager fileManager] readFromDisk];
-    if(arrr != nil) {
-        NSLog(@"has count %d", arrr.count);
-    }
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
@@ -211,8 +206,11 @@ NSArray *arrr = [[NotificationsFileManager fileManager] readFromDisk];
     
     
 }
+
+
 - (void)notifyViewUpdate {
     [self notifyUnitsWasUpdate];
+    [self notifyUpdateNotifications];
 }
 
 #pragma mark -
@@ -225,6 +223,18 @@ NSArray *arrr = [[NotificationsFileManager fileManager] readFromDisk];
             self.topbar.titleLabel.text = unit.name;
         }
         [pageableScrollView loadDataWithDictionary:unit];
+    }
+}
+
+#pragma mark
+#pragma mark device command get notifications handler
+
+- (void)notifyUpdateNotifications {
+    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
+    if(notifications == nil || notifications.count == 0) {
+        // no notifications
+    }else {
+        // has notifications
     }
 }
 
