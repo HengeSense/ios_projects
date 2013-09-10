@@ -51,9 +51,7 @@
     UILabel *lblAffectDevice;
     UIButton *btnMessageCount;
     
-    UITapGestureRecognizer *tapGesture;
     SMNotification *displayNotification;
-    
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -144,6 +142,7 @@
         lblMessage.text = displayNotification.text;
         lblMessage.textColor = [UIColor lightTextColor];
         [notificationView addSubview:lblMessage];
+        [lblMessage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)]];
     
         lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
         lblTime.backgroundColor =[UIColor clearColor];
@@ -184,11 +183,11 @@
         [self addSubview:notificationView];
     }
     
+    
+    
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-    if (tapGesture == nil) {
-        tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)];
-    }
-    [lblMessage addGestureRecognizer:tapGesture];    
+    
+       
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
