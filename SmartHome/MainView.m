@@ -12,7 +12,6 @@
 #import "NSString+StringUtils.h"
 #import "UIColor+ExtentionForHexString.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "SelectionView.h"
 #import "SMDateFormatter.h"
 #import "SceneMode.h"
 
@@ -189,8 +188,6 @@
     }
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
-    
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
 }
 
 - (void)testDelayGetUnits {
@@ -209,9 +206,26 @@
 }
 
 #pragma mark -
+#pragma mark selection view delegate
+
+- (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
+    if([NSString isBlank:source]) return;
+    SelectionItem *it = item;
+    if(it == nil) return;
+    NSLog(@"%@", it.identifier);
+    if([@"scene" isEqualToString:source]) {
+        
+    } else if([@"units" isEqualToString:source]) {
+        [[SMShared current].memory changeCurrentUnitTo:it.identifier];
+        [self notifyUnitsWasUpdate];
+    }
+}
+
+
+#pragma mark -
 #pragma mark notifications
 
--(void) updateNotifications:(NSArray *) notifications{
+- (void)updateNotifications:(NSArray *)notifications {
     if (notifications == nil||notifications.count == 0) {
         return;
     }
@@ -236,9 +250,7 @@
     lblMessage.text = displayNotification.text;
     lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
     [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
-    NSLog(@"%@",btnMessageCount.titleLabel.text);
     return;
-
 }
 
 #pragma mark -
@@ -304,7 +316,7 @@
             }
         }
     }
-    [SelectionView showWithItems:sList selectedIdentifier:@"" delegate:self];
+    [SelectionView showWithItems:sList selectedIdentifier:@"" source:@"scene" delegate:self];
 }
 
 - (void)btnShowUnitsList:(id)sender {
@@ -313,7 +325,8 @@
         [unitsList addObject:[[SelectionItem alloc] initWithIdentifier:unit.identifier andTitle:unit.name]];
     }
     NSString *selectedUnitIdentifier = [SMShared current].memory.currentUnit == nil ? [NSString emptyString] : [SMShared current].memory.currentUnit.identifier;
-    [SelectionView showWithItems:unitsList selectedIdentifier:selectedUnitIdentifier delegate:self];
+
+    [SelectionView showWithItems:unitsList selectedIdentifier:selectedUnitIdentifier source:@"units" delegate:self];
 }
 
 // show notification details

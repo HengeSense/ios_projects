@@ -36,6 +36,9 @@
 - (NSArray *)updateUnits:(NSArray *)newUnits;
 
 
+- (void)changeCurrentUnitTo:(NSString *)unitIdentifier;
+
+
 - (void)updateSceneList:(NSString *)unitIdentifier sceneList:(NSArray *)sceneList hashCode:(NSNumber *)hashCode;
 
 - (void)clearUnits;

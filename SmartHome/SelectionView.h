@@ -11,15 +11,17 @@
 
 @protocol SelectionViewDelegate <NSObject>
 
-- (void)selectionViewNotifyItemSelected:(id)item;
+- (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source;
 
 @end
 
 @interface SelectionView : UIView<UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) NSArray *items;
+@property (strong, nonatomic) NSString *source;
+@property (strong, nonatomic) NSString *selectedIdentifier;
+@property (assign, nonatomic) id<SelectionViewDelegate> delegate;
 
-
-+ (void)showWithItems:(NSArray *)items selectedIdentifier:(NSString *)identifier delegate:(id)target;
++ (void)showWithItems:(NSArray *)items selectedIdentifier:(NSString *)identifier source:(NSString *)source delegate:(id)target;
 
 @end
