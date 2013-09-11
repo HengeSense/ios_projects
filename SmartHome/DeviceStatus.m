@@ -18,7 +18,7 @@
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self && json) {
-        self.deviceIdentifer = [json stringForKey:@"id"];
+        self.deviceIdentifer = [json stringForKey:@"code"];
         self.status = [json numberForKey:@"status"].integerValue;
         self.state = [json numberForKey:@"state"].integerValue;
     }

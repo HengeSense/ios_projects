@@ -186,6 +186,7 @@
         [self addSubview:notificationView];
     }
 }
+
 /* 
  *
  *
@@ -279,6 +280,7 @@
 
 - (void)notifyDevicesStatusWasUpdate {
     if(pageableScrollView != nil) {
+        [pageableScrollView notifyStatusChanged];
     }
 }
 

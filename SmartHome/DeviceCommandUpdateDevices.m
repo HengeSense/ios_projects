@@ -18,7 +18,7 @@
     self = [super initWithDictionary:json];
     if(self && json) {
         self.voiceText = [json stringForKey:@"voiceText"];
-        NSArray *_devices_ = [json notNSNullObjectForKey:@"devices"];
+        NSArray *_devices_ = [json notNSNullObjectForKey:@"childDeviceStatuses"];
         if(_devices_ != nil) {
             for(NSDictionary *_device_ in _devices_) {
                 [self.devicesStatus addObject:[[DeviceStatus alloc] initWithJson:_device_]];

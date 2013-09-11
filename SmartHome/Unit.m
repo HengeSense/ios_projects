@@ -75,7 +75,7 @@
     [json setObject:_zones_ forKey:@"zones"];
     
     
-    // sceneUpdateTime
+    // scene hash code
     
     // scenesModeList
     
