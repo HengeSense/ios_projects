@@ -63,12 +63,14 @@
             
             NSMutableArray *newList = [NSMutableArray array];
             
-            for(SMNotification *modifyItem in modifyList) {
-                for(SMNotification *oldItem in oldNotifications) {
-                    if([modifyItem.identifier isEqualToString:oldItem.identifier]) {
-                        oldItem.hasRead = modifyItem.hasRead;
-                        oldItem.text = modifyItem.text;
-                        break;
+            if(modifyList != nil && modifyList.count != 0) {
+                for(SMNotification *modifyItem in modifyList) {
+                    for(SMNotification *oldItem in oldNotifications) {
+                        if([modifyItem.identifier isEqualToString:oldItem.identifier]) {
+                            oldItem.hasRead = modifyItem.hasRead;
+                            oldItem.text = modifyItem.text;
+                            break;
+                        }
                     }
                 }
             }
