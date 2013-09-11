@@ -16,6 +16,22 @@
     return obj;
 }
 
+- (NSString *)stringForKey:(id)key {
+    NSString *str = [self notNSNullObjectForKey:key];
+    if(str != nil) {
+        return str;
+    }
+    return nil;
+}
+
+- (BOOL)boolForKey:(id)key {
+    NSString *_bool_ = [self notNSNullObjectForKey:key];
+    if(_bool_ != nil) {
+        return [@"yes" isEqualToString:_bool_];
+    }
+    return NO;
+}
+
 - (NSNumber *)numberForKey:(id)key {
     NSNumber *number = [self notNSNullObjectForKey:key];
     if(number != nil) return number;

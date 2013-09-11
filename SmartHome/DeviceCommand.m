@@ -22,6 +22,7 @@
 @synthesize appKey;
 @synthesize security;
 @synthesize tcpAddress;
+@synthesize hashCode;
 @synthesize updateTime;
 @synthesize describe;
 
@@ -35,17 +36,10 @@
             self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
             self.result = [json notNSNullObjectForKey:@"id"];
             self.describe = [json notNSNullObjectForKey:@"describe"];
-    
-            NSNumber *r_id = [json notNSNullObjectForKey:@"resultId"];
-            if(r_id != nil) {
-                self.resultID = r_id.integerValue;
-            }
-            
+            self.hashCode = [json numberForKey:@"hashCode"];
+            self.resultID = [json numberForKey:@"resultId"].integerValue;
             self.security = [json notNSNullObjectForKey:@"security"];
-            NSNumber *timestamp = [json notNSNullObjectForKey:@"commandTime"];
-            if(timestamp != nil) {
-                self.commandTime = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue];
-            }
+            self.commandTime = [json dateForKey:@"commandTime"];
         }
     }
     return self;
@@ -79,10 +73,8 @@
     }
     
     if([@"FindZKListCommand" isEqualToString:commandName] || [@"FindDeviceSceneCommand" isEqualToString:commandName]) {
-        if(self.updateTime != nil) {
-            [json setObject:[NSNumber numberWithLongLong:(long long)self.updateTime.timeIntervalSince1970] forKey:@"updateTime"];
-        } else {
-           [json setObject:[NSNumber numberWithInteger:0] forKey:@"updateTime"];
+        if(self.hashCode != nil) {
+            [json setObject:self.hashCode forKey:@"hashCode"];
         }
     }
 

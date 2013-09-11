@@ -19,6 +19,7 @@
 @synthesize createTime;
 @synthesize data = _data;
 @synthesize hasRead;
+@synthesize hasProcess;
 @synthesize identifier;
 
 @synthesize isInfo;
@@ -35,12 +36,8 @@
         self.type = [json notNSNullObjectForKey:@"type"];
         self.createTime = [json dateForKey:@"createTime"];
         self.identifier = [json notNSNullObjectForKey:@"id"];
-        NSString *_hasRead_ = [json notNSNullObjectForKey:@"hasRead"];
-        if([NSString isBlank:_hasRead_]) {
-            self.hasRead = NO;
-        } else {
-            self.hasRead = [_hasRead_ isEqualToString:@"yes"];
-        }
+        self.hasRead = [json boolForKey:@"hasRead"];
+        self.hasProcess = [json boolForKey:@"hasProcess"];
         NSDictionary *_data_ = [json notNSNullObjectForKey:@"data"];
         if(_data_ != nil) {
             self.data = [[NotificationData alloc] initWithJson:_data_];
@@ -56,6 +53,7 @@
     [json setObject:([NSString isBlank:self.mac] ? [NSString emptyString] : self.mac) forKey:@"mac"];
     [json setObject:([NSString isBlank:self.type] ? [NSString emptyString] : self.type) forKey:@"type"];
     [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"id"];
+    [json setObject:(self.hasProcess ? @"yes" : @"no") forKey:@"hasProcess"];
     [json setObject:(self.hasRead ? @"yes" : @"no") forKey:@"hasRead"];
     
     if(self.data != nil) {

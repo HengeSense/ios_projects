@@ -12,6 +12,8 @@
 
 - (id)notNSNullObjectForKey:(id)key;
 
+- (BOOL)boolForKey:(id)key;
+- (NSString *)stringForKey:(id)key;
 - (NSNumber *)numberForKey:(id)key;
 - (NSDate *)dateForKey:(id)key;
 

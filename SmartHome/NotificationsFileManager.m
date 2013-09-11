@@ -52,13 +52,81 @@
     return nil;
 }
 
-- (void)update:(NSArray *)notifications {
+- (void)update:(NSArray *)modifyList deleteList:(NSArray *)deleteList {
     @synchronized(self) {
-        
-        
-        
-        
-        
+        @try {
+            if((modifyList == nil || modifyList.count == 0) && (deleteList == nil || deleteList.count == 0)) {
+                return;
+            }
+            NSArray *oldNotifications = [self readFromDiskInternal];
+            if(oldNotifications == nil || oldNotifications.count == 0) return;
+            
+            NSMutableArray *newList = [NSMutableArray array];
+            
+            for(SMNotification *modifyItem in modifyList) {
+                for(SMNotification *oldItem in oldNotifications) {
+                    if([modifyItem.identifier isEqualToString:oldItem.identifier]) {
+                        oldItem.hasRead = modifyItem.hasRead;
+                        oldItem.text = modifyItem.text;
+                        break;
+                    }
+                }
+            }
+            
+            if(deleteList != nil && deleteList.count != 0) {
+                for(SMNotification *oldItem in oldNotifications) {
+                    BOOL needDelete = NO;
+                    for(SMNotification *delItem in deleteList) {
+                        if([oldItem.identifier isEqualToString:delItem.identifier]) {
+                            needDelete = YES;
+                            break;
+                        }
+                    }
+                    if(!needDelete) {
+                        [newList addObject:oldItem];
+                    }
+                }
+            }
+            [self saveToDiskInternal:newList];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"exception in update notifications to disk >>> %@", exception.reason);
+        }
+        @finally {
+
+        }
+    }
+}
+
+- (void)saveToDiskInternal:(NSArray *)notificationsToSave {
+    
+    BOOL directoryExists = [[NSFileManager defaultManager] fileExistsAtPath:DIRECTORY];
+    if(!directoryExists) {
+        NSError *error;
+        BOOL createDirSuccess = [[NSFileManager defaultManager] createDirectoryAtPath:DIRECTORY withIntermediateDirectories:YES attributes:nil error:&error];
+        if(!createDirSuccess) {
+            NSLog(@"create directory failed , error >>> %@", error.description);
+            return;
+        }
+    }
+    
+    NSString *filePath = [DIRECTORY stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", [SMShared current].settings.account]];
+    
+    //
+    NSMutableArray *_notifications_ = [NSMutableArray array];
+    for(int i=0; i<notificationsToSave.count; i++) {
+        SMNotification *smn = [notificationsToSave objectAtIndex:i];
+        if(smn != nil) {
+            [_notifications_ addObject:[smn toJson]];
+        }
+    }
+    
+    NSData *data = [JsonUtils createJsonDataFromDictionary:[NSDictionary dictionaryWithObject:_notifications_ forKey:@"notifications"]];
+    
+    BOOL success = [data writeToFile:filePath atomically:YES];
+    
+    if(!success) {
+        NSLog(@"save notifications failed ...");
     }
 }
 
@@ -67,16 +135,6 @@
         @try {
             if(newNotifications == nil || newNotifications.count == 0) {
                 return;
-            }
-            
-            BOOL directoryExists = [[NSFileManager defaultManager] fileExistsAtPath:DIRECTORY];
-            if(!directoryExists) {
-                NSError *error;
-                BOOL createDirSuccess = [[NSFileManager defaultManager] createDirectoryAtPath:DIRECTORY withIntermediateDirectories:YES attributes:nil error:&error];
-                if(!createDirSuccess) {
-                    NSLog(@"create directory failed , error >>> %@", error.description);
-                    return;
-                }
             }
             
             // save list
@@ -136,25 +194,7 @@
                     }
                 }
             }
-            
-            NSString *filePath = [DIRECTORY stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", [SMShared current].settings.account]];
-            
-            //
-            NSMutableArray *_notifications_ = [NSMutableArray array];
-            for(int i=0; i<notificationsToSave.count; i++) {
-                SMNotification *smn = [notificationsToSave objectAtIndex:i];
-                if(smn != nil) {
-                    [_notifications_ addObject:[smn toJson]];
-                }
-            }
-            
-            NSData *data = [JsonUtils createJsonDataFromDictionary:[NSDictionary dictionaryWithObject:_notifications_ forKey:@"notifications"]];
-            
-            BOOL success = [data writeToFile:filePath atomically:YES];
-            
-            if(!success) {
-                NSLog(@"save notifications failed ...");
-            }
+            [self saveToDiskInternal:notificationsToSave];
         }
         @catch (NSException *exception) {
             NSLog(@"exception in save notifications to disk >>> %@", exception.reason);
