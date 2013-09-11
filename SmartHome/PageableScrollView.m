@@ -195,9 +195,10 @@
 - (void)notifyStatusChanged {
     if(deviceDictionary == nil) return;
     NSEnumerator *zonesEnumerator = deviceDictionary.keyEnumerator;
-    for(NSArray *zone in zonesEnumerator) {
-        for(int i=0; i<zone.count; i++) {
-            DeviceButton *btnDevice = [zone objectAtIndex:i];
+    for(NSString *zoneName in zonesEnumerator) {
+        NSArray *deviceButtons = [deviceDictionary objectForKey:zoneName];
+        for(int i=0; i<deviceButtons.count; i++) {
+            DeviceButton *btnDevice = [deviceButtons objectAtIndex:i];
             if(btnDevice != nil) {
                 [btnDevice refresh];
             }

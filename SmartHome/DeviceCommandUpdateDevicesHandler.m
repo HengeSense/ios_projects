@@ -18,7 +18,6 @@
         NSLog(@"trigger update devices command");
         DeviceCommandUpdateDevices *updateDevicesCommand = (DeviceCommandUpdateDevices *)command;
         [[SMShared current].memory updateUnitDevices:updateDevicesCommand.devicesStatus forUnit:updateDevicesCommand.masterDeviceCode];
-        
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetUnitsHandler class]];
         if(subscriptions != nil && subscriptions.count > 0) {
             for(int i=0; i<subscriptions.count; i++) {

@@ -74,7 +74,6 @@
     }
     [json setObject:_zones_ forKey:@"zones"];
     
-    
     // scene hash code
     
     // scenesModeList
