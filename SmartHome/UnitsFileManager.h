@@ -13,4 +13,6 @@
 - (NSArray *)readFromDisk;
 - (void)writeToDisk:(NSArray *)units;
 
++ (UnitsFileManager *)fileManager;
+
 @end

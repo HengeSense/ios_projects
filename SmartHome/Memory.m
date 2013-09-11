@@ -9,6 +9,7 @@
 #import "Memory.h" 
 #import "NSString+StringUtils.h"
 
+
 @implementation Memory
 
 @synthesize units;
@@ -67,6 +68,41 @@
         if(subscriptions_ != nil) {
             [subscriptions_ removeObject:obj];
         }
+    }
+}
+
+- (void)updateUnitDevices:(NSArray *)devicesStatus forUnit:(NSString *)identifier {
+    @synchronized(self) {
+        if(devicesStatus == nil || devicesStatus.count == 0) return;
+        Unit *unit = [self findUnitByIdentifierInternal:identifier];
+        if(unit != nil && unit.devices != nil && unit.devices.count > 0) {
+            for(DeviceStatus *ds in devicesStatus) {
+                for(Device *device in unit.devices) {
+                    if([ds.deviceIdentifer isEqualToString:device.identifier]) {
+                        device.state = ds.state;
+                        device.status = ds.status;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+- (Unit *)findUnitByIdentifierInternal:(NSString *)identifier {
+    if([NSString isBlank:identifier]) return nil;
+    if(self.units == nil || self.units.count == 0) return nil;
+    for(Unit *u in self.units) {
+        if([u.identifier isEqualToString:identifier]) {
+            return u;
+        }
+    }
+    return nil;
+}
+
+- (Unit *)findUnitByIdentifier:(NSString *)identifier {
+    @synchronized(self){
+        return [self findUnitByIdentifierInternal:identifier];
     }
 }
 
@@ -157,12 +193,14 @@
 }
 
 - (void)changeCurrentUnitTo:(NSString *)unitIdentifier {
-    if([NSString isBlank:unitIdentifier]) return;
-    if(self.units == nil) return;
-    for(Unit *unit in self.units) {
-        if([unitIdentifier isEqualToString:unit.identifier]) {
-            currentUnit = unit;
-            break;
+    @synchronized(self) {
+        if([NSString isBlank:unitIdentifier]) return;
+        if(self.units == nil) return;
+        for(Unit *unit in self.units) {
+            if([unitIdentifier isEqualToString:unit.identifier]) {
+                currentUnit = unit;
+                break;
+            }
         }
     }
 }

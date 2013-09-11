@@ -277,6 +277,11 @@
     }
 }
 
+- (void)notifyDevicesStatusWasUpdate {
+    if(pageableScrollView != nil) {
+    }
+}
+
 #pragma mark
 #pragma mark device command get notifications handler
 

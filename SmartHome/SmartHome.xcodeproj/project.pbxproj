@@ -121,8 +121,8 @@
 		6F2E437E17CB08D9006FE4E8 /* btn_dark_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E437D17CB08D9006FE4E8 /* btn_dark_small@2x.png */; };
 		6F347A4F17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A4E17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m */; };
 		6F347A5217D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A5117D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m */; };
-		6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDeviceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDeviceHandler.m */; };
-		6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A5717D8B63500B486D3 /* DeviceCommandUpdateDevice.m */; };
+		6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m */; };
+		6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A5717D8B63500B486D3 /* DeviceCommandUpdateDevices.m */; };
 		6F347A5B17D8B64500B486D3 /* DeviceCommandVoiceControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A5A17D8B64500B486D3 /* DeviceCommandVoiceControl.m */; };
 		6F347A5E17D8BFB800B486D3 /* btn_scene@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F347A5C17D8BFB800B486D3 /* btn_scene@2x.png */; };
 		6F347A5F17D8BFB800B486D3 /* btn_unit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F347A5D17D8BFB800B486D3 /* btn_unit@2x.png */; };
@@ -237,6 +237,7 @@
 		6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */; };
 		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
 		6FFAFDF817E05AC5001EB9D0 /* line_cell_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */; };
+		6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */; };
 		F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150B17CDA27F0058DADE /* lineleft@2x.png */; };
 		F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150C17CDA27F0058DADE /* lineright@2x.png */; };
 		F205157A17CF42370058DADE /* message_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157817CF42370058DADE /* message_count@2x.png */; };
@@ -460,10 +461,10 @@
 		6F347A4E17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetSceneListHandler.m; sourceTree = "<group>"; };
 		6F347A5017D8B47100B486D3 /* DeviceCommandVoiceControlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandVoiceControlHandler.h; sourceTree = "<group>"; };
 		6F347A5117D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandVoiceControlHandler.m; sourceTree = "<group>"; };
-		6F347A5317D8B48800B486D3 /* DeviceCommandUpdateDeviceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateDeviceHandler.h; sourceTree = "<group>"; };
-		6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDeviceHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateDeviceHandler.m; sourceTree = "<group>"; };
-		6F347A5617D8B63500B486D3 /* DeviceCommandUpdateDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateDevice.h; sourceTree = "<group>"; };
-		6F347A5717D8B63500B486D3 /* DeviceCommandUpdateDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateDevice.m; sourceTree = "<group>"; };
+		6F347A5317D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateDevicesHandler.h; sourceTree = "<group>"; };
+		6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateDevicesHandler.m; sourceTree = "<group>"; };
+		6F347A5617D8B63500B486D3 /* DeviceCommandUpdateDevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateDevices.h; sourceTree = "<group>"; };
+		6F347A5717D8B63500B486D3 /* DeviceCommandUpdateDevices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateDevices.m; sourceTree = "<group>"; };
 		6F347A5917D8B64500B486D3 /* DeviceCommandVoiceControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandVoiceControl.h; sourceTree = "<group>"; };
 		6F347A5A17D8B64500B486D3 /* DeviceCommandVoiceControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandVoiceControl.m; sourceTree = "<group>"; };
 		6F347A5C17D8BFB800B486D3 /* btn_scene@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_scene@2x.png"; sourceTree = "<group>"; };
@@ -635,6 +636,8 @@
 		6FEB91E717BB843D007C04A1 /* TemperatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureView.h; sourceTree = "<group>"; };
 		6FEB91E817BB843D007C04A1 /* TemperatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureView.m; sourceTree = "<group>"; };
 		6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_cell_notification@2x.png"; sourceTree = "<group>"; };
+		6FFAFDF917E0823C001EB9D0 /* DeviceStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceStatus.h; sourceTree = "<group>"; };
+		6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceStatus.m; sourceTree = "<group>"; };
 		F205150B17CDA27F0058DADE /* lineleft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineleft@2x.png"; sourceTree = "<group>"; };
 		F205150C17CDA27F0058DADE /* lineright@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineright@2x.png"; sourceTree = "<group>"; };
 		F205157817CF42370058DADE /* message_count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_count@2x.png"; sourceTree = "<group>"; };
@@ -826,6 +829,8 @@
 				6FDFB05517DD7221002E23B1 /* SMNotification.m */,
 				6FDFB05717DD722C002E23B1 /* NotificationData.h */,
 				6FDFB05817DD722C002E23B1 /* NotificationData.m */,
+				6FFAFDF917E0823C001EB9D0 /* DeviceStatus.h */,
+				6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1478,8 +1483,8 @@
 				6F347A4E17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m */,
 				6F347A5017D8B47100B486D3 /* DeviceCommandVoiceControlHandler.h */,
 				6F347A5117D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m */,
-				6F347A5317D8B48800B486D3 /* DeviceCommandUpdateDeviceHandler.h */,
-				6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDeviceHandler.m */,
+				6F347A5317D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.h */,
+				6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1616,8 +1621,8 @@
 				6F84A77617D047B400D46BFA /* DeviceCommandUpdateUnits.m */,
 				6F159BF417D708EC005CFFEE /* DeviceCommandUpdateNotifications.h */,
 				6F159BF517D708EC005CFFEE /* DeviceCommandUpdateNotifications.m */,
-				6F347A5617D8B63500B486D3 /* DeviceCommandUpdateDevice.h */,
-				6F347A5717D8B63500B486D3 /* DeviceCommandUpdateDevice.m */,
+				6F347A5617D8B63500B486D3 /* DeviceCommandUpdateDevices.h */,
+				6F347A5717D8B63500B486D3 /* DeviceCommandUpdateDevices.m */,
 				6F347A5917D8B64500B486D3 /* DeviceCommandVoiceControl.h */,
 				6F347A5A17D8B64500B486D3 /* DeviceCommandVoiceControl.m */,
 				6FC1021517D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.h */,
@@ -2024,8 +2029,8 @@
 				6F159C0317D754BB005CFFEE /* SMButton.m in Sources */,
 				6F347A4F17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m in Sources */,
 				6F347A5217D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m in Sources */,
-				6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDeviceHandler.m in Sources */,
-				6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevice.m in Sources */,
+				6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m in Sources */,
+				6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevices.m in Sources */,
 				6F347A5B17D8B64500B486D3 /* DeviceCommandVoiceControl.m in Sources */,
 				6F457AA817D8D452004CD1A7 /* UnitsFileManager.m in Sources */,
 				6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */,
@@ -2042,6 +2047,7 @@
 				F280616417DD6E810064F35B /* MessageCell.m in Sources */,
 				F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */,
 				6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */,
+				6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

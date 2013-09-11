@@ -146,19 +146,16 @@
     } else if(_device_.isTV || _device_.isSTB) {
         TVViewController *tvViewController = [[TVViewController alloc] init];
         tvViewController.title = _device_.name;
-        tvViewController.delegate = [self findContainerView];
         [self.ownerController presentModalViewController:tvViewController animated:YES];
     } else if(_device_.isAircondition) {
         AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
         airConditionViewController.title = _device_.name;
-        airConditionViewController.delegate = [self findContainerView];
         [self.ownerController presentModalViewController:airConditionViewController animated:YES];
     } else if(_device_.isSocket) {
         
     } else if(_device_.isCamera) {
         CameraViewController *cameraViewController = [[CameraViewController alloc] init];
         cameraViewController.title = _device_.name;
-        cameraViewController.delegate = [self findContainerView];
         [self.ownerController presentModalViewController:cameraViewController animated:YES];
     }
 }

@@ -1,5 +1,5 @@
 //
-//  DeviceCommandUpdateDeviceHandler.h
+//  DeviceCommandUpdateDevicesHandler.h
 //  SmartHome
 //
 //  Created by Zhao yang on 9/5/13.
@@ -8,6 +8,6 @@
 
 #import "DeviceCommandHandler.h"
 
-@interface DeviceCommandUpdateDeviceHandler : DeviceCommandHandler
+@interface DeviceCommandUpdateDevicesHandler : DeviceCommandHandler
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Unit.h"
+#import "DeviceStatus.h"
 
 @interface Memory : NSObject
 
@@ -35,10 +36,25 @@
  */
 - (NSArray *)updateUnits:(NSArray *)newUnits;
 
+/*
+ *
+ */
+- (void)updateUnitDevices:(NSArray *)devicesStatus forUnit:(NSString *)identifier;
 
+
+/*
+ *
+ */
+- (Unit *)findUnitByIdentifier:(NSString *)identifier;
+
+/*
+ *
+ */
 - (void)changeCurrentUnitTo:(NSString *)unitIdentifier;
 
-
+/*
+ *
+ */
 - (void)updateSceneList:(NSString *)unitIdentifier sceneList:(NSArray *)sceneList hashCode:(NSNumber *)hashCode;
 
 - (void)clearUnits;

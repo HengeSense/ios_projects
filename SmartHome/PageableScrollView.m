@@ -192,17 +192,14 @@
     }
 }
 
-- (void)notifyStatusChangedFor:(NSString *)deviceId {
+- (void)notifyStatusChanged {
     if(deviceDictionary == nil) return;
     NSEnumerator *zonesEnumerator = deviceDictionary.keyEnumerator;
     for(NSArray *zone in zonesEnumerator) {
         for(int i=0; i<zone.count; i++) {
             DeviceButton *btnDevice = [zone objectAtIndex:i];
             if(btnDevice != nil) {
-                if([deviceId isEqualToString:btnDevice.device.identifier]) {
-                    [btnDevice refresh];
-                    return;
-                }
+                [btnDevice refresh];
             }
         }
     }

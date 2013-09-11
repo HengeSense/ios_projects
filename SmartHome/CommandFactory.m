@@ -12,6 +12,7 @@
 #import "DeviceCommandUpdateNotifications.h"
 #import "DeviceCommandUpdateSceneMode.h"
 #import "DeviceCommandVoiceControl.h"
+#import "DeviceCommandUpdateDevices.h"
 
 @implementation CommandFactory
 
@@ -70,7 +71,7 @@
     } else if([@"KeyControlCommand" isEqualToString:commandName]) {
         
     } else if([@"DeviceFingerExcuteCommand" isEqualToString:commandName]) {
-        
+        command = [[DeviceCommandUpdateDevices alloc] initWithDictionary:json];
     }
     
     return command;
