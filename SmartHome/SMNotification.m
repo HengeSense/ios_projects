@@ -55,7 +55,9 @@
     [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"id"];
     [json setObject:(self.hasProcess ? @"yes" : @"no") forKey:@"hasProcess"];
     [json setObject:(self.hasRead ? @"yes" : @"no") forKey:@"hasRead"];
-    
+    if(self.createTime != nil) {
+        [json setObject:self.createTime forKey:@"createTime"];
+    }
     if(self.data != nil) {
         [json setObject:[self.data toJson] forKey:@"data"];
     }
