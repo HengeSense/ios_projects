@@ -14,13 +14,16 @@
 
 @implementation NotificationViewController{
     UITableView *messageTable;
-    NSArray *messageArr;
+    NSMutableArray *messageArr;
+    NSMutableArray *modifyArr;
+    NSMutableArray *deleteArr;
+    NSIndexPath *curIndexPath;
 }
 -(id) initWithNotifications:(NSArray *)notifications{
     self = [super init];
     if (self) {
         if (messageArr == nil&& notifications!=nil) {
-            messageArr = notifications;
+            messageArr = [NSMutableArray arrayWithArray: notifications];
         }
     }
     return  self;
@@ -95,11 +98,24 @@
     return  MESSAGE_CELL_HEIGHT;
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    curIndexPath = indexPath;
     MessageCell *cell = (MessageCell *)[tableView cellForRowAtIndexPath:indexPath];
     SMNotification *notificaion = cell.notificaion;
     NotificationHandlerViewController *handlerViewController = [[NotificationHandlerViewController alloc] initWithMessage:notificaion];
+    handlerViewController.cfNotificationDelegate = self;
+    handlerViewController.deleteNotificationDelegate =self;
     NSLog(@"type = %@ ,index =%i",notificaion.type,indexPath.row);
     [self presentModalViewController:handlerViewController animated:YES];
+}
+-(void) didAgreeOrRefuse:(NSString *)operation{
+    if (operation == nil) return;
+    SMNotification *curMessage = [messageArr objectAtIndex:curIndexPath.row];
+    curMessage.text = [curMessage.text stringByAppendingString:NSLocalizedString(operation, @"")];
+    
+    
+}
+-(void) didWhenDeleted{
+    [deleteArr addObject:[messageArr objectAtIndex:curIndexPath.row]];
 }
 - (void)didReceiveMemoryWarning
 {

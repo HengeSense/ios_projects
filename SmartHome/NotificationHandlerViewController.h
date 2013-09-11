@@ -11,9 +11,15 @@
 #import "SMNotification.h"
 #import "MessageCell.h"
 #import <QuartzCore/QuartzCore.h>
-
+@protocol DeleteNotificationDelegate<NSObject>
+-(void) didWhenDeleted;
+@end
+@protocol CFNotificationDelegate <NSObject>
+-(void) didAgreeOrRefuse:(NSString *) operation;
+@end
 @interface NotificationHandlerViewController : PopViewController
 -(id) initWithMessage:(SMNotification *) smNotification;
-
 @property (strong,nonatomic) SMNotification *message;
+@property (assign,nonatomic) id<DeleteNotificationDelegate> deleteNotificationDelegate;
+@property (assign,nonatomic) id<CFNotificationDelegate> cfNotificationDelegate;
 @end
