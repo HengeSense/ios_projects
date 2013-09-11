@@ -359,6 +359,7 @@
 
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 12;
     ConversationView *view = [self speechView];
     speechViewState = SpeechViewStateClosing;
@@ -403,6 +404,7 @@
 
 - (void)startListening:(NSTimer *)timer {
     [speechRecognitionUtil startListening];
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark -
@@ -418,9 +420,14 @@
 }
 
 - (void)recognizeCancelled {
+    
 }
 
 - (void)speakerVolumeChanged:(int)volume {
+    int v = volume / 3;
+    if(v > 9) v = 9;
+    if(v < 0) v = 0;
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"btn_speech_0%d.png", v]] forState:UIControlStateNormal];
 }
 
 - (void)recognizeSuccess:(NSString *)result {
@@ -434,11 +441,13 @@
         [self speechRecognizerFailed:@"empty speaking..."];
         //
     }
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateReady;
 }
 
 - (void)recognizeError:(int)errorCode {
     [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateReady;
 }
 
