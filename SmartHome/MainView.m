@@ -185,8 +185,6 @@
         
         [self addSubview:notificationView];
     }
-    
-    [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 /* 
  *
