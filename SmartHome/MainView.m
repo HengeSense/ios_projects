@@ -189,6 +189,10 @@
         [self addSubview:notificationView];
     }
     
+[[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    
+    
+    
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 

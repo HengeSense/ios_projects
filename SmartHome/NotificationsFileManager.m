@@ -52,6 +52,16 @@
     return nil;
 }
 
+- (void)update:(NSArray *)notifications {
+    @synchronized(self) {
+        
+        
+        
+        
+        
+    }
+}
+
 - (void)writeToDisk:(NSArray *)newNotifications {
     @synchronized(self) {
         @try {
