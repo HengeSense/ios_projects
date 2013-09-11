@@ -20,6 +20,9 @@
 }
 
 @synthesize items = _items_;
+@synthesize selectedIdentifier;
+@synthesize source;
+@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -63,7 +66,7 @@
     self.backgroundColor = [UIColor colorWithHexString:@"222226"];
 }
 
-+ (void)showWithItems:(NSArray *)items selectedIdentifier:(NSString *)identifier delegate:(id)target {
++ (void)showWithItems:(NSArray *)items selectedIdentifier:(NSString *)identifier source:(NSString *)source delegate:(id)target {
     CGFloat height = (items == nil ? 0 : items.count) * 45 + 49 + 6 + 10 + 30 + 30;
     
     UIView *lockView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -74,6 +77,9 @@
     
     SelectionView *selectionView = [[SelectionView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, height)];
     selectionView.items = items;
+    selectionView.selectedIdentifier = identifier;
+    selectionView.delegate = target;
+    selectionView.source = source;
     [[UIApplication sharedApplication].keyWindow addSubview:selectionView];
     
     [UIView animateWithDuration:0.3f
@@ -126,11 +132,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"29292c"];
-        
+
         UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 300, 30)];
         lblTitle.font = [UIFont systemFontOfSize:17.f];
         lblTitle.backgroundColor = [UIColor clearColor];
         lblTitle.textColor = [UIColor lightTextColor];
+        lblTitle.tag = 1234;
         [cell addSubview:lblTitle];
         
         UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, cell.bounds.size.height, cell.bounds.size.width, 2)];
@@ -140,13 +147,44 @@
         SelectionItem *item = [self.items objectAtIndex:indexPath.row];
         if(item) {
             lblTitle.text = item.title;
+            if([self.selectedIdentifier isEqualToString:item.identifier]) {
+                lblTitle.textColor = [UIColor colorWithHexString:@"b8642d"];
+                [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+            }
         }
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell != nil) {
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:1234];
+        if(lblTitle != nil) {
+            lblTitle.textColor = [UIColor colorWithHexString:@"b8642d"];
+        }
+    }
+    SelectionItem *item = [self.items objectAtIndex:indexPath.row];
+    if(item) {
+        if([item.identifier isEqualToString:self.selectedIdentifier]) {
+            [self dismiss];
+            return;
+        }
+        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(selectionViewNotifyItemSelected:from:)]) {
+            [self.delegate selectionViewNotifyItemSelected:item from:self.source];
+        }
+    }
+    [self dismiss];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell != nil) {
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:1234];
+        if(lblTitle != nil) {
+            lblTitle.textColor = [UIColor lightTextColor];
+        }
+    }
 }
 
 @end

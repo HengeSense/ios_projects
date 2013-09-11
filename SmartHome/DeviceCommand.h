@@ -22,7 +22,6 @@
 @property (strong, nonatomic) NSString *security;
 @property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSDate *commandTime;
-@property (strong, nonatomic) NSDate *updateTime;
 @property (strong, nonatomic) NSNumber *hashCode;
 @property (strong, nonatomic) NSString *describe;
 

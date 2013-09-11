@@ -28,10 +28,13 @@
         
         for(Unit *unit in updateUnitsCommand.units) {
             DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
+            
+            // set master device code
             getSceneListCommand.masterDeviceCode = unit.identifier;
-            if(unit.scenesModeList != nil && unit.scenesModeList.count > 0) {
-                getSceneListCommand.updateTime = unit.sceneUpdateTime;
-            }
+            
+            // set hash code
+            getSceneListCommand.hashCode = unit.sceneHashCode;
+            
             [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
         }
     }

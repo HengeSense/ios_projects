@@ -12,7 +12,6 @@
 #import "NSString+StringUtils.h"
 #import "UIColor+ExtentionForHexString.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "SelectionView.h"
 #import "SMDateFormatter.h"
 #import "SceneMode.h"
 
@@ -160,7 +159,7 @@
         imgAffectDevice.center = CGPointMake(imgAffectDevice.center.x, notificationView.bounds.size.height / 2);
         [notificationView addSubview:imgAffectDevice];
         
-        lblAffectDevice = [[UILabel alloc] initWithFrame:CGRectMake(imgAffectDevice.frame.origin.x+imgAffectDevice.frame.size.width + 5, 0, 20, 20)];
+        lblAffectDevice = [[UILabel alloc] initWithFrame:CGRectMake(imgAffectDevice.frame.origin.x+imgAffectDevice.frame.size.width + 10, 0, 20, 20)];
         lblAffectDevice.center = CGPointMake(lblAffectDevice.center.x, notificationView.bounds.size.height / 2);
         lblAffectDevice.text = [NSString stringWithFormat:@"%i",notificationsArr.count];
         lblAffectDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
@@ -175,7 +174,7 @@
         [btnNotification addTarget:self action:@selector(btnShowNotificationPressed:) forControlEvents:UIControlEventTouchUpInside];
         [notificationView addSubview:btnNotification];
 
-        btnMessageCount = [[UIButton alloc] initWithFrame:CGRectMake(btnNotification.frame.origin.x+btnNotification.frame.size.width+5, 0, 40, 20)];
+        btnMessageCount = [[UIButton alloc] initWithFrame:CGRectMake(btnNotification.frame.origin.x+btnNotification.frame.size.width-5, 0, 40, 20)];
         btnMessageCount.center = CGPointMake(btnMessageCount.center.x, notificationView.bounds.size.height /2 );
         [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
         [btnMessageCount setTitleColor:[UIColor colorWithHexString:@"dfa800"] forState:UIControlStateNormal];
@@ -187,7 +186,7 @@
         [self addSubview:notificationView];
     }
     
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 /* 
  *
@@ -200,9 +199,26 @@
 }
 
 #pragma mark -
+#pragma mark selection view delegate
+
+- (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
+    if([NSString isBlank:source]) return;
+    SelectionItem *it = item;
+    if(it == nil) return;
+    NSLog(@"%@", it.identifier);
+    if([@"scene" isEqualToString:source]) {
+        
+    } else if([@"units" isEqualToString:source]) {
+        [[SMShared current].memory changeCurrentUnitTo:it.identifier];
+        [self notifyUnitsWasUpdate];
+    }
+}
+
+
+#pragma mark -
 #pragma mark notifications
 
--(void) updateNotifications:(NSArray *) notifications{
+- (void)updateNotifications:(NSArray *)notifications {
     if (notifications == nil||notifications.count == 0) {
         return;
     }
@@ -228,7 +244,6 @@
     lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
     [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
     return;
-
 }
 
 #pragma mark -
@@ -295,7 +310,7 @@
             }
         }
     }
-    [SelectionView showWithItems:sList selectedIdentifier:@"" delegate:self];
+    [SelectionView showWithItems:sList selectedIdentifier:@"" source:@"scene" delegate:self];
 }
 
 - (void)btnShowUnitsList:(id)sender {
@@ -304,7 +319,8 @@
         [unitsList addObject:[[SelectionItem alloc] initWithIdentifier:unit.identifier andTitle:unit.name]];
     }
     NSString *selectedUnitIdentifier = [SMShared current].memory.currentUnit == nil ? [NSString emptyString] : [SMShared current].memory.currentUnit.identifier;
-    [SelectionView showWithItems:unitsList selectedIdentifier:selectedUnitIdentifier delegate:self];
+
+    [SelectionView showWithItems:unitsList selectedIdentifier:selectedUnitIdentifier source:@"units" delegate:self];
 }
 
 // show notification details
@@ -337,6 +353,7 @@
 
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 12;
     ConversationView *view = [self speechView];
     speechViewState = SpeechViewStateClosing;
@@ -381,6 +398,7 @@
 
 - (void)startListening:(NSTimer *)timer {
     [speechRecognitionUtil startListening];
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark -
@@ -396,9 +414,14 @@
 }
 
 - (void)recognizeCancelled {
+    
 }
 
 - (void)speakerVolumeChanged:(int)volume {
+    int v = volume / 3;
+    if(v > 9) v = 9;
+    if(v < 0) v = 0;
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"btn_speech_0%d.png", v]] forState:UIControlStateNormal];
 }
 
 - (void)recognizeSuccess:(NSString *)result {
@@ -412,11 +435,13 @@
         [self speechRecognizerFailed:@"empty speaking..."];
         //
     }
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateReady;
 }
 
 - (void)recognizeError:(int)errorCode {
     [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateReady;
 }
 
