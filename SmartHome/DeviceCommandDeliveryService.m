@@ -8,12 +8,13 @@
 
 #import "DeviceCommandDeliveryService.h"
 
+#import "UnitsFileManager.h"
 #import "DeviceCommandGetUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "DeviceCommandVoiceControlHandler.h"
-#import "DeviceCommandUpdateDeviceHandler.h"
+#import "DeviceCommandUpdateDevicesHandler.h"
 #import "DeviceCommandGetSceneListHandler.h"
 
 @implementation DeviceCommandDeliveryService
@@ -74,9 +75,9 @@
         handler = [[DeviceCommandGetSceneListHandler alloc] init];
     } else if([@"VoiceControlCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandVoiceControlHandler alloc] init];
-    } else if([@"KeyControlCommand" isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandUpdateDeviceHandler alloc] init];
-    }
+    } else if([@"DeviceFingerExcuteCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandUpdateDevicesHandler alloc] init];
+    } 
         
     if(handler != nil) {
         [handler handle:command];
@@ -85,6 +86,7 @@
 
 - (void)startService {
     if(!self.isService) {
+        [[SMShared current].memory updateUnits:[[UnitsFileManager fileManager] readFromDisk]];
         if(![self.tcpService isConnect]) {
             [self performSelectorInBackground:@selector(startTcp) withObject:nil];
         }
@@ -95,6 +97,7 @@
 - (void)stopService {
     if(self.isService) {
         [self.tcpService disconnect];
+        [[UnitsFileManager fileManager] writeToDisk:[SMShared current].memory.units];
         isService = NO;
     }
 }

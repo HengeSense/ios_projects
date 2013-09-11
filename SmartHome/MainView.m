@@ -182,11 +182,10 @@
     }
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     [[SMShared current].deliveryService executeDeviceCommand:
-     [CommandFactory commandForType:CommandTypeGetNotifications]];
-    
-
+     [CommandFactory commandForType:CommandTypeGetNotifications]];  
 }
-/* 
+
+/*
  *
  *
  *
@@ -243,7 +242,6 @@
     SMNotification *lastNotHandlerAlNotification;
     for (SMNotification *notification in notificationsArr) {
         if ([notification.createTime timeIntervalSince1970]>=lastTime) {
-             NSLog(@"time %@",notification.createTime);
             lastTime = [notification.createTime timeIntervalSince1970];
             displayNotification = notification;
         }
@@ -255,7 +253,7 @@
         displayNotification = lastNotHandlerAlNotification;
     }
     lblMessage.text = displayNotification.text;
-    lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
+    lblTime.text =  [SMDateFormatter dateToString:displayNotification.createTime format:@"MM-dd HH:mm"];
     [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
     return;
 }
@@ -290,6 +288,12 @@
             self.topbar.titleLabel.text = unit.name;
         }
         [pageableScrollView loadDataWithDictionary:unit];
+    }
+}
+
+- (void)notifyDevicesStatusWasUpdate {
+    if(pageableScrollView != nil) {
+        [pageableScrollView notifyStatusChanged];
     }
 }
 

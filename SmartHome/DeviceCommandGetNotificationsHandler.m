@@ -14,7 +14,6 @@
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateNotifications class]]) {
-        NSLog(@"trigger get notification handler...");
         DeviceCommandUpdateNotifications *receivedNotificationsCommand = (DeviceCommandUpdateNotifications *)command;
         [[NotificationsFileManager fileManager] writeToDisk:receivedNotificationsCommand.notifications];
         

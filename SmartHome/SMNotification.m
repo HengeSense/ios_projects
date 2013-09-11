@@ -11,6 +11,8 @@
 #import "NotificationData.h"
 #import "NSString+StringUtils.h"
 
+#import "SMDateFormatter.h"
+
 @implementation SMNotification
 
 @synthesize text;
@@ -55,7 +57,9 @@
     [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"id"];
     [json setObject:(self.hasProcess ? @"yes" : @"no") forKey:@"hasProcess"];
     [json setObject:(self.hasRead ? @"yes" : @"no") forKey:@"hasRead"];
-    
+    if(self.createTime != nil) {
+        [json setObject:[NSNumber numberWithLongLong:self.createTime.timeIntervalSince1970] forKey:@"createTime"];
+    }
     if(self.data != nil) {
         [json setObject:[self.data toJson] forKey:@"data"];
     }

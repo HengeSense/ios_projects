@@ -13,6 +13,7 @@
 #import "DeviceCommandGetUnitsHandler.h"
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "DeviceCommandVoiceControlHandler.h"
+#import "DeviceCommandUpdateDevicesHandler.h"
 #import "PageableScrollView.h"
 #import "SelectionView.h"
 #import "NotificationHandlerViewController.h"   
@@ -31,9 +32,11 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     RecognizerStateRecordingEnd,
     RecognizerStateProceesing
 };
-@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate,DeleteNotificationDelegate,CFNotificationDelegate>
+
+@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate,DeleteNotificationDelegate,CFNotificationDelegate, DevicecommandUpdateDevicesDelegate>
 
 - (void)showSpeechView;
 - (void)hideSpeechView;
 - (void)notifyViewUpdate;
+
 @end

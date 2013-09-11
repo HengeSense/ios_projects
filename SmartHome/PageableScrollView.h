@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "PageableNavView.h"
-#import "PopViewController.h"
+#import "Unit.h"
 
-@interface PageableScrollView : UIView<UIScrollViewDelegate, StatusChangeDelegate>
+@interface PageableScrollView : UIView<UIScrollViewDelegate>
 
 @property (strong,nonatomic) UIScrollView *pageableScrollView;
 @property (strong,nonatomic) PageableNavView *pageNavView;
 
 - (id)initWithPoint:(CGPoint)point owner:(UIViewController *)owner;
 - (void)loadDataWithDictionary:(Unit *)unit;
+
+- (void)notifyStatusChanged;
 
 @end

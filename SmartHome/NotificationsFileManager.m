@@ -11,6 +11,7 @@
 #import "SMShared.h"
 
 #define MAX_NOTIFICATIONS_COUNT 50
+
 #define DIRECTORY [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"smarthome-notifications"]
 
 @implementation NotificationsFileManager
