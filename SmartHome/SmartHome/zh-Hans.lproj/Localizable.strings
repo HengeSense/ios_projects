@@ -29,6 +29,8 @@
 "delete"           = "删除";
 "refuse"           = "拒绝";
 "agree"            = "同意";
+"agree.operation"  = "［同意］";
+"refuse.operation" = "［拒绝］";
 
 
 

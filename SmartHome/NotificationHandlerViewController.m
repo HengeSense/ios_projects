@@ -114,6 +114,7 @@
             UIButton *agreeBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, view.frame.size.height+view.frame.origin.y+5, 203/2, 98/2)];
             [agreeBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
             [agreeBtn setTitle: NSLocalizedString(@"agree", @"") forState:UIControlStateNormal];
+            if(message.hasProcess) agreeBtn.enabled = NO;
             [self.view addSubview:agreeBtn];
             [agreeBtn addTarget:self action:@selector(agreeBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -121,6 +122,7 @@
             [refuseBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
             refuseBtn.center = CGPointMake(agreeBtn.center.x+agreeBtn.frame.size.width+5, agreeBtn.center.y);
             [refuseBtn setTitle: NSLocalizedString(@"refuse", @"") forState:UIControlStateNormal];
+            if(message.hasProcess) refuseBtn.enabled = NO;
             [self.view addSubview:refuseBtn];
             [refuseBtn addTarget:self action:@selector(refuseBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -137,25 +139,28 @@
     }
 }
 -(void) cancel{
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void) deleteBtnPressed:(UIButton *) sender{
     if ([self.deleteNotificationDelegate respondsToSelector:@selector(didWhenDeleted)]) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"deleting", @"") forType:AlertViewTypeWaitting];
+        [[AlertView currentAlertView] alertAutoDisappear:NO  lockView:self.view];
+
         [self.deleteNotificationDelegate didWhenDeleted];
     }
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void) agreeBtnPressed:(UIButton *) sender{
     if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
-        [self.cfNotificationDelegate didAgreeOrRefuse:@"agree"];
+        [self.cfNotificationDelegate didAgreeOrRefuse:@"agree.operation"];
     }
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void) refuseBtnPressed:(UIButton *) sender{
     if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
-        [self.cfNotificationDelegate didAgreeOrRefuse:@"refuse"];
+        [self.cfNotificationDelegate didAgreeOrRefuse:@"refuse.operation"];
     }
-    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 - (void)didReceiveMemoryWarning

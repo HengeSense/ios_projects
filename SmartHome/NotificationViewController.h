@@ -11,6 +11,7 @@
 #import "Message.h"
 #import "MessageCell.h"
 #import "NotificationHandlerViewController.h"
+#import "MainView.h"
 @interface NotificationViewController : NavViewController<UITableViewDataSource,UITableViewDelegate,DeleteNotificationDelegate,CFNotificationDelegate>
--(id) initWithNotifications:(NSArray *) notifications;
+-(id) initWithNotifications:(NSArray *) notifications from:(MainView *) where;
 @end

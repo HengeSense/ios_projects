@@ -8,24 +8,65 @@
 
 #import "MessageCell.h"
 
-@implementation MessageCell
+@implementation MessageCell{
+    UIView  *view;
+    UIImageView *typeMessage;
+    UILabel *textLabel;
+    UIImageView *accessory;
+    UIImageView *seperatorLine;
+}
 @synthesize notificaion;
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ofMessage:(SMNotification *) message
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier 
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
-        [self initUIWithMessage:message];
-        self.notificaion = message;
+        [self initUI];
     }
     return self;
 }
--(void) initUIWithMessage:(SMNotification *) message{
-
-    UIView  *view = [[UIView alloc] initWithFrame:self.contentView.frame];
-    view.backgroundColor = [UIColor clearColor];
+-(void) initUI{
     
-    UIImageView *typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50/2, 39/2)];
+    if (typeMessage == nil) {
+        typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50/2, 39/2)];
+        typeMessage.backgroundColor = [UIColor clearColor];
+    }
+    
+    if (textLabel == nil) {
+        textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
+        textLabel.tag = TEXT_LABEL_TAG;
+        textLabel.font =[UIFont systemFontOfSize:12];
+        textLabel.textColor = [UIColor lightTextColor];
+        textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        textLabel.numberOfLines = 0;
+        textLabel.backgroundColor = [UIColor clearColor];
+
+    }
+    
+    if (accessory == nil) {
+        accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_accessory.png"]];
+        accessory.frame = CGRectMake(self.frame.size.width-10, 28, 12/2, 31/2);
+
+    }
+    
+    if (seperatorLine == nil) {
+       seperatorLine = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cell_selection_view.png"]];
+        seperatorLine.frame = CGRectMake(0, MESSAGE_CELL_HEIGHT-1, 320, 1);
+
+    }
+    if(view == nil){
+        view = [[UIView alloc] initWithFrame:self.contentView.frame];
+        view.backgroundColor = [UIColor clearColor];
+        [view addSubview:typeMessage];
+        [view addSubview:textLabel];
+        [view addSubview:accessory];
+        [view addSubview:seperatorLine];
+        [self addSubview:view];
+    }
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+
+}
+-(void) loadWithMessage:(SMNotification *) message{
     if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]) {
         typeMessage.image = [UIImage imageNamed:@"icon_message.png"];
     }else if([message.type isEqualToString:@"CF"]){
@@ -33,28 +74,11 @@
     }else if([message.type isEqualToString:@"AL"]){
         typeMessage.image = [UIImage imageNamed:@"icon_warning"];
     }
-    typeMessage.backgroundColor = [UIColor clearColor];
     typeMessage.tag = TYPE_IMAGE_TAG;
-    [view addSubview:typeMessage];
-    
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
-    textLabel.tag = TEXT_LABEL_TAG;
-    textLabel.font =[UIFont systemFontOfSize:12];
     textLabel.text = [@"    " stringByAppendingString:message.text];
-    textLabel.textColor = [UIColor lightTextColor];
-    textLabel.lineBreakMode = UILineBreakModeWordWrap;
-    textLabel.numberOfLines = 0;
-    textLabel.backgroundColor = [UIColor clearColor];
-    [view addSubview:textLabel];
-    
-    UIImageView *accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_accessory.png"]];
-    accessory.center = CGPointMake(self.frame.size.width-12, self.center.y+15);
-    [view addSubview:accessory];
-    
     view.tag = CELL_VIEW_TAG;
-    [self addSubview:view];
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

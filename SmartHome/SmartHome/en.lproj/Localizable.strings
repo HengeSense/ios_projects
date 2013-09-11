@@ -28,8 +28,8 @@
 "delete"           = "delete";
 "refuse"           = "refuse";
 "agree"            = "agree";
-
-
+"agree.operation"  = "[agreed]";
+"refuse.operation" = "[refused]";
 
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 

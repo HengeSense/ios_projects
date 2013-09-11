@@ -63,7 +63,6 @@
     }
     return self;
 }
-
 - (void)initDefaults {
     [super initDefaults];
     
@@ -190,12 +189,6 @@
     
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
 }
-
-- (void)testDelayGetUnits {
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-}
-
-
 /* 
  *
  *
@@ -230,11 +223,10 @@
     if (lastNotHandlerAlNotification !=nil) {
         displayNotification = lastNotHandlerAlNotification;
     }
-    
+    NSLog(@"updatenotifications");
     lblMessage.text = displayNotification.text;
     lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
     [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
-    NSLog(@"%@",btnMessageCount.titleLabel.text);
     return;
 
 }
@@ -277,6 +269,7 @@
 
 - (void)notifyUpdateNotifications {
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
+    NSLog(@"%i",notifications.count);
     if(notifications == nil || notifications.count == 0) {
         // notifications is empty
     }else {
@@ -289,7 +282,7 @@
 #pragma mark button pressed
 
 - (void)btnShowNotificationPressed:(id)sender {
-    NotificationViewController *notificationViewController = [[NotificationViewController alloc] initWithNotifications:notificationsArr];
+    NotificationViewController *notificationViewController = [[NotificationViewController alloc] initWithNotifications:notificationsArr from:self];
     [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 

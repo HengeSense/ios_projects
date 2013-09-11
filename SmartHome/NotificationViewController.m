@@ -18,12 +18,16 @@
     NSMutableArray *modifyArr;
     NSMutableArray *deleteArr;
     NSIndexPath *curIndexPath;
+    MainView *mainView;
 }
--(id) initWithNotifications:(NSArray *)notifications{
+-(id) initWithNotifications:(NSArray *)notifications from:(MainView *)where{
     self = [super init];
     if (self) {
         if (messageArr == nil&& notifications!=nil) {
             messageArr = [NSMutableArray arrayWithArray: notifications];
+        }
+        if (mainView == nil) {
+            mainView = where;
         }
     }
     return  self;
@@ -48,7 +52,12 @@
         notification.hasRead = YES;
     }
     
-
+    if (modifyArr == nil) {
+        modifyArr =[NSMutableArray new];
+    }
+    if (deleteArr == nil) {
+        deleteArr = [NSMutableArray new];
+    }
 }
 -(void)initUI{
     [super initUI];
@@ -67,14 +76,21 @@
 //    }
     
     if (messageTable == nil) {
-        messageTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        messageTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, self.view.frame.size.width,self.view.frame.size.height-self.topbar.frame.size.height) style:UITableViewStylePlain];
         messageTable.dataSource = self;
         messageTable.delegate = self;
         messageTable.backgroundColor = [UIColor clearColor];
-        messageTable.separatorColor = [UIColor grayColor];
+        messageTable.separatorStyle= UITableViewCellSelectionStyleNone;
         [self.view addSubview:messageTable];
     }
     self.topbar.titleLabel.text = NSLocalizedString(@"notification.manager", @"");
+    [self.topbar.leftButton addTarget:self action:@selector(updateMainView) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void) updateMainView{
+    NSLog(@"updataMianView");
+    if (mainView) {
+        [mainView notifyViewUpdate];
+    }
 }
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -84,14 +100,13 @@
 }
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MessageCell *messageCell = nil;
+    SMNotification *notification = [messageArr objectAtIndex:indexPath.row];
     static NSString *messageIdentifier = @"messageCellIdentifier";
     messageCell = [tableView dequeueReusableCellWithIdentifier:messageIdentifier];
     if (messageCell == nil) {
-        SMNotification *notification = [messageArr objectAtIndex:indexPath.row];
-        NSLog(@"cell:type = %@ row= %i",notification.type,indexPath.row);
-        messageCell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:messageIdentifier ofMessage:notification];
-    
+        messageCell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:messageIdentifier];
     }
+    [messageCell loadWithMessage:notification];
     return messageCell;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -99,23 +114,33 @@
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     curIndexPath = indexPath;
-    MessageCell *cell = (MessageCell *)[tableView cellForRowAtIndexPath:indexPath];
-    SMNotification *notificaion = cell.notificaion;
+    SMNotification *notificaion = [messageArr objectAtIndex:indexPath.row];
     NotificationHandlerViewController *handlerViewController = [[NotificationHandlerViewController alloc] initWithMessage:notificaion];
     handlerViewController.cfNotificationDelegate = self;
     handlerViewController.deleteNotificationDelegate =self;
-    NSLog(@"type = %@ ,index =%i",notificaion.type,indexPath.row);
-    [self presentModalViewController:handlerViewController animated:YES];
+    [self.navigationController pushViewController:handlerViewController animated:YES];
 }
 -(void) didAgreeOrRefuse:(NSString *)operation{
     if (operation == nil) return;
     SMNotification *curMessage = [messageArr objectAtIndex:curIndexPath.row];
     curMessage.text = [curMessage.text stringByAppendingString:NSLocalizedString(operation, @"")];
-    
+    curMessage.hasProcess = YES;
+    [modifyArr addObject:curMessage];
+    [messageTable reloadData];
     
 }
 -(void) didWhenDeleted{
     [deleteArr addObject:[messageArr objectAtIndex:curIndexPath.row]];
+    [messageArr removeObjectAtIndex:curIndexPath.row];
+    [messageTable reloadData];
+    [self saveNotificationsToDisk];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] delayDismissAlertView];
+    
+}
+-(void) saveNotificationsToDisk{
+     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
+    [fileManager update:modifyArr deleteList:deleteArr];
 }
 - (void)didReceiveMemoryWarning
 {

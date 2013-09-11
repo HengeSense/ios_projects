@@ -13,6 +13,6 @@
 #define TEXT_LABEL_TAG 1000
 #define CELL_VIEW_TAG 999
 @interface MessageCell : UITableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ofMessage:(SMNotification *) message;
+-(void) loadWithMessage:(SMNotification *) message;
 @property (strong,nonatomic) SMNotification *notificaion;
 @end
