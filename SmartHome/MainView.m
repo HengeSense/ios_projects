@@ -144,6 +144,7 @@
         lblMessage.font = [UIFont systemFontOfSize:14];
         lblMessage.text = displayNotification.text;
         lblMessage.textColor = [UIColor lightTextColor];
+        lblMessage.userInteractionEnabled = YES;
         [lblMessage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)]];
         [notificationView addSubview:lblMessage];
         
@@ -175,7 +176,7 @@
         [btnNotification addTarget:self action:@selector(btnShowNotificationPressed:) forControlEvents:UIControlEventTouchUpInside];
         [notificationView addSubview:btnNotification];
 
-        btnMessageCount = [[UIButton alloc] initWithFrame:CGRectMake(btnNotification.frame.origin.x+btnNotification.frame.size.width+5, 0, 20, 20)];
+        btnMessageCount = [[UIButton alloc] initWithFrame:CGRectMake(btnNotification.frame.origin.x+btnNotification.frame.size.width+5, 0, 40, 20)];
         btnMessageCount.center = CGPointMake(btnMessageCount.center.x, notificationView.bounds.size.height /2 );
         [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
         [btnMessageCount setTitleColor:[UIColor colorWithHexString:@"dfa800"] forState:UIControlStateNormal];
@@ -188,9 +189,6 @@
     }
     
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
-
-    
-    [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
 
 - (void)testDelayGetUnits {
@@ -236,6 +234,7 @@
     lblMessage.text = displayNotification.text;
     lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
     [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
+    NSLog(@"%@",btnMessageCount.titleLabel.text);
     return;
 
 }

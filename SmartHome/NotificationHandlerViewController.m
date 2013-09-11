@@ -140,13 +140,23 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void) deleteBtnPressed:(UIButton *) sender{
+    if ([self.deleteNotificationDelegate respondsToSelector:@selector(didWhenDeleted)]) {
+        [self.deleteNotificationDelegate didWhenDeleted];
+    }
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void) agreeBtnPressed:(UIButton *) sender{
-    
+    if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
+        [self.cfNotificationDelegate didAgreeOrRefuse:@"agree"];
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 -(void) refuseBtnPressed:(UIButton *) sender{
-    
+    if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
+        [self.cfNotificationDelegate didAgreeOrRefuse:@"refuse"];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+
 }
 - (void)didReceiveMemoryWarning
 {
