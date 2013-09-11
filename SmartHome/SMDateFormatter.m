@@ -17,7 +17,6 @@
     formatter.dateFormat = format;
     return [formatter stringFromDate:date];
 }
-
 + (NSDateFormatter *)formatter {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.timeZone = [NSTimeZone localTimeZone];

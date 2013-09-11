@@ -75,6 +75,7 @@
     view.layer.cornerRadius = 10;
     
     if (message !=nil) {
+        NSLog(@"%@",message.type);
         typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50/2, 39/2)];
         if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]) {
             typeMessage.image = [UIImage imageNamed:@"icon_message.png"];
@@ -114,17 +115,21 @@
             [agreeBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
             [agreeBtn setTitle: NSLocalizedString(@"agree", @"") forState:UIControlStateNormal];
             [self.view addSubview:agreeBtn];
+            [agreeBtn addTarget:self action:@selector(agreeBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
             
             UIButton *refuseBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
             [refuseBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
             refuseBtn.center = CGPointMake(agreeBtn.center.x+agreeBtn.frame.size.width+5, agreeBtn.center.y);
             [refuseBtn setTitle: NSLocalizedString(@"refuse", @"") forState:UIControlStateNormal];
             [self.view addSubview:refuseBtn];
+            [refuseBtn addTarget:self action:@selector(refuseBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+            
             
             UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
             [deleteBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
             deleteBtn.center = CGPointMake(refuseBtn.center.x+refuseBtn.frame.size.width+5, refuseBtn.center.y);
             [deleteBtn setTitle: NSLocalizedString(@"delete", @"") forState:UIControlStateNormal];
+            [deleteBtn addTarget:self action:@selector(deleteBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:deleteBtn];
             
         }
@@ -135,6 +140,12 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 -(void) deleteBtnPressed:(UIButton *) sender{
+    [self dismissModalViewControllerAnimated:YES];
+}
+-(void) agreeBtnPressed:(UIButton *) sender{
+    
+}
+-(void) refuseBtnPressed:(UIButton *) sender{
     
 }
 - (void)didReceiveMemoryWarning

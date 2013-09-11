@@ -9,13 +9,14 @@
 #import "MessageCell.h"
 
 @implementation MessageCell
-
+@synthesize notificaion;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ofMessage:(SMNotification *) message
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
         [self initUIWithMessage:message];
+        self.notificaion = message;
     }
     return self;
 }

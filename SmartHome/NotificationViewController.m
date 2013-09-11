@@ -7,6 +7,7 @@
 //
 
 #import "NotificationViewController.h"
+#import "NotificationsFileManager.h"
 @interface NotificationViewController ()
 
 @end
@@ -15,7 +16,15 @@
     UITableView *messageTable;
     NSArray *messageArr;
 }
-
+-(id) initWithNotifications:(NSArray *)notifications{
+    self = [super init];
+    if (self) {
+        if (messageArr == nil&& notifications!=nil) {
+            messageArr = notifications;
+        }
+    }
+    return  self;
+}
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,30 +41,34 @@
 }
 -(void)initDefaults{
     [super initDefaults];
+    for (SMNotification *notification in messageArr) {
+        notification.hasRead = YES;
+    }
+    
 
 }
 -(void)initUI{
     [super initUI];
-    if (messageArr == nil) {
-        SMNotification *s1 = [SMNotification new];
-        s1.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
-        s1.type = @"MS";
-        SMNotification *s2 = [SMNotification new];
-        s2.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
-        s2.type = @"CF";
-        SMNotification *s3 = [SMNotification new];
-        s3.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFFeeeeeeeeeeeee                         eeee                                                           eeeeeeeeeeeeeeeeeeeeeeee           eeeee                eeeee    eeeeeeeeeeee                                 eeeeeee            eee  eeeee         eeeee         eeeeee           eeeeeeeeeeeee       2212121121221212121212121212121212121212121121212212121eof";
-        s3.type = @"AL";
-        
-        messageArr = [[NSArray alloc] initWithObjects:s1,s2,s3, nil];
-    }
+//    if (messageArr == nil) {
+//        SMNotification *s1 = [SMNotification new];
+//        s1.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
+//        s1.type = @"MS";
+//        SMNotification *s2 = [SMNotification new];
+//        s2.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFF";
+//        s2.type = @"CF";
+//        SMNotification *s3 = [SMNotification new];
+//        s3.text = @"dsdsadadedda dsad sddddddd dsda dsd adsd asdefsdf fgfg dfE D SDAFFeeeeeeeeeeeee                         eeee                                                           eeeeeeeeeeeeeeeeeeeeeeee           eeeee                eeeee    eeeeeeeeeeee                                 eeeeeee            eee  eeeee         eeeee         eeeeee           eeeeeeeeeeeee       2212121121221212121212121212121212121212121121212212121eof";
+//        s3.type = @"AL";
+//        
+//        messageArr = [[NSArray alloc] initWithObjects:s1,s2,s3, nil];
+//    }
     
     if (messageTable == nil) {
         messageTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         messageTable.dataSource = self;
         messageTable.delegate = self;
         messageTable.backgroundColor = [UIColor clearColor];
-        messageTable.separatorColor = [UIColor blackColor];
+        messageTable.separatorColor = [UIColor grayColor];
         [self.view addSubview:messageTable];
     }
     self.topbar.titleLabel.text = NSLocalizedString(@"notification.manager", @"");
@@ -67,11 +80,14 @@
     return messageArr.count;
 }
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *messageCell = nil;
+    MessageCell *messageCell = nil;
     static NSString *messageIdentifier = @"messageCellIdentifier";
     messageCell = [tableView dequeueReusableCellWithIdentifier:messageIdentifier];
     if (messageCell == nil) {
-        messageCell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:messageIdentifier ofMessage:[messageArr objectAtIndex:indexPath.row]];
+        SMNotification *notification = [messageArr objectAtIndex:indexPath.row];
+        NSLog(@"cell:type = %@ row= %i",notification.type,indexPath.row);
+        messageCell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:messageIdentifier ofMessage:notification];
+    
     }
     return messageCell;
 }
@@ -79,7 +95,10 @@
     return  MESSAGE_CELL_HEIGHT;
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NotificationHandlerViewController *handlerViewController = [[NotificationHandlerViewController alloc] initWithMessage:[messageArr objectAtIndex:indexPath.row]];
+    MessageCell *cell = (MessageCell *)[tableView cellForRowAtIndexPath:indexPath];
+    SMNotification *notificaion = cell.notificaion;
+    NotificationHandlerViewController *handlerViewController = [[NotificationHandlerViewController alloc] initWithMessage:notificaion];
+    NSLog(@"type = %@ ,index =%i",notificaion.type,indexPath.row);
     [self presentModalViewController:handlerViewController animated:YES];
 }
 - (void)didReceiveMemoryWarning

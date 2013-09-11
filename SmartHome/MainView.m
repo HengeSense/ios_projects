@@ -76,9 +76,6 @@
     if (displayNotification == nil) {
         displayNotification =[SMNotification new];
     }
-    displayNotification.text = @"dsdsdsdasdsadasdasdsadasdasdasdasdasdasdasdasddsadasdaddasdfdsffa";
-    displayNotification.type = @"CF";
-    displayNotification.createTime = [NSDate date];
 }
 
 - (void)initUI {
@@ -141,12 +138,13 @@
         lblMessage.font = [UIFont systemFontOfSize:14];
         lblMessage.text = displayNotification.text;
         lblMessage.textColor = [UIColor lightTextColor];
-        [notificationView addSubview:lblMessage];
         [lblMessage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)]];
+        [notificationView addSubview:lblMessage];
+        
     
         lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
         lblTime.backgroundColor =[UIColor clearColor];
-        lblTime.text = [SMDateFormatter dateToString:displayNotification.createTime format:@"HH:mm:ss"];
+        lblTime.text = [SMDateFormatter dateToString:displayNotification.createTime format:@"MM-dd HH:mm:ss"];
         lblTime.font = [UIFont systemFontOfSize:12];
         lblTime.textColor = [UIColor lightTextColor];
         [notificationView addSubview: lblTime];
@@ -182,11 +180,6 @@
         
         [self addSubview:notificationView];
     }
-    
-    
-    
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-    
        
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
     
@@ -220,7 +213,7 @@
     NSTimeInterval alLastTime = 0;
     SMNotification *lastNotHandlerAlNotification;
     for (SMNotification *notification in notificationsArr) {
-        if ([notification.createTime timeIntervalSince1970]>lastTime) {
+        if ([notification.createTime timeIntervalSince1970]>=lastTime) {
             lastTime = [notification.createTime timeIntervalSince1970];
             displayNotification = notification;
         }
@@ -235,7 +228,7 @@
     
     lblMessage.text = displayNotification.text;
     lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
-    btnMessageCount.titleLabel.text = [NSString stringWithFormat:@"%i",notificationsArr.count];
+    [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
     return;
 
 }
@@ -263,6 +256,7 @@
         // notifications is empty
     }else {
         // has notifications
+        [self updateNotifications:notifications];
     }
 }
 
@@ -270,7 +264,7 @@
 #pragma mark button pressed
 
 - (void)btnShowNotificationPressed:(id)sender {
-    NotificationViewController *notificationViewController = [[NotificationViewController alloc] init];
+    NotificationViewController *notificationViewController = [[NotificationViewController alloc] initWithNotifications:notificationsArr];
     [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 

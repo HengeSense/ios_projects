@@ -14,4 +14,5 @@
 #define CELL_VIEW_TAG 999
 @interface MessageCell : UITableViewCell
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier ofMessage:(SMNotification *) message;
+@property (strong,nonatomic) SMNotification *notificaion;
 @end
