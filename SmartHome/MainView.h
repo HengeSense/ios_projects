@@ -15,6 +15,7 @@
 #import "DeviceCommandVoiceControlHandler.h"
 #import "PageableScrollView.h"
 #import "SelectionView.h"
+#import "NotificationHandlerViewController.h"   
 
 typedef NS_ENUM(NSInteger, SpeechViewState) {
     SpeechViewStateOpenning   = 1,
@@ -30,7 +31,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     RecognizerStateRecordingEnd,
     RecognizerStateProceesing
 };
-@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate>
+@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate,DeleteNotificationDelegate,CFNotificationDelegate>
 
 - (void)showSpeechView;
 - (void)hideSpeechView;

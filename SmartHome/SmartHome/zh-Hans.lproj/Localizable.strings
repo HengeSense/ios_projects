@@ -31,6 +31,8 @@
 "agree"            = "同意";
 "agree.operation"  = "［同意］";
 "refuse.operation" = "［拒绝］";
+"delete.success" = "删除成功";
+"deleting" = "删除中...";
 
 
 

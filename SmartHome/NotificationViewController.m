@@ -87,7 +87,6 @@
     [self.topbar.leftButton addTarget:self action:@selector(updateMainView) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void) updateMainView{
-    NSLog(@"updataMianView");
     if (mainView) {
         [mainView notifyViewUpdate];
     }

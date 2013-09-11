@@ -7,13 +7,14 @@
 //
 
 #import "MessageCell.h"
-
+#import "SMDateFormatter.h"
 @implementation MessageCell{
     UIView  *view;
     UIImageView *typeMessage;
     UILabel *textLabel;
     UIImageView *accessory;
     UIImageView *seperatorLine;
+    UILabel *lblTime;
 }
 @synthesize notificaion;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier 
@@ -32,24 +33,30 @@
     }
     
     if (textLabel == nil) {
-        textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
+        textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 240,MESSAGE_CELL_HEIGHT-25)];
         textLabel.tag = TEXT_LABEL_TAG;
-        textLabel.font =[UIFont systemFontOfSize:12];
+        textLabel.font =[UIFont systemFontOfSize:14];
         textLabel.textColor = [UIColor lightTextColor];
         textLabel.lineBreakMode = UILineBreakModeWordWrap;
         textLabel.numberOfLines = 0;
         textLabel.backgroundColor = [UIColor clearColor];
 
     }
+    if (lblTime == nil) {
+        lblTime = [[UILabel alloc] initWithFrame:CGRectMake(40, MESSAGE_CELL_HEIGHT-20, 240, 15)];
+        lblTime.backgroundColor = [UIColor clearColor];
+        lblTime.textColor = [UIColor lightTextColor];
+        lblTime.font = [UIFont systemFontOfSize:12];
+    }
     
     if (accessory == nil) {
         accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"message_accessory.png"]];
-        accessory.frame = CGRectMake(self.frame.size.width-10, 28, 12/2, 31/2);
+        accessory.frame = CGRectMake(self.frame.size.width-30, 28, 12/2, 31/2);
 
     }
     
     if (seperatorLine == nil) {
-       seperatorLine = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cell_selection_view.png"]];
+       seperatorLine = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cell_notification.png"]];
         seperatorLine.frame = CGRectMake(0, MESSAGE_CELL_HEIGHT-1, 320, 1);
 
     }
@@ -60,6 +67,7 @@
         [view addSubview:textLabel];
         [view addSubview:accessory];
         [view addSubview:seperatorLine];
+        [view addSubview:lblTime];
         [self addSubview:view];
     }
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -76,6 +84,7 @@
     }
     typeMessage.tag = TYPE_IMAGE_TAG;
     textLabel.text = [@"    " stringByAppendingString:message.text];
+    lblTime.text = [SMDateFormatter dateToString:message.createTime format:@"yyyy-MM-dd HH:mm"];
     view.tag = CELL_VIEW_TAG;
 }
 

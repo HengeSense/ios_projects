@@ -21,7 +21,6 @@
 #import "NotificationsFileManager.h"
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "NotificationsFileManager.h"
-#import "NotificationHandlerViewController.h"   
 #import "DeviceCommandVoiceControl.h"
 #import "SpeechSynthesizer.h"
 
@@ -76,10 +75,6 @@
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     
-    
-    if (displayNotification == nil) {
-        displayNotification =[SMNotification new];
-    }
 }
 
 - (void)initUI {
@@ -140,7 +135,7 @@
         lblMessage = [[UILabel alloc]initWithFrame:CGRectMake(btnMessage.frame.origin.x+25/2+15,btnMessage.frame.origin.y-10, 120, 20)];
         lblMessage.backgroundColor = [UIColor clearColor];
         lblMessage.font = [UIFont systemFontOfSize:14];
-        lblMessage.text = displayNotification.text;
+        lblMessage.text = @"";
         lblMessage.textColor = [UIColor lightTextColor];
         lblMessage.userInteractionEnabled = YES;
         [lblMessage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)]];
@@ -149,7 +144,7 @@
     
         lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
         lblTime.backgroundColor =[UIColor clearColor];
-        lblTime.text = [SMDateFormatter dateToString:displayNotification.createTime format:@"MM-dd HH:mm:ss"];
+        lblTime.text = @"";
         lblTime.font = [UIFont systemFontOfSize:12];
         lblTime.textColor = [UIColor lightTextColor];
         [notificationView addSubview: lblTime];
@@ -161,7 +156,7 @@
         
         lblAffectDevice = [[UILabel alloc] initWithFrame:CGRectMake(imgAffectDevice.frame.origin.x+imgAffectDevice.frame.size.width + 10, 0, 20, 20)];
         lblAffectDevice.center = CGPointMake(lblAffectDevice.center.x, notificationView.bounds.size.height / 2);
-        lblAffectDevice.text = [NSString stringWithFormat:@"%i",notificationsArr.count];
+        lblAffectDevice.text = @"0";
         lblAffectDevice.textColor = [UIColor colorWithHexString:@"dfa800"];
         lblAffectDevice.font = [UIFont systemFontOfSize:14];
         lblAffectDevice.backgroundColor = [UIColor clearColor];
@@ -176,7 +171,7 @@
 
         btnMessageCount = [[UIButton alloc] initWithFrame:CGRectMake(btnNotification.frame.origin.x+btnNotification.frame.size.width-5, 0, 40, 20)];
         btnMessageCount.center = CGPointMake(btnMessageCount.center.x, notificationView.bounds.size.height /2 );
-        [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
+        [btnMessageCount setTitle:@"" forState:UIControlStateNormal];
         [btnMessageCount setTitleColor:[UIColor colorWithHexString:@"dfa800"] forState:UIControlStateNormal];
         btnMessageCount.backgroundColor = [UIColor clearColor];
         btnMessageCount.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -185,6 +180,11 @@
         
         [self addSubview:notificationView];
     }
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+    [[SMShared current].deliveryService executeDeviceCommand:
+     [CommandFactory commandForType:CommandTypeGetNotifications]];
+    
+
 }
 /* 
  *
@@ -196,6 +196,23 @@
     [self notifyUpdateNotifications];
 }
 
+#pragma mark-
+#pragma mark notification handler delegate
+-(void)didAgreeOrRefuse:(NSString *)operation{
+    if (operation == nil) return;
+
+    displayNotification.text = [displayNotification.text stringByAppendingString:NSLocalizedString(operation, @"")];
+    displayNotification.hasProcess = YES;
+    NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
+    [fileManager update:[[NSArray alloc] initWithObjects:displayNotification, nil] deleteList:nil];
+    [self notifyViewUpdate];
+
+}
+-(void) didWhenDeleted{
+    NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
+    [fileManager update:nil deleteList:[[NSArray alloc] initWithObjects:displayNotification, nil]];
+    [self notifyViewUpdate];
+}
 #pragma mark -
 #pragma mark selection view delegate
 
@@ -226,6 +243,7 @@
     SMNotification *lastNotHandlerAlNotification;
     for (SMNotification *notification in notificationsArr) {
         if ([notification.createTime timeIntervalSince1970]>=lastTime) {
+             NSLog(@"time %@",notification.createTime);
             lastTime = [notification.createTime timeIntervalSince1970];
             displayNotification = notification;
         }
@@ -233,11 +251,9 @@
             lastNotHandlerAlNotification = notification;
         }
     }
-    
     if (lastNotHandlerAlNotification !=nil) {
         displayNotification = lastNotHandlerAlNotification;
     }
-    NSLog(@"updatenotifications");
     lblMessage.text = displayNotification.text;
     lblTime.text =  [NSString stringWithFormat:@"%li",(long)displayNotification.createTime];
     [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
@@ -282,7 +298,6 @@
 
 - (void)notifyUpdateNotifications {
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
-    NSLog(@"%i",notifications.count);
     if(notifications == nil || notifications.count == 0) {
         // notifications is empty
     }else {
@@ -323,7 +338,9 @@
 
 // show notification details
 - (void)tapGestureHandler {
-    [self.ownerController.navigationController presentModalViewController:[[NotificationHandlerViewController alloc] initWithMessage:displayNotification] animated:YES];
+    if (displayNotification == nil) return;
+    [self.ownerController.navigationController pushViewController:[[NotificationHandlerViewController alloc] initWithMessage:displayNotification] animated:YES];
+    
 }
 
 #pragma mark -

@@ -30,7 +30,8 @@
 "agree"            = "agree";
 "agree.operation"  = "[agreed]";
 "refuse.operation" = "[refused]";
-
+"delete.success" = "delete success";
+"deleting" = "deleting...";
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*

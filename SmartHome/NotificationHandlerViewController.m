@@ -9,7 +9,7 @@
 #import "NotificationHandlerViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "LongButton.h"
-
+#import "SMDateFormatter.h"
 @interface NotificationHandlerViewController ()
 
 @end
@@ -71,11 +71,10 @@
     view = [[UIView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+5,self.view.frame.size.width-10 , MESSAGE_CELL_HEIGHT)];
     view.backgroundColor = [UIColor clearColor];
     view.center = CGPointMake(self.view.center.x, view.center.y);
-    view.backgroundColor = [UIColor colorWithHexString:@"1a1a1f"];
+    view.backgroundColor = [UIColor colorWithHexString:@"282E3C"];
     view.layer.cornerRadius = 10;
     
     if (message !=nil) {
-        NSLog(@"%@",message.type);
         typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50/2, 39/2)];
         if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]) {
             typeMessage.image = [UIImage imageNamed:@"icon_message.png"];
@@ -90,7 +89,7 @@
         
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
         textLabel.tag = TEXT_LABEL_TAG;
-        UIFont *font = [UIFont systemFontOfSize:12];
+        UIFont *font = [UIFont systemFontOfSize:14];
         textLabel.font = font;
         textLabel.text = [@"    " stringByAppendingString:message.text];
         textLabel.textColor = [UIColor lightTextColor];
@@ -100,7 +99,15 @@
         textLabel.frame = CGRectMake(40, 5, size.width, size.height<MESSAGE_CELL_HEIGHT?MESSAGE_CELL_HEIGHT:size.height*2);
         textLabel.backgroundColor = [UIColor clearColor];
         [view addSubview:textLabel];
-        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, textLabel.frame.size.height);
+        
+        UILabel *lblTime = [[UILabel alloc]initWithFrame:CGRectMake(40, textLabel.frame.size.height+5+2, 240, 15)];
+        lblTime.text = [SMDateFormatter dateToString:message.createTime format:@"yyyy-MM-dd HH:mm:ss"];
+        lblTime.backgroundColor = [UIColor clearColor];
+        lblTime.textColor = [UIColor lightTextColor];
+        lblTime.font = [UIFont systemFontOfSize:12];
+        [view addSubview:lblTime];
+        
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, textLabel.frame.size.height+15);
         view.tag = CELL_VIEW_TAG;
         [self.view addSubview:view];
         
