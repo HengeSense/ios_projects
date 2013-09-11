@@ -23,8 +23,9 @@
 @synthesize updateTime;
 @synthesize zones;
 @synthesize devices;
-@synthesize sceneUpdateTime;
+@synthesize hashCode;
 
+@synthesize sceneHashCode;
 @synthesize scenesModeList = _scenesModeList_;
 
 - (id)initWithJson:(NSDictionary *)json {
@@ -39,11 +40,9 @@
             self.name = [json notNSNullObjectForKey:@"name"];
             self.localPort = [json numberForKey:@"localPort"].integerValue;
             self.status = [json notNSNullObjectForKey:@"status"];
-            
-            NSNumber *_updateTime_ = [json notNSNullObjectForKey:@"updateTime"];
-            if(_updateTime_ != nil) {
-                self.updateTime = [NSDate dateWithTimeIntervalSince1970:_updateTime_.longLongValue];
-            }
+            self.hashCode = [json numberForKey:@"hashCode"];
+            self.updateTime = [json dateForKey:@"updateTime"];
+            self.sceneHashCode = [json numberForKey:@"sceneHashCode"];
             
             NSArray *_zones_ = [json notNSNullObjectForKey:@"zones"];
             for(int i=0; i<_zones_.count; i++) {
@@ -64,6 +63,8 @@
     [json setObject:[NSNumber numberWithInteger:self.localPort] forKey:@"localPort"];
     [json setObject:([NSString isBlank:self.status] ? [NSString emptyString] : self.status) forKey:@"status"];
     [json setObject:(self.updateTime == nil ? [NSNumber numberWithInteger:0] : [NSNumber numberWithLongLong:self.updateTime.timeIntervalSince1970]) forKey:@"updateTime"];
+    [json setObject:(self.hashCode == nil ? [NSNumber numberWithInteger:0] : self.hashCode) forKey:@"hashCode"];
+    [json setObject:(self.sceneHashCode == nil ? [NSNumber numberWithInteger:0] : self.sceneHashCode) forKey:@"sceneHashCode"];
     
     // zones ...
     NSMutableArray *_zones_ = [NSMutableArray array];

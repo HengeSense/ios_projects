@@ -18,9 +18,12 @@
 @property (assign, nonatomic) NSInteger localPort;
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSDate *updateTime;
+@property (strong, nonatomic) NSNumber *hashCode;
 @property (strong, nonatomic) NSMutableArray *zones;
 @property (strong, nonatomic) NSMutableArray *scenesModeList;
-@property (strong, nonatomic) NSDate *sceneUpdateTime;
+
+
+@property (strong, nonatomic) NSNumber *sceneHashCode;
 
 @property (strong, nonatomic, readonly) NSArray *devices;
 

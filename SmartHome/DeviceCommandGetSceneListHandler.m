@@ -14,8 +14,9 @@
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateSceneMode class]]) {
+        // service 
         DeviceCommandUpdateSceneMode *updateSceneModeCommand = (DeviceCommandUpdateSceneMode *)command;
-        [[SMShared current].memory updateSceneList:updateSceneModeCommand.masterDeviceCode sceneList:updateSceneModeCommand.scenesMode updateTime:updateSceneModeCommand.updateTime];
+        [[SMShared current].memory updateSceneList:updateSceneModeCommand.masterDeviceCode sceneList:updateSceneModeCommand.scenesMode hashCode:updateSceneModeCommand.hashCode];
     }
 }
 

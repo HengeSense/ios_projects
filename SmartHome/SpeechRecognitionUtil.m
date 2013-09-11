@@ -43,7 +43,7 @@
     self.vadBos = @"3000";
     self.vadEos = @"1800";
     self.asrSch = @"0";
-    self.asrPtt = @"1";
+    self.asrPtt = @"0";
     self.sampleRate = @"16000";
     self.plainResult = @"0";
 }

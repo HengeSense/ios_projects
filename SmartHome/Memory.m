@@ -70,7 +70,7 @@
     }
 }
 
-- (void)updateSceneList:(NSString *)unitIdentifier sceneList:(NSArray *)sceneList updateTime:(NSDate *)updateTime {
+- (void)updateSceneList:(NSString *)unitIdentifier sceneList:(NSArray *)sceneList hashCode:(NSNumber *)hashCode {
     @synchronized(self) {
         if([NSString isBlank:unitIdentifier]) return;
         if(self.units != nil && self.units.count > 0) {
@@ -80,12 +80,11 @@
                     if(sceneList != nil) {
                         [u.scenesModeList addObjectsFromArray:sceneList];
                     }
-                    u.sceneUpdateTime = updateTime;
+                    u.sceneHashCode = (hashCode == nil ? [NSNumber numberWithInteger:0] : hashCode);
                     break;
                 }
             }
         }
-
     }
 }
 

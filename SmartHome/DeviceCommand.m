@@ -23,7 +23,6 @@
 @synthesize security;
 @synthesize tcpAddress;
 @synthesize hashCode;
-@synthesize updateTime;
 @synthesize describe;
 
 - (id)initWithDictionary:(NSDictionary *)json {
@@ -72,9 +71,11 @@
         [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     }
     
-    if([@"FindZKListCommand" isEqualToString:commandName] || [@"FindDeviceSceneCommand" isEqualToString:commandName]) {
+    if(([@"FindZKListCommand" isEqualToString:commandName] && ![NSString isBlank:self.masterDeviceCode]) || [@"FindDeviceSceneCommand" isEqualToString:commandName]) {
         if(self.hashCode != nil) {
             [json setObject:self.hashCode forKey:@"hashCode"];
+        } else {
+            [json setObject:[NSNumber numberWithInteger:0] forKey:@"hashCode"];
         }
     }
 

@@ -87,8 +87,8 @@
         SMNotification *notification = [messageArr objectAtIndex:indexPath.row];
         NSLog(@"cell:type = %@ row= %i",notification.type,indexPath.row);
         messageCell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:messageIdentifier ofMessage:notification];
-    
     }
+
     return messageCell;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

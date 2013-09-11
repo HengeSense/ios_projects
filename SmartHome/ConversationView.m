@@ -61,7 +61,7 @@
     }
     
     if(tblMessages == nil) {
-        tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 14, self.frame.size.width, self.frame.size.height-14) style:UITableViewStylePlain];
+        tblMessages = [[UITableView alloc] initWithFrame:CGRectMake(0, 14, self.frame.size.width, self.frame.size.height-30) style:UITableViewStylePlain];
         tblMessages.backgroundColor = [UIColor clearColor];
         tblMessages.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblMessages.delegate = self;
@@ -164,7 +164,7 @@
     if(message != nil) {
         UIView *messageView = [message viewWithMessage:self.frame.size.width];
         if(messageView != nil) {
-            return messageView.frame.size.height + 15;
+            return messageView.frame.size.height + 10;
         }
     }
     return 0;
