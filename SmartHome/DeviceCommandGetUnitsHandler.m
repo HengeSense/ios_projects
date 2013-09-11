@@ -1,16 +1,16 @@
 //
-//  DeviceCommandUpdateUnitsHandler.m
+//  DeviceCommandGetUnitsHandler.m
 //  SmartHome
 //
 //  Created by hadoop user account on 30/08/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "DeviceCommandUpdateUnitsHandler.h"
+#import "DeviceCommandGetUnitsHandler.h"
 #import "CommandFactory.h"
 #import "Unit.h"
 
-@implementation DeviceCommandUpdateUnitsHandler
+@implementation DeviceCommandGetUnitsHandler
 
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];

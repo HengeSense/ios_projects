@@ -8,7 +8,7 @@
 
 #import "DeviceCommandDeliveryService.h"
 
-#import "DeviceCommandUpdateUnitsHandler.h"
+#import "DeviceCommandGetUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
 #import "DeviceCommandGetNotificationsHandler.h"
@@ -63,7 +63,7 @@
     
     DeviceCommandHandler *handler = nil;
     if([@"FindZKListCommand" isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandUpdateUnitsHandler alloc] init];
+        handler = [[DeviceCommandGetUnitsHandler alloc] init];
     } else if([@"AccountUpdateCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateAccountHandler alloc] init];
     } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {

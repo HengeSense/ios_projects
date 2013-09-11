@@ -7,6 +7,13 @@
 //
 
 #import "DeviceCommandHandler.h"
+#import "DeviceCommandVoiceControl.h"
+
+@protocol DeviceCommandVoiceControlDelegate <NSObject>
+
+- (void)notifyVoiceControlAccept:(DeviceCommandVoiceControl *)command;
+
+@end
 
 @interface DeviceCommandVoiceControlHandler : DeviceCommandHandler
 

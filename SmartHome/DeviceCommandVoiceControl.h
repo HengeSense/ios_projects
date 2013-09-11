@@ -10,4 +10,6 @@
 
 @interface DeviceCommandVoiceControl : DeviceCommand
 
+@property (strong, nonatomic) NSString *voiceText;
+
 @end

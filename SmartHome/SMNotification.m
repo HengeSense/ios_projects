@@ -19,6 +19,7 @@
 @synthesize createTime;
 @synthesize data = _data;
 @synthesize hasRead;
+@synthesize identifier;
 
 @synthesize isInfo;
 @synthesize isValidation;
@@ -33,6 +34,7 @@
         self.mac = [json notNSNullObjectForKey:@"mac"];
         self.type = [json notNSNullObjectForKey:@"type"];
         self.createTime = [json dateForKey:@"createTime"];
+        self.identifier = [json notNSNullObjectForKey:@"id"];
         NSString *_hasRead_ = [json notNSNullObjectForKey:@"hasRead"];
         if([NSString isBlank:_hasRead_]) {
             self.hasRead = NO;
@@ -53,6 +55,7 @@
     [json setObject:([NSString isBlank:self.text] ? [NSString emptyString] : self.text) forKey:@"text"];
     [json setObject:([NSString isBlank:self.mac] ? [NSString emptyString] : self.mac) forKey:@"mac"];
     [json setObject:([NSString isBlank:self.type] ? [NSString emptyString] : self.type) forKey:@"type"];
+    [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"id"];
     [json setObject:(self.hasRead ? @"yes" : @"no") forKey:@"hasRead"];
     
     if(self.data != nil) {

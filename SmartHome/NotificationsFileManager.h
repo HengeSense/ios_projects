@@ -12,6 +12,7 @@
 
 - (NSArray *)readFromDisk;
 - (void)writeToDisk:(NSArray *)messages;
+- (void)update:(NSArray *)notifications;
 
 + (NotificationsFileManager *)fileManager;
 

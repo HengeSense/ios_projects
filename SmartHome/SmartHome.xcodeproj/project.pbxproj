@@ -84,7 +84,6 @@
 		6F0FAF3C17AF882600B75D3E /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAF3517AF882600B75D3E /* zbar-helpicons.png */; };
 		6F0FAF3D17AF882600B75D3E /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAF3617AF882600B75D3E /* zbar-samples.png */; };
 		6F0FAF3F17AF885F00B75D3E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAF3E17AF885F00B75D3E /* AudioToolbox.framework */; };
-		6F0FAF4117AF88DD00B75D3E /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAF4017AF88DD00B75D3E /* iflyMSC.framework */; };
 		6F0FAF4517AF8B0D00B75D3E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAF4417AF8B0D00B75D3E /* libiconv.dylib */; };
 		6F0FAF4717AF8B3300B75D3E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAF4617AF8B3300B75D3E /* AVFoundation.framework */; };
 		6F0FAF4917AF8B4000B75D3E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAF4817AF8B4000B75D3E /* CoreMedia.framework */; };
@@ -234,6 +233,7 @@
 		6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */; };
 		6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */; };
 		6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */; };
+		6FE9336517DF19F1001D67E0 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9336417DF19F1001D67E0 /* iflyMSC.framework */; };
 		6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */; };
 		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
 		F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150B17CDA27F0058DADE /* lineleft@2x.png */; };
@@ -249,7 +249,7 @@
 		F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* SMTextField.m */; };
 		F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CC17B87CF1009286D6 /* MyDevicesView.m */; };
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
-		F20C788017D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */; };
+		F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */; };
 		F20C788317D0859C003D50C5 /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C788217D0859B003D50C5 /* Memory.m */; };
 		F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178BFD17CAEC6F0043400F /* PageableScrollView.m */; };
 		F2178C0117CB06720043400F /* PageableNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0017CB06720043400F /* PageableNavView.m */; };
@@ -407,7 +407,6 @@
 		6F0FAF3517AF882600B75D3E /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
 		6F0FAF3617AF882600B75D3E /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
 		6F0FAF3E17AF885F00B75D3E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		6F0FAF4017AF88DD00B75D3E /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		6F0FAF4417AF8B0D00B75D3E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		6F0FAF4617AF8B3300B75D3E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6F0FAF4817AF8B4000B75D3E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -629,6 +628,7 @@
 		6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetAccountHandler.m; sourceTree = "<group>"; };
 		6FE3B76417D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateAccountHandler.h; sourceTree = "<group>"; };
 		6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateAccountHandler.m; sourceTree = "<group>"; };
+		6FE9336417DF19F1001D67E0 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
 		6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		6FEB91E717BB843D007C04A1 /* TemperatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureView.h; sourceTree = "<group>"; };
@@ -659,8 +659,8 @@
 		F20B36CC17B87CF1009286D6 /* MyDevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDevicesView.m; sourceTree = "<group>"; };
 		F20B36CE17B9DDAD009286D6 /* DevicesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesViewController.h; sourceTree = "<group>"; };
 		F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesViewController.m; sourceTree = "<group>"; };
-		F20C787E17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateUnitsHandler.h; sourceTree = "<group>"; };
-		F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateUnitsHandler.m; sourceTree = "<group>"; };
+		F20C787E17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetUnitsHandler.h; sourceTree = "<group>"; };
+		F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnitsHandler.m; sourceTree = "<group>"; };
 		F20C788117D0859A003D50C5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		F20C788217D0859B003D50C5 /* Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memory.m; sourceTree = "<group>"; };
 		F2178BFC17CAEC6F0043400F /* PageableScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableScrollView.h; sourceTree = "<group>"; };
@@ -722,7 +722,7 @@
 				6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */,
 				6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */,
 				6F0FAF3817AF882600B75D3E /* libzbar.a in Frameworks */,
-				6F0FAF4117AF88DD00B75D3E /* iflyMSC.framework in Frameworks */,
+				6FE9336517DF19F1001D67E0 /* iflyMSC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,12 +876,12 @@
 				F237167E17B349650057C95B /* libxml2.dylib */,
 				6F0FAF4417AF8B0D00B75D3E /* libiconv.dylib */,
 				6F0FAF3017AF882600B75D3E /* libzbar.a */,
+				6FE9336417DF19F1001D67E0 /* iflyMSC.framework */,
 				F22DF72317C1CA3500BF7C3A /* Security.framework */,
 				6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */,
 				6F0FAF4A17AF8B4600B75D3E /* CoreVideo.framework */,
 				6F0FAF4817AF8B4000B75D3E /* CoreMedia.framework */,
 				6F0FAF4617AF8B3300B75D3E /* AVFoundation.framework */,
-				6F0FAF4017AF88DD00B75D3E /* iflyMSC.framework */,
 				6F0FAF3E17AF885F00B75D3E /* AudioToolbox.framework */,
 				6F0FAEEC17AF83B200B75D3E /* CoreText.framework */,
 				6F0FAEEA17AF83A400B75D3E /* QuartzCore.framework */,
@@ -1463,8 +1463,8 @@
 			children = (
 				6FD081BA17CF3E580089A1ED /* DeviceCommandHandler.h */,
 				6FD081BB17CF3E580089A1ED /* DeviceCommandHandler.m */,
-				F20C787E17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.h */,
-				F20C787F17D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m */,
+				F20C787E17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.h */,
+				F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */,
 				6FE3B76117D5D54B006FCD7C /* DeviceCommandGetAccountHandler.h */,
 				6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */,
 				6FE3B76417D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.h */,
@@ -2003,7 +2003,7 @@
 				6FD081BC17CF3E580089A1ED /* DeviceCommandHandler.m in Sources */,
 				6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */,
 				6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */,
-				F20C788017D04A1F003D50C5 /* DeviceCommandUpdateUnitsHandler.m in Sources */,
+				F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */,
 				6F84A77A17D04A5700D46BFA /* Zone.m in Sources */,
 				6F84A78017D06D6D00D46BFA /* Unit.m in Sources */,
 				F20C788317D0859C003D50C5 /* Memory.m in Sources */,
@@ -2158,6 +2158,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../../Downloads/iphone_noui_1/lib\"",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2187,6 +2188,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../../Downloads/iphone_noui_1/lib\"",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

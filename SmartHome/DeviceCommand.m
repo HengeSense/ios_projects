@@ -23,6 +23,7 @@
 @synthesize security;
 @synthesize tcpAddress;
 @synthesize updateTime;
+@synthesize describe;
 
 - (id)initWithDictionary:(NSDictionary *)json {
     self = [super init];
@@ -33,7 +34,8 @@
             self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
             self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
             self.result = [json notNSNullObjectForKey:@"id"];
-            
+            self.describe = [json notNSNullObjectForKey:@"describe"];
+    
             NSNumber *r_id = [json notNSNullObjectForKey:@"resultId"];
             if(r_id != nil) {
                 self.resultID = r_id.integerValue;
@@ -59,12 +61,19 @@
     if(![NSString isBlank:self.deviceCode]) {
         [json setObject:self.deviceCode forKey:@"deviceCode"];
     }
+    
     if(![NSString isBlank:self.commandName]) {
         [json setObject:self.commandName forKey:@"_className"];
     }
+    
     if(![NSString isBlank:self.masterDeviceCode]) {
         [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
     }
+    
+    if(![NSString isBlank:self.describe]) {
+        [json setObject:self.describe forKey:@"describe"];
+    }
+    
     if(self.commandTime != nil) {
         [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
     }

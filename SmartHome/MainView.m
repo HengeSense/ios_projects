@@ -22,7 +22,9 @@
 #import "NotificationsFileManager.h"
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "NotificationsFileManager.h"
-#import "NotificationHandlerViewController.h"           
+#import "NotificationHandlerViewController.h"   
+#import "DeviceCommandVoiceControl.h"
+#import "SpeechSynthesizer.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -70,8 +72,12 @@
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
     
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitsHandler class] for:self];
+    // subscribe events
+    
+    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
+    
     
     if (displayNotification == nil) {
         displayNotification =[SMNotification new];
@@ -101,7 +107,7 @@
     }
     
 #pragma mark -
-#pragma mark speech view
+#pragma mark speech button
     
     if(btnSpeech == nil) {
         btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
@@ -180,8 +186,9 @@
         
         [self addSubview:notificationView];
     }
-       
+    
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(testDelayGetUnits) userInfo:nil repeats:NO];
 }
@@ -233,6 +240,25 @@
 
 }
 
+#pragma mark -
+#pragma mark voice control handler
+
+- (void)notifyVoiceControlAccept:(DeviceCommandVoiceControl *)command {
+    if(speechViewState == SpeechViewStateOpenned) {
+        ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];
+        textMessage.messageOwner = MESSAGE_OWNER_MINE;
+        textMessage.textMessage = command.voiceText;
+        textMessage.timeMessage = [SMDateFormatter dateToString:[NSDate date] format:@"HH:mm:ss"];
+        [speechView addMessage:textMessage];
+        if(command.resultID != 1) {
+            ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];
+            textMessage.messageOwner = MESSAGE_OWNER_THEIRS;
+            textMessage.textMessage = command.describe;
+            textMessage.timeMessage = [SMDateFormatter dateToString:[NSDate date] format:@"HH:mm:ss"];
+            [speechView addMessage:textMessage];
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark device command upate unit handler
@@ -327,6 +353,7 @@
                          view.frame = CGRectMake(view.frame.origin.x, (0 - viewHeight - 12), view.frame.size.width, view.frame.size.height);
                      }
                      completion:^(BOOL finished) {
+                         [[self speechView] clearMessages];
                          [[self speechView] hideWelcomeMessage];
                          [[self speechView] removeFromSuperview];
                          [self.ownerController enableGestureForDrawerView];
@@ -384,11 +411,11 @@
 
 - (void)recognizeSuccess:(NSString *)result {
     if(![NSString isBlank:result]) {
-        ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];
-        textMessage.messageOwner = MESSAGE_OWNER_MINE;
-        textMessage.textMessage = result;
-        [speechView addMessage:textMessage];
         //process text message
+        DeviceCommandVoiceControl *command = (DeviceCommandVoiceControl *)[CommandFactory commandForType:CommandTypeUpdateDeviceViaVoice];
+        command.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
+        command.voiceText = result;
+        [[SMShared current].deliveryService executeDeviceCommand:command];
     } else {
         [self speechRecognizerFailed:@"empty speaking..."];
         //

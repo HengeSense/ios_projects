@@ -11,6 +11,7 @@
 #import "DeviceCommandUpdateUnits.h"
 #import "DeviceCommandUpdateNotifications.h"
 #import "DeviceCommandUpdateSceneMode.h"
+#import "DeviceCommandVoiceControl.h"
 
 @implementation CommandFactory
 
@@ -38,7 +39,9 @@
         command.commandName = @"FindDeviceSceneCommand";
         return command;
     } else if(type == CommandTypeUpdateDeviceViaVoice) {
-        
+        DeviceCommandVoiceControl *command = [[DeviceCommandVoiceControl alloc] init];
+        command.commandName = @"VoiceControlCommand";
+        return command;
     } else if(type == CommandTypeUpdateDevice) {
         
     }
@@ -63,8 +66,10 @@
     } else if([@"FindDeviceSceneCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateSceneMode alloc] initWithDictionary:json];
     } else if([@"VoiceControlCommand" isEqualToString:commandName]) {
-        
+        command = [[DeviceCommandVoiceControl alloc] initWithDictionary:json];
     } else if([@"KeyControlCommand" isEqualToString:commandName]) {
+        
+    } else if([@"DeviceFingerExcuteCommand" isEqualToString:commandName]) {
         
     }
     

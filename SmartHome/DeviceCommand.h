@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSDate *commandTime;
 @property (strong, nonatomic) NSDate *updateTime;
+@property (strong, nonatomic) NSString *describe;
 
 - (id)initWithDictionary:(NSDictionary *)json;
 - (NSMutableDictionary *)toDictionary;

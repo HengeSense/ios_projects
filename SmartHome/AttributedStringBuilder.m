@@ -32,9 +32,9 @@
  *
  */
 - (NSMutableAttributedString *)appendStringWithString:
-(NSString *)str fontColor:(UIColor *)fc fontName:(NSString *)fn
-                                             fontSize:(CGFloat)fs fontWidth:(CGFloat)fw fontSpace:(long)fsp
-                                       underLineStyle:(UNDER_LINE_STYLE)uls underLineColor:(UIColor *)ulc {
+        (NSString *)str fontColor:(UIColor *)fc fontName:(NSString *)fn
+         fontSize:(CGFloat)fs fontWidth:(CGFloat)fw fontSpace:(long)fsp
+         underLineStyle:(UNDER_LINE_STYLE)uls underLineColor:(UIColor *)ulc {
     
     if(str == nil || [@"" isEqualToString:str]) {
         return string;
