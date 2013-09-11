@@ -180,9 +180,6 @@
         
         [self addSubview:notificationView];
     }
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-    [[SMShared current].deliveryService executeDeviceCommand:
-     [CommandFactory commandForType:CommandTypeGetNotifications]];  
 }
 
 /*
@@ -224,7 +221,7 @@
         
     } else if([@"units" isEqualToString:source]) {
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
-        [self notifyUnitsWasUpdate];
+        [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     }
 }
 

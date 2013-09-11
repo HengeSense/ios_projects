@@ -238,6 +238,7 @@
 		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
 		6FFAFDF817E05AC5001EB9D0 /* line_cell_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */; };
 		6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */; };
+		6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */; };
 		F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150B17CDA27F0058DADE /* lineleft@2x.png */; };
 		F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150C17CDA27F0058DADE /* lineright@2x.png */; };
 		F205157A17CF42370058DADE /* message_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157817CF42370058DADE /* message_count@2x.png */; };
@@ -636,6 +637,8 @@
 		6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_cell_notification@2x.png"; sourceTree = "<group>"; };
 		6FFAFDF917E0823C001EB9D0 /* DeviceStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceStatus.h; sourceTree = "<group>"; };
 		6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceStatus.m; sourceTree = "<group>"; };
+		6FFAFDFC17E0A3FE001EB9D0 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
 		F205150B17CDA27F0058DADE /* lineleft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineleft@2x.png"; sourceTree = "<group>"; };
 		F205150C17CDA27F0058DADE /* lineright@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineright@2x.png"; sourceTree = "<group>"; };
 		F205157817CF42370058DADE /* message_count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_count@2x.png"; sourceTree = "<group>"; };
@@ -1121,6 +1124,8 @@
 				6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */,
 				6F0FAEB017AF814000B75D3E /* UIColor+ExtentionForHexString.h */,
 				6F0FAEB117AF814000B75D3E /* UIColor+ExtentionForHexString.m */,
+				6FFAFDFC17E0A3FE001EB9D0 /* NSDate+Extension.h */,
+				6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -2020,6 +2025,7 @@
 				F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */,
 				6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */,
 				6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */,
+				6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "Reachability.h"
 #import "MainViewController.h"
 #import "LoginViewController.h"
+#import "SMDateFormatter.h"
 #import "UnitsBindingViewController.h"
 
 @implementation AppDelegate
@@ -21,7 +22,7 @@
 @synthesize rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{   
+{
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
     

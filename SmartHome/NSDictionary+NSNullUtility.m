@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+NSNullUtility.h"
+#import "NSDate+Extension.h"
 
 @implementation NSDictionary (NSNullUtility)
 
@@ -41,7 +42,7 @@
 - (NSDate *)dateForKey:(id)key {
     NSNumber *_date_ = [self notNSNullObjectForKey:key];
     if(_date_ == nil) return nil;
-    return [NSDate dateWithTimeIntervalSince1970:_date_.longLongValue];
+    return [NSDate dateWithTimeIntervalMillisecondSince1970:_date_.longLongValue];
 }
 
 @end
