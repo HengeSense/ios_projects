@@ -46,7 +46,6 @@
 
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    
     [json setMayBlankString:self.text forKey:@"text"];
     [json setMayBlankString:self.mac forKey:@"mac"];
     [json setMayBlankString:self.type forKey:@"type"];

@@ -231,9 +231,19 @@
 
 #pragma mark -
 #pragma mark notifications
-
+-(NSInteger) countOfNotRead{
+    NSInteger count = 0;
+    for (SMNotification *notification in notificationsArr) {
+        if(!notification.hasRead) count++;
+    }
+    return  count;
+}
 - (void)updateNotifications:(NSArray *)notifications {
     if (notifications == nil||notifications.count == 0) {
+        lblMessage.text = NSLocalizedString(@"everything.is.ok", @"");
+        lblTime.text =@"";
+        [btnMessageCount setTitle:@"0" forState:UIControlStateNormal];
+        displayNotification = nil;
         return;
     }
     notificationsArr = notifications;
@@ -254,7 +264,7 @@
     }
     lblMessage.text = displayNotification.text;
     lblTime.text =  [SMDateFormatter dateToString:displayNotification.createTime format:@"MM-dd HH:mm"];
-    [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",notificationsArr.count] forState:UIControlStateNormal];
+    [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",[self countOfNotRead]] forState:UIControlStateNormal];
     return;
 }
 
@@ -304,6 +314,7 @@
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
     if(notifications == nil || notifications.count == 0) {
         // notifications is empty
+        [self updateNotifications:nil];
     }else {
         // has notifications
         [self updateNotifications:notifications];

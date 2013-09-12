@@ -64,18 +64,6 @@
             
             NSMutableArray *newList = [NSMutableArray array];
             
-            if(modifyList != nil && modifyList.count != 0) {
-                for(SMNotification *modifyItem in modifyList) {
-                    for(SMNotification *oldItem in oldNotifications) {
-                        if([modifyItem.identifier isEqualToString:oldItem.identifier]) {
-                            oldItem.hasRead = modifyItem.hasRead;
-                            oldItem.text = modifyItem.text;
-                            break;
-                        }
-                    }
-                }
-            }
-            
             if(deleteList != nil && deleteList.count != 0) {
                 for(SMNotification *oldItem in oldNotifications) {
                     BOOL needDelete = NO;
@@ -90,6 +78,20 @@
                     }
                 }
             }
+            
+            if(modifyList != nil && modifyList.count != 0) {
+                for(SMNotification *modifyItem in modifyList) {
+                    for(SMNotification *oldItem in newList) {
+                        if([modifyItem.identifier isEqualToString:oldItem.identifier]) {
+                            oldItem.hasRead = modifyItem.hasRead;
+                            oldItem.text = modifyItem.text;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            
             [self saveToDiskInternal:newList];
         }
         @catch (NSException *exception) {
