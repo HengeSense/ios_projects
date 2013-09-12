@@ -44,7 +44,6 @@
     UIButton *btnUnit;
     UIButton *btnScene;
     
-    NSArray *notificationsArr;
     UIButton *btnMessage;
     UILabel *lblMessage;
     UILabel *lblTime;
@@ -231,7 +230,7 @@
 
 #pragma mark -
 #pragma mark notifications
--(NSInteger) countOfNotRead{
+-(NSInteger) countOfNotRead:(NSArray *) notificationsArr{
     NSInteger count = 0;
     for (SMNotification *notification in notificationsArr) {
         if(!notification.hasRead) count++;
@@ -246,11 +245,10 @@
         displayNotification = nil;
         return;
     }
-    notificationsArr = notifications;
     NSTimeInterval lastTime = 0;
     NSTimeInterval alLastTime = 0;
     SMNotification *lastNotHandlerAlNotification;
-    for (SMNotification *notification in notificationsArr) {
+    for (SMNotification *notification in notifications) {
         if ([notification.createTime timeIntervalSince1970]>=lastTime) {
             lastTime = [notification.createTime timeIntervalSince1970];
             displayNotification = notification;
@@ -264,7 +262,7 @@
     }
     lblMessage.text = displayNotification.text;
     lblTime.text =  [SMDateFormatter dateToString:displayNotification.createTime format:@"MM-dd HH:mm"];
-    [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",[self countOfNotRead]] forState:UIControlStateNormal];
+    [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",[self countOfNotRead:notifications]] forState:UIControlStateNormal];
     return;
 }
 
@@ -325,7 +323,7 @@
 #pragma mark button pressed
 
 - (void)btnShowNotificationPressed:(id)sender {
-    NotificationViewController *notificationViewController = [[NotificationViewController alloc] initWithNotifications:notificationsArr from:self];
+    NotificationViewController *notificationViewController = [[NotificationViewController alloc] initFrom:self];
     [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 
