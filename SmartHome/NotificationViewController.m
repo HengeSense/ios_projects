@@ -53,11 +53,13 @@
     }
     
     if (modifyArr == nil) {
-        modifyArr =[NSMutableArray new];
+        modifyArr =[NSMutableArray arrayWithArray:messageArr];
     }
     if (deleteArr == nil) {
         deleteArr = [NSMutableArray new];
     }
+    [self saveNotificationsToDisk];
+    [modifyArr removeAllObjects];
 }
 -(void)initUI{
     [super initUI];
@@ -91,6 +93,7 @@
         [mainView notifyViewUpdate];
     }
 }
+
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -127,7 +130,7 @@
     curMessage.hasProcess = YES;
     [modifyArr addObject:curMessage];
     [messageTable reloadData];
-    
+    [self saveNotificationsToDisk];
 }
 -(void) didWhenDeleted{
     [deleteArr addObject:[messageArr objectAtIndex:curIndexPath.row]];
