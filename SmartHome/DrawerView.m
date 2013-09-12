@@ -59,7 +59,7 @@
     if(accountView == nil) {
         accountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, ACCOUNT_VIEW_HEIGHT)];
         UIImageView *imgHeader = [[UIImageView alloc] initWithFrame:CGRectMake(12, 0, 30, 30)];
-        imgHeader.image = [UIImage imageNamed:@"img_header.png"];
+        imgHeader.image = [UIImage imageNamed:@"logo.png"];
         imgHeader.center = CGPointMake(imgHeader.center.x, accountView.center.y);
         UILabel *lblMessage1 = [[UILabel alloc] initWithFrame:CGRectMake(50, 22, 60, 18)];
         UILabel *lblMessage2 = [[UILabel alloc] initWithFrame:CGRectMake(50, 42, 50, 18)];

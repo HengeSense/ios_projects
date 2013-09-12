@@ -30,8 +30,8 @@
 "agree"            = "agree";
 "agree.operation"  = "[agreed]";
 "refuse.operation" = "[refused]";
-"delete.success" = "delete success";
-"deleting" = "deleting...";
+"delete.success"   = "delete success";
+"deleting"         = "deleting...";
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*
@@ -74,6 +74,18 @@
 "welcome_message_line1" = "Hello, What can i";
 "welcome_message_line2" = "help you ?";
 
+/*
+ * device view && controller
+ */
+"unit_info"            =   "Unit Info";
+"devices_list"         =   "Devices";
+"unit_name"            =   "Unit Name";
+"unit_address"         =   "Address";
+"unit_state"           =   "Status";
+"unit_devices_count"   =   "Device count";
+"unit_lastupdate_time" =   "Last update time";
+"zone_info"            =   "Zones";
+"unit_detail"          =   "Unit Details";
 
 /*
  * register view controller
@@ -158,6 +170,7 @@
 "request.format.error"      = "Wrong request format!";
 "request.too.frequent.error" ="Too frequest request!";
 "system.error"          = "System error!";
+
 /*
  *notification
  */

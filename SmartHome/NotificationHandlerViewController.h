@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PopViewController.h"
+#import "NavViewController.h"
 #import "SMNotification.h"
 #import "MessageCell.h"
 #import <QuartzCore/QuartzCore.h>
@@ -17,7 +17,7 @@
 @protocol CFNotificationDelegate <NSObject>
 -(void) didAgreeOrRefuse:(NSString *) operation;
 @end
-@interface NotificationHandlerViewController : PopViewController
+@interface NotificationHandlerViewController : NavViewController
 -(id) initWithMessage:(SMNotification *) smNotification;
 @property (strong,nonatomic) SMNotification *message;
 @property (assign,nonatomic) id<DeleteNotificationDelegate> deleteNotificationDelegate;

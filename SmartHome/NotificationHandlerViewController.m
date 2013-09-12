@@ -49,25 +49,10 @@
 -(void) initDefaults{
     messageTypeDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"cf", @"btn_done.png"),@"CF",NSLocalizedString(@"ms", @"btn_done.png"),@"MS",NSLocalizedString(@"al", @"btn_done.png"),@"AL",NSLocalizedString(@"at", @"btn_done.png"),@"AT", nil];
 }
-- (void)generateTopbar {
-    self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:YES];
-    
-    self.topbar.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 8, 120/2, 59/2)];
-    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateNormal];
-    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateSelected];
-    [self.topbar.leftButton setTitle:NSLocalizedString(@"back", @"") forState:UIControlStateNormal];
-    [self.topbar.leftButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
-    self.topbar.leftButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self.topbar.leftButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
-    [self.topbar addSubview:self.topbar.leftButton];
-    
-    [self.view addSubview:self.topbar];
-    self.topbar.titleLabel.text = [messageTypeDictionary objectForKey:self.message.type];
-}
-
-
 -(void) initUI{
     [super initUI];
+    self.topbar.titleLabel.text = [messageTypeDictionary objectForKey:self.message.type];
+
     view = [[UIView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+5,self.view.frame.size.width-10 , MESSAGE_CELL_HEIGHT)];
     view.backgroundColor = [UIColor clearColor];
     view.center = CGPointMake(self.view.center.x, view.center.y);
