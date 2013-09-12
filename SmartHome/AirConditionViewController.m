@@ -13,7 +13,7 @@
 #define RADIO_MARGIN 60
 #define LABEL_MARGIN_TOP 20
 #define RADIO_CENTER 10
-#define CELL_HEIGHT 30
+#define CELL_HEIGHT 50
 
 @interface AirConditionViewController ()
 
@@ -93,7 +93,7 @@
         type = NSLocalizedString(@"cold", @"");
         temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
     }
-    temperatureCell.textLabel.font = [UIFont systemFontOfSize:14];
+    temperatureCell.textLabel.font = [UIFont systemFontOfSize:16];
     temperatureCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
     temperatureCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return  temperatureCell;
