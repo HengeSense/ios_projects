@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NavViewController.h"
+#import "Device.h"
 
-@interface DeviceDetailViewController : UIViewController
+@interface DeviceDetailViewController : NavViewController
+
+@property (strong, nonatomic) Device *device;
 
 @end

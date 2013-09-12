@@ -7,12 +7,12 @@
 //
 
 #import "MyDevicesView.h"
-#import "DevicesViewController.h"
-#import "TVViewController.h"
-#import "AirConditionViewController.h"
+#import "UnitDetailsViewController.h"
+#import "SMCell.h"
 
 @implementation MyDevicesView {
     UITableView *tblUnits;
+    NSArray *units;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -41,14 +41,23 @@
     }
 }
 
+- (void)refresh {
+    
+}
+
 #pragma mark -
-#pragma mark table view delegate
+#pragma mark view service
+
+- (void)notifyViewUpdate {
+    units = [SMShared current].memory.units;
+    [tblUnits reloadData];
+}
 
 #pragma mark -
 #pragma mark table view delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return units == nil ? 0 : units.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -65,10 +74,9 @@
     static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
     
     NSString *cellIdentifier;
-    
     if(indexPath.row == 0) {
         cellIdentifier = topCellIdentifier;
-    } else if(indexPath.row == 13) {
+    } else if(indexPath.row == units.count - 1) {
         cellIdentifier = bottomCellIdentifier;
     } else {
         cellIdentifier = centerCellIdentifier;
@@ -77,9 +85,45 @@
     SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 120, 40)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.tag = 999;
+        [cell addSubview:titleLabel];
+        
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 2, 150, 40)];
+        detailLabel.textAlignment = NSTextAlignmentRight;
+        detailLabel.textColor = [UIColor darkGrayColor];
+        detailLabel.backgroundColor = [UIColor clearColor];
+        detailLabel.font = [UIFont systemFontOfSize:16.f];
+        detailLabel.tag = 888;
+        [cell addSubview:detailLabel];
+    }
+   
+    UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
+    UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
+    
+    if(units.count > indexPath.row) {
+        Unit *unit = [units objectAtIndex:indexPath.row];
+        titleLabel.text = unit.name;
+        detailLabel.text = [NSString stringWithFormat:@"%@   ", unit.status];
+    }
+    
+    if(units.count == 1) {
+        cell.isSingle = YES;
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(units.count > indexPath.row) {
+        UnitDetailsViewController *unitDetailsViewController = [[UnitDetailsViewController alloc] init];
+        unitDetailsViewController.unit = [units objectAtIndex:indexPath.row];
+        [self.ownerController.navigationController pushViewController:unitDetailsViewController animated:YES];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

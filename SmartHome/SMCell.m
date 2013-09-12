@@ -44,19 +44,21 @@
 }
 
 - (void)initUI {
-    self.backgroundView = [[UIView alloc] initWithFrame:self.bounds];
+    self.frame = CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2);
+    self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2)];
+    self.backgroundView.backgroundColor = [UIColor redColor];
     self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
     self.textLabel.font = [UIFont systemFontOfSize:16.f];
     self.textLabel.textColor = [UIColor blackColor];
     self.textLabel.highlightedTextColor = [UIColor darkGrayColor];
     
     if(backgroundImageView == nil) {
-        backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2)];
+        backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
         [self.backgroundView addSubview:backgroundImageView];
     }
     
     if(selectedBackgroundImageView == nil) {
-        selectedBackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2)];
+        selectedBackgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
         [self.selectedBackgroundView addSubview:selectedBackgroundImageView];
     }
    
@@ -73,8 +75,13 @@
         isTop = !isSingle_;
         isCenter = !isSingle_;
         isBottom = !isSingle_;
-        backgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"" selected:NO];
-        selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"" selected:YES];
+        backgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"singleCellIdentifier" selected:NO];
+        selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"singleCellIdentifier" selected:YES];
+        
+        UIView *line = [self viewWithTag:8888];
+        if(line) {
+            [line removeFromSuperview];
+        }
     }
 }
 
@@ -88,6 +95,7 @@
         selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"topCellIdentifier" selected:YES];
         UIImageView *imgSperatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, SM_CELL_HEIGHT / 2 - 1, SM_CELL_WIDTH / 2, 1)];
         imgSperatorLineView.image = [UIImage imageNamed:@"line_cell_seperator_main.png"];
+        imgSperatorLineView.tag = 8888;
         [self addSubview:imgSperatorLineView];
     }
 }
@@ -102,6 +110,7 @@
         selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"cellIdentifier" selected:YES];
         UIImageView *imgSperatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, SM_CELL_HEIGHT / 2 - 1, SM_CELL_WIDTH / 2, 1)];
         imgSperatorLineView.image = [UIImage imageNamed:@"line_cell_seperator_main.png"];
+        imgSperatorLineView.tag = 8888;
         [self addSubview:imgSperatorLineView];
     }
 }

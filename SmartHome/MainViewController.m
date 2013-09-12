@@ -149,6 +149,7 @@
         if(!isFirst) {
             [self showMainView:YES];
         }
+        [view notifyViewUpdate];
     }
 }
 

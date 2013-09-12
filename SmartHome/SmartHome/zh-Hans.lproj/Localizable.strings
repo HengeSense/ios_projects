@@ -108,6 +108,19 @@
 "login_later"              =  "请稍后再登录";
 
 /*
+ * device view && controller
+ */
+"unit_info"            =   "主控信息";
+"devices_list"         =   "设备列表";
+"unit_name"            =   "主控名称";
+"unit_address"         =   "内网地址";
+"unit_state"           =   "状态";
+"unit_devices_count"   =   "设备数";
+"unit_lastupdate_time" =   "最后更新时间";
+"zone_info"            =   "我的区域";
+"unit_detail"          =   "主控详情";
+
+/*
  * units binding view
  */
 "scanner_button_tips"      = "    在有无线网络的情况下，你可以采用功能扫一扫将主控设备录入手机。";

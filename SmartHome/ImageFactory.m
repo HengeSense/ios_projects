@@ -35,6 +35,8 @@
         return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", @"bg_cell_center", selected ? @"_selected" : @""]];
     } else if([@"bottomCellIdentifier" isEqualToString:identifier]) {
         return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", @"bg_cell_footer", selected ? @"_selected" : @""]];
+    } else if([@"singleCellIdentifier" isEqualToString:identifier]) {
+        return [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png", @"txt_main", selected ? @"_selected" : @""]];
     } else {
         return nil;
     }
