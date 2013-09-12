@@ -20,11 +20,11 @@
     NSIndexPath *curIndexPath;
     MainView *mainView;
 }
--(id) initWithNotifications:(NSArray *)notifications from:(MainView *)where{
+-(id) initFrom:(MainView *)where{
     self = [super init];
     if (self) {
-        if (messageArr == nil&& notifications!=nil) {
-            messageArr = [NSMutableArray arrayWithArray: notifications];
+        if (messageArr == nil) {
+            messageArr = [NSMutableArray arrayWithArray:[[[NotificationsFileManager alloc] init] readFromDisk]];
         }
         if (mainView == nil) {
             mainView = where;
