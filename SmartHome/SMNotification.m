@@ -7,10 +7,6 @@
 //
 
 #import "SMNotification.h"
-#import "NSDictionary+NSNullUtility.h"
-#import "NotificationData.h"
-#import "NSString+StringUtils.h"
-
 #import "SMDateFormatter.h"
 
 @implementation SMNotification
@@ -33,14 +29,14 @@
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
-        self.text = [json notNSNullObjectForKey:@"text"];
-        self.mac = [json notNSNullObjectForKey:@"mac"];
-        self.type = [json notNSNullObjectForKey:@"type"];
+        self.text = [json stringForKey:@"text"];
+        self.mac = [json stringForKey:@"mac"];
+        self.type = [json stringForKey:@"type"];
         self.createTime = [json dateForKey:@"createTime"];
-        self.identifier = [json notNSNullObjectForKey:@"id"];
+        self.identifier = [json stringForKey:@"id"];
         self.hasRead = [json boolForKey:@"hasRead"];
         self.hasProcess = [json boolForKey:@"hasProcess"];
-        NSDictionary *_data_ = [json notNSNullObjectForKey:@"data"];
+        NSDictionary *_data_ = [json dictionaryForKey:@"data"];
         if(_data_ != nil) {
             self.data = [[NotificationData alloc] initWithJson:_data_];
         }
@@ -50,15 +46,14 @@
 
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:([NSString isBlank:self.text] ? [NSString emptyString] : self.text) forKey:@"text"];
-    [json setObject:([NSString isBlank:self.mac] ? [NSString emptyString] : self.mac) forKey:@"mac"];
-    [json setObject:([NSString isBlank:self.type] ? [NSString emptyString] : self.type) forKey:@"type"];
-    [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"id"];
-    [json setObject:(self.hasProcess ? @"yes" : @"no") forKey:@"hasProcess"];
-    [json setObject:(self.hasRead ? @"yes" : @"no") forKey:@"hasRead"];
-    if(self.createTime != nil) {
-        [json setObject:[NSNumber numberWithLongLong:self.createTime.timeIntervalSince1970] forKey:@"createTime"];
-    }
+    [json setMayBlankString:self.text forKey:@"text"];
+    [json setMayBlankString:self.mac forKey:@"mac"];
+    [json setMayBlankString:self.type forKey:@"type"];
+    [json setMayBlankString:self.identifier forKey:@"id"];
+    [json setBool:self.hasProcess forKey:@"hasProcess"];
+    [json setBool:self.hasRead forKey:@"hasRead"];
+    [json setDateLongLongValue:self.createTime forKey:@"createTime"];
+    
     if(self.data != nil) {
         [json setObject:[self.data toJson] forKey:@"data"];
     }

@@ -1,5 +1,5 @@
 //
-//  NSDictionary+NSNullUtility.h
+//  NSDictionary+Extension.h
 //  SmartHome
 //
 //  Created by Zhao yang on 8/5/13.
@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSString+StringUtils.h"
 
-@interface NSDictionary (NSNullUtility)
+@interface NSDictionary (Extension)
 
 - (id)notNSNullObjectForKey:(id)key;
 
@@ -16,5 +17,9 @@
 - (NSString *)stringForKey:(id)key;
 - (NSNumber *)numberForKey:(id)key;
 - (NSDate *)dateForKey:(id)key;
+- (NSInteger)integerForKey:(id)key;
+- (NSArray *)arrayForKey:(id)key;
+- (NSDictionary *)dictionaryForKey:(id)key;
 
 @end
+

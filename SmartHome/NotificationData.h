@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Entity.h"
 
-@interface NotificationData : NSObject
+@interface NotificationData : Entity
 
 @property (strong, nonatomic) NSString *masterDeviceCode;
 @property (strong, nonatomic) NSString *requestDeviceCode;
 @property (strong, nonatomic) NSString *dataCommandName;
 
-- (id)initWithJson:(NSDictionary *)json;
-- (NSDictionary *)toJson;
 
 @end

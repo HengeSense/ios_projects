@@ -7,8 +7,6 @@
 //
 
 #import "NotificationData.h"
-#import "NSDictionary+NSNullUtility.h"
-#import "NSString+StringUtils.h"
 
 @implementation NotificationData
 
@@ -20,9 +18,9 @@
     self = [super init];
     if(self) {
         if(json) {
-            self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
-            self.dataCommandName = [json notNSNullObjectForKey:@"className"];
-            self.requestDeviceCode = [json notNSNullObjectForKey:@"requsetDeviceCode"];
+            self.masterDeviceCode = [json stringForKey:@"masterDeviceCode"];
+            self.dataCommandName = [json stringForKey:@"className"];
+            self.requestDeviceCode = [json stringForKey:@"requsetDeviceCode"];
         }
     }
     return self;
@@ -30,9 +28,9 @@
 
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:([NSString isBlank:self.masterDeviceCode] ? [NSString emptyString] : self.masterDeviceCode) forKey:@"masterDeviceCode"];
-    [json setObject:([NSString isBlank:self.dataCommandName] ? [NSString emptyString] : self.dataCommandName) forKey:@"className"];
-    [json setObject:([NSString isBlank:self.requestDeviceCode] ? [NSString emptyString] : self.requestDeviceCode) forKey:@"requsetDeviceCode"];
+    [json setMayBlankString:self.masterDeviceCode forKey:@"masterDeviceCode"];
+    [json setMayBlankString:self.dataCommandName forKey:@"className"];
+    [json setMayBlankString:self.requestDeviceCode forKey:@"requsetDeviceCode"];
     return json;
 }
 

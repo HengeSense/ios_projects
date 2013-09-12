@@ -7,7 +7,6 @@
 //
 
 #import "Unit.h"
-#import "NSString+StringUtils.h"
 
 @interface Unit()
 
@@ -32,14 +31,14 @@
     self = [super init];
     if(self) {
         if(json != nil) {
-            self.identifier = [json notNSNullObjectForKey:@"_id"];
+            self.identifier = [json stringForKey:@"_id"];
             if(self.identifier != nil) {
                 self.identifier = [self.identifier substringToIndex:self.identifier.length-4];
             }
-            self.localIP = [json notNSNullObjectForKey:@"localIp"];
-            self.name = [json notNSNullObjectForKey:@"name"];
-            self.localPort = [json numberForKey:@"localPort"].integerValue;
-            self.status = [json notNSNullObjectForKey:@"status"];
+            self.localIP = [json stringForKey:@"localIp"];
+            self.name = [json stringForKey:@"name"];
+            self.localPort = [json integerForKey:@"localPort"];
+            self.status = [json stringForKey:@"status"];
             self.hashCode = [json numberForKey:@"hashCode"];
             self.updateTime = [json dateForKey:@"updateTime"];
             self.sceneHashCode = [json numberForKey:@"sceneHashCode"];
@@ -58,11 +57,13 @@
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
     [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : [NSString stringWithFormat:@"%@A001", self.identifier]) forKey:@"_id"];
-    [json setObject:([NSString isBlank:self.localIP] ? [NSString emptyString] : self.localIP) forKey:@"localIp"];
-    [json setObject:([NSString isBlank:self.name] ? [NSString emptyString] : self.name) forKey:@"name"];
-    [json setObject:[NSNumber numberWithInteger:self.localPort] forKey:@"localPort"];
-    [json setObject:([NSString isBlank:self.status] ? [NSString emptyString] : self.status) forKey:@"status"];
-    [json setObject:(self.updateTime == nil ? [NSNumber numberWithInteger:0] : [NSNumber numberWithLongLong:self.updateTime.timeIntervalSince1970]) forKey:@"updateTime"];
+    
+    [json setMayBlankString:self.localIP forKey:@"localIp"];
+    [json setMayBlankString:self.name forKey:@"name"];
+    [json setInteger:self.localPort forKey:@"localPort"];
+    [json setMayBlankString:self.status forKey:@"status"];
+    [json setDateLongLongValue:self.updateTime forKey:@"updateTime"];
+    
     [json setObject:(self.hashCode == nil ? [NSNumber numberWithInteger:0] : self.hashCode) forKey:@"hashCode"];
     [json setObject:(self.sceneHashCode == nil ? [NSNumber numberWithInteger:0] : self.sceneHashCode) forKey:@"sceneHashCode"];
     
