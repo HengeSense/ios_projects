@@ -7,13 +7,12 @@
 //
 
 #import "DeviceCommand.h"
+#import "Entity.h"
 
-@interface SceneMode : NSObject
+@interface SceneMode : Entity
 
 @property (assign, nonatomic) NSInteger code;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *masterDeviceCode;
-
-- (id)initWithJson:(NSDictionary *)json;
 
 @end

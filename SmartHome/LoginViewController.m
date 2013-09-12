@@ -13,7 +13,6 @@
 #import "UnitsBindingViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
-#import "NSDictionary+NSNullUtility.h"
 #import "JsonUtils.h"
 #import "DeviceCommand.h"
 

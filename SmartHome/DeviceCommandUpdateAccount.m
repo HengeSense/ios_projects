@@ -7,7 +7,6 @@
 //
 
 #import "DeviceCommandUpdateAccount.h"
-#import "NSString+StringUtils.h"
 
 @implementation DeviceCommandUpdateAccount
 
@@ -19,39 +18,18 @@
 - (id)initWithDictionary:(NSDictionary *)json {
     self = [super initWithDictionary:json];
     if(self) {
-        self.screenName = [json notNSNullObjectForKey:@"screenName"];
-        self.email = [json notNSNullObjectForKey:@"email"];
+        self.screenName = [json stringForKey:@"screenName"];
+        self.email = [json stringForKey:@"email"];
     }
     return self;
 }
 
 - (NSMutableDictionary *)toDictionary {
     NSMutableDictionary *json = [super toDictionary];
-    
-    if(![NSString isBlank:self.oldPwd]) {
-        [json setObject:self.oldPwd forKey:@"oldPwd"];
-    } else {
-        [json setObject:[NSString emptyString] forKey:@"oldPwd"];
-    }
-    
-    if(![NSString isBlank:self.pwdToUpdate]) {
-        [json setObject:self.pwdToUpdate forKey:@"newPwd"];
-    } else {
-        [json setObject:[NSString emptyString] forKey:@"newPwd"];
-    }
-    
-    if(![NSString isBlank:self.screenName]) {
-        [json setObject:self.screenName forKey:@"screenName"];
-    } else {
-        [json setObject:[NSString emptyString] forKey:@"screenName"];
-    }
-    
-    if(![NSString isBlank:self.email]) {
-        [json setObject:self.email forKey:@"email"];
-    } else {
-        [json setObject:[NSString emptyString] forKey:@"email"];
-    }
-    
+    [json setMayBlankString:self.oldPwd forKey:@"oldPwd"];
+    [json setMayBlankString:self.pwdToUpdate forKey:@"newPwd"];
+    [json setMayBlankString:self.screenName forKey:@"screenName"];
+    [json setMayBlankString:self.email forKey:@"email"];
     return json;
 }
 

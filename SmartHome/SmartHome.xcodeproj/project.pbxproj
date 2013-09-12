@@ -43,7 +43,7 @@
 		6F0FAE8C17AF7F9F00B75D3E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8B17AF7F9F00B75D3E /* Default@2x.png */; };
 		6F0FAE8E17AF7F9F00B75D3E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8D17AF7F9F00B75D3E /* Default-568h@2x.png */; };
 		6F0FAEA817AF805C00B75D3E /* DrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEA717AF805C00B75D3E /* DrawerViewController.m */; };
-		6F0FAEAC17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAB17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m */; };
+		6F0FAEAC17AF80CC00B75D3E /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAB17AF80CC00B75D3E /* NSDictionary+Extension.m */; };
 		6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */; };
 		6F0FAEB217AF814000B75D3E /* UIColor+ExtentionForHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEB117AF814000B75D3E /* UIColor+ExtentionForHexString.m */; };
 		6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEBA17AF822000B75D3E /* MySettingsView.m */; };
@@ -239,6 +239,8 @@
 		6FFAFDF817E05AC5001EB9D0 /* line_cell_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */; };
 		6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */; };
 		6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */; };
+		6FFAFE0117E154A6001EB9D0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFE0017E154A5001EB9D0 /* Entity.m */; };
+		6FFAFE0417E15752001EB9D0 /* NSMutableDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFE0317E15752001EB9D0 /* NSMutableDictionary+Extension.m */; };
 		F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150B17CDA27F0058DADE /* lineleft@2x.png */; };
 		F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150C17CDA27F0058DADE /* lineright@2x.png */; };
 		F205157A17CF42370058DADE /* message_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157817CF42370058DADE /* message_count@2x.png */; };
@@ -323,8 +325,8 @@
 		6F0FAE8D17AF7F9F00B75D3E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6F0FAEA617AF805C00B75D3E /* DrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawerViewController.h; sourceTree = "<group>"; };
 		6F0FAEA717AF805C00B75D3E /* DrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawerViewController.m; sourceTree = "<group>"; };
-		6F0FAEAA17AF80CC00B75D3E /* NSDictionary+NSNullUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NSNullUtility.h"; sourceTree = "<group>"; };
-		6F0FAEAB17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NSNullUtility.m"; sourceTree = "<group>"; };
+		6F0FAEAA17AF80CC00B75D3E /* NSDictionary+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extension.h"; sourceTree = "<group>"; };
+		6F0FAEAB17AF80CC00B75D3E /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		6F0FAEAD17AF80F500B75D3E /* NSString+StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringUtils.h"; sourceTree = "<group>"; };
 		6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtils.m"; sourceTree = "<group>"; };
 		6F0FAEB017AF814000B75D3E /* UIColor+ExtentionForHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ExtentionForHexString.h"; sourceTree = "<group>"; };
@@ -639,6 +641,10 @@
 		6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceStatus.m; sourceTree = "<group>"; };
 		6FFAFDFC17E0A3FE001EB9D0 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		6FFAFDFF17E154A5001EB9D0 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		6FFAFE0017E154A5001EB9D0 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		6FFAFE0217E15752001EB9D0 /* NSMutableDictionary+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Extension.h"; sourceTree = "<group>"; };
+		6FFAFE0317E15752001EB9D0 /* NSMutableDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Extension.m"; sourceTree = "<group>"; };
 		F205150B17CDA27F0058DADE /* lineleft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineleft@2x.png"; sourceTree = "<group>"; };
 		F205150C17CDA27F0058DADE /* lineright@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineright@2x.png"; sourceTree = "<group>"; };
 		F205157817CF42370058DADE /* message_count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_count@2x.png"; sourceTree = "<group>"; };
@@ -1010,6 +1016,8 @@
 			children = (
 				6F0F475517C5EC840057F9A4 /* service */,
 				6F0F475417C5EC790057F9A4 /* ui */,
+				6FFAFDFF17E154A5001EB9D0 /* Entity.h */,
+				6FFAFE0017E154A5001EB9D0 /* Entity.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -1118,14 +1126,16 @@
 		6F0FAEA917AF80A800B75D3E /* categories */ = {
 			isa = PBXGroup;
 			children = (
-				6F0FAEAA17AF80CC00B75D3E /* NSDictionary+NSNullUtility.h */,
-				6F0FAEAB17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m */,
+				6F0FAEAA17AF80CC00B75D3E /* NSDictionary+Extension.h */,
+				6F0FAEAB17AF80CC00B75D3E /* NSDictionary+Extension.m */,
 				6F0FAEAD17AF80F500B75D3E /* NSString+StringUtils.h */,
 				6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */,
 				6F0FAEB017AF814000B75D3E /* UIColor+ExtentionForHexString.h */,
 				6F0FAEB117AF814000B75D3E /* UIColor+ExtentionForHexString.m */,
 				6FFAFDFC17E0A3FE001EB9D0 /* NSDate+Extension.h */,
 				6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */,
+				6FFAFE0217E15752001EB9D0 /* NSMutableDictionary+Extension.h */,
+				6FFAFE0317E15752001EB9D0 /* NSMutableDictionary+Extension.m */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -1908,7 +1918,7 @@
 				6F0FAE8417AF7F9F00B75D3E /* main.m in Sources */,
 				6F0FAE8817AF7F9F00B75D3E /* AppDelegate.m in Sources */,
 				6F0FAEA817AF805C00B75D3E /* DrawerViewController.m in Sources */,
-				6F0FAEAC17AF80CC00B75D3E /* NSDictionary+NSNullUtility.m in Sources */,
+				6F0FAEAC17AF80CC00B75D3E /* NSDictionary+Extension.m in Sources */,
 				6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */,
 				6F0FAEB217AF814000B75D3E /* UIColor+ExtentionForHexString.m in Sources */,
 				6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */,
@@ -2026,6 +2036,8 @@
 				6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */,
 				6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */,
 				6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */,
+				6FFAFE0117E154A6001EB9D0 /* Entity.m in Sources */,
+				6FFAFE0417E15752001EB9D0 /* NSMutableDictionary+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,6 @@
 //
 
 #import "SceneMode.h"
-#import "NSDictionary+NSNullUtility.h"
 
 @implementation SceneMode
 
@@ -18,8 +17,8 @@
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self && json) {
-        self.name = [json notNSNullObjectForKey:@"name"];
-        self.code = [json numberForKey:@"code"].integerValue;
+        self.name = [json stringForKey:@"name"];
+        self.code = [json integerForKey:@"code"];
     }
     return self;
 }

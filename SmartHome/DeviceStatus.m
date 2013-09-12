@@ -7,7 +7,6 @@
 //
 
 #import "DeviceStatus.h"
-#import "NSDictionary+NSNullUtility.h"
 
 @implementation DeviceStatus
 
@@ -19,8 +18,8 @@
     self = [super init];
     if(self && json) {
         self.deviceIdentifer = [json stringForKey:@"code"];
-        self.status = [json numberForKey:@"status"].integerValue;
-        self.state = [json numberForKey:@"state"].integerValue;
+        self.status = [json integerForKey:@"status"];
+        self.state = [json integerForKey:@"state"];
     }
     return self;
 }

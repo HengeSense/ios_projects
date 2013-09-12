@@ -16,7 +16,7 @@
     self = [super initWithDictionary:json];
     if(self) {
         if(json) {
-            NSArray *_notifications_ = [json notNSNullObjectForKey:@"mqs"];
+            NSArray *_notifications_ = [json arrayForKey:@"mqs"];
             if(_notifications_ != nil) {
                 for(int i=0; i<_notifications_.count; i++) {
                     NSDictionary *_notification_ = [_notifications_ objectAtIndex:i];

@@ -7,7 +7,6 @@
 //
 
 #import "DeviceCommandVoiceControl.h"
-#import "NSDictionary+NSNullUtility.h"
 
 @implementation DeviceCommandVoiceControl
 
@@ -16,14 +15,14 @@
 - (id)initWithDictionary:(NSDictionary *)json {
     self = [super initWithDictionary:json];
     if(self && json) {
-        self.voiceText = [json notNSNullObjectForKey:@"voiceText"];
+        self.voiceText = [json stringForKey:@"voiceText"];
     }
     return self;
 }
 
 - (NSMutableDictionary *)toDictionary {
     NSMutableDictionary *json = [super toDictionary];
-    [json setObject:(self.voiceText == nil ? @"" : self.voiceText) forKey:@"voiceText"];
+    [json setMayBlankString:self.voiceText forKey:@"voiceText"];
     return json;
 }
 

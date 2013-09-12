@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSDictionary+NSNullUtility.h"
 #import "Zone.h"
+#import "Entity.h"
 
-@interface Unit : NSObject
+@interface Unit : Entity
 
 @property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSString *localIP;
@@ -20,15 +20,13 @@
 @property (strong, nonatomic) NSDate *updateTime;
 @property (strong, nonatomic) NSNumber *hashCode;
 @property (strong, nonatomic) NSMutableArray *zones;
+
+//
 @property (strong, nonatomic) NSMutableArray *scenesModeList;
-
-
 @property (strong, nonatomic) NSNumber *sceneHashCode;
 
+//
 @property (strong, nonatomic, readonly) NSArray *devices;
-
-- (id)initWithJson:(NSDictionary *)json;
-- (NSDictionary *)toJson;
 
 - (Zone *)zoneForId:(NSString *)_id_;
 

@@ -7,7 +7,6 @@
 //
 
 #import "Device.h"
-#import "NSString+StringUtils.h"
 
 @implementation Device
 
@@ -45,20 +44,20 @@
     self = [super init];
     if(self) {
         if(json != nil) {
-            self.category = [json notNSNullObjectForKey:@"category"];
-            self.ep = [json numberForKey:@"ep"].integerValue;
-            self.identifier = [json notNSNullObjectForKey:@"code"];
-            self.ip = [json notNSNullObjectForKey:@"ip"];
-            self.irType = [json numberForKey:@"irType"].integerValue;
-            self.status = [json numberForKey:@"status"].integerValue;
-            self.state = [json numberForKey:@"state"].integerValue;
-            self.port = [json numberForKey:@"port"].integerValue;
-            self.pwd = [json notNSNullObjectForKey:@"pwd"];
-            self.resolution = [json numberForKey:@"resolution"].integerValue;
-            self.type = [json numberForKey:@"type"].integerValue;
-            self.name = [json notNSNullObjectForKey:@"name"];
-            self.nwkAddr = [json notNSNullObjectForKey:@"nwkAddr"];
-            self.user = [json notNSNullObjectForKey:@"user"];
+            self.category = [json stringForKey:@"category"];
+            self.ep = [json integerForKey:@"ep"];
+            self.identifier = [json stringForKey:@"code"];
+            self.ip = [json stringForKey:@"ip"];
+            self.irType = [json integerForKey:@"irType"];
+            self.status = [json integerForKey:@"status"];
+            self.state = [json integerForKey:@"state"];
+            self.port = [json integerForKey:@"port"];
+            self.pwd = [json stringForKey:@"pwd"];
+            self.resolution = [json integerForKey:@"resolution"];
+            self.type = [json integerForKey:@"type"];
+            self.name = [json stringForKey:@"name"];
+            self.nwkAddr = [json stringForKey:@"nwkAddr"];
+            self.user = [json stringForKey:@"user"];
         }
     }
     return self;
@@ -66,20 +65,20 @@
 
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:([NSString isBlank:self.category] ? [NSString emptyString] : self.category) forKey:@"category"];
-    [json setObject:[NSNumber numberWithInteger:self.ep] forKey:@"ep"];
-    [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"code"];
-    [json setObject:([NSString isBlank:self.ip] ? [NSString emptyString] : self.ip) forKey:@"ip"];
-    [json setObject:[NSNumber numberWithInteger:self.irType] forKey:@"irType"];
-    [json setObject:[NSNumber numberWithInteger:self.status] forKey:@"status"];
-    [json setObject:[NSNumber numberWithInteger:self.state] forKey:@"state"];
-    [json setObject:[NSNumber numberWithInteger:self.port] forKey:@"port"];
-    [json setObject:([NSString isBlank:self.pwd] ? [NSString emptyString] : self.pwd) forKey:@"pwd"];
-    [json setObject:[NSNumber numberWithInteger:self.resolution] forKey:@"resolution"];
-    [json setObject:[NSNumber numberWithInteger:self.type] forKey:@"type"];
-    [json setObject:([NSString isBlank:self.name] ? [NSString emptyString] : self.name) forKey:@"name"];
-    [json setObject:([NSString isBlank:self.nwkAddr] ? [NSString emptyString] : self.nwkAddr) forKey:@"nwkAddr"];
-    [json setObject:([NSString isBlank:self.user] ? [NSString emptyString] : self.user) forKey:@"user"];
+    [json setMayBlankString:self.category forKey:@"category"];
+    [json setInteger:self.ep forKey:@"ep"];
+    [json setMayBlankString:self.identifier forKey:@"code"];
+    [json setMayBlankString:self.ip forKey:@"ip"];
+    [json setInteger:self.irType forKey:@"irType"];
+    [json setInteger:self.status forKey:@"status"];
+    [json setInteger:self.state forKey:@"state"];
+    [json setInteger:self.port forKey:@"port"];
+    [json setMayBlankString:self.pwd forKey:@"pwd"];
+    [json setInteger:self.resolution forKey:@"resolution"];
+    [json setInteger:self.type forKey:@"type"];
+    [json setMayBlankString:self.name forKey:@"name"];
+    [json setMayBlankString:self.nwkAddr forKey:@"nwkAddr"];
+    [json setMayBlankString:self.user forKey:@"user"];
     return json;
 }
 

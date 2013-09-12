@@ -8,7 +8,7 @@
 
 #import "GlobalSettings.h"
 #import "NSString+StringUtils.h"
-#import "NSDictionary+NSNullUtility.h"
+#import "NSDictionary+Extension.h"
 
 #define GLOBAL_SETTINGS_KEY       @"global_settings.key"
 #define ACCOUNT_KEY               @"account.key"

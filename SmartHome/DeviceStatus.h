@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Entity.h"
 
-@interface DeviceStatus : NSObject
+@interface DeviceStatus : Entity
 
 @property (strong, nonatomic) NSString *deviceIdentifer;
 @property (assign, nonatomic) NSInteger state;
 @property (assign, nonatomic) NSInteger status;
 
-- (id)initWithJson:(NSDictionary *)json;
 
 @end

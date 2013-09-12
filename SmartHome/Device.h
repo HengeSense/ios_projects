@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSDictionary+NSNullUtility.h"
+#import "Entity.h"
 
-@interface Device : NSObject
+@interface Device : Entity
 
 @property (copy, nonatomic) NSString *identifier;
 @property (copy, nonatomic) NSString *name;
@@ -40,9 +40,6 @@
 @property (assign, nonatomic, readonly) BOOL isAircondition;         //红外线-空调
 @property (assign, nonatomic, readonly) BOOL isSTB;                  //红外线-机顶盒
 @property (assign, nonatomic, readonly) BOOL isCamera;               //摄像头
-
-- (id)initWithJson:(NSDictionary *)json;
-- (NSDictionary *)toJson;
 
 // 获取执行命令的字符串
 - (NSString *)commandString;

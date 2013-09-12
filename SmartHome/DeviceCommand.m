@@ -29,15 +29,15 @@
     self = [super init];
     if(self) {
         if(json != nil) {
-            self.deviceCode = [json notNSNullObjectForKey:@"deviceCode"];
-            self.commandName = [json notNSNullObjectForKey:@"_className"];
-            self.masterDeviceCode = [json notNSNullObjectForKey:@"masterDeviceCode"];
-            self.tcpAddress = [json notNSNullObjectForKey:@"tcp"];
-            self.result = [json notNSNullObjectForKey:@"id"];
-            self.describe = [json notNSNullObjectForKey:@"describe"];
+            self.deviceCode = [json stringForKey:@"deviceCode"];
+            self.commandName = [json stringForKey:@"_className"];
+            self.masterDeviceCode = [json stringForKey:@"masterDeviceCode"];
+            self.tcpAddress = [json stringForKey:@"tcp"];
+            self.result = [json stringForKey:@"id"];
+            self.describe = [json stringForKey:@"describe"];
             self.hashCode = [json numberForKey:@"hashCode"];
-            self.resultID = [json numberForKey:@"resultId"].integerValue;
-            self.security = [json notNSNullObjectForKey:@"security"];
+            self.resultID = [json integerForKey:@"resultId"];
+            self.security = [json stringForKey:@"security"];
             self.commandTime = [json dateForKey:@"commandTime"];
         }
     }
@@ -49,27 +49,12 @@
     
     // commons
     [json setObject:APP_KEY forKey:@"appKey"];
-    [json setObject:[SMShared current].settings.secretKey forKey:@"security"];
-    
-    if(![NSString isBlank:self.deviceCode]) {
-        [json setObject:self.deviceCode forKey:@"deviceCode"];
-    }
-    
-    if(![NSString isBlank:self.commandName]) {
-        [json setObject:self.commandName forKey:@"_className"];
-    }
-    
-    if(![NSString isBlank:self.masterDeviceCode]) {
-        [json setObject:self.masterDeviceCode forKey:@"masterDeviceCode"];
-    }
-    
-    if(![NSString isBlank:self.describe]) {
-        [json setObject:self.describe forKey:@"describe"];
-    }
-    
-    if(self.commandTime != nil) {
-        [json setObject:[NSNumber numberWithLongLong:(long long)self.commandTime.timeIntervalSince1970] forKey:@"commandTime"];
-    }
+    [json setNoNilObject:[SMShared current].settings.secretKey forKey:@"security"];
+    [json setNoBlankString:self.deviceCode forKey:@"deviceCode"];
+    [json setNoBlankString:self.commandName forKey:@"_className"];
+    [json setNoBlankString:self.masterDeviceCode forKey:@"masterDeviceCode"];
+    [json setNoBlankString:self.describe forKey:@"describe"];
+    [json setDateLongLongValue:self.commandTime forKey:@"commandTime"];
     
     if(([@"FindZKListCommand" isEqualToString:commandName] && ![NSString isBlank:self.masterDeviceCode]) || [@"FindDeviceSceneCommand" isEqualToString:commandName]) {
         if(self.hashCode != nil) {
@@ -78,7 +63,7 @@
             [json setObject:[NSNumber numberWithInteger:0] forKey:@"hashCode"];
         }
     }
-
+    
     return json;
 }
 

@@ -16,7 +16,7 @@
     self = [super initWithDictionary:json];
     if(self) {
         if(json != nil) {
-            NSArray *_scenes_ = [json notNSNullObjectForKey:@"scenes"];
+            NSArray *_scenes_ = [json arrayForKey:@"scenes"];
             if(_scenes_ != nil) {
                 for(int i=0; i<_scenes_.count; i++) {
                     NSDictionary *_scene_ = [_scenes_ objectAtIndex:i];

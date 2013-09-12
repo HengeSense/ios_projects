@@ -7,7 +7,6 @@
 //
 
 #import "Zone.h"
-#import "NSString+StringUtils.h"
 
 @implementation Zone
 
@@ -19,9 +18,9 @@
     self = [super init];
     if(self) {
         if(json != nil) {
-            self.name = [json notNSNullObjectForKey:@"name"];
-            self.identifier = [json notNSNullObjectForKey:@"code"];
-            NSArray *_devices_ = [json notNSNullObjectForKey:@"devices"];
+            self.name = [json stringForKey:@"name"];
+            self.identifier = [json stringForKey:@"code"];
+            NSArray *_devices_ = [json arrayForKey:@"devices"];
             if(_devices_ != nil) {
                 for(int i=0; i<_devices_.count; i++) {
                     NSDictionary *_device_ = [_devices_ objectAtIndex:i];
@@ -36,8 +35,8 @@
 
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
-    [json setObject:([NSString isBlank:self.name] ? [NSString emptyString] : self.name) forKey:@"name"];
-    [json setObject:([NSString isBlank:self.identifier] ? [NSString emptyString] : self.identifier) forKey:@"code"];
+    [json setMayBlankString:self.name forKey:@"name"];
+    [json setMayBlankString:self.identifier forKey:@"code"];
     NSMutableArray *_devices_ = [NSMutableArray array];
     for(int i=0; i<self.devices.count; i++) {
         Device *device = [self.devices objectAtIndex:i];

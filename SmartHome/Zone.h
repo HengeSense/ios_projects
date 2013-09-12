@@ -7,17 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSDictionary+NSNullUtility.h"
+#import "Entity.h"
 #import "Device.h"
 
-@interface Zone : NSObject
+@interface Zone : Entity
 
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *identifier;
-
-- (id)initWithJson:(NSDictionary *)json;
-- (NSDictionary *)toJson;
 
 - (Device *)deviceForId:(NSString *)_id_;
 

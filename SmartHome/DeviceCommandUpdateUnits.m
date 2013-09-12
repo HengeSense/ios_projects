@@ -15,7 +15,7 @@
     self = [super initWithDictionary:json];
     if(self) {
         if(json != nil) {
-            NSArray *_units_ = [json notNSNullObjectForKey:@"zkList"];
+            NSArray *_units_ = [json arrayForKey:@"zkList"];
             if(_units_ != nil && [_units_ isKindOfClass:[NSArray class]]) {
                 for(int i=0; i<_units_.count; i++) {
                     NSDictionary *_unit_ = [_units_ objectAtIndex:i];

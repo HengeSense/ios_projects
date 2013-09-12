@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSDictionary+NSNullUtility.h"
-#import "ServiceBase.h"
+#import "NSDictionary+Extension.h"
+#import "NSMutableDictionary+Extension.h"
 #import "JsonUtils.h"
 
 @interface DeviceCommand : NSObject

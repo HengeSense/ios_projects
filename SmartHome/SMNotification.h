@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Entity.h"
 #import "NotificationData.h"
 
-@interface SMNotification : NSObject
+@interface SMNotification : Entity
 
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *text;
@@ -25,8 +26,5 @@
 @property (assign, nonatomic, readonly) BOOL isValidation;
 @property (assign, nonatomic, readonly) BOOL isMessage;
 @property (assign, nonatomic, readonly) BOOL isInfoOrMessage;
-
-- (id)initWithJson:(NSDictionary *)json;
-- (NSDictionary *)toJson;
 
 @end
