@@ -123,6 +123,7 @@
             input.text = self.value;
             input.delegate = self;
             [self.view addSubview:input];
+            [input becomeFirstResponder];
         }
     
         input.returnKeyType = UIReturnKeyDone;

@@ -9,6 +9,7 @@
 #import "PopViewController.h"
 #import "NavViewController.h"
 #import "SMTextField.h"
+
 @protocol TextViewDelegate <NSObject>
 
 - (void)textViewHasBeenSetting:(NSString *)string;

@@ -171,7 +171,16 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if(indexPath.section == 0 && indexPath.row == 0) {
+        ModifyInfoViewController *textModifyView = [[ModifyInfoViewController alloc] initWithKey:NSLocalizedString(@"change_unit_name", @"") forValue:unit == nil ? [NSString emptyString] : unit.name from:self];
+        textModifyView.textDelegate = self;
+        [self presentModalViewController:textModifyView animated:YES];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)textViewHasBeenSetting:(NSString *)string {
+    NSLog(string);
 }
 
 

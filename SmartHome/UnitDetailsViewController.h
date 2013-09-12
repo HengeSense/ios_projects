@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
 #import "Unit.h"
+#import "ModifyInfoViewController.h"
 
-@interface UnitDetailsViewController : NavViewController<UITableViewDataSource, UITableViewDelegate>
+@interface UnitDetailsViewController : NavViewController<UITableViewDataSource, UITableViewDelegate, TextViewDelegate>
 
 @property (strong, nonatomic) Unit *unit;
 

@@ -119,6 +119,7 @@
 "unit_lastupdate_time" =   "最后更新时间";
 "zone_info"            =   "我的区域";
 "unit_detail"          =   "主控详情";
+"change_unit_name"     =   "修改主控名";
 
 /*
  * units binding view

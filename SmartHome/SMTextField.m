@@ -25,6 +25,7 @@
     text.font = [UIFont systemFontOfSize:18.f];
     text.textColor = [UIColor darkTextColor];
     text.borderStyle = UITextBorderStyleNone;
+    text.clearButtonMode = UITextFieldViewModeWhileEditing;
     return text;
 }
 
