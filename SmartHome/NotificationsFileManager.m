@@ -86,6 +86,7 @@
                     for(SMNotification *oldItem in newList) {
                         if([modifyItem.identifier isEqualToString:oldItem.identifier]) {
                             oldItem.hasRead = modifyItem.hasRead;
+                            oldItem.hasProcess = modifyItem.hasProcess;
                             oldItem.text = modifyItem.text;
                             break;
                         }

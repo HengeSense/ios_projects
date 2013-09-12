@@ -254,6 +254,7 @@
 		F20B36D017B9DDAD009286D6 /* DevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* DevicesViewController.m */; };
 		F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */; };
 		F20C788317D0859C003D50C5 /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C788217D0859B003D50C5 /* Memory.m */; };
+		F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F217126017E1A44F00000967 /* PushSettingViewController.m */; };
 		F2178BFE17CAEC6F0043400F /* PageableScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178BFD17CAEC6F0043400F /* PageableScrollView.m */; };
 		F2178C0117CB06720043400F /* PageableNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0017CB06720043400F /* PageableNavView.m */; };
 		F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0317CB3CEB0043400F /* ScrollNavButton.m */; };
@@ -671,6 +672,8 @@
 		F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnitsHandler.m; sourceTree = "<group>"; };
 		F20C788117D0859A003D50C5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		F20C788217D0859B003D50C5 /* Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memory.m; sourceTree = "<group>"; };
+		F217125F17E1A44F00000967 /* PushSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingViewController.h; sourceTree = "<group>"; };
+		F217126017E1A44F00000967 /* PushSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingViewController.m; sourceTree = "<group>"; };
 		F2178BFC17CAEC6F0043400F /* PageableScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableScrollView.h; sourceTree = "<group>"; };
 		F2178BFD17CAEC6F0043400F /* PageableScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageableScrollView.m; sourceTree = "<group>"; };
 		F2178BFF17CB06720043400F /* PageableNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageableNavView.h; sourceTree = "<group>"; };
@@ -1098,6 +1101,8 @@
 				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
 				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,
 				F280616817DDA7900064F35B /* NotificationHandlerViewController.m */,
+				F217125F17E1A44F00000967 /* PushSettingViewController.h */,
+				F217126017E1A44F00000967 /* PushSettingViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -2038,6 +2043,7 @@
 				6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */,
 				6FFAFE0117E154A6001EB9D0 /* Entity.m in Sources */,
 				6FFAFE0417E15752001EB9D0 /* NSMutableDictionary+Extension.m in Sources */,
+				F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

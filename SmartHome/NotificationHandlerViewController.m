@@ -72,7 +72,7 @@
     view.backgroundColor = [UIColor clearColor];
     view.center = CGPointMake(self.view.center.x, view.center.y);
     view.backgroundColor = [UIColor colorWithHexString:@"282E3C"];
-    view.layer.cornerRadius = 10;
+    view.layer.cornerRadius = 5;
     
     if (message !=nil) {
         typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50/2, 39/2)];
@@ -107,7 +107,7 @@
         lblTime.font = [UIFont systemFontOfSize:12];
         [view addSubview:lblTime];
         
-        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, textLabel.frame.size.height+15+5);
+        view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, textLabel.frame.size.height+15+5+8);
         view.tag = CELL_VIEW_TAG;
         [self.view addSubview:view];
         

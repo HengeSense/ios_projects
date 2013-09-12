@@ -209,6 +209,8 @@
 -(void) didWhenDeleted{
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:nil deleteList:[[NSArray alloc] initWithObjects:displayNotification, nil]];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] delayDismissAlertView];
     [self notifyViewUpdate];
 }
 #pragma mark -
@@ -352,7 +354,11 @@
 // show notification details
 - (void)tapGestureHandler {
     if (displayNotification == nil) return;
-    [self.ownerController.navigationController pushViewController:[[NotificationHandlerViewController alloc] initWithMessage:displayNotification] animated:YES];
+    
+    NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:displayNotification];
+    handler.deleteNotificationDelegate = self;
+    handler.cfNotificationDelegate = self;
+    [self.ownerController.navigationController pushViewController:handler animated:YES];
     
 }
 

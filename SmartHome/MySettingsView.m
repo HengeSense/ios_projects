@@ -10,7 +10,7 @@
 #import "AlertView.h"
 #import "LongButton.h"
 #import "SMCell.h"
-
+#import "PushSettingViewController.h"
 @implementation MySettingsView {
     UITableView *tblSettings;
     UIButton *btnLogout;
@@ -39,7 +39,6 @@
         tblSettings.delegate = self;
         [self addSubview:tblSettings];
     }
-    
     if(btnLogout == nil) {
         btnLogout = [LongButton buttonWithPoint:CGPointMake(0, 0)];
         btnLogout.center = CGPointMake(self.bounds.size.width / 2, 222);
@@ -56,6 +55,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
+            [self.ownerController.navigationController pushViewController:[[PushSettingViewController alloc]init] animated:YES];
             break;
         case 1:
             break;
@@ -125,7 +125,6 @@
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.ownerController.view];
     [NSTimer scheduledTimerWithTimeInterval:0.7f target:self selector:@selector(reallyLogout) userInfo:nil repeats:NO];
 }
-
 - (void)reallyLogout {
     [[SMShared current].deliveryService stopService];
     //clear all subscriptions
