@@ -77,8 +77,10 @@
                         [newList addObject:oldItem];
                     }
                 }
+            } else {
+                [newList addObjectsFromArray:oldNotifications];
             }
-            
+
             if(modifyList != nil && modifyList.count != 0) {
                 for(SMNotification *modifyItem in modifyList) {
                     for(SMNotification *oldItem in newList) {
@@ -90,7 +92,6 @@
                     }
                 }
             }
-            
             
             [self saveToDiskInternal:newList];
         }
