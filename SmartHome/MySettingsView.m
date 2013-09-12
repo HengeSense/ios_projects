@@ -37,6 +37,7 @@
         tblSettings.backgroundColor = [UIColor clearColor];
         tblSettings.dataSource = self;
         tblSettings.delegate = self;
+        tblSettings.scrollEnabled = NO;
         [self addSubview:tblSettings];
     }
     if(btnLogout == nil) {

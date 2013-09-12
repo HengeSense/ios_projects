@@ -159,8 +159,7 @@
         }
     } else if(indexPath.section == 1) {
         Zone *zone = [unit.zones objectAtIndex:indexPath.row];
-        titleLabel.text = zone.name;
-        
+        titleLabel.text = [NSString stringWithFormat:@"%@  (%d)", zone.name, zone.devices == nil ? 0 : zone.devices.count];
         if(unit.zones.count == 1) {
             cell.isSingle = YES;
         }
@@ -168,7 +167,6 @@
     
     return cell;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0 && indexPath.row == 0) {
