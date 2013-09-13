@@ -82,7 +82,7 @@
     if(cell == nil) {
         cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 120, 40)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 150, 40)];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor blackColor];
         titleLabel.tag = 999;

@@ -40,11 +40,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 -(void) initDefaults{

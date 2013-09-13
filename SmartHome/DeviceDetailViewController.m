@@ -35,6 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+
 -(void) initDefaults{
     [super initDefaults];
     if (fieldsNames == nil) {
@@ -45,6 +46,7 @@
         fieldsValues = [[NSArray alloc] initWithObjects:device.name,NSLocalizedString(device.category, @""),    device.ip,[NSString stringWithFormat:@"%i",device.port],device.nwkAddr,status, nil];
     }
 }
+
 -(void) initUI{
     [super initUI];
     if(device)
@@ -57,15 +59,17 @@
         tblDetail.dataSource = self;
         tblDetail.delegate = self;
         [self.view addSubview:tblDetail];
-
     }
 }
+
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return fieldsNames.count;
 }
+
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellDetailIndentifier;
     if (indexPath.row == 0) {
@@ -94,6 +98,11 @@
     cellDetail.accessoryViewVisible = YES;
     return cellDetail;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
