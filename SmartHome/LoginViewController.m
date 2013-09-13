@@ -62,8 +62,13 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) initUI{
-    
+- (void)viewWillAppear:(BOOL)animated {
+    //
+    txtUserName.text = [NSString emptyString];
+    txtPassword.text = [NSString emptyString];
+}
+
+- (void)initUI {
     [super initUI];
     
     [self registerTapGestureToResignKeyboard];
@@ -139,17 +144,12 @@
     lblSeperator.textAlignment = NSTextAlignmentCenter;
     lblSeperator.backgroundColor = [UIColor clearColor];
     [self.view addSubview:lblSeperator];
-    
-    //
-    txtUserName.text = @"";
-    txtPassword.text = @"";
 }
 
 #pragma mark -
 #pragma mark services
 
 - (void)login {
-    
     NSString *userName = [NSString trim:txtUserName.text];
     NSString *password = [NSString trim:txtPassword.text];
     
@@ -188,8 +188,9 @@
                         if(![SMShared current].deliveryService.isService) {
                             [[SMShared current].deliveryService startService];
                         }
-                        
                         [[AlertView currentAlertView] dismissAlertView];
+                        
+                        txtPassword.text = [NSString emptyString];
                         
                         if([SMShared current].settings.anyUnitsBinding) {
                             [self.navigationController pushViewController:[[MainViewController alloc] init] animated:NO];
