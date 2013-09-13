@@ -65,6 +65,7 @@
         default:
             break;
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -126,6 +127,7 @@
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.ownerController.view];
     [NSTimer scheduledTimerWithTimeInterval:0.7f target:self selector:@selector(reallyLogout) userInfo:nil repeats:NO];
 }
+
 - (void)reallyLogout {
     [[SMShared current].deliveryService stopService];
     //clear all subscriptions
