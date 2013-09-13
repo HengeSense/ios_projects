@@ -1,18 +1,18 @@
 //
-//  TVSpeechSettingViewController.m
+//  PasswordForgotViewController.m
 //  SmartHome
 //
-//  Created by Zhao yang on 8/5/13.
+//  Created by Zhao yang on 9/13/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "TVSpeechSettingViewController.h"
+#import "PasswordForgotViewController.h"
 
-@interface TVSpeechSettingViewController ()
+@interface PasswordForgotViewController ()
 
 @end
 
-@implementation TVSpeechSettingViewController
+@implementation PasswordForgotViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

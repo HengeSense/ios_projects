@@ -68,12 +68,7 @@
 		6F0FAEED17AF83B200B75D3E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAEEC17AF83B200B75D3E /* CoreText.framework */; };
 		6F0FAEF117AF840E00B75D3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAEF317AF840E00B75D3E /* Localizable.strings */; };
 		6F0FAEFB17AF874100B75D3E /* AirConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEFA17AF874100B75D3E /* AirConditionViewController.m */; };
-		6F0FAF0117AF876200B75D3E /* SceneModeSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0017AF876200B75D3E /* SceneModeSettingViewController.m */; };
-		6F0FAF0417AF877900B75D3E /* SceneModeDeviceSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0317AF877900B75D3E /* SceneModeDeviceSelectionViewController.m */; };
-		6F0FAF0717AF878700B75D3E /* TVAdjustmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0617AF878700B75D3E /* TVAdjustmentViewController.m */; };
-		6F0FAF0A17AF879A00B75D3E /* TVSpeechSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0917AF879A00B75D3E /* TVSpeechSettingViewController.m */; };
 		6F0FAF0D17AF87AC00B75D3E /* TVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */; };
-		6F0FAF1017AF87BD00B75D3E /* AirconditionAdjustmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */; };
 		6F0FAF1317AF87CD00B75D3E /* VerificationCodeSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */; };
 		6F0FAF1617AF87DE00B75D3E /* QRCodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */; };
 		6F0FAF3717AF882600B75D3E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAF1817AF882600B75D3E /* .gitignore */; };
@@ -134,6 +129,7 @@
 		6F47FADD17E2B80E0027C0F7 /* icon_security_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47FADB17E2B80E0027C0F7 /* icon_security_off@2x.png */; };
 		6F47FADE17E2B80E0027C0F7 /* icon_security_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47FADC17E2B80E0027C0F7 /* icon_security_on@2x.png */; };
 		6F47FAE017E2BBB60027C0F7 /* icon_curtain_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47FADF17E2BBB60027C0F7 /* icon_curtain_off@2x.png */; };
+		6F47FAE317E2C2E50027C0F7 /* PasswordForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47FAE217E2C2E50027C0F7 /* PasswordForgotViewController.m */; };
 		6F48EEEE17C8A89700C85D9B /* alert_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */; };
 		6F48EEEF17C8A89700C85D9B /* alert_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEED17C8A89700C85D9B /* alert_success@2x.png */; };
 		6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F668CE717DEE2C700034C90 /* SMDateFormatter.m */; };
@@ -146,7 +142,6 @@
 		6F84A77A17D04A5700D46BFA /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84A77917D04A5700D46BFA /* Zone.m */; };
 		6F84A78017D06D6D00D46BFA /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84A77F17D06D6D00D46BFA /* Unit.m */; };
 		6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */; };
-		6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282717B3DF3D00D0C1E3 /* RootViewController.m */; };
 		6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */; };
 		6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* ConversationView.m */; };
 		6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */; };
@@ -371,18 +366,8 @@
 		6F0FAEF417AF841500B75D3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6F0FAEF917AF874100B75D3E /* AirConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirConditionViewController.h; sourceTree = "<group>"; };
 		6F0FAEFA17AF874100B75D3E /* AirConditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirConditionViewController.m; sourceTree = "<group>"; };
-		6F0FAEFF17AF876200B75D3E /* SceneModeSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneModeSettingViewController.h; sourceTree = "<group>"; };
-		6F0FAF0017AF876200B75D3E /* SceneModeSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneModeSettingViewController.m; sourceTree = "<group>"; };
-		6F0FAF0217AF877900B75D3E /* SceneModeDeviceSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneModeDeviceSelectionViewController.h; sourceTree = "<group>"; };
-		6F0FAF0317AF877900B75D3E /* SceneModeDeviceSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneModeDeviceSelectionViewController.m; sourceTree = "<group>"; };
-		6F0FAF0517AF878700B75D3E /* TVAdjustmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVAdjustmentViewController.h; sourceTree = "<group>"; };
-		6F0FAF0617AF878700B75D3E /* TVAdjustmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVAdjustmentViewController.m; sourceTree = "<group>"; };
-		6F0FAF0817AF879A00B75D3E /* TVSpeechSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVSpeechSettingViewController.h; sourceTree = "<group>"; };
-		6F0FAF0917AF879A00B75D3E /* TVSpeechSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVSpeechSettingViewController.m; sourceTree = "<group>"; };
 		6F0FAF0B17AF87AC00B75D3E /* TVViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVViewController.h; sourceTree = "<group>"; };
 		6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVViewController.m; sourceTree = "<group>"; };
-		6F0FAF0E17AF87BD00B75D3E /* AirconditionAdjustmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirconditionAdjustmentViewController.h; sourceTree = "<group>"; };
-		6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirconditionAdjustmentViewController.m; sourceTree = "<group>"; };
 		6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerificationCodeSendViewController.h; sourceTree = "<group>"; };
 		6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerificationCodeSendViewController.m; sourceTree = "<group>"; };
 		6F0FAF1417AF87DE00B75D3E /* QRCodeScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScannerViewController.h; sourceTree = "<group>"; };
@@ -484,6 +469,8 @@
 		6F47FADB17E2B80E0027C0F7 /* icon_security_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_security_off@2x.png"; sourceTree = "<group>"; };
 		6F47FADC17E2B80E0027C0F7 /* icon_security_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_security_on@2x.png"; sourceTree = "<group>"; };
 		6F47FADF17E2BBB60027C0F7 /* icon_curtain_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_curtain_off@2x.png"; sourceTree = "<group>"; };
+		6F47FAE117E2C2E50027C0F7 /* PasswordForgotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordForgotViewController.h; sourceTree = "<group>"; };
+		6F47FAE217E2C2E50027C0F7 /* PasswordForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordForgotViewController.m; sourceTree = "<group>"; };
 		6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_failed@2x.png"; sourceTree = "<group>"; };
 		6F48EEED17C8A89700C85D9B /* alert_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_success@2x.png"; sourceTree = "<group>"; };
 		6F668CE617DEE2C700034C90 /* SMDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDateFormatter.h; sourceTree = "<group>"; };
@@ -504,8 +491,6 @@
 		6F84A77F17D06D6D00D46BFA /* Unit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unit.m; sourceTree = "<group>"; };
 		6F8927BF17B3976A00D0C1E3 /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
 		6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
-		6F89282617B3DF3D00D0C1E3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		6F89282717B3DF3D00D0C1E3 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		6F89282917B3F2D000D0C1E3 /* ServiceBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceBase.h; sourceTree = "<group>"; };
 		6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceBase.m; sourceTree = "<group>"; };
 		6F8A722B17B23E91002BA8C5 /* ConversationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationView.h; sourceTree = "<group>"; };
@@ -1059,60 +1044,19 @@
 		6F0FAEA317AF801700B75D3E /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6F0FAEC517AF82CC00B75D3E /* MainViewController.h */,
-				6F0FAEC617AF82CC00B75D3E /* MainViewController.m */,
-				6F0FAEF917AF874100B75D3E /* AirConditionViewController.h */,
-				6F0FAEFA17AF874100B75D3E /* AirConditionViewController.m */,
-				6F0FAEFF17AF876200B75D3E /* SceneModeSettingViewController.h */,
-				6F0FAF0017AF876200B75D3E /* SceneModeSettingViewController.m */,
-				6F0FAF0217AF877900B75D3E /* SceneModeDeviceSelectionViewController.h */,
-				6F0FAF0317AF877900B75D3E /* SceneModeDeviceSelectionViewController.m */,
-				6F0FAF0517AF878700B75D3E /* TVAdjustmentViewController.h */,
-				6F0FAF0617AF878700B75D3E /* TVAdjustmentViewController.m */,
-				6F0FAF0817AF879A00B75D3E /* TVSpeechSettingViewController.h */,
-				6F0FAF0917AF879A00B75D3E /* TVSpeechSettingViewController.m */,
-				6F0FAF0B17AF87AC00B75D3E /* TVViewController.h */,
-				6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */,
-				6F0FAF0E17AF87BD00B75D3E /* AirconditionAdjustmentViewController.h */,
-				6F0FAF0F17AF87BD00B75D3E /* AirconditionAdjustmentViewController.m */,
+				6F47FAE717E2C3E30027C0F7 /* main */,
+				6F47FAEA17E2C4610027C0F7 /* settings_controllers */,
+				6F47FAE917E2C42F0027C0F7 /* commons_controllers */,
+				6F47FAE417E2C2FD0027C0F7 /* login_register_controllers */,
+				6F47FAE817E2C3FB0027C0F7 /* notifications_controllers */,
+				6F47FAE617E2C39E0027C0F7 /* devices_control_controllers */,
+				6F47FAE517E2C3550027C0F7 /* units_devices_controller */,
 				6F0FAF1417AF87DE00B75D3E /* QRCodeScannerViewController.h */,
 				6F0FAF1517AF87DE00B75D3E /* QRCodeScannerViewController.m */,
-				F205B78117B0EEE2003EC863 /* NavViewController.h */,
-				F205B78217B0EEE2003EC863 /* NavViewController.m */,
-				6F89282617B3DF3D00D0C1E3 /* RootViewController.h */,
-				6F89282717B3DF3D00D0C1E3 /* RootViewController.m */,
-				F237168017B371460057C95B /* UIViewController+UIViewControllerExtension.h */,
-				F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */,
-				6FB4240117B482F50042EA41 /* BaseViewController.h */,
-				6FB4240217B482F50042EA41 /* BaseViewController.m */,
-				F20B36CE17B9DDAD009286D6 /* UnitDetailsViewController.h */,
-				F20B36CF17B9DDAD009286D6 /* UnitDetailsViewController.m */,
-				6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */,
-				6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */,
 				6F1EE66817BC787900580760 /* UnitsBindingViewController.h */,
 				6F1EE66917BC787900580760 /* UnitsBindingViewController.m */,
-				F20AE08917BDBD540040B80A /* ModifyInfoViewController.h */,
-				F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */,
-				F20AE08C17BDD00B0040B80A /* LoginViewController.h */,
-				F20AE08D17BDD00B0040B80A /* LoginViewController.m */,
-				F2D8E8C517C48EA500090E5B /* CameraViewController.h */,
-				F2D8E8C617C48EA500090E5B /* CameraViewController.m */,
-				6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */,
-				6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */,
-				6FB66D6317C751570002D6C5 /* VerificationCodeValidationViewController.h */,
-				6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */,
-				6FD6C64717CC539200BDA327 /* PopViewController.h */,
-				6FD6C64817CC539200BDA327 /* PopViewController.m */,
 				F288414017D4A35C00B81DD3 /* UserAccountViewController.h */,
 				F288414117D4A35C00B81DD3 /* UserAccountViewController.m */,
-				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,
-				F280616817DDA7900064F35B /* NotificationHandlerViewController.m */,
-				F217125F17E1A44F00000967 /* PushSettingViewController.h */,
-				F217126017E1A44F00000967 /* PushSettingViewController.m */,
-				6FFAFE0717E1B492001EB9D0 /* ZoneDetailsViewController.h */,
-				6FFAFE0817E1B492001EB9D0 /* ZoneDetailsViewController.m */,
-				6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */,
-				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1340,6 +1284,93 @@
 				6FC8C07B17D98593003B3904 /* icon_warning@2x.png */,
 			);
 			name = icons;
+			sourceTree = "<group>";
+		};
+		6F47FAE417E2C2FD0027C0F7 /* login_register_controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F20AE08C17BDD00B0040B80A /* LoginViewController.h */,
+				F20AE08D17BDD00B0040B80A /* LoginViewController.m */,
+				6F0FAF1117AF87CC00B75D3E /* VerificationCodeSendViewController.h */,
+				6F0FAF1217AF87CC00B75D3E /* VerificationCodeSendViewController.m */,
+				6FB66D6317C751570002D6C5 /* VerificationCodeValidationViewController.h */,
+				6FB66D6417C751570002D6C5 /* VerificationCodeValidationViewController.m */,
+				6F47FAE117E2C2E50027C0F7 /* PasswordForgotViewController.h */,
+				6F47FAE217E2C2E50027C0F7 /* PasswordForgotViewController.m */,
+			);
+			name = login_register_controllers;
+			sourceTree = "<group>";
+		};
+		6F47FAE517E2C3550027C0F7 /* units_devices_controller */ = {
+			isa = PBXGroup;
+			children = (
+				F20B36CE17B9DDAD009286D6 /* UnitDetailsViewController.h */,
+				F20B36CF17B9DDAD009286D6 /* UnitDetailsViewController.m */,
+				6FFAFE0717E1B492001EB9D0 /* ZoneDetailsViewController.h */,
+				6FFAFE0817E1B492001EB9D0 /* ZoneDetailsViewController.m */,
+				6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */,
+				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
+			);
+			name = units_devices_controller;
+			sourceTree = "<group>";
+		};
+		6F47FAE617E2C39E0027C0F7 /* devices_control_controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6F0FAEF917AF874100B75D3E /* AirConditionViewController.h */,
+				6F0FAEFA17AF874100B75D3E /* AirConditionViewController.m */,
+				6F0FAF0B17AF87AC00B75D3E /* TVViewController.h */,
+				6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */,
+				F2D8E8C517C48EA500090E5B /* CameraViewController.h */,
+				F2D8E8C617C48EA500090E5B /* CameraViewController.m */,
+			);
+			name = devices_control_controllers;
+			sourceTree = "<group>";
+		};
+		6F47FAE717E2C3E30027C0F7 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				6F0FAEC517AF82CC00B75D3E /* MainViewController.h */,
+				6F0FAEC617AF82CC00B75D3E /* MainViewController.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		6F47FAE817E2C3FB0027C0F7 /* notifications_controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */,
+				6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */,
+				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,
+				F280616817DDA7900064F35B /* NotificationHandlerViewController.m */,
+			);
+			name = notifications_controllers;
+			sourceTree = "<group>";
+		};
+		6F47FAE917E2C42F0027C0F7 /* commons_controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F20AE08917BDBD540040B80A /* ModifyInfoViewController.h */,
+				F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */,
+				F205B78117B0EEE2003EC863 /* NavViewController.h */,
+				F205B78217B0EEE2003EC863 /* NavViewController.m */,
+				F237168017B371460057C95B /* UIViewController+UIViewControllerExtension.h */,
+				F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */,
+				6FB4240117B482F50042EA41 /* BaseViewController.h */,
+				6FB4240217B482F50042EA41 /* BaseViewController.m */,
+				6FD6C64717CC539200BDA327 /* PopViewController.h */,
+				6FD6C64817CC539200BDA327 /* PopViewController.m */,
+			);
+			name = commons_controllers;
+			sourceTree = "<group>";
+		};
+		6F47FAEA17E2C4610027C0F7 /* settings_controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F217125F17E1A44F00000967 /* PushSettingViewController.h */,
+				F217126017E1A44F00000967 /* PushSettingViewController.m */,
+			);
+			name = settings_controllers;
 			sourceTree = "<group>";
 		};
 		6F48EEEB17C8A87700C85D9B /* alert_view */ = {
@@ -1953,12 +1984,7 @@
 				6F0FAEE017AF836600B75D3E /* MessageInterceptor.m in Sources */,
 				6F0FAEE117AF836600B75D3E /* PullTableView.m in Sources */,
 				6F0FAEFB17AF874100B75D3E /* AirConditionViewController.m in Sources */,
-				6F0FAF0117AF876200B75D3E /* SceneModeSettingViewController.m in Sources */,
-				6F0FAF0417AF877900B75D3E /* SceneModeDeviceSelectionViewController.m in Sources */,
-				6F0FAF0717AF878700B75D3E /* TVAdjustmentViewController.m in Sources */,
-				6F0FAF0A17AF879A00B75D3E /* TVSpeechSettingViewController.m in Sources */,
 				6F0FAF0D17AF87AC00B75D3E /* TVViewController.m in Sources */,
-				6F0FAF1017AF87BD00B75D3E /* AirconditionAdjustmentViewController.m in Sources */,
 				6F0FAF1317AF87CD00B75D3E /* VerificationCodeSendViewController.m in Sources */,
 				6F0FAF1617AF87DE00B75D3E /* QRCodeScannerViewController.m in Sources */,
 				6F0FAF4F17AF9C8F00B75D3E /* DrawerNavItemCell.m in Sources */,
@@ -1977,7 +2003,6 @@
 				F237168517B3715C0057C95B /* SmsService.m in Sources */,
 				6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */,
 				6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */,
-				6F89282817B3DF3D00D0C1E3 /* RootViewController.m in Sources */,
 				6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */,
 				6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */,
 				6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */,
@@ -2060,6 +2085,7 @@
 				6FFAFE0417E15752001EB9D0 /* NSMutableDictionary+Extension.m in Sources */,
 				F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */,
 				6FFAFE0917E1B493001EB9D0 /* ZoneDetailsViewController.m in Sources */,
+				6F47FAE317E2C2E50027C0F7 /* PasswordForgotViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
