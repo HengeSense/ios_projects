@@ -1101,14 +1101,14 @@
 				6FD6C64817CC539200BDA327 /* PopViewController.m */,
 				F288414017D4A35C00B81DD3 /* UserAccountViewController.h */,
 				F288414117D4A35C00B81DD3 /* UserAccountViewController.m */,
-				6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */,
-				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
 				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,
 				F280616817DDA7900064F35B /* NotificationHandlerViewController.m */,
 				F217125F17E1A44F00000967 /* PushSettingViewController.h */,
 				F217126017E1A44F00000967 /* PushSettingViewController.m */,
 				6FFAFE0717E1B492001EB9D0 /* ZoneDetailsViewController.h */,
 				6FFAFE0817E1B492001EB9D0 /* ZoneDetailsViewController.m */,
+				6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */,
+				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
