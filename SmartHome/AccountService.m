@@ -37,5 +37,10 @@
     NSString *url = [NSString stringWithFormat:@"/login?mobileCode=%@&pwd=%@&appKey=%@&phoneType=%@",account, pwd,APP_KEY, PHONE_TYPE];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
+
+- (void)sendPasswordToMobile:(NSString *)phoneNumber success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
+    NSString *url = [NSString stringWithFormat:@"/forget/pwd?mobileCode=%@&checkCode=%@", phoneNumber, [NSString md5HexDigest:[NSString stringWithFormat:@"%@FFFF", phoneNumber]]];
+    [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
+}
                      
 @end

@@ -10,6 +10,7 @@
 #import "SMTextField.h"
 #import "LongButton.h"
 #import "MainViewController.h"
+#import "PasswordForgotViewController.h"
 #import "UnitsBindingViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
@@ -116,6 +117,7 @@
         btnFindPassword.center = CGPointMake(self.view.center.x - 50, btnFindPassword.center.y);
         btnFindPassword.titleLabel.font = [UIFont systemFontOfSize:14];
         [btnFindPassword setTitle:NSLocalizedString(@"find_password", @"") forState:UIControlStateNormal];
+        [btnFindPassword addTarget:self action:@selector(showFindPasswordViewController) forControlEvents:UIControlEventTouchUpInside];
         btnFindPassword.titleLabel.textColor = [UIColor whiteColor];
         [self.view addSubview:btnFindPassword];
     }
@@ -146,22 +148,7 @@
 #pragma mark -
 #pragma mark services
 
-//need to be deleted in production, only used for debug or test
-- (void)fastLogin {
-    [[AlertView currentAlertView] dismissAlertView];
-    [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
-}
-
 - (void)login {
-    //need to be deleted in production, only used for debug or test
-    if([@"" isEqualToString:txtUserName.text]) {
-        if([@"" isEqualToString:txtPassword.text]) {
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
-            [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-            [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(fastLogin) userInfo:nil repeats:NO];
-            return;
-        }
-    }
     
     NSString *userName = [NSString trim:txtUserName.text];
     NSString *password = [NSString trim:txtPassword.text];
@@ -235,8 +222,12 @@
     [[AlertView currentAlertView] delayDismissAlertView];
 }
 
--(void)showRegisterViewController {
+- (void)showRegisterViewController {
     [self.navigationController pushViewController:[[VerificationCodeSendViewController alloc] init] animated:YES];
+}
+
+- (void)showFindPasswordViewController {
+    [self.navigationController pushViewController:[[PasswordForgotViewController alloc] init] animated:YES];
 }
 
 #pragma mark -

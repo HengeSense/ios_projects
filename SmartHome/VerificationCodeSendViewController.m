@@ -20,13 +20,6 @@
     UITextField *txtPhoneNumber;
     UILabel *lblPhoneNumber;
     UIButton *btnVerificationCodeSender;
-    VerificationCodeValidationViewController *verificationCodeValidationViewController;
-    
-    UITextField *verification;
-
-    NSTimeInterval resendTimeInterval;
-    NSString *accountPhone;
-    @private NSString *verificationCode;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

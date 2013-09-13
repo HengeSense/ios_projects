@@ -47,6 +47,7 @@
 "verification_validation.title"       = "Enter verfication code";
 "aircondition_setting.title"          = "Aircondition Setting";
 "account_info.title"                  = "Account Info";
+"find_password.title"                 = "Find password";
 
 /*
  * drawer view
@@ -101,6 +102,11 @@
 "send_success"                    = "Send successfully";
 "verification_code_expire"        = "Verification code was expired";
 "none_verification_code"          = "Please get verification code first";
+"send_password"                   = "Send password";
+"phone_for_receive_pwd"           = "Phone Number";
+"phone_not_exists"                = "Phone not exists";
+"send_failed"                     = "Send failed";
+"delay_send"                      = "Please resend later";
 
 /*
  *login view controller

@@ -8,6 +8,6 @@
 
 #import "NavViewController.h"
 
-@interface PasswordForgotViewController : NavViewController
+@interface PasswordForgotViewController : NavViewController<UITextFieldDelegate>
 
 @end
