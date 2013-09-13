@@ -32,6 +32,7 @@
 "refuse.operation" = "[refused]";
 "delete.success"   = "delete success";
 "deleting"         = "deleting...";
+"security_invalid" = "Security invalid";
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*

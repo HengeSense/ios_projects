@@ -31,7 +31,8 @@
 "agree"            = "同意";
 "agree.operation"  = "［同意］";
 "refuse.operation" = "［拒绝］";
-"delete.success" = "删除成功";
+"delete.success"   = "删除成功";
+"security_invalid" = "安全码失效";
 "deleting" = "删除中...";
 
 

@@ -11,6 +11,7 @@
 #import "LongButton.h"
 #import "SMCell.h"
 #import "PushSettingViewController.h"
+
 @implementation MySettingsView {
     UITableView *tblSettings;
     UIButton *btnLogout;
@@ -122,20 +123,13 @@
 }
 
 - (void)logout {
-    [[SMShared current].settings clearAuth];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.ownerController.view];
-    [NSTimer scheduledTimerWithTimeInterval:0.7f target:self selector:@selector(reallyLogout) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(reallyLogout) userInfo:nil repeats:NO];
 }
 
 - (void)reallyLogout {
-    [[SMShared current].deliveryService stopService];
-    //clear all subscriptions
-    [[SMShared current].memory.subscriptions removeAllObjects];
-    //clear all units
-    [[SMShared current].memory clearUnits];
-    //top bar left button
-    [self.topbar.leftButton removeTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
+    [[SMShared current].app logout];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"has_logout", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
     [self.ownerController.navigationController popToRootViewControllerAnimated:YES];

@@ -73,6 +73,12 @@
 
 
 /*
+ * clear both subscriptions and units
+ */
+- (void)clear;
+
+
+/*
  *  sync memory units to disk file
  */
 - (void)syncUnitsToDisk;

@@ -14,5 +14,6 @@
 
 - (UIView *)viewWithIdentifier:(NSString *)identifier;
 - (void)putView:(UIView *)view forIdentifier:(NSString *)identifier;
+- (void)clear;
 
 @end

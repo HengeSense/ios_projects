@@ -50,4 +50,10 @@
     }
 }
 
+- (void)clear {
+    if(pool != nil) {
+        [pool removeAllObjects];
+    }
+}
+
 @end

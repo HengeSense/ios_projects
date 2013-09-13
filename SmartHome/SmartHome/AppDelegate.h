@@ -21,4 +21,6 @@
 @property (strong, nonatomic) Memory *memory;
 @property (strong, nonatomic) DeviceCommandDeliveryService *deviceCommandDeliveryService;
 
+- (void)logout;
+
 @end

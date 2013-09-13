@@ -99,9 +99,7 @@
     NSLog(receivedJson);
     
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
-    if(command != nil) {
-        [[SMShared current].deliveryService handleDeviceCommand:command];
-    }
+    [[SMShared current].deliveryService handleDeviceCommand:command];
 }
 
 - (void)notifyConnectionClosed {

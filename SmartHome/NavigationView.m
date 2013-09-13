@@ -48,12 +48,13 @@
     return topbar;
 }
 
+/*
 - (void)refreshTopbarEvent {
     if(topbar != nil) {
         [topbar.leftButton removeTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
         [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
     }
-}
+}*/
 
 - (void)notifyViewUpdate {
     

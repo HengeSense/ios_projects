@@ -16,6 +16,8 @@
 #import "DeviceCommandUpdateDevicesHandler.h"
 #import "DeviceCommandGetSceneListHandler.h"
 
+#import "AlertView.h"
+
 @implementation DeviceCommandDeliveryService
 
 @synthesize tcpService;
@@ -48,18 +50,25 @@
 /*
  *
  *
- *
- *
  */
 - (void)handleDeviceCommand:(DeviceCommand *)command {
+    if(command == nil) return;
     
-    if(!self.isService) return;
+    if(command.resultID == -3000) {
+        [[SMShared current].app logout];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"security_invalid", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        return;
+    }
     
     if(command.resultID == -100) {
         NSLog(@"device command has been ignore .. [ %@ ]", command.commandName);
         //ignore this command
         return;
     }
+    
+    // if is not served
+    if(!self.isService) return;
     
     DeviceCommandHandler *handler = nil;
     if([@"FindZKListCommand" isEqualToString:command.commandName]) {

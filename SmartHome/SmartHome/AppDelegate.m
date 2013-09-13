@@ -12,6 +12,8 @@
 #import "LoginViewController.h"
 #import "SMDateFormatter.h"
 #import "UnitsBindingViewController.h"
+#import "ViewsPool.h"
+#import "NavigationView.h"
 
 @implementation AppDelegate
 
@@ -169,6 +171,21 @@
         rootViewController = [[LoginViewController alloc] init];
     }
     return rootViewController;
+}
+
+- (void)logout {
+    [[SMShared current].deliveryService stopService];
+    [[SMShared current].settings clearAuth];
+    [[SMShared current].memory clear];
+    
+    NavigationView *mainView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+    if(mainView != nil) {
+        UIViewController *mainViewController = mainView.ownerController;
+        [[ViewsPool sharedPool] clear];
+        if(mainViewController != nil) {
+            [mainViewController.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
 }
 
 @end

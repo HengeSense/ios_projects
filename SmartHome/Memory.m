@@ -295,6 +295,13 @@
     }
 }
 
+- (void)clear {
+    @synchronized(self) {
+        if(self.units != nil) [self.units removeAllObjects];
+        if(self.subscriptions != nil) [self.subscriptions removeAllObjects];
+    }
+}
+
 
 #pragma mark -
 #pragma mark getter and setter's

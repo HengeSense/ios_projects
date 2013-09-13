@@ -31,12 +31,6 @@
     [super viewDidLoad];
     [self initDefaults];
     [self initUI];
-    
-    NSArray *identifierCollection = [NSArray arrayWithObjects:@"mainView", @"myDevicesView", nil];
-    for(NSString *identifier in identifierCollection) {
-        NavigationView *navView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:identifier];
-        [navView notifyViewUpdate];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,7 +136,6 @@
     
     if(view != nil) {
         view.ownerController = self;
-        [view refreshTopbarEvent];
         UIView *v = [self.mainView viewWithTag:MAIN_VIEW_TAG];
         if(v != nil) [v removeFromSuperview];
         [self.mainView addSubview:view];
