@@ -34,7 +34,7 @@
 /*
  *  Update the new units to memory
  */
-- (NSArray *)updateUnits:(NSArray *)newUnits;
+- (NSArray *)replaceUnits:(NSArray *)newUnits;
 
 /*
  *  Update unit devices status for a unit
@@ -70,6 +70,11 @@
  *  load units from disk file
  */
 - (void)loadUnitsFromDisk;
+
+/*
+ *
+ */
+- (NSArray *)updateUnit:(Unit *)unit;
 
 
 /*

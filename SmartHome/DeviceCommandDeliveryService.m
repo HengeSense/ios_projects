@@ -54,7 +54,7 @@
 - (void)handleDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     
-    if(command.resultID == -3000) {
+    if(command.resultID == -3000 || command.resultID == -2000 || command.resultID == -1000) {
         [[SMShared current].app logout];
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"security_invalid", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
@@ -85,7 +85,9 @@
         handler = [[DeviceCommandVoiceControlHandler alloc] init];
     } else if([@"DeviceFingerExcuteCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateDevicesHandler alloc] init];
-    } 
+    } else if([@"DeviceChangeNameCommand" isEqualToString:command.commandName]) {
+        
+    }
         
     if(handler != nil) {
         [handler handle:command];

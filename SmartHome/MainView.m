@@ -185,8 +185,19 @@
 }
 
 #pragma mark-
-#pragma mark notification handler delegate
--(void)didAgreeOrRefuse:(NSString *)operation{
+#pragma mark notification
+
+// show notification details
+- (void)tapGestureHandler {
+    if (displayNotification == nil) return;
+    
+    NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:displayNotification];
+    handler.deleteNotificationDelegate = self;
+    handler.cfNotificationDelegate = self;
+    [self.ownerController.navigationController pushViewController:handler animated:YES];
+}
+
+- (void)didAgreeOrRefuse:(NSString *)operation {
     if (operation == nil) return;
 
     displayNotification.text = [displayNotification.text stringByAppendingString:NSLocalizedString(operation, @"")];
@@ -196,39 +207,23 @@
     [self notifyViewUpdate];
 
 }
--(void) didWhenDeleted{
+
+- (void)didWhenDeleted {
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:nil deleteList:[[NSArray alloc] initWithObjects:displayNotification, nil]];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
     [self notifyViewUpdate];
 }
-#pragma mark -
-#pragma mark selection view delegate
 
-- (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
-    if([NSString isBlank:source]) return;
-    SelectionItem *it = item;
-    if(it == nil) return;
-    NSLog(@"%@", it.identifier);
-    if([@"scene" isEqualToString:source]) {
-        
-    } else if([@"units" isEqualToString:source]) {
-        [[SMShared current].memory changeCurrentUnitTo:it.identifier];
-        [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-    }
-}
-
-
-#pragma mark -
-#pragma mark notifications
--(NSInteger) countOfNotRead:(NSArray *) notificationsArr{
+- (NSInteger)countOfNotRead:(NSArray *)notificationsArr {
     NSInteger count = 0;
     for (SMNotification *notification in notificationsArr) {
         if(!notification.hasRead) count++;
     }
     return  count;
 }
+
 - (void)updateNotifications:(NSArray *)notifications {
     if (notifications == nil||notifications.count == 0) {
         lblMessage.text = NSLocalizedString(@"everything.is.ok", @"");
@@ -257,6 +252,27 @@
     [btnMessageCount setTitle:[NSString stringWithFormat:@"%i",[self countOfNotRead:notifications]] forState:UIControlStateNormal];
     return;
 }
+
+#pragma mark -
+#pragma mark selection view delegate
+
+- (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
+    if([NSString isBlank:source]) return;
+    SelectionItem *it = item;
+    if(it == nil) return;
+    NSLog(@"%@", it.identifier);
+    if([@"scene" isEqualToString:source]) {
+        
+    } else if([@"units" isEqualToString:source]) {
+        [[SMShared current].memory changeCurrentUnitTo:it.identifier];
+        [self notifyUnitsWasUpdate];
+        DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
+        command.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
+        command.hashCode = [SMShared current].memory.currentUnit.hashCode;
+        [[SMShared current].deliveryService executeDeviceCommand:command];
+    }
+}
+
 
 #pragma mark -
 #pragma mark voice control handler
@@ -293,18 +309,18 @@
 }
 
 - (void)notifyDevicesStatusWasUpdate:(DeviceCommandUpdateDevices *)command {
-    if(command == nil) return;
-    
     if(pageableScrollView != nil) {
         [pageableScrollView notifyStatusChanged];
     }
     
     if([NSString isBlank:command.voiceText] || speechView == nil) return;
    
+    NSString *executeResult = command.resultID == 1 ? @"[执行成功]" : @"[执行失败]";
+    
     if(speechViewState == SpeechViewStateOpenned) {
         ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];
-        textMessage.messageOwner = MESSAGE_OWNER_MINE;
-        textMessage.textMessage = command.voiceText;
+        textMessage.messageOwner = MESSAGE_OWNER_THEIRS;
+        textMessage.textMessage = [NSString stringWithFormat:@"%@ %@", command.voiceText, executeResult];
         textMessage.timeMessage = [SMDateFormatter dateToString:[NSDate date] format:@"HH:mm:ss"];
         [speechView addMessage:textMessage];
     }
@@ -354,16 +370,6 @@
     [SelectionView showWithItems:unitsList selectedIdentifier:selectedUnitIdentifier source:@"units" delegate:self];
 }
 
-// show notification details
-- (void)tapGestureHandler {
-    if (displayNotification == nil) return;
-    
-    NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:displayNotification];
-    handler.deleteNotificationDelegate = self;
-    handler.cfNotificationDelegate = self;
-    [self.ownerController.navigationController pushViewController:handler animated:YES];
-    
-}
 
 #pragma mark -
 #pragma mark speech view
@@ -448,6 +454,7 @@
 - (void)endRecord {
     AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
     recognizerState = RecognizerStateRecordingEnd;
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
 }
 
 - (void)recognizeCancelled {

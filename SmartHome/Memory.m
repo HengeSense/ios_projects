@@ -13,7 +13,9 @@
 
 #define DIRECTORY [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"smarthome-units"]
 
-@implementation Memory
+@implementation Memory {
+    NSString *currentUnitIdentifier;
+}
 
 @synthesize units;
 @synthesize currentUnit;
@@ -80,55 +82,35 @@
 #pragma mark -
 #pragma mark units
 
-- (NSArray *)updateUnits:(NSArray *)newUnits {
+- (NSArray *)updateUnit:(Unit *)unit {
     @synchronized(self) {
-        if(newUnits == nil || newUnits.count == 0) {
-            [self.units removeAllObjects];
-            return self.units;
-        }
-        
+        if(unit == nil) return self.units;
         if(self.units.count == 0) {
-            [self.units addObjectsFromArray:newUnits];
-            return self.units;
-        }
-        
-        NSMutableDictionary *updateList = [NSMutableDictionary dictionary];
-        NSMutableArray *createList = [NSMutableArray array];
-        
-        for(int i=0; i<newUnits.count; i++) {
-            Unit *newUnit = [newUnits objectAtIndex:i];
-            
-            BOOL unitFound = NO;
-            for(int j=0; j<self.units.count; j++) {
-                Unit *oldUnit = [self.units objectAtIndex:j];
-                if([oldUnit.identifier isEqualToString:newUnit.identifier]) {
-                    unitFound = YES;
-                    if(newUnit.updateTime.timeIntervalSince1970 > oldUnit.updateTime.timeIntervalSince1970) {
-                        [updateList setObject:newUnit forKey:[NSNumber numberWithInteger:j].stringValue];
-                        break;
-                    }
+            [self.units addObject:unit];
+        } else {
+            int replaceIndex = -1;
+            for(int i=0; i<self.units.count; i++) {
+                Unit *oldUnit = [self.units objectAtIndex:i];
+                if([oldUnit.identifier isEqualToString:unit.identifier]) {
+                    replaceIndex = i;
+                    break;
                 }
             }
-            
-            if(!unitFound) {
-                [createList addObject:newUnit];
+            if(replaceIndex != -1) {
+                unit.name = @"你妹";
+                [self.units replaceObjectAtIndex:replaceIndex withObject:unit];
             }
         }
-        
-        if(updateList.count > 0) {
-            NSEnumerator *keyEnumerator = updateList.keyEnumerator;
-            for(NSString *key in keyEnumerator) {
-                NSInteger replaceIndex = [key integerValue];
-                [self.units setObject:[updateList objectForKey:key] atIndexedSubscript:replaceIndex];
-            }
+        return self.units;
+    }
+}
+
+- (NSArray *)replaceUnits:(NSArray *)newUnits {
+    @synchronized(self) {
+        [self.units removeAllObjects];
+        if(newUnits != nil) {
+            [self.units addObjectsFromArray:newUnits];    
         }
-        
-        if(createList.count > 0) {
-            for(int i=0; i<createList.count; i++) {
-                [self.units addObject:[createList objectAtIndex:i]];
-            }
-        }
-        
         return self.units;
     }
 }
@@ -202,23 +184,16 @@
 - (Unit *)currentUnit {
     @synchronized(self) {
         if(self.units.count == 0) return nil;
-        if(currentUnit == nil) {
+        if([NSString isBlank:currentUnitIdentifier]) {
             return [self.units objectAtIndex:0];
         }
-        return currentUnit;
+        return [self findUnitByIdentifierInternal:currentUnitIdentifier];
     }
 }
 
 - (void)changeCurrentUnitTo:(NSString *)unitIdentifier {
     @synchronized(self) {
-        if([NSString isBlank:unitIdentifier]) return;
-        if(self.units == nil) return;
-        for(Unit *unit in self.units) {
-            if([unitIdentifier isEqualToString:unit.identifier]) {
-                currentUnit = unit;
-                break;
-            }
-        }
+        currentUnitIdentifier = unitIdentifier;
     }
 }
 

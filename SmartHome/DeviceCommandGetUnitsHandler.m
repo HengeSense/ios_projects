@@ -16,7 +16,14 @@
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateUnits class]]) {
         DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
-        [[SMShared current].memory updateUnits:updateUnitsCommand.units];
+        if([NSString isBlank:updateUnitsCommand.masterDeviceCode]) {
+            [[SMShared current].memory replaceUnits:updateUnitsCommand.units];
+        } else {
+            if(updateUnitsCommand.units.count > 0) {
+                [[SMShared current].memory updateUnit:[updateUnitsCommand.units objectAtIndex:0]];
+            }
+        }
+        
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
         if(subscriptions) {
             for(int i=0; i<subscriptions.count; i++) {

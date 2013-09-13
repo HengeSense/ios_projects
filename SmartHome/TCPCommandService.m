@@ -96,7 +96,7 @@
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
     NSString *receivedJson = [[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding];
-    NSLog(receivedJson);
+//    NSLog(receivedJson);
     
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     [[SMShared current].deliveryService handleDeviceCommand:command];

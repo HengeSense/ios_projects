@@ -21,7 +21,7 @@
         if(subscriptions != nil && subscriptions.count > 0) {
             for(int i=0; i<subscriptions.count; i++) {
                 if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(notifyDevicesStatusWasUpdate:)]) {
-                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyDevicesStatusWasUpdate:) withObject:nil waitUntilDone:NO];
+                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyDevicesStatusWasUpdate:) withObject:updateDevicesCommand waitUntilDone:NO];
                 }
             }
         }

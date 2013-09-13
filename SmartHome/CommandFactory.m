@@ -13,6 +13,7 @@
 #import "DeviceCommandUpdateSceneMode.h"
 #import "DeviceCommandVoiceControl.h"
 #import "DeviceCommandUpdateDevices.h"
+#import "DeviceCommandUpdateUnitName.h"
 
 @implementation CommandFactory
 
@@ -45,6 +46,10 @@
         return command;
     } else if(type == CommandTypeUpdateDevice) {
         
+    } else if(type == CommandTypeUpdateUnitName) {
+        DeviceCommandUpdateUnitName *command = [[DeviceCommandUpdateUnitName alloc] init];
+        command.commandName = @"DeviceChangeNameCommand";
+        return command;
     }
     
     return nil;

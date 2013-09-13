@@ -130,6 +130,8 @@
 		6F47FADE17E2B80E0027C0F7 /* icon_security_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47FADC17E2B80E0027C0F7 /* icon_security_on@2x.png */; };
 		6F47FAE017E2BBB60027C0F7 /* icon_curtain_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47FADF17E2BBB60027C0F7 /* icon_curtain_off@2x.png */; };
 		6F47FAE317E2C2E50027C0F7 /* PasswordForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47FAE217E2C2E50027C0F7 /* PasswordForgotViewController.m */; };
+		6F47FAED17E311970027C0F7 /* DeviceCommandUpdateUnitName.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47FAEC17E311970027C0F7 /* DeviceCommandUpdateUnitName.m */; };
+		6F47FAF017E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47FAEF17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m */; };
 		6F48EEEE17C8A89700C85D9B /* alert_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */; };
 		6F48EEEF17C8A89700C85D9B /* alert_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEED17C8A89700C85D9B /* alert_success@2x.png */; };
 		6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F668CE717DEE2C700034C90 /* SMDateFormatter.m */; };
@@ -471,6 +473,10 @@
 		6F47FADF17E2BBB60027C0F7 /* icon_curtain_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_curtain_off@2x.png"; sourceTree = "<group>"; };
 		6F47FAE117E2C2E50027C0F7 /* PasswordForgotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordForgotViewController.h; sourceTree = "<group>"; };
 		6F47FAE217E2C2E50027C0F7 /* PasswordForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordForgotViewController.m; sourceTree = "<group>"; };
+		6F47FAEB17E311970027C0F7 /* DeviceCommandUpdateUnitName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateUnitName.h; sourceTree = "<group>"; };
+		6F47FAEC17E311970027C0F7 /* DeviceCommandUpdateUnitName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateUnitName.m; sourceTree = "<group>"; };
+		6F47FAEE17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateUnitNameHandler.h; sourceTree = "<group>"; };
+		6F47FAEF17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateUnitNameHandler.m; sourceTree = "<group>"; };
 		6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_failed@2x.png"; sourceTree = "<group>"; };
 		6F48EEED17C8A89700C85D9B /* alert_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_success@2x.png"; sourceTree = "<group>"; };
 		6F668CE617DEE2C700034C90 /* SMDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDateFormatter.h; sourceTree = "<group>"; };
@@ -1541,6 +1547,8 @@
 				6F347A5117D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m */,
 				6F347A5317D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.h */,
 				6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m */,
+				6F47FAEE17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.h */,
+				6F47FAEF17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1683,6 +1691,8 @@
 				6F347A5A17D8B64500B486D3 /* DeviceCommandVoiceControl.m */,
 				6FC1021517D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.h */,
 				6FC1021617D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m */,
+				6F47FAEB17E311970027C0F7 /* DeviceCommandUpdateUnitName.h */,
+				6F47FAEC17E311970027C0F7 /* DeviceCommandUpdateUnitName.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -2086,6 +2096,8 @@
 				F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */,
 				6FFAFE0917E1B493001EB9D0 /* ZoneDetailsViewController.m in Sources */,
 				6F47FAE317E2C2E50027C0F7 /* PasswordForgotViewController.m in Sources */,
+				6F47FAED17E311970027C0F7 /* DeviceCommandUpdateUnitName.m in Sources */,
+				6F47FAF017E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
