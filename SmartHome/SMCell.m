@@ -65,7 +65,6 @@
 - (void)initUI {
     self.frame = CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2);
     self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2)];
-    self.backgroundView.backgroundColor = [UIColor redColor];
     self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
     self.textLabel.font = [UIFont systemFontOfSize:16.f];
     self.textLabel.textColor = [UIColor blackColor];
