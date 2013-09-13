@@ -21,7 +21,9 @@
 }
 
 - (NSUInteger)count {
-    return queue.count;
+    @synchronized(self) {
+        return queue.count;
+    }
 }
 
 - (void)pushCommand:(DeviceCommand *)command {

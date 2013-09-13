@@ -13,6 +13,6 @@
 
 @interface UnitDetailsViewController : NavViewController<UITableViewDataSource, UITableViewDelegate, TextViewDelegate>
 
-@property (strong, nonatomic) Unit *unit;
+@property (strong, nonatomic) NSString *unitIdentifier;
 
 @end

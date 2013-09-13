@@ -57,6 +57,11 @@
 - (void)updateSceneList:(NSString *)unitIdentifier sceneList:(NSArray *)sceneList hashCode:(NSNumber *)hashCode;
 
 /*
+ *  get all units identifier to a array
+ */
+- (NSArray *)allUnitsIdentifierAsArray;
+
+/*
  *  clear all units from memory
  */
 - (void)clearUnits;

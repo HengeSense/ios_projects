@@ -28,7 +28,6 @@
 }
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-    
      if(eventCode == NSStreamEventHasBytesAvailable) {
         if(aStream != nil && aStream == self.inputStream) {
             
@@ -85,7 +84,6 @@
         } else if(aStream == self.outputStream) {
             outOpen = YES;
         }
-        
         if(inOpen && outOpen) {
             if(self.messageHandlerDelegate != nil && [self.messageHandlerDelegate respondsToSelector:@selector(notifyConnectionOpened)]) {
                 [self.messageHandlerDelegate notifyConnectionOpened];
@@ -210,9 +208,9 @@
 
 - (void)close {
     receivedData = nil;
+    [super close];
     inOpen = NO;
     outOpen = NO;
-    [super close];
     if(self.messageHandlerDelegate != nil && [self.messageHandlerDelegate respondsToSelector:@selector(notifyConnectionClosed)]) {
         [self.messageHandlerDelegate notifyConnectionClosed];
     }

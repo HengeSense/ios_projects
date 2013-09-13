@@ -18,9 +18,10 @@
 
 @implementation UnitDetailsViewController{
     UITableView *tblUnit;
+    Unit *unit;
 }
 
-@synthesize unit;
+@synthesize unitIdentifier;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +58,10 @@
         tblUnit.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:tblUnit];
     }
+}
+
+- (void)initDefaults {
+    unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
 }
 
 #pragma mark -
@@ -159,7 +164,7 @@
             cell.isBottom = YES;
         }
     } else if(indexPath.section == 1) {
-        if(unit.zones != nil && unit.zones.count > indexPath.row) {
+        if(unit.zones != nil) {
             Zone *zone = [unit.zones objectAtIndex:indexPath.row];
             titleLabel.text = [NSString stringWithFormat:@"%@  (%d)", zone.name, zone.devices == nil ? 0 : zone.devices.count];
             if(unit.zones.count == 1) {
@@ -172,6 +177,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(unit == nil) return;
     if(indexPath.section == 0 && indexPath.row == 0) {
         ModifyInfoViewController *textModifyView = [[ModifyInfoViewController alloc] initWithKey:NSLocalizedString(@"change_unit_name", @"") forValue:unit == nil ? [NSString emptyString] : unit.name from:self];
         textModifyView.textDelegate = self;

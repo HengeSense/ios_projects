@@ -174,6 +174,17 @@
     return nil;
 }
 
+- (NSArray *)allUnitsIdentifierAsArray {
+    @synchronized(self) {
+        NSMutableArray *ids = [NSMutableArray array];
+        if(self.units == nil || self.units.count == 0) return ids;
+        for(Unit *unit in self.units) {
+            [ids addObject:unit.identifier];
+        }
+        return ids;
+    }
+}
+
 - (void)updateSceneList:(NSString *)unitIdentifier sceneList:(NSArray *)sceneList hashCode:(NSNumber *)hashCode {
     @synchronized(self) {
         if([NSString isBlank:unitIdentifier]) return;

@@ -12,7 +12,7 @@
 
 @implementation MyDevicesView {
     UITableView *tblUnits;
-    NSArray *units;
+    NSArray *unitsIdentifierCollection;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -41,15 +41,11 @@
     }
 }
 
-- (void)refresh {
-    
-}
-
 #pragma mark -
 #pragma mark view service
 
 - (void)notifyViewUpdate {
-    units = [SMShared current].memory.units;
+    unitsIdentifierCollection = [[SMShared current].memory allUnitsIdentifierAsArray];
     [tblUnits reloadData];
 }
 
@@ -57,7 +53,7 @@
 #pragma mark table view delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return units == nil ? 0 : units.count;
+    return unitsIdentifierCollection == nil ? 0 : unitsIdentifierCollection.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -76,7 +72,7 @@
     NSString *cellIdentifier;
     if(indexPath.row == 0) {
         cellIdentifier = topCellIdentifier;
-    } else if(indexPath.row == units.count - 1) {
+    } else if(indexPath.row == unitsIdentifierCollection.count - 1) {
         cellIdentifier = bottomCellIdentifier;
     } else {
         cellIdentifier = centerCellIdentifier;
@@ -104,13 +100,14 @@
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
     UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
     
-    if(units.count > indexPath.row) {
-        Unit *unit = [units objectAtIndex:indexPath.row];
+    Unit *unit = [[SMShared current].memory findUnitByIdentifier:[unitsIdentifierCollection objectAtIndex:indexPath.row]];
+
+    if(unit != nil) {
         titleLabel.text = unit.name;
         detailLabel.text = [NSString stringWithFormat:@"%@   ", unit.status];
     }
-    
-    if(units.count == 1) {
+
+    if(unitsIdentifierCollection.count == 1) {
         cell.isSingle = YES;
     }
     
@@ -118,11 +115,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(units.count > indexPath.row) {
-        UnitDetailsViewController *unitDetailsViewController = [[UnitDetailsViewController alloc] init];
-        unitDetailsViewController.unit = [units objectAtIndex:indexPath.row];
-        [self.ownerController.navigationController pushViewController:unitDetailsViewController animated:YES];
-    }
+    UnitDetailsViewController *unitDetailsViewController = [[UnitDetailsViewController alloc] init];
+    unitDetailsViewController.unitIdentifier = [unitsIdentifierCollection objectAtIndex:indexPath.row];
+    [self.ownerController.navigationController pushViewController:unitDetailsViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
