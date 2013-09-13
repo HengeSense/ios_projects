@@ -7,10 +7,11 @@
 //
 
 #import "DeviceCommandHandler.h"
+#import "DeviceCommandUpdateDevices.h"
 
 @protocol DevicecommandUpdateDevicesDelegate <NSObject>
 
-- (void)notifyDevicesStatusWasUpdate;
+- (void)notifyDevicesStatusWasUpdate:(DeviceCommandUpdateDevices *)command;
 
 @end
 

@@ -9,20 +9,12 @@
 
 #import "MainView.h"
 #import "NotificationViewController.h"
-#import "NSString+StringUtils.h"
 #import "UIColor+ExtentionForHexString.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "SMDateFormatter.h"
 #import "SceneMode.h"
-
-#import "DeviceButton.h"
 #import "CommandFactory.h"
-#import "DeviceCommandUpdateAccount.h"
 #import "NotificationsFileManager.h"
-#import "DeviceCommandGetNotificationsHandler.h"
-#import "NotificationsFileManager.h"
-#import "DeviceCommandVoiceControl.h"
-#import "SpeechSynthesizer.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -73,7 +65,6 @@
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
-    
 }
 
 - (void)initUI {
@@ -271,6 +262,7 @@
 #pragma mark voice control handler
 
 - (void)notifyVoiceControlAccept:(DeviceCommandVoiceControl *)command {
+    if(command == nil || speechView == nil) return;
     if(speechViewState == SpeechViewStateOpenned) {
         ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];
         textMessage.messageOwner = MESSAGE_OWNER_MINE;
@@ -300,9 +292,21 @@
     }
 }
 
-- (void)notifyDevicesStatusWasUpdate {
+- (void)notifyDevicesStatusWasUpdate:(DeviceCommandUpdateDevices *)command {
+    if(command == nil) return;
+    
     if(pageableScrollView != nil) {
         [pageableScrollView notifyStatusChanged];
+    }
+    
+    if([NSString isBlank:command.voiceText] || speechView == nil) return;
+   
+    if(speechViewState == SpeechViewStateOpenned) {
+        ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];
+        textMessage.messageOwner = MESSAGE_OWNER_MINE;
+        textMessage.textMessage = command.voiceText;
+        textMessage.timeMessage = [SMDateFormatter dateToString:[NSDate date] format:@"HH:mm:ss"];
+        [speechView addMessage:textMessage];
     }
 }
 
