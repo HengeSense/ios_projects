@@ -184,7 +184,10 @@
         [self presentModalViewController:textModifyView animated:YES];
     } else if(indexPath.section == 1) {
         ZoneDetailsViewController *zoneDetailViewController = [[ZoneDetailsViewController alloc] init];
-        zoneDetailViewController.zone = [unit.zones objectAtIndex:indexPath.row];
+        if(unit.zones != nil) {
+            zoneDetailViewController.zone = [unit.zones objectAtIndex:indexPath.row];
+            zoneDetailViewController.title = zoneDetailViewController.zone.name;
+        }
         [self.navigationController pushViewController:zoneDetailViewController animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
