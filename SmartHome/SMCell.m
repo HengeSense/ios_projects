@@ -9,10 +9,13 @@
 #import "SMCell.h"
 #import "ImageFactory.h"
 
+#define FIXED_WIDTH 9
+
 @implementation SMCell {
     UIImageView *backgroundImageView;
     UIImageView *selectedBackgroundImageView;
     UIImageView *accessoryImageView;
+    BOOL needFixed;
 }
 
 @synthesize isSingle;
@@ -21,11 +24,27 @@
 @synthesize isBottom;
 @synthesize accessoryViewVisible = _accessoryViewVisible_;
 
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        [self initUI];
+        if([@"topCellIdentifier" isEqualToString:reuseIdentifier]) {
+            self.isTop = YES;
+        } else if([@"cellIdentifier" isEqualToString:reuseIdentifier]) {
+            self.isCenter = YES;
+        } else if([@"bottomCellIdentifier" isEqualToString:reuseIdentifier]) {
+            self.isBottom = YES;
+        }
+    }
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier needFixed:(BOOL)fixed
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        needFixed = fixed;
         [self initUI];
         if([@"topCellIdentifier" isEqualToString:reuseIdentifier]) {
             self.isTop = YES;
@@ -46,7 +65,6 @@
 - (void)initUI {
     self.frame = CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2);
     self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, SM_CELL_HEIGHT / 2)];
-    self.backgroundView.backgroundColor = [UIColor redColor];
     self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.bounds];
     self.textLabel.font = [UIFont systemFontOfSize:16.f];
     self.textLabel.textColor = [UIColor blackColor];
@@ -77,7 +95,6 @@
         isBottom = !isSingle_;
         backgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"singleCellIdentifier" selected:NO];
         selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"singleCellIdentifier" selected:YES];
-        
         UIView *line = [self viewWithTag:8888];
         if(line) {
             [line removeFromSuperview];
@@ -93,7 +110,7 @@
         isBottom = !isTop_;
         backgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"topCellIdentifier" selected:NO];
         selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"topCellIdentifier" selected:YES];
-        UIImageView *imgSperatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, SM_CELL_HEIGHT / 2 - 1, SM_CELL_WIDTH / 2, 1)];
+        UIImageView *imgSperatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(needFixed ? FIXED_WIDTH : 0, SM_CELL_HEIGHT / 2 - 1, SM_CELL_WIDTH / 2, 1)];
         imgSperatorLineView.image = [UIImage imageNamed:@"line_cell_seperator_main.png"];
         imgSperatorLineView.tag = 8888;
         [self addSubview:imgSperatorLineView];
@@ -108,7 +125,7 @@
         isBottom = !isCenter_;
         backgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"cellIdentifier" selected:NO];
         selectedBackgroundImageView.image = [[ImageFactory sharedImageFactory] imageForCellWithIdentifier:@"cellIdentifier" selected:YES];
-        UIImageView *imgSperatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, SM_CELL_HEIGHT / 2 - 1, SM_CELL_WIDTH / 2, 1)];
+        UIImageView *imgSperatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(needFixed ? FIXED_WIDTH : 0, SM_CELL_HEIGHT / 2 - 1, SM_CELL_WIDTH / 2, 1)];
         imgSperatorLineView.image = [UIImage imageNamed:@"line_cell_seperator_main.png"];
         imgSperatorLineView.tag = 8888;
         [self addSubview:imgSperatorLineView];

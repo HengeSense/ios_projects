@@ -10,6 +10,7 @@
 #import "SMCell.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SMDateFormatter.h"
+#import "ZoneDetailsViewController.h"
 
 @interface UnitDetailsViewController ()
 
@@ -17,9 +18,10 @@
 
 @implementation UnitDetailsViewController{
     UITableView *tblUnit;
+    Unit *unit;
 }
 
-@synthesize unit;
+@synthesize unitIdentifier;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +58,10 @@
         tblUnit.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:tblUnit];
     }
+}
+
+- (void)initDefaults {
+    unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
 }
 
 #pragma mark -
@@ -112,7 +118,7 @@
    
     SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
-        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:YES];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 120, 40)];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor blackColor];
@@ -158,20 +164,37 @@
             cell.isBottom = YES;
         }
     } else if(indexPath.section == 1) {
-        Zone *zone = [unit.zones objectAtIndex:indexPath.row];
-        titleLabel.text = zone.name;
-        
-        if(unit.zones.count == 1) {
-            cell.isSingle = YES;
+        if(unit.zones != nil) {
+            Zone *zone = [unit.zones objectAtIndex:indexPath.row];
+            titleLabel.text = [NSString stringWithFormat:@"%@  (%d)", zone.name, zone.devices == nil ? 0 : zone.devices.count];
+            if(unit.zones.count == 1) {
+                cell.isSingle = YES;
+            }
         }
     }
     
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if(unit == nil) return;
+    if(indexPath.section == 0 && indexPath.row == 0) {
+        ModifyInfoViewController *textModifyView = [[ModifyInfoViewController alloc] initWithKey:NSLocalizedString(@"change_unit_name", @"") forValue:unit == nil ? [NSString emptyString] : unit.name from:self];
+        textModifyView.textDelegate = self;
+        [self presentModalViewController:textModifyView animated:YES];
+    } else if(indexPath.section == 1) {
+        ZoneDetailsViewController *zoneDetailViewController = [[ZoneDetailsViewController alloc] init];
+        if(unit.zones != nil) {
+            zoneDetailViewController.zone = [unit.zones objectAtIndex:indexPath.row];
+            zoneDetailViewController.title = zoneDetailViewController.zone.name;
+        }
+        [self.navigationController pushViewController:zoneDetailViewController animated:YES];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)textViewHasBeenSetting:(NSString *)string {
+    NSLog(string);
 }
 
 

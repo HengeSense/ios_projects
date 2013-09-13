@@ -86,6 +86,7 @@
 "unit_lastupdate_time" =   "Last update time";
 "zone_info"            =   "Zones";
 "unit_detail"          =   "Unit Details";
+"change_unit_name"     =   "Change Unit Name";
 
 /*
  * register view controller

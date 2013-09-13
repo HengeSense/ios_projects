@@ -131,7 +131,8 @@
 		6F35114C17C5B80D005CD097 /* btn_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F35114917C5B80D005CD097 /* btn_on@2x.png */; };
 		6F35114D17C5B80D005CD097 /* btn_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F35114A17C5B80D005CD097 /* btn_switch@2x.png */; };
 		6F3F2D3A17C5AEC7003C3848 /* bg_speech@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F2D3917C5AEC7003C3848 /* bg_speech@2x.png */; };
-		6F457AA817D8D452004CD1A7 /* UnitsFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F457AA717D8D452004CD1A7 /* UnitsFileManager.m */; };
+		6F47FADD17E2B80E0027C0F7 /* icon_security_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47FADB17E2B80E0027C0F7 /* icon_security_off@2x.png */; };
+		6F47FADE17E2B80E0027C0F7 /* icon_security_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47FADC17E2B80E0027C0F7 /* icon_security_on@2x.png */; };
 		6F48EEEE17C8A89700C85D9B /* alert_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */; };
 		6F48EEEF17C8A89700C85D9B /* alert_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEED17C8A89700C85D9B /* alert_success@2x.png */; };
 		6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F668CE717DEE2C700034C90 /* SMDateFormatter.m */; };
@@ -480,8 +481,8 @@
 		6F35114A17C5B80D005CD097 /* btn_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_switch@2x.png"; sourceTree = "<group>"; };
 		6F3F2D3917C5AEC7003C3848 /* bg_speech@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_speech@2x.png"; sourceTree = "<group>"; };
 		6F3F2D3D17C5B1D7003C3848 /* bg_speech@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_speech@2x.png"; sourceTree = "<group>"; };
-		6F457AA617D8D452004CD1A7 /* UnitsFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsFileManager.h; sourceTree = "<group>"; };
-		6F457AA717D8D452004CD1A7 /* UnitsFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsFileManager.m; sourceTree = "<group>"; };
+		6F47FADB17E2B80E0027C0F7 /* icon_security_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_security_off@2x.png"; sourceTree = "<group>"; };
+		6F47FADC17E2B80E0027C0F7 /* icon_security_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_security_on@2x.png"; sourceTree = "<group>"; };
 		6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_failed@2x.png"; sourceTree = "<group>"; };
 		6F48EEED17C8A89700C85D9B /* alert_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_success@2x.png"; sourceTree = "<group>"; };
 		6F668CE617DEE2C700034C90 /* SMDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDateFormatter.h; sourceTree = "<group>"; };
@@ -1004,8 +1005,6 @@
 				6FA0E1F417CF45DE00154CDE /* SMShared.m */,
 				6F95BF5F17D4A7CD003A0745 /* SMCommandQueue.h */,
 				6F95BF6017D4A7CD003A0745 /* SMCommandQueue.m */,
-				6F457AA617D8D452004CD1A7 /* UnitsFileManager.h */,
-				6F457AA717D8D452004CD1A7 /* UnitsFileManager.m */,
 				6F9EDFA817D8D55800AFDBDF /* NotificationsFileManager.h */,
 				6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */,
 				6F668CE617DEE2C700034C90 /* SMDateFormatter.h */,
@@ -1106,14 +1105,14 @@
 				6FD6C64817CC539200BDA327 /* PopViewController.m */,
 				F288414017D4A35C00B81DD3 /* UserAccountViewController.h */,
 				F288414117D4A35C00B81DD3 /* UserAccountViewController.m */,
-				6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */,
-				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
 				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,
 				F280616817DDA7900064F35B /* NotificationHandlerViewController.m */,
 				F217125F17E1A44F00000967 /* PushSettingViewController.h */,
 				F217126017E1A44F00000967 /* PushSettingViewController.m */,
 				6FFAFE0717E1B492001EB9D0 /* ZoneDetailsViewController.h */,
 				6FFAFE0817E1B492001EB9D0 /* ZoneDetailsViewController.m */,
+				6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */,
+				6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1463,6 +1462,8 @@
 		6FB66D5917C702360002D6C5 /* device */ = {
 			isa = PBXGroup;
 			children = (
+				6F47FADB17E2B80E0027C0F7 /* icon_security_off@2x.png */,
+				6F47FADC17E2B80E0027C0F7 /* icon_security_on@2x.png */,
 				6FB66D5A17C702610002D6C5 /* icon_device_off@2x.png */,
 				6FD081BD17CF43260089A1ED /* icon_aircondition_off@2x.png */,
 				6FD081BE17CF43260089A1ED /* icon_aircondition_on@2x.png */,
@@ -1922,6 +1923,8 @@
 				6FFAFDF817E05AC5001EB9D0 /* line_cell_notification@2x.png in Resources */,
 				6FFAFE0617E1AF1D001EB9D0 /* logo@2x.png in Resources */,
 				6FFAFE0B17E1B6BE001EB9D0 /* txt_main_selected@2x.png in Resources */,
+				6F47FADD17E2B80E0027C0F7 /* icon_security_off@2x.png in Resources */,
+				6F47FADE17E2B80E0027C0F7 /* icon_security_on@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2039,7 +2042,6 @@
 				6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m in Sources */,
 				6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevices.m in Sources */,
 				6F347A5B17D8B64500B486D3 /* DeviceCommandVoiceControl.m in Sources */,
-				6F457AA817D8D452004CD1A7 /* UnitsFileManager.m in Sources */,
 				6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */,
 				F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */,
 				6FC8C07017D975DC003B3904 /* DeviceDetailViewController.m in Sources */,

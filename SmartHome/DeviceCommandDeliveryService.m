@@ -8,7 +8,6 @@
 
 #import "DeviceCommandDeliveryService.h"
 
-#import "UnitsFileManager.h"
 #import "DeviceCommandGetUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
@@ -86,7 +85,7 @@
 
 - (void)startService {
     if(!self.isService) {
-        [[SMShared current].memory updateUnits:[[UnitsFileManager fileManager] readFromDisk]];
+        [[SMShared current].memory loadUnitsFromDisk];
         if(![self.tcpService isConnect]) {
             [self performSelectorInBackground:@selector(startTcp) withObject:nil];
         }
@@ -97,7 +96,7 @@
 - (void)stopService {
     if(self.isService) {
         [self.tcpService disconnect];
-        [[UnitsFileManager fileManager] writeToDisk:[SMShared current].memory.units];
+        [[SMShared current].memory syncUnitsToDisk];
         isService = NO;
     }
 }

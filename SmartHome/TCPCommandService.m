@@ -14,7 +14,6 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
-    BOOL isFlushing;
 }
 
 - (id)init {
@@ -56,29 +55,27 @@
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     [queue pushCommand:command];
-    if(!isFlushing) {
-        [self flushQueue];
-    }
+    [self flushQueue];
 }
 
 - (void)flushQueue {
-    if(self.isConnect && [socket canWrite] && queue.count > 0) {
-        isFlushing = YES;
-        NSMutableData *dataToSender = [NSMutableData data];
-        DeviceCommand *command = [queue popup];
-        while (command != nil) {
-            CommunicationMessage *message = [[CommunicationMessage alloc] init];
-            message.deviceCommand = command;
-            NSData *data = [message generateData];
-            if(data != nil) {
-                [dataToSender appendData:data];
+    @synchronized(self) {
+        if(self.isConnect && [socket canWrite] && queue.count > 0) {
+            NSMutableData *dataToSender = [NSMutableData data];
+            DeviceCommand *command = [queue popup];
+            while (command != nil) {
+                CommunicationMessage *message = [[CommunicationMessage alloc] init];
+                message.deviceCommand = command;
+                NSData *data = [message generateData];
+                if(data != nil) {
+                    [dataToSender appendData:data];
+                }
+                command = [queue popup];
             }
-            command = [queue popup];
+            if(dataToSender.length > 0) {
+                [socket writeData:dataToSender];
+            }
         }
-        if(dataToSender.length > 0) {
-            [socket writeData:dataToSender];
-        }
-        isFlushing = NO;
     }
 }
 

@@ -20,4 +20,6 @@
 
 @property (assign, nonatomic) BOOL accessoryViewVisible;
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier needFixed:(BOOL)fixed;
+
 @end
