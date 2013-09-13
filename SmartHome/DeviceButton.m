@@ -14,6 +14,9 @@
 #import "TVViewController.h"
 #import "CameraViewController.h"
 
+#define ON  0
+#define OFF 1
+
 @implementation DeviceButton {
     UIButton *btn;
     UILabel *lblTitle;
@@ -97,26 +100,26 @@
     [statusImage removeAllObjects];
     if(_device_ != nil) {
         if(_device_.isLightOrInlight) {
-            [self registerImage:[UIImage imageNamed:@"icon_light_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_light_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_light_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_light_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         } else if(_device_.isCurtainOrSccurtain) {
-            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         } else if(_device_.isTV) {
-            [self registerImage:[UIImage imageNamed:@"icon_tv_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_tv_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_tv_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_tv_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         } else if(_device_.isSTB) {
-            [self registerImage:[UIImage imageNamed:@"icon_stb_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_stb_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_stb_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_stb_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         } else if(_device_.isAircondition) {
-            [self registerImage:[UIImage imageNamed:@"icon_aircondition_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_aircondition_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_aircondition_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_aircondition_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         } else if(_device_.isSocket) {
-            [self registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_device_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_device_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         } else if(_device_.isCamera) {
-            [self registerImage:[UIImage imageNamed:@"icon_camera_off.png"] forStatus:[NSNumber numberWithInteger:0].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_camera_on.png"] forStatus:[NSNumber numberWithInteger:1].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_camera_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_camera_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         }
     }
 }
