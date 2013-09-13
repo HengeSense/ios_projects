@@ -194,6 +194,16 @@
 "voice"                    = "voice";
 "shake"                    = "shake";
 "push.help1"               = "push.help1";
+"push.help2"               = "push.help2";
 "opened"                   = "opened";
 "closed"                   = "closed";
 "new.message.advance"      = "New Message Advance";
+/*
+ *device detail
+ */
+"device.name"       = "device name";
+"device.category"   = "device category";
+"device.ip"         = "device IP";
+"device.port"       = "device port";
+"device.nwkAddr"    = "device nwkAddr";
+"device.status"     = "device status";

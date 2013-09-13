@@ -195,9 +195,19 @@
  */
 "receive.new.message.advance" = "接收新消息通知";
 "voice"                    = "声音";
-"shake"                    = "震动";
-"push.help1"               = "  如果你要关闭或开启智能家居的新消息通知，请在iPhone的“设置” － “通知”功能中，找到应用程序“智能家居”进行更改";
+"shake"                    = "振动";
+"push.help1"               = "  如果你要关闭或开启智能家居的新消息通知，请在iPhone的“设置” － “通知”功能中，找到应用程序“智能家居”进行更改。";
+"push.help2"               = "  当程序在运行时，你可以设置声音或者振动。";
 "opened"                   = "已开启";
 "closed"                   = "已关闭";
 "new.message.advance"      = "新消息通知";
+/*
+ *device detail
+ */
+"device.name"       = "设备名";
+"device.category"   = "设备类型";
+"device.ip"         = "设备IP";
+"device.port"       = "设备端口";
+"device.nwkAddr"    = "设备网络地址";
+"device.status"     = "设备状态";
 

@@ -98,7 +98,17 @@
         [voiceAndShakeView addSubview:seperatorLine];
         
     }
-    
+    UILabel *lblHelp2 = [[UILabel alloc] initWithFrame:CGRectMake(0, voiceAndShakeView.frame.size.height+voiceAndShakeView.frame.origin.y, 300, 50)];
+    lblHelp2.center = CGPointMake(self.view.center.x, lblHelp2.center.y);
+    lblHelp2.backgroundColor = [UIColor clearColor];
+    lblHelp2.textColor = [UIColor lightTextColor];
+    lblHelp2.font = [UIFont systemFontOfSize:14];
+    lblHelp2.lineBreakMode = UILineBreakModeWordWrap;
+    lblHelp2.numberOfLines = 0;
+    lblHelp2.text = NSLocalizedString(@"push.help2", @"");
+    [lblHelp2 sizeThatFits:lblHelp2.frame.size];
+    [self.view addSubview:lblHelp2];
+
     if (voiceSwitch == nil) {
         voiceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(210, 12, 100, 40)];
         [voiceSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];

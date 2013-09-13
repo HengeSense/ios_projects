@@ -8,8 +8,8 @@
 
 #import "NavViewController.h"
 #import "Zone.h"
-
-@interface ZoneDetailsViewController : NavViewController
+#import "SMCell.h"
+@interface ZoneDetailsViewController : NavViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) Zone *zone;
 

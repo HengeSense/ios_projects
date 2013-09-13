@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
 #import "Device.h"
-
-@interface DeviceDetailViewController : NavViewController
+#import "SMCell.h"
+@interface DeviceDetailViewController : NavViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) Device *device;
 
