@@ -10,6 +10,7 @@
 #import "SMCell.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SMDateFormatter.h"
+#import "ZoneDetailsViewController.h"
 
 @interface UnitDetailsViewController ()
 
@@ -158,10 +159,12 @@
             cell.isBottom = YES;
         }
     } else if(indexPath.section == 1) {
-        Zone *zone = [unit.zones objectAtIndex:indexPath.row];
-        titleLabel.text = [NSString stringWithFormat:@"%@  (%d)", zone.name, zone.devices == nil ? 0 : zone.devices.count];
-        if(unit.zones.count == 1) {
-            cell.isSingle = YES;
+        if(unit.zones != nil && unit.zones.count > indexPath.row) {
+            Zone *zone = [unit.zones objectAtIndex:indexPath.row];
+            titleLabel.text = [NSString stringWithFormat:@"%@  (%d)", zone.name, zone.devices == nil ? 0 : zone.devices.count];
+            if(unit.zones.count == 1) {
+                cell.isSingle = YES;
+            }
         }
     }
     
@@ -173,6 +176,10 @@
         ModifyInfoViewController *textModifyView = [[ModifyInfoViewController alloc] initWithKey:NSLocalizedString(@"change_unit_name", @"") forValue:unit == nil ? [NSString emptyString] : unit.name from:self];
         textModifyView.textDelegate = self;
         [self presentModalViewController:textModifyView animated:YES];
+    } else if(indexPath.section == 1) {
+        ZoneDetailsViewController *zoneDetailViewController = [[ZoneDetailsViewController alloc] init];
+        zoneDetailViewController.zone = [unit.zones objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:zoneDetailViewController animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
