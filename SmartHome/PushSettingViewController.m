@@ -43,13 +43,13 @@
     CGFloat topBarHeight = self.topbar.frame.size.height;
     UIFont *fontName = [UIFont systemFontOfSize:18];
     if (systemSettingView == nil) {
-        systemSettingView = [[UIView alloc] initWithFrame:CGRectMake(0, topBarHeight+5, 300, ITEM_HEIGHT)];
+        systemSettingView = [[UIView alloc] initWithFrame:CGRectMake(0, topBarHeight+15, 300, ITEM_HEIGHT)];
         systemSettingView.center = CGPointMake(self.view.center.x, systemSettingView.center.y);
         systemSettingView.layer.cornerRadius = 10;
         systemSettingView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:systemSettingView];
         
-        UILabel *lblSysSettingTitle = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 200, ITEM_HEIGHT)];
+        UILabel *lblSysSettingTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, ITEM_HEIGHT)];
         lblSysSettingTitle.backgroundColor = [UIColor clearColor];
         lblSysSettingTitle.font = fontName;
         lblSysSettingTitle.text = NSLocalizedString(@"receive.new.message.advance", @"");
@@ -75,19 +75,19 @@
     [self.view addSubview:lblHelp1];
     
     if(voiceAndShakeView == nil){
-        voiceAndShakeView = [[UIView alloc] initWithFrame:CGRectMake(0,lblHelp1.frame.origin.y+lblHelp1.frame.size.height+5 , 300, 2*ITEM_HEIGHT+1)];
+        voiceAndShakeView = [[UIView alloc] initWithFrame:CGRectMake(0,lblHelp1.frame.origin.y+lblHelp1.frame.size.height - 5, 300, 2*ITEM_HEIGHT+1)];
         voiceAndShakeView.center = CGPointMake(self.view.center.x, voiceAndShakeView.center.y);
         voiceAndShakeView.layer.cornerRadius = 10;
         voiceAndShakeView.backgroundColor = [UIColor whiteColor];
         
         [self.view addSubview:voiceAndShakeView];
-        UILabel *lblVoice = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 100, ITEM_HEIGHT)];
+        UILabel *lblVoice = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, ITEM_HEIGHT)];
         lblVoice.backgroundColor = [UIColor clearColor];
         lblVoice.font = fontName;
         lblVoice.text = NSLocalizedString(@"voice", @"");
         [voiceAndShakeView addSubview:lblVoice];
         
-        UILabel *lblShake = [[UILabel alloc] initWithFrame:CGRectMake(5, ITEM_HEIGHT, 100, ITEM_HEIGHT)];
+        UILabel *lblShake = [[UILabel alloc] initWithFrame:CGRectMake(10, ITEM_HEIGHT, 100, ITEM_HEIGHT)];
         lblShake.backgroundColor = [UIColor clearColor];
         lblShake.font = fontName;
         lblShake.text = NSLocalizedString(@"shake", @"");
@@ -98,14 +98,15 @@
         [voiceAndShakeView addSubview:seperatorLine];
         
     }
+    
     if (voiceSwitch == nil) {
-        voiceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(200, 10, 100, 40)];
+        voiceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(210, 12, 100, 40)];
         [voiceSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         [voiceAndShakeView addSubview:voiceSwitch];
     }
     
     if(shakeSwitch == nil){
-        shakeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(200, ITEM_HEIGHT+10, 100, 40)];
+        shakeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(210, ITEM_HEIGHT+12, 100, 40)];
         [shakeSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         [voiceAndShakeView addSubview:shakeSwitch];
 
