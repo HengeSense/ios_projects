@@ -118,7 +118,7 @@
    
     SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
-        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:YES];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 120, 40)];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor blackColor];
