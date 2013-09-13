@@ -180,3 +180,13 @@
 "at" = "Message Content";
 "al" = "Warning Message";
 "everything.is.ok" = "Everything is OK!";
+/*
+ *push setting
+ */
+"receive.new.message.advance" = "receive new message advance";
+"voice"                    = "voice";
+"shake"                    = "shake";
+"push.help1"               = "push.help1";
+"opened"                   = "opened";
+"closed"                   = "closed";
+"new.message.advance"      = "New Message Advance";

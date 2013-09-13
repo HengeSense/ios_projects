@@ -182,4 +182,14 @@
 "at" = "消息内容";
 "al" = "警报内容";
 "everything.is.ok" = "一切正常!";
+/*
+ *push setting
+ */
+"receive.new.message.advance" = "接收新消息通知";
+"voice"                    = "声音";
+"shake"                    = "震动";
+"push.help1"               = "  如果你要关闭或开启智能家居的新消息通知，请在iPhone的“设置” － “通知”功能中，找到应用程序“智能家居”进行更改";
+"opened"                   = "已开启";
+"closed"                   = "已关闭";
+"new.message.advance"      = "新消息通知";
 
