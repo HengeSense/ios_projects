@@ -10,6 +10,8 @@
 
 @implementation Device
 
+@synthesize zone;
+
 @synthesize category;
 @synthesize ep;
 @synthesize identifier;
@@ -82,8 +84,8 @@
     return json;
 }
 
-- (NSString *)commandString {
-    return [NSString stringWithFormat:@"%@-%@-%d", self.category, self.identifier, self.status];
+- (NSString *)commandStringForStatus:(NSInteger)st {
+    return [NSString stringWithFormat:@"%@-%@-%d", self.category, self.identifier, st];
 }
 
 #pragma mark -

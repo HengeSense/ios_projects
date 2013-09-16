@@ -13,6 +13,7 @@
 @synthesize name;
 @synthesize devices;
 @synthesize identifier;
+@synthesize unit;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
@@ -25,6 +26,7 @@
                 for(int i=0; i<_devices_.count; i++) {
                     NSDictionary *_device_ = [_devices_ objectAtIndex:i];
                     Device *device = [[Device alloc] initWithJson:_device_];
+                    device.zone = self;
                     [self.devices addObject:device];
                 }
             }

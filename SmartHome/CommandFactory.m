@@ -7,13 +7,6 @@
 //
 
 #import "CommandFactory.h"
-#import "DeviceCommandUpdateAccount.h"
-#import "DeviceCommandUpdateUnits.h"
-#import "DeviceCommandUpdateNotifications.h"
-#import "DeviceCommandUpdateSceneMode.h"
-#import "DeviceCommandVoiceControl.h"
-#import "DeviceCommandUpdateDevices.h"
-#import "DeviceCommandUpdateUnitName.h"
 
 @implementation CommandFactory
 
@@ -45,7 +38,9 @@
         command.commandName = @"VoiceControlCommand";
         return command;
     } else if(type == CommandTypeUpdateDevice) {
-        
+        DeviceCommandUpdateDevice *command = [[DeviceCommandUpdateDevice alloc] init];
+        command.commandName = @"KeyControlCommand";
+        return command;
     } else if(type == CommandTypeUpdateUnitName) {
         DeviceCommandUpdateUnitName *command = [[DeviceCommandUpdateUnitName alloc] init];
         command.commandName = @"DeviceChangeNameCommand";
@@ -73,8 +68,6 @@
         command = [[DeviceCommandUpdateSceneMode alloc] initWithDictionary:json];
     } else if([@"VoiceControlCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandVoiceControl alloc] initWithDictionary:json];
-    } else if([@"KeyControlCommand" isEqualToString:commandName]) {
-        
     } else if([@"DeviceFingerExcuteCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateDevices alloc] initWithDictionary:json];
     }

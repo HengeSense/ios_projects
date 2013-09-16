@@ -10,8 +10,11 @@
 #import "Entity.h"
 #import "Device.h"
 
+@class Unit;
+
 @interface Zone : Entity
 
+@property (strong, nonatomic) Unit *unit;
 @property (strong, nonatomic) NSMutableArray *devices;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *identifier;

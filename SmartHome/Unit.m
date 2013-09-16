@@ -47,6 +47,7 @@
             for(int i=0; i<_zones_.count; i++) {
                 NSDictionary *_zone_ = [_zones_ objectAtIndex:i];
                 Zone *zone = [[Zone alloc] initWithJson:_zone_];
+                zone.unit = self;
                 [self.zones addObject:zone];
             }
         }

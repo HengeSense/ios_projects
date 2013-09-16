@@ -170,6 +170,7 @@
 		6FB5AC9617E6A356009AF916 /* CameraPicPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5AC9517E6A356009AF916 /* CameraPicPath.m */; };
 		6FB5AC9917E6A89F009AF916 /* PlayCameraPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5AC9817E6A89F009AF916 /* PlayCameraPicViewController.m */; };
 		6FB5AC9C17E6B6FA009AF916 /* NetworkCheckerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5AC9B17E6B6FA009AF916 /* NetworkCheckerOperation.m */; };
+		6FB5AC9F17E70108009AF916 /* DeviceCommandUpdateDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5AC9E17E70108009AF916 /* DeviceCommandUpdateDevice.m */; };
 		6FB66D5617C6F8F20002D6C5 /* bg_cell_center_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5317C6F8F20002D6C5 /* bg_cell_center_selected@2x.png */; };
 		6FB66D5717C6F8F20002D6C5 /* bg_cell_footer_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5417C6F8F20002D6C5 /* bg_cell_footer_selected@2x.png */; };
 		6FB66D5817C6F8F20002D6C5 /* bg_cell_top_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB66D5517C6F8F20002D6C5 /* bg_cell_top_selected@2x.png */; };
@@ -541,6 +542,8 @@
 		6FB5AC9817E6A89F009AF916 /* PlayCameraPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayCameraPicViewController.m; sourceTree = "<group>"; };
 		6FB5AC9A17E6B6FA009AF916 /* NetworkCheckerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCheckerOperation.h; sourceTree = "<group>"; };
 		6FB5AC9B17E6B6FA009AF916 /* NetworkCheckerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCheckerOperation.m; sourceTree = "<group>"; };
+		6FB5AC9D17E70108009AF916 /* DeviceCommandUpdateDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateDevice.h; sourceTree = "<group>"; };
+		6FB5AC9E17E70108009AF916 /* DeviceCommandUpdateDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateDevice.m; sourceTree = "<group>"; };
 		6FB66D5317C6F8F20002D6C5 /* bg_cell_center_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cell_center_selected@2x.png"; sourceTree = "<group>"; };
 		6FB66D5417C6F8F20002D6C5 /* bg_cell_footer_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cell_footer_selected@2x.png"; sourceTree = "<group>"; };
 		6FB66D5517C6F8F20002D6C5 /* bg_cell_top_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_cell_top_selected@2x.png"; sourceTree = "<group>"; };
@@ -1708,6 +1711,8 @@
 				6FC1021617D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m */,
 				6F47FAEB17E311970027C0F7 /* DeviceCommandUpdateUnitName.h */,
 				6F47FAEC17E311970027C0F7 /* DeviceCommandUpdateUnitName.m */,
+				6FB5AC9D17E70108009AF916 /* DeviceCommandUpdateDevice.h */,
+				6FB5AC9E17E70108009AF916 /* DeviceCommandUpdateDevice.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -2116,6 +2121,7 @@
 				6FB5AC9617E6A356009AF916 /* CameraPicPath.m in Sources */,
 				6FB5AC9917E6A89F009AF916 /* PlayCameraPicViewController.m in Sources */,
 				6FB5AC9C17E6B6FA009AF916 /* NetworkCheckerOperation.m in Sources */,
+				6FB5AC9F17E70108009AF916 /* DeviceCommandUpdateDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

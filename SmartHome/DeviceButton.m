@@ -13,6 +13,7 @@
 #import "AirConditionViewController.h"
 #import "TVViewController.h"
 #import "CameraViewController.h"
+#import "CommandFactory.h"
 
 #define ON  0
 #define OFF 1
@@ -143,7 +144,11 @@
     if(self.device == nil) return;
     
     if(_device_.isLightOrInlight) {
-        
+        DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+        updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
+        [updateDeviceCommand addCommandString:[self.device commandStringForStatus: self.device.status==0 ? 1 : 0]];
+        [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
+         ];
     } else if(_device_.isCurtainOrSccurtain) {
         
     } else if(_device_.isTV || _device_.isSTB) {
@@ -155,7 +160,11 @@
         airConditionViewController.title = _device_.name;
         [self.ownerController presentModalViewController:airConditionViewController animated:YES];
     } else if(_device_.isSocket) {
-        
+        DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+        updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
+        [updateDeviceCommand addCommandString:[self.device commandStringForStatus: self.device.status == 0 ? 1 : 0]];
+        [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
+         ];
     } else if(_device_.isCamera) {
         CameraViewController *cameraViewController = [[CameraViewController alloc] init];
         cameraViewController.title = _device_.name;

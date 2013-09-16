@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Entity.h"
 
+@class Zone;
+
 @interface Device : Entity
+
+@property (strong, nonatomic) Zone *zone;
 
 @property (copy, nonatomic) NSString *identifier;
 @property (copy, nonatomic) NSString *name;
@@ -42,6 +46,6 @@
 @property (assign, nonatomic, readonly) BOOL isCamera;               //摄像头
 
 // 获取执行命令的字符串
-- (NSString *)commandString;
+- (NSString *)commandStringForStatus:(NSInteger)st;
 
 @end

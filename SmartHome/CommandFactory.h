@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "DeviceCommand.h"
+#import "DeviceCommandUpdateAccount.h"
+#import "DeviceCommandUpdateUnits.h"
+#import "DeviceCommandUpdateNotifications.h"
+#import "DeviceCommandUpdateSceneMode.h"
+#import "DeviceCommandVoiceControl.h"
+#import "DeviceCommandUpdateDevices.h"
+#import "DeviceCommandUpdateUnitName.h"
+#import "DeviceCommandUpdateDevice.h"
 
 typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeNone,
