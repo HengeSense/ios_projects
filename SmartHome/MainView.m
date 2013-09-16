@@ -18,7 +18,6 @@
 
 #import "DeviceCommandUpdateUnitName.h"
 #import "PlayCameraPicViewController.h"
-#import "NetworkCheckerOperation.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -56,6 +55,7 @@
     }
     return self;
 }
+
 - (void)initDefaults {
     [super initDefaults];
     

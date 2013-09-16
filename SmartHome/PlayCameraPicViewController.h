@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "NavViewController.h"
+#import "PopViewController.h"
 
-@interface PlayCameraPicViewController : NavViewController
+@interface PlayCameraPicViewController : PopViewController
 
 @property (strong, nonatomic) NSArray *cameraPicPaths;
 

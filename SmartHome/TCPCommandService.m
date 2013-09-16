@@ -14,6 +14,7 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
+    BOOL isFirst;
     
     /*      */
     BOOL flag;
@@ -28,6 +29,8 @@
 }
 
 - (void)initDefaults {
+    isFirst = YES;
+    
     if(socket == nil) {
         NSString *tcpAddress = [SMShared current].settings.tcpAddress;
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
@@ -123,7 +126,11 @@
 }
 
 - (void)notifyConnectionOpened {
-    NSLog(@"socket opened");
+    NSLog(@"socket is open");
+    if(isFirst) {
+        isFirst = NO;
+        [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+    }
 }
 
 

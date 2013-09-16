@@ -96,8 +96,7 @@
         view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, textLabel.frame.size.height+15+5+8);
         view.tag = CELL_VIEW_TAG;
         [self.view addSubview:view];
-        
-        if([message.type isEqualToString:@"AL"]&&message.data.isCameraData){
+        if(message.isWarning && message.data.isCameraData){
             UIButton *btnCheck = [[UIButton alloc] initWithFrame:CGRectMake(5, view.frame.size.height+view.frame.origin.y+5, 152.5, 98/2)];
             [btnCheck setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
             [btnCheck setTitle:NSLocalizedString(@"check.it.out", @"") forState:UIControlStateNormal];

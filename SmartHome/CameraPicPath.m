@@ -24,4 +24,12 @@
     return self;
 }
 
+- (NSDictionary *)toJson {
+    NSMutableDictionary *json = [NSMutableDictionary dictionary];
+    [json setNoBlankString:self.path forKey:@"path"];
+    [json setNoBlankString:self.name forKey:@"name"];
+    [json setNoBlankString:self.host forKey:@"host"];
+    return json;
+}
+
 @end

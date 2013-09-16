@@ -42,6 +42,15 @@
     [json setMayBlankString:self.masterDeviceCode forKey:@"masterDeviceCode"];
     [json setMayBlankString:self.dataCommandName forKey:@"_className"];
     [json setMayBlankString:self.requestDeviceCode forKey:@"requsetDeviceCode"];
+    
+    if(self.cameraPicPaths.count > 0) {
+        NSMutableArray *arr = [NSMutableArray array];
+        for(CameraPicPath *cpp in self.cameraPicPaths) {
+            [arr addObject:[cpp toJson]];
+        }
+        [json setObject:arr forKey:@"cameraPicPaths"];
+    }
+    
     return json;
 }
 
