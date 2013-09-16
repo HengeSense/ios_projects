@@ -36,6 +36,7 @@
 @property (assign, nonatomic, readonly) BOOL isConnect;
 
 - (BOOL)canWrite;
+- (BOOL)isConnectting;
 - (void)writeData:(NSData *)data;
 
 @end

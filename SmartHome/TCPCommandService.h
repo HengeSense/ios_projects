@@ -14,9 +14,12 @@
 
 @interface TCPCommandService : NSObject<MessageHandler>
 
-- (BOOL)isConnect;
+- (BOOL)isConnectted;
+- (BOOL)isConnectting;
+
 - (void)disconnect;
 - (void)connect;
+
 - (void)executeDeviceCommand:(DeviceCommand *)command;
 
 @end

@@ -18,7 +18,11 @@
 
 #import "AlertView.h"
 
-@implementation DeviceCommandDeliveryService
+#define NETWORK_CHECK_INTERVAL 5
+
+@implementation DeviceCommandDeliveryService {
+    NSTimer *tcpConnectChecker;
+}
 
 @synthesize tcpService;
 @synthesize restfulService;
@@ -96,20 +100,41 @@
 
 - (void)startService {
     if(!self.isService) {
-        [[SMShared current].memory loadUnitsFromDisk];
-        if(![self.tcpService isConnect]) {
-            [self performSelectorInBackground:@selector(startTcp) withObject:nil];
-        }
         isService = YES;
+        
+        [[SMShared current].memory loadUnitsFromDisk];
+        
+        // start net work checker
+        if(tcpConnectChecker != nil) {
+            [tcpConnectChecker invalidate];
+        }
+        tcpConnectChecker = [NSTimer scheduledTimerWithTimeInterval:NETWORK_CHECK_INTERVAL target:self selector:@selector(checkTcp) userInfo:nil repeats:YES];
+        [tcpConnectChecker fire];
     }
 }
 
 - (void)stopService {
     if(self.isService) {
+        if(tcpConnectChecker != nil) {
+            [tcpConnectChecker invalidate];
+            tcpConnectChecker = nil;
+        }
         [self.tcpService disconnect];
         [[SMShared current].memory syncUnitsToDisk];
         isService = NO;
     }
+}
+
+- (void)checkTcp {
+    [self startTcpIfNeed];
+}
+
+- (void)startTcpIfNeed {    
+    if(self.tcpService.isConnectting || self.tcpService.isConnectted) {
+        NSLog(@"don't need to connect again.");
+        return;
+    }
+    [self performSelectorInBackground:@selector(startTcp) withObject:nil];
 }
 
 - (void)startTcp {

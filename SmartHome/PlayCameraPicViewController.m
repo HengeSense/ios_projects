@@ -7,12 +7,17 @@
 //
 
 #import "PlayCameraPicViewController.h"
+#import "CameraPicPath.h"
+
+#define THREAD_COUNT 3
 
 @interface PlayCameraPicViewController ()
 
 @end
 
-@implementation PlayCameraPicViewController
+@implementation PlayCameraPicViewController {
+    UIImageView *playView;
+}
 
 @synthesize cameraPicPaths;
 
@@ -35,6 +40,26 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)initDefaults {
+    
+}
+
+- (void)initUI {
+    [super initUI];
+    
+    if(playView == nil) {
+        playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, 320, 320)];
+        playView.backgroundColor = [UIColor redColor];
+        [self.view addSubview:playView];
+    }
+    
+    if(cameraPicPaths == nil || cameraPicPaths.count == 0) return;
+}
+
+- (void)startPlayWithCameraPicPath:(CameraPicPath *)path {
+    if(path == nil) return;
 }
 
 @end

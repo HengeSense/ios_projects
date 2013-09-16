@@ -14,6 +14,9 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
+    
+    /*      */
+    BOOL flag;
 }
 
 - (id)init {
@@ -40,6 +43,10 @@
 }
 
 - (void)connect {
+    @synchronized(self) {
+        if(flag) return;
+        flag = YES;
+    }
     [socket connect];
 }
 
@@ -47,9 +54,14 @@
     [socket close];
 }
 
-- (BOOL)isConnect {
+- (BOOL)isConnectted {
     if(socket == nil) return NO;
     return socket.isConnect;
+}
+
+- (BOOL)isConnectting {
+    if(socket == nil) return NO;
+    return socket.isConnectting;
 }
 
 - (void)executeDeviceCommand:(DeviceCommand *)command {
@@ -60,7 +72,7 @@
 
 - (void)flushQueue {
     @synchronized(self) {
-        if(self.isConnect && [socket canWrite] && queue.count > 0) {
+        if(self.isConnectted && [socket canWrite] && queue.count > 0) {
             NSMutableData *dataToSender = [NSMutableData data];
             DeviceCommand *command = [queue popup];
             while (command != nil) {
@@ -95,7 +107,6 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
-
     NSData *dd =    [JsonUtils createJsonDataFromDictionary:[JsonUtils createDictionaryFromJson:messages]];
     NSLog([[NSString alloc] initWithData:dd encoding:NSUTF8StringEncoding]);
     
@@ -104,7 +115,10 @@
 }
 
 - (void)notifyConnectionClosed {
-    NSLog(@"socket closed");
+    @synchronized(self) {
+        flag = NO;
+        NSLog(@"socket closed");
+    }
 }
 
 - (void)notifyConnectionOpened {

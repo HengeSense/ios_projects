@@ -203,6 +203,11 @@
     return inOpen && outOpen;
 }
 
+- (BOOL)isConnectting {
+    return (self.inputStream != nil && self.inputStream.streamStatus == NSStreamStatusOpening)
+        || (self.outputStream != nil && self.outputStream.streamStatus == NSStreamStatusOpening);
+}
+
 #pragma mark -
 #pragma mark override super method
 
