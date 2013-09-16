@@ -97,7 +97,6 @@
                 }
             }
             if(replaceIndex != -1) {
-                unit.name = @"你妹";
                 [self.units replaceObjectAtIndex:replaceIndex withObject:unit];
             }
         }

@@ -7,20 +7,31 @@
 //
 
 #import "NotificationData.h"
+#import "CameraPicPath.h"
 
 @implementation NotificationData
 
 @synthesize masterDeviceCode;
 @synthesize requestDeviceCode;
 @synthesize dataCommandName;
+@synthesize cameraPicPaths;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
         if(json) {
             self.masterDeviceCode = [json stringForKey:@"masterDeviceCode"];
-            self.dataCommandName = [json stringForKey:@"className"];
+            self.dataCommandName = [json stringForKey:@"_className"];
             self.requestDeviceCode = [json stringForKey:@"requsetDeviceCode"];
+            NSArray *_pics_ = [json arrayForKey:@"cameraPicPaths"];
+            if(_pics_ != nil) {
+                for(NSDictionary *pic in _pics_) {
+                    CameraPicPath *cpp = [[CameraPicPath alloc] initWithJson:pic];
+                    if(cpp != nil) {
+                        [self.cameraPicPaths addObject:cpp];
+                    }
+                }
+            }
         }
     }
     return self;
@@ -29,9 +40,27 @@
 - (NSDictionary *)toJson {
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
     [json setMayBlankString:self.masterDeviceCode forKey:@"masterDeviceCode"];
-    [json setMayBlankString:self.dataCommandName forKey:@"className"];
+    [json setMayBlankString:self.dataCommandName forKey:@"_className"];
     [json setMayBlankString:self.requestDeviceCode forKey:@"requsetDeviceCode"];
     return json;
+}
+
+- (NSMutableArray *)cameraPicPaths {
+    if(cameraPicPaths == nil) {
+        cameraPicPaths = [NSMutableArray array];
+    }
+    return cameraPicPaths;
+}
+
+- (BOOL)isCameraData {
+    if(self.dataCommandName != nil) {
+        if([self.dataCommandName isEqualToString:@"WarningMessageCommand"]) {
+            if(self.cameraPicPaths.count != 0) {
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 @end

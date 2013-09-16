@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSString *masterDeviceCode;
 @property (strong, nonatomic) NSString *requestDeviceCode;
 @property (strong, nonatomic) NSString *dataCommandName;
+@property (strong, nonatomic) NSMutableArray *cameraPicPaths;
 
+- (BOOL)isCameraData;
 
 @end

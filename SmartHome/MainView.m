@@ -16,6 +16,8 @@
 #import "CommandFactory.h"
 #import "NotificationsFileManager.h"
 
+#import "DeviceCommandUpdateUnitName.h"
+
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
 #define SPEECH_BUTTON_HEIGHT             198
@@ -171,7 +173,7 @@
         [self addSubview:notificationView];
     }
     
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+   
 }
 
 /*
