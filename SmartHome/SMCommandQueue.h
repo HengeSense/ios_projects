@@ -15,4 +15,6 @@
 - (void)pushCommand:(DeviceCommand *)command;
 - (DeviceCommand *)popup;
 
+- (BOOL)contains:(DeviceCommand *)command;
+
 @end

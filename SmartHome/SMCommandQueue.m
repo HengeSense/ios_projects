@@ -32,6 +32,18 @@
     }
 }
 
+- (BOOL)contains:(DeviceCommand *)command {
+    @synchronized(self) {
+        if(queue == nil || queue.count == 0) return NO;
+        for(DeviceCommand *cmd in queue) {
+            if([cmd isEqual:command]) {
+                return YES;
+            }
+        }
+        return NO;
+    }
+}
+
 - (DeviceCommand *)popup {
     @synchronized(self) {
         if(queue.count > 0) {

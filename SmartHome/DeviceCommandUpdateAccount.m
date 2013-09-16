@@ -33,4 +33,32 @@
     return json;
 }
 
+- (BOOL)isEqual:(id)object {
+    if(![super isEqual:object]) {
+        return NO;
+    }
+    if(![object isKindOfClass:[DeviceCommandUpdateAccount class]]) {
+        return NO;
+    }
+    DeviceCommandUpdateAccount *cmd = (DeviceCommandUpdateAccount *)object;
+    
+    if(![NSString string:self.oldPwd isEqualString:cmd.oldPwd]) {
+        return NO;
+    }
+    
+    if(![NSString string:self.pwdToUpdate isEqualString:cmd.pwdToUpdate]) {
+        return NO;
+    }
+    
+    if(![NSString string:self.screenName isEqualString:cmd.screenName]) {
+        return NO;
+    }
+    
+    if(![NSString string:self.email isEqualString:cmd.email]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

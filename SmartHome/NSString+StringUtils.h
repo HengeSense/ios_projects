@@ -12,6 +12,7 @@
 
 + (BOOL)isEmpty:(NSString *)str;
 + (BOOL)isBlank:(NSString *)str;
++ (BOOL)string:(NSString *)s1 isEqualString:(NSString *)s2;
 + (NSString *)trim:(NSString *)str;
 + (NSString *)stringEncodeWithBase64:(NSString *)str;
 + (NSString *)emptyString;

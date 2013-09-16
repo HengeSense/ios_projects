@@ -78,6 +78,16 @@
     return [[hash lowercaseString] substringWithRange:NSMakeRange(8, 16)];
 }
 
++ (BOOL)string:(NSString *)s1 isEqualString:(NSString *)s2 {
+    if(s1 != nil && s2 != nil) {
+        return [s1 isEqualToString:s2];
+    } else if(s1 == nil && s2 == nil) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 + (NSString *)emptyString {
     return @"";
 }

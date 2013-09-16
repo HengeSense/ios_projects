@@ -85,4 +85,30 @@
     return security;
 }
 
+- (BOOL)isEqual:(id)object {
+    if(object == nil) return NO;
+    if(self == object) return YES;
+    if([object isKindOfClass:[self class]]) {
+        DeviceCommand *cmd = (DeviceCommand *)object;
+        if(![self.commandName isEqualToString:cmd.commandName]) {
+            return NO;
+        }
+        if(![NSString string:self.masterDeviceCode isEqualString:cmd.masterDeviceCode]) {
+            return NO;
+        }
+        
+        if((self.hashCode == nil && cmd.hashCode != nil) || (self.hashCode != nil && cmd.hashCode == nil))
+        {
+            return NO;
+        }
+        if(self.hashCode != nil) {
+            if(![self.hashCode isEqual:cmd.hashCode]) {
+                return NO;
+            }
+        }
+        return YES;
+    }
+    return NO;
+}
+
 @end

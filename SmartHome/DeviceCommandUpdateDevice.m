@@ -31,4 +31,8 @@
     }
 }
 
+- (BOOL)isEqual:(id)object {
+    return NO;
+}
+
 @end

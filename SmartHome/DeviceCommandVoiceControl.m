@@ -26,4 +26,23 @@
     return json;
 }
 
+- (BOOL)isEqual:(id)object {
+    if(![super isEqual:object]) {
+        return NO;
+    }
+    if([object isKindOfClass:[DeviceCommandVoiceControl class]]) {
+        DeviceCommandVoiceControl *control = (DeviceCommandVoiceControl *)object;
+        
+        if(([NSString isBlank:self.voiceText] && ![NSString isBlank:control.voiceText])
+           || (![NSString isBlank:self.voiceText] && [NSString isBlank:control.voiceText])) {
+            return NO;
+        }
+        
+        if(![NSString isBlank:self.voiceText]) {
+            return [self.voiceText isEqualToString:control.voiceText];
+        }
+    }
+    return NO;
+}
+
 @end
