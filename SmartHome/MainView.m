@@ -173,6 +173,8 @@
         [notificationView addSubview:btnMessageCount];
         
         [self addSubview:notificationView];
+        [[SMShared current].deliveryService executeDeviceCommand:
+        [CommandFactory commandForType:CommandTypeGetNotifications]];
     }
 }
 
