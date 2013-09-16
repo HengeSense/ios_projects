@@ -10,6 +10,7 @@
 #import "UIColor+ExtentionForHexString.h"
 #import "LongButton.h"
 #import "SMDateFormatter.h"
+#import "PlayCameraPicViewController.h"
 @interface NotificationHandlerViewController ()
 
 @end
@@ -96,8 +97,18 @@
         view.tag = CELL_VIEW_TAG;
         [self.view addSubview:view];
         
-        
-        if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]||[message.type isEqualToString:@"AL"]) {
+        if([message.type isEqualToString:@"AL"]&&message.data.isCameraData){
+            UIButton *btnCheck = [[UIButton alloc] initWithFrame:CGRectMake(5, view.frame.size.height+view.frame.origin.y+5, 152.5, 98/2)];
+            [btnCheck setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
+            [btnCheck setTitle:NSLocalizedString(@"check.it.out", @"") forState:UIControlStateNormal];
+            [btnCheck addTarget:self action:@selector(btnCheckPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:btnCheck];
+            UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(10+152.5, btnCheck.frame.origin.y, 152.5, 98/2)];
+            [deleteButton setTitle:NSLocalizedString(@"delete", @"") forState:UIControlStateNormal];
+            [deleteButton addTarget:self action:@selector(deleteBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [deleteButton setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
+            [self.view addSubview:deleteButton];
+        }else if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]||[message.type isEqualToString:@"AL"]) {
             UIButton *deleteButton = [LongButton buttonWithPoint:CGPointMake(5, view.frame.size.height+view.frame.origin.y+5)];
             [deleteButton setTitle: NSLocalizedString(@"delete", @"") forState:UIControlStateNormal];
             [deleteButton addTarget:self action:@selector(deleteBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -132,6 +143,10 @@
 }
 -(void) cancel{
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void) btnCheckPressed:(UIButton *) sender{
+    PlayCameraPicViewController *playCameraPicViewController = [[PlayCameraPicViewController alloc] init];
+    [self presentModalViewController:playCameraPicViewController animated:YES];
 }
 -(void) deleteBtnPressed:(UIButton *) sender{
     if ([self.deleteNotificationDelegate respondsToSelector:@selector(didWhenDeleted)]) {
