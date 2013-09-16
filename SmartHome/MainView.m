@@ -174,23 +174,9 @@
         
         [self addSubview:notificationView];
     }
-    
-    UIButton *bb =    [[UIButton alloc] initWithFrame:CGRectMake(100, 0, 200, 30)];
-    [bb addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
-    [bb setTitle:@"test" forState:UIControlStateNormal];
-    [self addSubview:bb];
 }
 
 - (void)test {
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [queue addOperation:
-     [[NetworkCheckerOperation alloc] init]];
-    
-    [NSThread sleepForTimeInterval:2];
-    [queue cancelAllOperations];
-    NSLog(@"ookk");
-    
-    return;
     PlayCameraPicViewController *play = [[PlayCameraPicViewController alloc] init];
     [self.ownerController.navigationController pushViewController:play animated:YES];
 }

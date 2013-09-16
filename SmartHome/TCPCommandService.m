@@ -67,7 +67,8 @@
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     [queue pushCommand:command];
-    [self flushQueue];
+    
+    [self performSelectorInBackground:@selector(flushQueue) withObject:nil];
 }
 
 - (void)flushQueue {

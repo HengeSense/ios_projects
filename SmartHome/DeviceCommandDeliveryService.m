@@ -102,9 +102,10 @@
     if(!self.isService) {
         isService = YES;
         
+        // load all units from disk
         [[SMShared current].memory loadUnitsFromDisk];
         
-        // start net work checker
+        // start network checker
         if(tcpConnectChecker != nil) {
             [tcpConnectChecker invalidate];
         }
