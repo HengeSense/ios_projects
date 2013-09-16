@@ -131,8 +131,7 @@
 }
 
 - (void)startTcpIfNeed {    
-    if(self.tcpService.isConnectting || self.tcpService.isConnectted) {
-        NSLog(@"don't need to connect again.");
+    if(self.tcpService.isConnectted || self.tcpService.isConnectting) {
         return;
     }
     [self performSelectorInBackground:@selector(startTcp) withObject:nil];
