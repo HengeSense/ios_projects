@@ -23,6 +23,8 @@
     UIImageView *leftBoundsShadow;
     UIImageView *rightBoundsShadow;
     UIViewController *ownerController;
+    NSInteger curPage;
+    
 }
 
 @synthesize pageableScrollView;
@@ -121,7 +123,7 @@
     [self addSubview:leftBoundsShadow];
     [self addSubview:rightBoundsShadow];
     leftBoundsShadow.hidden = YES;
-
+    [self toCurPage];
     navItems = mutableNavArr;
 
 }
@@ -159,17 +161,20 @@
 -(void) accessoryBehavior{
     CGFloat itemWidth = self.pageableScrollView.frame.size.width;
     CGFloat xOffset = self.pageableScrollView.contentOffset.x;
+    curPage = xOffset/itemWidth;
+    [self toCurPage];
+}
+-(void) toCurPage{
+    CGFloat xOffset = self.pageableScrollView.contentOffset.x;
     CGPoint navOffset = self.pageNavView.pageableNavView.contentOffset;
     CGFloat navHeight = 30+ITEM_MARGIN;
-    
-    NSInteger curPage = xOffset/itemWidth;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
         obj.selected = NO;
         obj.titleLabel.font = [UIFont systemFontOfSize:14];
         if (curPage == idx) {
             obj.selected = YES;
             obj.titleLabel.font = [UIFont systemFontOfSize:16];
-
+            
         }
     }];
     CGFloat curNavYOffset = navHeight*curPage;
@@ -190,8 +195,8 @@
         leftBoundsShadow.hidden = NO;
         rightBoundsShadow.hidden = YES;
     }
-}
 
+}
 - (void)notifyStatusChanged {
     if(deviceDictionary == nil) return;
     NSEnumerator *zonesEnumerator = deviceDictionary.keyEnumerator;
