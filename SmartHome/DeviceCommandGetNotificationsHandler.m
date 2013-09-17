@@ -14,8 +14,6 @@
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateNotifications class]]) {
-        NSLog(@"trigger notification push command");
-        
         DeviceCommandUpdateNotifications *receivedNotificationsCommand = (DeviceCommandUpdateNotifications *)command;
         [[NotificationsFileManager fileManager] writeToDisk:receivedNotificationsCommand.notifications];
         
