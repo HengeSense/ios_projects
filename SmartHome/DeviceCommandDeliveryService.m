@@ -81,7 +81,7 @@
         handler = [[DeviceCommandUpdateAccountHandler alloc] init];
     } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetAccountHandler alloc] init];
-    } else if([@"AccountMQListCommand" isEqualToString:command.commandName]) {
+    } else if([@"MessageQueueCommand" isEqualToString:command.commandName] || [@"AccountMQListCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetNotificationsHandler alloc] init];
     } else if([@"FindDeviceSceneCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetSceneListHandler alloc] init];
@@ -91,7 +91,7 @@
         handler = [[DeviceCommandUpdateDevicesHandler alloc] init];
     } else if([@"DeviceChangeNameCommand" isEqualToString:command.commandName]) {
         
-    }
+    } 
         
     if(handler != nil) {
         [handler handle:command];

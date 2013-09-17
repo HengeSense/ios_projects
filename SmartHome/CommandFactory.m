@@ -62,7 +62,7 @@
         command = [[DeviceCommand alloc] initWithDictionary:json];
     } else if([@"AccountProfileCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateAccount alloc] initWithDictionary:json];
-    } else if([@"AccountMQListCommand" isEqualToString:commandName]) {
+    } else if([@"MessageQueueCommand" isEqualToString:commandName] || [@"AccountMQListCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateNotifications alloc] initWithDictionary:json];
     } else if([@"FindDeviceSceneCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateSceneMode alloc] initWithDictionary:json];

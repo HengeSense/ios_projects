@@ -15,6 +15,7 @@
 @synthesize requestDeviceCode;
 @synthesize dataCommandName;
 @synthesize cameraPicPaths;
+@synthesize http;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
@@ -23,6 +24,7 @@
             self.masterDeviceCode = [json stringForKey:@"masterDeviceCode"];
             self.dataCommandName = [json stringForKey:@"_className"];
             self.requestDeviceCode = [json stringForKey:@"requsetDeviceCode"];
+            self.http = [json stringForKey:@"http"];
             NSArray *_pics_ = [json arrayForKey:@"cameraPicPaths"];
             if(_pics_ != nil) {
                 for(NSDictionary *pic in _pics_) {
@@ -42,6 +44,7 @@
     [json setMayBlankString:self.masterDeviceCode forKey:@"masterDeviceCode"];
     [json setMayBlankString:self.dataCommandName forKey:@"_className"];
     [json setMayBlankString:self.requestDeviceCode forKey:@"requsetDeviceCode"];
+    [json setMayBlankString:self.http forKey:@"http"];
     
     if(self.cameraPicPaths.count > 0) {
         NSMutableArray *arr = [NSMutableArray array];

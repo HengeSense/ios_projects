@@ -25,6 +25,11 @@
                     }
                 }
             }
+            
+            NSDictionary *_notification = [json dictionaryForKey:@"mq"];
+            if(_notification != nil) {
+                [self.notifications addObject:[[SMNotification alloc] initWithJson:_notification]];
+            }
         }
     }
     return self;

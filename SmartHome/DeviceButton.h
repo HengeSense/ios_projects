@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SelectionView.h"
 #import "Device.h"
 
-@interface DeviceButton : UIView
+@interface DeviceButton : UIView<SelectionViewDelegate>
 
 @property (strong, nonatomic) Device *device;
 @property (strong, nonatomic) UIViewController *ownerController;

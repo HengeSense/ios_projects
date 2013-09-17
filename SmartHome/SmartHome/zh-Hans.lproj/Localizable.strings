@@ -33,7 +33,11 @@
 "refuse.operation" = "［拒绝］";
 "delete.success"   = "删除成功";
 "security_invalid" = "安全码失效";
-"deleting" = "删除中...";
+"no_name"          = "未命名";
+"deleting"         = "删除中...";
+"curtain_start"            = "打开";
+"curtain_stop"             = "停止";
+"curtain_close"            = "关闭";
 
 
 

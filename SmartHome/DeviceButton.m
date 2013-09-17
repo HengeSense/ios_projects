@@ -18,6 +18,10 @@
 #define ON  0
 #define OFF 1
 
+#define OPEN  1
+#define CLOSE 2
+#define STOP  3
+
 @implementation DeviceButton {
     UIButton *btn;
     UILabel *lblTitle;
@@ -85,7 +89,7 @@
         if(self.device && ![NSString isBlank:self.device.name]) {
             lblTitle.text = self.device.name;
         } else {
-            lblTitle.text = [NSString emptyString];
+            lblTitle.text = NSLocalizedString(@"no_name", @"");
         }
     }
     if(self.device != nil && statusImage != nil && btn != nil) {
@@ -104,8 +108,9 @@
             [self registerImage:[UIImage imageNamed:@"icon_light_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_light_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         } else if(_device_.isCurtainOrSccurtain) {
-            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_curtain_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:OPEN].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:CLOSE].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_off.png"] forStatus:[NSNumber numberWithInteger:STOP].stringValue];
         } else if(_device_.isTV) {
             [self registerImage:[UIImage imageNamed:@"icon_tv_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_tv_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
@@ -121,6 +126,9 @@
         } else if(_device_.isCamera) {
             [self registerImage:[UIImage imageNamed:@"icon_camera_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_camera_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
+        } else if(_device_.isWarsignal) {
+            [self registerImage:[UIImage imageNamed:@"icon_security_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_security_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
         }
     }
 }
@@ -143,18 +151,27 @@
 - (void)btnPressed:(id)sender {
     if(self.device == nil) return;
     
-    if(_device_.isLightOrInlight) {
+    if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {
         DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
         updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
-        [updateDeviceCommand addCommandString:[self.device commandStringForStatus: self.device.status==0 ? 1 : 0]];
+        [updateDeviceCommand addCommandString:[self.device commandStringForStatus: self.device.status == 0 ? 1 : 0]];
         [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
          ];
     } else if(_device_.isCurtainOrSccurtain) {
-        DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
-        updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
-        [updateDeviceCommand addCommandString:[self.device commandStringForStatus: self.device.status==0 ? 1 : 0]];
-        [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
-         ];
+        NSString *status = [NSString emptyString];
+        if(_device_.status == 1) {
+            status = @"open";
+        } else if(_device_.status == 2) {
+            status = @"close";
+        } else if(_device_.status == 3) {
+            status = @"stop";
+        }
+        NSArray *items = [NSArray arrayWithObjects:
+         [[SelectionItem alloc] initWithIdentifier:@"open" andTitle:NSLocalizedString(@"curtain_start", @"")],
+         [[SelectionItem alloc] initWithIdentifier:@"close" andTitle:NSLocalizedString(@"curtain_close", @"")],
+         [[SelectionItem alloc] initWithIdentifier:@"stop" andTitle:NSLocalizedString(@"curtain_stop", @"")], nil];
+        
+        [SelectionView showWithItems:items selectedIdentifier:status source:@"curtain" delegate:self];
     } else if(_device_.isTV || _device_.isSTB) {
         TVViewController *tvViewController = [[TVViewController alloc] init];
         tvViewController.title = _device_.name;
@@ -163,12 +180,6 @@
         AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
         airConditionViewController.title = _device_.name;
         [self.ownerController presentModalViewController:airConditionViewController animated:YES];
-    } else if(_device_.isSocket) {
-        DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
-        updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
-        [updateDeviceCommand addCommandString:[self.device commandStringForStatus: self.device.status == 0 ? 1 : 0]];
-        [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
-         ];
     } else if(_device_.isCamera) {
         CameraViewController *cameraViewController = [[CameraViewController alloc] init];
         cameraViewController.title = _device_.name;
@@ -183,6 +194,31 @@
         return p_view;
     }
     return nil;
+}
+
+- (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
+    if([@"curtain" isEqualToString:source]) {
+       
+        if([item isKindOfClass:[SelectionItem class]]) {
+            SelectionItem *it = item;
+            NSUInteger status = -1;
+            if([@"open" isEqualToString:it.identifier]) {
+                status = 0;
+            } else if([@"close" isEqualToString:it.identifier]) {
+                status = 1;
+            } else if([@"stop" isEqualToString:it.identifier]) {
+                status = 2;
+            }
+            
+            if(status == -1) return;
+            
+            DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+            updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
+            [updateDeviceCommand addCommandString:[self.device commandStringForStatus:status]];
+            [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
+             ];
+        }
+    }
 }
 
 @end

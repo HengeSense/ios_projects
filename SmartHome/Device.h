@@ -44,6 +44,7 @@
 @property (assign, nonatomic, readonly) BOOL isAircondition;         //红外线-空调
 @property (assign, nonatomic, readonly) BOOL isSTB;                  //红外线-机顶盒
 @property (assign, nonatomic, readonly) BOOL isCamera;               //摄像头
+@property (assign, nonatomic, readonly) BOOL isWarsignal;            //安防,警报
 
 // 获取执行命令的字符串
 - (NSString *)commandStringForStatus:(NSInteger)st;

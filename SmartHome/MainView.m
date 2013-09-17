@@ -212,7 +212,6 @@
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:[[NSArray alloc] initWithObjects:displayNotification, nil] deleteList:nil];
     [self notifyViewUpdate];
-
 }
 
 - (void)didWhenDeleted {
@@ -267,9 +266,12 @@
     if([NSString isBlank:source]) return;
     SelectionItem *it = item;
     if(it == nil) return;
-    NSLog(@"%@", it.identifier);
     if([@"scene" isEqualToString:source]) {
-        
+        DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+        updateDeviceCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
+        [updateDeviceCommand addCommandString:[NSString stringWithFormat:@"scene-%@", it.identifier]];
+        [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
+         ];
     } else if([@"units" isEqualToString:source]) {
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
         [self notifyUnitsWasUpdate];

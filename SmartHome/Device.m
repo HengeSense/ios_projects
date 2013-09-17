@@ -26,6 +26,7 @@
 @synthesize name;
 @synthesize nwkAddr;
 @synthesize user;
+@synthesize isWarsignal;
 
 @synthesize isRemote;
 @synthesize isSccurtain;
@@ -141,6 +142,10 @@
 
 - (BOOL)isOnline {
     return self.state == 1;
+}
+
+- (BOOL)isWarsignal {
+    return [@"warsignal" isEqualToString:self.category];
 }
 
 @end

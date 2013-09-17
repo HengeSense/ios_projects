@@ -238,6 +238,7 @@
 		6FE9336517DF19F1001D67E0 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE9336417DF19F1001D67E0 /* iflyMSC.framework */; };
 		6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */; };
 		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
+		6FF6C4E917E83A4500F637FD /* ImagePlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF6C4E817E83A4500F637FD /* ImagePlayView.m */; };
 		6FFAFDF817E05AC5001EB9D0 /* line_cell_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */; };
 		6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */; };
 		6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */; };
@@ -644,6 +645,8 @@
 		6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		6FEB91E717BB843D007C04A1 /* TemperatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureView.h; sourceTree = "<group>"; };
 		6FEB91E817BB843D007C04A1 /* TemperatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureView.m; sourceTree = "<group>"; };
+		6FF6C4E717E83A4500F637FD /* ImagePlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePlayView.h; sourceTree = "<group>"; };
+		6FF6C4E817E83A4500F637FD /* ImagePlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePlayView.m; sourceTree = "<group>"; };
 		6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_cell_notification@2x.png"; sourceTree = "<group>"; };
 		6FFAFDF917E0823C001EB9D0 /* DeviceStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceStatus.h; sourceTree = "<group>"; };
 		6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceStatus.m; sourceTree = "<group>"; };
@@ -962,6 +965,8 @@
 				6F0FAEA517AF803800B75D3E /* drawer_navigation */,
 				6F159C0117D754BB005CFFEE /* SMButton.h */,
 				6F159C0217D754BB005CFFEE /* SMButton.m */,
+				6FF6C4E717E83A4500F637FD /* ImagePlayView.h */,
+				6FF6C4E817E83A4500F637FD /* ImagePlayView.m */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -2122,6 +2127,7 @@
 				6FB5AC9917E6A89F009AF916 /* PlayCameraPicViewController.m in Sources */,
 				6FB5AC9C17E6B6FA009AF916 /* NetworkCheckerOperation.m in Sources */,
 				6FB5AC9F17E70108009AF916 /* DeviceCommandUpdateDevice.m in Sources */,
+				6FF6C4E917E83A4500F637FD /* ImagePlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

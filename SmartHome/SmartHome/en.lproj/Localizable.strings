@@ -33,6 +33,10 @@
 "delete.success"   = "delete success";
 "deleting"         = "deleting...";
 "security_invalid" = "Security invalid";
+"no_name"          = "No name";
+"curtain_start"            = "Start";
+"curtain_stop"             = "Stop";
+"curtain_close"            = "Close";
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*
