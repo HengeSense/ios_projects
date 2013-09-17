@@ -8,7 +8,7 @@
 
 #import "PlayCameraPicViewController.h"
 #import "CameraPicPath.h"
-
+#import "LongButton.h"
 #define THREAD_COUNT 3
 
 @interface PlayCameraPicViewController ()
@@ -56,8 +56,17 @@
     }
     
     if(cameraPicPaths == nil || cameraPicPaths.count == 0) return;
+    for (int i = 0; i<cameraPicPaths.count; ++i) {
+        LongButton *btnCheck = [[LongButton alloc] initWithCameraPicPath:[cameraPicPaths objectAtIndex:i]  atPoint:CGPointMake(5, 5+98/2)];
+        btnCheck.cameraPicPath = [cameraPicPaths objectAtIndex:i];
+//        btnCheck setTitle: forState: 
+        [btnCheck addTarget:self action:@selector(btnCheckPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnCheck];
+    }
 }
-
+-(void) btnCheckPressed:(LongButton *) sender{
+    [self startPlayWithCameraPicPath:sender.cameraPicPath];
+}
 - (void)startPlayWithCameraPicPath:(CameraPicPath *)path {
     if(path == nil) return;
 }

@@ -9,7 +9,7 @@
 #import "LongButton.h"
 
 @implementation LongButton
-
+@synthesize cameraPicPath;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -17,7 +17,17 @@
     }
     return self;
 }
+-(id) initWithCameraPicPath:(CameraPicPath *)path atPoint:(CGPoint)point{
+    self = [super init];
+    if (self) {
+        self.frame = CGRectMake(point.x, point.y, 622 / 2, 98 / 2);
+        [self setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
+        [self setBackgroundImage:[UIImage imageNamed:@"btn_orange_highlight.png"] forState:UIControlStateHighlighted];
+    }
+    return self;
 
+
+}
 + (UIButton *)buttonWithPoint:(CGPoint)point {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(point.x, point.y, 622 / 2, 98 / 2)];
     [button setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
