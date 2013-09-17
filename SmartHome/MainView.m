@@ -197,7 +197,10 @@
 // show notification details
 - (void)tapGestureHandler {
     if (displayNotification == nil) return;
-    
+    displayNotification.hasRead = YES;
+    NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
+    [fileManager update:[[NSArray alloc] initWithObjects:displayNotification, nil] deleteList:nil];
+    [self notifyViewUpdate];
     NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:displayNotification];
     handler.deleteNotificationDelegate = self;
     handler.cfNotificationDelegate = self;
@@ -206,7 +209,6 @@
 
 - (void)didAgreeOrRefuse:(NSString *)operation {
     if (operation == nil) return;
-
     displayNotification.text = [displayNotification.text stringByAppendingString:NSLocalizedString(operation, @"")];
     displayNotification.hasProcess = YES;
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
