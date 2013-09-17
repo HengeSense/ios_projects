@@ -150,7 +150,11 @@
         [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
          ];
     } else if(_device_.isCurtainOrSccurtain) {
-        
+        DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+        updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
+        [updateDeviceCommand addCommandString:[self.device commandStringForStatus: self.device.status==0 ? 1 : 0]];
+        [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
+         ];
     } else if(_device_.isTV || _device_.isSTB) {
         TVViewController *tvViewController = [[TVViewController alloc] init];
         tvViewController.title = _device_.name;
