@@ -123,8 +123,9 @@
     [self addSubview:leftBoundsShadow];
     [self addSubview:rightBoundsShadow];
     leftBoundsShadow.hidden = YES;
-    [self toCurPage];
     navItems = mutableNavArr;
+    self.pageableScrollView.contentOffset = CGPointMake(curPage*SCROLL_ITEM_WIDTH, self.pageableScrollView.contentOffset.y);
+    [self toCurPage];
 
 }
 -(void) pageWithViews:(NSArray *) views{
