@@ -51,7 +51,7 @@
     [super initUI];
     
     if(playView == nil) {
-        playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, 320, 320)];
+        playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, 240, 320)];
         playView.backgroundColor = [UIColor redColor];
         [self.view addSubview:playView];
     }
@@ -72,6 +72,6 @@
 
 - (void)startPlayWithCameraPicPath:(CameraPicPath *)path {
     if(path == nil) return;
+    
 }
-
 @end
