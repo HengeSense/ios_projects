@@ -14,9 +14,9 @@
     NSMutableArray *imgList1;
     NSMutableArray *imgList2;
     NSMutableArray *imgList3;
+    NSUInteger pointerAt;
 }
 
-@synthesize fps;
 @synthesize delegate;
 
 - (id)init {
@@ -31,7 +31,7 @@
     imgList1 = [NSMutableArray arrayWithCapacity:IMAGE_ARRAY_COUNT];
     imgList2 = [NSMutableArray arrayWithCapacity:IMAGE_ARRAY_COUNT];
     imgList3 = [NSMutableArray arrayWithCapacity:IMAGE_ARRAY_COUNT];
-
+    pointerAt = 0;
 }
 
 - (void)addImage:(UIImage *)image {
@@ -41,41 +41,75 @@
 }
 
 //- (UIImage *)getImageUsingFps:(BOOL *)hasMore {
-    /*
-    if(lastReadTime == -1) {
-        
-        
-        return nil;
-    } else {
-        NSDate *now = [NSDate date];
-        long long f = now.timeIntervalSince1970 * 1000 - lastReadTime;
-        if(f < 300) {
-            [NSThread sleepForTimeInterval:f];
-        }
-        
-        return nil;
-    }*/
+//
+//    if(lastReadTime == -1) {
+//        
+//        
+//        return nil;
+//    } else {
+//        NSDate *now = [NSDate date];
+//        long long f = now.timeIntervalSince1970 * 1000 - lastReadTime;
+//        if(f < 300) {
+//            [NSThread sleepForTimeInterval:f];
+//        }
+//        
+
 
 - (void)startDownloader {
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:nil cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5];
-    NSURLResponse *response;
+    
+NSURL *u =    [[NSURL alloc] initWithString:@"http://172.16.8.162/2013/8/17/e89fcbf1-7467-4143-85b4-f7ffd200c813/101/0.jpg"];
+    
+    // prepare
     NSError *error;
+    NSURLResponse *response;
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:u cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:20];
+    
+    // send request
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if(error != nil && response != nil && data != nil) {
-        // success
+    
+    // process response
+    if(error == nil && response != nil && data != nil) {
         NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
         if(resp.statusCode == 200) {
             UIImage *image = [UIImage imageWithData:data];
+            NSMutableArray *arr = [self currentPointAtArray];
+            if(arr != nil) {
+                [arr addObject:image];
+                if(arr.count == IMAGE_ARRAY_COUNT) {
+                    [self movePointer];
+                }
+                [self startDownloader];
+            } else {
+                NSLog(@"unknown exception at download image");
+            }
         } else {
-            
+            NSLog(@"downloader image status code is %d", resp.statusCode);
         }
     } else {
-        NSLog(@"error %d", error.code);
+        NSLog(@"system error from downloader camera image code is %d", error.code);
     }
+    
+    //[self.delegate imageProviderNotifyAvailable:[NSArray arrayWithObject:image] provider:self];
 }
 
-- (void)clearHasPlayedImage {
-    @synchronized(self) {
+- (NSMutableArray *)currentPointAtArray {
+    if(pointerAt == 0) {
+        return imgList1;
+    }
+    if(pointerAt == 1) {
+        return imgList2;
+    }
+    if(pointerAt == 2) {
+        return imgList3;   
+    }
+    return nil;
+}
+
+- (void)movePointer {
+    if(pointerAt < 2) {
+        pointerAt++;
+    } else {
+        pointerAt = 0;
     }
 }
 

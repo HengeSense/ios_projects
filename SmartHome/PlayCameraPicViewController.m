@@ -10,6 +10,7 @@
 #import "CameraPicPath.h"
 #import "LongButton.h"
 
+
 #define THREAD_COUNT 3
 
 @interface PlayCameraPicViewController ()
@@ -18,6 +19,7 @@
 
 @implementation PlayCameraPicViewController {
     UIImageView *playView;
+    ImageProvider *provider;
 }
 
 @synthesize data;
@@ -44,34 +46,36 @@
 }
 
 - (void)initDefaults {
-    
+    provider = [[ImageProvider alloc] init];
+    provider.delegate = self;
 }
 
 - (void)initUI {
     [super initUI];
     
     if(playView == nil) {
-        playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, 240, 320)];
+        playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, 320, 240)];
         playView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:playView];
     }
-    NSArray *cameraPicPaths = data.cameraPicPaths;
-    if(cameraPicPaths == nil || cameraPicPaths.count == 0) return;
-    for (int i = 0; i<cameraPicPaths.count; ++i) {
-        LongButton *btnCheck = [[LongButton alloc] initWithCameraPicPath:[cameraPicPaths objectAtIndex:i]  atPoint:CGPointMake(5, 5+98/2)];
-        btnCheck.cameraPicPath = [cameraPicPaths objectAtIndex:i];
-//        btnCheck setTitle: forState: 
-        [btnCheck addTarget:self action:@selector(btnCheckPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnCheck];
+        
+    if(data.cameraPicPaths != nil) {
+        for (int i = 0; i<3; ++i) {
+            UIButton *btnPlayCamera = [LongButton buttonWithPoint:CGPointMake(5, self.topbar.bounds.size.height + i * 54 + 212)];
+            [self.view addSubview:btnPlayCamera];
+        }
     }
-}
-
--(void) btnCheckPressed:(LongButton *) sender{
-    [self startPlayWithCameraPicPath:sender.cameraPicPath];
-}
-
-- (void)startPlayWithCameraPicPath:(CameraPicPath *)path {
-    if(path == nil) return;
     
+//    [provider startDownloader];
 }
+
+
+#pragma mark -
+
+- (void)imageProviderNotifyAvailable:(NSArray *)imgList provider:(id)provider {
+    UIImage *img = [imgList objectAtIndex:0];
+    playView.image = img;
+}
+
+
 @end

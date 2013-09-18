@@ -19,10 +19,6 @@
 
 @property (assign, nonatomic) id<ImageProviderDelegate> delegate;
 
-
-
-
-@property (assign, nonatomic) NSUInteger fps;
-
+- (void)startDownloader;
 
 @end

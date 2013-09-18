@@ -8,8 +8,9 @@
 
 #import "PopViewController.h"
 #import "NotificationData.h"
+#import "ImageProvider.h"
 
-@interface PlayCameraPicViewController : PopViewController
+@interface PlayCameraPicViewController : PopViewController<ImageProviderDelegate>
 
 @property (strong, nonatomic) NotificationData *data;
 
