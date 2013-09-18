@@ -145,6 +145,7 @@
 }
 -(void) btnCheckPressed:(UIButton *) sender{
     PlayCameraPicViewController *playCameraPicViewController = [[PlayCameraPicViewController alloc] init];
+    playCameraPicViewController.data = self.message.data;
     [self presentModalViewController:playCameraPicViewController animated:YES];
 }
 -(void) deleteBtnPressed:(UIButton *) sender{

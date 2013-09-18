@@ -7,9 +7,10 @@
 //
 
 #import "PopViewController.h"
+#import "NotificationData.h"
 
 @interface PlayCameraPicViewController : PopViewController
 
-@property (strong, nonatomic) NSArray *cameraPicPaths;
+@property (strong, nonatomic) NotificationData *data;
 
 @end

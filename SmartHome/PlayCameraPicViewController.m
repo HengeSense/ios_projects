@@ -20,7 +20,7 @@
     UIImageView *playView;
 }
 
-@synthesize cameraPicPaths;
+@synthesize data;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,7 +55,7 @@
         playView.backgroundColor = [UIColor redColor];
         [self.view addSubview:playView];
     }
-    
+    NSArray *cameraPicPaths = data.cameraPicPaths;
     if(cameraPicPaths == nil || cameraPicPaths.count == 0) return;
     for (int i = 0; i<cameraPicPaths.count; ++i) {
         LongButton *btnCheck = [[LongButton alloc] initWithCameraPicPath:[cameraPicPaths objectAtIndex:i]  atPoint:CGPointMake(5, 5+98/2)];
