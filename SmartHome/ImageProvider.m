@@ -8,7 +8,7 @@
 
 #import "ImageProvider.h"
 
-#define IMAGE_ARRAY_COUNT 9
+#define IMAGE_ARRAY_COUNT 50
 
 @implementation ImageProvider {
     NSMutableArray *imgList1;
@@ -40,56 +40,48 @@
     }
 }
 
-//- (UIImage *)getImageUsingFps:(BOOL *)hasMore {
-//
-//    if(lastReadTime == -1) {
-//        
-//        
-//        return nil;
-//    } else {
-//        NSDate *now = [NSDate date];
-//        long long f = now.timeIntervalSince1970 * 1000 - lastReadTime;
-//        if(f < 300) {
-//            [NSThread sleepForTimeInterval:f];
-//        }
-//        
-
-
-- (void)startDownloader {
+- (void)startDownloader:(NSString *)url imageIndex:(NSInteger)index {
     
-NSURL *u =    [[NSURL alloc] initWithString:@"http://172.16.8.162/2013/8/17/e89fcbf1-7467-4143-85b4-f7ffd200c813/101/0.jpg"];
+    NSURL *_url_ = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/%d.jpg", url, index]];
     
     // prepare
     NSError *error;
     NSURLResponse *response;
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:u cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:20];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:_url_ cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:20];
     
     // send request
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     // process response
     if(error == nil && response != nil && data != nil) {
+        NSLog(@"%@", _url_.description);
+        
         NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
         if(resp.statusCode == 200) {
             UIImage *image = [UIImage imageWithData:data];
             NSMutableArray *arr = [self currentPointAtArray];
             if(arr != nil) {
                 [arr addObject:image];
-                if(arr.count == IMAGE_ARRAY_COUNT) {
+                if(arr.count == IMAGE_ARRAY_COUNT) {                    
+                    [self performSelectorOnMainThread:@selector(notifyWith:) withObject:arr waitUntilDone:NO];
                     [self movePointer];
                 }
-                [self startDownloader];
+                index++;
+                [self startDownloader:url imageIndex:index];
             } else {
                 NSLog(@"unknown exception at download image");
             }
         } else {
             NSLog(@"downloader image status code is %d", resp.statusCode);
+            [self performSelectorOnMainThread:@selector(notifyWith:) withObject:[self currentPointAtArray] waitUntilDone:NO];
         }
     } else {
         NSLog(@"system error from downloader camera image code is %d", error.code);
     }
-    
-    //[self.delegate imageProviderNotifyAvailable:[NSArray arrayWithObject:image] provider:self];
+}
+
+- (void)notifyWith:(NSArray *)imageList {
+    [self.delegate imageProviderNotifyAvailable:imageList provider:self];
 }
 
 - (NSMutableArray *)currentPointAtArray {

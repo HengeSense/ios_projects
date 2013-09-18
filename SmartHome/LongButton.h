@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParameterExtentions.h"
 
-@interface LongButton : UIButton
+@interface LongButton : UIButton<ParameterExtentions>
 
-+ (UIButton *)buttonWithPoint:(CGPoint)point;
-+ (UIButton *)darkButtonWithPoint:(CGPoint)point;
++ (LongButton *)buttonWithPoint:(CGPoint)point;
++ (LongButton *)darkButtonWithPoint:(CGPoint)point;
 
 @end

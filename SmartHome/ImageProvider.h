@@ -19,6 +19,6 @@
 
 @property (assign, nonatomic) id<ImageProviderDelegate> delegate;
 
-- (void)startDownloader;
+- (void)startDownloader:(NSString *)url imageIndex:(NSInteger)index;
 
 @end

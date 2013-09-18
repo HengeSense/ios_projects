@@ -140,6 +140,8 @@
 		6F6AB3AB17C31CB4001F1D33 /* bg_finder_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */; };
 		6F6AB3AC17C31CB4001F1D33 /* bg_scanner_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */; };
 		6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */; };
+		6F84355817E9A66F0084C316 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355617E9A66F0084C316 /* icon.png */; };
+		6F84355917E9A66F0084C316 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355717E9A66F0084C316 /* icon@2x.png */; };
 		6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84A77617D047B400D46BFA /* DeviceCommandUpdateUnits.m */; };
 		6F84A77A17D04A5700D46BFA /* Zone.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84A77917D04A5700D46BFA /* Zone.m */; };
 		6F84A78017D06D6D00D46BFA /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84A77F17D06D6D00D46BFA /* Unit.m */; };
@@ -495,6 +497,9 @@
 		6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner_shadow@2x.png"; sourceTree = "<group>"; };
 		6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtranetClientSocket.h; sourceTree = "<group>"; };
 		6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtranetClientSocket.m; sourceTree = "<group>"; };
+		6F84355517E985D40084C316 /* ParameterExtentions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParameterExtentions.h; sourceTree = "<group>"; };
+		6F84355617E9A66F0084C316 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		6F84355717E9A66F0084C316 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		6F84A77517D047B400D46BFA /* DeviceCommandUpdateUnits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateUnits.h; sourceTree = "<group>"; };
 		6F84A77617D047B400D46BFA /* DeviceCommandUpdateUnits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateUnits.m; sourceTree = "<group>"; };
 		6F84A77817D04A5700D46BFA /* Zone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zone.h; sourceTree = "<group>"; };
@@ -978,6 +983,8 @@
 			isa = PBXGroup;
 			children = (
 				6FFAFE0517E1AF1D001EB9D0 /* logo@2x.png */,
+				6F84355617E9A66F0084C316 /* icon.png */,
+				6F84355717E9A66F0084C316 /* icon@2x.png */,
 				6F159BE817D6E82C005CFFEE /* aircondition */,
 				6F159BD717D6E594005CFFEE /* remote_control */,
 				6F350AB517CEF69100B796F1 /* icons */,
@@ -1003,6 +1010,7 @@
 		6F0FAE9F17AF7FFE00B75D3E /* commons */ = {
 			isa = PBXGroup;
 			children = (
+				6F84355417E985B90084C316 /* protocals */,
 				6FEB91CD17BB201C007C04A1 /* socket */,
 				6FD8A73017B234FF009C7493 /* rest */,
 				6F0FAEA917AF80A800B75D3E /* categories */,
@@ -1502,6 +1510,14 @@
 			name = conversation_view;
 			sourceTree = "<group>";
 		};
+		6F84355417E985B90084C316 /* protocals */ = {
+			isa = PBXGroup;
+			children = (
+				6F84355517E985D40084C316 /* ParameterExtentions.h */,
+			);
+			name = protocals;
+			sourceTree = "<group>";
+		};
 		6F984F7A17BE1EC5007F90A2 /* alert_view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1996,6 +2012,8 @@
 				6F47FADD17E2B80E0027C0F7 /* icon_security_off@2x.png in Resources */,
 				6F47FADE17E2B80E0027C0F7 /* icon_security_on@2x.png in Resources */,
 				6F47FAE017E2BBB60027C0F7 /* icon_curtain_off@2x.png in Resources */,
+				6F84355817E9A66F0084C316 /* icon.png in Resources */,
+				6F84355917E9A66F0084C316 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
