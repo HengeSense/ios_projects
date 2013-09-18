@@ -52,7 +52,7 @@
     
     if(playView == nil) {
         playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, 240, 320)];
-        playView.backgroundColor = [UIColor redColor];
+        playView.backgroundColor = [UIColor clearColor];
         [self.view addSubview:playView];
     }
     NSArray *cameraPicPaths = data.cameraPicPaths;
