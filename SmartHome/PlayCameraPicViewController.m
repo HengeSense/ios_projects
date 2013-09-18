@@ -9,6 +9,7 @@
 #import "PlayCameraPicViewController.h"
 #import "CameraPicPath.h"
 #import "LongButton.h"
+
 #define THREAD_COUNT 3
 
 @interface PlayCameraPicViewController ()
@@ -64,9 +65,11 @@
         [self.view addSubview:btnCheck];
     }
 }
+
 -(void) btnCheckPressed:(LongButton *) sender{
     [self startPlayWithCameraPicPath:sender.cameraPicPath];
 }
+
 - (void)startPlayWithCameraPicPath:(CameraPicPath *)path {
     if(path == nil) return;
 }

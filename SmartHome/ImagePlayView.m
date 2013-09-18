@@ -8,7 +8,9 @@
 
 #import "ImagePlayView.h"
 
-@implementation ImagePlayView
+@implementation ImagePlayView {
+    UIImageView *playView;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,8 +21,15 @@
     return self;
 }
 
-- (void)play {
-    
+- (void)initUI {
+    if(playView == nil) {
+        playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [self addSubview:playView];
+    }
+}
+
+- (void)playWithImage:(UIImage *)img {
+    playView.image = img;
 }
 
 

@@ -239,6 +239,7 @@
 		6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */; };
 		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
 		6FF6C4E917E83A4500F637FD /* ImagePlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF6C4E817E83A4500F637FD /* ImagePlayView.m */; };
+		6FF6C4EC17E850E200F637FD /* ImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF6C4EB17E850E200F637FD /* ImageProvider.m */; };
 		6FFAFDF817E05AC5001EB9D0 /* line_cell_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */; };
 		6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */; };
 		6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFDFD17E0A3FE001EB9D0 /* NSDate+Extension.m */; };
@@ -647,6 +648,8 @@
 		6FEB91E817BB843D007C04A1 /* TemperatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureView.m; sourceTree = "<group>"; };
 		6FF6C4E717E83A4500F637FD /* ImagePlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePlayView.h; sourceTree = "<group>"; };
 		6FF6C4E817E83A4500F637FD /* ImagePlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePlayView.m; sourceTree = "<group>"; };
+		6FF6C4EA17E850E200F637FD /* ImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProvider.h; sourceTree = "<group>"; };
+		6FF6C4EB17E850E200F637FD /* ImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageProvider.m; sourceTree = "<group>"; };
 		6FFAFDF717E05AC5001EB9D0 /* line_cell_notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line_cell_notification@2x.png"; sourceTree = "<group>"; };
 		6FFAFDF917E0823C001EB9D0 /* DeviceStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceStatus.h; sourceTree = "<group>"; };
 		6FFAFDFA17E0823C001EB9D0 /* DeviceStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceStatus.m; sourceTree = "<group>"; };
@@ -1019,6 +1022,8 @@
 				6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */,
 				6F668CE617DEE2C700034C90 /* SMDateFormatter.h */,
 				6F668CE717DEE2C700034C90 /* SMDateFormatter.m */,
+				6FF6C4EA17E850E200F637FD /* ImageProvider.h */,
+				6FF6C4EB17E850E200F637FD /* ImageProvider.m */,
 			);
 			name = commons;
 			sourceTree = "<group>";
@@ -2128,6 +2133,7 @@
 				6FB5AC9C17E6B6FA009AF916 /* NetworkCheckerOperation.m in Sources */,
 				6FB5AC9F17E70108009AF916 /* DeviceCommandUpdateDevice.m in Sources */,
 				6FF6C4E917E83A4500F637FD /* ImagePlayView.m in Sources */,
+				6FF6C4EC17E850E200F637FD /* ImageProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
