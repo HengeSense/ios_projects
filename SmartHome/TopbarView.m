@@ -36,7 +36,7 @@
     
     if(img != nil) {
         UIImageView *backgroundImageView =
-            [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 44)];
+        [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 64 : 44)];
         backgroundImageView.image = img;
         [topbar addSubview:backgroundImageView];
     }

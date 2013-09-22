@@ -50,7 +50,7 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"unit_detail", @"");
     
     if(tblUnit == nil) {
-        tblUnit = [[UITableView alloc] initWithFrame:CGRectMake(-5, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topbar.bounds.size.height) style:UITableViewStyleGrouped];
+        tblUnit = [[UITableView alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 5 : -5, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topbar.bounds.size.height) style:UITableViewStyleGrouped];
         tblUnit.backgroundColor = [UIColor clearColor];
         tblUnit.backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
         tblUnit.delegate = self;
@@ -118,7 +118,8 @@
    
     SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
-        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:YES];
+        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:![UIDevice systemVersionIsMoreThanOrEuqal7]];
+        cell.backgroundColor = [UIColor clearColor];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 120, 40)];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor blackColor];

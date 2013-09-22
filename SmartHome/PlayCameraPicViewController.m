@@ -91,18 +91,18 @@
 #pragma mark -
 
 - (void)imageProviderNotifyAvailable:(NSArray *)imgList provider:(id)provider {
-    for(int i=0; i<imgList.count; i++) {
-        [playView setImage: [imgList objectAtIndex:i]];
-//        [playView setNeedsDisplay];
-//        [playView setNeedsLayout];
-//        [playView setNeedsUpdateConstraints];
-        [NSThread sleepForTimeInterval:2.f];
-        
-        
-        
-        [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(jjjj) userInfo:nil repeats:YES];
-    }
-    return;
+//    for(int i=0; i<imgList.count; i++) {
+//        [playView setImage: [imgList objectAtIndex:i]];
+////        [playView setNeedsDisplay];
+////        [playView setNeedsLayout];
+////        [playView setNeedsUpdateConstraints];
+//        [NSThread sleepForTimeInterval:2.f];
+//        
+//        
+//        
+//        [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(jjjj) userInfo:nil repeats:YES];
+//    }
+//    return;
     playView.animationImages = imgList;
     playView.animationRepeatCount = 1;
     playView.animationDuration = 5.f;

@@ -42,7 +42,9 @@
 }
 
 - (void)generateTopbar {
-    self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:YES];
+    self.topbar = [TopbarView topBarWithImage:
+                   [UIDevice systemVersionIsMoreThanOrEuqal7] ? [UIImage imageNamed:@"bg_topbar7.png"] :
+                   [UIImage imageNamed:@"bg_topbar.png"] shadow:YES];
     self.topbar.leftButton.frame = CGRectMake(5, [UIDevice systemVersionIsMoreThanOrEuqal7] ? (20+9) : 9, 61, 30);
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateNormal];
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateHighlighted];
