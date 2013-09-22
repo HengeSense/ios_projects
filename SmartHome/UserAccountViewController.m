@@ -43,7 +43,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 -(void) initDefaults{
@@ -86,6 +85,8 @@
         [self.view addSubview:btnSubmit];
         [btnSubmit addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 - (void)didReceiveMemoryWarning
