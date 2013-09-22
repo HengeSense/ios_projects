@@ -11,7 +11,6 @@
 #import "LongButton.h"
 
 #define THREAD_COUNT 3
-
 @interface PlayCameraPicViewController ()
 
 @end
