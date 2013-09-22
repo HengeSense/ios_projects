@@ -101,6 +101,7 @@
     self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 28 : 8, 101/2, 59/2)];
     [self.topbar addSubview:self.topbar.rightButton];
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
+    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateHighlighted];
     [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];
     self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
     self.topbar.rightButton.titleLabel.textColor = [UIColor lightTextColor];

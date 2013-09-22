@@ -68,6 +68,10 @@
         lblTitle.backgroundColor = [UIColor clearColor];
         [self addSubview:lblTitle];
     }
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
+    [tapGesture addTarget:self action:@selector(btnPressed:)];
+    [self addGestureRecognizer:tapGesture];
 }
 
 + (DeviceButton *)buttonWithDevice:(Device *)device point:(CGPoint)point owner:(UIViewController *)owner {

@@ -11,6 +11,7 @@
 #import "LongButton.h"
 
 #define THREAD_COUNT 3
+
 @interface PlayCameraPicViewController ()
 
 @end
@@ -61,7 +62,7 @@
         
     if(data.cameraPicPaths != nil) {
         for (int i = 0; i<data.cameraPicPaths.count; i++) {
-            LongButton *btnPlayCamera = [LongButton buttonWithPoint:CGPointMake(5, self.topbar.bounds.size.height + i * 54 + 212)];
+            LongButton *btnPlayCamera = [LongButton buttonWithPoint:CGPointMake(5, self.topbar.bounds.size.height + i * 54 + 245)];
             CameraPicPath *path = [data.cameraPicPaths objectAtIndex:i];
             NSString *url = [NSString stringWithFormat:@"%@%@", data.http, path.path];
             [btnPlayCamera setObject:url forKey:@"url"];
