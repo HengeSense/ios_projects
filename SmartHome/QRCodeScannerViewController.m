@@ -8,6 +8,7 @@
 
 #import "QRCodeScannerViewController.h"
 #import "NSString+StringUtils.h"
+#import "UIDevice+Extension.h"
 
 #define SCANNER_VIEW_LENGTH 235
 #define INDICATOR_VIEW_TAG 10012
@@ -102,11 +103,12 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
         //set scanner region
         readerView.scanCrop = [self regionRectForScanner:rectForScannerView readerViewBounds:readerView.bounds];
         [self.view addSubview:readerView];
-        
-        UIImageView *bottomBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 44 - 20, [UIScreen mainScreen].bounds.size.width, 44)];
+        CGFloat y = [UIDevice systemVersionIsMoreThanOrEuqal7] ? 0 : 20;
+        UIImageView *bottomBar = [[UIImageView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 44 - y, [UIScreen mainScreen].bounds.size.width, 44)];
         bottomBar.image = [UIImage imageNamed:@"bg_bottom_bar_black.png"];
         
-        UIButton *btnBack = [[UIButton alloc] initWithFrame:CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 44 - 12, 48, 27)];
+        CGFloat y2 = [UIDevice systemVersionIsMoreThanOrEuqal7] ? 20 : 0;
+        UIButton *btnBack = [[UIButton alloc] initWithFrame:CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 44 - 12 + y2, 48, 27)];
         [btnBack setBackgroundImage:[UIImage imageNamed:@"btn_done_black.png"] forState:UIControlStateNormal];
         [btnBack setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
         btnBack.titleLabel.font = [UIFont systemFontOfSize:14.f];
