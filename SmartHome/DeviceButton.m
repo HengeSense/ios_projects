@@ -19,8 +19,8 @@
 #define OFF 1
 
 #define OPEN  1
-#define CLOSE 2
-#define STOP  3
+#define CLOSE 3
+#define STOP  2
 
 @implementation DeviceButton {
     UIButton *btn;
@@ -163,11 +163,11 @@
          ];
     } else if(_device_.isCurtainOrSccurtain) {
         NSString *status = [NSString emptyString];
-        if(_device_.status == 1) {
+        if(_device_.status == OPEN) {
             status = @"open";
-        } else if(_device_.status == 2) {
+        } else if(_device_.status == CLOSE) {
             status = @"close";
-        } else if(_device_.status == 3) {
+        } else if(_device_.status == STOP) {
             status = @"stop";
         }
         NSArray *items = [NSArray arrayWithObjects:
@@ -207,11 +207,11 @@
             SelectionItem *it = item;
             NSUInteger status = -1;
             if([@"open" isEqualToString:it.identifier]) {
-                status = 1;
+                status = OPEN;
             } else if([@"close" isEqualToString:it.identifier]) {
-                status = 3;
+                status = CLOSE;
             } else if([@"stop" isEqualToString:it.identifier]) {
-                status = 2;
+                status = STOP;
             }
             
             if(status == -1) return;
