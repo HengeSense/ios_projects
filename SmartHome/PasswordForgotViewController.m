@@ -9,6 +9,7 @@
 #import "PasswordForgotViewController.h"
 #import "SMTextField.h"
 #import "LongButton.h"
+#import "UIDevice+Extension.h"
 
 @interface PasswordForgotViewController ()
 
@@ -47,7 +48,7 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"find_password.title", @"");
     
     if(lblPhoneNumber == nil) {
-        lblPhoneNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, 60, 250, 20)];
+        lblPhoneNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 80 : 60, 250, 20)];
         [lblPhoneNumber setText:NSLocalizedString(@"phone_for_receive_pwd", @"")];
         lblPhoneNumber.font = [UIFont systemFontOfSize:16];
         lblPhoneNumber.backgroundColor = [UIColor clearColor];

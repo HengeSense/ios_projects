@@ -41,9 +41,10 @@
         tblSettings.scrollEnabled = NO;
         [self addSubview:tblSettings];
     }
+    
     if(btnLogout == nil) {
         btnLogout = [LongButton buttonWithPoint:CGPointMake(0, 0)];
-        btnLogout.center = CGPointMake(self.bounds.size.width / 2, 222);
+        btnLogout.center = CGPointMake(self.bounds.size.width / 2, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 242 : 222);
         [btnLogout setTitle:NSLocalizedString(@"account_logout", @"") forState:UIControlStateNormal];
         btnLogout.titleLabel.textColor = [UIColor whiteColor];
         [btnLogout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];

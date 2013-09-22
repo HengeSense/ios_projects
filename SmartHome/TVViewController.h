@@ -10,6 +10,6 @@
 #import "PopViewController.h"
 #import "SMCell.h"
 
-@interface TVViewController : PopViewController<UITableViewDataSource, UITableViewDelegate>
+@interface TVViewController : PopViewController
 
 @end

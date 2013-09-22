@@ -95,10 +95,14 @@
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
+    if([UIDevice systemVersionIsMoreThanOrEuqal7]) {
+        screenHeight += 20;
+    }
+    
     //initial main view
     if(self.mainView == nil) {
         //initial white board
-        self.mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20)];
+        self.mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 20)];
         self.mainView.backgroundColor = [UIColor whiteColor];
         
         [self drawerNavigationItemChanged:[drawerItems objectAtIndex:0] isFirstTime:YES];
@@ -106,7 +110,7 @@
     
     //initial drawer navigation view
     if(self.leftView == nil) {
-        DrawerView *dv = [[DrawerView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) andItems:drawerItems];
+        DrawerView *dv = [[DrawerView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 20) andItems:drawerItems];
         dv.drawerNavigationItemChangedDelegate = self;
         dv.ownerViewController = self;
         self.leftView = dv;
@@ -131,6 +135,9 @@
     currentItem = item;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if([UIDevice systemVersionIsMoreThanOrEuqal7]) {
+        screenHeight += 20;
+    }
     NavigationView *view = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:item.itemIdentifier];
     if(view == nil) {
         if([@"mainView" isEqualToString:item.itemIdentifier]) {

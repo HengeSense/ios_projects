@@ -69,21 +69,27 @@
         [self.view addSubview:closeBtn];
     }
 }
+
 -(void) closeBtnPressed{
     return;
 }
+
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
+
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
+
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *temperatureCell = nil;
     static NSString *cellIdentifier = @"temperatureCellIdentifier";
     temperatureCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (temperatureCell == nil) {
+    
+    if(temperatureCell == nil) {
         temperatureCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        temperatureCell.backgroundColor = [UIColor clearColor];
     }
     NSString *type;
     if (indexPath.section == 0) {
@@ -96,19 +102,22 @@
     temperatureCell.textLabel.font = [UIFont systemFontOfSize:16];
     temperatureCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
     temperatureCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    UIImageView *seperatorLine = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cell_notification"]];
-    seperatorLine.frame = CGRectMake(0,1, 320, 1);
-    [temperatureCell addSubview:seperatorLine];
+//    if(indexPath.row != 0) {
+        UIImageView *seperatorLine = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"line_cell_notification"]];
+        seperatorLine.frame = CGRectMake(0,1, 320, 1);
+        [temperatureCell addSubview:seperatorLine];
+//    }
     return  temperatureCell;
 }
--(UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = nil;
-    if (section == 0) {
+    if(section == 0) {
         header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 640/2, 47/2)];
         UIImageView *headerImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_hot.png"]];
         headerImg.frame = CGRectMake(0, 0, 640/2, 47/2);
         [header addSubview:headerImg];
-    }else if(section == 1){
+    } else if(section == 1){
         header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 640/2, 47/2)];
         header.backgroundColor = [UIColor clearColor];
         UIImageView *headerImg = nil;
@@ -119,9 +128,9 @@
 
     }
     return header;
-
 }
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     curIndex = indexPath;
     UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
@@ -132,10 +141,12 @@
     curCell.textLabel.textColor = [UIColor whiteColor];
     [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(selectDelay) userInfo:nil repeats:NO];
 }
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  CELL_HEIGHT;
 }
--(void) selectDelay{
+
+- (void)selectDelay {
     UITableViewCell *curCell = [temperatureTable cellForRowAtIndexPath:curIndex];
     curCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
     curCell.backgroundColor = [UIColor clearColor];

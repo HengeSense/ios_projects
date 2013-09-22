@@ -7,6 +7,7 @@
 //
 
 #import "SMTextField.h"
+#import "UIDevice+Extension.h"
 
 @implementation SMTextField
 
@@ -30,11 +31,13 @@
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + 12, bounds.size.width - 15, bounds.size.height);
+    CGFloat fixedHeight = [UIDevice systemVersionIsMoreThanOrEuqal7] ? 0 : 12;
+    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + fixedHeight, bounds.size.width - 15, bounds.size.height);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + 12, bounds.size.width - 15, bounds.size.height);
+    CGFloat fixedHeight = [UIDevice systemVersionIsMoreThanOrEuqal7] ? 0 : 12;
+    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + fixedHeight, bounds.size.width - 15, bounds.size.height);
 }
 
 - (CGRect)clearButtonRectForBounds:(CGRect)bounds {

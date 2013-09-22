@@ -115,6 +115,7 @@
     if(cell == nil) {
         NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"DrawerNavItemCell" owner:self options:nil];
         cell = [arr objectAtIndex:0];
+        cell.backgroundColor = [UIColor clearColor];
         CGRect imgRect = cell.imgPart.frame;
         cell.imgPart.frame = CGRectMake(imgRect.origin.x, 12, imgRect.size.width, imgRect.size.height);
         CGRect lblRect = cell.lblPart.frame;

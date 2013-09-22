@@ -47,7 +47,7 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"verification_code_send.title", @"");
     
     if(lblPhoneNumber == nil) {
-        lblPhoneNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, 60, 250, 20)];
+        lblPhoneNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 80 : 60, 250, 20)];
         [lblPhoneNumber setText:NSLocalizedString(@"phone_number_register", @"")];
         lblPhoneNumber.font = [UIFont systemFontOfSize:16];
         lblPhoneNumber.backgroundColor = [UIColor clearColor];

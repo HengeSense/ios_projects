@@ -15,6 +15,7 @@
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "JsonUtils.h"
+#import "UIDevice+Extension.h"
 #import "DeviceCommand.h"
 
 
@@ -25,6 +26,8 @@
 @end
 
 @implementation LoginViewController{
+    UIImageView *imgLogo;
+    
     UILabel *lblUserName;
     UILabel *lblPassword;
     
@@ -72,9 +75,16 @@
     [super initUI];
     
     [self registerTapGestureToResignKeyboard];
+    
+    if(imgLogo == nil) {
+        imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 262/2, 114/2)];
+        imgLogo.center = CGPointMake(self.view.center.x, imgLogo.center.y);
+        imgLogo.image = [UIImage imageNamed:@"logo2.png"];
+        [self.view addSubview:imgLogo];
+    }
         
     if(lblUserName == nil) {
-        lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
+        lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 108 : 88, 100, 20)];
         lblUserName.backgroundColor = [UIColor clearColor];
         lblUserName.text = NSLocalizedString(@"username", @"");
         lblUserName.font= [UIFont systemFontOfSize:16];
@@ -84,7 +94,6 @@
     
     if(txtUserName == nil) {
         txtUserName = [SMTextField textFieldWithPoint:CGPointMake(5, (lblUserName.frame.origin.y + LINE_HIGHT + 20))];
-//        txtUserName.keyboardType = UIKeyboardTypeASCIICapable;
         txtUserName.keyboardType = UIKeyboardTypeNumberPad;
         txtUserName.returnKeyType = UIReturnKeyNext;
         txtUserName.clearButtonMode = UITextFieldViewModeWhileEditing;

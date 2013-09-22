@@ -7,6 +7,7 @@
 //
 
 #import "DrawerViewController.h"
+#import "UIDevice+Extension.h"
 
 #define BLACK_MASK_VIEW_TAG    2900
 #define BLACK_MASK_VIEW_ALPHA  0.6
@@ -61,7 +62,11 @@
 
 - (void)applyBindings {
     //20 is the status bar height
-    screenCenterY = ([UIScreen mainScreen].bounds.size.height - 20) / 2;
+    if([UIDevice systemVersionIsMoreThanOrEuqal7]) {
+        screenCenterY = ([UIScreen mainScreen].bounds.size.height) / 2;
+    } else {
+        screenCenterY = ([UIScreen mainScreen].bounds.size.height - 20) / 2;
+    }
     
     self.view.backgroundColor = [UIColor clearColor];
     

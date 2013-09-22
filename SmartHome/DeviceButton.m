@@ -203,9 +203,9 @@
             SelectionItem *it = item;
             NSUInteger status = -1;
             if([@"open" isEqualToString:it.identifier]) {
-                status = 0;
-            } else if([@"close" isEqualToString:it.identifier]) {
                 status = 1;
+            } else if([@"close" isEqualToString:it.identifier]) {
+                status = 3;
             } else if([@"stop" isEqualToString:it.identifier]) {
                 status = 2;
             }

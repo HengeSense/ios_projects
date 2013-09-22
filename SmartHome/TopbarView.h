@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIDevice+Extension.h"
 
 #define TOP_BAR_HEIGHT 46.5
 

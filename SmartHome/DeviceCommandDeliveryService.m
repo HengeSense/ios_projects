@@ -101,15 +101,17 @@
 - (void)startService {
     if(!self.isService) {
         isService = YES;
-        
+
         // load all units from disk
         [[SMShared current].memory loadUnitsFromDisk];
-        
+
         // start network checker
         if(tcpConnectChecker != nil) {
             [tcpConnectChecker invalidate];
         }
+
         tcpConnectChecker = [NSTimer scheduledTimerWithTimeInterval:NETWORK_CHECK_INTERVAL target:self selector:@selector(checkTcp) userInfo:nil repeats:YES];
+
         [tcpConnectChecker fire];
     }
 }

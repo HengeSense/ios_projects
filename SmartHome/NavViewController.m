@@ -43,11 +43,11 @@
 
 - (void)generateTopbar {
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:YES];
-    self.topbar.leftButton.frame = CGRectMake(0, 0, 61, 30);
-    self.topbar.leftButton.center = CGPointMake(37.5, 22);
+    self.topbar.leftButton.frame = CGRectMake(5, [UIDevice systemVersionIsMoreThanOrEuqal7] ? (20+9) : 9, 61, 30);
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateNormal];
     [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_back.jpg"] forState:UIControlStateHighlighted];
-    self.topbar.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 1, 0);
+    self.topbar.leftButton.titleEdgeInsets = UIEdgeInsetsMake(0, 8, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 0 : 1, 0);
+
     [self.topbar.leftButton setTitle:NSLocalizedString(@"back", @"") forState:UIControlStateNormal];
     [self.topbar.leftButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
     [self.topbar.leftButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateHighlighted];

@@ -78,7 +78,7 @@
 #pragma selection button (units && scene)
     
     if(btnUnit == nil) {
-        btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, 65, 227 / 2, 73 / 2)];
+        btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 85 : 65, 227 / 2, 73 / 2)];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateNormal];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateHighlighted];
         [btnUnit addTarget:self action:@selector(btnShowUnitsList:) forControlEvents:UIControlEventTouchUpInside];
@@ -86,7 +86,7 @@
     }
     
     if(btnScene == nil) {
-        btnScene = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 227/2 - 15, 65, 227 /2, 73 / 2)];
+        btnScene = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 227/2 - 15, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 85 : 65, 227 /2, 73 / 2)];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateHighlighted];
         [btnScene addTarget:self action:@selector(btnShowSceneList:) forControlEvents:UIControlEventTouchUpInside];

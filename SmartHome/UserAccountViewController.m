@@ -80,7 +80,7 @@
     }
     
     if(btnSubmit == nil) {
-        btnSubmit = [LongButton buttonWithPoint:CGPointMake(0, 190)];
+        btnSubmit = [LongButton buttonWithPoint:CGPointMake(0, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 210 : 190)];
         btnSubmit.center = CGPointMake(self.view.center.x, btnSubmit.center.y);
         [btnSubmit setTitle:NSLocalizedString(@"submit", @"") forState:UIControlStateNormal];
         [self.view addSubview:btnSubmit];

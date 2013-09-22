@@ -34,6 +34,10 @@
     if(socket == nil) {
         NSString *tcpAddress = [SMShared current].settings.tcpAddress;
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
+        if(addressSet == nil || addressSet.count != 2) {
+            NSLog(@"tcp address error... %@", tcpAddress == nil ? [NSString emptyString] : tcpAddress);
+            return;
+        }
         NSString *addr = [addressSet objectAtIndex:0];
         NSString *port = [addressSet objectAtIndex:1];
         socket = [[ExtranetClientSocket alloc] initWithIPAddress:addr andPort:port.integerValue];

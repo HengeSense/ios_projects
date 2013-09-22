@@ -177,6 +177,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifer];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    cell.backgroundColor = [UIColor clearColor];
     UIView *messageView = [cell viewWithTag:CELL_CONTENT_VIEW_TAG];
     if(messageView != nil) {
         [messageView removeFromSuperview];

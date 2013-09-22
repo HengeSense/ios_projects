@@ -14,6 +14,7 @@
 #import "SMTextField.h"
 #import "LoginViewController.h"
 #import "JsonUtils.h"
+#import "UIDevice+Extension.h"
 
 @interface VerificationCodeValidationViewController ()
 
@@ -62,7 +63,7 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"verification_validation.title", @"");
     
     if(lblVerificationCode == nil) {
-        lblVerificationCode = [[UILabel alloc] initWithFrame:CGRectMake(10, 60, 250, 20)];
+        lblVerificationCode = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 80 : 60, 250, 20)];
         [lblVerificationCode setText:NSLocalizedString(@"verification_code_enter.tips", @"")];
         lblVerificationCode.font = [UIFont systemFontOfSize:16];
         lblVerificationCode.backgroundColor = [UIColor clearColor];

@@ -110,13 +110,13 @@
     [self.view addSubview:lblHelp2];
 
     if (voiceSwitch == nil) {
-        voiceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(210, 12, 100, 40)];
+        voiceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 240 : 210, 12, 100, 40)];
         [voiceSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         [voiceAndShakeView addSubview:voiceSwitch];
     }
     
     if(shakeSwitch == nil){
-        shakeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(210, ITEM_HEIGHT+12, 100, 40)];
+        shakeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 240 : 210, ITEM_HEIGHT+12, 100, 40)];
         [shakeSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         [voiceAndShakeView addSubview:shakeSwitch];
 

@@ -50,9 +50,9 @@
 
 - (void)initUI {
     [self generateTopbar];
-        
+    CGFloat y = [UIDevice systemVersionIsMoreThanOrEuqal7] ? 0 : 20;
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
-        CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width, ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - 20))];
+        CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width, ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - y))];
     backgroundImageView.image = [UIImage imageNamed:@"bg_scanner.png"];
     [self.view addSubview:backgroundImageView];
     
@@ -98,7 +98,7 @@
 
 - (void)generateTopbar {
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:NO];
-    self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, 8, 101/2, 59/2)];
+    self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 28 : 8, 101/2, 59/2)];
     [self.topbar addSubview:self.topbar.rightButton];
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
     [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];

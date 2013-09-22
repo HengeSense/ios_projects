@@ -59,6 +59,8 @@
 }
 
 - (void)initUI {
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
 }
 
