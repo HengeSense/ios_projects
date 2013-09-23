@@ -59,9 +59,9 @@
     if(command == nil) return;
     
     if(command.resultID == -3000 || command.resultID == -2000 || command.resultID == -1000) {
-        [[SMShared current].app logout];
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"security_invalid", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        [[SMShared current].app logout];
         return;
     }
     
