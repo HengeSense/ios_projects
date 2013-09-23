@@ -8,6 +8,7 @@
 
 #import "PushSettingViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <AudioToolbox/AudioToolbox.h>
 @interface PushSettingViewController ()
 
 @end
@@ -60,7 +61,8 @@
         lblSystemSetting.backgroundColor = [UIColor clearColor];
         lblSystemSetting.font = [UIFont systemFontOfSize:16];
         lblSystemSetting.textColor = [UIColor lightGrayColor];
-        lblSystemSetting.text = [NSNotificationCenter defaultCenter]?NSLocalizedString(@"opened", @""):NSLocalizedString(@"closed", @"");
+        NSLog(@"%i",[[UIApplication sharedApplication] enabledRemoteNotificationTypes]);
+        lblSystemSetting.text = [[UIApplication sharedApplication] enabledRemoteNotificationTypes]?NSLocalizedString(@"opened", @""):NSLocalizedString(@"closed", @"");
         [systemSettingView addSubview:lblSystemSetting];
     }
     UILabel *lblHelp1 = [[UILabel alloc] initWithFrame:CGRectMake(0, topBarHeight+10+ITEM_HEIGHT, 300, 100)];
@@ -125,8 +127,11 @@
 -(void)switchChanged:(UISwitch *) sender{
     if ([sender isEqual:voiceSwitch]) {
         NSLog(@"voice");
+        AudioServicesPlaySystemSound(1007);
     }else if ([sender isEqual:shakeSwitch]){
         NSLog(@"shake");
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
     }
 }
 - (void)didReceiveMemoryWarning

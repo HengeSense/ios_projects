@@ -8,20 +8,22 @@
 
 #import "DeviceFinder.h"
 #import "AsyncUdpSocket.h"
-#import "IPAddress.h"
+#import "IPAddressTool.h"
 //5050
 
 @implementation DeviceFinder
 -(void) startFindingDevice{
     if (self) {
         AsyncUdpSocket *udpSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
-        NSString *host = [[[IPAddress alloc] init] getIPAddress];
+        NSString *host = [[[IPAddressTool alloc] init] deviceIPAdress];
+        NSLog(@"host:%@",host);
         NSMutableArray *ipArr = [NSMutableArray arrayWithArray:[host componentsSeparatedByString:@"."]];
-        [ipArr setObject:@"255" atIndexedSubscript:3];
+        [ipArr removeLastObject];
+        [ipArr addObject:@"255"];
         NSString *broadCastAddress = [ipArr componentsJoinedByString:@"."];
         NSString *str = @"A001";
         NSData *sendData = [str dataUsingEncoding:NSUTF8StringEncoding];
-        
+        NSLog(@"broadCastAddress:%@",broadCastAddress);
         [udpSocket enableBroadcast:YES error:nil];
         [udpSocket sendData:sendData toHost:broadCastAddress port:5050 withTimeout:5 tag:1];
         [udpSocket receiveWithTimeout:5 tag:0];
@@ -29,6 +31,7 @@
 }
 -(BOOL) onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port{
     NSLog(@"receive data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    NSLog(@"server ip:%@",host);
     return  YES;
 }
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error {

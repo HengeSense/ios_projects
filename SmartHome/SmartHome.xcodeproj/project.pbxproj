@@ -124,7 +124,6 @@
 		6F6AB3AB17C31CB4001F1D33 /* bg_finder_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */; };
 		6F6AB3AC17C31CB4001F1D33 /* bg_scanner_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */; };
 		6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */; };
-		6F73D08017EEE99900FFF974 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F73D07817EEE99900FFF974 /* libzbar.a */; };
 		6F73D08217EEE99900FFF974 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07B17EEE99900FFF974 /* zbar-back.png */; };
 		6F73D08317EEE99900FFF974 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07C17EEE99900FFF974 /* zbar-help.html */; };
 		6F73D08417EEE99900FFF974 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */; };
@@ -270,6 +269,7 @@
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
 		F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27B4EC317EFD35D00A55220 /* libzbar.a */; };
 		F27B4ECD17F01F3900A55220 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = F27B4ECC17F01F3900A55220 /* IPAddress.m */; };
+		F27B4ED317F067AA00A55220 /* IPAddressTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F27B4ED217F067AA00A55220 /* IPAddressTool.m */; };
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
 		F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationHandlerViewController.m */; };
@@ -470,7 +470,6 @@
 		6F73D07517EEE99900FFF974 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
 		6F73D07617EEE99900FFF974 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
 		6F73D07717EEE99900FFF974 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
-		6F73D07817EEE99900FFF974 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		6F73D07B17EEE99900FFF974 /* zbar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-back.png"; sourceTree = "<group>"; };
 		6F73D07C17EEE99900FFF974 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
 		6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
@@ -697,6 +696,8 @@
 		F27B4EC317EFD35D00A55220 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		F27B4ECB17F01F3900A55220 /* IPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddress.h; sourceTree = "<group>"; };
 		F27B4ECC17F01F3900A55220 /* IPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddress.m; sourceTree = "<group>"; };
+		F27B4ED117F067AA00A55220 /* IPAddressTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddressTool.h; sourceTree = "<group>"; };
+		F27B4ED217F067AA00A55220 /* IPAddressTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddressTool.m; sourceTree = "<group>"; };
 		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		F280616317DD6E810064F35B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		F280616517DD76A30064F35B /* message_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_accessory@2x.png"; sourceTree = "<group>"; };
@@ -737,7 +738,6 @@
 				6F0FAE7817AF7F9F00B75D3E /* UIKit.framework in Frameworks */,
 				6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */,
 				6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */,
-				6F73D08017EEE99900FFF974 /* libzbar.a in Frameworks */,
 				6FE9336517DF19F1001D67E0 /* iflyMSC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1743,6 +1743,8 @@
 			children = (
 				F27B4ECB17F01F3900A55220 /* IPAddress.h */,
 				F27B4ECC17F01F3900A55220 /* IPAddress.m */,
+				F27B4ED117F067AA00A55220 /* IPAddressTool.h */,
+				F27B4ED217F067AA00A55220 /* IPAddressTool.m */,
 			);
 			name = IPAddress;
 			sourceTree = "<group>";
@@ -2058,6 +2060,7 @@
 				F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */,
 				6F84A77A17D04A5700D46BFA /* Zone.m in Sources */,
 				6F84A78017D06D6D00D46BFA /* Unit.m in Sources */,
+				F27B4ED317F067AA00A55220 /* IPAddressTool.m in Sources */,
 				F20C788317D0859C003D50C5 /* Memory.m in Sources */,
 				6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */,
 				6F95BF6117D4A7CD003A0745 /* SMCommandQueue.m in Sources */,
@@ -2175,12 +2178,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -2204,13 +2208,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
@@ -2238,8 +2243,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				SDKROOT = iphoneos7.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";
@@ -2271,8 +2276,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				SDKROOT = iphoneos7.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";
