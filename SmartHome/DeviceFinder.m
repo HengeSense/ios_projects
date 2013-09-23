@@ -17,9 +17,9 @@
     AsyncUdpSocket *udpSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
     
     NSString *str = @"hello";
-    
-NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-       [udpSocket sendData:data toHost:@"192.168.0.255" port:5050 withTimeout:-1 tag:0];
+    [udpSocket enableBroadcast:YES error:nil];
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    [udpSocket sendData:data toHost:@"172.16.8.255" port:5050 withTimeout:5 tag:0];
  
 }
 
