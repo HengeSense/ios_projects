@@ -211,7 +211,7 @@
                     return;
                 }
             }
-            
+
             NSString *filePath = [DIRECTORY stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.txt", [SMShared current].settings.account]];
             
             if(self.units == nil || self.units.count == 0) {
@@ -225,7 +225,7 @@
                 }
                 return;
             }
-            
+
             NSMutableArray *unitsToSave = [NSMutableArray array];
             for(Unit *unit in self.units) {
                 [unitsToSave addObject:[unit toJson]];
@@ -243,7 +243,6 @@
             NSLog(@"save units exception reason %@", exception.reason);
         }
         @finally {
-            
         }
     }
 }

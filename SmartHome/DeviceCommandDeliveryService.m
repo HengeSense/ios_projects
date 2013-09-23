@@ -123,6 +123,7 @@
             tcpConnectChecker = nil;
         }
         [self.tcpService disconnect];
+        tcpService = nil;
         [[SMShared current].memory syncUnitsToDisk];
         isService = NO;
     }

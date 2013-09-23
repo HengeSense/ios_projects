@@ -78,7 +78,6 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
     [self.deviceCommandDeliveryService startService];
 }
 
@@ -177,13 +176,13 @@
         [[SMShared current].deliveryService stopService];
         [[SMShared current].settings clearAuth];
         [[SMShared current].memory clear];
-        
         NavigationView *mainView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
         if(mainView != nil) {
             UIViewController *mainViewController = mainView.ownerController;
             [[ViewsPool sharedPool] clear];
-            
             [self performSelectorOnMainThread:@selector(popupToRootViewController:) withObject:mainViewController waitUntilDone:YES];
+        } else {
+            
         }
     }
 }

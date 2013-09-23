@@ -26,7 +26,9 @@
     UIButton *btnSubmit;
     BOOL passwordIsModified;
 }
+
 @synthesize infoDictionary;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -45,7 +47,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 }
 
--(void) initDefaults{
+- (void)initDefaults {
     [super initDefaults];
     values = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",nil];
     titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick.name", @""),NSLocalizedString(@"user.email", @""),NSLocalizedString(@"modify.password", @""), nil];
@@ -54,10 +56,9 @@
     }
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
-    
 }
 
-- (void)initUI{
+- (void)initUI {
     [super initUI];
     
     self.topbar.titleLabel.text = NSLocalizedString(@"account_info.title", @"");
@@ -73,7 +74,7 @@
         [self.view addSubview:infoTable];
     }
     
-    if(checkPassword == nil){
+    if(checkPassword == nil) {
         checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password.valid", @"") message:NSLocalizedString(@"please.input.old.password", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
         [checkPassword setAlertViewStyle:UIAlertViewStyleSecureTextInput];
     }
@@ -95,16 +96,16 @@
     // Dispose of any resources that can be recreated.
 }
 
--(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
--(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(values == nil) return 0;
     return titles.count;
 }
 
--(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier;
     if (indexPath.row == 0) {
         cellIdentifier = @"topCellIdentifier";
@@ -127,22 +128,23 @@
     return result;
 }
 
--(void) btnDownPressed:(id) sender{
+- (void)btnDownPressed:(id)sender {
     [checkPassword show];
 }
 
--(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         password = [alertView textFieldAtIndex:0].text;
         [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(delayProcess) userInfo:nil repeats:NO];
-        
     }
 }
--(UIView *) viewInCellAtIndexPath:(NSIndexPath *) indexPath of:(UITableViewCell *) cell{
+
+- (UIView *)viewInCellAtIndexPath:(NSIndexPath *) indexPath of:(UITableViewCell *)cell {
     NSArray *subViews = cell.contentView.subviews;
     for (UIView *v in subViews) {
         [v removeFromSuperview];
     }
+    
     UIView *view = [[UIView alloc] initWithFrame:cell.contentView.frame];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0,80 , cell.frame.size.height)];
     titleLabel.text = [titles objectAtIndex:indexPath.row];
@@ -150,10 +152,9 @@
     [titleLabel setBackgroundColor:[UIColor clearColor]];
     [view addSubview:titleLabel];
     
-    
     UILabel *valueLabel =[[UILabel alloc] initWithFrame:CGRectMake(85, 0,200 ,cell.frame.size.height)];
     valueLabel.tag = 1000;
-    valueLabel.textAlignment = UITextAlignmentRight;
+    valueLabel.textAlignment = NSTextAlignmentRight;
     [valueLabel setBackgroundColor:[UIColor clearColor]];
     [valueLabel setTextColor:[UIColor grayColor]];
     [valueLabel setFont:[UIFont systemFontOfSize:16]];
@@ -168,8 +169,8 @@
     
     view.tag = 999;
     return  view;
-
 }
+
 - (void)delayProcess {
     [[AlertView currentAlertView] setMessage:@"处理中" forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
@@ -182,15 +183,15 @@
     [[SMShared current].deliveryService executeDeviceCommand:command];
     [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
 }
--(void) delayDimiss{
+
+- (void)delayDimiss {
     if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system.error", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
     }
 }
     
--(void) didEndUpdateAccount:(DeviceCommand *)command{
-    
+- (void) didEndUpdateAccount:(DeviceCommand *)command {
     if (command == nil) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system.error", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
@@ -221,9 +222,9 @@
         default:
             break;
     }
-    
 }
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     editCell = [tableView cellForRowAtIndexPath:indexPath];
     editIndex = indexPath;
@@ -232,19 +233,19 @@
     [self presentModalViewController:modifyView animated:YES];
 }
 
--(void) textViewHasBeenSetting:(NSString *)string{
+- (void)textViewHasBeenSetting:(NSString *)string {
     if ([[titles objectAtIndex:editIndex.row] isEqualToString:NSLocalizedString(@"modify.password", @"")]) {
-        
-        if (string !=nil&&![@"" isEqualToString:string]) {
+        if(string !=nil&&![@"" isEqualToString:string]) {
             passwordIsModified = YES;
             [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
         }
-    }else{
+    } else {
         [values setObject:string atIndexedSubscript:editIndex.row];
         [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
     }
     [infoDictionary setValue:string forKey:[titles objectAtIndex:editIndex.row]];
 }
+
 - (void)updateAccount:(DeviceCommandUpdateAccount *)updateCommand {
     if(updateCommand != nil) {
         [values setObject:updateCommand.screenName atIndexedSubscript:0];

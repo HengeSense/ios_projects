@@ -129,7 +129,7 @@
 - (void)btnQRCodeScannerPressed:(id)sender {
     QRCodeScannerViewController *scannerViewController = [[QRCodeScannerViewController alloc] init];
     scannerViewController.delegate = self;
-    [self presentModalViewController:scannerViewController animated:YES];
+    [self presentViewController:scannerViewController animated:YES completion:^{}];
 }
 
 #pragma mark -
@@ -143,7 +143,7 @@
 - (void)test:(NSTimer *)timer {
     UIViewController *viewController = timer.userInfo;
     [self showMainView];
-    [viewController dismissModalViewControllerAnimated:YES];
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

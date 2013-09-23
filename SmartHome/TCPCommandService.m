@@ -14,7 +14,6 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
-    BOOL isFirst;
     
     /*      */
     BOOL flag;
@@ -29,8 +28,6 @@
 }
 
 - (void)initDefaults {
-    isFirst = YES;
-    
     if(socket == nil) {
         NSString *tcpAddress = [SMShared current].settings.tcpAddress;
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
@@ -116,8 +113,10 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
+    
     NSData *dd =    [JsonUtils createJsonDataFromDictionary:[JsonUtils createDictionaryFromJson:messages]];
     NSLog([[NSString alloc] initWithData:dd encoding:NSUTF8StringEncoding]);
+    
     
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     [[SMShared current].deliveryService handleDeviceCommand:command];
@@ -132,10 +131,7 @@
 
 - (void)notifyConnectionOpened {
     NSLog(@"socket is open");
-    if(isFirst) {
-        isFirst = NO;
-        [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-    }
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
 
 
