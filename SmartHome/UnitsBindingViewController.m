@@ -97,10 +97,6 @@
     [self.view addSubview:lblForBtnAutoSearch];
 }
 
-- (void)showTestViewController {
-    [self.navigationController pushViewController:[[TestViewController alloc] init] animated:YES];
-}
-
 - (void)generateTopbar {
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:NO];
     self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 28 : 8, 101/2, 59/2)];
