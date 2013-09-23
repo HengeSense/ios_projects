@@ -50,10 +50,23 @@
     }
     return self;
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat xOffset = self.pageableScrollView.contentOffset.x;
+    if (xOffset <= 0) {
+        rightBoundsShadow.hidden = NO;
+        leftBoundsShadow.hidden = YES;
+    }else if (xOffset<self.pageableScrollView.contentSize.width-SCROLL_ITEM_WIDTH){
+        leftBoundsShadow.hidden = NO;
+        rightBoundsShadow.hidden = NO;
+    }else{
+        leftBoundsShadow.hidden = NO;
+        rightBoundsShadow.hidden = YES;
+    }
+
+}
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self accessoryBehavior];
 }
-
 - (void)loadDataWithDictionary:(Unit *)unit {
     [self removeSubviews:self];
     if (unit == nil) return;
