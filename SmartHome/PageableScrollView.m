@@ -120,6 +120,7 @@
 
     self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
     self.pageableScrollView.delegate = self;
+    self.pageableScrollView.bounces = NO;
     self.pageableScrollView.contentSize = CGSizeMake(self.pageableScrollView.frame.size.width*multiple,SCROLL_ITEM_HEIGHT);
     [self pageWithViews:mutableScrollArr];
     [self addSubview:self.pageableScrollView];
@@ -179,7 +180,6 @@
     [self toCurPage];
 }
 -(void) toCurPage{
-    CGFloat xOffset = self.pageableScrollView.contentOffset.x;
     CGPoint navOffset = self.pageNavView.pageableNavView.contentOffset;
     CGFloat navHeight = 30+ITEM_MARGIN;
     [navItems enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL *stop) {
@@ -198,18 +198,6 @@
     if(navOffset.y>curNavYOffset){
         self.pageNavView.pageableNavView.contentOffset = CGPointMake(navOffset.x, navOffset.y-navHeight);
     }
-    
-    if (xOffset <= 0) {
-        rightBoundsShadow.hidden = NO;
-        leftBoundsShadow.hidden = YES;
-    }else if (xOffset<self.pageableScrollView.contentSize.width-SCROLL_ITEM_WIDTH){
-        leftBoundsShadow.hidden = NO;
-        rightBoundsShadow.hidden = NO;
-    }else{
-        leftBoundsShadow.hidden = NO;
-        rightBoundsShadow.hidden = YES;
-    }
-
 }
 - (void)notifyStatusChanged {
     if(deviceDictionary == nil) return;
