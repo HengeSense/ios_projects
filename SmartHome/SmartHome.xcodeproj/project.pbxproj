@@ -131,7 +131,6 @@
 		6F73D08317EEE99900FFF974 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07C17EEE99900FFF974 /* zbar-help.html */; };
 		6F73D08417EEE99900FFF974 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */; };
 		6F73D08517EEE99900FFF974 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07E17EEE99900FFF974 /* zbar-samples.png */; };
-		6F73D08717EEEA4300FFF974 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F73D08617EEEA4300FFF974 /* libzbar.a */; };
 		6F73D08B17EEEDF700FFF974 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D08A17EEEDF700FFF974 /* Entitlements.plist */; };
 		6F84355817E9A66F0084C316 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355617E9A66F0084C316 /* icon.png */; };
 		6F84355917E9A66F0084C316 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355717E9A66F0084C316 /* icon@2x.png */; };
@@ -738,7 +737,6 @@
 				6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */,
 				6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */,
 				6F73D08017EEE99900FFF974 /* libzbar.a in Frameworks */,
-				6F73D08717EEEA4300FFF974 /* libzbar.a in Frameworks */,
 				6FE9336517DF19F1001D67E0 /* iflyMSC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2212,9 +2210,7 @@
 		6F0FAE9B17AF7F9F00B75D3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 骞 刘 (C9478LBLD3)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
@@ -2228,20 +2224,13 @@
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/young/Documents/ios_projects/SmartHome/ZBarSDK,
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
-				SDKROOT = iphoneos7.0;
-				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "arm64 arm7s";
 				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				SDKROOT = iphoneos7.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";
 				WRAPPER_EXTENSION = app;
@@ -2251,9 +2240,7 @@
 		6F0FAE9C17AF7F9F00B75D3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 骞 刘 (C9478LBLD3)";
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
@@ -2267,23 +2254,13 @@
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/young/Documents/ios_projects/SmartHome/ZBarSDK,
-				);
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
-				SDKROOT = iphoneos7.0;
-				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "arm64 arm7s";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				SDKROOT = iphoneos7.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";
 				WRAPPER_EXTENSION = app;
