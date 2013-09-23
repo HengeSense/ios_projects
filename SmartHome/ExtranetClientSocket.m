@@ -104,7 +104,9 @@
     uint8_t buffer[BUFFER_SIZE];
     while(self.inputStream != nil && self.inputStream.hasBytesAvailable) {
         NSInteger bytesHasRead = [self.inputStream read:buffer maxLength:BUFFER_SIZE];
-        [receivedData appendBytes:buffer length:bytesHasRead];
+        if(bytesHasRead != -1) {
+            [receivedData appendBytes:buffer length:bytesHasRead];
+        }
     }
 }
 
