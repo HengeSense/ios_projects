@@ -124,9 +124,6 @@
 		6F6AB3AB17C31CB4001F1D33 /* bg_finder_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */; };
 		6F6AB3AC17C31CB4001F1D33 /* bg_scanner_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */; };
 		6F6AB3B617C39EBD001F1D33 /* ExtranetClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */; };
-		6F73D07F17EEE99900FFF974 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D06017EEE99900FFF974 /* .gitignore */; };
-		6F73D08017EEE99900FFF974 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F73D07817EEE99900FFF974 /* libzbar.a */; };
-		6F73D08117EEE99900FFF974 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07917EEE99900FFF974 /* README */; };
 		6F73D08217EEE99900FFF974 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07B17EEE99900FFF974 /* zbar-back.png */; };
 		6F73D08317EEE99900FFF974 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07C17EEE99900FFF974 /* zbar-help.html */; };
 		6F73D08417EEE99900FFF974 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */; };
@@ -270,6 +267,7 @@
 		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
 		F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */; };
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
+		F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27B4EC317EFD35D00A55220 /* libzbar.a */; };
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
 		F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationHandlerViewController.m */; };
@@ -450,7 +448,6 @@
 		6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner_shadow@2x.png"; sourceTree = "<group>"; };
 		6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtranetClientSocket.h; sourceTree = "<group>"; };
 		6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtranetClientSocket.m; sourceTree = "<group>"; };
-		6F73D06017EEE99900FFF974 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6F73D06417EEE99900FFF974 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
 		6F73D06517EEE99900FFF974 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		6F73D06617EEE99900FFF974 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -471,13 +468,10 @@
 		6F73D07517EEE99900FFF974 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
 		6F73D07617EEE99900FFF974 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
 		6F73D07717EEE99900FFF974 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
-		6F73D07817EEE99900FFF974 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
-		6F73D07917EEE99900FFF974 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		6F73D07B17EEE99900FFF974 /* zbar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-back.png"; sourceTree = "<group>"; };
 		6F73D07C17EEE99900FFF974 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
 		6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
 		6F73D07E17EEE99900FFF974 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
-		6F73D08617EEEA4300FFF974 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzbar.a; path = ZBarSDK/libzbar.a; sourceTree = "<group>"; };
 		6F73D08A17EEEDF700FFF974 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		6F84355517E985D40084C316 /* ParameterExtentions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParameterExtentions.h; sourceTree = "<group>"; };
 		6F84355617E9A66F0084C316 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -697,6 +691,7 @@
 		F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+UIViewControllerExtension.m"; sourceTree = "<group>"; };
 		F237168317B3715C0057C95B /* SmsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsService.h; sourceTree = "<group>"; };
 		F237168417B3715C0057C95B /* SmsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsService.m; sourceTree = "<group>"; };
+		F27B4EC317EFD35D00A55220 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		F280616317DD6E810064F35B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		F280616517DD76A30064F35B /* message_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_accessory@2x.png"; sourceTree = "<group>"; };
@@ -725,6 +720,7 @@
 			files = (
 				F22DF72917C1F5FB00BF7C3A /* Security.framework in Frameworks */,
 				F237167F17B349650057C95B /* libxml2.dylib in Frameworks */,
+				F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */,
 				6FD8A72217B229C4009C7493 /* SystemConfiguration.framework in Frameworks */,
 				6F0FAF4B17AF8B4600B75D3E /* CoreVideo.framework in Frameworks */,
 				6F0FAF4917AF8B4000B75D3E /* CoreMedia.framework in Frameworks */,
@@ -736,7 +732,6 @@
 				6F0FAE7817AF7F9F00B75D3E /* UIKit.framework in Frameworks */,
 				6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */,
 				6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */,
-				6F73D08017EEE99900FFF974 /* libzbar.a in Frameworks */,
 				6FE9336517DF19F1001D67E0 /* iflyMSC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -894,9 +889,9 @@
 		6F0FAE7617AF7F9F00B75D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F27B4EC317EFD35D00A55220 /* libzbar.a */,
 				F237167E17B349650057C95B /* libxml2.dylib */,
 				6F0FAF4417AF8B0D00B75D3E /* libiconv.dylib */,
-				6F73D08617EEEA4300FFF974 /* libzbar.a */,
 				6FE9336417DF19F1001D67E0 /* iflyMSC.framework */,
 				F22DF72317C1CA3500BF7C3A /* Security.framework */,
 				6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */,
@@ -1394,10 +1389,7 @@
 		6F73D05F17EEE99900FFF974 /* ZBarSDK */ = {
 			isa = PBXGroup;
 			children = (
-				6F73D06017EEE99900FFF974 /* .gitignore */,
 				6F73D06117EEE99900FFF974 /* Headers */,
-				6F73D07817EEE99900FFF974 /* libzbar.a */,
-				6F73D07917EEE99900FFF974 /* README */,
 				6F73D07A17EEE99900FFF974 /* Resources */,
 			);
 			path = ZBarSDK;
@@ -1827,7 +1819,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F73D07F17EEE99900FFF974 /* .gitignore in Resources */,
 				6F0FAE8217AF7F9F00B75D3E /* InfoPlist.strings in Resources */,
 				6F73D08417EEE99900FFF974 /* zbar-helpicons.png in Resources */,
 				6F0FAE8A17AF7F9F00B75D3E /* Default.png in Resources */,
@@ -1906,7 +1897,6 @@
 				6FA7859F17CBA40200998541 /* btn_speech_03@2x.png in Resources */,
 				6FA785A017CBA40200998541 /* btn_speech_04@2x.png in Resources */,
 				6FA785A117CBA40200998541 /* btn_speech_05@2x.png in Resources */,
-				6F73D08117EEE99900FFF974 /* README in Resources */,
 				6FA785A217CBA40200998541 /* btn_speech_06@2x.png in Resources */,
 				6FA785A317CBA40200998541 /* btn_speech_07@2x.png in Resources */,
 				6FA785A417CBA40200998541 /* btn_speech_08@2x.png in Resources */,
@@ -2212,8 +2202,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2224,11 +2214,14 @@
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/hadoop/ios_projects/SmartHome,
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
 				SDKROOT = iphoneos7.0;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2242,8 +2235,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2254,11 +2247,14 @@
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/hadoop/ios_projects/SmartHome,
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
 				SDKROOT = iphoneos7.0;
 				USER_HEADER_SEARCH_PATHS = "";
