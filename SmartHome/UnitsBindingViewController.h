@@ -9,6 +9,7 @@
 #import "QRCodeScannerViewController.h"
 #import "BaseViewController.h"
 #import "TopbarView.h"
+#import "DeviceFinder.h"
 
 @interface UnitsBindingViewController : BaseViewController<QRCodeProcessorDelegate>
 

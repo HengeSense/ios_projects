@@ -11,6 +11,6 @@
 
 @interface DeviceFinder : NSObject<AsyncUdpSocketDelegate>
 
-+ (void)startFindingDevice;
+- (void)startFindingDevice;
 
 @end

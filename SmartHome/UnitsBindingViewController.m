@@ -67,6 +67,7 @@
     if(btnAutoSearch == nil){
         btnAutoSearch = [[UIButton alloc] initWithFrame:CGRectMake(25+btnQRCodeScanner.frame.size.width+17, 150, 253/2, 88/2)];
         [btnAutoSearch setBackgroundImage:[UIImage imageNamed:@"btn_finder.png"] forState:UIControlStateNormal];
+        [btnAutoSearch addTarget:self action:@selector(btnAutoSearchPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnAutoSearch];
     }
     
@@ -132,6 +133,10 @@
     [self presentViewController:scannerViewController animated:YES completion:^{}];
 }
 
+-(void) btnAutoSearchPressed:(UIButton *) sender{
+    DeviceFinder *finder = [[DeviceFinder alloc] init];
+    [finder startFindingDevice];
+}
 #pragma mark -
 #pragma mark QR code delegate
 
