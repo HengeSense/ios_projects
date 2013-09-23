@@ -14,7 +14,6 @@
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateDevices class]]) {
-        NSLog(@"trigger update devices command");
         DeviceCommandUpdateDevices *updateDevicesCommand = (DeviceCommandUpdateDevices *)command;
         [[SMShared current].memory updateUnitDevices:updateDevicesCommand.devicesStatus forUnit:updateDevicesCommand.masterDeviceCode];
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetUnitsHandler class]];

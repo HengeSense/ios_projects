@@ -19,7 +19,10 @@
     UIImageView *imgCameraShots;
     UIView *backgroundView;
     DirectionButton *btnDirection;
+    CameraSocket *socket;
 }
+
+@synthesize cameraDevice;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,7 +43,7 @@
     [super initUI];
     
     if(backgroundView == nil) {
-        backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, 310, self.view.bounds.size.height - self.topbar.bounds.size.height - 30)];
+        backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, 310, 480 - self.topbar.bounds.size.height - 10)];
         backgroundView.center = CGPointMake(self.view.center.x, backgroundView.center.y);
         backgroundView.backgroundColor = [UIColor colorWithHexString:@"#1a1a1f"];
         backgroundView.layer.cornerRadius = 10;
@@ -48,7 +51,7 @@
     }
     
     if(imgCameraShots == nil) {
-        imgCameraShots = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 280, 200)];
+        imgCameraShots = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 288, 216)];
         imgCameraShots.center = CGPointMake(backgroundView.bounds.size.width / 2, imgCameraShots.center.y);
         imgCameraShots.image = [UIImage imageNamed:@"test.png"];
         [backgroundView addSubview:imgCameraShots];
@@ -59,6 +62,9 @@
         btnDirection.delegate = self;
         [backgroundView addSubview:btnDirection];
     }
+    
+    [[SMShared current].memory subscribeHandler:[DeviceCommandGetCameraServerHandler class] for:self];
+    [self startMonitorCamera];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,7 +77,61 @@
     
 }
 
+- (void)dismiss {
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetCameraServerHandler class] for:self];
+    [self performSelectorInBackground:@selector(stopMonitorCamera) withObject:nil];
+    [super dismiss];
+}
 
+#pragma mark -
+#pragma mark service
+
+- (void)startMonitorCamera {
+    if(self.cameraDevice == nil) return;
+    DeviceCommandGetCameraServer *cmd = (DeviceCommandGetCameraServer *)[CommandFactory commandForType:CommandTypeGetCameraServer];
+    cmd.masterDeviceCode = self.cameraDevice.zone.unit.identifier;
+    cmd.cameraId = self.cameraDevice.identifier;
+    [[SMShared current].deliveryService executeDeviceCommand:cmd];
+}
+
+- (void)stopMonitorCamera {
+    if(socket != nil && [socket isConnectted]) {
+        [socket close];
+    }
+}
+
+#pragma mark -
+#pragma mark device command get camera server delegate
+
+- (void)receivedCameraServer:(DeviceCommandReceivedCameraServer *)command {
+    NSArray *addressSet = [command.server componentsSeparatedByString:@":"];
+    if(addressSet != nil && addressSet.count == 2) {
+        NSString *address = [addressSet objectAtIndex:0];
+        NSString *port = [addressSet objectAtIndex:1];
+        if(socket != nil && [socket isConnectted]) {
+            [socket close];
+        }
+        socket = [[CameraSocket alloc] initWithIPAddress:address andPort:port.integerValue];
+        socket.delegate = self;
+        socket.key = command.conStr;
+        [socket connect];
+    }
+}
+
+#pragma mark -
+#pragma mark camera socket delegate
+
+- (void)notifyNewImageWasReceived:(UIImage *)image {
+    imgCameraShots.image = image;
+}
+
+- (void)notifyCameraConnectted {
+    NSLog(@"camera open");
+}
+
+- (void)notifyCameraWasDisconnectted {
+    NSLog(@"camera close");
+}
 
 #pragma mark -
 #pragma mark direction button delegate

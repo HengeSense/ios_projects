@@ -18,7 +18,6 @@
 #import "UIDevice+Extension.h"
 #import "DeviceCommand.h"
 
-
 #define LINE_HIGHT 5
 
 @interface LoginViewController ()

@@ -195,6 +195,10 @@
 		6FD081C617CF43260089A1ED /* icon_camera_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD081C017CF43260089A1ED /* icon_camera_on@2x.png */; };
 		6FD081C717CF43260089A1ED /* icon_tv_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD081C117CF43260089A1ED /* icon_tv_off@2x.png */; };
 		6FD081C817CF43260089A1ED /* icon_tv_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD081C217CF43260089A1ED /* icon_tv_on@2x.png */; };
+		6FD0CC0117EFE8CA005956E0 /* CameraSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0CC0017EFE8CA005956E0 /* CameraSocket.m */; };
+		6FD0CC0417EFEC6F005956E0 /* DeviceCommandGetCameraServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0CC0317EFEC6F005956E0 /* DeviceCommandGetCameraServer.m */; };
+		6FD0CC0717EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0CC0617EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m */; };
+		6FD0CC0A17EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0CC0917EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m */; };
 		6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4CFE817C249F200EC98F9 /* BitUtils.m */; };
 		6FD4CFEB17C312BD00EC98F9 /* bg_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */; };
 		6FD6C64917CC539200BDA327 /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C64817CC539200BDA327 /* PopViewController.m */; };
@@ -572,6 +576,14 @@
 		6FD081C017CF43260089A1ED /* icon_camera_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_camera_on@2x.png"; sourceTree = "<group>"; };
 		6FD081C117CF43260089A1ED /* icon_tv_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tv_off@2x.png"; sourceTree = "<group>"; };
 		6FD081C217CF43260089A1ED /* icon_tv_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tv_on@2x.png"; sourceTree = "<group>"; };
+		6FD0CBFF17EFE8CA005956E0 /* CameraSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSocket.h; sourceTree = "<group>"; };
+		6FD0CC0017EFE8CA005956E0 /* CameraSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSocket.m; sourceTree = "<group>"; };
+		6FD0CC0217EFEC6F005956E0 /* DeviceCommandGetCameraServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetCameraServer.h; sourceTree = "<group>"; };
+		6FD0CC0317EFEC6F005956E0 /* DeviceCommandGetCameraServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetCameraServer.m; sourceTree = "<group>"; };
+		6FD0CC0517EFEE53005956E0 /* DeviceCommandReceivedCameraServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandReceivedCameraServer.h; sourceTree = "<group>"; };
+		6FD0CC0617EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandReceivedCameraServer.m; sourceTree = "<group>"; };
+		6FD0CC0817EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetCameraServerHandler.h; sourceTree = "<group>"; };
+		6FD0CC0917EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetCameraServerHandler.m; sourceTree = "<group>"; };
 		6FD4CFE717C249F200EC98F9 /* BitUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitUtils.h; sourceTree = "<group>"; };
 		6FD4CFE817C249F200EC98F9 /* BitUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitUtils.m; sourceTree = "<group>"; };
 		6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner@2x.png"; sourceTree = "<group>"; };
@@ -1539,6 +1551,8 @@
 				6F347A5417D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m */,
 				6F47FAEE17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.h */,
 				6F47FAEF17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m */,
+				6FD0CC0817EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.h */,
+				6FD0CC0917EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1595,6 +1609,8 @@
 			children = (
 				6F6AB3B417C39EBD001F1D33 /* ExtranetClientSocket.h */,
 				6F6AB3B517C39EBD001F1D33 /* ExtranetClientSocket.m */,
+				6FD0CBFF17EFE8CA005956E0 /* CameraSocket.h */,
+				6FD0CC0017EFE8CA005956E0 /* CameraSocket.m */,
 			);
 			name = tcp;
 			sourceTree = "<group>";
@@ -1685,6 +1701,10 @@
 				6F47FAEC17E311970027C0F7 /* DeviceCommandUpdateUnitName.m */,
 				6FB5AC9D17E70108009AF916 /* DeviceCommandUpdateDevice.h */,
 				6FB5AC9E17E70108009AF916 /* DeviceCommandUpdateDevice.m */,
+				6FD0CC0217EFEC6F005956E0 /* DeviceCommandGetCameraServer.h */,
+				6FD0CC0317EFEC6F005956E0 /* DeviceCommandGetCameraServer.m */,
+				6FD0CC0517EFEE53005956E0 /* DeviceCommandReceivedCameraServer.h */,
+				6FD0CC0617EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -2014,15 +2034,18 @@
 				6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */,
 				6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */,
 				6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */,
+				6FD0CC0A17EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m in Sources */,
 				6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */,
 				6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */,
 				6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */,
 				6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */,
 				F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */,
+				6FD0CC0417EFEC6F005956E0 /* DeviceCommandGetCameraServer.m in Sources */,
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 				F20B36D017B9DDAD009286D6 /* UnitDetailsViewController.m in Sources */,
 				6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */,
 				6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */,
+				6FD0CC0117EFE8CA005956E0 /* CameraSocket.m in Sources */,
 				6F1EE66A17BC787900580760 /* UnitsBindingViewController.m in Sources */,
 				6F1EE66D17BCD41500580760 /* ClientSocket.m in Sources */,
 				F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */,
@@ -2070,6 +2093,7 @@
 				6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */,
 				6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */,
 				6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */,
+				6FD0CC0717EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m in Sources */,
 				6F159BF317D70899005CFFEE /* DeviceCommandGetNotificationsHandler.m in Sources */,
 				6F159BF617D708EC005CFFEE /* DeviceCommandUpdateNotifications.m in Sources */,
 				6F159C0317D754BB005CFFEE /* SMButton.m in Sources */,

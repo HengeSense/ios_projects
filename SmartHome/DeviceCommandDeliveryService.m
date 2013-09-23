@@ -15,6 +15,7 @@
 #import "DeviceCommandVoiceControlHandler.h"
 #import "DeviceCommandUpdateDevicesHandler.h"
 #import "DeviceCommandGetSceneListHandler.h"
+#import "DeviceCommandGetCameraServerHandler.h"
 
 #import "AlertView.h"
 
@@ -42,17 +43,13 @@
 
 /*
  *
- *
- *
  */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(!self.isService) return;
-    
     [self.tcpService executeDeviceCommand:command];
 }
 
 /*
- *
  *
  */
 - (void)handleDeviceCommand:(DeviceCommand *)command {
@@ -90,8 +87,10 @@
     } else if([@"DeviceFingerExcuteCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateDevicesHandler alloc] init];
     } else if([@"DeviceChangeNameCommand" isEqualToString:command.commandName]) {
-        
-    } 
+        // ...
+    } else if([@"RequestCameraCommand" isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandGetCameraServerHandler alloc] init];
+    }
         
     if(handler != nil) {
         [handler handle:command];

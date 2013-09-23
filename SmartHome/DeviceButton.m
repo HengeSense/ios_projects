@@ -187,6 +187,7 @@
     } else if(_device_.isCamera) {
         CameraViewController *cameraViewController = [[CameraViewController alloc] init];
         cameraViewController.title = _device_.name;
+        cameraViewController.cameraDevice = _device_;
         [self.ownerController presentViewController:cameraViewController animated:YES completion:nil];
     }
 }

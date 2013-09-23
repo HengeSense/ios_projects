@@ -16,6 +16,8 @@
 #import "DeviceCommandUpdateDevices.h"
 #import "DeviceCommandUpdateUnitName.h"
 #import "DeviceCommandUpdateDevice.h"
+#import "DeviceCommandGetCameraServer.h"
+#import "DeviceCommandReceivedCameraServer.h"
 
 typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeNone,
@@ -27,6 +29,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeUpdateDeviceViaVoice,
     CommandTypeUpdateDevice,
     CommandTypeUpdateUnitName,
+    CommandTypeGetCameraServer,
 };
 
 @interface CommandFactory : NSObject

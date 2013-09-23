@@ -45,6 +45,10 @@
         DeviceCommandUpdateUnitName *command = [[DeviceCommandUpdateUnitName alloc] init];
         command.commandName = @"DeviceChangeNameCommand";
         return command;
+    } else if(type == CommandTypeGetCameraServer) {
+        DeviceCommandGetCameraServer *command = [[DeviceCommandGetCameraServer alloc] init];
+        command.commandName = @"RequestCameraCommand";
+        return command;
     }
     
     return nil;
@@ -70,6 +74,8 @@
         command = [[DeviceCommandVoiceControl alloc] initWithDictionary:json];
     } else if([@"DeviceFingerExcuteCommand" isEqualToString:commandName]) {
         command = [[DeviceCommandUpdateDevices alloc] initWithDictionary:json];
+    } else if([@"RequestCameraCommand" isEqualToString:commandName]) {
+        command = [[DeviceCommandReceivedCameraServer alloc] initWithDictionary:json];
     }
     
     return command;
