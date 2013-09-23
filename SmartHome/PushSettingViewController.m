@@ -68,7 +68,7 @@
     lblHelp1.backgroundColor = [UIColor clearColor];
     lblHelp1.textColor = [UIColor lightTextColor];
     lblHelp1.font = [UIFont systemFontOfSize:14];
-    lblHelp1.lineBreakMode = UILineBreakModeWordWrap;
+    lblHelp1.lineBreakMode = NSLineBreakByWordWrapping;
     lblHelp1.numberOfLines = 0;
     lblHelp1.text = NSLocalizedString(@"push.help1", @"");
     [lblHelp1 sizeThatFits:lblHelp1.frame.size];
@@ -103,7 +103,7 @@
     lblHelp2.backgroundColor = [UIColor clearColor];
     lblHelp2.textColor = [UIColor lightTextColor];
     lblHelp2.font = [UIFont systemFontOfSize:14];
-    lblHelp2.lineBreakMode = UILineBreakModeWordWrap;
+    lblHelp2.lineBreakMode = NSLineBreakByWordWrapping;
     lblHelp2.numberOfLines = 0;
     lblHelp2.text = NSLocalizedString(@"push.help2", @"");
     [lblHelp2 sizeThatFits:lblHelp2.frame.size];

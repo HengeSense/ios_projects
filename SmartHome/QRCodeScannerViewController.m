@@ -125,7 +125,7 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 #pragma mark events
 
 - (void)btnBackPressed:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)btnFlashLightPressed:(id)sender {
@@ -234,7 +234,7 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(qrCodeScannerSuccess:scanner:)]) {
         [self.delegate qrCodeScannerSuccess:result scanner:self];
     } else {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

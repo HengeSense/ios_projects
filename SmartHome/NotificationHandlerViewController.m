@@ -11,6 +11,7 @@
 #import "LongButton.h"
 #import "SMDateFormatter.h"
 #import "PlayCameraPicViewController.h"
+
 @interface NotificationHandlerViewController ()
 
 @end
@@ -19,10 +20,10 @@
     UIView  *view;
     UIImageView *typeMessage;
     NSDictionary *messageTypeDictionary;
-    
-    
 }
+
 @synthesize message;
+
 -(id) initWithMessage:(SMNotification *) smNotification{
     self = [super init];
     if (self) {
@@ -47,10 +48,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
--(void) initDefaults{
+
+- (void)initDefaults {
     messageTypeDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:NSLocalizedString(@"cf", @"btn_done.png"),@"CF",NSLocalizedString(@"ms", @"btn_done.png"),@"MS",NSLocalizedString(@"al", @"btn_done.png"),@"AL",NSLocalizedString(@"at", @"btn_done.png"),@"AT", nil];
 }
--(void) initUI{
+
+- (void)initUI {
     [super initUI];
     self.topbar.titleLabel.text = [messageTypeDictionary objectForKey:self.message.type];
 
@@ -81,7 +84,7 @@
         textLabel.textColor = [UIColor lightTextColor];
         textLabel.numberOfLines = 0;
         CGSize constraint = CGSizeMake(240, 20000.0f);
-        CGSize size = [textLabel.text sizeWithFont:font constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        CGSize size = [textLabel.text sizeWithFont:font constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
         textLabel.frame = CGRectMake(40, 5, size.width, size.height<MESSAGE_CELL_HEIGHT?MESSAGE_CELL_HEIGHT:size.height*2);
         textLabel.backgroundColor = [UIColor clearColor];
         [view addSubview:textLabel];
@@ -128,27 +131,27 @@
             [self.view addSubview:refuseBtn];
             [refuseBtn addTarget:self action:@selector(refuseBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
             
-            
             UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 203/2, 98/2)];
             [deleteBtn setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
             deleteBtn.center = CGPointMake(refuseBtn.center.x+refuseBtn.frame.size.width+5, refuseBtn.center.y);
             [deleteBtn setTitle: NSLocalizedString(@"delete", @"") forState:UIControlStateNormal];
             [deleteBtn addTarget:self action:@selector(deleteBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:deleteBtn];
-            
         }
-
     }
 }
--(void) cancel{
+
+- (void)cancel {
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void) btnCheckPressed:(UIButton *) sender{
+
+- (void)btnCheckPressed:(UIButton *)sender {
     PlayCameraPicViewController *playCameraPicViewController = [[PlayCameraPicViewController alloc] init];
     playCameraPicViewController.data = self.message.data;
-    [self presentModalViewController:playCameraPicViewController animated:YES];
+    [self presentViewController:playCameraPicViewController animated:YES completion:nil];
 }
--(void) deleteBtnPressed:(UIButton *) sender{
+
+- (void)deleteBtnPressed:(UIButton *)sender {
     if ([self.deleteNotificationDelegate respondsToSelector:@selector(didWhenDeleted)]) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"deleting", @"") forType:AlertViewTypeWaitting];
         [[AlertView currentAlertView] alertAutoDisappear:NO  lockView:self.view];
@@ -157,19 +160,22 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void) agreeBtnPressed:(UIButton *) sender{
+
+- (void)agreeBtnPressed:(UIButton *)sender {
     if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
         [self.cfNotificationDelegate didAgreeOrRefuse:@"agree.operation"];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void) refuseBtnPressed:(UIButton *) sender{
+
+- (void)refuseBtnPressed:(UIButton *)sender {
     if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
         [self.cfNotificationDelegate didAgreeOrRefuse:@"refuse.operation"];
     }
     [self.navigationController popViewControllerAnimated:YES];
 
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

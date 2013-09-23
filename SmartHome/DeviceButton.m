@@ -179,15 +179,15 @@
     } else if(_device_.isTV || _device_.isSTB) {
         TVViewController *tvViewController = [[TVViewController alloc] init];
         tvViewController.title = _device_.name;
-        [self.ownerController presentModalViewController:tvViewController animated:YES];
+        [self.ownerController presentViewController:tvViewController animated:YES completion:nil];
     } else if(_device_.isAircondition) {
         AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
         airConditionViewController.title = _device_.name;
-        [self.ownerController presentModalViewController:airConditionViewController animated:YES];
+        [self.ownerController presentViewController:airConditionViewController animated:YES completion:nil];
     } else if(_device_.isCamera) {
         CameraViewController *cameraViewController = [[CameraViewController alloc] init];
         cameraViewController.title = _device_.name;
-        [self.ownerController presentModalViewController:cameraViewController animated:YES];
+        [self.ownerController presentViewController:cameraViewController animated:YES completion:nil];
     }
 }
 

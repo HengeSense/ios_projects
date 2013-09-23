@@ -83,7 +83,7 @@
     if (cellDetail == nil) {
         cellDetail = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellDetailIndentifier];
         UILabel *lblValue = [[UILabel alloc] initWithFrame:CGRectMake(SM_CELL_WIDTH/2-120, 0, 100, SM_CELL_HEIGHT/2)];
-        lblValue.textAlignment = UITextAlignmentRight;
+        lblValue.textAlignment = NSTextAlignmentRight;
         lblValue.backgroundColor = [UIColor clearColor];
         lblValue.font = [UIFont systemFontOfSize:16];
         lblValue.textColor = [UIColor lightGrayColor];

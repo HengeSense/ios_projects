@@ -136,7 +136,7 @@
         if (input.text !=nil&&makesureInput.text!=nil) {
             if ([input.text isEqualToString:makesureInput.text]) {
                 [self.textDelegate textViewHasBeenSetting:input.text];
-                [self dismissModalViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
                 return  YES;
             }else{
                 [[AlertView currentAlertView] setMessage:NSLocalizedString(@"the.two.input.is.not.consistent", @"") forType:AlertViewTypeFailed];
@@ -153,7 +153,7 @@
         if(self.textDelegate != nil && [self.textDelegate respondsToSelector:@selector(textViewHasBeenSetting:)]) {
             [self.textDelegate textViewHasBeenSetting:input.text];
         }
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
         return  YES;
 
     }
@@ -164,12 +164,10 @@
         if (input.text !=nil&&makesureInput.text!=nil) {
             if ([input.text isEqualToString:makesureInput.text]) {
                 [self.textDelegate textViewHasBeenSetting:input.text];
-                [self dismissModalViewControllerAnimated:YES];
-
+                [self dismissViewControllerAnimated:YES completion:nil];
             }else{
                 [[AlertView currentAlertView] setMessage:NSLocalizedString(@"the.two.input.is.not.consistent", @"") forType:AlertViewTypeFailed];
                 [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
-
             }
             
         }else{
@@ -181,13 +179,11 @@
         if(self.textDelegate != nil && [self.textDelegate respondsToSelector:@selector(textViewHasBeenSetting:)]) {
             [self.textDelegate textViewHasBeenSetting:input.text];
         }
-        [self dismissModalViewControllerAnimated:YES];
-
-        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
--(void) cancel{
-    [self dismissModalViewControllerAnimated:YES];
+- (void)cancel {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

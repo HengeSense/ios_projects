@@ -37,7 +37,7 @@
         textLabel.tag = TEXT_LABEL_TAG;
         textLabel.font =[UIFont systemFontOfSize:14];
         textLabel.textColor = [UIColor lightTextColor];
-        textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         textLabel.numberOfLines = 0;
         textLabel.backgroundColor = [UIColor clearColor];
 

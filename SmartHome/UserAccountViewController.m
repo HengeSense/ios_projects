@@ -230,7 +230,7 @@
     editIndex = indexPath;
     ModifyInfoViewController *modifyView = [[ModifyInfoViewController alloc] initWithKey:[titles objectAtIndex:indexPath.row] forValue:[values objectAtIndex:indexPath.row] from:self];
     modifyView.textDelegate = self;
-    [self presentModalViewController:modifyView animated:YES];
+    [self presentViewController:modifyView animated:YES completion:nil];
 }
 
 - (void)textViewHasBeenSetting:(NSString *)string {

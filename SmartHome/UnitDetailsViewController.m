@@ -182,7 +182,7 @@
     if(indexPath.section == 0 && indexPath.row == 0) {
         ModifyInfoViewController *textModifyView = [[ModifyInfoViewController alloc] initWithKey:NSLocalizedString(@"change_unit_name", @"") forValue:unit == nil ? [NSString emptyString] : unit.name from:self];
         textModifyView.textDelegate = self;
-        [self presentModalViewController:textModifyView animated:YES];
+        [self presentViewController:textModifyView animated:YES completion:nil];
     } else if(indexPath.section == 1) {
         ZoneDetailsViewController *zoneDetailViewController = [[ZoneDetailsViewController alloc] init];
         if(unit.zones != nil) {
