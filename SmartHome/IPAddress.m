@@ -14,7 +14,7 @@
 
 - (NSString *)getIPAddress
 {
-    NSString *address = @"255.255.255.255";
+    NSString *address = @"error";
     struct ifaddrs *interfaces = NULL;
     struct ifaddrs *temp_addr = NULL;
     int success = 0;

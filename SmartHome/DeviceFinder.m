@@ -11,14 +11,21 @@
 #import "IPAddressTool.h"
 #import "IPAddress.h"
 //5050
-
+static NSString *IP;
 @implementation DeviceFinder
+-(id) init{
+    self = [super init];
+    if (!IP) {
+        IPAddressTool *ipTool = [[IPAddressTool alloc] init];
+        IP = [ipTool deviceIPAdress];
+    }
+    return  self;
+}
 -(void) startFindingDevice{
     if (self) {
         AsyncUdpSocket *udpSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
-        NSString *host = [[[IPAddress alloc] init] getIPAddress];
-        NSLog(@"host:%@",host);
-        NSMutableArray *ipArr = [NSMutableArray arrayWithArray:[host componentsSeparatedByString:@"."]];
+        NSLog(@"host:%@",IP);
+        NSMutableArray *ipArr = [NSMutableArray arrayWithArray:[IP componentsSeparatedByString:@"."]];
         [ipArr removeLastObject];
         [ipArr addObject:@"255"];
         NSString *broadCastAddress = [ipArr componentsJoinedByString:@"."];

@@ -280,6 +280,7 @@
 		F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationHandlerViewController.m */; };
 		F280616B17DDC7BC0064F35B /* button_cf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616A17DDC7BB0064F35B /* button_cf@2x.png */; };
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
+		F2911BE217F1615700742713 /* IPAddress.c in Sources */ = {isa = PBXBuildFile; fileRef = F2911BE117F1615700742713 /* IPAddress.c */; };
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F2D8E8C717C48EA500090E5B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraViewController.m */; };
@@ -709,7 +710,6 @@
 		F237168317B3715C0057C95B /* SmsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsService.h; sourceTree = "<group>"; };
 		F237168417B3715C0057C95B /* SmsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsService.m; sourceTree = "<group>"; };
 		F27B4EC317EFD35D00A55220 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
-		F27B4ECB17F01F3900A55220 /* IPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddress.h; sourceTree = "<group>"; };
 		F27B4ECC17F01F3900A55220 /* IPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddress.m; sourceTree = "<group>"; };
 		F27B4ED117F067AA00A55220 /* IPAddressTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddressTool.h; sourceTree = "<group>"; };
 		F27B4ED217F067AA00A55220 /* IPAddressTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddressTool.m; sourceTree = "<group>"; };
@@ -721,6 +721,8 @@
 		F280616A17DDC7BB0064F35B /* button_cf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cf@2x.png"; sourceTree = "<group>"; };
 		F288414017D4A35C00B81DD3 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		F288414117D4A35C00B81DD3 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
+		F2911BE117F1615700742713 /* IPAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IPAddress.c; sourceTree = "<group>"; };
+		F2911BE317F1617600742713 /* IPAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPAddress.h; sourceTree = "<group>"; };
 		F2BB0EF317BE1B7E004E14B1 /* LongButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongButton.h; sourceTree = "<group>"; };
 		F2BB0EF417BE1B7E004E14B1 /* LongButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongButton.m; sourceTree = "<group>"; };
 		F2D8E8C217C468D200090E5B /* QCheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QCheckBox.h; path = SmartHome/QCheckBox.h; sourceTree = "<group>"; };
@@ -1766,10 +1768,11 @@
 		F27B4EC517F01D1400A55220 /* IPAddress */ = {
 			isa = PBXGroup;
 			children = (
-				F27B4ECB17F01F3900A55220 /* IPAddress.h */,
 				F27B4ECC17F01F3900A55220 /* IPAddress.m */,
 				F27B4ED117F067AA00A55220 /* IPAddressTool.h */,
 				F27B4ED217F067AA00A55220 /* IPAddressTool.m */,
+				F2911BE117F1615700742713 /* IPAddress.c */,
+				F2911BE317F1617600742713 /* IPAddress.h */,
 			);
 			name = IPAddress;
 			sourceTree = "<group>";
@@ -2088,6 +2091,7 @@
 				6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */,
 				F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */,
 				6F84A77A17D04A5700D46BFA /* Zone.m in Sources */,
+				F2911BE217F1615700742713 /* IPAddress.c in Sources */,
 				6F84A78017D06D6D00D46BFA /* Unit.m in Sources */,
 				F27B4ED317F067AA00A55220 /* IPAddressTool.m in Sources */,
 				F20C788317D0859C003D50C5 /* Memory.m in Sources */,
