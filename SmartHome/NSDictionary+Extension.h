@@ -20,6 +20,7 @@
 - (NSInteger)integerForKey:(id)key;
 - (NSArray *)arrayForKey:(id)key;
 - (NSDictionary *)dictionaryForKey:(id)key;
+- (NSString *)noNilStringForKey:(id)key;
 
 @end
 

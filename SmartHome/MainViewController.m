@@ -62,7 +62,6 @@
 
     DrawerNavigationItem *mainView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *myDevicesView = [[DrawerNavigationItem alloc] init];
-    DrawerNavigationItem *sceneModeView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *settingsView = [[DrawerNavigationItem alloc] init];
      
     mainView.itemIdentifier = @"mainView";
@@ -75,11 +74,6 @@
     myDevicesView.itemImageName = @"icon_devices_unselected.png";
     myDevicesView.itemCheckedImageName = @"icon_devices_selected.png";
     
-    sceneModeView.itemIdentifier = @"sceneModeView";
-    sceneModeView.itemTitle = NSLocalizedString(@"scene_mode", @"");
-    sceneModeView.itemImageName = @"icon_scene_mode_unselected.png";
-    sceneModeView.itemCheckedImageName = @"icon_scene_mode_selected.png";
-    
     settingsView.itemIdentifier = @"settingsView";
     settingsView.itemTitle = NSLocalizedString(@"settings_view", @"");
     settingsView.itemImageName = @"icon_settings_unselected.png";
@@ -87,7 +81,6 @@
     
     [drawerItems addObject:mainView];
     [drawerItems addObject:myDevicesView];
-    [drawerItems addObject:sceneModeView];
     [drawerItems addObject:settingsView];
 }
 

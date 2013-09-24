@@ -15,6 +15,8 @@
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
+        [SMShared current].settings.screenName = deviceCommand.screenName;
+        [[SMShared current].settings saveSettings];
         NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetAccountHandler class]];
         for(int i=0; i<arr.count; i++) {
             if([[arr objectAtIndex:i] respondsToSelector:@selector(updateAccount:)]) {

@@ -18,6 +18,8 @@
     NSUInteger hasRetryCount;
     NSMutableData *currentImageData;
     NSUInteger currentImageLength;
+    NSTimeInterval lastSendTime;
+    BOOL needToShakeHands;
     BOOL shakeHandsSuccess;
     BOOL inOpen;
     BOOL outOpen;
@@ -30,6 +32,7 @@
     if(self) {
         hasRetryCount = 0;
         shakeHandsSuccess = NO;
+        needToShakeHands = YES;
         inOpen = NO;
         outOpen = NO;
         currentImageLength = -1;
@@ -57,6 +60,12 @@
                 // shake hands success
                 if(header[0] == 1) {
                     shakeHandsSuccess = YES;
+//                    [currentImageData appendBytes:header length:1];
+                    NSLog(@"shark suc");
+                } else {
+                    NSLog(@"shark fail %d", header[0]);
+                    [NSThread sleepForTimeInterval:1];
+                    needToShakeHands = YES;
                 }
             } else {
                 int bytesRead = 0;
@@ -92,23 +101,7 @@
             }
         }
     } else if(eventCode == NSStreamEventHasSpaceAvailable) {
-        if(shakeHandsSuccess) return;
-        if([NSString isBlank:connectionString]) {
-            [self close];
-            return;
-        }
-        
-        if(hasRetryCount >= MAX_RETRY_COUNT) {
-            hasRetryCount = 0;
-            [self close];
-            return;
-        }
-
-        NSData *data = [connectionString dataUsingEncoding:NSUTF8StringEncoding];
-        [self.outputStream write:data.bytes maxLength:data.length];
-        hasRetryCount++;
-        
-        [NSThread sleepForTimeInterval:1];
+        [self tryShakeHands];
     } else if(eventCode == NSStreamEventOpenCompleted) {
         if(aStream == self.inputStream) {
             inOpen = YES;
@@ -130,6 +123,28 @@
     }
 }
 
+- (void)tryShakeHands {
+    if(shakeHandsSuccess) return;
+    if(needToShakeHands) {
+        if([NSString isBlank:connectionString]) {
+            [self close];
+            return;
+        }
+        
+        if(hasRetryCount >= MAX_RETRY_COUNT) {
+            hasRetryCount = 0;
+            [self close];
+            return;
+        }
+        
+        NSData *data = [connectionString dataUsingEncoding:NSUTF8StringEncoding];
+        [self.outputStream write:data.bytes maxLength:data.length];
+        hasRetryCount++;
+        NSLog(@"send");
+        needToShakeHands = NO;
+    }
+}
+
 - (void)connect {
     if([self isConnectted]) return;
     [super connect];
@@ -139,6 +154,8 @@
     [super close];
     inOpen = NO;
     outOpen = NO;
+    shakeHandsSuccess = NO;
+    needToShakeHands = YES;
     currentImageLength = -1;
     currentImageData = [NSMutableData data];
     [self performSelectorOnMainThread:@selector(notifyConnectionClosed) withObject:nil waitUntilDone:NO];

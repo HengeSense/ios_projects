@@ -10,6 +10,9 @@
 #import "CommandFactory.h"
 #import "LongButton.h"
 #import "DeviceCommandUpdateAccount.h"
+#import "ViewsPool.h"
+#import "NavigationView.h"
+#import "MainViewController.h"
 
 @interface UserAccountViewController ()
 
@@ -159,20 +162,20 @@
     [valueLabel setTextColor:[UIColor grayColor]];
     [valueLabel setFont:[UIFont systemFontOfSize:16]];
     
-    if (passwordIsModified&&indexPath.row == 2) {
+    if(passwordIsModified&&indexPath.row == 2) {
         valueLabel.text = NSLocalizedString(@"password.is.modified", @"");
-    }else{
-            valueLabel.text = [values objectAtIndex:indexPath.row];
+    } else {
+        valueLabel.text = [values objectAtIndex:indexPath.row];
     }
 
     [view addSubview:valueLabel];
     
     view.tag = 999;
-    return  view;
+    return view;
 }
 
 - (void)delayProcess {
-    [[AlertView currentAlertView] setMessage:@"处理中" forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing.tips", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     
     DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
@@ -191,7 +194,7 @@
     }
 }
     
-- (void) didEndUpdateAccount:(DeviceCommand *)command {
+- (void)didEndUpdateAccount:(DeviceCommand *)command {
     if (command == nil) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system.error", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
@@ -202,6 +205,7 @@
         case 1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.success", @"") forType:AlertViewTypeSuccess];
             [[AlertView currentAlertView] delayDismissAlertView];
+            [self updateScreenName];
             break;
         case -1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.password.error", @"") forType:AlertViewTypeFailed];
@@ -224,6 +228,19 @@
     }
 }
 
+- (void)updateScreenName {
+    NavigationView *view = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+    if(view != nil) {
+        MainViewController *controller = (MainViewController *)view.ownerController;
+        if(controller != nil) {
+            DrawerView *dv = (DrawerView *)controller.leftView;
+            if(dv != nil) {
+                [dv setScreenName:[infoDictionary stringForKey:NSLocalizedString(@"nick.name", @"")]];
+            }
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     editCell = [tableView cellForRowAtIndexPath:indexPath];
@@ -235,7 +252,7 @@
 
 - (void)textViewHasBeenSetting:(NSString *)string {
     if ([[titles objectAtIndex:editIndex.row] isEqualToString:NSLocalizedString(@"modify.password", @"")]) {
-        if(string !=nil&&![@"" isEqualToString:string]) {
+        if(![NSString isBlank:string]) {
             passwordIsModified = YES;
             [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
         }

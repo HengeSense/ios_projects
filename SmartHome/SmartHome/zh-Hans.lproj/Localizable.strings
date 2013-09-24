@@ -63,7 +63,7 @@
 /*
  * drawer view
  */
-"account.setting"    =   "账号设置";
+"account.setting"    =   "点击修改账号";
 
 /*
  * main view controller

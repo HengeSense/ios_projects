@@ -9,6 +9,7 @@
 #import "GlobalSettings.h"
 #import "NSString+StringUtils.h"
 #import "NSDictionary+Extension.h"
+#import "NSMutableDictionary+Extension.h"
 
 #define GLOBAL_SETTINGS_KEY       @"global_settings.key"
 #define ACCOUNT_KEY               @"account.key"
@@ -16,6 +17,7 @@
 #define ANY_UNITS_BINDING_KEY     @"any_units_binding.key"
 #define TCP_ADDRESS_KEY           @"tcp_address.key"
 #define DEVICE_CODE_KEY           @"device_code.key"
+#define SCREEN_NAME_KEY           @"screen_name.key"
 
 @implementation GlobalSettings
 
@@ -37,47 +39,16 @@
             self.secretKey = [NSString emptyString];
             self.tcpAddress = [NSString emptyString];
             self.deviceCode = [NSString emptyString];
+            self.screenName = [NSString emptyString];
         } else {
             //already have a setting file
             //need to fill object property
-            
-            NSString *account_obj = [settings notNSNullObjectForKey:ACCOUNT_KEY];
-            NSString *secret_key_obj = [settings notNSNullObjectForKey:SECRET_KEY_KEY];
-            NSString *any_unit_binding_obj  = [settings notNSNullObjectForKey:ANY_UNITS_BINDING_KEY];
-            NSString *tcp_address_obj = [settings notNSNullObjectForKey:TCP_ADDRESS_KEY];
-            NSString *device_code_obj = [settings notNSNullObjectForKey:DEVICE_CODE_KEY];
-            
-            if(![NSString isBlank:device_code_obj]) {
-                self.deviceCode = device_code_obj;
-            } else {
-                self.deviceCode = [NSString emptyString];
-            }
-            
-            if(![NSString isBlank:account_obj]) {
-                self.account = account_obj;
-            } else {
-                self.account = [NSString emptyString];
-            }
-            
-            if(![NSString isBlank:secret_key_obj]) {
-                self.secretKey = secret_key_obj;
-            } else {
-                self.secretKey = [NSString emptyString];
-            }
-            
-            if(![NSString isBlank:any_unit_binding_obj]) {
-                if([@"yes" isEqualToString:any_unit_binding_obj]) {
-                    self.anyUnitsBinding = YES;
-                } else {
-                    self.anyUnitsBinding = NO;
-                }
-            }
-            
-            if(![NSString isBlank:tcp_address_obj]) {
-                self.tcpAddress = tcp_address_obj;
-            } else {
-                self.tcpAddress = [NSString emptyString];
-            }
+            self.account = [settings noNilStringForKey:ACCOUNT_KEY];
+            self.secretKey = [settings noNilStringForKey:SECRET_KEY_KEY];
+            self.anyUnitsBinding = [settings boolForKey:ANY_UNITS_BINDING_KEY];
+            self.tcpAddress = [settings noNilStringForKey:TCP_ADDRESS_KEY];
+            self.deviceCode = [settings noNilStringForKey:DEVICE_CODE_KEY];
+            self.screenName = [settings noNilStringForKey:SCREEN_NAME_KEY];
         }
     }
     return self;
@@ -86,25 +57,35 @@
 - (NSDictionary *)toDictionary {
     //convert self to a dictionary
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    [dictionary setObject:self.account forKey:ACCOUNT_KEY];
-    [dictionary setObject:self.secretKey forKey:SECRET_KEY_KEY];
-    [dictionary setObject:(self.anyUnitsBinding ? @"yes" : @"no") forKey:ANY_UNITS_BINDING_KEY];
-    [dictionary setObject:self.tcpAddress forKey:TCP_ADDRESS_KEY];
-    [dictionary setObject:self.deviceCode forKey:DEVICE_CODE_KEY];
+    [dictionary setMayBlankString:self.account forKey:ACCOUNT_KEY];
+    [dictionary setMayBlankString:self.secretKey forKey:SECRET_KEY_KEY];
+    [dictionary setMayBlankString:(self.anyUnitsBinding ? @"yes" : @"no") forKey:ANY_UNITS_BINDING_KEY];
+    [dictionary setMayBlankString:self.tcpAddress forKey:TCP_ADDRESS_KEY];
+    [dictionary setMayBlankString:self.deviceCode forKey:DEVICE_CODE_KEY];
+    [dictionary setMayBlankString:self.screenName forKey:SCREEN_NAME_KEY];
     return dictionary;
 }
 
-- (void)clearAuth {
-    self.secretKey = [NSString emptyString];
-    self.account = [NSString emptyString];
-    self.deviceCode = [NSString emptyString];
-    [self saveSettings];
-}
-
-- (void)saveSettings {
+- (void)saveSettingsInternal {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[self toDictionary] forKey:GLOBAL_SETTINGS_KEY];
     [defaults synchronize];
+}
+
+- (void)clearAuth {
+    @synchronized(self) {
+        self.secretKey = [NSString emptyString];
+        self.account = [NSString emptyString];
+        self.deviceCode = [NSString emptyString];
+        self.screenName = [NSString emptyString];
+        [self saveSettingsInternal];
+    }
+}
+
+- (void)saveSettings {
+    @synchronized(self) {
+        [self saveSettingsInternal];
+    }
 }
 
 @end

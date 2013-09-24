@@ -67,4 +67,12 @@
     return NO;
 }
 
+- (NSString *)noNilStringForKey:(id)key {
+    NSString *_str_ = [self notNSNullObjectForKey:key];
+    if(_str_ == nil) {
+        return [NSString emptyString];
+    }
+    return _str_;
+}
+
 @end

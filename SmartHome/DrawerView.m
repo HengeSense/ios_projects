@@ -17,10 +17,12 @@
 
 @implementation DrawerView {
     UIView *accountView;
+    UIImageView *logoView;
     UITableView *tblNavigationItems;
     NSArray *navigationItems;
     UIImageView *backgroundImageView;
     ViewsPool *viewsPool;
+    UILabel *lblMessage1;
     CGFloat entryHeight;
     BOOL isChanging;
     NSUInteger checkedRowIndex;
@@ -56,23 +58,29 @@
         [self addSubview:backgroundImageView];
     }
     
+    if(logoView == nil) {
+        logoView = [[UIImageView alloc] initWithFrame:CGRectMake(22, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 30 : 10, 148/2, 57/2)];
+        logoView.image = [UIImage imageNamed:@"logo3.png"];
+        [self addSubview:logoView];
+        
+        UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height + 15, 120, 2)];
+        imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
+        [self addSubview:imgSeperatorLine];
+    }
+    
     if(accountView == nil) {
-        accountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, ACCOUNT_VIEW_HEIGHT)];
-        UIImageView *imgHeader = [[UIImageView alloc] initWithFrame:CGRectMake(12, 0, 30, 30)];
-        imgHeader.image = [UIImage imageNamed:@"logo.png"];
-        imgHeader.center = CGPointMake(imgHeader.center.x, accountView.center.y);
-        UILabel *lblMessage1 = [[UILabel alloc] initWithFrame:CGRectMake(50, 22, 60, 18)];
-        UILabel *lblMessage2 = [[UILabel alloc] initWithFrame:CGRectMake(50, 42, 50, 18)];
+        accountView = [[UIView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height + 15, 120, ACCOUNT_VIEW_HEIGHT)];
+        lblMessage1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 22, 100, 18)];
+        UILabel *lblMessage2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 42, 100, 18)];
         lblMessage1.backgroundColor = [UIColor clearColor];
         lblMessage2.backgroundColor = [UIColor clearColor];
         lblMessage1.font = [UIFont systemFontOfSize:13.f];
-        lblMessage2.font = [UIFont systemFontOfSize:10.f];
+        lblMessage2.font = [UIFont systemFontOfSize:11.f];
+        lblMessage1.textAlignment = NSTextAlignmentCenter;
+        lblMessage2.textAlignment = NSTextAlignmentCenter;
         lblMessage1.textColor = [UIColor colorWithHexString:@"#898e9a"];
         lblMessage2.textColor = [UIColor colorWithHexString:@"#898e9a"];
-        UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, ACCOUNT_VIEW_HEIGHT-2, 120, 2)];
-        imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
-        
-        [accountView addSubview:imgHeader];
+
         [accountView addSubview:lblMessage1];
         [accountView addSubview:lblMessage2];
         UIButton *accountBackground = [[UIButton alloc] initWithFrame:accountView.bounds];
@@ -80,15 +88,18 @@
         [accountBackground addTarget:self action:@selector(showAccountView:) forControlEvents:UIControlEventTouchUpInside];
         [accountView addSubview:accountBackground];
         [self addSubview:accountView];
-        [self addSubview:imgSeperatorLine];
         
-        lblMessage1.text = @"个人账号";
+        UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, accountView.frame.origin.y + accountView.bounds.size.height, 120, 2)];
+        imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
+        [self addSubview:imgSeperatorLine];
+
+        lblMessage1.text = [NSString isBlank:[SMShared current].settings.screenName] ? [SMShared current].settings.account : [SMShared current].settings.screenName;
         lblMessage2.text = NSLocalizedString(@"account.setting", @"");
     }
     
     if(tblNavigationItems == nil) {
         tblNavigationItems = [[UITableView alloc]
-            initWithFrame:CGRectMake(0, ACCOUNT_VIEW_HEIGHT, 120,
+            initWithFrame:CGRectMake(0, ACCOUNT_VIEW_HEIGHT + accountView.frame.origin.y, 120,
             self.frame.size.height - ACCOUNT_VIEW_HEIGHT) style:UITableViewStylePlain];
         tblNavigationItems.dataSource = self;
         tblNavigationItems.delegate = self;
@@ -103,6 +114,12 @@
     if(self.ownerViewController != nil) {
         [self.ownerViewController.navigationController pushViewController:[[UserAccountViewController alloc] init] animated:YES];
     }
+}
+
+- (void)setScreenName:(NSString *)name {
+    if(lblMessage1 == nil) return;
+    if([NSString isBlank:name]) lblMessage1.text = [NSString emptyString];
+    lblMessage1.text = name;
 }
 
 #pragma mark -

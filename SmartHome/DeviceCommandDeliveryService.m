@@ -46,7 +46,10 @@
  */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(!self.isService) return;
-    [self.tcpService executeDeviceCommand:command];
+    
+    if(self.tcpService.isConnectting || self.tcpService.isConnectted) {
+        [self.tcpService executeDeviceCommand:command];
+    }
 }
 
 /*
