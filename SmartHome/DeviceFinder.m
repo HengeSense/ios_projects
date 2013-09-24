@@ -10,6 +10,9 @@
 #import "AsyncUdpSocket.h"
 #import "IPAddressTool.h"
 #import "IPAddress.h"
+#import "JsonUtils.h"
+#import "NSDictionary+Extension.h"
+
 //5050
 static NSString *IP;
 @implementation DeviceFinder
@@ -38,7 +41,12 @@ static NSString *IP;
     }
 }
 -(BOOL) onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port{
+    NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
+
+    NSString *deviceCode = [json stringForKey:@"deviceCode"];
     NSLog(@"receive data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    NSLog(@"json:%@",json);
+    NSLog(@"deviceCode:%@",deviceCode);
     NSLog(@"server ip:%@",host);
     return  YES;
 }

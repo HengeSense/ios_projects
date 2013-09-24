@@ -77,8 +77,10 @@
 #pragma mark -
 #pragma selection button (units && scene)
     
+    CGFloat margin = (self.bounds.size.height-self.topbar.frame.size.height-375)/4;
+    NSLog(@"%f",margin);
     if(btnUnit == nil) {
-        btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 85 : 65, 227 / 2, 73 / 2)];
+        btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, self.topbar.frame.size.height+margin, 227 / 2, 73 / 2)];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateNormal];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateHighlighted];
         [btnUnit addTarget:self action:@selector(btnShowUnitsList:) forControlEvents:UIControlEventTouchUpInside];
@@ -86,7 +88,7 @@
     }
     
     if(btnScene == nil) {
-        btnScene = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 227/2 - 15, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 85 : 65, 227 /2, 73 / 2)];
+        btnScene = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 227/2, self.topbar.frame.size.height+margin, 227 /2, 73 / 2)];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateHighlighted];
         [btnScene addTarget:self action:@selector(btnShowSceneList:) forControlEvents:UIControlEventTouchUpInside];
@@ -108,7 +110,7 @@
 #pragma mark units view
     
     if(pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (self.bounds.size.height - 198 / 2 - 190)) owner:self.ownerController];
+        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (self.bounds.size.height - 198 / 2 - margin-180)) owner:self.ownerController];
         pageableScrollView.backgroundColor = [UIColor clearColor];
         [self addSubview:pageableScrollView];
     }
@@ -118,7 +120,7 @@
 #pragma mark notifications view
     
     if(notificationView == nil) {
-        notificationView = [[UIView alloc] initWithFrame:CGRectMake(10, (pageableScrollView.frame.origin.y - 40 - 25/2), [UIScreen mainScreen].bounds.size.width, 40)];
+        notificationView = [[UIView alloc] initWithFrame:CGRectMake(10, (pageableScrollView.frame.origin.y - 40 - margin), [UIScreen mainScreen].bounds.size.width, 40)];
         
         btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25/2, 30/2)];
         btnMessage.center = CGPointMake(btnMessage.center.x, notificationView.bounds.size.height / 2);
