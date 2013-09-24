@@ -178,7 +178,7 @@
 }
 
 - (void)adjustCamera:(NSString *)direction {
-    if(self.cameraDevice != nil) return;
+    if(self.cameraDevice == nil) return;
     DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
     updateDeviceCommand.masterDeviceCode = self.cameraDevice.zone.unit.identifier;
     [updateDeviceCommand addCommandString:[self.cameraDevice commandStringForCamera:direction]];
