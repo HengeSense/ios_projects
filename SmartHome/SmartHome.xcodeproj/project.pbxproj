@@ -29,6 +29,7 @@
 		6F0420FC17C4B25C00F7F6AF /* btn_done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0420FB17C4B25C00F7F6AF /* btn_done@2x.png */; };
 		6F09060917F1295900C26491 /* CameraLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F09060817F1295900C26491 /* CameraLoadingView.m */; };
 		6F09060B17F1427C00C26491 /* logo3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F09060A17F1427C00C26491 /* logo3@2x.png */; };
+		6F09060E17F17C1F00C26491 /* SystemAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F09060D17F17C1F00C26491 /* SystemAudio.m */; };
 		6F0F475317C5C3280057F9A4 /* bg_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F475217C5C3280057F9A4 /* bg_shadow@2x.png */; };
 		6F0F475917C5ECC00057F9A4 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F475817C5ECC00057F9A4 /* Device.m */; };
 		6F0F476017C5F6180057F9A4 /* bg_cell_center@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F0F475C17C5F6180057F9A4 /* bg_cell_center@2x.png */; };
@@ -315,6 +316,8 @@
 		6F09060717F1295900C26491 /* CameraLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraLoadingView.h; sourceTree = "<group>"; };
 		6F09060817F1295900C26491 /* CameraLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraLoadingView.m; sourceTree = "<group>"; };
 		6F09060A17F1427C00C26491 /* logo3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo3@2x.png"; sourceTree = "<group>"; };
+		6F09060C17F17C1F00C26491 /* SystemAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemAudio.h; sourceTree = "<group>"; };
+		6F09060D17F17C1F00C26491 /* SystemAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemAudio.m; sourceTree = "<group>"; };
 		6F0F475217C5C3280057F9A4 /* bg_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_shadow@2x.png"; sourceTree = "<group>"; };
 		6F0F475717C5ECC00057F9A4 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		6F0F475817C5ECC00057F9A4 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
@@ -1039,6 +1042,8 @@
 				6F668CE717DEE2C700034C90 /* SMDateFormatter.m */,
 				6FF6C4EA17E850E200F637FD /* ImageProvider.h */,
 				6FF6C4EB17E850E200F637FD /* ImageProvider.m */,
+				6F09060C17F17C1F00C26491 /* SystemAudio.h */,
+				6F09060D17F17C1F00C26491 /* SystemAudio.m */,
 			);
 			name = commons;
 			sourceTree = "<group>";
@@ -2048,6 +2053,7 @@
 				6F09060917F1295900C26491 /* CameraLoadingView.m in Sources */,
 				6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */,
 				6FD0CC0A17EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m in Sources */,
+				6F09060E17F17C1F00C26491 /* SystemAudio.m in Sources */,
 				6FB4240317B482F50042EA41 /* BaseViewController.m in Sources */,
 				6FB4240717B4B4500042EA41 /* ViewUtils.m in Sources */,
 				6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */,

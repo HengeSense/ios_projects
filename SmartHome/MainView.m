@@ -8,16 +8,16 @@
 
 
 #import "MainView.h"
+#import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
 #import "UIColor+ExtentionForHexString.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import "SMDateFormatter.h"
 #import "SceneMode.h"
 #import "CommandFactory.h"
 #import "NotificationsFileManager.h"
 
 #import "DeviceCommandUpdateUnitName.h"
-#import "PlayCameraPicViewController.h"
+
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -174,11 +174,6 @@
         
         [self addSubview:notificationView];
     }
-}
-
-- (void)test {
-    PlayCameraPicViewController *play = [[PlayCameraPicViewController alloc] init];
-    [self.ownerController.navigationController pushViewController:play animated:YES];
 }
 
 /*

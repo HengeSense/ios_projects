@@ -126,7 +126,7 @@
         titleLabel.tag = 999;
         [cell addSubview:titleLabel];
         
-        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 2, 150, 40)];
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 140 : 150, 2, 150, 40)];
         detailLabel.textAlignment = NSTextAlignmentRight;
         detailLabel.textColor = [UIColor darkGrayColor];
         detailLabel.backgroundColor = [UIColor clearColor];
@@ -195,7 +195,11 @@
 }
 
 - (void)textViewHasBeenSetting:(NSString *)string {
-    NSLog(string);
+    UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if(cell) {
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:999];
+        lblTitle.text = string;
+    }
 }
 
 @end

@@ -88,7 +88,7 @@
         titleLabel.tag = 999;
         [cell addSubview:titleLabel];
         
-        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 2, 150, 40)];
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 140 : 150, 2, 150, 40)];
         detailLabel.textAlignment = NSTextAlignmentRight;
         detailLabel.textColor = [UIColor darkGrayColor];
         detailLabel.backgroundColor = [UIColor clearColor];

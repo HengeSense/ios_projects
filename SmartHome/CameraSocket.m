@@ -52,20 +52,17 @@
             if(!shakeHandsSuccess) {
                 uint8_t header[1];
                 int bytesRead = [self.inputStream read:header maxLength:1];
-                if(bytesRead != 1) {
-                    //unkonw, maybe server client was closed...
+                if(bytesRead == -1) {
+                    //unkonw, maybe server client was closed... don't need to process
                     return;
                 }
-
                 // shake hands success
                 if(header[0] == 1) {
                     shakeHandsSuccess = YES;
-//                    [currentImageData appendBytes:header length:1];
-                    NSLog(@"shark suc");
                 } else {
-                    NSLog(@"shark fail %d", header[0]);
                     [NSThread sleepForTimeInterval:1];
                     needToShakeHands = YES;
+                    [self tryShakeHands];
                 }
             } else {
                 int bytesRead = 0;
@@ -124,24 +121,25 @@
 }
 
 - (void)tryShakeHands {
-    if(shakeHandsSuccess) return;
-    if(needToShakeHands) {
-        if([NSString isBlank:connectionString]) {
-            [self close];
-            return;
+    @synchronized(self) {
+        if(shakeHandsSuccess) return;
+        if(needToShakeHands) {
+            needToShakeHands = NO;
+            if([NSString isBlank:connectionString]) {
+                [self close];
+                return;
+            }
+            
+            if(hasRetryCount >= MAX_RETRY_COUNT) {
+                hasRetryCount = 0;
+                [self close];
+                return;
+            }
+            
+            NSData *data = [connectionString dataUsingEncoding:NSUTF8StringEncoding];
+            [self.outputStream write:data.bytes maxLength:data.length];
+            hasRetryCount++;
         }
-        
-        if(hasRetryCount >= MAX_RETRY_COUNT) {
-            hasRetryCount = 0;
-            [self close];
-            return;
-        }
-        
-        NSData *data = [connectionString dataUsingEncoding:NSUTF8StringEncoding];
-        [self.outputStream write:data.bytes maxLength:data.length];
-        hasRetryCount++;
-        NSLog(@"send");
-        needToShakeHands = NO;
     }
 }
 
