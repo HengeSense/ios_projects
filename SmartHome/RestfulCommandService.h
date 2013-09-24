@@ -7,6 +7,7 @@
 //
 
 #import "ServiceBase.h"
+#import "CommandFactory.h"
 
 @interface RestfulCommandService : ServiceBase
 
