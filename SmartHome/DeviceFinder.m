@@ -9,13 +9,14 @@
 #import "DeviceFinder.h"
 #import "AsyncUdpSocket.h"
 #import "IPAddressTool.h"
+#import "IPAddress.h"
 //5050
 
 @implementation DeviceFinder
 -(void) startFindingDevice{
     if (self) {
         AsyncUdpSocket *udpSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
-        NSString *host = [[[IPAddressTool alloc] init] deviceIPAdress];
+        NSString *host = [[[IPAddress alloc] init] getIPAddress];
         NSLog(@"host:%@",host);
         NSMutableArray *ipArr = [NSMutableArray arrayWithArray:[host componentsSeparatedByString:@"."]];
         [ipArr removeLastObject];
