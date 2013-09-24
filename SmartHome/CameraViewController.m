@@ -118,6 +118,12 @@
         socket = [[CameraSocket alloc] initWithIPAddress:address andPort:port.integerValue];
         socket.delegate = self;
         socket.key = command.conStr;
+        [self performSelectorInBackground:@selector(startSocket) withObject:nil];
+    }
+}
+
+- (void)startSocket {
+    if(socket != nil) {
         [socket connect];
     }
 }
@@ -136,24 +142,27 @@
 }
 
 - (void)notifyCameraConnectted {
-    NSLog(@"camera open");
     firstImageHasBeenSet = NO;
 }
 
 - (void)notifyCameraWasDisconnectted {
-    NSLog(@"camera close");
+    imgCameraShots.image = nil;
     firstImageHasBeenSet = NO;
+    CameraLoadingView * loadingView = (CameraLoadingView *)[imgCameraShots viewWithTag:9999];
+    if(loadingView != nil) {
+        [loadingView showError];
+    }
 }
 
 #pragma mark -
 #pragma mark direction button delegate
 
 - (void)leftButtonClicked {
-    [self adjustCamera:@"l"];
+    [self adjustCamera:@"2"];
 }
 
 - (void)rightButtonClicked {
-    [self adjustCamera:@"r"];
+    [self adjustCamera:@"3"];
 }
 
 - (void)centerButtonClicked {
@@ -161,11 +170,11 @@
 }
 
 - (void)topButtonClicked {
-    [self adjustCamera:@"u"];
+    [self adjustCamera:@"0"];
 }
 
 - (void)bottomButtonClicked {
-    [self adjustCamera:@"d"];
+    [self adjustCamera:@"1"];
 }
 
 - (void)adjustCamera:(NSString *)direction {

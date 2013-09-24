@@ -16,5 +16,6 @@
 
 - (void)show;
 - (void)hide;
+- (void)showError;
 
 @end

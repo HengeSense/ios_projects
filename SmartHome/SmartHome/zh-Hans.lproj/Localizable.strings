@@ -35,9 +35,10 @@
 "security_invalid" = "安全码失效";
 "no_name"          = "未命名";
 "deleting"         = "删除中...";
-"curtain_start"            = "开启窗帘";
-"curtain_stop"             = "暂停";
-"curtain_close"            = "合起窗帘";
+"curtain_start"    = "开启窗帘";
+"curtain_stop"     = "暂停";
+"curtain_close"    = "合起窗帘";
+"connect_failed"   = "连接已终止!";
 "loading"          = "加载中...";
 
 

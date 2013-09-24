@@ -12,6 +12,7 @@
 @implementation CameraLoadingView {
     UIActivityIndicatorView *indicatorView;
     UILabel *lblTitle;
+    UIImageView *imgView;
 }
 
 @synthesize message = _message_;
@@ -27,9 +28,7 @@
 }
 
 + (CameraLoadingView *)viewWithPoint:(CGPoint)point {
-    
     CameraLoadingView *view = [[CameraLoadingView alloc] initWithFrame:CGRectMake(point.x, point.y, 180, 50)];
-    
     return view;
 }
 
@@ -46,13 +45,17 @@
         [self addSubview:indicatorView];
     }
     
+    if(imgView == nil) {
+        imgView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 3, 44, 44)];
+        imgView.image = [UIImage imageNamed:@"alert_failed.png"];
+        [self addSubview:imgView];
+    }
+    
     if(lblTitle == nil) {
-        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(60, 3, 100, 44)];
-        lblTitle.text = NSLocalizedString(@"loading", @"");
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(60, 3, 110, 44)];
         lblTitle.textColor = [UIColor whiteColor];
         lblTitle.textAlignment = NSTextAlignmentCenter;
         lblTitle.backgroundColor = [UIColor clearColor];
-        
         [self addSubview:lblTitle];
     }
     
@@ -61,6 +64,8 @@
 
 - (void)show {
     self.hidden = NO;
+    imgView.hidden = YES;
+    lblTitle.text = NSLocalizedString(@"loading", @"");
     if(!indicatorView.isAnimating) {
         [indicatorView startAnimating];
     }
@@ -71,6 +76,15 @@
         [indicatorView stopAnimating];
     }
     self.hidden = YES;
+}
+
+- (void)showError {
+    imgView.hidden = NO;
+    self.hidden = NO;
+    if(indicatorView.isAnimating) {
+        [indicatorView stopAnimating];
+    }
+    [self setMessage:NSLocalizedString(@"connect_failed", @"")];
 }
 
 - (void)setMessage:(NSString *)message {
