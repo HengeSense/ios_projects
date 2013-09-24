@@ -42,7 +42,7 @@ static NSString *IP;
 }
 -(BOOL) onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port{
     NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
-
+//[json stringForKey:<#(id)#>]
     NSString *deviceCode = [json stringForKey:@"deviceCode"];
     NSLog(@"receive data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     NSLog(@"json:%@",json);
