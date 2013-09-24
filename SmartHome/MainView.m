@@ -77,10 +77,11 @@
 #pragma mark -
 #pragma selection button (units && scene)
     
-    CGFloat margin = (self.bounds.size.height-self.topbar.frame.size.height-375)/4;
-    NSLog(@"%f",margin);
+    CGFloat margin = (self.bounds.size.height-self.topbar.frame.size.height-355)/4;
+    NSLog(@"%f",self.topbar.frame.size.height);
     if(btnUnit == nil) {
         btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, self.topbar.frame.size.height+margin, 227 / 2, 73 / 2)];
+        NSLog(@"%@",NSStringFromCGRect(btnUnit.frame));
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateNormal];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateHighlighted];
         [btnUnit addTarget:self action:@selector(btnShowUnitsList:) forControlEvents:UIControlEventTouchUpInside];
@@ -88,7 +89,7 @@
     }
     
     if(btnScene == nil) {
-        btnScene = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 227/2, self.topbar.frame.size.height+margin, 227 /2, 73 / 2)];
+        btnScene = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 227/2-15, self.topbar.frame.size.height+margin, 227 /2, 73 / 2)];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateNormal];
         [btnScene setBackgroundImage:[UIImage imageNamed:@"btn_scene.png"] forState:UIControlStateHighlighted];
         [btnScene addTarget:self action:@selector(btnShowSceneList:) forControlEvents:UIControlEventTouchUpInside];
