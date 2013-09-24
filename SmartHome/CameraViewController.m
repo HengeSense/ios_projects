@@ -8,6 +8,7 @@
 
 #import "CameraViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CameraLoadingView.h"
 #import "UIColor+ExtentionForHexString.h"
 
 
@@ -18,6 +19,7 @@
 @implementation CameraViewController{
     UIImageView *imgCameraShots;
     UIView *backgroundView;
+    BOOL firstImageHasBeenSet;
     DirectionButton *btnDirection;
     CameraSocket *socket;
 }
@@ -39,7 +41,7 @@
 	// Do any additional setup after loading the view.
 }
 
--(void) initUI{
+- (void)initUI {
     [super initUI];
     
     if(backgroundView == nil) {
@@ -53,8 +55,12 @@
     if(imgCameraShots == nil) {
         imgCameraShots = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 288, 216)];
         imgCameraShots.center = CGPointMake(backgroundView.bounds.size.width / 2, imgCameraShots.center.y);
-        imgCameraShots.image = [UIImage imageNamed:@"test.png"];
+        imgCameraShots.backgroundColor = [UIColor blackColor];
         [backgroundView addSubview:imgCameraShots];
+        
+        CameraLoadingView *loadingView = [CameraLoadingView viewWithPoint:CGPointMake(54, 83)];
+        loadingView.tag = 9999;
+        [imgCameraShots addSubview:loadingView];
     }
     
     if(btnDirection == nil) {
@@ -71,10 +77,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)btnDownPressed:(id)sender {
-    
 }
 
 - (void)dismiss {
@@ -104,6 +106,8 @@
 #pragma mark device command get camera server delegate
 
 - (void)receivedCameraServer:(DeviceCommandReceivedCameraServer *)command {
+    if(self.cameraDevice == nil) return;
+    if(![self.cameraDevice.identifier isEqualToString:command.cameraId]) return;
     NSArray *addressSet = [command.server componentsSeparatedByString:@":"];
     if(addressSet != nil && addressSet.count == 2) {
         NSString *address = [addressSet objectAtIndex:0];
@@ -122,38 +126,55 @@
 #pragma mark camera socket delegate
 
 - (void)notifyNewImageWasReceived:(UIImage *)image {
+    if(!firstImageHasBeenSet) {
+        CameraLoadingView * loadingView = (CameraLoadingView *)[imgCameraShots viewWithTag:9999];
+        if(loadingView != nil) {
+            [loadingView hide];
+        }
+    }
     imgCameraShots.image = image;
 }
 
 - (void)notifyCameraConnectted {
     NSLog(@"camera open");
+    firstImageHasBeenSet = NO;
 }
 
 - (void)notifyCameraWasDisconnectted {
     NSLog(@"camera close");
+    firstImageHasBeenSet = NO;
 }
 
 #pragma mark -
 #pragma mark direction button delegate
 
 - (void)leftButtonClicked {
-    NSLog(@"leftClicked");
+    [self adjustCamera:@"l"];
 }
 
 - (void)rightButtonClicked {
-    NSLog(@"rightClicked");
+    [self adjustCamera:@"r"];
 }
 
 - (void)centerButtonClicked {
-    NSLog(@"centerClicked");
+    
 }
 
 - (void)topButtonClicked {
-    NSLog(@"topClicked");
+    [self adjustCamera:@"u"];
 }
 
 - (void)bottomButtonClicked {
-    NSLog(@"bottomClicked");
+    [self adjustCamera:@"d"];
+}
+
+- (void)adjustCamera:(NSString *)direction {
+    if(self.cameraDevice != nil) return;
+    DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+    updateDeviceCommand.masterDeviceCode = self.cameraDevice.zone.unit.identifier;
+    [updateDeviceCommand addCommandString:[self.cameraDevice commandStringForCamera:direction]];
+    [[SMShared current].deliveryService executeDeviceCommand:updateDeviceCommand
+     ];
 }
 
 @end

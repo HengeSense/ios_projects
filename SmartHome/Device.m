@@ -89,6 +89,10 @@
     return [NSString stringWithFormat:@"%@-%@-%d", self.category, self.identifier, st];
 }
 
+- (NSString *)commandStringForCamera:(NSString *)direction {
+    return [NSString stringWithFormat:@"%@-%@-%@", self.category, self.identifier, direction];
+}
+
 #pragma mark -
 #pragma mark device type or state
 

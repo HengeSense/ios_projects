@@ -174,7 +174,6 @@
          [[SelectionItem alloc] initWithIdentifier:@"open" andTitle:NSLocalizedString(@"curtain_start", @"")],
          [[SelectionItem alloc] initWithIdentifier:@"close" andTitle:NSLocalizedString(@"curtain_close", @"")],
          [[SelectionItem alloc] initWithIdentifier:@"stop" andTitle:NSLocalizedString(@"curtain_stop", @"")], nil];
-        
         [SelectionView showWithItems:items selectedIdentifier:status source:@"curtain" delegate:self];
     } else if(_device_.isTV || _device_.isSTB) {
         TVViewController *tvViewController = [[TVViewController alloc] init];

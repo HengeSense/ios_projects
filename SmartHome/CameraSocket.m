@@ -109,7 +109,6 @@
         hasRetryCount++;
         
         [NSThread sleepForTimeInterval:1];
-        
     } else if(eventCode == NSStreamEventOpenCompleted) {
         if(aStream == self.inputStream) {
             inOpen = YES;
@@ -129,6 +128,11 @@
     } else {
         //unknow event code , ignore this
     }
+}
+
+- (void)connect {
+    if([self isConnectted]) return;
+    [super connect];
 }
 
 - (void)close {

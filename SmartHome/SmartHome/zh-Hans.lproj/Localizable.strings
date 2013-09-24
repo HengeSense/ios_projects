@@ -38,6 +38,7 @@
 "curtain_start"            = "开启窗帘";
 "curtain_stop"             = "暂停";
 "curtain_close"            = "合起窗帘";
+"loading"          = "加载中...";
 
 
 

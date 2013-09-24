@@ -48,5 +48,6 @@
 
 // 获取执行命令的字符串
 - (NSString *)commandStringForStatus:(NSInteger)st;
+- (NSString *)commandStringForCamera:(NSString *)direction;
 
 @end

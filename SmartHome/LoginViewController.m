@@ -18,6 +18,8 @@
 #import "UIDevice+Extension.h"
 #import "DeviceCommand.h"
 
+#import "CameraLoadingView.h"
+
 #define LINE_HIGHT 5
 
 @interface LoginViewController ()
@@ -152,6 +154,10 @@
     lblSeperator.textAlignment = NSTextAlignmentCenter;
     lblSeperator.backgroundColor = [UIColor clearColor];
     [self.view addSubview:lblSeperator];
+    
+    
+    CameraLoadingView *v = [CameraLoadingView viewWithPoint:CGPointMake(100, 100)];
+    [self.view addSubview:v];
 }
 
 #pragma mark -

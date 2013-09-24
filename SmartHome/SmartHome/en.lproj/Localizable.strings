@@ -37,6 +37,7 @@
 "curtain_start"            = "Start";
 "curtain_stop"             = "Stop";
 "curtain_close"            = "Close";
+"loading"          = "loading...";
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*
