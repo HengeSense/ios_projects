@@ -59,7 +59,9 @@ static NSString *IP;
 }
 
 -(void) getUnit:(NSString *) deviceAddress{
-    [[SMShared current].deliveryService.restfulService getUnitByUrl:deviceAddress];
+    DeviceCommandGetUnit *getUnitCommand = (DeviceCommandGetUnit *)[CommandFactory commandForType:CommandTypeGetUnits];
+    getUnitCommand.unitServerUrl = deviceAddress;
+    [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
     
 }
 -(void) requestForBindingUnit:(NSString *) deviceCode{
