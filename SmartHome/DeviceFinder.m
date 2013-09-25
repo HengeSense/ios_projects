@@ -12,7 +12,9 @@
 #import "IPAddress.h"
 #import "JsonUtils.h"
 #import "NSDictionary+Extension.h"
-
+#import "Unit.h"
+#import "SMShared.h"
+#import "RestClient.h"
 //5050
 static NSString *IP;
 @implementation DeviceFinder
@@ -42,19 +44,24 @@ static NSString *IP;
 }
 -(BOOL) onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port{
     NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
-
     NSString *deviceCode = [json noNilStringForKey:@"deviceCode"];
     
     NSLog(@"receive data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     NSLog(@"json:%@",json);
     NSLog(@"deviceCode:%@",deviceCode);
     NSLog(@"server ip:%@",host);
-    return  YES;
+    return  NO;
 }
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error {
     NSLog(@"not send");
 }
 
+-(void) getUnit:(NSString *) deviceAddress{
+    
+}
+-(void) requestForBindingUnit:(NSString *) deviceCode{
+    
+}
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didSendDataWithTag:(long)tag {
     NSLog(@"send");
 }

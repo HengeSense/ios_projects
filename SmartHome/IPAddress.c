@@ -21,6 +21,8 @@
 #include <errno.h>
 #include <net/if_dl.h>
 #include "IPAddress.h"
+#include <net/ethernet.h>
+
 #define min(a,b)    ((a) < (b) ? (a) : (b))
 #define max(a,b)    ((a) > (b) ? (a) : (b))
 #define BUFFERSIZE  4000
@@ -170,7 +172,7 @@ void GetHWAddresses()
             struct sockaddr_dl *sdl = (struct sockaddr_dl *)&ifr->ifr_addr;
             int a,b,c,d,e,f;
             int i;
-            strcpy(temp, (char *)ether_ntoa(LLADDR(sdl)));
+            strcpy(temp, (char *)ether_ntoa((const struct ether_addr *)LLADDR(sdl)));
             sscanf(temp, "%x:%x:%x:%x:%x:%x", &a, &b, &c, &d, &e, &f);
             sprintf(temp, "%02X:%02X:%02X:%02X:%02X:%02X",a,b,c,d,e,f);
             for (i=0; i<MAXADDRS; ++i)

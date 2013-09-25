@@ -10,4 +10,9 @@
 
 @implementation RestfulCommandService
 
+- (void)getUnit:(NSString *)unitIdentifier success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
+    
+    
+}
+
 @end
