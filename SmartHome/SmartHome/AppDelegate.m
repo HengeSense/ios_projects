@@ -13,6 +13,7 @@
 #import "UnitsBindingViewController.h"
 #import "ViewsPool.h"
 #import "NavigationView.h"
+#import "WelcomeViewController.h"
 
 @implementation AppDelegate
 
@@ -34,7 +35,9 @@
     navigationController.delegate = ((LoginViewController *)self.rootViewController);
 
     BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
-    
+    if (self.settings.isFirstTimeOpenApp) {
+        [self.rootViewController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated: YES];
+    }
     if(hasLogin) {
         // start service 
         [self.deviceCommandDeliveryService startService];

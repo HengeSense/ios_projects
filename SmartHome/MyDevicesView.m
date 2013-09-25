@@ -47,7 +47,6 @@
         [btnAdd setBackgroundImage:[UIImage imageNamed:@"btn_add.png"] forState:UIControlStateNormal];
         btnAdd.center = CGPointMake(btnAdd.center.x, self.topbar.center.y+10);
         [btnAdd addTarget:self action:@selector(btnAddPressed:) forControlEvents:UIControlEventTouchUpInside];
-        NSLog(NSStringFromCGRect(btnAdd.frame));
         [self.topbar addSubview:btnAdd];
     }
 }
@@ -55,7 +54,7 @@
 #pragma mark btn action
 
 -(void) btnAddPressed:(UIButton *) sender{
-    UnitsBindingViewController *unitsBindingViewController = [[UnitsBindingViewController alloc] init];
+    UnitsBindingViewController *unitsBindingViewController = [[UnitsBindingViewController alloc] initWithType:TopBarTypeDone];
     [self.ownerController presentViewController:unitsBindingViewController animated:YES completion:nil];
 }
 

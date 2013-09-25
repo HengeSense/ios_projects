@@ -128,7 +128,6 @@
 		6F5A228217F292D000D29BE0 /* welcome02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227C17F292D000D29BE0 /* welcome02@2x.png */; };
 		6F5A228317F292D000D29BE0 /* welcome03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227D17F292D000D29BE0 /* welcome03@2x.png */; };
 		6F5A228417F292D000D29BE0 /* welcome04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227E17F292D000D29BE0 /* welcome04@2x.png */; };
-		6F5A228517F292D000D29BE0 /* welcome05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227F17F292D000D29BE0 /* welcome05@2x.png */; };
 		6F5A228617F292D000D29BE0 /* welcome06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A228017F292D000D29BE0 /* welcome06@2x.png */; };
 		6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F668CE717DEE2C700034C90 /* SMDateFormatter.m */; };
 		6F6AB3A117C31C06001F1D33 /* btn_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A317C31C06001F1D33 /* btn_scanner@2x.png */; };
@@ -291,6 +290,9 @@
 		F280616B17DDC7BC0064F35B /* button_cf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616A17DDC7BB0064F35B /* button_cf@2x.png */; };
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
 		F2911BE217F1615700742713 /* IPAddress.c in Sources */ = {isa = PBXBuildFile; fileRef = F2911BE117F1615700742713 /* IPAddress.c */; };
+		F29BBA5B17F2C41B00B65436 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */; };
+		F29BBA5F17F2C48F00B65436 /* WelcomeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BBA5E17F2C48F00B65436 /* WelcomeImageView.m */; };
+		F29BBA6117F2DD5200B65436 /* welcome05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F29BBA6017F2DD5200B65436 /* welcome05@2x.png */; };
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F2D8E8C717C48EA500090E5B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraViewController.m */; };
@@ -470,7 +472,6 @@
 		6F5A227C17F292D000D29BE0 /* welcome02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome02@2x.png"; sourceTree = "<group>"; };
 		6F5A227D17F292D000D29BE0 /* welcome03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome03@2x.png"; sourceTree = "<group>"; };
 		6F5A227E17F292D000D29BE0 /* welcome04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome04@2x.png"; sourceTree = "<group>"; };
-		6F5A227F17F292D000D29BE0 /* welcome05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome05@2x.png"; sourceTree = "<group>"; };
 		6F5A228017F292D000D29BE0 /* welcome06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome06@2x.png"; sourceTree = "<group>"; };
 		6F5A228717F2994D00D29BE0 /* CommandExecutor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommandExecutor.h; sourceTree = "<group>"; };
 		6F668CE617DEE2C700034C90 /* SMDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDateFormatter.h; sourceTree = "<group>"; };
@@ -747,6 +748,11 @@
 		F288414117D4A35C00B81DD3 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
 		F2911BE117F1615700742713 /* IPAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IPAddress.c; sourceTree = "<group>"; };
 		F2911BE317F1617600742713 /* IPAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPAddress.h; sourceTree = "<group>"; };
+		F29BBA5917F2C41B00B65436 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		F29BBA5D17F2C48F00B65436 /* WelcomeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeImageView.h; sourceTree = "<group>"; };
+		F29BBA5E17F2C48F00B65436 /* WelcomeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeImageView.m; sourceTree = "<group>"; };
+		F29BBA6017F2DD5200B65436 /* welcome05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome05@2x.png"; sourceTree = "<group>"; };
 		F2BB0EF317BE1B7E004E14B1 /* LongButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongButton.h; sourceTree = "<group>"; };
 		F2BB0EF417BE1B7E004E14B1 /* LongButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongButton.m; sourceTree = "<group>"; };
 		F2D8E8C217C468D200090E5B /* QCheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QCheckBox.h; path = SmartHome/QCheckBox.h; sourceTree = "<group>"; };
@@ -983,6 +989,7 @@
 		6F0FAE9D17AF7FEE00B75D3E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				F29BBA5C17F2C45100B65436 /* welcome_image_view */,
 				6F167B7E17D9A213004169CD /* selection_view */,
 				6F159BED17D6FEA8005CFFEE /* remote_control_view */,
 				F2178BFB17CAEC1A0043400F /* pageable_scroll_view */,
@@ -1131,6 +1138,8 @@
 				F288414117D4A35C00B81DD3 /* UserAccountViewController.m */,
 				6FB5AC9717E6A89F009AF916 /* PlayCameraPicViewController.h */,
 				6FB5AC9817E6A89F009AF916 /* PlayCameraPicViewController.m */,
+				F29BBA5917F2C41B00B65436 /* WelcomeViewController.h */,
+				F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1360,7 +1369,7 @@
 				6F5A227C17F292D000D29BE0 /* welcome02@2x.png */,
 				6F5A227D17F292D000D29BE0 /* welcome03@2x.png */,
 				6F5A227E17F292D000D29BE0 /* welcome04@2x.png */,
-				6F5A227F17F292D000D29BE0 /* welcome05@2x.png */,
+				F29BBA6017F2DD5200B65436 /* welcome05@2x.png */,
 				6F5A228017F292D000D29BE0 /* welcome06@2x.png */,
 			);
 			name = welcome;
@@ -1823,6 +1832,15 @@
 			name = IPAddress;
 			sourceTree = "<group>";
 		};
+		F29BBA5C17F2C45100B65436 /* welcome_image_view */ = {
+			isa = PBXGroup;
+			children = (
+				F29BBA5D17F2C48F00B65436 /* WelcomeImageView.h */,
+				F29BBA5E17F2C48F00B65436 /* WelcomeImageView.m */,
+			);
+			name = welcome_image_view;
+			sourceTree = "<group>";
+		};
 		F2BB0EF217BE1B2A004E14B1 /* buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1922,6 +1940,7 @@
 				6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */,
 				6FDF756417B8BC31004EF7FD /* bubble_mine@2x.png in Resources */,
 				6F1EE66617BC73FE00580760 /* bg_scanner_view@2x.png in Resources */,
+				F29BBA6117F2DD5200B65436 /* welcome05@2x.png in Resources */,
 				6F1EE66717BC73FE00580760 /* line_scanner@2x.png in Resources */,
 				6F1BE41717BD11B6003C973D /* bg_bottom_bar_black@2x.png in Resources */,
 				6F1BE41917BD1413003C973D /* btn_done_black@2x.png in Resources */,
@@ -1957,7 +1976,6 @@
 				6F5A228317F292D000D29BE0 /* welcome03@2x.png in Resources */,
 				6F0420EA17C4817800F7F6AF /* btn_camera_center@2x.png in Resources */,
 				6F0420EB17C4817800F7F6AF /* btn_camera_right@2x.png in Resources */,
-				6F5A228517F292D000D29BE0 /* welcome05@2x.png in Resources */,
 				6F0420EC17C4817800F7F6AF /* btn_camera_top@2x.png in Resources */,
 				6F0420F217C4824900F7F6AF /* btn_camera_left@2x.png in Resources */,
 				6F0420F417C49E3500F7F6AF /* bg_drawer_cell@2x.png in Resources */,
@@ -2074,6 +2092,7 @@
 				6F0FAEC417AF824B00B75D3E /* TopbarView.m in Sources */,
 				6F0FAEC717AF82CC00B75D3E /* MainViewController.m in Sources */,
 				6F0FAECA17AF832700B75D3E /* DrawerView.m in Sources */,
+				F29BBA5B17F2C41B00B65436 /* WelcomeViewController.m in Sources */,
 				6F0FAEFB17AF874100B75D3E /* AirConditionViewController.m in Sources */,
 				6F0FAF0D17AF87AC00B75D3E /* TVViewController.m in Sources */,
 				6F0FAF1317AF87CD00B75D3E /* VerificationCodeSendViewController.m in Sources */,
@@ -2165,6 +2184,7 @@
 				6F159C0317D754BB005CFFEE /* SMButton.m in Sources */,
 				6F347A4F17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m in Sources */,
 				6F347A5217D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m in Sources */,
+				F29BBA5F17F2C48F00B65436 /* WelcomeImageView.m in Sources */,
 				6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m in Sources */,
 				6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevices.m in Sources */,
 				6F347A5B17D8B64500B486D3 /* DeviceCommandVoiceControl.m in Sources */,

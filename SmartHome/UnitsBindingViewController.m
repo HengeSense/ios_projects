@@ -29,6 +29,13 @@
     }
     return self;
 }
+-(id) initWithType:(NSUInteger) type{
+    self = [super init];
+    if (self) {
+        self.topBarType = type;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -103,10 +110,18 @@
     [self.topbar addSubview:self.topbar.rightButton];
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateHighlighted];
-    [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];
+    if (self.topBarType==TopBarTypeDone) {
+        [self.topbar.rightButton setTitle:@"完成" forState:UIControlStateNormal];
+        [self.topbar.rightButton addTarget:self action:@selector(btnDonePressed:) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];
+        [self.topbar.rightButton addTarget:self action:@selector(btnSkipPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
+    
     self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
     self.topbar.rightButton.titleLabel.textColor = [UIColor lightTextColor];
-    [self.topbar.rightButton addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.topbar.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
     [self.view addSubview:self.topbar];
     self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"btn_done.png");
@@ -123,8 +138,11 @@
 #pragma mark -
 #pragma mark events
 
-- (void)btnDownPressed:(id)sender {
+- (void)btnSkipPressed:(id)sender {
     [self showMainView];
+}
+- (void)btnDonePressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)btnQRCodeScannerPressed:(id)sender {
