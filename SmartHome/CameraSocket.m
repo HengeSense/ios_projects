@@ -76,7 +76,7 @@
                         uint8_t bytes[5];
                         [currentImageData getBytes:bytes length:5];
                         if(bytes[0] != 1) {
-                            NSLog(@"camera socket header match error!");
+                            NSLog(@"[TCP CAMERA SOCKET] header matching error");
                             [self close];
                             return;
                         }

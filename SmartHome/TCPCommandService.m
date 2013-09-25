@@ -15,7 +15,7 @@
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
     
-    /*      */
+    /* This flat to make sure only call connect method once */
     BOOL flag;
 }
 
@@ -32,7 +32,7 @@
         NSString *tcpAddress = [SMShared current].settings.tcpAddress;
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
         if(addressSet == nil || addressSet.count != 2) {
-            NSLog(@"tcp address error... %@", tcpAddress == nil ? [NSString emptyString] : tcpAddress);
+            NSLog(@"TCP COMMAND SOCKET] Server address error [ %@ ]", tcpAddress == nil ? [NSString emptyString] : tcpAddress);
             return;
         }
         NSString *addr = [addressSet objectAtIndex:0];
@@ -78,7 +78,7 @@
 
 - (void)flushQueue {
     @synchronized(self) {
-        if(self.isConnectted && [socket canWrite] && queue.count > 0) {
+        if([socket canWrite] && queue.count > 0) {
             NSMutableData *dataToSender = [NSMutableData data];
             DeviceCommand *command = [queue popup];
             while (command != nil) {
@@ -105,11 +105,11 @@
 }
 
 - (void)clientSocketMessageDiscard:(NSData *)discardMessage {
-    NSLog(@"some socket data will discard, the length is %d .", discardMessage.length);
+    NSLog(@"[TCP COMMAND SOCKET] Some data will discard, the length is %d", discardMessage.length);
 }
 
 - (void)clientSocketMessageReadError {
-    NSLog(@"socket reading error.");
+    NSLog(@"[TCP COMMAND SOCKET] socket data reading or format error");
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
@@ -125,14 +125,13 @@
 - (void)notifyConnectionClosed {
     @synchronized(self) {
         flag = NO;
-        NSLog(@"socket closed");
+        NSLog(@"[TCP COMMAND SOCKET] Closed");
     }
 }
 
 - (void)notifyConnectionOpened {
-    NSLog(@"socket is open");
+    NSLog(@"[TCP COMMAND SOCKET] Opened");
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
 }
-
 
 @end

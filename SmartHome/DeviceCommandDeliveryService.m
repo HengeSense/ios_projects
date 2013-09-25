@@ -42,22 +42,32 @@
 }
 
 /*
+ * Execute device command
+ *
+ * NO Network Environment  ---> RETURN
+ * 3G                      ---> TCP CONNECTION
+ * WIFI  WITH UNIT         ---> RESTFUL SERVICE
+ * WIFI  WITH NO UNIT      ---> TCP CONNECTION
  *
  */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(!self.isService) return;
     
-    if(self.tcpService.isConnectting || self.tcpService.isConnectted) {
+    if(self.tcpService.isConnectted) {
         [self.tcpService executeDeviceCommand:command];
     }
 }
 
 /*
+ * To Handle Response From Server
  *
+ * Restful or Tcp Connection Response
  */
 - (void)handleDeviceCommand:(DeviceCommand *)command {
+
     if(command == nil) return;
-    
+
+    // Security key is invalid or expired
     if(command.resultID == -3000 || command.resultID == -2000 || command.resultID == -1000) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"security_invalid", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
@@ -65,16 +75,16 @@
         return;
     }
     
-    if(command.resultID == -100) {
-        NSLog(@"device command has been ignore .. [ %@ ]", command.commandName);
-        //ignore this command
-        return;
-    }
+    // This command should be ignore,
+    // Client will never process this command.
+    if(command.resultID == -100) return;
     
-    // if is not served
+    
+    // If the service is not served
     if(!self.isService) return;
     
     DeviceCommandHandler *handler = nil;
+    
     if([@"FindZKListCommand" isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetUnitsHandler alloc] init];
     } else if([@"AccountUpdateCommand" isEqualToString:command.commandName]) {
@@ -100,36 +110,49 @@
     }
 }
 
+#pragma mark -
+#pragma mark Service switch
+
 - (void)startService {
     if(!self.isService) {
         isService = YES;
-
-        // load all units from disk
+        
+        // Load all units from disk
         [[SMShared current].memory loadUnitsFromDisk];
 
-        // start network checker
         if(tcpConnectChecker != nil) {
             [tcpConnectChecker invalidate];
         }
 
+        // Start network checker
+        // Every 5 seconds to check the tcp is connectted
+        // If it was closed , then open it again
         tcpConnectChecker = [NSTimer scheduledTimerWithTimeInterval:NETWORK_CHECK_INTERVAL target:self selector:@selector(checkTcp) userInfo:nil repeats:YES];
-
         [tcpConnectChecker fire];
     }
 }
 
 - (void)stopService {
     if(self.isService) {
+        isService = NO;
+        
+        // Stop TCP Connection checker
         if(tcpConnectChecker != nil) {
             [tcpConnectChecker invalidate];
             tcpConnectChecker = nil;
         }
+        
+        // Disconnect tcp connection
         [self.tcpService disconnect];
         tcpService = nil;
+        
+        // Synchronize memory units to disk
         [[SMShared current].memory syncUnitsToDisk];
-        isService = NO;
     }
 }
+
+#pragma mark -
+#pragma mark TCP Connection checker
 
 - (void)checkTcp {
     [self startTcpIfNeed];
