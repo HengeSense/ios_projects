@@ -8,6 +8,7 @@
 
 #import "DeviceCommandDeliveryService.h"
 
+#import "Reachability.h"
 #import "DeviceCommandGetUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
@@ -22,6 +23,7 @@
 #define NETWORK_CHECK_INTERVAL 5
 
 @implementation DeviceCommandDeliveryService {
+    Reachability* reachability;
     NSTimer *tcpConnectChecker;
     NSArray *mayUsingInternalNetworkCommands;
 }
@@ -31,7 +33,7 @@
 @synthesize isService;
 
 #pragma mark -
-#pragma mark initializations
+#pragma mark Initializations
 
 - (id)init {
     self = [super init];
@@ -43,11 +45,12 @@
 
 - (void)initDefaults {
     isService = NO;
-    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:@"FindZKListCommand", @"", nil];
+    reachability = [Reachability reachabilityWithHostname:@"www.baidu.com"];
+    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:@"FindZKListCommand", @"KeyControlCommand", @"FindDeviceSceneCommand", nil];
 }
 
 #pragma mark -
-#pragma mark device command delivery methods
+#pragma mark Device command delivery methods
 
 /*
  *
@@ -62,6 +65,10 @@
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     if(!self.isService) return;
+    
+    NSLog(@"is reachble %@", reachability.isReachable ? @"yes" : @"no");
+    NSLog(@"is reachble via wifi %@", reachability.isReachableViaWiFi ? @"yes" : @"no");
+    NSLog(@"is reachble via 3g %@", reachability.isReachableViaWWAN ? @"yes" : @"no");
     
     // If the command can be delivery in internal network
     if([self commandCanDeliveryInInternalNetwork:command]) {
@@ -151,6 +158,39 @@
 
 - (void)getUnitFailed:(RestResponse *)resp {
     NSLog(@"failed status code is %d", resp.statusCode);
+}
+
+#pragma mark -
+#pragma mark Network monitor
+
+- (void)startMonitorNetworks {
+    
+	// Here we set up a NSNotification observer. The Reachability that caused the notification
+	// is passed in the object parameter
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+	[reachability startNotifier];
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification {
+    Reachability *reach = notification.object;
+    if(reach == nil) return;
+    if(reach.isReachable) {
+        if(reach.isReachableViaWiFi) {
+            // wifi
+            NSLog(@"reach via wifi");
+        } else if(reach.isReachableViaWWAN) {
+            // wwan
+            NSLog(@"reach via wwan");
+        }
+    } else {
+        // not reachable
+        if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
+            NSLog(@"local wifi");
+        } else {
+            NSLog(@"can't find any network environment");
+        }
+    }
 }
 
 #pragma mark -
