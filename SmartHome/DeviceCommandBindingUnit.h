@@ -10,4 +10,6 @@
 
 @interface DeviceCommandBindingUnit : DeviceCommand
 
+@property (strong, nonatomic) NSString *requestDeviceCode ;
+
 @end

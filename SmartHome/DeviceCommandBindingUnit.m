@@ -10,4 +10,14 @@
 
 @implementation DeviceCommandBindingUnit
 
+@synthesize requestDeviceCode;
+
+- (NSMutableDictionary *)toDictionary {
+    NSMutableDictionary *json = [super toDictionary];
+    if(json != nil) {
+        [json setMayBlankString:self.requestDeviceCode forKey:@"requestDeviceCode"];
+    }
+    return json;
+}
+
 @end

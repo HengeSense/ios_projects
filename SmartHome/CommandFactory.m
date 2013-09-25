@@ -49,6 +49,10 @@
         DeviceCommandGetCameraServer *command = [[DeviceCommandGetCameraServer alloc] init];
         command.commandName = COMMAND_GET_CAMERA_SERVER;
         return command;
+    } else if(type == CommandTypeBindingUnit) {
+        DeviceCommandBindingUnit *command = [[DeviceCommandBindingUnit alloc] init];
+        command.commandName = COMMAND_BING_UNIT;
+        return command;
     }
     
     return nil;
