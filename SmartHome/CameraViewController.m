@@ -142,7 +142,6 @@
 }
 
 - (void)notifyCameraConnectted {
-    NSLog(@"open camera");
     firstImageHasBeenSet = NO;
 }
 

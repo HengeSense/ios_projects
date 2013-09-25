@@ -78,10 +78,8 @@
 #pragma selection button (units && scene)
     
     CGFloat margin = (self.bounds.size.height-self.topbar.frame.size.height-355)/4;
-    NSLog(@"%f",self.topbar.frame.size.height);
     if(btnUnit == nil) {
         btnUnit = [[UIButton alloc] initWithFrame:CGRectMake(15, self.topbar.frame.size.height+margin, 227 / 2, 73 / 2)];
-        NSLog(@"%@",NSStringFromCGRect(btnUnit.frame));
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateNormal];
         [btnUnit setBackgroundImage:[UIImage imageNamed:@"btn_unit.png"] forState:UIControlStateHighlighted];
         [btnUnit addTarget:self action:@selector(btnShowUnitsList:) forControlEvents:UIControlEventTouchUpInside];
@@ -198,7 +196,7 @@
     displayNotification.hasRead = YES;
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:[[NSArray alloc] initWithObjects:displayNotification, nil] deleteList:nil];
-    [self notifyViewUpdate];
+    [self notifyUpdateNotifications];
     NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:displayNotification];
     handler.deleteNotificationDelegate = self;
     handler.cfNotificationDelegate = self;
@@ -211,7 +209,7 @@
     displayNotification.hasProcess = YES;
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:[[NSArray alloc] initWithObjects:displayNotification, nil] deleteList:nil];
-    [self notifyViewUpdate];
+    [self notifyUpdateNotifications];
 }
 
 - (void)didWhenDeleted {
@@ -219,7 +217,7 @@
     [fileManager update:nil deleteList:[[NSArray alloc] initWithObjects:displayNotification, nil]];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
-    [self notifyViewUpdate];
+    [self notifyUpdateNotifications];
 }
 
 - (NSInteger)countOfNotRead:(NSArray *)notificationsArr {
@@ -233,7 +231,7 @@
 - (void)updateNotifications:(NSArray *)notifications {
     if (notifications == nil||notifications.count == 0) {
         lblMessage.text = NSLocalizedString(@"everything.is.ok", @"");
-        lblTime.text =@"";
+        lblTime.text = [NSString emptyString];
         [btnMessageCount setTitle:@"0" forState:UIControlStateNormal];
         displayNotification = nil;
         return;

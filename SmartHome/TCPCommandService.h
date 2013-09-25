@@ -9,17 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "CommunicationMessage.h"
 #import "SMCommandQueue.h"
+#import "CommandExecutor.h"
 #import "NSString+StringUtils.h"
 #import "ExtranetClientSocket.h"
 
-@interface TCPCommandService : NSObject<MessageHandler>
+@interface TCPCommandService : NSObject<MessageHandler, CommandExecutor>
 
 - (BOOL)isConnectted;
 - (BOOL)isConnectting;
 
 - (void)disconnect;
 - (void)connect;
-
-- (void)executeDeviceCommand:(DeviceCommand *)command;
 
 @end

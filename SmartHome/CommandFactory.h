@@ -33,6 +33,19 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeGetCameraServer,
 };
 
+#define COMMAND_UPDATE_ACCOUNT       @"AccountUpdateCommand"
+#define COMMAND_GET_ACCOUNT          @"AccountProfileCommand"
+#define COMMAND_GET_UNITS            @"FindZKListCommand"
+#define COMMAND_GET_NOTIFICATIONS    @"AccountMQListCommand"
+#define COMMAND_GET_SCENE_LIST       @"FindDeviceSceneCommand"
+#define COMMAND_VOICE_CONTROL        @"VoiceControlCommand"
+#define COMMAND_KEY_CONTROL          @"KeyControlCommand"
+#define COMMAND_CHANGE_UNIT_NAME     @"DeviceChangeNameCommand"
+#define COMMAND_GET_CAMERA_SERVER    @"RequestCameraCommand"
+#define COMMAND_PUSH_NOTIFICATIONS   @"MessageQueueCommand"
+#define COMMAND_PUSH_DEVICE_STATUS   @"DeviceFingerExcuteCommand"
+
+
 @interface CommandFactory : NSObject
 
 + (DeviceCommand *)commandForType:(CommandType)type;

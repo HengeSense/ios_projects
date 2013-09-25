@@ -46,7 +46,7 @@
 - (void)initDefaults {
     isService = NO;
     reachability = [Reachability reachabilityWithHostname:@"www.baidu.com"];
-    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:@"FindZKListCommand", @"KeyControlCommand", @"FindDeviceSceneCommand", nil];
+    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_GET_UNITS, COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, nil];
 }
 
 #pragma mark -
@@ -66,19 +66,40 @@
     if(command == nil) return;
     if(!self.isService) return;
     
-    NSLog(@"is reachble %@", reachability.isReachable ? @"yes" : @"no");
-    NSLog(@"is reachble via wifi %@", reachability.isReachableViaWiFi ? @"yes" : @"no");
-    NSLog(@"is reachble via 3g %@", reachability.isReachableViaWWAN ? @"yes" : @"no");
-    
-    // If the command can be delivery in internal network
-    if([self commandCanDeliveryInInternalNetwork:command]) {
-        
-        
+    id<CommandExecutor> executor = [self determineCommandExcutor];
+    if(executor != nil) {
+        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
+        [[self determineCommandExcutor] executeCommand:command];
     }
+}
+
+- (id<CommandExecutor>)determineCommandExcutor {
     
+    /*
+     
+     // If the command can be delivery in internal network
+     if([self commandCanDeliveryInInternalNetwork:command]) {
+     if(reachability.isReachableViaWiFi || [Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
+     
+     //  is nei wang  if()
+     if(YES) {
+     NSLog(@"execute using internal network");
+     [self.restfulService executeCommand:command];
+     return;
+     }
+     
+     }
+     }
+     
+     */
+    
+    // If the command can not be delivery in internal network, then using externet network
     if(self.tcpService.isConnectted) {
-        [self.tcpService executeDeviceCommand:command];
+        return self.tcpService;
     }
+    
+    
+    return nil;
 }
 
 /*
@@ -108,57 +129,29 @@
     
     DeviceCommandHandler *handler = nil;
     
-    if([@"FindZKListCommand" isEqualToString:command.commandName]) {
+    if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetUnitsHandler alloc] init];
-    } else if([@"AccountUpdateCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_UPDATE_ACCOUNT isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateAccountHandler alloc] init];
-    } else if([@"AccountProfileCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_GET_ACCOUNT isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetAccountHandler alloc] init];
-    } else if([@"MessageQueueCommand" isEqualToString:command.commandName] || [@"AccountMQListCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_PUSH_NOTIFICATIONS isEqualToString:command.commandName] || [COMMAND_GET_NOTIFICATIONS isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetNotificationsHandler alloc] init];
-    } else if([@"FindDeviceSceneCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_GET_SCENE_LIST isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetSceneListHandler alloc] init];
-    } else if([@"VoiceControlCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_VOICE_CONTROL isEqualToString:command.commandName]) {
         handler = [[DeviceCommandVoiceControlHandler alloc] init];
-    } else if([@"DeviceFingerExcuteCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_PUSH_DEVICE_STATUS isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateDevicesHandler alloc] init];
-    } else if([@"DeviceChangeNameCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_CHANGE_UNIT_NAME isEqualToString:command.commandName]) {
         // ...
-    } else if([@"RequestCameraCommand" isEqualToString:command.commandName]) {
+    } else if([COMMAND_GET_CAMERA_SERVER isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetCameraServerHandler alloc] init];
     }
         
     if(handler != nil) {
         [handler handle:command];
     }
-}
-
-
-#pragma mark -
-#pragma mark Restful service
-
-- (void)getUnitSucess:(RestResponse *)resp {
-    if(resp.statusCode == 200) {
-        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
-        if(json != nil) {
-            Unit *unit = [[Unit alloc] initWithJson:json];
-            if(unit != nil) {
-                DeviceCommandUpdateUnits *updateUnit = [[DeviceCommandUpdateUnits alloc] init];
-                updateUnit.commandName = @"FindZKListCommand";
-                updateUnit.masterDeviceCode = unit.identifier;
-                [updateUnit.units addObject:unit];
-                [self handleDeviceCommand:updateUnit];
-            }
-        }
-        return;
-    } else if(resp.statusCode == 204) {
-        NSLog(@"rest get unit is last version");
-    }
-    [self getUnitFailed:resp];
-}
-
-- (void)getUnitFailed:(RestResponse *)resp {
-    NSLog(@"failed status code is %d", resp.statusCode);
 }
 
 #pragma mark -

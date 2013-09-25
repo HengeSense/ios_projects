@@ -68,11 +68,15 @@
     return socket.isConnectting;
 }
 
-- (void)executeDeviceCommand:(DeviceCommand *)command {
+- (void)executeCommand:(DeviceCommand *)command {
     if(![queue contains:command]) {
         [queue pushCommand:command];
         [self performSelectorInBackground:@selector(flushQueue) withObject:nil];
     }
+}
+
+- (NSString *)executorName {
+    return @"TCP SERVICE";
 }
 
 - (void)flushQueue {
@@ -112,11 +116,6 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
-    
-    NSData *dd =    [JsonUtils createJsonDataFromDictionary:[JsonUtils createDictionaryFromJson:messages]];
-    NSLog([[NSString alloc] initWithData:dd encoding:NSUTF8StringEncoding]);
-    
-    
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     [[SMShared current].deliveryService handleDeviceCommand:command];
 }

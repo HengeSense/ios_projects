@@ -15,7 +15,10 @@
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateUnits class]]) {
+        
         DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
+        
+        // is update unit or update units
         if([NSString isBlank:updateUnitsCommand.masterDeviceCode]) {
             [[SMShared current].memory replaceUnits:updateUnitsCommand.units];
         } else {
@@ -24,6 +27,7 @@
             }
         }
         
+        // notify subscriptions
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
         if(subscriptions) {
             for(int i=0; i<subscriptions.count; i++) {
@@ -33,6 +37,7 @@
             }
         }
         
+        // update scene list for each unit
         for(Unit *unit in updateUnitsCommand.units) {
             DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
             

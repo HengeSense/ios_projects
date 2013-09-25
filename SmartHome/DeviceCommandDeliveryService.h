@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TCPCommandService.h"
 #import "RestfulCommandService.h"
-#import "DeviceCommand.h"
+#import "CommandFactory.h"
 
 @interface DeviceCommandDeliveryService : NSObject
 
@@ -19,12 +19,6 @@
 
 - (void)executeDeviceCommand:(DeviceCommand *)command;
 - (void)handleDeviceCommand:(DeviceCommand *)command;
-
-/*
- Restful Service Callback Method
- ----------------------------------------------------*/
-- (void)getUnitSucess:(RestResponse *)resp;
-- (void)getUnitFailed:(RestResponse *)resp;
 
 - (void)startService;
 - (void)stopService;

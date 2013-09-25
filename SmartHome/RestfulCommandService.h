@@ -7,10 +7,19 @@
 //
 
 #import "ServiceBase.h"
+#import "CommandExecutor.h"
 #import "CommandFactory.h"
 
-@interface RestfulCommandService : ServiceBase
+@interface RestfulCommandService : ServiceBase<CommandExecutor>
+
 
 - (void)getUnitByUrl:(NSString *)url;
+
+
+/*
+ Restful Service Callback Method
+ ----------------------------------------------------*/
+- (void)getUnitSucess:(RestResponse *)resp;
+- (void)getUnitFailed:(RestResponse *)resp;
 
 @end
