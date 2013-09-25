@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *deviceCode;
 @property (strong, nonatomic) NSString *tcpAddress;
 @property (strong, nonatomic) NSString *screenName;
+@property (assign, nonatomic) BOOL isFirstTimeOpenApp;
 @property (assign, nonatomic) BOOL anyUnitsBinding;
 
 - (NSDictionary *)toDictionary;

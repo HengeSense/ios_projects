@@ -85,6 +85,7 @@
         textLabel.numberOfLines = 0;
         CGSize constraint = CGSizeMake(240, 20000.0f);
         CGSize size = [textLabel.text sizeWithFont:font constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+        
         textLabel.frame = CGRectMake(40, 5, size.width, size.height<MESSAGE_CELL_HEIGHT?MESSAGE_CELL_HEIGHT:size.height*2);
         textLabel.backgroundColor = [UIColor clearColor];
         [view addSubview:textLabel];

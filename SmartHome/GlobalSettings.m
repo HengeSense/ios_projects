@@ -18,6 +18,7 @@
 #define TCP_ADDRESS_KEY           @"tcp_address.key"
 #define DEVICE_CODE_KEY           @"device_code.key"
 #define SCREEN_NAME_KEY           @"screen_name.key"
+#define FIRST_TIME_OPEN_APP_KEY   @"first_time_opa.key"
 
 @implementation GlobalSettings
 
@@ -26,6 +27,7 @@
 @synthesize tcpAddress;
 @synthesize anyUnitsBinding;
 @synthesize deviceCode;
+@synthesize isFirstTimeOpenApp;
 
 - (id)init {
     self = [super init];
@@ -35,6 +37,7 @@
         if(settings == nil) {
             //no settings file before
             self.anyUnitsBinding = NO;
+            self.isFirstTimeOpenApp = YES;
             self.account = [NSString emptyString];
             self.secretKey = [NSString emptyString];
             self.tcpAddress = [NSString emptyString];
@@ -49,6 +52,7 @@
             self.tcpAddress = [settings noNilStringForKey:TCP_ADDRESS_KEY];
             self.deviceCode = [settings noNilStringForKey:DEVICE_CODE_KEY];
             self.screenName = [settings noNilStringForKey:SCREEN_NAME_KEY];
+            self.isFirstTimeOpenApp = [settings boolForKey:FIRST_TIME_OPEN_APP_KEY];
         }
     }
     return self;
@@ -59,10 +63,11 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     [dictionary setMayBlankString:self.account forKey:ACCOUNT_KEY];
     [dictionary setMayBlankString:self.secretKey forKey:SECRET_KEY_KEY];
-    [dictionary setMayBlankString:(self.anyUnitsBinding ? @"yes" : @"no") forKey:ANY_UNITS_BINDING_KEY];
+    [dictionary setBool:self.anyUnitsBinding forKey:ANY_UNITS_BINDING_KEY];
     [dictionary setMayBlankString:self.tcpAddress forKey:TCP_ADDRESS_KEY];
     [dictionary setMayBlankString:self.deviceCode forKey:DEVICE_CODE_KEY];
     [dictionary setMayBlankString:self.screenName forKey:SCREEN_NAME_KEY];
+    [dictionary setBool:self.isFirstTimeOpenApp forKey:FIRST_TIME_OPEN_APP_KEY];
     return dictionary;
 }
 
