@@ -11,6 +11,6 @@
 
 @interface RestfulCommandService : ServiceBase
 
-
+- (void)getUnitByUrl:(NSString *)url;
 
 @end

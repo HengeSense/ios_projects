@@ -9,6 +9,7 @@
 #import "DeviceCommandUpdateUnits.h"
 
 @implementation DeviceCommandUpdateUnits
+
 @synthesize units;
 
 - (id)initWithDictionary:(NSDictionary *)json {

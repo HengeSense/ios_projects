@@ -23,6 +23,9 @@
 //
 - (void)handleDeviceCommand:(DeviceCommand *)command;
 
+- (void)getUnitSucess:(RestResponse *)resp;
+- (void)getUnitFailed:(RestResponse *)resp;
+
 - (void)startService;
 - (void)stopService;
 

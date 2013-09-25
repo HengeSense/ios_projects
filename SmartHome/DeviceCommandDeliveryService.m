@@ -126,6 +126,33 @@
     }
 }
 
+
+#pragma mark -
+#pragma mark Restful handle
+
+- (void)getUnitSucess:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            Unit *unit = [[Unit alloc] initWithJson:json];
+            if(unit != nil) {
+                DeviceCommandUpdateUnits *updateUnit = [[DeviceCommandUpdateUnits alloc] init];
+                updateUnit.commandName = @"FindZKListCommand";
+                updateUnit.masterDeviceCode = unit.identifier;
+                [updateUnit.units addObject:unit];
+                [self handleDeviceCommand:updateUnit];
+                return;
+            }
+        }
+    }
+    
+    [self getUnitFailed:resp];
+}
+
+- (void)getUnitFailed:(RestResponse *)resp {
+    NSLog(@"failed status code is %d", resp.statusCode);
+}
+
 #pragma mark -
 #pragma mark Service switch
 
@@ -212,7 +239,10 @@
 }
 
 - (RestfulCommandService *)restfulService {
-    return nil;
+    if(restfulService == nil) {
+        restfulService = [[RestfulCommandService alloc] init];
+    }
+    return restfulService;
 }
 
 @end

@@ -45,7 +45,9 @@ static NSString *IP;
 -(BOOL) onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port{
     NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
     NSString *deviceCode = [json noNilStringForKey:@"deviceCode"];
-    
+    NSString *ip = [json noNilStringForKey:@"ipv4"];
+    NSString *url = [NSString stringWithFormat:@"http://%@:8777/gatewaycfg",ip];
+    [self getUnit:url];
     NSLog(@"receive data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     NSLog(@"json:%@",json);
     NSLog(@"deviceCode:%@",deviceCode);
@@ -57,6 +59,7 @@ static NSString *IP;
 }
 
 -(void) getUnit:(NSString *) deviceAddress{
+    [[SMShared current].deliveryService.restfulService getUnitByUrl:deviceAddress];
     
 }
 -(void) requestForBindingUnit:(NSString *) deviceCode{
