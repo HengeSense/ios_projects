@@ -75,6 +75,7 @@
 
 - (id<CommandExecutor>)determineCommandExcutor {
     
+    
     /*
      
      // If the command can be delivery in internal network
@@ -86,7 +87,7 @@
      NSLog(@"execute using internal network");
      [self.restfulService executeCommand:command];
      return;
-     }
+     }o
      
      }
      }
@@ -97,7 +98,6 @@
     if(self.tcpService.isConnectted) {
         return self.tcpService;
     }
-    
     
     return nil;
 }

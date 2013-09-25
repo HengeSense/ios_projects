@@ -146,7 +146,7 @@
 - (void)resendVerificationCode {
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [[SMShared current].accountService sendVerificationCodeFor:self.phoneNumberToValidation success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
+    [[[AccountService alloc] init] sendVerificationCodeFor:self.phoneNumberToValidation success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
 }
 
 - (void)verificationCodeSendSuccess:(RestResponse *)resp {
@@ -186,7 +186,7 @@
     }
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [[SMShared current].accountService registerWithPhoneNumber:self.phoneNumberToValidation checkCode:txtVerificationCode.text success:@selector(registerSuccessfully:) failed:@selector(registerFailed:) target:self callback:nil];
+    [[[AccountService alloc] init] registerWithPhoneNumber:self.phoneNumberToValidation checkCode:txtVerificationCode.text success:@selector(registerSuccessfully:) failed:@selector(registerFailed:) target:self callback:nil];
 }
 
 - (void)registerSuccessfully:(RestResponse *)resp {    

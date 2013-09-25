@@ -80,12 +80,12 @@
 - (void)sendPassword:(id)sender {
     NSString *phoneNumber = [NSString trim:txtPhoneNumber.text];
     if([NSString isBlank:phoneNumber] || phoneNumber.length != 11) {
-        [[SMShared current].accountService sendPasswordToMobile:phoneNumber success:@selector(sendPasswordSuccess:) failed:@selector(sendPasswordFailed:) target:self callback:nil];
+        [[[AccountService alloc] init] sendPasswordToMobile:phoneNumber success:@selector(sendPasswordSuccess:) failed:@selector(sendPasswordFailed:) target:self callback:nil];
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_format_invalid", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
     }
     
-    [[SMShared current].accountService sendPasswordToMobile:phoneNumber success:@selector(sendPasswordSuccess:) failed:@selector(sendPasswordFailed:) target:self callback:nil];
+    [[[AccountService alloc] init] sendPasswordToMobile:phoneNumber success:@selector(sendPasswordSuccess:) failed:@selector(sendPasswordFailed:) target:self callback:nil];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
 }

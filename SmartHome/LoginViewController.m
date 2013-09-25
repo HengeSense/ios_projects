@@ -175,7 +175,8 @@
     
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [[SMShared current].accountService loginWithAccount:userName password:password success:@selector(loginSuccess:) failed:@selector(loginFailed:) target:self callback:nil];
+    
+    [[[AccountService alloc] init] loginWithAccount:userName password:password success:@selector(loginSuccess:) failed:@selector(loginFailed:) target:self callback:nil];
 }
 
 - (void)loginSuccess:(RestResponse *)resp {
