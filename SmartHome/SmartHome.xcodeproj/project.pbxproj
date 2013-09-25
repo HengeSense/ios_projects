@@ -275,7 +275,6 @@
 		F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */; };
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
 		F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27B4EC317EFD35D00A55220 /* libzbar.a */; };
-		F27B4ECD17F01F3900A55220 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = F27B4ECC17F01F3900A55220 /* IPAddress.m */; };
 		F27B4ED317F067AA00A55220 /* IPAddressTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F27B4ED217F067AA00A55220 /* IPAddressTool.m */; };
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
@@ -715,7 +714,6 @@
 		F237168317B3715C0057C95B /* SmsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsService.h; sourceTree = "<group>"; };
 		F237168417B3715C0057C95B /* SmsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsService.m; sourceTree = "<group>"; };
 		F27B4EC317EFD35D00A55220 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
-		F27B4ECC17F01F3900A55220 /* IPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddress.m; sourceTree = "<group>"; };
 		F27B4ED117F067AA00A55220 /* IPAddressTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddressTool.h; sourceTree = "<group>"; };
 		F27B4ED217F067AA00A55220 /* IPAddressTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddressTool.m; sourceTree = "<group>"; };
 		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
@@ -1776,7 +1774,6 @@
 		F27B4EC517F01D1400A55220 /* IPAddress */ = {
 			isa = PBXGroup;
 			children = (
-				F27B4ECC17F01F3900A55220 /* IPAddress.m */,
 				F27B4ED117F067AA00A55220 /* IPAddressTool.h */,
 				F27B4ED217F067AA00A55220 /* IPAddressTool.m */,
 				F2911BE117F1615700742713 /* IPAddress.c */,
@@ -2125,7 +2122,6 @@
 				6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */,
 				F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */,
 				6FC8C07017D975DC003B3904 /* DeviceDetailViewController.m in Sources */,
-				F27B4ECD17F01F3900A55220 /* IPAddress.m in Sources */,
 				6F167B8117D9A233004169CD /* SelectionView.m in Sources */,
 				6FC1021717D9C71A00CA08F8 /* DeviceCommandUpdateSceneMode.m in Sources */,
 				6FC1021A17D9C72F00CA08F8 /* SceneMode.m in Sources */,
