@@ -7,11 +7,11 @@
 //
 
 #import "QRCodeScannerViewController.h"
-#import "BaseViewController.h"
+#import "PopViewController.h"
 #import "TopbarView.h"
 #import "DeviceFinder.h"
 
-@interface UnitsBindingViewController : BaseViewController<QRCodeProcessorDelegate>
+@interface UnitsBindingViewController : PopViewController <QRCodeProcessorDelegate>
 
 @property (strong, nonatomic) TopbarView *topbar;
 

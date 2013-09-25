@@ -9,10 +9,12 @@
 #import "MyDevicesView.h"
 #import "UnitDetailsViewController.h"
 #import "SMCell.h"
+#import "UnitsBindingViewController.h"
 
 @implementation MyDevicesView {
     UITableView *tblUnits;
     NSArray *unitsIdentifierCollection;
+    UIButton *btnAdd;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -39,6 +41,22 @@
         tblUnits.backgroundColor = [UIColor clearColor];
         [self addSubview:tblUnits];
     }
+    
+    if (btnAdd == nil) {
+        btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width-33/2-10, 0, 33/2, 33/2)];
+        [btnAdd setBackgroundImage:[UIImage imageNamed:@"btn_add.png"] forState:UIControlStateNormal];
+        btnAdd.center = CGPointMake(btnAdd.center.x, self.topbar.center.y+10);
+        [btnAdd addTarget:self action:@selector(btnAddPressed:) forControlEvents:UIControlEventTouchUpInside];
+        NSLog(NSStringFromCGRect(btnAdd.frame));
+        [self.topbar addSubview:btnAdd];
+    }
+}
+#pragma mark-
+#pragma mark btn action
+
+-(void) btnAddPressed:(UIButton *) sender{
+    UnitsBindingViewController *unitsBindingViewController = [[UnitsBindingViewController alloc] init];
+    [self.ownerController presentViewController:unitsBindingViewController animated:YES completion:nil];
 }
 
 #pragma mark -
