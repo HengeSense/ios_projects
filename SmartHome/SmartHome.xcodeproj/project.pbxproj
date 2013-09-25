@@ -122,6 +122,8 @@
 		6F48EEEE17C8A89700C85D9B /* alert_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */; };
 		6F48EEEF17C8A89700C85D9B /* alert_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEED17C8A89700C85D9B /* alert_success@2x.png */; };
 		6F5A227417F28E8000D29BE0 /* DeviceCommandGetUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */; };
+		6F5A227717F2923100D29BE0 /* DeviceCommandBindingUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */; };
+		6F5A227917F2924800D29BE0 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227817F2924800D29BE0 /* btn_add@2x.png */; };
 		6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F668CE717DEE2C700034C90 /* SMDateFormatter.m */; };
 		6F6AB3A117C31C06001F1D33 /* btn_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A317C31C06001F1D33 /* btn_scanner@2x.png */; };
 		6F6AB3A517C31C16001F1D33 /* btn_finder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */; };
@@ -455,6 +457,9 @@
 		6F48EEED17C8A89700C85D9B /* alert_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_success@2x.png"; sourceTree = "<group>"; };
 		6F5A227217F28E8000D29BE0 /* DeviceCommandGetUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetUnit.h; sourceTree = "<group>"; };
 		6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnit.m; sourceTree = "<group>"; };
+		6F5A227517F2923100D29BE0 /* DeviceCommandBindingUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandBindingUnit.h; sourceTree = "<group>"; };
+		6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandBindingUnit.m; sourceTree = "<group>"; };
+		6F5A227817F2924800D29BE0 /* btn_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_add@2x.png"; sourceTree = "<group>"; };
 		6F668CE617DEE2C700034C90 /* SMDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDateFormatter.h; sourceTree = "<group>"; };
 		6F668CE717DEE2C700034C90 /* SMDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDateFormatter.m; sourceTree = "<group>"; };
 		6F6AB3A217C31C06001F1D33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/btn_scanner@2x.png"; sourceTree = "<group>"; };
@@ -1338,6 +1343,7 @@
 			isa = PBXGroup;
 			children = (
 				F280616A17DDC7BB0064F35B /* button_cf@2x.png */,
+				6F5A227817F2924800D29BE0 /* btn_add@2x.png */,
 				6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */,
 				6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */,
 				6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */,
@@ -1723,6 +1729,8 @@
 				6FD0CC0617EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m */,
 				6F5A227217F28E8000D29BE0 /* DeviceCommandGetUnit.h */,
 				6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */,
+				6F5A227517F2923100D29BE0 /* DeviceCommandBindingUnit.h */,
+				6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -1896,6 +1904,7 @@
 				F22DF72B17C1FFE300BF7C3A /* btn_orange@2x.png in Resources */,
 				F22DF72D17C2009500BF7C3A /* txt_main@2x.png in Resources */,
 				F22DF72F17C2052E00BF7C3A /* btn_register@2x.png in Resources */,
+				6F5A227917F2924800D29BE0 /* btn_add@2x.png in Resources */,
 				F22E425217C306EA000FD247 /* btn_back@2x.jpg in Resources */,
 				F22E425417C30806000FD247 /* bg_topbar@2x.png in Resources */,
 				6FD4CFEB17C312BD00EC98F9 /* bg_scanner@2x.png in Resources */,
@@ -2113,6 +2122,7 @@
 				6FE3B75D17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m in Sources */,
 				6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */,
 				6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */,
+				6F5A227717F2923100D29BE0 /* DeviceCommandBindingUnit.m in Sources */,
 				6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */,
 				6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */,
 				6FD0CC0717EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m in Sources */,
