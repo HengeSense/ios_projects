@@ -25,6 +25,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self startMonitorNetworks];
+    
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
     
@@ -55,8 +57,6 @@
     
     // register for remote notifications
     [self registerForRemoteNotifications];
-    
-    [self startMonitorNetworks];
     
     return YES;
 }

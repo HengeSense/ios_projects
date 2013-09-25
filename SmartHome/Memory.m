@@ -98,6 +98,8 @@
             }
             if(replaceIndex != -1) {
                 [self.units replaceObjectAtIndex:replaceIndex withObject:unit];
+            } else {
+                [self.units addObject:unit];
             }
         }
         return self.units;

@@ -23,11 +23,15 @@
 
 @implementation DeviceCommandDeliveryService {
     NSTimer *tcpConnectChecker;
+    NSArray *mayUsingInternalNetworkCommands;
 }
 
 @synthesize tcpService;
 @synthesize restfulService;
 @synthesize isService;
+
+#pragma mark -
+#pragma mark initializations
 
 - (id)init {
     self = [super init];
@@ -39,9 +43,14 @@
 
 - (void)initDefaults {
     isService = NO;
+    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:@"FindZKListCommand", @"", nil];
 }
 
+#pragma mark -
+#pragma mark device command delivery methods
+
 /*
+ *
  * Execute device command
  *
  * NO Network Environment  ---> RETURN
@@ -51,7 +60,14 @@
  *
  */
 - (void)executeDeviceCommand:(DeviceCommand *)command {
+    if(command == nil) return;
     if(!self.isService) return;
+    
+    // If the command can be delivery in internal network
+    if([self commandCanDeliveryInInternalNetwork:command]) {
+        
+        
+    }
     
     if(self.tcpService.isConnectted) {
         [self.tcpService executeDeviceCommand:command];
@@ -167,6 +183,22 @@
 
 - (void)startTcp {
     [self.tcpService connect];
+}
+
+#pragma mark -
+#pragma mark utils
+
+- (BOOL)commandCanDeliveryInInternalNetwork:(DeviceCommand *)command {
+    if(mayUsingInternalNetworkCommands == nil) return NO;
+
+    for(int i=0; i<mayUsingInternalNetworkCommands.count; i++) {
+        NSString *cmdName = [mayUsingInternalNetworkCommands objectAtIndex:i];
+        if([cmdName isEqualToString:command.commandName]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 #pragma mark -
