@@ -25,6 +25,8 @@
 @synthesize hashCode;
 @synthesize describe;
 
+@synthesize fromInternalNetwork;
+
 - (id)initWithDictionary:(NSDictionary *)json {
     self = [super init];
     if(self) {

@@ -22,7 +22,7 @@
         command.commandName = @"AccountProfileCommand";
         return command;
     } else if(type == CommandTypeGetUnits) {
-        DeviceCommand *command = [[DeviceCommand alloc] init];
+        DeviceCommandGetUnit *command = [[DeviceCommandGetUnit alloc] init];
         command.commandName = @"FindZKListCommand";
         return command;
     } else if(type == CommandTypeGetNotifications) {

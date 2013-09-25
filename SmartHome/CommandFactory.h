@@ -18,6 +18,7 @@
 #import "DeviceCommandUpdateDevice.h"
 #import "DeviceCommandGetCameraServer.h"
 #import "DeviceCommandReceivedCameraServer.h"
+#import "DeviceCommandGetUnit.h"
 
 typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeNone,

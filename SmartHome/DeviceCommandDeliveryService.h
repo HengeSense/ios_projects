@@ -17,12 +17,12 @@
 @property (strong, nonatomic, readonly) RestfulCommandService *restfulService;
 @property (assign, nonatomic, readonly) BOOL isService;
 
-//
 - (void)executeDeviceCommand:(DeviceCommand *)command;
-
-//
 - (void)handleDeviceCommand:(DeviceCommand *)command;
 
+/*
+ Restful Service Callback Method
+ ----------------------------------------------------*/
 - (void)getUnitSucess:(RestResponse *)resp;
 - (void)getUnitFailed:(RestResponse *)resp;
 

@@ -135,7 +135,7 @@
 
 
 #pragma mark -
-#pragma mark Restful handle
+#pragma mark Restful service
 
 - (void)getUnitSucess:(RestResponse *)resp {
     if(resp.statusCode == 200) {
@@ -148,11 +148,12 @@
                 updateUnit.masterDeviceCode = unit.identifier;
                 [updateUnit.units addObject:unit];
                 [self handleDeviceCommand:updateUnit];
-                return;
             }
         }
+        return;
+    } else if(resp.statusCode == 204) {
+        NSLog(@"rest get unit is last version");
     }
-    
     [self getUnitFailed:resp];
 }
 
@@ -164,7 +165,6 @@
 #pragma mark Network monitor
 
 - (void)startMonitorNetworks {
-    
 	// Here we set up a NSNotification observer. The Reachability that caused the notification
 	// is passed in the object parameter
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];

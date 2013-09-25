@@ -20,9 +20,12 @@
     return self;
 }
 
-- (void)getUnitByIdentifier:(NSString *)unitIdentifier success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    
-    
+- (void)getUnitByIdentifier:(NSString *)unitIdentifier {
+    Unit *unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
+    if(unit != nil) {
+        NSString *url = [NSString stringWithFormat:@"http://%@:%d/gatewaycfg?hashCode=1", unit.localIP, unit.localPort];
+        [self getUnitByUrl:url];
+    }
 }
 
 - (void)getUnitByUrl:(NSString *)url {
