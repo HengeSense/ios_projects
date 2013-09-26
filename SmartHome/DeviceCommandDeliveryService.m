@@ -348,7 +348,8 @@
     if(mayUsingInternalNetworkCommands == nil) return NO;
     if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
         if([NSString isBlank:command.masterDeviceCode]) {
-            return NO;
+            DeviceCommandGetUnit *cmd = (DeviceCommandGetUnit *)command;
+            return ![NSString isBlank:cmd.unitServerUrl];
         } else {
             return YES;
         }

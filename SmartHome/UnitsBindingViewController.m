@@ -156,7 +156,7 @@
     DeviceFinder *finder = [[DeviceFinder alloc] init];
     [finder startFindingDevice];
     [[AlertView currentAlertView] setMessage:@"正在搜索主控" forType:AlertViewTypeWaitting];
-    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:nil];
     
 //    NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(delay) userInfo:<#(id)#> repeats:<#(BOOL)#>
     
