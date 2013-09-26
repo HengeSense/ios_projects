@@ -86,6 +86,11 @@
 - (void)getUnitSucess:(RestResponse *)resp {
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        
+        NSString *str = [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
+        NSLog(str);
+        
+        
         if(json != nil) {
             Unit *unit = [[Unit alloc] initWithJson:json];
             if(unit != nil) {
