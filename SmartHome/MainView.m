@@ -364,7 +364,7 @@
             }
         }
     }
-    [SelectionView showWithItems:sList selectedIdentifier:@"" source:@"scene" delegate:self];
+    [SelectionView showWithItems:sList selectedIdentifier:[NSString emptyString] source:@"scene" delegate:self];
 }
 
 - (void)btnShowUnitsList:(id)sender {

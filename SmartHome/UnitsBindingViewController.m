@@ -111,7 +111,7 @@
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateHighlighted];
     if (self.topBarType==TopBarTypeDone) {
-        [self.topbar.rightButton setTitle:@"完成" forState:UIControlStateNormal];
+        [self.topbar.rightButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
         [self.topbar.rightButton addTarget:self action:@selector(btnDonePressed:) forControlEvents:UIControlEventTouchUpInside];
     }else{
         [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];

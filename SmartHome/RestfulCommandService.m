@@ -85,7 +85,7 @@
 
 - (void)getUnitSucess:(RestResponse *)resp {
     if(resp.statusCode == 200) {
-        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];        
         if(json != nil) {
             Unit *unit = [[Unit alloc] initWithJson:json];
             if(unit != nil) {

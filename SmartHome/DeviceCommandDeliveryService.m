@@ -96,7 +96,7 @@
 - (void)executeDeviceCommandInternal:(DeviceCommand *)command {
     id<CommandExecutor> executor = [self determineCommandExcutor:command];
     if(executor != nil) {
-//        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
+        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
         [executor executeCommand:command];
     }
 }
