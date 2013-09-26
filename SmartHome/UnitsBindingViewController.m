@@ -141,6 +141,7 @@
 - (void)btnSkipPressed:(id)sender {
     [self showMainView];
 }
+
 - (void)btnDonePressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -154,6 +155,11 @@
 -(void) btnAutoSearchPressed:(UIButton *) sender{
     DeviceFinder *finder = [[DeviceFinder alloc] init];
     [finder startFindingDevice];
+    [[AlertView currentAlertView] setMessage:@"正在搜索主控" forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    
+//    NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(delay) userInfo:<#(id)#> repeats:<#(BOOL)#>
+    
 }
 #pragma mark -
 #pragma mark QR code delegate

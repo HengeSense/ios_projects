@@ -123,7 +123,6 @@
 		6F48EEEF17C8A89700C85D9B /* alert_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEED17C8A89700C85D9B /* alert_success@2x.png */; };
 		6F5A227417F28E8000D29BE0 /* DeviceCommandGetUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */; };
 		6F5A227717F2923100D29BE0 /* DeviceCommandBindingUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */; };
-		6F5A227917F2924800D29BE0 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227817F2924800D29BE0 /* btn_add@2x.png */; };
 		6F5A228117F292D000D29BE0 /* welcome01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227B17F292D000D29BE0 /* welcome01@2x.png */; };
 		6F5A228217F292D000D29BE0 /* welcome02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227C17F292D000D29BE0 /* welcome02@2x.png */; };
 		6F5A228317F292D000D29BE0 /* welcome03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227D17F292D000D29BE0 /* welcome03@2x.png */; };
@@ -261,6 +260,7 @@
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C017D9784800280F21 /* PasswordPopupViewController.m */; };
 		F20AC1A917F3CCFC00224CB8 /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20AC1A817F3CCFC00224CB8 /* help@2x.png */; };
+		F20AC1AB17F3DDD100224CB8 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20AC1AA17F3DDD100224CB8 /* btn_add@2x.png */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
 		F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08D17BDD00B0040B80A /* LoginViewController.m */; };
 		F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* SMTextField.m */; };
@@ -468,7 +468,6 @@
 		6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnit.m; sourceTree = "<group>"; };
 		6F5A227517F2923100D29BE0 /* DeviceCommandBindingUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandBindingUnit.h; sourceTree = "<group>"; };
 		6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandBindingUnit.m; sourceTree = "<group>"; };
-		6F5A227817F2924800D29BE0 /* btn_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_add@2x.png"; sourceTree = "<group>"; };
 		6F5A227B17F292D000D29BE0 /* welcome01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome01@2x.png"; sourceTree = "<group>"; };
 		6F5A227C17F292D000D29BE0 /* welcome02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome02@2x.png"; sourceTree = "<group>"; };
 		6F5A227D17F292D000D29BE0 /* welcome03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome03@2x.png"; sourceTree = "<group>"; };
@@ -702,6 +701,7 @@
 		F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordPopupViewController.h; sourceTree = "<group>"; };
 		F205E5C017D9784800280F21 /* PasswordPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPopupViewController.m; sourceTree = "<group>"; };
 		F20AC1A817F3CCFC00224CB8 /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
+		F20AC1AA17F3DDD100224CB8 /* btn_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_add@2x.png"; sourceTree = "<group>"; };
 		F20AE08917BDBD540040B80A /* ModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyInfoViewController.h; sourceTree = "<group>"; };
 		F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoViewController.m; sourceTree = "<group>"; };
 		F20AE08C17BDD00B0040B80A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1381,8 +1381,8 @@
 			isa = PBXGroup;
 			children = (
 				F280616A17DDC7BB0064F35B /* button_cf@2x.png */,
-				6F5A227817F2924800D29BE0 /* btn_add@2x.png */,
 				6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */,
+				F20AC1AA17F3DDD100224CB8 /* btn_add@2x.png */,
 				6F6AB3AA17C31CB4001F1D33 /* bg_scanner_shadow@2x.png */,
 				6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */,
 				6F6AB3A317C31C06001F1D33 /* btn_scanner@2x.png */,
@@ -1955,7 +1955,6 @@
 				6F5A228217F292D000D29BE0 /* welcome02@2x.png in Resources */,
 				F22DF72D17C2009500BF7C3A /* txt_main@2x.png in Resources */,
 				F22DF72F17C2052E00BF7C3A /* btn_register@2x.png in Resources */,
-				6F5A227917F2924800D29BE0 /* btn_add@2x.png in Resources */,
 				F22E425217C306EA000FD247 /* btn_back@2x.jpg in Resources */,
 				F22E425417C30806000FD247 /* bg_topbar@2x.png in Resources */,
 				6FD4CFEB17C312BD00EC98F9 /* bg_scanner@2x.png in Resources */,
@@ -1983,6 +1982,7 @@
 				6F0420EC17C4817800F7F6AF /* btn_camera_top@2x.png in Resources */,
 				6F0420F217C4824900F7F6AF /* btn_camera_left@2x.png in Resources */,
 				6F0420F417C49E3500F7F6AF /* bg_drawer_cell@2x.png in Resources */,
+				F20AC1AB17F3DDD100224CB8 /* btn_add@2x.png in Resources */,
 				6F0420F617C4A42F00F7F6AF /* line_cell_seperator@2x.png in Resources */,
 				6F0420F817C4A9EC00F7F6AF /* img_header@2x.png in Resources */,
 				6F0420FA17C4ADB900F7F6AF /* btn_drawer_nav@2x.png in Resources */,
@@ -2357,8 +2357,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";
@@ -2390,8 +2390,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "EC171946-3A03-41AF-BEF6-40477827D5FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC171946-3A03-41AF-BEF6-40477827D5FB";
+				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7";

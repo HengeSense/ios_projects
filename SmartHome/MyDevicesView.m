@@ -43,7 +43,7 @@
     }
     
     if (btnAdd == nil) {
-        btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width-33/2-10, 0, 88/2, 88/2)];
+        btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width-88/2-10, 0, 88/2, 88/2)];
         [btnAdd setBackgroundImage:[UIImage imageNamed:@"btn_add.png"] forState:UIControlStateNormal];
         btnAdd.center = CGPointMake(btnAdd.center.x, self.topbar.center.y+10);
         [btnAdd addTarget:self action:@selector(btnAddPressed:) forControlEvents:UIControlEventTouchUpInside];

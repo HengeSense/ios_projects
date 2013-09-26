@@ -117,7 +117,6 @@
     
     
     CGFloat multiple = (CGFloat) unit.zones.count;
-
     self.pageableScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCROLL_ITEM_WIDTH, SCROLL_ITEM_HEIGHT)];
     self.pageableScrollView.delegate = self;
     self.pageableScrollView.bounces = NO;
