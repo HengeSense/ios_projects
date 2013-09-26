@@ -36,6 +36,8 @@
 
     BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
     if (self.settings.isFirstTimeOpenApp) {
+        self.settings.isFirstTimeOpenApp = NO;
+        [self.settings saveSettings];
         [self.rootViewController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated: YES];
     }
     if(hasLogin) {

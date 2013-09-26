@@ -65,7 +65,12 @@ static NSString *IP;
     
 }
 -(void) requestForBindingUnit:(NSString *) deviceCode{
+    DeviceCommandBindingUnit *bindingUnitCommand = (DeviceCommandBindingUnit *)[CommandFactory commandForType:CommandTypeBindingUnit];
+    bindingUnitCommand.masterDeviceCode = deviceCode;
+    bindingUnitCommand.requestDeviceCode = [SMShared current].settings.deviceCode;
     
+    [[SMShared current].deliveryService executeDeviceCommand:bindingUnitCommand];
+
 }
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didSendDataWithTag:(long)tag {
     NSLog(@"send");

@@ -74,7 +74,7 @@
 }
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollWelcomeImg.contentOffset.x>scrollWelcomeImg.contentSize.width-IMG_WIDTH) {
-        [self.navigationController pushViewController:[[LoginViewController alloc] init] animated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
     }
 }
 - (void)didReceiveMemoryWarning

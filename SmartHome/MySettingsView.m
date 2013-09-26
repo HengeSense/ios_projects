@@ -11,7 +11,7 @@
 #import "LongButton.h"
 #import "SMCell.h"
 #import "PushSettingViewController.h"
-
+#import "WelcomeViewController.h"
 @implementation MySettingsView {
     UITableView *tblSettings;
     UIButton *btnLogout;
@@ -44,7 +44,8 @@
     
     if(btnLogout == nil) {
         btnLogout = [LongButton buttonWithPoint:CGPointMake(0, 0)];
-        btnLogout.center = CGPointMake(self.bounds.size.width / 2, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 242 : 222);
+        btnLogout.center = CGPointMake(self.bounds.size.width / 2, SM_CELL_HEIGHT/2+([UIDevice systemVersionIsMoreThanOrEuqal7] ? 242 : 222));
+        NSLog(NSStringFromCGRect(btnLogout.frame));
         [btnLogout setTitle:NSLocalizedString(@"account_logout", @"") forState:UIControlStateNormal];
         btnLogout.titleLabel.textColor = [UIColor whiteColor];
         [btnLogout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
@@ -64,6 +65,9 @@
             break;
         case 2:
             break;
+        case 3:
+            [self.ownerController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
+            break;
         default:
             break;
     }
@@ -71,7 +75,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -116,6 +120,11 @@
             cell.imageView.image = [UIImage imageNamed:@"icon_about_us.png"];
             cell.textLabel.text = [NSString stringWithFormat:@"  %@", NSLocalizedString(@"about_us", @"")];
             break;
+        case 3:
+            cell.imageView.image = [UIImage imageNamed:@"help.png"];
+            cell.textLabel.text = [NSString stringWithFormat:@"  %@", @"帮助"];
+            break;
+
         default:
             break;
     }

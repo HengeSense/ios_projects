@@ -260,6 +260,7 @@
 		F205157B17CF42370058DADE /* device_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157917CF42370058DADE /* device_count@2x.png */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C017D9784800280F21 /* PasswordPopupViewController.m */; };
+		F20AC1A917F3CCFC00224CB8 /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20AC1A817F3CCFC00224CB8 /* help@2x.png */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
 		F20AE08E17BDD00B0040B80A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08D17BDD00B0040B80A /* LoginViewController.m */; };
 		F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE09317BE0D5B0040B80A /* SMTextField.m */; };
@@ -700,6 +701,7 @@
 		F205E5BE17D977B600280F21 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordPopupViewController.h; sourceTree = "<group>"; };
 		F205E5C017D9784800280F21 /* PasswordPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPopupViewController.m; sourceTree = "<group>"; };
+		F20AC1A817F3CCFC00224CB8 /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
 		F20AE08917BDBD540040B80A /* ModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyInfoViewController.h; sourceTree = "<group>"; };
 		F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyInfoViewController.m; sourceTree = "<group>"; };
 		F20AE08C17BDD00B0040B80A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1735,6 +1737,7 @@
 				6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */,
 				6FDD0EDB17CDED63000D95E8 /* accessory@2x.png */,
 				6FDD0ED617CDED30000D95E8 /* icon_notification@2x.png */,
+				F20AC1A817F3CCFC00224CB8 /* help@2x.png */,
 			);
 			name = settings_view;
 			sourceTree = "<group>";
@@ -1961,6 +1964,7 @@
 				6F6AB3AB17C31CB4001F1D33 /* bg_finder_shadow@2x.png in Resources */,
 				6F6AB3AC17C31CB4001F1D33 /* bg_scanner_shadow@2x.png in Resources */,
 				6F17C28117EDEDFA00D46254 /* logo2@2x.png in Resources */,
+				F20AC1A917F3CCFC00224CB8 /* help@2x.png in Resources */,
 				6F0420D617C4677A00F7F6AF /* icon_devices_selected@2x.png in Resources */,
 				6F0420D717C4677A00F7F6AF /* icon_devices_unselected@2x.png in Resources */,
 				6F0420D817C4677A00F7F6AF /* icon_home_selected@2x.png in Resources */,
