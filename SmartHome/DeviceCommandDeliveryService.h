@@ -37,5 +37,6 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
 
 /*  */
 - (NetworkMode)currentNetworkMode;
+- (void)checkInternalOrNotInternalNetwork;
 
 @end

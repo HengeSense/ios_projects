@@ -16,11 +16,19 @@
     self = [super init];
     if(self) {
         [super setupWithUrl:[NSString emptyString]];
+        self.client.timeoutInterval = 3;
     }
     return self;
 }
 
 - (void)executeCommand:(DeviceCommand *)command {
+    
+    Unit *unit = [[SMShared current].memory findUnitByIdentifier:command.masterDeviceCode];
+    if(unit != nil) {
+        command.restAddress = unit.localIP;
+        command.restPort = unit.localPort;
+    }
+    
     if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
         DeviceCommandGetUnit *getUnitCommand = (DeviceCommandGetUnit *)command;
         if([NSString isBlank:getUnitCommand.unitServerUrl]) {

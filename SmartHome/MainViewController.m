@@ -38,6 +38,7 @@
     
     if(currentUnitRefreshTimer == nil) {
         currentUnitRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:UNIT_REFRESH_INTERVAL target:self selector:@selector(refreshUnit) userInfo:nil repeats:YES];
+        [currentUnitRefreshTimer fire];
     }
 }
 
@@ -48,6 +49,7 @@
         command.masterDeviceCode = unit.identifier;
         command.hashCode = unit.hashCode;
         [[SMShared current].deliveryService executeDeviceCommand:command];
+        [[SMShared current].deliveryService checkInternalOrNotInternalNetwork];
     }
 }
 

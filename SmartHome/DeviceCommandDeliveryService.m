@@ -29,6 +29,14 @@
     
     NetworkMode networkMode;
     
+    /*
+     * no            0
+     * wifi net      1
+     * wifi no net   2
+     * 3g            3
+     */
+    NSUInteger flag;
+
     NSObject *syncObject;
 }
 
@@ -48,6 +56,7 @@
 }
 
 - (void)initDefaults {
+    
     /* Property set */
     isService = NO;
     networkMode = NetworkModeNotChecked;
@@ -87,24 +96,15 @@
 - (void)executeDeviceCommandInternal:(DeviceCommand *)command {
     id<CommandExecutor> executor = [self determineCommandExcutor:command];
     if(executor != nil) {
-        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
+//        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
         [executor executeCommand:command];
     }
 }
 
 - (id<CommandExecutor>)determineCommandExcutor:(DeviceCommand *)command {
     if([self commandCanDeliveryInInternalNetwork:command]) {
-        if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
-            Unit *unit = [[SMShared current].memory findUnitByIdentifier:command.masterDeviceCode];
-            if(unit != nil) {
-                command.restPort = unit.localPort;
-                command.restAddress = unit.localIP;
-                NSString *u = [NSString stringWithFormat:@"http://%@:%d/heartbeat", command.restAddress, command.restPort];
-                BOOL reachInternal = [self checkIsReachableInternalUnit:u];
-                if(reachInternal) {
-                    return self.restfulService;
-                }
-            }
+        if([self currentNetworkMode] == NetworkModeInternal) {
+            return self.restfulService;
         }
     }
     
@@ -186,6 +186,7 @@
         // Every 5 seconds to check the tcp is connectted
         // If it was closed , then open it again
         tcpConnectChecker = [NSTimer scheduledTimerWithTimeInterval:NETWORK_CHECK_INTERVAL target:self selector:@selector(checkTcp) userInfo:nil repeats:YES];
+        
         [tcpConnectChecker fire];
     }
 }
@@ -241,45 +242,102 @@
 - (void)reachabilityChanged:(NSNotification *)notification {
     Reachability *reach = notification.object;
     if(reach == nil) return;
-
     if(reach.isReachable) {
         if(reach.isReachableViaWiFi) {
             // WIFI &&   Network
-            
-            
+            if(flag == 2) {
+                flag = 1;
+                return;
+            }
+            flag = 1;
         } else if(reach.isReachableViaWWAN) {
             // 3G   &&   Network
-
+            flag = 3;
         } else {
             // Else, ignore
         }
     } else {
         if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
             // WIFI && No Network
+            if(flag == 1) {
+                flag = 2;
+                return;
+            }
+            flag = 2;
         } else {
             // No (WIFI && 3G && 2G && Network)
+            flag = 0;
+        }
+    }
+    
+    if(flag == 1 || flag == 2) {
+        [self checkInternalOrNotInternalNetwork];
+    } else {
+        if([self currentNetworkMode] != NetworkModeExternal) {
+            [self setCurrentNetworkMode:NetworkModeExternal];
         }
     }
 }
 
-- (BOOL)checkIsReachableInternalUnit:(NSString *)url {
+- (void)checkInternalOrNotInternalNetwork {
+    [self performSelectorInBackground:@selector(checkIsReachableInternalUnit) withObject:nil];
+}
+
+- (void)checkIsReachableInternalUnit {
     @synchronized(syncObject) {
+        NSString *url = [self currentUnitNetworkCheckUrl];
+        if(url == nil) {
+            networkMode = NetworkModeExternal;
+            return;
+        }
+        
+        if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus == NotReachable) {
+            networkMode = NetworkModeExternal;
+            return;
+        }
+        
         NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [[NSURL alloc] initWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:3];
         NSURLResponse *response;
         NSError *error;
         [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        if(error) return NO;
-        if(response) {
-            NSHTTPURLResponse *rp = (NSHTTPURLResponse *)response;
-            return rp.statusCode == 200;
+        if(error == nil) {
+            if(response) {
+                NSHTTPURLResponse *rp = (NSHTTPURLResponse *)response;
+                if(rp.statusCode == 200) {
+                    NSLog(@"change to 内网");
+                    networkMode = NetworkModeInternal;
+                    return;
+                }
+            }
         }
-        return NO;
+        NSLog(@"change to 外网");
+        networkMode = NetworkModeExternal;
     }
 }
 
 - (NetworkMode)currentNetworkMode {
+    return networkMode;
+}
+
+- (void)setCurrentNetworkMode:(NetworkMode)mode {
     @synchronized(syncObject) {
-        return networkMode;
+        NSLog(@"Network mode was changed : (%@) to (%@)", [self stringFromNetworkMode:networkMode], [self stringFromNetworkMode:mode]);
+        networkMode = mode;
+    }
+}
+
+- (NSString *)currentUnitNetworkCheckUrl {
+    if([SMShared current].memory.currentUnit == nil) return nil;
+    return [NSString stringWithFormat:@"http://%@:%d/heartbeat", [SMShared current].memory.currentUnit.localIP, [SMShared current].memory.currentUnit.localPort];
+}
+
+- (NSString *)stringFromNetworkMode:(NetworkMode)mode {
+    if(mode == 0) {
+        return @"未检测";
+    } else if(mode == 1) {
+        return @"外网";
+    } else {
+        return @"内网";
     }
 }
 

@@ -196,6 +196,7 @@
     @synchronized(self) {
         currentUnitIdentifier = unitIdentifier;
     }
+    [[SMShared current].deliveryService checkInternalOrNotInternalNetwork];
 }
 
 #pragma mark -
