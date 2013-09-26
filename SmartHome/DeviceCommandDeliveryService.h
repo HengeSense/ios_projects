@@ -7,9 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+
+/*  Command Executor */
 #import "TCPCommandService.h"
 #import "RestfulCommandService.h"
+
 #import "CommandFactory.h"
+#import "Reachability.h"
+
+typedef NS_ENUM(NSUInteger, NetworkMode) {
+    NetworkModeNotChecked,
+    NetworkModeExternal,
+    NetworkModeInternal
+};
 
 @interface DeviceCommandDeliveryService : NSObject
 
@@ -17,10 +27,15 @@
 @property (strong, nonatomic, readonly) RestfulCommandService *restfulService;
 @property (assign, nonatomic, readonly) BOOL isService;
 
+/* Execute or handle command */
 - (void)executeDeviceCommand:(DeviceCommand *)command;
 - (void)handleDeviceCommand:(DeviceCommand *)command;
 
+/* Start or stop command delivery service */
 - (void)startService;
 - (void)stopService;
+
+/*  */
+- (NetworkMode)currentNetworkMode;
 
 @end

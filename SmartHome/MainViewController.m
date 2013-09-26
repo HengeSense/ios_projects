@@ -16,7 +16,7 @@
 #import "ViewsPool.h"
 
 #define MAIN_VIEW_TAG         5001
-#define UNIT_REFRESH_INTERVAL 30
+#define UNIT_REFRESH_INTERVAL 10
 
 @interface MainViewController ()
 

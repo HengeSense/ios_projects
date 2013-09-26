@@ -25,6 +25,8 @@
 @synthesize hashCode;
 @synthesize describe;
 
+@synthesize restAddress;
+@synthesize restPort;
 @synthesize fromInternalNetwork;
 
 - (id)initWithDictionary:(NSDictionary *)json {

@@ -8,7 +8,7 @@
 
 #import "DeviceCommandDeliveryService.h"
 
-#import "Reachability.h"
+/*  Command Handler  */
 #import "DeviceCommandGetUnitsHandler.h"
 #import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
@@ -26,6 +26,10 @@
     Reachability* reachability;
     NSTimer *tcpConnectChecker;
     NSArray *mayUsingInternalNetworkCommands;
+    
+    NetworkMode networkMode;
+    
+    NSObject *syncObject;
 }
 
 @synthesize tcpService;
@@ -44,9 +48,15 @@
 }
 
 - (void)initDefaults {
+    /* Property set */
     isService = NO;
+    networkMode = NetworkModeNotChecked;
+    syncObject = [[NSObject alloc] init];
+    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, nil];
+    
+    /* Network monitor */
     reachability = [Reachability reachabilityWithHostname:@"www.baidu.com"];
-    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_GET_UNITS, COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, nil];
+    [self startMonitorNetworks];
 }
 
 #pragma mark -
@@ -65,34 +75,38 @@
 - (void)executeDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     if(!self.isService) return;
-    
-    id<CommandExecutor> executor = [self determineCommandExcutor];
-    if(executor != nil) {
-        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
-        [[self determineCommandExcutor] executeCommand:command];
+    @synchronized(self) {
+        if([NSThread mainThread] == [NSThread currentThread]) {
+            [self performSelectorInBackground:@selector(executeDeviceCommandInternal:) withObject:command];
+        } else {
+            [self executeDeviceCommandInternal:command];
+        }
     }
 }
 
-- (id<CommandExecutor>)determineCommandExcutor {
-    
-    
-    /*
-     
-     // If the command can be delivery in internal network
-     if([self commandCanDeliveryInInternalNetwork:command]) {
-     if(reachability.isReachableViaWiFi || [Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
-     
-     //  is nei wang  if()
-     if(YES) {
-     NSLog(@"execute using internal network");
-     [self.restfulService executeCommand:command];
-     return;
-     }o
-     
-     }
-     }
-     
-     */
+- (void)executeDeviceCommandInternal:(DeviceCommand *)command {
+    id<CommandExecutor> executor = [self determineCommandExcutor:command];
+    if(executor != nil) {
+        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
+        [executor executeCommand:command];
+    }
+}
+
+- (id<CommandExecutor>)determineCommandExcutor:(DeviceCommand *)command {
+    if([self commandCanDeliveryInInternalNetwork:command]) {
+        if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
+            Unit *unit = [[SMShared current].memory findUnitByIdentifier:command.masterDeviceCode];
+            if(unit != nil) {
+                command.restPort = unit.localPort;
+                command.restAddress = unit.localIP;
+                NSString *u = [NSString stringWithFormat:@"http://%@:%d/heartbeat", command.restAddress, command.restPort];
+                BOOL reachInternal = [self checkIsReachableInternalUnit:u];
+                if(reachInternal) {
+                    return self.restfulService;
+                }
+            }
+        }
+    }
     
     // If the command can not be delivery in internal network, then using externet network
     if(self.tcpService.isConnectted) {
@@ -151,38 +165,6 @@
         
     if(handler != nil) {
         [handler handle:command];
-    }
-}
-
-#pragma mark -
-#pragma mark Network monitor
-
-- (void)startMonitorNetworks {
-	// Here we set up a NSNotification observer. The Reachability that caused the notification
-	// is passed in the object parameter
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    
-	[reachability startNotifier];
-}
-
-- (void)reachabilityChanged:(NSNotification *)notification {
-    Reachability *reach = notification.object;
-    if(reach == nil) return;
-    if(reach.isReachable) {
-        if(reach.isReachableViaWiFi) {
-            // wifi
-            NSLog(@"reach via wifi");
-        } else if(reach.isReachableViaWWAN) {
-            // wwan
-            NSLog(@"reach via wwan");
-        }
-    } else {
-        // not reachable
-        if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
-            NSLog(@"local wifi");
-        } else {
-            NSLog(@"can't find any network environment");
-        }
     }
 }
 
@@ -246,18 +228,79 @@
 }
 
 #pragma mark -
+#pragma mark Network monitor
+
+- (void)startMonitorNetworks {
+	// Here we set up a NSNotification observer. The Reachability that caused the notification
+	// is passed in the object parameter
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+    [reachability startNotifier];
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification {
+    Reachability *reach = notification.object;
+    if(reach == nil) return;
+
+    if(reach.isReachable) {
+        if(reach.isReachableViaWiFi) {
+            // WIFI &&   Network
+            
+            
+        } else if(reach.isReachableViaWWAN) {
+            // 3G   &&   Network
+
+        } else {
+            // Else, ignore
+        }
+    } else {
+        if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
+            // WIFI && No Network
+        } else {
+            // No (WIFI && 3G && 2G && Network)
+        }
+    }
+}
+
+- (BOOL)checkIsReachableInternalUnit:(NSString *)url {
+    @synchronized(syncObject) {
+        NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [[NSURL alloc] initWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:3];
+        NSURLResponse *response;
+        NSError *error;
+        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if(error) return NO;
+        if(response) {
+            NSHTTPURLResponse *rp = (NSHTTPURLResponse *)response;
+            return rp.statusCode == 200;
+        }
+        return NO;
+    }
+}
+
+- (NetworkMode)currentNetworkMode {
+    @synchronized(syncObject) {
+        return networkMode;
+    }
+}
+
+#pragma mark -
 #pragma mark utils
 
 - (BOOL)commandCanDeliveryInInternalNetwork:(DeviceCommand *)command {
     if(mayUsingInternalNetworkCommands == nil) return NO;
-
+    if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
+        if([NSString isBlank:command.masterDeviceCode]) {
+            return NO;
+        } else {
+            return YES;
+        }
+    }
     for(int i=0; i<mayUsingInternalNetworkCommands.count; i++) {
         NSString *cmdName = [mayUsingInternalNetworkCommands objectAtIndex:i];
         if([cmdName isEqualToString:command.commandName]) {
             return YES;
         }
     }
-    
     return NO;
 }
 

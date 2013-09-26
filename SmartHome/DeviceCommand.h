@@ -25,6 +25,8 @@
 @property (strong, nonatomic) NSNumber *hashCode;
 @property (strong, nonatomic) NSString *describe;
 
+@property (strong, nonatomic) NSString *restAddress;
+@property (assign, nonatomic) NSInteger restPort;
 @property (assign, nonatomic) BOOL fromInternalNetwork;
 
 - (id)initWithDictionary:(NSDictionary *)json;

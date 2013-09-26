@@ -12,8 +12,20 @@
 
 @interface RestfulCommandService : ServiceBase<CommandExecutor>
 
-
+/*
+ Units list
+ ----------------------------------------------------*/
 - (void)getUnitByUrl:(NSString *)url;
+- (void)getUnitByIdentifier:(NSString *)unitIdentifier address:(NSString *)addr port:(NSInteger)port hashCode:(NSNumber *)hashCode;
+
+/*
+ Scene list
+ ----------------------------------------------------*/
+
+
+/*
+ Key control
+ ----------------------------------------------------*/
 
 
 /*

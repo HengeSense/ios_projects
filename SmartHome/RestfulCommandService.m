@@ -21,19 +21,54 @@
 }
 
 - (void)executeCommand:(DeviceCommand *)command {
-    
+    if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
+        DeviceCommandGetUnit *getUnitCommand = (DeviceCommandGetUnit *)command;
+        if([NSString isBlank:getUnitCommand.unitServerUrl]) {
+            [self getUnitByIdentifier:getUnitCommand.masterDeviceCode address:getUnitCommand.restAddress port:getUnitCommand.restPort hashCode:getUnitCommand.hashCode];
+        } else {
+            [self getUnitByUrl:getUnitCommand.unitServerUrl];
+        }
+    } else if([COMMAND_KEY_CONTROL isEqualToString:command.commandName]) {
+        DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)command;
+        NSData *data = [JsonUtils createJsonDataFromDictionary:[updateDevice toDictionary]];
+        [self updateDeviceWithAddress:updateDevice.restAddress port:updateDevice.restPort data:data];
+    } else if([COMMAND_GET_SCENE_LIST isEqualToString:command.commandName]) {
+        
+    }
 }
 
 - (NSString *)executorName {
     return @"RESTFUL SERVICE";
 }
 
-- (void)getUnitByIdentifier:(NSString *)unitIdentifier {
-    Unit *unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
-    if(unit != nil) {
-        NSString *url = [NSString stringWithFormat:@"http://%@:%d/gatewaycfg?hashCode=1", unit.localIP, unit.localPort];
-        [self getUnitByUrl:url];
+#pragma mark -
+#pragma mark Update devices from rest server
+
+- (void)updateDeviceWithAddress:(NSString *)address port:(NSInteger)port data:(NSData *)data {
+    NSString *url = [NSString stringWithFormat:@"http://%@:%d/executor", address, port];
+    [self.client postForUrl:url acceptType:@"application/json" contentType:@"application/json" body:data success:@selector(updateDeviceSuccess:) error:@selector(updateDeviceFailed:) for:self callback:nil];
+}
+
+- (void)updateDeviceSuccess:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:resp.body]];
+        [[SMShared current].deliveryService handleDeviceCommand:command];
+        return;
     }
+    
+    [self updateDeviceFailed:resp];
+}
+
+- (void)updateDeviceFailed:(RestResponse *)resp {
+    NSLog(@"Update device from rest failed, status code is %d", resp.statusCode);
+}
+
+#pragma mark -
+#pragma mark Get units from rest server
+
+- (void)getUnitByIdentifier:(NSString *)unitIdentifier address:(NSString *)addr port:(NSInteger)port hashCode:(NSNumber *)hashCode {
+        NSString *url = [NSString stringWithFormat:@"http://%@:%d/gatewaycfg?hashCode=%d", addr, port, hashCode.integerValue];
+        [self getUnitByUrl:url];
 }
 
 - (void)getUnitByUrl:(NSString *)url {
@@ -47,7 +82,7 @@
             Unit *unit = [[Unit alloc] initWithJson:json];
             if(unit != nil) {
                 DeviceCommandUpdateUnits *updateUnit = [[DeviceCommandUpdateUnits alloc] init];
-                updateUnit.commandName = @"FindZKListCommand";
+                updateUnit.commandName = COMMAND_GET_UNITS;
                 updateUnit.masterDeviceCode = unit.identifier;
                 [updateUnit.units addObject:unit];
                 [[SMShared current].deliveryService handleDeviceCommand:updateUnit];
@@ -55,13 +90,26 @@
         }
         return;
     } else if(resp.statusCode == 204) {
-        NSLog(@"rest get unit is last version");
+        // ignore this ... do not need to refresh local unit
+        return;
     }
     [self getUnitFailed:resp];
 }
 
 - (void)getUnitFailed:(RestResponse *)resp {
-    NSLog(@"failed status code is %d", resp.statusCode);
+    NSLog(@"Get units from rest failed, staus code is %d", resp.statusCode);
 }
+
+#pragma mark -
+#pragma mark Scene list from rest server
+
+
+
+
+
+
+#pragma mark -
+#pragma mark Key control from rest server
+
 
 @end

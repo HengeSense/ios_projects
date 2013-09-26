@@ -71,7 +71,7 @@
 - (void)executeCommand:(DeviceCommand *)command {
     if(![queue contains:command]) {
         [queue pushCommand:command];
-        [self performSelectorInBackground:@selector(flushQueue) withObject:nil];
+        [self flushQueue];
     }
 }
 
