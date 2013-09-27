@@ -14,7 +14,6 @@
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "DeviceCommandVoiceControlHandler.h"
 #import "DeviceCommandUpdateDevicesHandler.h"
-#import "PageableScrollView.h"
 #import "SelectionView.h"
 #import "NotificationHandlerViewController.h"   
 

@@ -11,5 +11,6 @@
 @interface SMButton : UIButton
 
 @property (strong, nonatomic) id source;
+//@property (assign, nonatomic) BOOL isSelected;
 
 @end
