@@ -40,6 +40,8 @@
 "curtain_close"    = "合起窗帘";
 "connect_failed"   = "连接已终止!";
 "loading"          = "加载中...";
+"execution_success" = "执行成功";
+"execution_failed"  = "执行失败";
 
 
 
@@ -166,6 +168,7 @@
 "account_logout"     =   "退出登录";
 "update_product"     =   "检查产品";
 "about_us"           =   "关于";
+"help"               =   "帮助";
 
 /*
  *user info

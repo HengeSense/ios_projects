@@ -12,6 +12,7 @@
 #import "SMCell.h"
 #import "PushSettingViewController.h"
 #import "WelcomeViewController.h"
+
 @implementation MySettingsView {
     UITableView *tblSettings;
     UIButton *btnLogout;
@@ -121,9 +122,8 @@
             break;
         case 3:
             cell.imageView.image = [UIImage imageNamed:@"help.png"];
-            cell.textLabel.text = [NSString stringWithFormat:@"  %@", @"帮助"];
+            cell.textLabel.text = [NSString stringWithFormat:@"  %@", NSLocalizedString(@"help", @"")];
             break;
-
         default:
             break;
     }

@@ -39,6 +39,8 @@
 "curtain_close"    = "Close";
 "loading"          = "loading...";
 "connect_failed"   = "Connect failed!";
+"execution_success" = "Execute success";
+"execution_failed"  = "Execute failed";
 "the.two.input.is.not.consistent" = "The two input is not consistent";
 
 /*
@@ -160,8 +162,9 @@
  */
 "push_settings"      =   "Push settings";
 "account_logout"     =   "Logout";
-"update_product"          =   "Product update";
+"update_product"     =   "Upgrade";
 "about_us"           =   "About us";
+"help"               =   "Help";
 
 /*
  * user info

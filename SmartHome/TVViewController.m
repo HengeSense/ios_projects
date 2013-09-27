@@ -19,6 +19,14 @@
 
 @synthesize device = _device_;
 
+- (id)initWithDevice:(Device *)device {
+    self = [super init];
+    if(self) {
+        _device_ = device;
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,11 +47,11 @@
     [super didReceiveMemoryWarning];
 }
 
--(void) initUI{
+- (void)initUI {
     [super initUI];
-    
     if(remoteControl == nil) {
         remoteControl = [TVRemoteControlPanel pannelWithPoint:CGPointMake(0, self.topbar.bounds.size.height)];
+        remoteControl.device = self.device;
         [self.view addSubview:remoteControl];
     }
 }

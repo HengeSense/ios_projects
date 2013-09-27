@@ -174,9 +174,8 @@
          [[SelectionItem alloc] initWithIdentifier:@"stop" andTitle:NSLocalizedString(@"curtain_stop", @"")], nil];
         [SelectionView showWithItems:items selectedIdentifier:status source:@"curtain" delegate:self];
     } else if(_device_.isTV || _device_.isSTB) {
-        TVViewController *tvViewController = [[TVViewController alloc] init];
+        TVViewController *tvViewController = [[TVViewController alloc] initWithDevice:_device_];
         tvViewController.title = _device_.name;
-        tvViewController.device = _device_;
         [self.ownerController presentViewController:tvViewController animated:YES completion:nil];
     } else if(_device_.isAircondition) {
         AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
@@ -193,6 +192,7 @@
 - (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
     if([@"curtain" isEqualToString:source]) {
         if([item isKindOfClass:[SelectionItem class]]) {
+            
             SelectionItem *it = item;
             NSUInteger status = -1;
             if([@"open" isEqualToString:it.identifier]) {

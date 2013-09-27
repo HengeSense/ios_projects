@@ -312,7 +312,6 @@
         if(unit != nil && ![NSString isBlank:unit.name]) {
             self.topbar.titleLabel.text = unit.name;
         }
-//        [pageableScrollView loadDataWithDictionary:unit];
         [unitView loadOrRefreshUnit:unit];
     }
 }
@@ -323,8 +322,10 @@
     }
     
     if([NSString isBlank:command.voiceText] || speechView == nil) return;
-   
-    NSString *executeResult = command.resultID == 1 ? @"[执行成功]" : @"[执行失败]";
+    
+    NSString *successMsg = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"execution_success", @"")] ;
+    NSString *successErr = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"execution_failed", @"")] ;
+    NSString *executeResult = (command.resultID == 1) ? successMsg : successErr;
     
     if(speechViewState == SpeechViewStateOpenned) {
         ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];

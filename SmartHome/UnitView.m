@@ -76,9 +76,9 @@
     }
     
     if(changed) {
-        [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
         [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
     }
+    [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
 }
 
 - (void)notifyCurrentSelectionZoneChanged:(NSString *)zoneIdentifier {
