@@ -50,7 +50,7 @@
         command.commandName = COMMAND_GET_CAMERA_SERVER;
         return command;
     } else if(type == CommandTypeBindingUnit) {
-        DeviceCommandBindingUnit *command = [[DeviceCommandBindingUnit alloc] init];
+        DeviceCommand *command = [[DeviceCommand alloc] init];
         command.commandName = COMMAND_BING_UNIT;
         return command;
     }

@@ -122,12 +122,10 @@
 		6F48EEEE17C8A89700C85D9B /* alert_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEEC17C8A89700C85D9B /* alert_failed@2x.png */; };
 		6F48EEEF17C8A89700C85D9B /* alert_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F48EEED17C8A89700C85D9B /* alert_success@2x.png */; };
 		6F5A227417F28E8000D29BE0 /* DeviceCommandGetUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */; };
-		6F5A227717F2923100D29BE0 /* DeviceCommandBindingUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */; };
 		6F5A228117F292D000D29BE0 /* welcome01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227B17F292D000D29BE0 /* welcome01@2x.png */; };
 		6F5A228217F292D000D29BE0 /* welcome02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227C17F292D000D29BE0 /* welcome02@2x.png */; };
 		6F5A228317F292D000D29BE0 /* welcome03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227D17F292D000D29BE0 /* welcome03@2x.png */; };
 		6F5A228417F292D000D29BE0 /* welcome04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A227E17F292D000D29BE0 /* welcome04@2x.png */; };
-		6F5A228617F292D000D29BE0 /* welcome06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A228017F292D000D29BE0 /* welcome06@2x.png */; };
 		6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F668CE717DEE2C700034C90 /* SMDateFormatter.m */; };
 		6F6AB3A117C31C06001F1D33 /* btn_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A317C31C06001F1D33 /* btn_scanner@2x.png */; };
 		6F6AB3A517C31C16001F1D33 /* btn_finder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */; };
@@ -253,6 +251,9 @@
 		6FFAFE0617E1AF1D001EB9D0 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAFE0517E1AF1D001EB9D0 /* logo@2x.png */; };
 		6FFAFE0917E1B493001EB9D0 /* ZoneDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAFE0817E1B492001EB9D0 /* ZoneDetailsViewController.m */; };
 		6FFAFE0B17E1B6BE001EB9D0 /* txt_main_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAFE0A17E1B6BE001EB9D0 /* txt_main_selected@2x.png */; };
+		F203A14A17F5393800BABDEC /* btn_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F203A14717F5393800BABDEC /* btn_start@2x.png */; };
+		F203A14B17F5393800BABDEC /* btn_start_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F203A14817F5393800BABDEC /* btn_start_shadow@2x.png */; };
+		F203A14C17F5393800BABDEC /* welcome06@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F203A14917F5393800BABDEC /* welcome06@2x.jpg */; };
 		F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150B17CDA27F0058DADE /* lineleft@2x.png */; };
 		F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150C17CDA27F0058DADE /* lineright@2x.png */; };
 		F205157A17CF42370058DADE /* message_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157817CF42370058DADE /* message_count@2x.png */; };
@@ -466,13 +467,10 @@
 		6F48EEED17C8A89700C85D9B /* alert_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_success@2x.png"; sourceTree = "<group>"; };
 		6F5A227217F28E8000D29BE0 /* DeviceCommandGetUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetUnit.h; sourceTree = "<group>"; };
 		6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnit.m; sourceTree = "<group>"; };
-		6F5A227517F2923100D29BE0 /* DeviceCommandBindingUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandBindingUnit.h; sourceTree = "<group>"; };
-		6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandBindingUnit.m; sourceTree = "<group>"; };
 		6F5A227B17F292D000D29BE0 /* welcome01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome01@2x.png"; sourceTree = "<group>"; };
 		6F5A227C17F292D000D29BE0 /* welcome02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome02@2x.png"; sourceTree = "<group>"; };
 		6F5A227D17F292D000D29BE0 /* welcome03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome03@2x.png"; sourceTree = "<group>"; };
 		6F5A227E17F292D000D29BE0 /* welcome04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome04@2x.png"; sourceTree = "<group>"; };
-		6F5A228017F292D000D29BE0 /* welcome06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome06@2x.png"; sourceTree = "<group>"; };
 		6F5A228717F2994D00D29BE0 /* CommandExecutor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommandExecutor.h; sourceTree = "<group>"; };
 		6F668CE617DEE2C700034C90 /* SMDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDateFormatter.h; sourceTree = "<group>"; };
 		6F668CE717DEE2C700034C90 /* SMDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMDateFormatter.m; sourceTree = "<group>"; };
@@ -688,6 +686,9 @@
 		6FFAFE0717E1B492001EB9D0 /* ZoneDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneDetailsViewController.h; sourceTree = "<group>"; };
 		6FFAFE0817E1B492001EB9D0 /* ZoneDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneDetailsViewController.m; sourceTree = "<group>"; };
 		6FFAFE0A17E1B6BE001EB9D0 /* txt_main_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "txt_main_selected@2x.png"; sourceTree = "<group>"; };
+		F203A14717F5393800BABDEC /* btn_start@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_start@2x.png"; sourceTree = "<group>"; };
+		F203A14817F5393800BABDEC /* btn_start_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_start_shadow@2x.png"; sourceTree = "<group>"; };
+		F203A14917F5393800BABDEC /* welcome06@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "welcome06@2x.jpg"; sourceTree = "<group>"; };
 		F205150B17CDA27F0058DADE /* lineleft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineleft@2x.png"; sourceTree = "<group>"; };
 		F205150C17CDA27F0058DADE /* lineright@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineright@2x.png"; sourceTree = "<group>"; };
 		F205157817CF42370058DADE /* message_count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_count@2x.png"; sourceTree = "<group>"; };
@@ -1368,11 +1369,13 @@
 			isa = PBXGroup;
 			children = (
 				6F5A227B17F292D000D29BE0 /* welcome01@2x.png */,
+				F203A14717F5393800BABDEC /* btn_start@2x.png */,
+				F203A14817F5393800BABDEC /* btn_start_shadow@2x.png */,
 				6F5A227C17F292D000D29BE0 /* welcome02@2x.png */,
 				6F5A227D17F292D000D29BE0 /* welcome03@2x.png */,
 				6F5A227E17F292D000D29BE0 /* welcome04@2x.png */,
 				F29BBA6017F2DD5200B65436 /* welcome05@2x.png */,
-				6F5A228017F292D000D29BE0 /* welcome06@2x.png */,
+				F203A14917F5393800BABDEC /* welcome06@2x.jpg */,
 			);
 			name = welcome;
 			sourceTree = "<group>";
@@ -1769,8 +1772,6 @@
 				6FD0CC0617EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m */,
 				6F5A227217F28E8000D29BE0 /* DeviceCommandGetUnit.h */,
 				6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */,
-				6F5A227517F2923100D29BE0 /* DeviceCommandBindingUnit.h */,
-				6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -2007,6 +2008,7 @@
 				6F48EEEE17C8A89700C85D9B /* alert_failed@2x.png in Resources */,
 				6F48EEEF17C8A89700C85D9B /* alert_success@2x.png in Resources */,
 				6F2E437A17CB05BD006FE4E8 /* btn_orange_highlight@2x.png in Resources */,
+				F203A14A17F5393800BABDEC /* btn_start@2x.png in Resources */,
 				6F2E437E17CB08D9006FE4E8 /* btn_dark_small@2x.png in Resources */,
 				6FA7859117CBA35F00998541 /* btn_speech@2x.png in Resources */,
 				6FA7859C17CBA40200998541 /* btn_speech_00@2x.png in Resources */,
@@ -2019,6 +2021,7 @@
 				6FA785A317CBA40200998541 /* btn_speech_07@2x.png in Resources */,
 				6FA785A417CBA40200998541 /* btn_speech_08@2x.png in Resources */,
 				6FA785A517CBA40200998541 /* btn_speech_09@2x.png in Resources */,
+				F203A14C17F5393800BABDEC /* welcome06@2x.jpg in Resources */,
 				6FD6C64C17CC5B4B00BDA327 /* test@2x.png in Resources */,
 				F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */,
 				F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */,
@@ -2037,6 +2040,7 @@
 				6FD081C817CF43260089A1ED /* icon_tv_on@2x.png in Resources */,
 				F205157A17CF42370058DADE /* message_count@2x.png in Resources */,
 				F205157B17CF42370058DADE /* device_count@2x.png in Resources */,
+				F203A14B17F5393800BABDEC /* btn_start_shadow@2x.png in Resources */,
 				6F159BE117D6E66C005CFFEE /* btn_rc_power@2x.png in Resources */,
 				6F159BE317D6E68A005CFFEE /* btn_rc_number@2x.png in Resources */,
 				6F159BE717D6E825005CFFEE /* btn_rc@2x.png in Resources */,
@@ -2072,7 +2076,6 @@
 				6F84355817E9A66F0084C316 /* icon.png in Resources */,
 				6F84355917E9A66F0084C316 /* icon@2x.png in Resources */,
 				6F73D08317EEE99900FFF974 /* zbar-help.html in Resources */,
-				6F5A228617F292D000D29BE0 /* welcome06@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2179,7 +2182,6 @@
 				6FE3B75D17D5AD14006FCD7C /* DeviceCommandUpdateAccount.m in Sources */,
 				6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */,
 				6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */,
-				6F5A227717F2923100D29BE0 /* DeviceCommandBindingUnit.m in Sources */,
 				6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */,
 				6F159BF017D702F5005CFFEE /* TVRemoteControlPanel.m in Sources */,
 				6FD0CC0717EFEE53005956E0 /* DeviceCommandReceivedCameraServer.m in Sources */,

@@ -8,7 +8,8 @@
 
 #import "UnitsBindingViewController.h"
 #import "LoginViewController.h"
-
+#import "DeviceCommandGetUnitsHandler.h"
+#import "MainViewController.h"
 @interface UnitsBindingViewController ()
 
 @end
@@ -17,6 +18,10 @@
     UIButton *btnDone;
     UIButton *btnQRCodeScanner;
     UIButton *btnAutoSearch;
+    
+    DeviceFinder *finder;
+    
+    UIAlertView *alertBinding;
 }
 
 @synthesize topbar;
@@ -53,6 +58,10 @@
 #pragma mark initializations
 
 - (void)initDefaults {
+    if (finder == nil) {
+        finder = [[DeviceFinder alloc] init];
+        finder.delegate = self;
+    }
 }
 
 - (void)initUI {
@@ -64,46 +73,52 @@
     [self.view addSubview:backgroundImageView];
     
     //QR Code scanner button
-    if(btnQRCodeScanner == nil) {
-        btnQRCodeScanner = [[UIButton alloc] initWithFrame:CGRectMake(25, 150, 253/2, 88/2)];
-        [btnQRCodeScanner setBackgroundImage:[UIImage imageNamed:@"btn_scanner.png"] forState:UIControlStateNormal];
-        [btnQRCodeScanner addTarget:self action:@selector(btnQRCodeScannerPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnQRCodeScanner];
-    }
+//    if(btnQRCodeScanner == nil) {
+//        btnQRCodeScanner = [[UIButton alloc] initWithFrame:CGRectMake(25, 150, 253/2, 88/2)];
+//        [btnQRCodeScanner setBackgroundImage:[UIImage imageNamed:@"btn_scanner.png"] forState:UIControlStateNormal];
+//        [btnQRCodeScanner addTarget:self action:@selector(btnQRCodeScannerPressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:btnQRCodeScanner];
+//    }
     
     if(btnAutoSearch == nil){
-        btnAutoSearch = [[UIButton alloc] initWithFrame:CGRectMake(25+btnQRCodeScanner.frame.size.width+17, 150, 253/2, 88/2)];
+        btnAutoSearch = [[UIButton alloc] initWithFrame:CGRectMake(0, 150, 253/2, 88/2)];
+        btnAutoSearch.center = CGPointMake(self.view.center.x, btnAutoSearch.center.y);
         [btnAutoSearch setBackgroundImage:[UIImage imageNamed:@"btn_finder.png"] forState:UIControlStateNormal];
         [btnAutoSearch addTarget:self action:@selector(btnAutoSearchPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnAutoSearch];
     }
     
     //add button shadow
-    UIImageView *scannerShadow = [[UIImageView alloc] initWithFrame:CGRectMake(25, btnQRCodeScanner.frame.origin.y+btnQRCodeScanner.frame.size.height, 253/2, 88/2)];
-    scannerShadow.image = [UIImage imageNamed:@"bg_scanner_shadow.png"];
-    [self.view addSubview:scannerShadow];
+//    UIImageView *scannerShadow = [[UIImageView alloc] initWithFrame:CGRectMake(25, btnQRCodeScanner.frame.origin.y+btnQRCodeScanner.frame.size.height, 253/2, 88/2)];
+//    scannerShadow.image = [UIImage imageNamed:@"bg_scanner_shadow.png"];
+//    [self.view addSubview:scannerShadow];
     
-    UIImageView *finderShadow = [[UIImageView alloc] initWithFrame:CGRectMake(25+scannerShadow.frame.size.width+17, scannerShadow.frame.origin.y, 253/2, 88/2)];
+    UIImageView *finderShadow = [[UIImageView alloc] initWithFrame:CGRectMake(btnAutoSearch.frame.origin.x, btnAutoSearch.frame.origin.y+btnAutoSearch.frame.size.height, 253/2, 88/2)];
     finderShadow.image = [UIImage imageNamed:@"bg_finder_shadow.png"];
     [self.view addSubview:finderShadow];
     
-    UILabel *lblForBtnScanner = [[UILabel alloc] initWithFrame:CGRectMake(25, scannerShadow.frame.origin.y+scannerShadow.frame.size.height, 253/2, 150)];
-    lblForBtnScanner.numberOfLines = 4;
-    lblForBtnScanner.backgroundColor = [UIColor clearColor];
-    lblForBtnScanner.textColor = [UIColor whiteColor];
-    lblForBtnScanner.font = [UIFont systemFontOfSize:12];
-    lblForBtnScanner.text = NSLocalizedString(@"scanner_button_tips", @"");
-    [self.view addSubview:lblForBtnScanner];
+//    UILabel *lblForBtnScanner = [[UILabel alloc] initWithFrame:CGRectMake(25, scannerShadow.frame.origin.y+scannerShadow.frame.size.height, 253/2, 150)];
+//    lblForBtnScanner.numberOfLines = 4;
+//    lblForBtnScanner.backgroundColor = [UIColor clearColor];
+//    lblForBtnScanner.textColor = [UIColor whiteColor];
+//    lblForBtnScanner.font = [UIFont systemFontOfSize:12];
+//    lblForBtnScanner.text = NSLocalizedString(@"scanner_button_tips", @"");
+//    [self.view addSubview:lblForBtnScanner];
     
-    UILabel *lblForBtnAutoSearch = [[UILabel alloc] initWithFrame:CGRectMake(25+lblForBtnScanner.frame.size.width+17, lblForBtnScanner.frame.origin.y, 253/2, 150)];
+    UILabel *lblForBtnAutoSearch = [[UILabel alloc] initWithFrame:CGRectMake(btnAutoSearch.frame.origin.x,finderShadow.frame.origin.y+finderShadow.frame.size.height, 253/2, 100)];
     lblForBtnAutoSearch.backgroundColor = [UIColor clearColor];
     lblForBtnAutoSearch.textColor = [UIColor whiteColor];
     lblForBtnAutoSearch.font = [UIFont systemFontOfSize:12];
     lblForBtnAutoSearch.numberOfLines = 5;
     lblForBtnAutoSearch.text = NSLocalizedString(@"auto_search_button_tips", @"");
     [self.view addSubview:lblForBtnAutoSearch];
+    
+    if (alertBinding == nil) {
+        alertBinding = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发现新主控，是否绑定" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"绑定", nil];
+        [alertBinding dismissWithClickedButtonIndex:0 animated:YES];
+        
+    }
 }
-
 - (void)generateTopbar {
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:NO];
     self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 28 : 8, 101/2, 59/2)];
@@ -137,7 +152,12 @@
 
 #pragma mark -
 #pragma mark events
-
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        [finder requestForBindingUnit];
+        [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+    }
+}
 - (void)btnSkipPressed:(id)sender {
     [self showMainView];
 }
@@ -153,13 +173,24 @@
 }
 
 -(void) btnAutoSearchPressed:(UIButton *) sender{
-    DeviceFinder *finder = [[DeviceFinder alloc] init];
-    [finder startFindingDevice];
+        [finder startFindingDevice];
     [[AlertView currentAlertView] setMessage:@"正在搜索主控" forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:nil];
     
-//    NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(delay) userInfo:<#(id)#> repeats:<#(BOOL)#>
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(delayDismiss) userInfo:nil repeats:NO];
     
+}
+-(void) delayDismiss{
+    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
+        [[AlertView currentAlertView] setMessage:@"没有发现新主控" forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
+    }
+}
+-(void) askwhetherBinding{
+    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
+        [[AlertView currentAlertView] dismissAlertView];
+    }
+    [alertBinding show];
 }
 #pragma mark -
 #pragma mark QR code delegate

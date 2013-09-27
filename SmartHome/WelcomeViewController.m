@@ -20,6 +20,7 @@
     NSInteger curImgViewIndex;
     
     UIScrollView *scrollWelcomeImg;
+    UIButton *btnStart;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,7 +40,7 @@
 -(void) initDefaults{
     [super initDefaults];
     if (imgNameArr == nil || imgNameArr.count==0) {
-        imgNameArr = [[NSArray alloc] initWithObjects:@"welcome01.png",@"welcome02.png",@"welcome03.png",@"welcome04.png",@"welcome05.png",@"welcome06.png", nil];
+        imgNameArr = [[NSArray alloc] initWithObjects:@"welcome01.png",@"welcome02.png",@"welcome03.png",@"welcome04.png",@"welcome05.png",@"welcome06.jpg", nil];
     }
     if (imgViewArr == nil) {
         imgViewArr = [NSMutableArray new];
@@ -53,6 +54,17 @@
             welcomeImageView.center = self.view.center;
             [imgViewArr addObject:welcomeImageView];
         }
+    }
+    if (btnStart == nil) {
+        btnStart = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-80, 150/2, 52/2)];
+        btnStart.center = CGPointMake(self.view.center.x, btnStart.center.y);
+        [btnStart setBackgroundImage:[UIImage imageNamed:@"btn_start.png"] forState:UIControlStateNormal];
+        [btnStart addTarget:self action:@selector(btnStartPressed:) forControlEvents:UIControlEventTouchUpInside];
+        UIImageView *imgShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"btn_start_shadow.png"]];
+        imgShadow.frame = CGRectMake(btnStart.frame.origin.x, btnStart.frame.size.height+btnStart.frame.origin.y, 150/2, 52/2);
+        
+        [[imgViewArr lastObject] addSubview:btnStart];
+        [[imgViewArr lastObject] addSubview:imgShadow];
     }
     if (imgViewArr&&imgViewArr.count>0) {
         [self.view addSubview:[imgViewArr objectAtIndex:0]];
@@ -72,10 +84,10 @@
         [self.view addSubview:scrollWelcomeImg];
     }
 }
+-(void) btnStartPressed:(UIButton *) sender{
+    [self.navigationController popViewControllerAnimated:NO];
+}
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollWelcomeImg.contentOffset.x>scrollWelcomeImg.contentSize.width-IMG_WIDTH) {
-        [self.navigationController popViewControllerAnimated:NO];
-    }
 }
 - (void)didReceiveMemoryWarning
 {

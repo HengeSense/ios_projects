@@ -14,7 +14,7 @@ typedef  NS_ENUM(NSUInteger, TopBarType){
     TopBarTypeSkip,
     TopBarTypeDone
 };
-@interface UnitsBindingViewController : PopViewController <QRCodeProcessorDelegate>
+@interface UnitsBindingViewController : PopViewController <QRCodeProcessorDelegate,DeviceFinderDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) TopbarView *topbar;
 @property (assign,nonatomic) TopBarType topBarType;
