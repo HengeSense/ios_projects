@@ -24,7 +24,7 @@
 @synthesize rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+{ 
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
     

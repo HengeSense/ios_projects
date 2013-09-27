@@ -8,8 +8,6 @@
 
 #import "DeviceButton.h"
 #import "NSString+StringUtils.h"
-#import "PageableScrollView.h"
-#import "PageableNavView.h"
 #import "AirConditionViewController.h"
 #import "TVViewController.h"
 #import "CameraViewController.h"
@@ -154,7 +152,7 @@
 
 - (void)btnPressed:(id)sender {
     if(self.device == nil) return;
-    
+
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {
         DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
         updateDeviceCommand.masterDeviceCode = self.device.zone.unit.identifier;
@@ -189,15 +187,6 @@
         cameraViewController.cameraDevice = _device_;
         [self.ownerController presentViewController:cameraViewController animated:YES completion:nil];
     }
-}
-
-- (PageableScrollView *)findContainerView {
-    UIView *view = self.superview.superview.superview;
-    if(view != nil && [view isMemberOfClass:[PageableScrollView class]]) {
-        PageableScrollView *p_view = (PageableScrollView *)view;
-        return p_view;
-    }
-    return nil;
 }
 
 - (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {

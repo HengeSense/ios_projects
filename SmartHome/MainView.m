@@ -15,9 +15,7 @@
 #import "SceneMode.h"
 #import "CommandFactory.h"
 #import "NotificationsFileManager.h"
-
-#import "DeviceCommandUpdateUnitName.h"
-
+#import "UnitView.h"
 
 #define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
@@ -30,15 +28,14 @@
     SpeechViewState speechViewState;
     RecognizerState recognizerState;
     ConversationView *speechView;
+    UnitView *unitView;
     SpeechRecognitionUtil *speechRecognitionUtil;
-    PageableScrollView *pageableScrollView;
-    PageableNavView *pageableNavView;
-    UIView *notificationView;
+
     UIButton *btnSpeech;
-    
     UIButton *btnUnit;
     UIButton *btnScene;
     
+    UIView *notificationView;
     UIButton *btnMessage;
     UILabel *lblMessage;
     UILabel *lblTime;
@@ -46,6 +43,12 @@
     UIButton *btnMessageCount;
     
     SMNotification *displayNotification;
+    
+    /* 
+     *
+     *
+     */
+    NSInteger flag;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -108,18 +111,16 @@
 #pragma mark -
 #pragma mark units view
     
-    if(pageableScrollView == nil) {
-        pageableScrollView = [[PageableScrollView alloc] initWithPoint:CGPointMake(0, (self.bounds.size.height - 198 / 2 - margin-180)) owner:self.ownerController];
-        pageableScrollView.backgroundColor = [UIColor clearColor];
-        [self addSubview:pageableScrollView];
+    if(unitView == nil) {
+        unitView = [UnitView unitViewWithPoint:CGPointMake(0, (self.bounds.size.height - 198 / 2 - margin-180)) ownerViewController:self.ownerController];
+        [self addSubview:unitView];
     }
-    
     
 #pragma mark -
 #pragma mark notifications view
     
     if(notificationView == nil) {
-        notificationView = [[UIView alloc] initWithFrame:CGRectMake(10, (pageableScrollView.frame.origin.y - 40 - margin), [UIScreen mainScreen].bounds.size.width, 40)];
+        notificationView = [[UIView alloc] initWithFrame:CGRectMake(10, (unitView.frame.origin.y - 40 - margin), [UIScreen mainScreen].bounds.size.width, 40)];
         
         btnMessage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25/2, 30/2)];
         btnMessage.center = CGPointMake(btnMessage.center.x, notificationView.bounds.size.height / 2);
@@ -311,13 +312,14 @@
         if(unit != nil && ![NSString isBlank:unit.name]) {
             self.topbar.titleLabel.text = unit.name;
         }
-        [pageableScrollView loadDataWithDictionary:unit];
+//        [pageableScrollView loadDataWithDictionary:unit];
+        [unitView loadOrRefreshUnit:unit];
     }
 }
 
 - (void)notifyDevicesStatusWasUpdate:(DeviceCommandUpdateDevices *)command {
-    if(pageableScrollView != nil) {
-        [pageableScrollView notifyStatusChanged];
+    if(unitView != nil) {
+        [unitView notifyStatusChanged];
     }
     
     if([NSString isBlank:command.voiceText] || speechView == nil) return;
@@ -465,7 +467,6 @@
 }
 
 - (void)recognizeCancelled {
-    
 }
 
 - (void)speakerVolumeChanged:(int)volume {
@@ -519,6 +520,18 @@
         speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;
+}
+
+- (NSString *)flagMessage {
+    if(flag == 0) {
+        
+    } else if(flag == 1) {
+        
+    } else if(flag == 2) {
+        
+    }
+    
+    return [NSString emptyString];
 }
 
 @end
