@@ -18,6 +18,8 @@
 //5050
 static NSString *IP;
 @implementation DeviceFinder
+@synthesize delegate;
+@synthesize deviceIdentifier;
 -(id) init{
     self = [super init];
     if (!IP) {
@@ -44,13 +46,21 @@ static NSString *IP;
 }
 -(BOOL) onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port{
     NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
-    NSString *deviceCode = [json noNilStringForKey:@"deviceCode"];
+    self.deviceIdentifier = [json noNilStringForKey:@"deviceCode"];
     NSString *ip = [json noNilStringForKey:@"ipv4"];
     NSString *url = [NSString stringWithFormat:@"http://%@:8777/gatewaycfg",ip];
-    [self getUnit:url];
+    Unit *unit = [[SMShared current].memory findUnitByIdentifier:self.deviceIdentifier];
+    if (unit) {
+        return NO;
+    }else{
+        [self getUnit:url];
+        if ([self.delegate respondsToSelector:@selector(askwhetherBinding)]) {
+            [self.delegate askwhetherBinding];
+        }
+    }
     NSLog(@"receive data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     NSLog(@"json:%@",json);
-    NSLog(@"deviceCode:%@",deviceCode);
+    NSLog(@"deviceCode:%@",self.deviceIdentifier);
     NSLog(@"server ip:%@",host);
     return  NO;
 }
@@ -64,14 +74,12 @@ static NSString *IP;
     [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
     
 }
--(void) requestForBindingUnit:(NSString *) deviceCode{
-    DeviceCommandBindingUnit *bindingUnitCommand = (DeviceCommandBindingUnit *)[CommandFactory commandForType:CommandTypeBindingUnit];
-    bindingUnitCommand.masterDeviceCode = deviceCode;
-    bindingUnitCommand.requestDeviceCode = [SMShared current].settings.deviceCode;
-    
+-(void) requestForBindingUnit{
+    DeviceCommand *bindingUnitCommand = [CommandFactory commandForType:CommandTypeBindingUnit];
+    bindingUnitCommand.masterDeviceCode = self.deviceIdentifier;
     [[SMShared current].deliveryService executeDeviceCommand:bindingUnitCommand];
-
 }
+
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didSendDataWithTag:(long)tag {
     NSLog(@"send");
 }
