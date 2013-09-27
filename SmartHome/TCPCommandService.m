@@ -116,10 +116,6 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
-    
-    NSString *str = [[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding];
-    NSLog(str);
-    
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     [[SMShared current].deliveryService handleDeviceCommand:command];
 }

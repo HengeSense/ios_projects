@@ -14,13 +14,17 @@
 #import "NSDictionary+Extension.h"
 #import "Unit.h"
 #import "SMShared.h"
-#import "RestClient.h"
-//5050
+
+#define APP_KEY @"A001"
+
 static NSString *IP;
+
 @implementation DeviceFinder
+
 @synthesize delegate;
 @synthesize deviceIdentifier;
--(id) init{
+
+- (id)init {
     self = [super init];
     if (!IP) {
         IPAddressTool *ipTool = [[IPAddressTool alloc] init];
@@ -28,60 +32,58 @@ static NSString *IP;
     }
     return  self;
 }
--(void) startFindingDevice{
-    if (self) {
-        AsyncUdpSocket *udpSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
-        NSLog(@"host:%@",IP);
-        NSMutableArray *ipArr = [NSMutableArray arrayWithArray:[IP componentsSeparatedByString:@"."]];
-        [ipArr removeLastObject];
-        [ipArr addObject:@"255"];
-        NSString *broadCastAddress = [ipArr componentsJoinedByString:@"."];
-        NSString *str = @"A001";
-        NSData *sendData = [str dataUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"broadCastAddress:%@",broadCastAddress);
-        [udpSocket enableBroadcast:YES error:nil];
-        [udpSocket sendData:sendData toHost:broadCastAddress port:5050 withTimeout:5 tag:1];
-        [udpSocket receiveWithTimeout:5 tag:0];
-    }
-}
--(BOOL) onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port{
-    NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
-    self.deviceIdentifier = [json noNilStringForKey:@"deviceCode"];
-    NSString *ip = [json noNilStringForKey:@"ipv4"];
-    NSString *url = [NSString stringWithFormat:@"http://%@:8777/gatewaycfg",ip];
-    Unit *unit = [[SMShared current].memory findUnitByIdentifier:self.deviceIdentifier];
-    if (unit) {
-        return NO;
-    }else{
-        [self getUnit:url];
-        if ([self.delegate respondsToSelector:@selector(askwhetherBinding)]) {
-            [self.delegate askwhetherBinding];
-        }
-    }
-    NSLog(@"receive data:%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    NSLog(@"json:%@",json);
-    NSLog(@"deviceCode:%@",self.deviceIdentifier);
-    NSLog(@"server ip:%@",host);
-    return  NO;
-}
-- (void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error {
-    NSLog(@"not send");
+
+#pragma mark -
+#pragma mark Service
+
+- (void)startFindingDevice {
+    AsyncUdpSocket *udpSocket = [[AsyncUdpSocket alloc] initWithDelegate:self];
+    NSMutableArray *ipArr = [NSMutableArray arrayWithArray:[IP componentsSeparatedByString:@"."]];
+    [ipArr removeLastObject];
+    [ipArr addObject:@"255"];
+    NSString *broadCastAddress = [ipArr componentsJoinedByString:@"."];
+    NSData *sendData = [APP_KEY dataUsingEncoding:NSUTF8StringEncoding];
+    [udpSocket enableBroadcast:YES error:nil];
+    [udpSocket sendData:sendData toHost:broadCastAddress port:5050 withTimeout:5 tag:1];
+    [udpSocket receiveWithTimeout:5 tag:0];
 }
 
--(void) getUnit:(NSString *) deviceAddress{
+- (void)getUnitByUrlAddress:(NSString *)deviceAddress {
     DeviceCommandGetUnit *getUnitCommand = (DeviceCommandGetUnit *)[CommandFactory commandForType:CommandTypeGetUnits];
     getUnitCommand.unitServerUrl = deviceAddress;
     [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
-    
 }
--(void) requestForBindingUnit{
+
+- (void)requestForBindingUnit {
     DeviceCommand *bindingUnitCommand = [CommandFactory commandForType:CommandTypeBindingUnit];
     bindingUnitCommand.masterDeviceCode = self.deviceIdentifier;
     [[SMShared current].deliveryService executeDeviceCommand:bindingUnitCommand];
 }
 
+#pragma mark-
+#pragma mark UDP Delegate
+
+- (BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port {
+    NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
+    self.deviceIdentifier = [json noNilStringForKey:@"deviceCode"];
+    NSString *ip = [json noNilStringForKey:@"ipv4"];
+    NSString *url = [NSString stringWithFormat:@"http://%@:8777/gatewaycfg",ip];
+    Unit *unit = [[SMShared current].memory findUnitByIdentifier:self.deviceIdentifier];
+    if(unit == nil) {
+        [self getUnitByUrlAddress:url];
+        if ([self.delegate respondsToSelector:@selector(askwhetherBinding)]) {
+            [self.delegate askwhetherBinding];
+        }
+    }
+    return  NO;
+}
+
+- (void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error {
+    NSLog(@"[UDP DEVICE FINDER] NOT SEND.");
+}
+
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didSendDataWithTag:(long)tag {
-    NSLog(@"send");
+    NSLog(@"[UDP DEVICE FINDER] SEND.");
 }
 
 @end

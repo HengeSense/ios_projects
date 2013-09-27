@@ -54,7 +54,8 @@
 - (void)loadOrRefreshUnit:(Unit *)unit {
     /*    */
     zonesView.ownerViewController = self.ownerViewController;
-    zonesView.unit = unit;
+    BOOL changed;
+    [zonesView loadOrRefreshUnit:unit changed:&changed];
     
     /*    */
     [zonesNavigationView loadOrRefreshWithZones:unit.zones];
@@ -74,8 +75,10 @@
         }
     }
     
-    [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
-    [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
+    if(changed) {
+        [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
+        [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
+    }
 }
 
 - (void)notifyCurrentSelectionZoneChanged:(NSString *)zoneIdentifier {
