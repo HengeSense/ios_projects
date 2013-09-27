@@ -15,7 +15,8 @@
 - (NSMutableDictionary *)toDictionary {
     NSMutableDictionary *json = [super toDictionary];
     if(json) {
-        
+        [json setMayBlankString:self.requestDeviceCode forKey:@"requestDeviceCode"];
+        [json setInteger:self.resultID forKey:@"resultId"];
     }
     return json;
 }

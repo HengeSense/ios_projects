@@ -53,6 +53,10 @@
         DeviceCommand *command = [[DeviceCommand alloc] init];
         command.commandName = COMMAND_BING_UNIT;
         return command;
+    } else if(type == CommandTypeAuthBindingUnit) {
+        DeviceCommandAuthBinding *command = [[DeviceCommandAuthBinding alloc] init];
+        command.commandName = COMMAND_AUTH_BINGDING;
+        return command;
     }
     
     return nil;

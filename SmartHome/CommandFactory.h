@@ -19,6 +19,7 @@
 #import "DeviceCommandGetCameraServer.h"
 #import "DeviceCommandReceivedCameraServer.h"
 #import "DeviceCommandGetUnit.h"
+#import "DeviceCommandAuthBinding.h"
 
 typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeNone,
@@ -32,6 +33,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeUpdateUnitName,
     CommandTypeGetCameraServer,
     CommandTypeBindingUnit,
+    CommandTypeAuthBindingUnit,
 };
 
 #define COMMAND_UPDATE_ACCOUNT       @"AccountUpdateCommand"
