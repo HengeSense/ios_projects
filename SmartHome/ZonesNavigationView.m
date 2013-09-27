@@ -70,7 +70,7 @@
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:18.f];
     } else {
-        [button setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14.f];
     }
 }

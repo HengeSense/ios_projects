@@ -176,6 +176,7 @@
     } else if(_device_.isTV || _device_.isSTB) {
         TVViewController *tvViewController = [[TVViewController alloc] init];
         tvViewController.title = _device_.name;
+        tvViewController.device = _device_;
         [self.ownerController presentViewController:tvViewController animated:YES completion:nil];
     } else if(_device_.isAircondition) {
         AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
@@ -191,7 +192,6 @@
 
 - (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
     if([@"curtain" isEqualToString:source]) {
-       
         if([item isKindOfClass:[SelectionItem class]]) {
             SelectionItem *it = item;
             NSUInteger status = -1;

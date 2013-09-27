@@ -37,8 +37,8 @@
     [self initUI];
     
     if(currentUnitRefreshTimer == nil) {
-//        currentUnitRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:UNIT_REFRESH_INTERVAL target:self selector:@selector(refreshUnit) userInfo:nil repeats:YES];
-//        [currentUnitRefreshTimer fire];
+        currentUnitRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:UNIT_REFRESH_INTERVAL target:self selector:@selector(refreshUnit) userInfo:nil repeats:YES];
+        [currentUnitRefreshTimer fire];
     }
 }
 

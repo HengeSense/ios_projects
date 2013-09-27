@@ -39,6 +39,10 @@
     } else if([COMMAND_KEY_CONTROL isEqualToString:command.commandName]) {
         DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)command;
         NSData *data = [JsonUtils createJsonDataFromDictionary:[updateDevice toDictionary]];
+        
+NSString *s =        [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(s);
+        
         [self updateDeviceWithAddress:updateDevice.restAddress port:updateDevice.restPort data:data];
     } else if([COMMAND_GET_SCENE_LIST isEqualToString:command.commandName]) {
         
@@ -86,11 +90,6 @@
 - (void)getUnitSucess:(RestResponse *)resp {
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
-        
-        NSString *str = [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
-        NSLog(str);
-        
-        
         if(json != nil) {
             Unit *unit = [[Unit alloc] initWithJson:json];
             if(unit != nil) {

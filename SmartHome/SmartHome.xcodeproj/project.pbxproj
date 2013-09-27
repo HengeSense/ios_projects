@@ -229,6 +229,7 @@
 		6FDA6E7F17F4608800E4C717 /* DevicesPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA6E7E17F4608800E4C717 /* DevicesPanelView.m */; };
 		6FDA6E8217F4838A00E4C717 /* ZonesNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA6E8117F4838A00E4C717 /* ZonesNavigationView.m */; };
 		6FDA6E8817F5114000E4C717 /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA6E8717F5113F00E4C717 /* UIView+Extensions.m */; };
+		6FDA6E8B17F547A500E4C717 /* DeviceCommandAuthBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA6E8A17F547A500E4C717 /* DeviceCommandAuthBinding.m */; };
 		6FDD0EC817CDD369000D95E8 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0EC717CDD369000D95E8 /* AsyncUdpSocket.m */; };
 		6FDD0ED117CDECBA000D95E8 /* TCPCommandService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED017CDECBA000D95E8 /* TCPCommandService.m */; };
 		6FDD0ED717CDED30000D95E8 /* icon_feed_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED317CDED30000D95E8 /* icon_feed_back@2x.png */; };
@@ -654,6 +655,8 @@
 		6FDA6E8117F4838A00E4C717 /* ZonesNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZonesNavigationView.m; sourceTree = "<group>"; };
 		6FDA6E8617F5113F00E4C717 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
 		6FDA6E8717F5113F00E4C717 /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extensions.m"; sourceTree = "<group>"; };
+		6FDA6E8917F547A500E4C717 /* DeviceCommandAuthBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandAuthBinding.h; sourceTree = "<group>"; };
+		6FDA6E8A17F547A500E4C717 /* DeviceCommandAuthBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandAuthBinding.m; sourceTree = "<group>"; };
 		6FDD0EC617CDD369000D95E8 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		6FDD0EC717CDD369000D95E8 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		6FDD0ECF17CDECBA000D95E8 /* TCPCommandService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCommandService.h; sourceTree = "<group>"; };
@@ -1797,6 +1800,8 @@
 				6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */,
 				6F5A227517F2923100D29BE0 /* DeviceCommandBindingUnit.h */,
 				6F5A227617F2923100D29BE0 /* DeviceCommandBindingUnit.m */,
+				6FDA6E8917F547A500E4C717 /* DeviceCommandAuthBinding.h */,
+				6FDA6E8A17F547A500E4C717 /* DeviceCommandAuthBinding.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -2103,6 +2108,7 @@
 				6F0FAE8817AF7F9F00B75D3E /* AppDelegate.m in Sources */,
 				6F0FAEA817AF805C00B75D3E /* DrawerViewController.m in Sources */,
 				6F0FAEAC17AF80CC00B75D3E /* NSDictionary+Extension.m in Sources */,
+				6FDA6E8B17F547A500E4C717 /* DeviceCommandAuthBinding.m in Sources */,
 				6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */,
 				6F0FAEB217AF814000B75D3E /* UIColor+ExtentionForHexString.m in Sources */,
 				6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */,

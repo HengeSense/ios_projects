@@ -40,8 +40,28 @@
 }
 
 - (void)setUnit:(Unit *)unit {
+    BOOL changed = [self anyZonesChangedBetween:_unit_ newUnit:unit];
     _unit_ = unit;
-    [self loadWithZones:_unit_ == nil ? nil : _unit_.zones];
+    if(changed) {
+        [self loadWithZones:_unit_ == nil ? nil : _unit_.zones];
+    } else {
+        [self refreshWithZones:_unit_ == nil ? nil : _unit_.zones];
+    }
+}
+
+- (void)refreshWithZones:(NSMutableArray *)zones {
+    for(UIView *view in self.subviews) {
+        if([view isKindOfClass:[DevicesPanelView class]]) {
+            DevicesPanelView *panelView = (DevicesPanelView *)view;
+            for(Zone *zone in zones) {
+                NSLog(@"set");
+                if([panelView.zone.identifier isEqualToString:zone.identifier]) {
+                    panelView.zone = zone;
+                    break;
+                }
+            }
+        }
+    }
 }
 
 - (void)loadWithZones:(NSMutableArray *)zones {
@@ -58,6 +78,30 @@
         devicesPanel.zone = [zones objectAtIndex:i];
         [self addSubview:devicesPanel];
     }
+}
+
+- (BOOL)anyZonesChangedBetween:(Unit *)oldUnit newUnit:(Unit *)newUnit {
+    if(oldUnit == nil && newUnit == nil) return NO;
+    if((oldUnit == nil && newUnit != nil) || (oldUnit != nil && newUnit == nil)) return YES;
+    if((oldUnit.zones == nil && newUnit.zones != nil) || (oldUnit.zones != nil && newUnit.zones == nil)) return YES;
+    if(oldUnit.zones.count != newUnit.zones.count) return YES;
+
+    BOOL changed = NO;
+    for(Unit *n in newUnit.zones) {
+        BOOL found = NO;
+        for(Unit *o in oldUnit.zones) {
+            if([n.identifier isEqualToString:o.identifier]) {
+                found = YES;
+                break;
+            }
+        }
+        if(!found) {
+            changed = YES;
+            break;
+        }
+    }
+    
+    return changed;
 }
 
 - (void)notifyStatusChanged {

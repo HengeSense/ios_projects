@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DirectionButton.h"
 #import "SMButton.h"
+#import "Device.h"
 
 @protocol TVRemoteControlPanelDelegate <NSObject>
 
@@ -18,7 +19,8 @@
 
 @interface TVRemoteControlPanel : UIView<DirectionButtonDelegate>
 
-+ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point;
+@property (strong, nonatomic) Device *device;
 
++ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point;
 
 @end

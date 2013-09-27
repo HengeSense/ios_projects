@@ -17,6 +17,8 @@
     TVRemoteControlPanel *remoteControl;
 }
 
+@synthesize device = _device_;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,7 +48,11 @@
     }
 }
 
-
-
+- (void)setDevice:(Device *)device {
+    _device_ = device;
+    if(remoteControl != nil) {
+        remoteControl.device = device;
+    }
+}
 
 @end

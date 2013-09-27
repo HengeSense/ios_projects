@@ -7,6 +7,8 @@
 //
 
 #import "TVRemoteControlPanel.h"
+#import "CommandFactory.h"
+#import "SMShared.h"
 #import "UIColor+ExtentionForHexString.h"
 
 @implementation TVRemoteControlPanel {
@@ -17,6 +19,8 @@
     SMButton *btnMenu;
     DirectionButton *btnDirection;
 }
+
+@synthesize device;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -114,7 +118,7 @@
             number = sender;
         }
         if(number != nil) {
-            NSLog(@"remote control %d was pressed.", number.integerValue);
+            [self controlTvWithSingal:number.integerValue];
         }
     }
 }
@@ -140,6 +144,16 @@
 
 - (void)centerButtonClicked {
     [self btnPressed:[NSNumber numberWithInteger:18]];
+}
+
+- (void)controlTvWithSingal:(NSInteger)singal {
+    DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+    NSLog(self.device == nil?@">>>>isnil":@"isnot nil");
+    updateDevice.masterDeviceCode = device.zone.unit.identifier;
+    NSLog([device commandStringForStatus:1]);
+    [updateDevice addCommandString:[device commandStringForStatus:singal]];
+    [[SMShared current].deliveryService executeDeviceCommand:updateDevice];
+    
 }
 
 @end

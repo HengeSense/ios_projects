@@ -12,4 +12,6 @@
 
 @interface TVViewController : PopViewController
 
+@property (strong, nonatomic) Device *device;
+
 @end
