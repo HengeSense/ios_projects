@@ -30,7 +30,7 @@
 "security_invalid"      = "安全码失效";
 "no_name"               = "未命名";
 "deleting"              = "删除中...";
-"delete.success"        = "删除成功";
+"delete_success"        = "删除成功";
 "loading"               = "加载中...";
 "execution_success"     = "执行成功";
 "execution_failed"      = "执行失败";
@@ -91,7 +91,7 @@
 "nick_name"                 = "昵称";
 "mail"                      = "邮箱";
 "modify_pwd"                = "修改密码";
-"password.valid"            = "密码验证";
+"password_valid"            = "密码验证";
 "enter_old_pwd"             = "请输入旧密码";
 "enter_new_pwd"             = "输入新密码";
 "enter_pwd_again"           = "再次输入";
@@ -104,7 +104,7 @@
 
 /****************	Drawer View Strings	****************/
 
-"account.setting"    =   "点击修改账号";
+"edit_profile"    =   "点击修改账号";
 
 
 /****************	Main View Strings	****************/
@@ -163,7 +163,6 @@
 "push.help2"                    =   "  当程序在运行时，你可以设置声音或者振动。";
 "status_opened"                 =   "已开启";
 "status_closed"                 =   "已关闭";
-
 
 
 /****************	Device's Strings   ****************/

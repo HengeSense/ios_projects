@@ -78,7 +78,7 @@
     }
     
     if(checkPassword == nil) {
-        checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password.valid", @"") message:NSLocalizedString(@"enter_old_pwd", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
+        checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password_valid", @"") message:NSLocalizedString(@"enter_old_pwd", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
         [checkPassword setAlertViewStyle:UIAlertViewStyleSecureTextInput];
     }
     

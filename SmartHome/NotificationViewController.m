@@ -112,7 +112,7 @@
     [messageArr removeObjectAtIndex:curIndexPath.row];
     [messageTable reloadData];
     [self saveNotificationsToDisk];
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete_success", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
 }
 
