@@ -231,7 +231,7 @@
 
 - (void)updateNotifications:(NSArray *)notifications {
     if (notifications == nil||notifications.count == 0) {
-        lblMessage.text = NSLocalizedString(@"everything.is.ok", @"");
+        lblMessage.text = NSLocalizedString(@"everythings_fine", @"");
         lblTime.text = [NSString emptyString];
         [btnMessageCount setTitle:@"0" forState:UIControlStateNormal];
         displayNotification = nil;

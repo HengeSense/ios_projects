@@ -19,9 +19,10 @@
 @interface ModifyInfoViewController : PopViewController<UITextFieldDelegate>
 
 @property (assign, nonatomic) id<TextViewDelegate> textDelegate;
-@property (strong,nonatomic) NavViewController *lastView;
-@property (strong,nonatomic) NSString *title;
-@property (strong,nonatomic) NSString *value;
+@property (strong, nonatomic) NavViewController *lastView;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *value;
 
--(id) initWithKey:(NSString *) key forValue:(NSString *) v from:(NavViewController *) where;
+- (id)initWithKey:(NSString *) key forValue:(NSString *) v from:(NavViewController *)where;
+    
 @end

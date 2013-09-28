@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParameterExtentions.h"
 
-@interface SMButton : UIButton
+@interface SMButton : UIButton<ParameterExtentions>
 
 @property (strong, nonatomic) id source;
-//@property (assign, nonatomic) BOOL isSelected;
 
 @end

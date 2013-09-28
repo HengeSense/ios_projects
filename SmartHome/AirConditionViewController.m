@@ -93,10 +93,10 @@
     }
     NSString *type;
     if (indexPath.section == 0) {
-        type = NSLocalizedString(@"hot", @"");
+        type = NSLocalizedString(@"heating", @"");
         temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
     }else{
-        type = NSLocalizedString(@"cold", @"");
+        type = NSLocalizedString(@"cryogen", @"");
         temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
     }
     temperatureCell.textLabel.font = [UIFont systemFontOfSize:16];

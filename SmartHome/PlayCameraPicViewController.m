@@ -65,7 +65,7 @@
             LongButton *btnPlayCamera = [LongButton buttonWithPoint:CGPointMake(5, self.topbar.bounds.size.height + i * 54 + 245)];
             CameraPicPath *path = [data.cameraPicPaths objectAtIndex:i];
             NSString *url = [NSString stringWithFormat:@"%@%@", data.http, path.path];
-            [btnPlayCamera setObject:url forKey:@"url"];
+            [btnPlayCamera setParameter:url forKey:@"url"];
             [btnPlayCamera addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:btnPlayCamera];
         }
@@ -77,7 +77,7 @@
         return;
     }
     if(source != nil) {
-        NSString *url = [source objectForKey:@"url"];
+        NSString *url = [source parameterForKey:@"url"];
         if(![NSString isBlank:url]) {
             isPlaying = YES;
             [self performSelectorInBackground:@selector(startDownloader:) withObject:url];

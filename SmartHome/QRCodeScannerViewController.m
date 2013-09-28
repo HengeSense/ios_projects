@@ -177,7 +177,7 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
         lblMessage.textColor = [UIColor whiteColor];
         lblMessage.font = [UIFont boldSystemFontOfSize:18.f];
         lblMessage.backgroundColor = [UIColor clearColor];
-        lblMessage.text = NSLocalizedString(@"processing.tips", @"");
+        lblMessage.text = NSLocalizedString(@"processing", @"");
         [processingView addSubview:lblMessage];
         
         [lockView addSubview:processingView];

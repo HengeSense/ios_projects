@@ -71,9 +71,9 @@
     Device *device = [[zone devices] objectAtIndex:indexPath.row];
     deviceCell.textLabel.text = device.name;
     if (device.status == 1) {
-        lblStatus.text = NSLocalizedString(@"closed", @"");
+        lblStatus.text = NSLocalizedString(@"status_closed", @"");
     }else {
-        lblStatus.text = NSLocalizedString(@"opened", @"");
+        lblStatus.text = NSLocalizedString(@"status_opened", @"");
     }
     return deviceCell;
 }

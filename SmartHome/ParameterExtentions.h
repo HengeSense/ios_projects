@@ -10,7 +10,7 @@
 
 @protocol ParameterExtentions <NSObject>
 
-- (void)setObject:(id)object forKey:(NSString *)key;
-- (id)objectForKey:(NSString *)key;
+- (void)setParameter:(id)parameter forKey:(NSString *)key;
+- (id)parameterForKey:(NSString *)key;
 
 @end

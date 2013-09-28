@@ -53,7 +53,7 @@
 - (void)initDefaults {
     [super initDefaults];
     values = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",nil];
-    titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick.name", @""),NSLocalizedString(@"user.email", @""),NSLocalizedString(@"modify.password", @""), nil];
+    titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick_name", @""),NSLocalizedString(@"mail", @""),NSLocalizedString(@"modify_pwd", @""), nil];
     if (infoDictionary == nil) {
         infoDictionary = [[NSMutableDictionary alloc] initWithObjects:values forKeys:titles];
     }
@@ -78,7 +78,7 @@
     }
     
     if(checkPassword == nil) {
-        checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password.valid", @"") message:NSLocalizedString(@"please.input.old.password", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
+        checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password.valid", @"") message:NSLocalizedString(@"enter_old_pwd", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
         [checkPassword setAlertViewStyle:UIAlertViewStyleSecureTextInput];
     }
     
@@ -175,13 +175,13 @@
 }
 
 - (void)delayProcess {
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing.tips", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     
     DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
-    command.email = [infoDictionary objectForKey:NSLocalizedString(@"user.email", @"")];
-    command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick.name", @"")];
-    command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify.password", @"")];
+    command.email = [infoDictionary objectForKey:NSLocalizedString(@"mail", @"")];
+    command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick_name", @"")];
+    command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify_pwd", @"")];
     command.oldPwd = password;
     [[SMShared current].deliveryService executeDeviceCommand:command];
     [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
@@ -189,38 +189,38 @@
 
 - (void)delayDimiss {
     if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system.error", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
     }
 }
     
 - (void)didEndUpdateAccount:(DeviceCommand *)command {
     if (command == nil) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system.error", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
         return;
     }
 
     switch (command.resultID) {
         case 1:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.success", @"") forType:AlertViewTypeSuccess];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
             [[AlertView currentAlertView] delayDismissAlertView];
             [self updateScreenName];
             break;
         case -1:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update.password.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_invalid", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
             break;
         case -2:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"blank.nickname.or.email.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"mail_name_blank", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
             break;
         case -3:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.format.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"format_error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
             break;
         case -4:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request.too.frequent.error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_frequently", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
             break;
         default:
@@ -235,7 +235,7 @@
         if(controller != nil) {
             DrawerView *dv = (DrawerView *)controller.leftView;
             if(dv != nil) {
-                [dv setScreenName:[infoDictionary stringForKey:NSLocalizedString(@"nick.name", @"")]];
+                [dv setScreenName:[infoDictionary stringForKey:NSLocalizedString(@"nick_name", @"")]];
             }
         }
     }
@@ -251,7 +251,7 @@
 }
 
 - (void)textViewHasBeenSetting:(NSString *)string {
-    if ([[titles objectAtIndex:editIndex.row] isEqualToString:NSLocalizedString(@"modify.password", @"")]) {
+    if ([[titles objectAtIndex:editIndex.row] isEqualToString:NSLocalizedString(@"modify_pwd", @"")]) {
         if(![NSString isBlank:string]) {
             passwordIsModified = YES;
             [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];

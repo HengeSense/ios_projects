@@ -84,7 +84,7 @@
         messageTable.separatorStyle= UITableViewCellSelectionStyleNone;
         [self.view addSubview:messageTable];
     }
-    self.topbar.titleLabel.text = NSLocalizedString(@"notification.manager", @"");
+    self.topbar.titleLabel.text = NSLocalizedString(@"notification_manager.title", @"");
     [self.topbar.leftButton addTarget:self action:@selector(updateMainView) forControlEvents:UIControlEventTouchUpInside];
 }
 

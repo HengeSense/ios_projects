@@ -9,6 +9,9 @@
 #import "PushSettingViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioToolbox.h>
+
+#define ITEM_HEIGHT 50
+
 @interface PushSettingViewController ()
 
 @end
@@ -35,15 +38,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
--(void) initDefaults{
+    
+- (void)initDefaults {
     [super initDefaults];
 }
--(void) initUI{
+    
+- (void)initUI {
     [super initUI];
-    self.topbar.titleLabel.text = NSLocalizedString(@"new.message.advance", @"");
+    
+    self.topbar.titleLabel.text = NSLocalizedString(@"push_settings.title", @"");
     CGFloat topBarHeight = self.topbar.frame.size.height;
     UIFont *fontName = [UIFont systemFontOfSize:18];
-    if (systemSettingView == nil) {
+    
+    if(systemSettingView == nil) {
         systemSettingView = [[UIView alloc] initWithFrame:CGRectMake(0, topBarHeight+15, 300, ITEM_HEIGHT)];
         systemSettingView.center = CGPointMake(self.view.center.x, systemSettingView.center.y);
         systemSettingView.layer.cornerRadius = 10;
@@ -53,18 +60,20 @@
         UILabel *lblSysSettingTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, ITEM_HEIGHT)];
         lblSysSettingTitle.backgroundColor = [UIColor clearColor];
         lblSysSettingTitle.font = fontName;
-        lblSysSettingTitle.text = NSLocalizedString(@"receive.new.message.advance", @"");
+        lblSysSettingTitle.text = NSLocalizedString(@"receive_new_notification", @"");
         [systemSettingView addSubview:lblSysSettingTitle];
     }
-    if (lblSystemSetting == nil) {
+    
+    if(lblSystemSetting == nil) {
         lblSystemSetting = [[UILabel alloc] initWithFrame:CGRectMake(240,0,50,ITEM_HEIGHT)];
         lblSystemSetting.backgroundColor = [UIColor clearColor];
         lblSystemSetting.font = [UIFont systemFontOfSize:16];
         lblSystemSetting.textColor = [UIColor lightGrayColor];
         NSLog(@"%i",[[UIApplication sharedApplication] enabledRemoteNotificationTypes]);
-        lblSystemSetting.text = [[UIApplication sharedApplication] enabledRemoteNotificationTypes]?NSLocalizedString(@"opened", @""):NSLocalizedString(@"closed", @"");
+        lblSystemSetting.text = [[UIApplication sharedApplication] enabledRemoteNotificationTypes]?NSLocalizedString(@"status_opened", @""):NSLocalizedString(@"status_closed", @"");
         [systemSettingView addSubview:lblSystemSetting];
     }
+    
     UILabel *lblHelp1 = [[UILabel alloc] initWithFrame:CGRectMake(0, topBarHeight+10+ITEM_HEIGHT, 300, 100)];
     lblHelp1.center = CGPointMake(self.view.center.x, lblHelp1.center.y);
     lblHelp1.backgroundColor = [UIColor clearColor];
@@ -100,6 +109,7 @@
         [voiceAndShakeView addSubview:seperatorLine];
         
     }
+    
     UILabel *lblHelp2 = [[UILabel alloc] initWithFrame:CGRectMake(0, voiceAndShakeView.frame.size.height+voiceAndShakeView.frame.origin.y, 300, 50)];
     lblHelp2.center = CGPointMake(self.view.center.x, lblHelp2.center.y);
     lblHelp2.backgroundColor = [UIColor clearColor];
@@ -121,19 +131,19 @@
         shakeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 240 : 210, ITEM_HEIGHT+12, 100, 40)];
         [shakeSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         [voiceAndShakeView addSubview:shakeSwitch];
-
     }
 }
--(void)switchChanged:(UISwitch *) sender{
+    
+- (void)switchChanged:(UISwitch *)sender {
     if ([sender isEqual:voiceSwitch]) {
         NSLog(@"voice");
         AudioServicesPlaySystemSound(1007);
-    }else if ([sender isEqual:shakeSwitch]){
+    } else if([sender isEqual:shakeSwitch]) {
         NSLog(@"shake");
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-
     }
 }
+    
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

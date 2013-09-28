@@ -64,7 +64,7 @@
     
     if(lblVerificationCode == nil) {
         lblVerificationCode = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 80 : 60, 250, 20)];
-        [lblVerificationCode setText:NSLocalizedString(@"verification_code_enter.tips", @"")];
+        [lblVerificationCode setText:[NSString stringWithFormat:@"%@", NSLocalizedString(@"verification_code_enter.tips", @"")]];
         lblVerificationCode.font = [UIFont systemFontOfSize:16];
         lblVerificationCode.backgroundColor = [UIColor clearColor];
         lblVerificationCode.textColor = [UIColor lightTextColor];

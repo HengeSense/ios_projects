@@ -39,7 +39,7 @@
 -(void) initDefaults{
     [super initDefaults];
     if (fieldsNames == nil) {
-        fieldsNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"device.name",@""),NSLocalizedString(@"device.category", @""),NSLocalizedString(@"device.ip", @""),NSLocalizedString(@"device.port", @""),NSLocalizedString(@"device.nwkAddr", @""),NSLocalizedString(@"device.status", @""), nil];
+        fieldsNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"device_name",@""),NSLocalizedString(@"device_category", @""),NSLocalizedString(@"device_ip", @""),NSLocalizedString(@"device_port", @""),NSLocalizedString(@"device_nwkAddr", @""),NSLocalizedString(@"device_status", @""), nil];
     }
     if (fieldsValues == nil && device) {
         NSString *status = device.status?NSLocalizedString(@"closed", @""):NSLocalizedString(@"opened", @"");
