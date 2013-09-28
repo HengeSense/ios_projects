@@ -216,7 +216,7 @@
 - (void)didWhenDeleted {
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:nil deleteList:[[NSArray alloc] initWithObjects:displayNotification, nil]];
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete_success", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
     [self notifyUpdateNotifications];
 }

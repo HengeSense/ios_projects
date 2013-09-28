@@ -94,7 +94,7 @@
         [self addSubview:imgSeperatorLine];
 
         lblMessage1.text = [NSString isBlank:[SMShared current].settings.screenName] ? [SMShared current].settings.account : [SMShared current].settings.screenName;
-        lblMessage2.text = NSLocalizedString(@"account.setting", @"");
+        lblMessage2.text = NSLocalizedString(@"edit_profile", @"");
     }
     
     if(tblNavigationItems == nil) {
