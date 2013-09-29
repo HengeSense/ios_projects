@@ -7,6 +7,6 @@
 //
 
 #import "BaseViewController.h"
-@interface WelcomeViewController : BaseViewController<UIScrollViewDelegate>
+@interface WelcomeViewController : BaseViewController
 
 @end

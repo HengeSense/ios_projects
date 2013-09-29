@@ -21,6 +21,7 @@
     
     UIScrollView *scrollWelcomeImg;
     UIButton *btnStart;
+    UIImageView *imgShadow;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,17 +56,6 @@
             [imgViewArr addObject:welcomeImageView];
         }
     }
-    if (btnStart == nil) {
-        btnStart = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-80, 150/2, 52/2)];
-        btnStart.center = CGPointMake(self.view.center.x, btnStart.center.y);
-        [btnStart setBackgroundImage:[UIImage imageNamed:@"btn_start.png"] forState:UIControlStateNormal];
-        [btnStart addTarget:self action:@selector(btnStartPressed:) forControlEvents:UIControlEventTouchUpInside];
-        UIImageView *imgShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"btn_start_shadow.png"]];
-        imgShadow.frame = CGRectMake(btnStart.frame.origin.x, btnStart.frame.size.height+btnStart.frame.origin.y, 150/2, 52/2);
-        
-        [[imgViewArr lastObject] addSubview:btnStart];
-        [[imgViewArr lastObject] addSubview:imgShadow];
-    }
     if (imgViewArr&&imgViewArr.count>0) {
         [self.view addSubview:[imgViewArr objectAtIndex:0]];
     }
@@ -75,19 +65,34 @@
         scrollWelcomeImg.pagingEnabled = YES;
         scrollWelcomeImg.showsHorizontalScrollIndicator = NO;
         scrollWelcomeImg.contentSize = CGSizeMake(IMG_WIDTH*imgViewArr.count, IMG_HEIGHT);
-        scrollWelcomeImg.delegate = self;
         for (int i=0;i<imgViewArr.count;++i) {
             UIImageView *imgView = [imgViewArr objectAtIndex:i];
             imgView.frame = CGRectMake(i*IMG_WIDTH, 0, IMG_WIDTH, IMG_HEIGHT);
             [scrollWelcomeImg addSubview:imgView];
         }
         [self.view addSubview:scrollWelcomeImg];
+        
+        UIImageView *last = [imgViewArr lastObject];
+        last.userInteractionEnabled = YES;
+        if (btnStart == nil) {
+            btnStart = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-100, 150/2, 52/2)];
+            btnStart.center = CGPointMake(self.view.center.x, btnStart.center.y);
+            [btnStart setBackgroundImage:[UIImage imageNamed:@"btn_start.png"] forState:UIControlStateNormal];
+            [btnStart addTarget:self action:@selector(btnStartPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [last addSubview:btnStart];
+        }
+        if (imgShadow == nil) {
+            imgShadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"btn_start_shadow.png"]];
+            imgShadow.frame = CGRectMake(btnStart.frame.origin.x, btnStart.frame.size.height+btnStart.frame.origin.y, 150/2, 52/2);
+            [last addSubview:imgShadow];
+
+        }
+        
+
     }
 }
 -(void) btnStartPressed:(UIButton *) sender{
     [self.navigationController popViewControllerAnimated:NO];
-}
--(void) scrollViewDidScroll:(UIScrollView *)scrollView{
 }
 - (void)didReceiveMemoryWarning
 {

@@ -173,7 +173,7 @@
 }
 
 -(void) btnAutoSearchPressed:(UIButton *) sender{
-        [finder startFindingDevice];
+    [finder startFindingDevice];
     [[AlertView currentAlertView] setMessage:@"正在搜索主控" forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:nil];
     
