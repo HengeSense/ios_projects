@@ -53,6 +53,7 @@
 "find_password.title"                 = "找回密码";
 "notification_manager.title"          = "消息管理";
 "push_settings.title"                 = "推送设置";
+"view_message_video"                  = "查看消息视频";
 
 
 /****************	Login View Strings	****************/
@@ -182,4 +183,5 @@
 "signal_source"     =  "信道来源";
 "menu"              =  "菜单";
 "connect_failed"    =  "连接已终止!";
+"play"              =  "播放";
 
