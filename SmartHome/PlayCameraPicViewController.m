@@ -99,11 +99,11 @@
 }
 
 - (void)imageProviderNotifyImageStreamWasEnded {
-    NSLog(@"Image provider download image error.");
+    NSLog(@"[Image provider] Download image error.");
 }
 
 - (void)imageProviderNotifyReadingImageError {
-    NSLog(@"Image provider reading error.");
+    NSLog(@"[Image provider] Reading error.");
 }
 
 @end
