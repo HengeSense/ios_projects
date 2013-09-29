@@ -24,9 +24,12 @@
 @synthesize rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{ 
+{
+
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
+    
+    self.settings.isFirstTimeOpenApp = NO;
     
     // determine first view controller
     UINavigationController *navigationController =

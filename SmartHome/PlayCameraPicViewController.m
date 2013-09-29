@@ -65,11 +65,14 @@
             LongButton *btnPlayCamera = [LongButton buttonWithPoint:CGPointMake(5, self.topbar.bounds.size.height + i * 54 + 245)];
             CameraPicPath *path = [data.cameraPicPaths objectAtIndex:i];
             NSString *url = [NSString stringWithFormat:@"%@%@", data.http, path.path];
-            [btnPlayCamera setObject:url forKey:@"url"];
+            [btnPlayCamera setParameter:url forKey:@"url"];
+            [btnPlayCamera setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"play", @""), @"Ca"] forState:UIControlStateNormal];
             [btnPlayCamera addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:btnPlayCamera];
         }
     }
+    
+    self.topbar.titleLabel.text = NSLocalizedString(@"view_message_video", @"");
 }
 
 - (void)play:(id<ParameterExtentions>)source {
@@ -77,7 +80,7 @@
         return;
     }
     if(source != nil) {
-        NSString *url = [source objectForKey:@"url"];
+        NSString *url = [source parameterForKey:@"url"];
         if(![NSString isBlank:url]) {
             isPlaying = YES;
             [self performSelectorInBackground:@selector(startDownloader:) withObject:url];
@@ -91,23 +94,16 @@
 
 #pragma mark -
 
-- (void)imageProviderNotifyAvailable:(NSArray *)imgList provider:(id)provider {
-//    for(int i=0; i<imgList.count; i++) {
-//        [playView setImage: [imgList objectAtIndex:i]];
-////        [playView setNeedsDisplay];
-////        [playView setNeedsLayout];
-////        [playView setNeedsUpdateConstraints];
-//        [NSThread sleepForTimeInterval:2.f];
-//        
-//        
-//        
-//        [NSTimer scheduledTimerWithTimeInterval:0.3f target:self selector:@selector(jjjj) userInfo:nil repeats:YES];
-//    }
-//    return;
-    playView.animationImages = imgList;
-    playView.animationRepeatCount = 1;
-    playView.animationDuration = 5.f;
-    [playView startAnimating];
+- (void)imageProviderNotifyImageAvailable:(UIImage *)image {
+    playView.image = image;
+}
+
+- (void)imageProviderNotifyImageStreamWasEnded {
+    NSLog(@"[Image provider] Download image error.");
+}
+
+- (void)imageProviderNotifyReadingImageError {
+    NSLog(@"[Image provider] Reading error.");
 }
 
 @end

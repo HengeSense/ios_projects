@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) Device *device;
 
+- (id)initWithDevice:(Device *)device;
+
 @end

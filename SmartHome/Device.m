@@ -93,6 +93,10 @@
     return [NSString stringWithFormat:@"%@-%@-%@", self.category, self.identifier, direction];
 }
 
+- (NSString *)commandStringForRemote:(NSInteger)st {
+    return [NSString stringWithFormat:@"%@-%@-%d", self.category, self.nwkAddr, st];
+}
+
 #pragma mark -
 #pragma mark device type or state
 

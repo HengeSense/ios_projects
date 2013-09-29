@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PopViewController.h"
 #import "UIColor+ExtentionForHexString.h"
-
+#import "Device.h"
 @interface AirConditionViewController : PopViewController<UITableViewDataSource,UITableViewDelegate>
-
+@property (strong,nonatomic) Device *device;
+-(id) initWithDevice:(Device *) device;
 @end

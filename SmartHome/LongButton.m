@@ -9,14 +9,14 @@
 #import "LongButton.h"
 
 @implementation LongButton {
-    NSMutableDictionary *dic;
+    NSMutableDictionary *parameters;
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        dic = [NSMutableDictionary dictionary];
+        parameters = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -35,12 +35,15 @@
     return button;
 }
 
-- (void)setObject:(id)object forKey:(NSString *)key {
-    [dic setObject:object forKey:key];
+- (void)setParameter:(id)object forKey:(NSString *)key {
+    if(parameters != nil) {
+        [parameters setObject:object forKey:key];
+    }
 }
 
-- (id)objectForKey:(NSString *)key {
-    return [dic objectForKey:key];
+- (id)parameterForKey:(NSString *)key {
+    if(parameters == nil) return nil;
+    return [parameters objectForKey:key];
 }
 
 @end

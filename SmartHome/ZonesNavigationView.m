@@ -36,6 +36,8 @@
 }
 
 - (void)loadOrRefreshWithZones:(NSArray *)zones {
+    [self clearSubviews];
+    
     int totalElements = zones == nil ? 0 : zones.count;
     int totalPage = (totalElements + 5 - (totalElements % 5)) / 5;
     self.contentSize = CGSizeMake(80, totalPage * PANEL_HEIGHT);
@@ -47,7 +49,7 @@
         Zone *zone = [zones objectAtIndex:i];
         SMButton *btnZone = [[SMButton alloc] initWithFrame:CGRectMake(0, y, 80, 28)];
         btnZone.source = zone.identifier;
-        [self setButtonSelected:btnZone isSelected:YES];
+        [self setButtonSelected:btnZone isSelected:NO];
         [btnZone setTitle:zone.name forState:UIControlStateNormal];
         [btnZone addTarget:self action:@selector(btnZonePressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnZone];

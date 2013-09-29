@@ -148,12 +148,9 @@
 
 - (void)controlTvWithSingal:(NSInteger)singal {
     DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
-    NSLog(self.device == nil?@">>>>isnil":@"isnot nil");
     updateDevice.masterDeviceCode = device.zone.unit.identifier;
-    NSLog([device commandStringForStatus:1]);
-    [updateDevice addCommandString:[device commandStringForStatus:singal]];
+    [updateDevice addCommandString:[device commandStringForRemote:singal]];
     [[SMShared current].deliveryService executeDeviceCommand:updateDevice];
-    
 }
 
 @end

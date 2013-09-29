@@ -31,7 +31,6 @@
             break;
         }
         if (theAddr == localHost) continue;
-        NSLog(@"%s %s %s/n", if_names[i], hw_addrs[i], ip_names[i]);
     }
     return [NSString stringWithFormat:@"%s", ip_names[index]];
 }

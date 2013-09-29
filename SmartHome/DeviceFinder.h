@@ -8,12 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "AsyncUdpSocket.h"
+
 @protocol DeviceFinderDelegate<NSObject>
+
 -(void) askwhetherBinding;
+
 @end
+
 @interface DeviceFinder : NSObject<AsyncUdpSocketDelegate>
+
 @property (strong,nonatomic) NSString *deviceIdentifier;
 @property (assign,nonatomic) id<DeviceFinderDelegate> delegate;
+
 - (void)startFindingDevice;
--(void)requestForBindingUnit;
+- (void)requestForBindingUnit;
+
 @end

@@ -85,7 +85,7 @@
     if(lblUserName == nil) {
         lblUserName = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 108 : 88, 100, 20)];
         lblUserName.backgroundColor = [UIColor clearColor];
-        lblUserName.text = NSLocalizedString(@"username", @"");
+        lblUserName.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"username", @"")];
         lblUserName.font= [UIFont systemFontOfSize:16];
         lblUserName.textColor = [UIColor lightTextColor];
         [self.view addSubview:lblUserName];
@@ -102,7 +102,7 @@
     
     if(lblPassword == nil) {
         lblPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, (txtUserName.frame.origin.y + txtUserName.bounds.size.height + LINE_HIGHT), 100, 20)];
-        lblPassword.text = NSLocalizedString(@"password", @"");
+        lblPassword.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"password", @"")];
         lblPassword.textColor = [UIColor lightTextColor];
         lblPassword.backgroundColor = [UIColor clearColor];
         lblPassword.font= [UIFont systemFontOfSize:16];

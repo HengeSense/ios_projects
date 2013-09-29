@@ -39,7 +39,7 @@
     return [[ZonesView alloc] initWithFrame:CGRectMake(point.x, point.y, PANEL_WIDTH, PANEL_HEIGHT)];
 }
 
-- (void)setUnit:(Unit *)unit {
+- (void)loadOrRefreshUnit:(Unit *)unit changed:(BOOL *)anyZoneChanged {
     BOOL changed = [self anyZonesChangedBetween:_unit_ newUnit:unit];
     _unit_ = unit;
     if(changed) {
@@ -47,14 +47,14 @@
     } else {
         [self refreshWithZones:_unit_ == nil ? nil : _unit_.zones];
     }
+    *anyZoneChanged = changed;
 }
 
-- (void)refreshWithZones:(NSMutableArray *)zones {
+- (void)refreshWithZones:(NSArray *)zones {
     for(UIView *view in self.subviews) {
         if([view isKindOfClass:[DevicesPanelView class]]) {
             DevicesPanelView *panelView = (DevicesPanelView *)view;
             for(Zone *zone in zones) {
-                NSLog(@"set");
                 if([panelView.zone.identifier isEqualToString:zone.identifier]) {
                     panelView.zone = zone;
                     break;
@@ -64,7 +64,7 @@
     }
 }
 
-- (void)loadWithZones:(NSMutableArray *)zones {
+- (void)loadWithZones:(NSArray *)zones {
     [self clearSubviews];
     
     int totalPages = zones == nil ? 0 : zones.count;
@@ -83,6 +83,7 @@
 - (BOOL)anyZonesChangedBetween:(Unit *)oldUnit newUnit:(Unit *)newUnit {
     if(oldUnit == nil && newUnit == nil) return NO;
     if((oldUnit == nil && newUnit != nil) || (oldUnit != nil && newUnit == nil)) return YES;
+    if(![oldUnit.identifier isEqualToString:newUnit.identifier]) return YES;
     if((oldUnit.zones == nil && newUnit.zones != nil) || (oldUnit.zones != nil && newUnit.zones == nil)) return YES;
     if(oldUnit.zones.count != newUnit.zones.count) return YES;
 

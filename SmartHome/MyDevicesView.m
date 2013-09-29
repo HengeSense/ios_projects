@@ -121,7 +121,7 @@
 
     if(unit != nil) {
         titleLabel.text = unit.name;
-        detailLabel.text = [NSString stringWithFormat:@"%@   ", unit.status];
+        detailLabel.text = [NSString stringWithFormat:@"%@   ", [NSString isBlank:unit.status] ? NSLocalizedString(@"unknow", @"") : unit.status];
     }
 
     if(unitsIdentifierCollection.count == 1) {

@@ -84,7 +84,7 @@
         messageTable.separatorStyle= UITableViewCellSelectionStyleNone;
         [self.view addSubview:messageTable];
     }
-    self.topbar.titleLabel.text = NSLocalizedString(@"notification.manager", @"");
+    self.topbar.titleLabel.text = NSLocalizedString(@"notification_manager.title", @"");
     [self.topbar.leftButton addTarget:self action:@selector(updateMainView) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -112,7 +112,7 @@
     [messageArr removeObjectAtIndex:curIndexPath.row];
     [messageTable reloadData];
     [self saveNotificationsToDisk];
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete_success", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
 }
 

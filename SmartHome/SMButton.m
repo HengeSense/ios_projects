@@ -8,7 +8,9 @@
 
 #import "SMButton.h"
 
-@implementation SMButton
+@implementation SMButton {
+    NSMutableDictionary *parameters;
+}
 
 @synthesize source;
 
@@ -16,18 +18,24 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self initDefaults];
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+    
+- (void)initDefaults {
+    parameters = [NSMutableDictionary dictionary];
 }
-*/
+    
+- (void)setParameter:(id)object forKey:(NSString *)key {
+    if(parameters != nil) {
+        [parameters setObject:object forKey:key];
+    }
+}
+    
+- (id)parameterForKey:(NSString *)key {
+    if(parameters == nil) return nil;
+    return [parameters objectForKey:key];
+}
 
 @end

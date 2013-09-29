@@ -7,111 +7,59 @@
 */
 
 
+/****************	Global Strings	****************/
 
-/*
- * global
- */
-"ok"               = "好的";
-"cancel"           = "取消";
-"back"             = "返回";
-"done"             = "完成";
-"rename"           = "重命名";
-"skip"             = "跳过";
-"next_step"        = "下一步";
-"please_wait"      = "请稍后";
-"please_select"    = "请选择";
-"unknow_error"     = "系统错误";
-"request_timeout"  = "请求超时";
-"determine"        = "确定";
-"submit"           = "提交更改";
-"has_logout"       = "已登出";
-"processing.tips"  = "处理中,请稍后...";
-"delete"           = "删除";
-"refuse"           = "拒绝";
-"agree"            = "同意";
-"agree.operation"  = "［同意］";
-"refuse.operation" = "［拒绝］";
-"delete.success"   = "删除成功";
-"security_invalid" = "安全码失效";
-"no_name"          = "未命名";
-"deleting"         = "删除中...";
-"curtain_start"    = "开启窗帘";
-"curtain_stop"     = "暂停";
-"curtain_close"    = "合起窗帘";
-"connect_failed"   = "连接已终止!";
-"loading"          = "加载中...";
-
+"ok"                    = "好的";
+"cancel"                = "取消";
+"back"                  = "返回";
+"done"                  = "完成";
+"rename"                = "重命名";
+"skip"                  = "跳过";
+"next_step"             = "下一步";
+"please_wait"           = "请稍后";
+"please_select"         = "请选择";
+"unknow_error"          = "系统错误";
+"request_timeout"       = "请求超时";
+"determine"             = "确定";
+"submit"                = "提交更改";
+"has_logout"            = "已登出";
+"processing"            = "处理中,请稍后...";
+"delete"                = "删除";
+"refuse"                = "拒绝";
+"agree"                 = "同意";
+"security_invalid"      = "安全码失效";
+"no_name"               = "未命名";
+"deleting"              = "删除中...";
+"delete_success"        = "删除成功";
+"loading"               = "加载中...";
+"execution_success"     = "执行成功";
+"execution_failed"      = "执行失败";
+"request_frequently"    = "请求过于频繁!";
+"pwd_invalid"           = "密码错误!";
+"update_success"        = "修改成功!";
+"close"                 = "关";
+"unknow"                = "未知";
 
 
-"the.two.input.is.not.consistent" = "两次输入不一致";
+/****************	View's Title Strings	****************/
 
-/*
- * title
- */
 "main_view.title"                     = "主界面";
 "my_devices.title"                    = "我的设备";
-"scene_mode.title"                    = "情景模式";
-"historical_data.title"               = "历史数据";
 "unit_binding_view.title"             = "绑定主控";
 "settings_view.title"                 = "我的设置";
 "verification_code_send.title"        = "验证手机号码";
 "verification_validation.title"       = "填写验证码";
-"aircondition_setting.title"          = "空调设置";
 "account_info.title"                  = "账号信息";
 "find_password.title"                 = "找回密码";
+"notification_manager.title"          = "消息管理";
+"push_settings.title"                 = "推送设置";
+"view_message_video"                  = "查看消息视频";
 
-/*
- * drawer view
- */
-"account.setting"    =   "点击修改账号";
 
-/*
- * main view controller
- */
-"main_view"                     = "主界面";
-"my_devices"                    = "我的设备";
-"scene_mode"                    = "情景模式";
-"settings_view"                 = "设置";
-"historical_data"               = "历史数据";
-"settings_view"                 = "我的设置";
+/****************	Login View Strings	****************/
 
-/*
- * qr code scanner view controller
- */
-"qr_code_scanner"        = "扫一扫";
-"qr_code.tips"           = "将二维码放入框内 即可自动扫描";
-
-/*
- * speech recognition view
- */
-"welcome_message_line1" = "您好,请问需要";
-"welcome_message_line2" = "什么帮助?";
-
-/*
- * register view controller
- */
-"phone_number_register"           = "请输入手机号码:";
-"verification_code"               = "验证码:";
-"resend_verification_code"        = "重新发送验证码";
-"verification_code_enter.tips"    = "请输入收到的短信验证码:";
-"phone_has_been_register"         = "手机已被注册";
-"phone_format_invalid"            = "号码格式错误";
-"send_success"                    = "已发送";
-"verification_code_error"         = "验证码错误";
-"verification_code_expire"        = "验证码已过期";
-"none_verification_code"          = "请先获取验证码";
-"send_password"                   = "发送密码";
-"phone_for_receive_pwd"           = "请填需要找回密码的手机号码";
-
-"phone_not_exists"                = "号码不存在";
-"send_failed"                     = "发送失败";
-"delay_send"                      = "请稍后再试";
-
-/*
- * login view controller
- */
-"username"                 =  "登录名:";
-"password"                 =  "登录密码:";
+"username"                 =  "登录名";
+"password"                 =  "登录密码";
 "login"                    =  "登录";
 "remember_password"        =  "记住密码";
 "register_new_user"        =  "注册账号";
@@ -121,9 +69,70 @@
 "name_or_pwd_error"        =  "账号或密码错误";
 "login_later"              =  "请稍后再登录";
 
-/*
- * device view && controller
- */
+
+/****************	Register View Strings	****************/
+
+"enter_mobile"                    = "请输入手机号码";
+"resend_verification_code"        = "重新发送验证码";
+"verification_code_enter.tips"    = "请输入收到的短信验证码";
+"phone_has_been_register"         = "手机已被注册";
+"phone_format_invalid"            = "号码格式错误";
+"send_success"                    = "已发送";
+"verification_code_error"         = "验证码错误";
+"verification_code_expire"        = "验证码已过期";
+"none_verification_code"          = "请先获取验证码";
+"send_password"                   = "发送密码";
+"phone_for_receive_pwd"           = "请填需要找回密码的手机号码";
+"phone_not_exists"                = "号码不存在";
+"send_failed"                     = "发送失败";
+"delay_send"                      = "请稍后再试";
+
+
+/****************    Account Setting's View Strings	****************/
+
+"nick_name"                 = "昵称";
+"mail"                      = "邮箱";
+"modify_pwd"                = "修改密码";
+"password_valid"            = "密码验证";
+"enter_old_pwd"             = "请输入旧密码";
+"enter_new_pwd"             = "输入新密码";
+"enter_pwd_again"           = "再次输入";
+"password.is.modified"      = "密码已编辑";
+"mail_name_blank"           = "昵称或邮箱为空!";
+"format_error"              = "请求格式错误!";
+"pwd_different"             = "两次输入不一致";
+"pwd_format_invalid"        = "密码格式错误";
+
+
+/****************	Drawer View Strings	****************/
+
+"edit_profile"    =   "点击修改账号";
+
+
+/****************	Main View Strings	****************/
+
+"main_view"                     = "主界面";
+"my_devices"                    = "我的设备";
+"scene_mode"                    = "情景模式";
+"settings_view"                 = "我的设置";
+"welcome_message_line1"         = "您好,请问需要";
+"welcome_message_line2"         = "什么帮助?";
+"everythings_fine"              = "一切正常!";
+"view_message"                  = "查看";
+"ms"                            = "消息内容";
+"cf"                            = "验证消息";
+"at"                            = "消息内容";
+"al"                            = "警报内容";
+
+
+/****************	QR Code Scanner View Strings	****************/
+
+"qr_code_scanner"        = "扫一扫";
+"qr_code.tips"           = "将二维码放入框内 即可自动扫描";
+
+
+/****************	Device's List View Strings	****************/
+
 "unit_info"            =   "主控信息";
 "devices_list"         =   "设备列表";
 "unit_name"            =   "主控名称";
@@ -135,88 +144,44 @@
 "unit_detail"          =   "主控详情";
 "change_unit_name"     =   "修改主控名";
 
-/*
- * units binding view
- */
-"scanner_button_tips"      = "    在有无线网络的情况下，你可以采用功能扫一扫将主控设备录入手机。";
-"auto_search_button_tips"  = "    在没有无线网络的情况下，你可以采用自动寻找功能将主控录入手机。";
 
-/*
- * camera adjust view controller
- */
-"camera_adjust"            = "摄像头调整";
+/****************	Unit's Binding View Strings	****************/
 
-/*
- *air condition view controller
- */
-"hot"                               =  "制热";
-"cold"                              =  "制冷";
-"close"                             =  "关";
+"scanner_button_tips"      = "    在没有无线网络的情况下，你可以采用功能扫一扫将主控设备录入手机。";
+"auto_search_button_tips"  = "    在有无线网络的情况下，你可以采用自动寻找功能将主控录入手机。";
 
-/*
- * tv view controller
- */
-"signal_source"     =   "信道来源";
-"menu"              =   "菜单";
 
-/*
- * settings view
- */
-"push_settings"      =   "推送设置";
-"account_logout"     =   "退出登录";
-"update_product"     =   "检查产品";
-"about_us"           =   "关于";
+/****************	Setting's View Strings	****************/
 
-/*
- *user info
- */
-"nick.name"  = "昵称";
-"user.email" = "邮箱";
-"modify.password" = "修改密码";
-"please.input.old.password" = "请输入旧密码";
-"password.valid" = "密码验证";
+"push_settings"                 =   "推送设置";
+"account_logout"                =   "退出登录";
+"update_product"                =   "检查产品";
+"about_us"                      =   "关于";
+"help"                          =   "帮助";
+"receive_new_notification"      =   "接收新消息通知";
+"voice"                         =   "声音";
+"shake"                         =   "振动";
+"push.help1"                    =   "  如果你要关闭或开启智能家居的新消息通知，请在iPhone的“设置” － “通知”功能中，找到应用程序“智能家居”进行更改。";
+"push.help2"                    =   "  当程序在运行时，你可以设置声音或者振动。";
+"status_opened"                 =   "已开启";
+"status_closed"                 =   "已关闭";
 
-/*
- * modify info
- */
-"input.new.password" = "输入新密码:";
-"again.to.makesure"  = "再次输入：";
-"password.is.modified" = "密码已编辑";
-"update.success"     = "修改成功!";
-"update.password.error" = "密码错误!";
-"blank.nickname.or.email.error" = "昵称或邮箱为空! ";
-"request.format.error"      = "请求格式错误!";
-"request.too.frequent.error" ="请求过于频繁!";
-"system.error"          = "系统错误！";
-/*
- *notification
- */
-"notification.manager" = "消息管理";
-"ms" = "消息内容";
-"cf" = "验证消息";
-"at" = "消息内容";
-"al" = "警报内容";
-"everything.is.ok" = "一切正常!";
-"check.it.out"     = "查看";
 
-/*
- *push setting
- */
-"receive.new.message.advance" = "接收新消息通知";
-"voice"                    = "声音";
-"shake"                    = "振动";
-"push.help1"               = "  如果你要关闭或开启智能家居的新消息通知，请在iPhone的“设置” － “通知”功能中，找到应用程序“智能家居”进行更改。";
-"push.help2"               = "  当程序在运行时，你可以设置声音或者振动。";
-"opened"                   = "已开启";
-"closed"                   = "已关闭";
-"new.message.advance"      = "新消息通知";
-/*
- *device detail
- */
-"device.name"       = "设备名";
-"device.category"   = "设备类型";
-"device.ip"         = "设备IP";
-"device.port"       = "设备端口";
-"device.nwkAddr"    = "设备网络地址";
-"device.status"     = "设备状态";
+/****************	Device's Strings   ****************/
+
+"device_name"       =  "设备名";
+"device_category"   =  "设备类型";
+"device_ip"         =  "设备IP";
+"device_port"       =  "设备端口";
+"device_nwkAddr"    =  "设备网络地址";
+"device_status"     =  "设备状态";
+"curtain_start"     =  "开启窗帘";
+"curtain_stop"      =  "暂停";
+"curtain_close"     =  "合起窗帘";
+"heating"           =  "制热";
+"cryogen"           =  "制冷";
+"signal_source"     =  "信道来源";
+"menu"              =  "菜单";
+"connect_failed"    =  "连接已终止!";
+"play"              =  "播放";
 

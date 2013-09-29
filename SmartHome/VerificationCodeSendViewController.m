@@ -48,7 +48,7 @@
     
     if(lblPhoneNumber == nil) {
         lblPhoneNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 80 : 60, 250, 20)];
-        [lblPhoneNumber setText:NSLocalizedString(@"phone_number_register", @"")];
+        [lblPhoneNumber setText:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"enter_mobile", @"")]];
         lblPhoneNumber.font = [UIFont systemFontOfSize:16];
         lblPhoneNumber.backgroundColor = [UIColor clearColor];
         lblPhoneNumber.textColor = [UIColor lightTextColor];

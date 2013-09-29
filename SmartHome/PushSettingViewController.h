@@ -7,7 +7,7 @@
 //
 
 #import "NavViewController.h"
-#define ITEM_HEIGHT 50
+
 @interface PushSettingViewController : NavViewController
 
 @end

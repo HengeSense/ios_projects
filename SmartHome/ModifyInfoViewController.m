@@ -16,10 +16,12 @@
     UITextField *input;
     UITextField *makesureInput;
 }
+    
 @synthesize textDelegate;
 @synthesize lastView;
 @synthesize title;
 @synthesize value;
+    
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,6 +30,7 @@
     }
     return self;
 }
+    
 - (id) initWithKey:(NSString *)key forValue:(NSString *)v from:(NavViewController *)where{
     self = [super init];
     if(self){
@@ -58,6 +61,7 @@
 - (void)initDefaults {
 
 }
+    
 - (void)generateTopbar {
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:YES];
     self.topbar.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(5, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 28 : 8, 101/2, 59/2)];
@@ -86,12 +90,12 @@
 - (void)initUI {
     [super initUI];
     self.topbar.titleLabel.text = self.title;
-    if (self.title == NSLocalizedString(@"modify.password", @"")) {
+    if (self.title == NSLocalizedString(@"modify_pwd", @"")) {
         UILabel *one = [[UILabel alloc]initWithFrame:CGRectMake(10, self.topbar.frame.size.height+10, 150, 20)];
         one.font = [UIFont systemFontOfSize:14];
         one.backgroundColor = [UIColor clearColor];
         one.textColor = [UIColor lightTextColor];
-        one.text = NSLocalizedString(@"input.new.password", @"");
+        one.text = NSLocalizedString(@"enter_new_pwd", @"");
         [self.view addSubview:one];
         if (input == nil) {
             input = [SMTextField textFieldWithPoint:CGPointMake(5, one.frame.origin.y+one.frame.size.height+5)];
@@ -105,7 +109,7 @@
         again.font = [UIFont systemFontOfSize:14];
         again.backgroundColor = [UIColor clearColor];
         again.textColor = [UIColor lightTextColor];
-        again.text = NSLocalizedString(@"again.to.makesure", @"");
+        again.text = NSLocalizedString(@"enter_pwd_again", @"");
         [self.view addSubview:again];
         
         if (makesureInput == nil) {
@@ -115,9 +119,7 @@
             makesureInput.returnKeyType = UIReturnKeyDone;
             [self.view addSubview:makesureInput];
         }
-
-        
-    }else{
+    } else {
         if (input == nil) {
             input = [SMTextField textFieldWithPoint:CGPointMake(5, self.topbar.frame.size.height + 10)];
             input.text = self.value;
@@ -125,57 +127,51 @@
             [self.view addSubview:input];
             [input becomeFirstResponder];
         }
-    
         input.returnKeyType = UIReturnKeyDone;
     }
-    
 }
--(BOOL) textFieldShouldReturn:(UITextField *)textField{
     
-    if ([self.title isEqualToString:NSLocalizedString(@"modify.password", @"")]) {
-        if (input.text !=nil&&makesureInput.text!=nil) {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([self.title isEqualToString:NSLocalizedString(@"modify_pwd", @"")]) {
+        if (input.text !=nil && makesureInput.text!=nil) {
             if ([input.text isEqualToString:makesureInput.text]) {
                 [self.textDelegate textViewHasBeenSetting:input.text];
                 [self dismissViewControllerAnimated:YES completion:nil];
                 return  YES;
             }else{
-                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"the.two.input.is.not.consistent", @"") forType:AlertViewTypeFailed];
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_different", @"") forType:AlertViewTypeFailed];
                 [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
                 return  NO;
             }
-
-        }else{
-            [[AlertView currentAlertView] setMessage:@"密码格式不正确" forType:AlertViewTypeFailed];
+        } else {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_format_invalid", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
             return  NO;
         }
-    }else{
+    } else {
         if(self.textDelegate != nil && [self.textDelegate respondsToSelector:@selector(textViewHasBeenSetting:)]) {
             [self.textDelegate textViewHasBeenSetting:input.text];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
         return  YES;
-
     }
 }
-- (void)btnDownPressed:(id)sender {
     
-    if ([self.title isEqualToString:NSLocalizedString(@"modify.password", @"")]) {
-        if (input.text !=nil&&makesureInput.text!=nil) {
-            if ([input.text isEqualToString:makesureInput.text]) {
+- (void)btnDownPressed:(id)sender {
+    if([self.title isEqualToString:NSLocalizedString(@"modify_pwd", @"")]) {
+        if(input.text !=nil&&makesureInput.text!=nil) {
+            if([input.text isEqualToString:makesureInput.text]) {
                 [self.textDelegate textViewHasBeenSetting:input.text];
                 [self dismissViewControllerAnimated:YES completion:nil];
-            }else{
-                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"the.two.input.is.not.consistent", @"") forType:AlertViewTypeFailed];
+            } else {
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_different", @"") forType:AlertViewTypeFailed];
                 [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
             }
-            
-        }else{
-            [[AlertView currentAlertView] setMessage:@"密码格式不正确" forType:AlertViewTypeFailed];
+        } else {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_format_invalid", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
-
         }
-    }else{
+    } else {
         if(self.textDelegate != nil && [self.textDelegate respondsToSelector:@selector(textViewHasBeenSetting:)]) {
             [self.textDelegate textViewHasBeenSetting:input.text];
         }

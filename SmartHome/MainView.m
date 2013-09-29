@@ -216,7 +216,7 @@
 - (void)didWhenDeleted {
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:nil deleteList:[[NSArray alloc] initWithObjects:displayNotification, nil]];
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete.success", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete_success", @"") forType:AlertViewTypeSuccess];
     [[AlertView currentAlertView] delayDismissAlertView];
     [self notifyUpdateNotifications];
 }
@@ -231,7 +231,7 @@
 
 - (void)updateNotifications:(NSArray *)notifications {
     if (notifications == nil||notifications.count == 0) {
-        lblMessage.text = NSLocalizedString(@"everything.is.ok", @"");
+        lblMessage.text = NSLocalizedString(@"everythings_fine", @"");
         lblTime.text = [NSString emptyString];
         [btnMessageCount setTitle:@"0" forState:UIControlStateNormal];
         displayNotification = nil;
@@ -312,7 +312,6 @@
         if(unit != nil && ![NSString isBlank:unit.name]) {
             self.topbar.titleLabel.text = unit.name;
         }
-//        [pageableScrollView loadDataWithDictionary:unit];
         [unitView loadOrRefreshUnit:unit];
     }
 }
@@ -323,8 +322,10 @@
     }
     
     if([NSString isBlank:command.voiceText] || speechView == nil) return;
-   
-    NSString *executeResult = command.resultID == 1 ? @"[执行成功]" : @"[执行失败]";
+    
+    NSString *successMsg = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"execution_success", @"")] ;
+    NSString *successErr = [NSString stringWithFormat:@"[%@]", NSLocalizedString(@"execution_failed", @"")] ;
+    NSString *executeResult = (command.resultID == 1) ? successMsg : successErr;
     
     if(speechViewState == SpeechViewStateOpenned) {
         ConversationTextMessage *textMessage = [[ConversationTextMessage alloc] init];

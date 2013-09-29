@@ -94,7 +94,7 @@
             lblTitle.text = NSLocalizedString(@"no_name", @"");
         }
     }
-    if(self.device != nil && statusImage != nil && btn != nil) {
+    if(self.device != nil) {
         UIImage *image = [statusImage objectForKey:[NSNumber numberWithInteger:self.device.status].stringValue];
         if(image != nil) {
             [btn setBackgroundImage:image forState:UIControlStateNormal];
@@ -151,7 +151,9 @@
 #pragma mark event
 
 - (void)btnPressed:(id)sender {
-    if(self.device == nil) return;
+    if(self.device == nil || self.device.status == 0) {
+        NSLog(@"The device which you pressed is nil or not online.");
+    }
 
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {
         DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
@@ -174,12 +176,11 @@
          [[SelectionItem alloc] initWithIdentifier:@"stop" andTitle:NSLocalizedString(@"curtain_stop", @"")], nil];
         [SelectionView showWithItems:items selectedIdentifier:status source:@"curtain" delegate:self];
     } else if(_device_.isTV || _device_.isSTB) {
-        TVViewController *tvViewController = [[TVViewController alloc] init];
+        TVViewController *tvViewController = [[TVViewController alloc] initWithDevice:_device_];
         tvViewController.title = _device_.name;
-        tvViewController.device = _device_;
         [self.ownerController presentViewController:tvViewController animated:YES completion:nil];
     } else if(_device_.isAircondition) {
-        AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] init];
+        AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] initWithDevice:_device_];
         airConditionViewController.title = _device_.name;
         [self.ownerController presentViewController:airConditionViewController animated:YES completion:nil];
     } else if(_device_.isCamera) {

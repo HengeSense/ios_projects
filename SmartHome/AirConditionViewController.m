@@ -14,6 +14,9 @@
 #define LABEL_MARGIN_TOP 20
 #define RADIO_CENTER 10
 #define CELL_HEIGHT 50
+#define COLD_BASE_CODE 141
+#define HOT_BASE_CODE 152
+#define POWER_SWITCH_CODE 138
 
 @interface AirConditionViewController ()
 
@@ -25,7 +28,7 @@
     NSIndexPath *curIndex;
     
 }
-
+@synthesize device = _device;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,7 +37,13 @@
     }
     return self;
 }
-
+-(id) initWithDevice:(Device *) device{
+    self = [super init];
+    if (self) {
+        _device = device;
+    }
+    return self;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,7 +80,7 @@
 }
 
 -(void) closeBtnPressed{
-    return;
+    [self executeCommandWithCode:POWER_SWITCH_CODE];
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -93,10 +102,10 @@
     }
     NSString *type;
     if (indexPath.section == 0) {
-        type = NSLocalizedString(@"hot", @"");
+        type = NSLocalizedString(@"heating", @"");
         temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
     }else{
-        type = NSLocalizedString(@"cold", @"");
+        type = NSLocalizedString(@"cryogen", @"");
         temperatureCell.textLabel.text = [NSString stringWithFormat:@"%@     %i℃",type,indexPath.row+21];
     }
     temperatureCell.textLabel.font = [UIFont systemFontOfSize:16];
@@ -125,13 +134,14 @@
         headerImg.frame = CGRectMake(0, 0, 640/2, 47/2);
         [header addSubview:headerImg];
         return header;
-
     }
     return header;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     curIndex = indexPath;
+    NSInteger commandCode = curIndex.section?HOT_BASE_CODE+curIndex.row:COLD_BASE_CODE+curIndex.row;
+    [self executeCommandWithCode:commandCode];
     UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
         curCell.backgroundColor = [UIColor colorWithHexString:@"aa5923"];
@@ -145,7 +155,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  CELL_HEIGHT;
 }
-
+-(void) executeCommandWithCode:(NSInteger) commandCode{
+    DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+    updateDevice.masterDeviceCode = self.device.zone.unit.identifier;
+    [updateDevice addCommandString:[self.device commandStringForRemote:commandCode]];
+    [[SMShared current].deliveryService executeDeviceCommand:updateDevice];
+}
 - (void)selectDelay {
     UITableViewCell *curCell = [temperatureTable cellForRowAtIndexPath:curIndex];
     curCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
