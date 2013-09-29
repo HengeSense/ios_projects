@@ -27,10 +27,18 @@
 
 @synthesize restAddress;
 @synthesize restPort;
-@synthesize fromInternalNetwork;
+@synthesize commmandNetworkMode;
+
+- (id)init {
+    self = [super init];
+    if(self) {
+        self.commmandNetworkMode = CommandNetworkModeNone;
+    }
+    return self;
+}
 
 - (id)initWithDictionary:(NSDictionary *)json {
-    self = [super init];
+    self = [self init];
     if(self) {
         if(json != nil) {
             self.deviceCode = [json stringForKey:@"deviceCode"];

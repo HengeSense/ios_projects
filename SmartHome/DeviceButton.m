@@ -151,8 +151,8 @@
 #pragma mark event
 
 - (void)btnPressed:(id)sender {
-    if(self.device == nil || self.device.status == 0) {
-        NSLog(@"[DEVICE BUTTON] The device [ %@ ] which you pressed is nil or not online.", self.device == nil ? [NSString emptyString] : self.device.name);
+    if(self.device == nil) {
+        return;
     }
 
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {

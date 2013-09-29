@@ -102,6 +102,13 @@
 }
 
 - (id<CommandExecutor>)determineCommandExcutor:(DeviceCommand *)command {
+    
+    if(command.commmandNetworkMode == CommandNetworkModeInternal) {
+        return self.restfulService;
+    } else if(command.commmandNetworkMode == CommandNetworkModeExternal) {
+        return self.tcpService;
+    }
+    
     if([self commandCanDeliveryInInternalNetwork:command]) {
         if([self currentNetworkMode] == NetworkModeInternal) {
             return self.restfulService;
@@ -346,6 +353,7 @@
 
 - (BOOL)commandCanDeliveryInInternalNetwork:(DeviceCommand *)command {
     if(mayUsingInternalNetworkCommands == nil) return NO;
+    
     if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
         if([NSString isBlank:command.masterDeviceCode]) {
             DeviceCommandGetUnit *cmd = (DeviceCommandGetUnit *)command;

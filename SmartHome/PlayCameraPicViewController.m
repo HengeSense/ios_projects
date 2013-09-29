@@ -8,6 +8,7 @@
 
 #import "PlayCameraPicViewController.h"
 #import "CameraPicPath.h"
+#import "CameraLoadingView.h"
 #import "LongButton.h"
 
 #define THREAD_COUNT 3
@@ -20,6 +21,8 @@
     BOOL isPlaying;
     IBOutlet UIImageView *playView;
     ImageProvider *provider;
+    BOOL isFirst;
+    CameraLoadingView *loadingView;
 }
 
 @synthesize data;
@@ -49,6 +52,7 @@
     provider = [[ImageProvider alloc] init];
     provider.delegate = self;
     isPlaying = NO;
+    isFirst = YES;
 }
 
 - (void)initUI {
@@ -58,6 +62,13 @@
         playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, 320, 240)];
         playView.backgroundColor = [UIColor blackColor];
         [self.view addSubview:playView];
+        
+        if(loadingView == nil) {
+            loadingView = [CameraLoadingView viewWithPoint:CGPointMake(0, 0)];
+            loadingView.center = CGPointMake(playView.center.x, playView.bounds.size.height / 2);
+            [loadingView hide];
+            [playView addSubview:loadingView];
+        }
     }
         
     if(data.cameraPicPaths != nil) {
@@ -94,6 +105,7 @@
         NSString *url = [source parameterForKey:@"url"];
         if(![NSString isBlank:url]) {
             isPlaying = YES;
+            [loadingView show];
             [self performSelectorInBackground:@selector(startDownloader:) withObject:url];
         }
     }
@@ -107,18 +119,25 @@
 #pragma mark Image Provider Delegate
 
 - (void)imageProviderNotifyImageAvailable:(UIImage *)image {
+    if(isFirst) {
+        isFirst = NO;
+        [loadingView hide];
+    }
     playView.image = image;
 }
 
 - (void)imageProviderNotifyImageStreamWasEnded {
     isPlaying = NO;
+    isFirst = YES;
     playView.image = nil;
     NSLog(@"[Image provider] Download Ended.");
 }
 
 - (void)imageProviderNotifyReadingImageError {
     isPlaying = NO;
+    isFirst = YES;
     playView.image = nil;
+    [loadingView showError];
     NSLog(@"[Image provider] Reading Error.");
 }
 

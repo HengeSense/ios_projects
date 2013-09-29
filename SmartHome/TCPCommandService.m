@@ -117,6 +117,7 @@
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
+    command.commmandNetworkMode = CommandNetworkModeExternal;
     [[SMShared current].deliveryService handleDeviceCommand:command];
 }
 

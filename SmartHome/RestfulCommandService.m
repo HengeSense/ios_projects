@@ -38,10 +38,6 @@
     } else if([COMMAND_KEY_CONTROL isEqualToString:command.commandName]) {
         DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)command;
         NSData *data = [JsonUtils createJsonDataFromDictionary:[updateDevice toDictionary]];
-        
-        NSString *s =  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(s);
-        
         [self updateDeviceWithAddress:updateDevice.restAddress port:updateDevice.restPort data:data];
     } else if([COMMAND_GET_SCENE_LIST isEqualToString:command.commandName]) {
     }
@@ -62,6 +58,7 @@
 - (void)updateDeviceSuccess:(RestResponse *)resp {
     if(resp.statusCode == 200) {
         DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:resp.body]];
+        command.commmandNetworkMode = CommandNetworkModeInternal;
         [[SMShared current].deliveryService handleDeviceCommand:command];
         return;
     }
@@ -70,7 +67,7 @@
 }
 
 - (void)updateDeviceFailed:(RestResponse *)resp {
-    NSLog(@"Update device from rest failed, status code is %d", resp.statusCode);
+    NSLog(@"[RESTFUL COMMAND SERVICE] Update device failed, status code is %d", resp.statusCode);
 }
 
 #pragma mark -
@@ -94,6 +91,7 @@
                 DeviceCommandUpdateUnits *updateUnit = [[DeviceCommandUpdateUnits alloc] init];
                 updateUnit.commandName = COMMAND_GET_UNITS;
                 updateUnit.masterDeviceCode = unit.identifier;
+                updateUnit.commmandNetworkMode = CommandNetworkModeInternal;
                 [updateUnit.units addObject:unit];
                 [[SMShared current].deliveryService handleDeviceCommand:updateUnit];
             }
@@ -107,19 +105,12 @@
 }
 
 - (void)getUnitFailed:(RestResponse *)resp {
-    NSLog(@"Get units from rest failed, staus code is %d", resp.statusCode);
+    NSLog(@"[RESTFUL COMMAND SERVICE] Get unit failed, staus code is %d", resp.statusCode);
 }
 
 #pragma mark -
 #pragma mark Scene list from rest server
 
-
-
-
-
-
-#pragma mark -
-#pragma mark Key control from rest server
 
 
 @end

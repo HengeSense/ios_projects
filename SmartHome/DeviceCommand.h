@@ -11,6 +11,12 @@
 #import "NSMutableDictionary+Extension.h"
 #import "JsonUtils.h"
 
+typedef NS_ENUM(NSUInteger, CommandNetworkMode) {
+    CommandNetworkModeNone,
+    CommandNetworkModeInternal,
+    CommandNetworkModeExternal,
+};
+
 @interface DeviceCommand : NSObject
 
 @property (strong, nonatomic) NSString *result;
@@ -27,7 +33,7 @@
 
 @property (strong, nonatomic) NSString *restAddress;
 @property (assign, nonatomic) NSInteger restPort;
-@property (assign, nonatomic) BOOL fromInternalNetwork;
+@property (assign, nonatomic) CommandNetworkMode commmandNetworkMode;
 
 - (id)initWithDictionary:(NSDictionary *)json;
 - (NSMutableDictionary *)toDictionary;

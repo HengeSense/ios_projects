@@ -47,6 +47,9 @@
             // set hash code
             getSceneListCommand.hashCode = unit.sceneHashCode;
             
+            // set network delivery mode
+            getSceneListCommand.commmandNetworkMode = updateUnitsCommand.commmandNetworkMode;
+            
             [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
         }
     }

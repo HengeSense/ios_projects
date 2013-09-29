@@ -53,7 +53,7 @@
     // prepare
     NSError *error;
     NSURLResponse *response;
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:_url_ cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:20];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:_url_ cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10];
     
     // send request
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -94,6 +94,7 @@
             }
         }
     } else {
+        self.isDownloading = NO;
         [self performSelectorOnMainThread:@selector(notifyImageReadingError) withObject:nil waitUntilDone:NO];
     }
 }

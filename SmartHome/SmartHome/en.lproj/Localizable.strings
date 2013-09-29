@@ -39,6 +39,7 @@
 "update_success"        = "修改成功!";
 "close"                 = "关";
 "unknow"                = "未知";
+"error_occur"           = "出错啦!";
 
 
 /****************	View's Title Strings	****************/
