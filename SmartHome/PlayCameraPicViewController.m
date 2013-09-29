@@ -66,7 +66,7 @@
             CameraPicPath *path = [data.cameraPicPaths objectAtIndex:i];
             NSString *url = [NSString stringWithFormat:@"%@%@", data.http, path.path];
             [btnPlayCamera setParameter:url forKey:@"url"];
-            [btnPlayCamera setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"play", @""), @"Ca"] forState:UIControlStateNormal];
+            [btnPlayCamera setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"play", @""), path.name] forState:UIControlStateNormal];
             [btnPlayCamera addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:btnPlayCamera];
         }
@@ -75,10 +75,21 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"view_message_video", @"");
 }
 
+- (void)dismiss {
+    if(provider != nil) {
+        [provider stopDownload];
+    }
+    [super dismiss];
+}
+
 - (void)play:(id<ParameterExtentions>)source {
     if(isPlaying) {
+        if(provider != nil && provider.isDownloading) {
+            [provider stopDownload];
+        }
         return;
     }
+    
     if(source != nil) {
         NSString *url = [source parameterForKey:@"url"];
         if(![NSString isBlank:url]) {
@@ -93,17 +104,22 @@
 }
 
 #pragma mark -
+#pragma mark Image Provider Delegate
 
 - (void)imageProviderNotifyImageAvailable:(UIImage *)image {
     playView.image = image;
 }
 
 - (void)imageProviderNotifyImageStreamWasEnded {
-    NSLog(@"[Image provider] Download image error.");
+    isPlaying = NO;
+    playView.image = nil;
+    NSLog(@"[Image provider] Download Ended.");
 }
 
 - (void)imageProviderNotifyReadingImageError {
-    NSLog(@"[Image provider] Reading error.");
+    isPlaying = NO;
+    playView.image = nil;
+    NSLog(@"[Image provider] Reading Error.");
 }
 
 @end

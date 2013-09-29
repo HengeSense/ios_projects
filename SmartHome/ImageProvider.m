@@ -15,6 +15,7 @@
 }
 
 @synthesize delegate;
+@synthesize isDownloading;
 
 - (id)init {
     self = [super init];
@@ -29,6 +30,24 @@
 }
 
 - (void)startDownloader:(NSString *)url imageIndex:(NSInteger)index {
+    if(self.isDownloading) {
+        return;
+    } else {
+        self.isDownloading = YES;
+        [self startDownloaderInternal:url imageIndex:index];
+    }
+}
+
+- (void)stopDownload {
+    self.isDownloading = NO;
+}
+
+- (void)startDownloaderInternal:(NSString *)url imageIndex:(NSInteger)index {
+    if(!self.isDownloading) {
+        [self performSelectorOnMainThread:@selector(notifyImageStreamWasEnded) withObject:nil waitUntilDone:NO];
+        return;
+    }
+    
     NSURL *_url_ = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/%d.jpg", url, index]];
     
     // prepare
@@ -57,14 +76,20 @@
                         lastedDownloadingTime = [NSDate date].timeIntervalSince1970 * 1000;
                     }
                 }
-                [self performSelectorOnMainThread:@selector(notityImageWasAvailable:) withObject:image waitUntilDone:YES];
-                index++;
-                [self startDownloader:url imageIndex:index];
+                if(!self.isDownloading) {
+                    [self performSelectorOnMainThread:@selector(notifyImageStreamWasEnded) withObject:nil waitUntilDone:NO];
+                } else {
+                    [self performSelectorOnMainThread:@selector(notityImageWasAvailable:) withObject:image waitUntilDone:YES];
+                    index++;
+                    [self startDownloaderInternal:url imageIndex:index];
+                }
             }
         } else {
             if(resp.statusCode == 404) {
+                self.isDownloading = NO;
                 [self performSelectorOnMainThread:@selector(notifyImageStreamWasEnded) withObject:nil waitUntilDone:NO];
             } else {
+                self.isDownloading = NO;
                 [self performSelectorOnMainThread:@selector(notifyImageReadingError) withObject:nil waitUntilDone:NO];
             }
         }
