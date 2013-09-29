@@ -94,7 +94,7 @@
             lblTitle.text = NSLocalizedString(@"no_name", @"");
         }
     }
-    if(self.device != nil && statusImage != nil && btn != nil) {
+    if(self.device != nil) {
         UIImage *image = [statusImage objectForKey:[NSNumber numberWithInteger:self.device.status].stringValue];
         if(image != nil) {
             [btn setBackgroundImage:image forState:UIControlStateNormal];
@@ -151,7 +151,9 @@
 #pragma mark event
 
 - (void)btnPressed:(id)sender {
-    if(self.device == nil) return;
+    if(self.device == nil || self.device.status == 0) {
+        NSLog(@"The device which you pressed is nil or not online.");
+    }
 
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {
         DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
@@ -192,7 +194,6 @@
 - (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {
     if([@"curtain" isEqualToString:source]) {
         if([item isKindOfClass:[SelectionItem class]]) {
-            
             SelectionItem *it = item;
             NSUInteger status = -1;
             if([@"open" isEqualToString:it.identifier]) {

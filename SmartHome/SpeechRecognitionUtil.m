@@ -64,11 +64,15 @@
     if([@"asr" isEqualToString:self.domain]) {
         [speechRecognizer setParameter:@"grammarID" value:self.grammarID];
     }
+    NSLog(@"start listening ...... ");
     [speechRecognizer startListening];
 }
 
 - (void)stopListening {
     [speechRecognizer stopListening];
+    
+    
+    NSLog(@"stop listening ...... ");
 }
 
 - (void)cancel {
@@ -87,6 +91,7 @@
 }
 
 - (void)onBeginOfSpeech {
+    NSLog(@"begin.....");
     if(self.speechRecognitionNotificationDelegate == nil) return;
     if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(beginRecord)]) {
         [self.speechRecognitionNotificationDelegate beginRecord];
@@ -94,6 +99,7 @@
 }
 
 - (void)onEndOfSpeech {
+    NSLog(@"end.....");
     if(self.speechRecognitionNotificationDelegate == nil) return;
     if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(endRecord)]) {
         [self.speechRecognitionNotificationDelegate endRecord];
@@ -101,6 +107,7 @@
 }
 
 - (void)onResults:(NSArray *)results {
+    NSLog(@"On result");
     if(textResult == nil) {
         textResult = [[NSMutableString alloc] init];
         NSDictionary *dic = [results objectAtIndex:0];
@@ -119,6 +126,7 @@
 }
 
 - (void)onError:(IFlySpeechError *)errorCode {
+    NSLog(@"Error  error  error ....");
     if(self.speechRecognitionNotificationDelegate == nil) return;
     if(errorCode.errorCode == 0) {
         if([self.speechRecognitionNotificationDelegate respondsToSelector:@selector(recognizeSuccess:)]) {

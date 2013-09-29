@@ -87,7 +87,7 @@
  
  同时只能进行一路会话,这次会话没有结束不能进行下一路会话，否则会报错
  */
-- (void) startListening;
+- (BOOL) startListening;
 
 /** 停止录音
  

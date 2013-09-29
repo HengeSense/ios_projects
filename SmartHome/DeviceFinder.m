@@ -48,12 +48,6 @@ static NSString *IP;
     [udpSocket receiveWithTimeout:5 tag:0];
 }
 
-- (void)getUnitByUrlAddress:(NSString *)deviceAddress {
-    DeviceCommandGetUnit *getUnitCommand = (DeviceCommandGetUnit *)[CommandFactory commandForType:CommandTypeGetUnits];
-    getUnitCommand.unitServerUrl = deviceAddress;
-    [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
-}
-
 - (void)requestForBindingUnit {
     DeviceCommand *bindingUnitCommand = [CommandFactory commandForType:CommandTypeBindingUnit];
     bindingUnitCommand.masterDeviceCode = self.deviceIdentifier;
@@ -66,11 +60,8 @@ static NSString *IP;
 - (BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port {
     NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
     self.deviceIdentifier = [json noNilStringForKey:@"deviceCode"];
-    NSString *ip = [json noNilStringForKey:@"ipv4"];
-    NSString *url = [NSString stringWithFormat:@"http://%@:8777/gatewaycfg",ip];
     Unit *unit = [[SMShared current].memory findUnitByIdentifier:self.deviceIdentifier];
     if(unit == nil) {
-        [self getUnitByUrlAddress:url];
         if ([self.delegate respondsToSelector:@selector(askwhetherBinding)]) {
             [self.delegate askwhetherBinding];
         }
