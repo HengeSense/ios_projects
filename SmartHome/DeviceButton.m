@@ -152,7 +152,7 @@
 
 - (void)btnPressed:(id)sender {
     if(self.device == nil || self.device.status == 0) {
-        NSLog(@"The device which you pressed is nil or not online.");
+        NSLog(@"[DEVICE BUTTON] The device [ %@ ] which you pressed is nil or not online.", self.device == nil ? [NSString emptyString] : self.device.name);
     }
 
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {

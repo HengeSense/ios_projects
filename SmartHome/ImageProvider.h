@@ -23,7 +23,9 @@
 @interface ImageProvider : NSObject
 
 @property (assign, nonatomic) id<ImageProviderDelegate> delegate;
+@property (assign, atomic) BOOL isDownloading;
 
 - (void)startDownloader:(NSString *)url imageIndex:(NSInteger)index;
+- (void)stopDownload;
 
 @end
