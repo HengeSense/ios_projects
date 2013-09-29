@@ -137,7 +137,7 @@
 		6F73D08417EEE99900FFF974 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */; };
 		6F73D08517EEE99900FFF974 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07E17EEE99900FFF974 /* zbar-samples.png */; };
 		6F73D08B17EEEDF700FFF974 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D08A17EEEDF700FFF974 /* Entitlements.plist */; };
-		6F740E2317F7BC0A00F9A112 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F740E2217F7BC0A00F9A112 /* iflyMSC.framework */; };
+		6F740E2517F7CC2400F9A112 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F740E2417F7CC2400F9A112 /* iflyMSC.framework */; };
 		6F84355817E9A66F0084C316 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355617E9A66F0084C316 /* icon.png */; };
 		6F84355917E9A66F0084C316 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355717E9A66F0084C316 /* icon@2x.png */; };
 		6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F84A77617D047B400D46BFA /* DeviceCommandUpdateUnits.m */; };
@@ -511,7 +511,7 @@
 		6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
 		6F73D07E17EEE99900FFF974 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
 		6F73D08A17EEEDF700FFF974 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
-		6F740E2217F7BC0A00F9A112 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
+		6F740E2417F7CC2400F9A112 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		6F84355517E985D40084C316 /* ParameterExtentions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParameterExtentions.h; sourceTree = "<group>"; };
 		6F84355617E9A66F0084C316 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		6F84355717E9A66F0084C316 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -789,7 +789,7 @@
 				F22DF72917C1F5FB00BF7C3A /* Security.framework in Frameworks */,
 				F237167F17B349650057C95B /* libxml2.dylib in Frameworks */,
 				F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */,
-				6F740E2317F7BC0A00F9A112 /* iflyMSC.framework in Frameworks */,
+				6F740E2517F7CC2400F9A112 /* iflyMSC.framework in Frameworks */,
 				6FD8A72217B229C4009C7493 /* SystemConfiguration.framework in Frameworks */,
 				6F0FAF4B17AF8B4600B75D3E /* CoreVideo.framework in Frameworks */,
 				6F0FAF4917AF8B4000B75D3E /* CoreMedia.framework in Frameworks */,
@@ -960,7 +960,7 @@
 				F27B4EC317EFD35D00A55220 /* libzbar.a */,
 				F237167E17B349650057C95B /* libxml2.dylib */,
 				6F0FAF4417AF8B0D00B75D3E /* libiconv.dylib */,
-				6F740E2217F7BC0A00F9A112 /* iflyMSC.framework */,
+				6F740E2417F7CC2400F9A112 /* iflyMSC.framework */,
 				F22DF72317C1CA3500BF7C3A /* Security.framework */,
 				6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */,
 				6F0FAF4A17AF8B4600B75D3E /* CoreVideo.framework */,
@@ -2318,10 +2318,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
+				PROVISIONING_PROFILE = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
@@ -2348,10 +2348,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
+				PROVISIONING_PROFILE = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2376,7 +2376,7 @@
 				GCC_PREFIX_HEADER = "SmartHome/SmartHome-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2410,7 +2410,7 @@
 				GCC_PREFIX_HEADER = "SmartHome/SmartHome-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2";
 				INFOPLIST_FILE = "SmartHome/SmartHome-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
