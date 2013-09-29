@@ -8,13 +8,10 @@
 
 #import "ImageProvider.h"
 
-#define IMAGE_ARRAY_COUNT 50
+#define IMAGE_PLAY_INTERVAL 300
 
 @implementation ImageProvider {
-    NSMutableArray *imgList1;
-    NSMutableArray *imgList2;
-    NSMutableArray *imgList3;
-    NSUInteger pointerAt;
+    long long lastedDownloadingTime;
 }
 
 @synthesize delegate;
@@ -28,20 +25,10 @@
 }
 
 - (void)initDefaults {
-    imgList1 = [NSMutableArray arrayWithCapacity:IMAGE_ARRAY_COUNT];
-    imgList2 = [NSMutableArray arrayWithCapacity:IMAGE_ARRAY_COUNT];
-    imgList3 = [NSMutableArray arrayWithCapacity:IMAGE_ARRAY_COUNT];
-    pointerAt = 0;
-}
-
-- (void)addImage:(UIImage *)image {
-    @synchronized(self) {
-
-    }
+    lastedDownloadingTime = -1;
 }
 
 - (void)startDownloader:(NSString *)url imageIndex:(NSInteger)index {
-    
     NSURL *_url_ = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/%d.jpg", url, index]];
     
     // prepare
@@ -54,54 +41,53 @@
     
     // process response
     if(error == nil && response != nil && data != nil) {
-        NSLog(@"%@", _url_.description);
-        
         NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
         if(resp.statusCode == 200) {
             UIImage *image = [UIImage imageWithData:data];
-            NSMutableArray *arr = [self currentPointAtArray];
-            if(arr != nil) {
-                [arr addObject:image];
-                if(arr.count == IMAGE_ARRAY_COUNT) {                    
-                    [self performSelectorOnMainThread:@selector(notifyWith:) withObject:arr waitUntilDone:NO];
-                    [self movePointer];
+            if(image != nil) {
+                if(lastedDownloadingTime == -1) {
+                    lastedDownloadingTime = [NSDate date].timeIntervalSince1970 * 1000;
+                } else {
+                    NSTimeInterval now = [NSDate date].timeIntervalSince1970;
+                    long long timeDifference = now * 1000 - lastedDownloadingTime;
+                    if(timeDifference < IMAGE_PLAY_INTERVAL) {
+                        [NSThread sleepForTimeInterval:((double)(IMAGE_PLAY_INTERVAL - timeDifference)) / 1000];
+                        lastedDownloadingTime =[NSDate date].timeIntervalSince1970 * 1000;
+                    } else {
+                        lastedDownloadingTime = [NSDate date].timeIntervalSince1970 * 1000;
+                    }
                 }
+                [self performSelectorOnMainThread:@selector(notityImageWasAvailable:) withObject:image waitUntilDone:YES];
                 index++;
                 [self startDownloader:url imageIndex:index];
-            } else {
-                NSLog(@"unknown exception at download image");
             }
         } else {
-            NSLog(@"downloader image status code is %d", resp.statusCode);
-            [self performSelectorOnMainThread:@selector(notifyWith:) withObject:[self currentPointAtArray] waitUntilDone:NO];
+            if(resp.statusCode == 404) {
+                [self performSelectorOnMainThread:@selector(notifyImageStreamWasEnded) withObject:nil waitUntilDone:NO];
+            } else {
+                [self performSelectorOnMainThread:@selector(notifyImageReadingError) withObject:nil waitUntilDone:NO];
+            }
         }
     } else {
-        NSLog(@"system error from downloader camera image code is %d", error.code);
+        [self performSelectorOnMainThread:@selector(notifyImageReadingError) withObject:nil waitUntilDone:NO];
     }
 }
 
-- (void)notifyWith:(NSArray *)imageList {
-    [self.delegate imageProviderNotifyAvailable:imageList provider:self];
+- (void)notityImageWasAvailable:(UIImage *)image {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(imageProviderNotifyImageAvailable:)]) {
+        [self.delegate imageProviderNotifyImageAvailable:image];
+    }
 }
 
-- (NSMutableArray *)currentPointAtArray {
-    if(pointerAt == 0) {
-        return imgList1;
+- (void)notifyImageStreamWasEnded {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(imageProviderNotifyImageStreamWasEnded)]) {
+        [self.delegate imageProviderNotifyImageStreamWasEnded];
     }
-    if(pointerAt == 1) {
-        return imgList2;
-    }
-    if(pointerAt == 2) {
-        return imgList3;   
-    }
-    return nil;
 }
 
-- (void)movePointer {
-    if(pointerAt < 2) {
-        pointerAt++;
-    } else {
-        pointerAt = 0;
+- (void)notifyImageReadingError {
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(imageProviderNotifyReadingImageError)]) {
+        [self.delegate imageProviderNotifyReadingImageError];
     }
 }
 

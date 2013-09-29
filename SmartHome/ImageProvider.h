@@ -11,7 +11,12 @@
 
 @protocol ImageProviderDelegate <NSObject>
 
-- (void)imageProviderNotifyAvailable:(NSArray *)imgList provider:(id)provider;
+- (void)imageProviderNotifyImageAvailable:(UIImage *)image;
+- (void)imageProviderNotifyImageStreamWasEnded;
+
+@optional
+
+- (void)imageProviderNotifyReadingImageError;
 
 @end
 

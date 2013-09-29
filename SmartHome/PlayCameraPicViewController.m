@@ -91,6 +91,18 @@
 
 #pragma mark -
 
+- (void)imageProviderNotifyImageAvailable:(UIImage *)image {
+    playView.image = image;
+}
+
+- (void)imageProviderNotifyImageStreamWasEnded {
+    NSLog(@"Image provider download image error.");
+}
+
+- (void)imageProviderNotifyReadingImageError {
+    NSLog(@"Image provider reading error.");
+}
+
 - (void)imageProviderNotifyAvailable:(NSArray *)imgList provider:(id)provider {
 //    for(int i=0; i<imgList.count; i++) {
 //        [playView setImage: [imgList objectAtIndex:i]];

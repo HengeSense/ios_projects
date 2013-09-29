@@ -22,7 +22,6 @@
 }
 
 - (void)executeCommand:(DeviceCommand *)command {
-    
     Unit *unit = [[SMShared current].memory findUnitByIdentifier:command.masterDeviceCode];
     if(unit != nil) {
         command.restAddress = unit.localIP;
@@ -40,12 +39,11 @@
         DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)command;
         NSData *data = [JsonUtils createJsonDataFromDictionary:[updateDevice toDictionary]];
         
-NSString *s =        [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *s =  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(s);
         
         [self updateDeviceWithAddress:updateDevice.restAddress port:updateDevice.restPort data:data];
     } else if([COMMAND_GET_SCENE_LIST isEqualToString:command.commandName]) {
-        
     }
 }
 
