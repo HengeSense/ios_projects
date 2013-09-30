@@ -36,22 +36,6 @@
                 }
             }
         }
-        
-        // update scene list for each unit
-        for(Unit *unit in updateUnitsCommand.units) {
-            DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
-            
-            // set master device code
-            getSceneListCommand.masterDeviceCode = unit.identifier;
-            
-            // set hash code
-            getSceneListCommand.hashCode = unit.sceneHashCode;
-            
-            // set network delivery mode
-            getSceneListCommand.commmandNetworkMode = updateUnitsCommand.commmandNetworkMode;
-            
-            [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
-        }
     }
 }
 

@@ -70,11 +70,15 @@ static NSString *IP;
 }
 
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error {
+#ifdef DEBUG
     NSLog(@"[UDP DEVICE FINDER] NOT SEND.");
+#endif
 }
 
 - (void)onUdpSocket:(AsyncUdpSocket *)sock didSendDataWithTag:(long)tag {
+#ifdef DEBUG
     NSLog(@"[UDP DEVICE FINDER] SEND.");
+#endif
 }
 
 @end

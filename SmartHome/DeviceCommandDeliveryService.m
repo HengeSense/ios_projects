@@ -21,10 +21,12 @@
 #import "AlertView.h"
 
 #define NETWORK_CHECK_INTERVAL 5
+#define UNIT_REFRESH_INTERVAL  10
 
 @implementation DeviceCommandDeliveryService {
     Reachability* reachability;
     NSTimer *tcpConnectChecker;
+    NSTimer *unitRefresTimer;
     NSArray *mayUsingInternalNetworkCommands;
     
     NetworkMode networkMode;
@@ -96,7 +98,9 @@
 - (void)executeDeviceCommandInternal:(DeviceCommand *)command {
     id<CommandExecutor> executor = [self determineCommandExcutor:command];
     if(executor != nil) {
+#ifdef DEBUG
         NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
+#endif
         [executor executeCommand:command];
     }
 }
@@ -202,6 +206,8 @@
     if(self.isService) {
         isService = NO;
         
+        [self stopRefreshCurrentUnit];
+        
         // Stop TCP Connection checker
         if(tcpConnectChecker != nil) {
             [tcpConnectChecker invalidate];
@@ -233,6 +239,39 @@
 
 - (void)startTcp {
     [self.tcpService connect];
+}
+
+#pragma mark -
+#pragma mark Refresh current unit
+
+- (void)startRefreshCurrentUnit {
+    [self stopRefreshCurrentUnit];
+    unitRefresTimer = [NSTimer scheduledTimerWithTimeInterval:UNIT_REFRESH_INTERVAL target:self selector:@selector(refreshUnit) userInfo:nil repeats:YES];
+    [unitRefresTimer fire];
+}
+
+- (void)stopRefreshCurrentUnit {
+    if(unitRefresTimer != nil) {
+        [unitRefresTimer invalidate];
+        unitRefresTimer = nil;
+    }
+}
+
+- (void)refreshUnit {
+    Unit *unit = [SMShared current].memory.currentUnit;
+    if(unit != nil) {
+        DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
+        command.masterDeviceCode = unit.identifier;
+        command.hashCode = unit.hashCode;
+        [self executeDeviceCommand:command];
+        
+        DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
+        getSceneListCommand.masterDeviceCode = unit.identifier;
+        getSceneListCommand.hashCode = unit.sceneHashCode;
+        [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
+        
+        [self checkInternalOrNotInternalNetwork];
+    }
 }
 
 #pragma mark -
@@ -349,7 +388,7 @@
 }
 
 #pragma mark -
-#pragma mark utils
+#pragma mark Utils
 
 - (BOOL)commandCanDeliveryInInternalNetwork:(DeviceCommand *)command {
     if(mayUsingInternalNetworkCommands == nil) return NO;
@@ -372,7 +411,7 @@
 }
 
 #pragma mark -
-#pragma mark getter and setters
+#pragma mark Getter and Setters
 
 - (TCPCommandService *)tcpService {
     if(tcpService == nil) {

@@ -114,11 +114,11 @@
     [self.view addSubview:lblForBtnAutoSearch];
     
     if (alertBinding == nil) {
-        alertBinding = [[UIAlertView alloc] initWithTitle:@"提示" message:@"发现新主控，是否绑定" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"绑定", nil];
+        alertBinding = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"tips", @"") message:NSLocalizedString(@"found_new_unit", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"no", @"") otherButtonTitles:NSLocalizedString(@"binding", @""), nil];
         [alertBinding dismissWithClickedButtonIndex:0 animated:YES];
-        
     }
 }
+
 - (void)generateTopbar {
     self.topbar = [TopbarView topBarWithImage:[UIImage imageNamed:@"bg_topbar.png"] shadow:NO];
     self.topbar.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(self.topbar.frame.size.width - 101/2 - 8, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 28 : 8, 101/2, 59/2)];
@@ -152,6 +152,7 @@
 
 #pragma mark -
 #pragma mark events
+
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         [finder requestForBindingUnit];
@@ -174,24 +175,26 @@
 
 -(void) btnAutoSearchPressed:(UIButton *) sender{
     [finder startFindingDevice];
-    [[AlertView currentAlertView] setMessage:@"正在搜索主控" forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"searching_unit", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:nil];
     
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(delayDismiss) userInfo:nil repeats:NO];
-    
 }
--(void) delayDismiss{
+
+- (void)delayDismiss {
     if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
-        [[AlertView currentAlertView] setMessage:@"没有发现新主控" forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"no_unit_found", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
     }
 }
--(void) askwhetherBinding{
+
+- (void)askwhetherBinding {
     if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
         [[AlertView currentAlertView] dismissAlertView];
     }
     [alertBinding show];
 }
+
 #pragma mark -
 #pragma mark QR code delegate
 

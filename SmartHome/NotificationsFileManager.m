@@ -48,7 +48,9 @@
             }
         }
     } else {
-        NSLog(@"notifications file not exists");
+#ifdef DEBUG
+        NSLog(@"[NOTIFICATION FILE MANAGER]notifications file not exists");
+#endif
     }
     return nil;
 }
@@ -97,7 +99,9 @@
             [self saveToDiskInternal:newList];
         }
         @catch (NSException *exception) {
-            NSLog(@"exception in update notifications to disk >>> %@", exception.reason);
+#ifdef DEBUG
+            NSLog(@"[NOTIFICATION FILE MANAGER] Exception in update notifications to disk >>> %@", exception.reason);
+#endif
         }
         @finally {
 
@@ -112,7 +116,9 @@
         NSError *error;
         BOOL createDirSuccess = [[NSFileManager defaultManager] createDirectoryAtPath:DIRECTORY withIntermediateDirectories:YES attributes:nil error:&error];
         if(!createDirSuccess) {
-            NSLog(@"create directory failed , error >>> %@", error.description);
+#ifdef DEBUG
+            NSLog(@"[NOTIFICATION FILE MANAGER] Create directory failed , error >>> %@", error.description);
+#endif
             return;
         }
     }
@@ -133,7 +139,9 @@
     BOOL success = [data writeToFile:filePath atomically:YES];
     
     if(!success) {
-        NSLog(@"save notifications failed ...");
+#ifdef DEBUG
+        NSLog(@"[NOTIFICATION FILE MANAGER] Save notifications failed ...");
+#endif
     }
 }
 
@@ -204,7 +212,9 @@
             [self saveToDiskInternal:notificationsToSave];
         }
         @catch (NSException *exception) {
-            NSLog(@"exception in save notifications to disk >>> %@", exception.reason);
+#ifdef DEBUG
+            NSLog(@"[NOTIFICATION FILE MANAGER] exception in save notifications to disk >>> %@", exception.reason);
+#endif
         }
         @finally {
 

@@ -499,7 +499,9 @@
 }
 
 - (void)speechRecognizerFailed:(NSString *)message {
+#ifdef DEBUG
     NSLog(@"need alert fail the error message is : [   %@  ]", message);
+#endif
 }
 
 #pragma mark -

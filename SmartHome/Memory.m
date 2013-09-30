@@ -210,7 +210,9 @@
                 NSError *error;
                 BOOL createDirSuccess = [[NSFileManager defaultManager] createDirectoryAtPath:DIRECTORY withIntermediateDirectories:YES attributes:nil error:&error];
                 if(!createDirSuccess) {
-                    NSLog(@"create directory for units failed , error >>> %@", error.description);
+#ifdef DEBUG
+                    NSLog(@"[MEMORY] Create directory for units failed , error >>> %@", error.description);
+#endif
                     return;
                 }
             }
@@ -222,9 +224,11 @@
                 if(exists) {
                     NSError *error;
                     [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+#ifdef DEBUG
                     if(error) {
-                        NSLog(@"remove unit file failed. error >>>>  %@", error.description);
+                        NSLog(@"[MEMORY] Remove unit file failed. error >>>>  %@", error.description);
                     }
+#endif
                 }
                 return;
             }
@@ -237,13 +241,16 @@
             NSData *data = [JsonUtils createJsonDataFromDictionary:[NSDictionary dictionaryWithObject:unitsToSave forKey:@"units"]];
             
             BOOL success = [data writeToFile:filePath atomically:YES];
-            
+#ifdef DEBUG
             if(!success) {
-                NSLog(@"save units failed ...");
+                NSLog(@"[MEMORY] Save units failed ...");
             }
+#endif
         }
         @catch (NSException *exception) {
-            NSLog(@"save units exception reason %@", exception.reason);
+#ifdef DEBUG
+            NSLog(@"[MEMORY] Save units exception reason %@", exception.reason);
+#endif
         }
         @finally {
         }

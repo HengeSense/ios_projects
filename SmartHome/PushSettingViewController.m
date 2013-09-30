@@ -70,7 +70,6 @@
         lblSystemSetting.backgroundColor = [UIColor clearColor];
         lblSystemSetting.font = [UIFont systemFontOfSize:16];
         lblSystemSetting.textColor = [UIColor lightGrayColor];
-        NSLog(@"%i",[[UIApplication sharedApplication] enabledRemoteNotificationTypes]);
         lblSystemSetting.text = [[UIApplication sharedApplication] enabledRemoteNotificationTypes]?NSLocalizedString(@"status_opened", @""):NSLocalizedString(@"status_closed", @"");
         [systemSettingView addSubview:lblSystemSetting];
     }
