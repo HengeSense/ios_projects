@@ -27,9 +27,6 @@
     
     NSData *dataDomain = [JsonUtils createJsonDataFromDictionary:[self.deviceCommand toDictionary]];
     
-    NSString *str = [[NSString alloc] initWithData:dataDomain encoding:NSUTF8StringEncoding];
-    NSLog(str);
-    
     //append data length
     NSUInteger totalLength = DATA_HEADER_LENGTH + DATA_LENGTH_LENGTH + DEVICE_NO_LENGTH + dataDomain.length + MD5_LENGTH;
 

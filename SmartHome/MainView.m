@@ -446,12 +446,12 @@
 
 // 确保录音提示音已经结束,防止提示语进入识别范围
 - (void)delayStartListening {
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
     [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
 }
 
 - (void)startListening:(NSTimer *)timer {
     [speechRecognitionUtil startListening];
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark -
@@ -462,9 +462,9 @@
 }
 
 - (void)endRecord {
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
     recognizerState = RecognizerStateRecordingEnd;
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
 }
 
 - (void)recognizeCancelled {
@@ -478,6 +478,7 @@
 }
 
 - (void)recognizeSuccess:(NSString *)result {
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     if(![NSString isBlank:result]) {
         //process text message
         DeviceCommandVoiceControl *command = (DeviceCommandVoiceControl *)[CommandFactory commandForType:CommandTypeUpdateDeviceViaVoice];
@@ -488,13 +489,12 @@
         [self speechRecognizerFailed:@"empty speaking..."];
         //
     }
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateReady;
 }
 
 - (void)recognizeError:(int)errorCode {
-    [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
     recognizerState = RecognizerStateReady;
 }
 

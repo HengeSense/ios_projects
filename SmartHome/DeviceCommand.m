@@ -7,8 +7,7 @@
 //
 
 #import "DeviceCommand.h"
-#import "NSString+StringUtils.h"
-#import "JsonUtils.h"
+#import "CommandFactory.h"
 #import "SMShared.h"
 
 @implementation DeviceCommand
@@ -68,7 +67,7 @@
     [json setNoBlankString:self.describe forKey:@"describe"];
     [json setDateLongLongValue:self.commandTime forKey:@"commandTime"];
     
-    if(([@"FindZKListCommand" isEqualToString:commandName] && ![NSString isBlank:self.masterDeviceCode]) || [@"FindDeviceSceneCommand" isEqualToString:commandName]) {
+    if(([COMMAND_GET_UNITS isEqualToString:commandName] && ![NSString isBlank:self.masterDeviceCode]) || [COMMAND_GET_SCENE_LIST isEqualToString:commandName]) {
         if(self.hashCode != nil) {
             [json setObject:self.hashCode forKey:@"hashCode"];
         } else {
