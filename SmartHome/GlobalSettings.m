@@ -19,6 +19,8 @@
 #define DEVICE_CODE_KEY           @"device_code.key"
 #define SCREEN_NAME_KEY           @"screen_name.key"
 #define FIRST_TIME_OPEN_APP_KEY   @"first_time_opa.key"
+#define IS_VOICE_KEY              @"is_voice.key"
+#define IS_SHAKE_KEY              @"is_shake.key"
 
 @implementation GlobalSettings
 
@@ -28,6 +30,8 @@
 @synthesize anyUnitsBinding;
 @synthesize deviceCode;
 @synthesize isFirstTimeOpenApp;
+@synthesize isShake;
+@synthesize isVoice;
 
 - (id)init {
     self = [super init];
@@ -43,6 +47,8 @@
             self.tcpAddress = [NSString emptyString];
             self.deviceCode = [NSString emptyString];
             self.screenName = [NSString emptyString];
+            self.isVoice = YES;
+            self.isShake = NO;
         } else {
             //already have a setting file
             //need to fill object property
@@ -53,6 +59,8 @@
             self.deviceCode = [settings noNilStringForKey:DEVICE_CODE_KEY];
             self.screenName = [settings noNilStringForKey:SCREEN_NAME_KEY];
             self.isFirstTimeOpenApp = [settings boolForKey:FIRST_TIME_OPEN_APP_KEY];
+            self.isShake = [settings boolForKey:IS_SHAKE_KEY];
+            self.isVoice = [settings boolForKey:IS_VOICE_KEY];
         }
     }
     return self;
@@ -68,6 +76,8 @@
     [dictionary setMayBlankString:self.deviceCode forKey:DEVICE_CODE_KEY];
     [dictionary setMayBlankString:self.screenName forKey:SCREEN_NAME_KEY];
     [dictionary setBool:self.isFirstTimeOpenApp forKey:FIRST_TIME_OPEN_APP_KEY];
+    [dictionary setBool:self.isShake forKey:IS_SHAKE_KEY];
+    [dictionary setBool:self.isVoice forKey:IS_VOICE_KEY];
     return dictionary;
 }
 

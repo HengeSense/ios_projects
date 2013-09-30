@@ -11,5 +11,6 @@
 @interface SystemAudio : NSObject
 
 + (void)playClassicSmsSound;
++ (void)shake;
 
 @end

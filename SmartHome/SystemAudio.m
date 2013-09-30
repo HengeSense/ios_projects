@@ -15,4 +15,8 @@
     AudioServicesPlaySystemSound(1007);
 }
 
++ (void)shake {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+}
+
 @end

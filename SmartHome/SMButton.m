@@ -12,7 +12,7 @@
     NSMutableDictionary *parameters;
 }
 
-@synthesize source;
+@synthesize userObject;
 
 - (id)initWithFrame:(CGRect)frame
 {

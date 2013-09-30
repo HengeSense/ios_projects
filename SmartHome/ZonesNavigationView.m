@@ -48,7 +48,7 @@
         CGFloat y = ((i + 5 - (i % 5)) / 5 - 1) * PANEL_HEIGHT + (i % 5) * 38;
         Zone *zone = [zones objectAtIndex:i];
         SMButton *btnZone = [[SMButton alloc] initWithFrame:CGRectMake(0, y, 80, 28)];
-        btnZone.source = zone.identifier;
+        btnZone.userObject = zone.identifier;
         [self setButtonSelected:btnZone isSelected:NO];
         [btnZone setTitle:zone.name forState:UIControlStateNormal];
         [btnZone addTarget:self action:@selector(btnZonePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -58,7 +58,7 @@
 
 - (void)btnZonePressed:(SMButton *)sender {
     if(sender == nil) return;
-    NSString *identifier = sender.source;
+    NSString *identifier = sender.userObject;
     UnitView *unitView = (UnitView *)self.superview;
     if(unitView != nil) {
         [self highLightedWithZoneIdentifier:identifier];
@@ -82,7 +82,7 @@
     for(UIView *view in self.subviews) {
         if([view isKindOfClass:[SMButton class]]) {
             SMButton *btn = (SMButton *)view;
-            if([btn.source isEqualToString:zoneIdentifier]) {
+            if([btn.userObject isEqualToString:zoneIdentifier]) {
                 [self setButtonSelected:btn isSelected:YES];
             } else {
                 [self setButtonSelected:btn isSelected:NO];

@@ -23,7 +23,7 @@
         if(json) {
             self.masterDeviceCode = [json stringForKey:@"masterDeviceCode"];
             self.dataCommandName = [json stringForKey:@"_className"];
-            self.requestDeviceCode = [json stringForKey:@"requsetDeviceCode"];
+            self.requestDeviceCode = [json stringForKey:@"requestDeviceCode"];
             self.http = [json stringForKey:@"http"];
             NSArray *_pics_ = [json arrayForKey:@"cameraPicPaths"];
             if(_pics_ != nil) {
@@ -43,7 +43,7 @@
     NSMutableDictionary *json = [NSMutableDictionary dictionary];
     [json setMayBlankString:self.masterDeviceCode forKey:@"masterDeviceCode"];
     [json setMayBlankString:self.dataCommandName forKey:@"_className"];
-    [json setMayBlankString:self.requestDeviceCode forKey:@"requsetDeviceCode"];
+    [json setMayBlankString:self.requestDeviceCode forKey:@"requestDeviceCode"];
     [json setMayBlankString:self.http forKey:@"http"];
     
     if(self.cameraPicPaths.count > 0) {

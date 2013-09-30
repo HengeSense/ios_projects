@@ -163,6 +163,7 @@
 }
 
 - (void)agreeBtnPressed:(UIButton *)sender {
+    [self sendBindingResult:YES];
     if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
         [self.cfNotificationDelegate didAgreeOrRefuse:[NSString stringWithFormat:@" [%@] ", NSLocalizedString(@"agree", @"")]];
     }
@@ -170,10 +171,19 @@
 }
 
 - (void)refuseBtnPressed:(UIButton *)sender {
+    [self sendBindingResult:NO];
     if ([self.cfNotificationDelegate respondsToSelector:@selector(didAgreeOrRefuse:)]) {
         [self.cfNotificationDelegate didAgreeOrRefuse:[NSString stringWithFormat:@" [%@] ", NSLocalizedString(@"refuse", @"")]];
     }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)sendBindingResult:(BOOL)agree {
+    DeviceCommandAuthBinding *authBindingCommand = (DeviceCommandAuthBinding *)[CommandFactory commandForType:CommandTypeAuthBindingUnit];
+    authBindingCommand.resultID = agree ? 1 : 2;
+    authBindingCommand.masterDeviceCode = message.data.masterDeviceCode;
+    authBindingCommand.requestDeviceCode = message.data.requestDeviceCode;
+    [[SMShared current].deliveryService executeDeviceCommand:authBindingCommand];
 }
 
 - (void)didReceiveMemoryWarning

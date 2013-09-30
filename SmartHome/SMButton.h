@@ -11,6 +11,6 @@
 
 @interface SMButton : UIButton<ParameterExtentions>
 
-@property (strong, nonatomic) id source;
+@property (strong, nonatomic) id userObject;
 
 @end

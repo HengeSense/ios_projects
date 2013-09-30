@@ -9,6 +9,7 @@
 #import "PushSettingViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "SystemAudio.h"
 
 #define ITEM_HEIGHT 50
 
@@ -85,7 +86,7 @@
     [lblHelp1 sizeThatFits:lblHelp1.frame.size];
     [self.view addSubview:lblHelp1];
     
-    if(voiceAndShakeView == nil){
+    if(voiceAndShakeView == nil) {
         voiceAndShakeView = [[UIView alloc] initWithFrame:CGRectMake(0,lblHelp1.frame.origin.y+lblHelp1.frame.size.height - 5, 300, 2*ITEM_HEIGHT+1)];
         voiceAndShakeView.center = CGPointMake(self.view.center.x, voiceAndShakeView.center.y);
         voiceAndShakeView.layer.cornerRadius = 10;
@@ -107,7 +108,6 @@
         UIView *seperatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, ITEM_HEIGHT-1, 300, 1)];
         seperatorLine.backgroundColor = [UIColor grayColor];
         [voiceAndShakeView addSubview:seperatorLine];
-        
     }
     
     UILabel *lblHelp2 = [[UILabel alloc] initWithFrame:CGRectMake(0, voiceAndShakeView.frame.size.height+voiceAndShakeView.frame.origin.y, 300, 50)];
@@ -121,26 +121,35 @@
     [lblHelp2 sizeThatFits:lblHelp2.frame.size];
     [self.view addSubview:lblHelp2];
 
-    if (voiceSwitch == nil) {
+    if(voiceSwitch == nil) {
         voiceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 240 : 210, 12, 100, 40)];
+        [voiceSwitch setOn:[SMShared current].settings.isVoice animated:NO];
         [voiceSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         [voiceAndShakeView addSubview:voiceSwitch];
     }
     
-    if(shakeSwitch == nil){
+    if(shakeSwitch == nil) {
         shakeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 240 : 210, ITEM_HEIGHT+12, 100, 40)];
+        [shakeSwitch setOn:[SMShared current].settings.isShake animated:NO];
         [shakeSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
         [voiceAndShakeView addSubview:shakeSwitch];
     }
 }
     
 - (void)switchChanged:(UISwitch *)sender {
+    if(sender == nil) return;
     if ([sender isEqual:voiceSwitch]) {
-        NSLog(@"voice");
-        AudioServicesPlaySystemSound(1007);
+        if(sender.isOn) {
+            [SystemAudio playClassicSmsSound];
+        }
+        [SMShared current].settings.isVoice = sender.isOn;
+        [[SMShared current].settings saveSettings];
     } else if([sender isEqual:shakeSwitch]) {
-        NSLog(@"shake");
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        if(sender.isOn) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
+        [SMShared current].settings.isShake = sender.isOn;
+        [[SMShared current].settings saveSettings];
     }
 }
     
