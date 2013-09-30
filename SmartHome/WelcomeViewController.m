@@ -61,7 +61,6 @@
     }
     if (scrollWelcomeImg == nil) {
         scrollWelcomeImg = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, IMG_WIDTH, IMG_HEIGHT)];
-        scrollWelcomeImg.backgroundColor = [UIColor redColor];
         scrollWelcomeImg.pagingEnabled = YES;
         scrollWelcomeImg.showsHorizontalScrollIndicator = NO;
         scrollWelcomeImg.contentSize = CGSizeMake(IMG_WIDTH*imgViewArr.count, IMG_HEIGHT);
