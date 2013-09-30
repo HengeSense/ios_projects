@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#define IMG_HEIGHT [UIScreen mainScreen].bounds.size.height
+#import "UIDevice+Extension.h"
+
+#define IMG_HEIGHT [UIScreen mainScreen].bounds.size.height-([UIDevice systemVersionIsMoreThanOrEuqal7]?0:20)
 
 #define IMG_WIDTH  [UIScreen mainScreen].bounds.size.width
 

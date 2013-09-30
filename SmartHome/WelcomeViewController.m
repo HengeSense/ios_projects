@@ -52,16 +52,16 @@
     if (imgViewArr == nil||imgViewArr.count == 0) {
         for (NSString *imgName in imgNameArr) {
             UIImageView *welcomeImageView =[WelcomeImageView imageViewWithImageName:imgName];
-            welcomeImageView.center = self.view.center;
             [imgViewArr addObject:welcomeImageView];
         }
     }
     if (imgViewArr&&imgViewArr.count>0) {
+        
         [self.view addSubview:[imgViewArr objectAtIndex:0]];
     }
     if (scrollWelcomeImg == nil) {
         scrollWelcomeImg = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, IMG_WIDTH, IMG_HEIGHT)];
-        scrollWelcomeImg.center = self.view.center;
+        scrollWelcomeImg.backgroundColor = [UIColor redColor];
         scrollWelcomeImg.pagingEnabled = YES;
         scrollWelcomeImg.showsHorizontalScrollIndicator = NO;
         scrollWelcomeImg.contentSize = CGSizeMake(IMG_WIDTH*imgViewArr.count, IMG_HEIGHT);

@@ -7,7 +7,6 @@
 //
 
 #import "WelcomeImageView.h"
-
 @implementation WelcomeImageView
 
 - (id)initWithFrame:(CGRect)frame
