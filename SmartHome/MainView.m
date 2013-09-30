@@ -278,7 +278,6 @@
         getUnitCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
         getUnitCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
         [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
-        NSLog(@"aaaaaa");
         DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
         getSceneListCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
         getSceneListCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;

@@ -25,24 +25,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
-    
-    self.settings.isFirstTimeOpenApp = NO;
     
     // determine first view controller
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
     navigationController.delegate = ((LoginViewController *)self.rootViewController);
-
-    BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
-    if (self.settings.isFirstTimeOpenApp) {
-        self.settings.isFirstTimeOpenApp = NO;
-        [self.settings saveSettings];
-        [self.rootViewController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated: YES];
-    }
+    
+    BOOL hasLogin = ![[NSString emptyString] isEqualToString:self.settings.secretKey];
     if(hasLogin) {
         // start service 
         [self.deviceCommandDeliveryService startService];
@@ -59,6 +51,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+    if (self.settings.isFirstTimeOpenApp) {
+        self.settings.isFirstTimeOpenApp = NO;
+        [self.settings saveSettings];
+        [self.rootViewController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated: NO];
+    }
     
     // register for remote notifications
     [self registerForRemoteNotifications];
