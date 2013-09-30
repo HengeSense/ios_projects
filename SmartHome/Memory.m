@@ -93,6 +93,10 @@
                 Unit *oldUnit = [self.units objectAtIndex:i];
                 if([oldUnit.identifier isEqualToString:unit.identifier]) {
                     replaceIndex = i;
+                    if([NSString isBlank:unit.status]) {
+                        unit.name = oldUnit.name;
+                        unit.status = @"在线";
+                    }
                     break;
                 }
             }

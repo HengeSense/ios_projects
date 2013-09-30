@@ -274,10 +274,15 @@
     } else if([@"units" isEqualToString:source]) {
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
         [self notifyUnitsWasUpdate];
-        DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
-        command.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
-        command.hashCode = [SMShared current].memory.currentUnit.hashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:command];
+        DeviceCommand *getUnitCommand = [CommandFactory commandForType:CommandTypeGetUnits];
+        getUnitCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
+        getUnitCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
+        [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
+        NSLog(@"aaaaaa");
+        DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
+        getSceneListCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
+        getSceneListCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
+        [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
     }
 }
 

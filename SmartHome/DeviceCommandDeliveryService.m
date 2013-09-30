@@ -355,14 +355,19 @@
         NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [[NSURL alloc] initWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:1];
         NSURLResponse *response;
         NSError *error;
-        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         if(error == nil) {
             if(response) {
                 NSHTTPURLResponse *rp = (NSHTTPURLResponse *)response;
-                if(rp.statusCode == 200) {
-                    NSLog(@"change to 内网");
-                    networkMode = NetworkModeInternal;
-                    return;
+                if(rp.statusCode == 200 && data != nil) {
+                    NSString *unitIdentifier = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    if([SMShared current].memory.currentUnit != nil) {
+                        if([[SMShared current].memory.currentUnit.identifier isEqualToString:unitIdentifier]) {
+                            NSLog(@"change to 内网    %@", unitIdentifier);
+                            networkMode = NetworkModeInternal;
+                            return;
+                        }
+                    }
                 }
             }
         }
