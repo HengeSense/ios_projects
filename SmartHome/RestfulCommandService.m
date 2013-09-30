@@ -131,7 +131,7 @@
             DeviceCommandUpdateSceneMode *command = [[DeviceCommandUpdateSceneMode alloc] initWithDictionary:json];
             command.commandName = COMMAND_GET_SCENE_LIST;
             command.masterDeviceCode = resp.callbackObject;
-            
+            command.commmandNetworkMode = CommandNetworkModeInternal;
             [[SMShared current].deliveryService handleDeviceCommand:command];
             return;
         }

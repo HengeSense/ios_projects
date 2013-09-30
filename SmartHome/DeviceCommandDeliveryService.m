@@ -135,6 +135,16 @@
 - (void)handleDeviceCommand:(DeviceCommand *)command {
 
     if(command == nil) return;
+    
+#ifdef DEBUG
+    NSString *networkModeString = [NSString emptyString];
+    if(command.commmandNetworkMode == CommandNetworkModeExternal) {
+        networkModeString = @"External";
+    } else if(command.commmandNetworkMode == CommandNetworkModeInternal) {
+        networkModeString = @"Internal";
+    }
+    NSLog(@"Received [%@] From [%@]", command.commandName, networkModeString);
+#endif
 
     // Security key is invalid or expired
     if(command.resultID == -3000 || command.resultID == -2000 || command.resultID == -1000) {
@@ -342,7 +352,7 @@
             return;
         }
         
-        NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [[NSURL alloc] initWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:3];
+        NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [[NSURL alloc] initWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:1];
         NSURLResponse *response;
         NSError *error;
         [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
