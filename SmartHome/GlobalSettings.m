@@ -26,9 +26,10 @@
 
 @synthesize account;
 @synthesize secretKey;
+@synthesize deviceCode;
+
 @synthesize tcpAddress;
 @synthesize anyUnitsBinding;
-@synthesize deviceCode;
 @synthesize isFirstTimeOpenApp;
 @synthesize isShake;
 @synthesize isVoice;

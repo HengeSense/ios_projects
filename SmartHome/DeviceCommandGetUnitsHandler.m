@@ -27,6 +27,13 @@
             }
         }
         
+        BOOL hasUnits = [SMShared current].memory.units.count > 0;
+        BOOL anyUnitsBinding = [SMShared current].settings.anyUnitsBinding;
+        if(anyUnitsBinding != hasUnits) {
+            [SMShared current].settings.anyUnitsBinding = hasUnits;
+            [[SMShared current].settings saveSettings];
+        }
+        
         // notify subscriptions
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
         if(subscriptions) {
