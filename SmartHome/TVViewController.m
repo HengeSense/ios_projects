@@ -50,8 +50,7 @@
 - (void)initUI {
     [super initUI];
     if(remoteControl == nil) {
-        remoteControl = [TVRemoteControlPanel pannelWithPoint:CGPointMake(0, self.topbar.bounds.size.height)];
-        remoteControl.device = self.device;
+        remoteControl = [TVRemoteControlPanel pannelWithPoint:CGPointMake(0, self.topbar.bounds.size.height) andDevice:self.device];
         [self.view addSubview:remoteControl];
     }
 }

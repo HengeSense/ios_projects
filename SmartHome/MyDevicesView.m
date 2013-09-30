@@ -32,6 +32,7 @@
 
 - (void)initUI {
     [super initUI];
+    
     if(tblUnits == nil) {
         tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, SM_CELL_WIDTH / 2, self.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
         tblUnits.center = CGPointMake(self.center.x, tblUnits.center.y);
@@ -43,17 +44,17 @@
     }
     
     if (btnAdd == nil) {
-        btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width-88/2-10, 0, 88/2, 88/2)];
+        btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width - 44, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 20 : 0, 88/2, 88/2)];
         [btnAdd setBackgroundImage:[UIImage imageNamed:@"btn_add.png"] forState:UIControlStateNormal];
-        btnAdd.center = CGPointMake(btnAdd.center.x, self.topbar.center.y+10);
         [btnAdd addTarget:self action:@selector(btnAddPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.topbar addSubview:btnAdd];
     }
 }
+
 #pragma mark-
 #pragma mark btn action
 
--(void) btnAddPressed:(UIButton *) sender{
+- (void)btnAddPressed:(UIButton *)sender {
     UnitsBindingViewController *unitsBindingViewController = [[UnitsBindingViewController alloc] initWithType:TopBarTypeDone];
     [self.ownerController presentViewController:unitsBindingViewController animated:YES completion:nil];
 }

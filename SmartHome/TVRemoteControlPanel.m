@@ -20,19 +20,20 @@
     DirectionButton *btnDirection;
 }
 
-@synthesize device;
+@synthesize device = _device_;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andDevice:(Device *)device
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _device_ = device;
         [self initUI];
     }
     return self;
 }
 
-+ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point {
-    return [[TVRemoteControlPanel alloc] initWithFrame:CGRectMake(point.x, point.y, [UIScreen mainScreen].bounds.size.width, 380)];
++ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point andDevice:(Device *)device {
+    return [[TVRemoteControlPanel alloc] initWithFrame:CGRectMake(point.x, point.y, [UIScreen mainScreen].bounds.size.width, 380) andDevice:device];
 }
 
 - (void)initUI {
@@ -148,8 +149,8 @@
 
 - (void)controlTvWithSingal:(NSInteger)singal {
     DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
-    updateDevice.masterDeviceCode = device.zone.unit.identifier;
-    [updateDevice addCommandString:[device commandStringForRemote:singal]];
+    updateDevice.masterDeviceCode = self.device.zone.unit.identifier;
+    [updateDevice addCommandString:[self.device commandStringForRemote:singal]];
     [[SMShared current].deliveryService executeDeviceCommand:updateDevice];
 }
 

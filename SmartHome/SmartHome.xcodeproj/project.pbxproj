@@ -153,7 +153,6 @@
 		6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7C17BE1EEA007F90A2 /* AlertView.m */; };
 		6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */; };
 		6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0E1F417CF45DE00154CDE /* SMShared.m */; };
-		6FA1DD7C17C1BBD40016AC4E /* NetworkUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1DD7B17C1BBD40016AC4E /* NetworkUtils.m */; };
 		6FA7859117CBA35F00998541 /* btn_speech@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7859017CBA35F00998541 /* btn_speech@2x.png */; };
 		6FA7859C17CBA40200998541 /* btn_speech_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7859217CBA40200998541 /* btn_speech_00@2x.png */; };
 		6FA7859D17CBA40200998541 /* btn_speech_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7859317CBA40200998541 /* btn_speech_01@2x.png */; };
@@ -541,8 +540,6 @@
 		6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsFileManager.m; sourceTree = "<group>"; };
 		6FA0E1F317CF45DE00154CDE /* SMShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMShared.h; sourceTree = "<group>"; };
 		6FA0E1F417CF45DE00154CDE /* SMShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMShared.m; sourceTree = "<group>"; };
-		6FA1DD7A17C1BBD40016AC4E /* NetworkUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkUtils.h; sourceTree = "<group>"; };
-		6FA1DD7B17C1BBD40016AC4E /* NetworkUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkUtils.m; sourceTree = "<group>"; };
 		6FA7859017CBA35F00998541 /* btn_speech@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech@2x.png"; sourceTree = "<group>"; };
 		6FA7859217CBA40200998541 /* btn_speech_00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_00@2x.png"; sourceTree = "<group>"; };
 		6FA7859317CBA40200998541 /* btn_speech_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_01@2x.png"; sourceTree = "<group>"; };
@@ -1068,8 +1065,6 @@
 				6F0FAEA917AF80A800B75D3E /* categories */,
 				6F8927BF17B3976A00D0C1E3 /* GlobalSettings.h */,
 				6F8927C017B3976A00D0C1E3 /* GlobalSettings.m */,
-				6FA1DD7A17C1BBD40016AC4E /* NetworkUtils.h */,
-				6FA1DD7B17C1BBD40016AC4E /* NetworkUtils.m */,
 				6F17672F17C1FA15007AED0C /* JsonUtils.h */,
 				6F17673017C1FA15007AED0C /* JsonUtils.m */,
 				6FD4CFE717C249F200EC98F9 /* BitUtils.h */,
@@ -2166,7 +2161,6 @@
 				F20AE09417BE0D5B0040B80A /* SMTextField.m in Sources */,
 				F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */,
 				6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */,
-				6FA1DD7C17C1BBD40016AC4E /* NetworkUtils.m in Sources */,
 				6F17672B17C1E232007AED0C /* CommunicationMessage.m in Sources */,
 				6F17672E17C1F7CA007AED0C /* DeviceCommand.m in Sources */,
 				6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */,
@@ -2384,8 +2378,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				PROVISIONING_PROFILE = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
 				SDKROOT = iphoneos;
@@ -2420,8 +2412,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "77E799AD-9247-4827-8078-923D1B5C5587";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "77E799AD-9247-4827-8078-923D1B5C5587";
 				PROVISIONING_PROFILE = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E5CAAEF-2FB9-43C5-B55A-08B60186ED0A";
 				SDKROOT = iphoneos;

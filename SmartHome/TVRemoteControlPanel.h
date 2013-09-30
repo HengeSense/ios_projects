@@ -21,6 +21,7 @@
 
 @property (strong, nonatomic) Device *device;
 
-+ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point;
+- (id)initWithFrame:(CGRect)frame andDevice:(Device *)device;
++ (TVRemoteControlPanel *)pannelWithPoint:(CGPoint)point andDevice:(Device *)device;
 
 @end

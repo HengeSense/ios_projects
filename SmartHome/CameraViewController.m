@@ -45,7 +45,7 @@
     [super initUI];
     
     if(backgroundView == nil) {
-        backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, 310, 480 - self.topbar.bounds.size.height - 10)];
+        backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, 310, 480 - 64 - 10)];
         backgroundView.center = CGPointMake(self.view.center.x, backgroundView.center.y);
         backgroundView.backgroundColor = [UIColor colorWithHexString:@"#1a1a1f"];
         backgroundView.layer.cornerRadius = 10;
