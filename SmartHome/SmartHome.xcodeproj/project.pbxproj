@@ -210,7 +210,6 @@
 		6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4CFE817C249F200EC98F9 /* BitUtils.m */; };
 		6FD4CFEB17C312BD00EC98F9 /* bg_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */; };
 		6FD6C64917CC539200BDA327 /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C64817CC539200BDA327 /* PopViewController.m */; };
-		6FD6C64C17CC5B4B00BDA327 /* test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD6C64B17CC5B4B00BDA327 /* test@2x.png */; };
 		6FD6C65517CCE1CC00BDA327 /* DeviceFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */; };
 		6FD6C65B17CCF9F100BDA327 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C65A17CCF9F100BDA327 /* Reachability.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
@@ -301,7 +300,6 @@
 		F2BB0EF517BE1B7E004E14B1 /* LongButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0EF417BE1B7E004E14B1 /* LongButton.m */; };
 		F2D8E8C417C4734D00090E5B /* QCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C317C468D200090E5B /* QCheckBox.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F2D8E8C717C48EA500090E5B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8C617C48EA500090E5B /* CameraViewController.m */; };
-		F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */; };
 		F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */; };
 		F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8E8D717C5BBB600090E5B /* RadioButton.m */; };
 /* End PBXBuildFile section */
@@ -619,7 +617,6 @@
 		6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner@2x.png"; sourceTree = "<group>"; };
 		6FD6C64717CC539200BDA327 /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
 		6FD6C64817CC539200BDA327 /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
-		6FD6C64B17CC5B4B00BDA327 /* test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test@2x.png"; sourceTree = "<group>"; };
 		6FD6C65317CCE1CC00BDA327 /* DeviceFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceFinder.h; sourceTree = "<group>"; };
 		6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceFinder.m; sourceTree = "<group>"; };
 		6FD6C65917CCF9F100BDA327 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -771,7 +768,6 @@
 		F2D8E8C317C468D200090E5B /* QCheckBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QCheckBox.m; path = SmartHome/QCheckBox.m; sourceTree = "<group>"; };
 		F2D8E8C517C48EA500090E5B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		F2D8E8C617C48EA500090E5B /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
-		F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "camera_image@2x.jpg"; sourceTree = "<group>"; };
 		F2D8E8CB17C5AA4500090E5B /* CustomCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCheckBox.h; sourceTree = "<group>"; };
 		F2D8E8CC17C5AA4500090E5B /* CustomCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCheckBox.m; sourceTree = "<group>"; };
 		F2D8E8D617C5BBB600090E5B /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
@@ -1038,7 +1034,6 @@
 				6F159BD717D6E594005CFFEE /* remote_control */,
 				6F350AB517CEF69100B796F1 /* icons */,
 				6FDD0ED217CDECC4000D95E8 /* settings_view */,
-				6FD6C64A17CC5B0E00BDA327 /* test */,
 				6F48EEEB17C8A87700C85D9B /* alert_view */,
 				6FB66D5917C702360002D6C5 /* device */,
 				6F0F475A17C5F5990057F9A4 /* cells */,
@@ -1646,15 +1641,6 @@
 			name = communications;
 			sourceTree = "<group>";
 		};
-		6FD6C64A17CC5B0E00BDA327 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				6FD6C64B17CC5B4B00BDA327 /* test@2x.png */,
-				F2D8E8C817C5A4F000090E5B /* camera_image@2x.jpg */,
-			);
-			name = test;
-			sourceTree = "<group>";
-		};
 		6FD6C64D17CCDF3700BDA327 /* AsyncUdpSocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -2007,7 +1993,6 @@
 				6F35114B17C5B80D005CD097 /* btn_off@2x.png in Resources */,
 				6F35114C17C5B80D005CD097 /* btn_on@2x.png in Resources */,
 				6F35114D17C5B80D005CD097 /* btn_switch@2x.png in Resources */,
-				F2D8E8C917C5A4F000090E5B /* camera_image@2x.jpg in Resources */,
 				6F0F475317C5C3280057F9A4 /* bg_shadow@2x.png in Resources */,
 				6F0F476017C5F6180057F9A4 /* bg_cell_center@2x.png in Resources */,
 				6F0F476117C5F6180057F9A4 /* bg_cell_footer@2x.png in Resources */,
@@ -2037,7 +2022,6 @@
 				6FA785A417CBA40200998541 /* btn_speech_08@2x.png in Resources */,
 				6FA785A517CBA40200998541 /* btn_speech_09@2x.png in Resources */,
 				F203A14C17F5393800BABDEC /* welcome06@2x.jpg in Resources */,
-				6FD6C64C17CC5B4B00BDA327 /* test@2x.png in Resources */,
 				F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */,
 				F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */,
 				6FDD0ED717CDED30000D95E8 /* icon_feed_back@2x.png in Resources */,
