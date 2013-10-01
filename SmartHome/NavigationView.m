@@ -51,4 +51,8 @@
     // Used for extend
 }
 
+- (void)destory {
+    
+}
+
 @end

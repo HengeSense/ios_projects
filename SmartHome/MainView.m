@@ -44,11 +44,8 @@
     
     SMNotification *displayNotification;
     
-    /* 
-     *
-     *
-     */
-    NSInteger flag;
+    NSString *titleString;
+    NSString *stateString;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -72,6 +69,7 @@
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
 }
 
 - (void)initUI {
@@ -314,7 +312,8 @@
     @synchronized(self) {
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
-            self.topbar.titleLabel.text = unit.name;
+            titleString = unit.name;
+            [self updateTitleLabel];
         }
         [unitView loadOrRefreshUnit:unit];
     }
@@ -351,6 +350,41 @@
     }else {
         // has notifications
         [self updateNotifications:notifications];
+    }
+}
+
+#pragma mark -
+#pragma mark command delivery service delegate
+
+- (void)commandDeliveryServiceNotifyNetworkModeMayChanged:(NetworkMode)lastedNetwokMode {
+    if(lastedNetwokMode == 1) {
+        // External
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            stateString = NSLocalizedString(@"external", @"");
+        } else if([SMShared current].deliveryService.tcpService.isConnectting) {
+            stateString = NSLocalizedString(@"connectting", @"");
+        } else {
+            stateString = NSLocalizedString(@"disconnect", @"");
+        }
+    } else if(lastedNetwokMode == 2) {
+        // Internal
+        stateString = NSLocalizedString(@"internal", @"");
+    } else {
+        // Unknow
+        stateString = NSLocalizedString(@"disconnect", @"");
+    }
+    
+    [self updateTitleLabel];
+}
+
+- (void)updateTitleLabel {
+    if([NSString isBlank:stateString]) {
+        [self commandDeliveryServiceNotifyNetworkModeMayChanged:[SMShared current].deliveryService.currentNetworkMode];
+    }
+    if(![NSString isBlank:titleString]) {
+        self.topbar.titleLabel.text = [NSString stringWithFormat:@"%@ (%@)", titleString, stateString];
+    } else {
+        self.topbar.titleLabel.text = stateString;
     }
 }
 
@@ -504,7 +538,7 @@
 
 - (void)speechRecognizerFailed:(NSString *)message {
 #ifdef DEBUG
-    NSLog(@"need alert fail the error message is : [   %@  ]", message);
+    NSLog(@"[SPEECH RECOGNIZER] Error, reason is [ %@ ]", message);
 #endif
 }
 
@@ -512,9 +546,16 @@
 #pragma mark text message processor delegate
 
 
+- (void)destory {
+    [self unSubscribeEvnets];
+}
 
-
-
+- (void)unSubscribeEvnets {
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
+}
 
 #pragma mark -
 #pragma mark getter and setters
@@ -527,18 +568,6 @@
         speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;
-}
-
-- (NSString *)flagMessage {
-    if(flag == 0) {
-        
-    } else if(flag == 1) {
-        
-    } else if(flag == 2) {
-        
-    }
-    
-    return [NSString emptyString];
 }
 
 @end

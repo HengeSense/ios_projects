@@ -86,7 +86,7 @@
 
 - (void)flushQueue {
     @synchronized(self) {
-        if([socket canWrite] && queue.count > 0) {
+        if(socket.isConnect && [socket canWrite] && queue.count > 0) {
             NSMutableData *dataToSender = [NSMutableData data];
             DeviceCommand *command = [queue popup];
             while (command != nil) {
@@ -145,11 +145,7 @@
 #endif
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
-    
-    if(isFirst) {
-        isFirst = NO;
-//        [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
-    }
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 @end

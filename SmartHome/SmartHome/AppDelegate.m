@@ -101,11 +101,15 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"device token is %@", [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding]);
+#ifdef DEBUG
+    NSLog(@"[APP DELEGATE] Device token is %@.", [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding]);
+#endif
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"get device token failed...");
+#ifdef DEBUG
+    NSLog(@"[APP DELEGATE] Get device token failed.");
+#endif
 }
 
 #pragma mark -

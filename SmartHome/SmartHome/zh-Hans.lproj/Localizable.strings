@@ -43,6 +43,10 @@
 "close"                 = "关";
 "unknow"                = "未知";
 "error_occur"           = "出错啦!";
+"connectting"           = "连接中...";
+"internal"              = "内网";
+"external"              = "外网";
+"disconnect"            = "断开";
 
 
 /****************	View's Title Strings	****************/

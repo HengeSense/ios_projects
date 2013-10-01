@@ -49,7 +49,7 @@
         }
     } else {
 #ifdef DEBUG
-        NSLog(@"[NOTIFICATION FILE MANAGER]notifications file not exists");
+        NSLog(@"[NOTIFICATION FILE MANAGER] Notifications file not exists");
 #endif
     }
     return nil;

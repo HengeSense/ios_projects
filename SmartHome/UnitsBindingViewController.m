@@ -199,7 +199,6 @@
 #pragma mark QR code delegate
 
 - (void)qrCodeScannerSuccess:(NSString *)result scanner:(UIViewController *)scannerViewController {
-    NSLog(@"processing qr code %@", result);
     [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(test:) userInfo:scannerViewController repeats:NO];
 }
 
