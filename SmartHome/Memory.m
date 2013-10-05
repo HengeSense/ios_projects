@@ -245,11 +245,11 @@
             NSData *data = [JsonUtils createJsonDataFromDictionary:[NSDictionary dictionaryWithObject:unitsToSave forKey:@"units"]];
             
             BOOL success = [data writeToFile:filePath atomically:YES];
-#ifdef DEBUG
             if(!success) {
+#ifdef DEBUG
                 NSLog(@"[MEMORY] Save units failed ...");
-            }
 #endif
+            }
         }
         @catch (NSException *exception) {
 #ifdef DEBUG
