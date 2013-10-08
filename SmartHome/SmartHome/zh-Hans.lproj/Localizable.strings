@@ -199,4 +199,7 @@
 "menu"              =  "菜单";
 "connect_failed"    =  "连接已终止!";
 "play"              =  "播放";
+"volume_increase"   =  "音量+";
+"volume_reduce"     =  "音量-";
+
 
