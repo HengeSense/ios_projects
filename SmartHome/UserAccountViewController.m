@@ -206,6 +206,7 @@
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
             [[AlertView currentAlertView] delayDismissAlertView];
             [self updateScreenName];
+            [infoTable reloadData];
             break;
         case -1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_invalid", @"") forType:AlertViewTypeFailed];
