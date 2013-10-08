@@ -40,34 +40,45 @@
 
 - (void)initUI {
     if(btnPower == nil) {
-        btnPower = [[SMButton alloc] initWithFrame:CGRectMake(32, 15, 75/2, 78/2)];
+        btnPower = [[SMButton alloc] initWithFrame:CGRectMake(20, 15, 75/2, 78/2)];
         [btnPower setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
         [btnPower setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateHighlighted];
         [btnPower addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
-        btnPower.userObject = [NSNumber numberWithInteger:1];
+        btnPower.userObject = [NSNumber numberWithInteger:(self.device.isTV?1:89)];
         [self addSubview:btnPower];
     }
     
-    if(self.device.isSTB) {
-        if(btnVolumeIncreases == nil) {
-            btnVolumeIncreases = [[SMButton alloc] initWithFrame:CGRectMake(0, 18, 146/2, 62/2)];
-            [btnVolumeIncreases setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
-            [btnVolumeIncreases setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateHighlighted];
-            btnVolumeIncreases.userObject = [NSNumber numberWithInteger:1];
-            [self addSubview:btnVolumeIncreases];
-        }
-        
-        if(btnVolumeReduction == nil) {
-            btnVolumeReduction = [[SMButton alloc] initWithFrame:CGRectMake(0, 18, 146/2, 62/2)];
-            [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
-            [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateHighlighted];
-            btnVolumeReduction.userObject = [NSNumber numberWithInteger:1];
-            [self addSubview:btnVolumeReduction];
-        }
+
+    if(btnVolumeIncreases == nil) {
+        btnVolumeIncreases = [[SMButton alloc] initWithFrame:CGRectMake(67, 18, 146/2, 62/2)];
+        [btnVolumeIncreases setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
+        [btnVolumeIncreases setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateHighlighted];
+        btnVolumeIncreases.userObject = [NSNumber numberWithInteger:(self.device.isTV?19:111)];
+        btnVolumeIncreases.titleLabel.font = [UIFont systemFontOfSize:15.f];
+        [btnVolumeIncreases setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
+        [btnVolumeIncreases setTitle:NSLocalizedString(@"volume_increase", @"") forState:UIControlStateNormal];
+        [btnVolumeIncreases setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
+        [btnVolumeIncreases addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnVolumeIncreases];
     }
     
-    if(btnSignal == nil) {
-        btnSignal = [[SMButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 146/2 - 32, 18, 146/2, 62/2)];
+    if(btnVolumeReduction == nil) {
+        btnVolumeReduction = [[SMButton alloc] initWithFrame:CGRectMake(147, 18, 146/2, 62/2)];
+        [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
+        [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateHighlighted];
+        btnVolumeReduction.userObject = [NSNumber numberWithInteger:(self.device.isTV?20:112)];
+        btnVolumeIncreases.titleLabel.font = [UIFont systemFontOfSize:15.f];
+        [btnVolumeReduction setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
+        [btnVolumeReduction setTitle:NSLocalizedString(@"volume_reduce", @"") forState:UIControlStateNormal];
+        [btnVolumeReduction setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
+        [btnVolumeReduction addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+        [self addSubview:btnVolumeReduction];
+    }
+
+    
+    if(btnSignal == nil&&self.device.isTV) {
+        btnSignal = [[SMButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 146/2 - 20, 18, 146/2, 62/2)];
         btnSignal.titleLabel.font = [UIFont systemFontOfSize:15.f];
         [btnSignal setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
         [btnSignal setTitle:NSLocalizedString(@"signal_source", @"") forState:UIControlStateNormal];
@@ -87,7 +98,7 @@
             SMButton *btnDigital = [[SMButton alloc] initWithFrame:CGRectMake(x, y, 75/2, 78/2)];
             [btnDigital setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
             [btnDigital setTitle:[NSString stringWithFormat:@"%d", i>=9 ? 0 : (i+1)] forState:UIControlStateNormal];
-            btnDigital.userObject = [NSNumber numberWithInteger:i+2];
+            btnDigital.userObject = [NSNumber numberWithInteger:(self.device.isTV?i+2:i+90)];
             [btnDigital setBackgroundImage:[UIImage imageNamed:@"btn_rc_number.png"] forState:UIControlStateNormal];
             [btnDigital setBackgroundImage:[UIImage imageNamed:@"btn_rc_number.png"] forState:UIControlStateHighlighted];
             [btnDigital addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -105,7 +116,7 @@
         [btnBack setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
         [btnBack setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateHighlighted];
         [btnBack addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
-        btnBack.userObject = [NSNumber numberWithInteger:30];
+        btnBack.userObject = [NSNumber numberWithInteger:(self.device.isTV?38:109)];
         [self addSubview:btnBack];
     }
     
@@ -117,7 +128,7 @@
         [btnMenu setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
         [btnMenu setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
         [btnMenu setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateHighlighted];
-        btnMenu.userObject = [NSNumber numberWithInteger:13];
+        btnMenu.userObject = [NSNumber numberWithInteger:(self.device.isTV?13:103)];
         [btnMenu addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnMenu];
     }
