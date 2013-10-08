@@ -11,10 +11,10 @@
 
 @interface SMCommandQueue : NSObject
 
-- (NSUInteger)count;
-- (void)pushCommand:(DeviceCommand *)command;
 - (DeviceCommand *)popup;
-
+- (void)pushCommand:(DeviceCommand *)command;
 - (BOOL)contains:(DeviceCommand *)command;
+
+- (NSUInteger)count;
 
 @end

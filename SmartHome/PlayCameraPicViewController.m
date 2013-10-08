@@ -130,7 +130,9 @@
     isPlaying = NO;
     isFirst = YES;
     playView.image = nil;
+#ifdef DEBUG
     NSLog(@"[Image provider] Download Ended.");
+#endif
 }
 
 - (void)imageProviderNotifyReadingImageError {
@@ -138,7 +140,9 @@
     isFirst = YES;
     playView.image = nil;
     [loadingView showError];
+#ifdef DEBUG
     NSLog(@"[Image provider] Reading Error.");
+#endif
 }
 
 @end

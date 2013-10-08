@@ -16,7 +16,7 @@
 #import "ViewsPool.h"
 
 #define MAIN_VIEW_TAG         5001
-#define UNIT_REFRESH_INTERVAL 10
+
 
 @interface MainViewController ()
 
@@ -26,8 +26,6 @@
     TopbarView *topbar;
     NSMutableArray *drawerItems;
     DrawerNavigationItem *currentItem;
-    
-    NSTimer *currentUnitRefreshTimer;
 }
 
 - (void)viewDidLoad
@@ -35,22 +33,6 @@
     [super viewDidLoad];
     [self initDefaults];
     [self initUI];
-    
-    if(currentUnitRefreshTimer == nil) {
-        currentUnitRefreshTimer = [NSTimer scheduledTimerWithTimeInterval:UNIT_REFRESH_INTERVAL target:self selector:@selector(refreshUnit) userInfo:nil repeats:YES];
-        [currentUnitRefreshTimer fire];
-    }
-}
-
-- (void)refreshUnit {
-    Unit *unit = [SMShared current].memory.currentUnit;
-    if(unit != nil) {
-        DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
-        command.masterDeviceCode = unit.identifier;
-        command.hashCode = unit.hashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:command];
-        [[SMShared current].deliveryService checkInternalOrNotInternalNetwork];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +99,8 @@
     
     //after initial
     [self applyBindings];
+    
+    [[SMShared current].deliveryService startRefreshCurrentUnit];
 }
 
 - (void)drawerNavigationItemChanged:(DrawerNavigationItem *)item isFirstTime:(BOOL)isFirst {

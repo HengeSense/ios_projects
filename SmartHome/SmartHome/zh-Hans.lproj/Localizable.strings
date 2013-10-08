@@ -9,6 +9,9 @@
 
 /****************	Global Strings	****************/
 
+"yes"                   = "是";
+"no"                    = "否";
+"tips"                  = "提示";
 "ok"                    = "好的";
 "cancel"                = "取消";
 "back"                  = "返回";
@@ -40,6 +43,10 @@
 "close"                 = "关";
 "unknow"                = "未知";
 "error_occur"           = "出错啦!";
+"connectting"           = "连接中...";
+"internal"              = "内网";
+"external"              = "外网";
+"disconnect"            = "断开";
 
 
 /****************	View's Title Strings	****************/
@@ -167,6 +174,13 @@
 "status_opened"                 =   "已开启";
 "status_closed"                 =   "已关闭";
 
+
+/****************	Device Find View Strings   ****************/
+
+"no_unit_found"                 =   "没有找到新主控";
+"searching_unit"                =   "正在搜索主控";
+"found_new_unit"                =   "发现新主控,是否绑定?";
+"binding"                       =   "绑定";
 
 /****************	Device's Strings   ****************/
 

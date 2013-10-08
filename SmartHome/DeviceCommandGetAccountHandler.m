@@ -7,7 +7,8 @@
 //
 
 #import "DeviceCommandGetAccountHandler.h"
-
+#import "NavigationView.h"
+#import "ViewsPool.h"
 
 @implementation DeviceCommandGetAccountHandler
 
@@ -15,8 +16,15 @@
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
-        [SMShared current].settings.screenName = deviceCommand.screenName;
-        [[SMShared current].settings saveSettings];
+
+        NavigationView *nav = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+        if(nav != nil) {
+            DrawerView *drawerView = (DrawerView *)nav.ownerController.leftView;
+            if(drawerView != nil) {
+                [drawerView setScreenName:deviceCommand.screenName];
+            }
+        }
+        
         NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetAccountHandler class]];
         for(int i=0; i<arr.count; i++) {
             if([[arr objectAtIndex:i] respondsToSelector:@selector(updateAccount:)]) {

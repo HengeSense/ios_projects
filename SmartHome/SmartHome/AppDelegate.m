@@ -25,24 +25,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
-    
-    self.settings.isFirstTimeOpenApp = NO;
     
     // determine first view controller
     UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     [navigationController setNavigationBarHidden:YES];
     navigationController.delegate = ((LoginViewController *)self.rootViewController);
-
-    BOOL hasLogin = ![@"" isEqualToString:self.settings.secretKey];
-    if (self.settings.isFirstTimeOpenApp) {
-        self.settings.isFirstTimeOpenApp = NO;
-        [self.settings saveSettings];
-        [self.rootViewController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated: YES];
-    }
+    
+    BOOL hasLogin = ![[NSString emptyString] isEqualToString:self.settings.secretKey];
     if(hasLogin) {
         // start service 
         [self.deviceCommandDeliveryService startService];
@@ -59,6 +51,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
+    
+    if (self.settings.isFirstTimeOpenApp) {
+        self.settings.isFirstTimeOpenApp = NO;
+        [self.settings saveSettings];
+        [self.rootViewController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated: NO];
+    }
     
     // register for remote notifications
     [self registerForRemoteNotifications];
@@ -83,9 +81,10 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-    if(![NSString isBlank:self.settings.account] && ![NSString isBlank:self.settings.secretKey]
+    if(![NSString isBlank:self.settings.secretKey]
        && ![NSString isBlank:self.settings.deviceCode]) {
         [self.deviceCommandDeliveryService startService];
+        [self.deviceCommandDeliveryService startRefreshCurrentUnit];
     }
 }
 
@@ -102,11 +101,15 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"device token is %@", [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding]);
+#ifdef DEBUG
+    NSLog(@"[APP DELEGATE] Device token is %@.", [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding]);
+#endif
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"get device token failed...");
+#ifdef DEBUG
+    NSLog(@"[APP DELEGATE] Get device token failed.");
+#endif
 }
 
 #pragma mark -

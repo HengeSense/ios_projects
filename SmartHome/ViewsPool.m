@@ -7,6 +7,7 @@
 //
 
 #import "ViewsPool.h"
+#import "NavigationView.h"
 #import "NSString+StringUtils.h"
 
 @implementation ViewsPool {
@@ -36,23 +37,33 @@
 }
 
 - (UIView *)viewWithIdentifier:(NSString *)identifier {
-    return [pool objectForKey:identifier];
+    @synchronized(self) {
+        return [pool objectForKey:identifier];
+    }
 }
 
 - (void)putView:(UIView *)view forIdentifier:(NSString *)identifier {
-    if([NSString isEmpty:identifier]) return;
-    UIView *v = [self viewWithIdentifier:identifier];
-    if(v) {
-        [pool removeObjectForKey:identifier];
-    }
-    if(view) {
-        [pool setObject:view forKey:identifier];
+    @synchronized(self) {
+        if([NSString isEmpty:identifier]) return;
+        UIView *v = [self viewWithIdentifier:identifier];
+        if(v) {
+            if([v isKindOfClass:[NavigationView class]]) {
+                NavigationView *view = (NavigationView *)v;
+                [view destory];
+            }
+            [pool removeObjectForKey:identifier];
+        }
+        if(view) {
+            [pool setObject:view forKey:identifier];
+        }
     }
 }
 
 - (void)clear {
-    if(pool != nil) {
-        [pool removeAllObjects];
+    @synchronized(self) {
+        if(pool != nil) {
+            [pool removeAllObjects];
+        }
     }
 }
 

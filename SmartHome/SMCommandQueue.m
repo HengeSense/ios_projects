@@ -8,6 +8,9 @@
 
 #import "SMCommandQueue.h"
 
+#define CLEARD_COMMANDS_CAPS 50
+#define COMMANDS_CLEARD_TO   20
+
 @implementation SMCommandQueue {
     NSMutableArray *queue;
 }
@@ -28,6 +31,9 @@
 
 - (void)pushCommand:(DeviceCommand *)command {
     @synchronized(self) {
+        if(queue.count >= CLEARD_COMMANDS_CAPS) {
+            [self clearUpInternal];
+        }
         [queue addObject:command];
     }
 }
@@ -55,6 +61,13 @@
         }
         return nil;
     }
+}
+
+- (void)clearUpInternal {
+#ifdef DEBUG
+    NSLog(@"[COMMAND QUEUE] Too many commands has been queued, clear some older commands ...");
+#endif
+    [queue removeObjectsInRange:NSMakeRange(0, queue.count - COMMANDS_CLEARD_TO)];
 }
 
 @end

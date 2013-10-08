@@ -10,6 +10,7 @@
 #import "NSDictionary+Extension.h"
 #import "NSMutableDictionary+Extension.h"
 #import "JsonUtils.h"
+#import "NSString+StringUtils.h"
 
 typedef NS_ENUM(NSUInteger, CommandNetworkMode) {
     CommandNetworkModeNone,

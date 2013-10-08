@@ -40,6 +40,11 @@
         NSData *data = [JsonUtils createJsonDataFromDictionary:[updateDevice toDictionary]];
         [self updateDeviceWithAddress:updateDevice.restAddress port:updateDevice.restPort data:data];
     } else if([COMMAND_GET_SCENE_LIST isEqualToString:command.commandName]) {
+        Unit *unit = [[SMShared current].memory findUnitByIdentifier:command.masterDeviceCode];
+        if(unit != nil) {
+            NSString *url = [NSString stringWithFormat:@"http://%@:%d/scenecfg?hashCode=%d", unit.localIP, unit.localPort, unit.sceneHashCode.integerValue];
+            [self getSceneListByUrl:url unitIdentifier:command.masterDeviceCode];
+        }
     }
 }
 
@@ -67,7 +72,9 @@
 }
 
 - (void)updateDeviceFailed:(RestResponse *)resp {
+#ifdef DEBUG
     NSLog(@"[RESTFUL COMMAND SERVICE] Update device failed, status code is %d", resp.statusCode);
+#endif
 }
 
 #pragma mark -
@@ -105,12 +112,40 @@
 }
 
 - (void)getUnitFailed:(RestResponse *)resp {
+#ifdef DEBUG
     NSLog(@"[RESTFUL COMMAND SERVICE] Get unit failed, staus code is %d", resp.statusCode);
+#endif
 }
 
 #pragma mark -
 #pragma mark Scene list from rest server
 
+- (void)getSceneListByUrl:(NSString *)url unitIdentifier:(NSString *)identifier {
+    [self.client getForUrl:url acceptType:@"application/json" success:@selector(getSceneListSuccess:) error:@selector(getSceneListFailed:) for:self callback:identifier];
+}
 
+- (void)getSceneListSuccess:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            DeviceCommandUpdateSceneMode *command = [[DeviceCommandUpdateSceneMode alloc] initWithDictionary:json];
+            command.commandName = COMMAND_GET_SCENE_LIST;
+            command.masterDeviceCode = resp.callbackObject;
+            command.commmandNetworkMode = CommandNetworkModeInternal;
+            [[SMShared current].deliveryService handleDeviceCommand:command];
+            return;
+        }
+    } else if(resp.statusCode == 204) {
+        // ignore this ... do not need to refresh local scene list
+        return;
+    }
+    [self getSceneListFailed:resp];
+}
+
+- (void)getSceneListFailed:(RestResponse *)resp {
+#ifdef DEBUG
+    NSLog(@"[RESTFUL COMMAND SERVICE] Get scene list failed, staus code is %d", resp.statusCode);
+#endif
+}
 
 @end

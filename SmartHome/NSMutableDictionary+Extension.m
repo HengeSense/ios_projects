@@ -14,16 +14,19 @@
     [self setObject:[NSNumber numberWithInteger:integer] forKey:key];
 }
 
+/* if object is blank , return */
 - (void)setNoNilObject:(id)object forKey:(id<NSCopying>)key {
     if(object == nil || object == [NSNull null]) return;
     [self setObject:object forKey:key];
 }
 
+/* if string is blank , return */
 - (void)setNoBlankString:(NSString *)string forKey:(id<NSCopying>)key {
     if([NSString isBlank:string]) return;
     [self setObject:string forKey:key];
 }
 
+/* if string is blank , set an empty string for value */
 - (void)setMayBlankString:(NSString *)string forKey:(id<NSCopying>)key {
     if([NSString isBlank:string]) {
         [self setObject:[NSString emptyString] forKey:key];
@@ -32,6 +35,7 @@
     [self setObject:string forKey:key];
 }
 
+/* if date is nil , return */
 - (void)setDateLongLongValue:(NSDate *)date forKey:(id<NSCopying>)key {
     if(date == nil) return;
     [self setObject:[NSNumber numberWithLongLong:date.timeIntervalSince1970 * 1000] forKey:key];

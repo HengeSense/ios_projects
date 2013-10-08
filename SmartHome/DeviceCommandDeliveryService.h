@@ -21,6 +21,14 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
     NetworkModeInternal
 };
 
+@protocol CommandDeliveryServiceDelegate <NSObject>
+
+@optional
+
+- (void)commandDeliveryServiceNotifyNetworkModeMayChanged:(NetworkMode)lastedNetwokMode;
+
+@end
+
 @interface DeviceCommandDeliveryService : NSObject
 
 @property (strong, nonatomic, readonly) TCPCommandService *tcpService;
@@ -35,8 +43,12 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
 - (void)startService;
 - (void)stopService;
 
-/*  */
+/* External or Internal Network Checker */
 - (NetworkMode)currentNetworkMode;
 - (void)checkInternalOrNotInternalNetwork;
+
+/* Start and Stop refresh current unit */
+- (void)startRefreshCurrentUnit;
+- (void)stopRefreshCurrentUnit;
 
 @end

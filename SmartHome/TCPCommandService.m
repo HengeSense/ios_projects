@@ -14,6 +14,7 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
+    BOOL isFirst;
     
     /* This flat to make sure only call connect method once */
     BOOL flag;
@@ -32,7 +33,9 @@
         NSString *tcpAddress = [SMShared current].settings.tcpAddress;
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
         if(addressSet == nil || addressSet.count != 2) {
+#ifdef DEBUG
             NSLog(@"TCP COMMAND SOCKET] Server address error [ %@ ]", tcpAddress == nil ? [NSString emptyString] : tcpAddress);
+#endif
             return;
         }
         NSString *addr = [addressSet objectAtIndex:0];
@@ -44,6 +47,8 @@
     if(queue == nil) {
         queue = [[SMCommandQueue alloc] init];
     }
+    
+    isFirst = NO;
 }
 
 - (void)connect {
@@ -81,7 +86,7 @@
 
 - (void)flushQueue {
     @synchronized(self) {
-        if([socket canWrite] && queue.count > 0) {
+        if(socket.isConnect && [socket canWrite] && queue.count > 0) {
             NSMutableData *dataToSender = [NSMutableData data];
             DeviceCommand *command = [queue popup];
             while (command != nil) {
@@ -108,11 +113,15 @@
 }
 
 - (void)clientSocketMessageDiscard:(NSData *)discardMessage {
+#ifdef DEBUG
     NSLog(@"[TCP COMMAND SOCKET] Some data will discard, the length is %d", discardMessage.length);
+#endif
 }
 
 - (void)clientSocketMessageReadError {
+#ifdef DEBUG
     NSLog(@"[TCP COMMAND SOCKET] socket data reading or format error");
+#endif
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
@@ -124,14 +133,19 @@
 - (void)notifyConnectionClosed {
     @synchronized(self) {
         flag = NO;
+#ifdef DEBUG
         NSLog(@"[TCP COMMAND SOCKET] Closed");
+#endif
     }
 }
 
 - (void)notifyConnectionOpened {
+#ifdef DEBUG
     NSLog(@"[TCP COMMAND SOCKET] Opened");
+#endif
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 @end

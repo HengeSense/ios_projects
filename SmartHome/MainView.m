@@ -44,11 +44,8 @@
     
     SMNotification *displayNotification;
     
-    /* 
-     *
-     *
-     */
-    NSInteger flag;
+    NSString *titleString;
+    NSString *stateString;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -72,6 +69,7 @@
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
 }
 
 - (void)initUI {
@@ -274,10 +272,14 @@
     } else if([@"units" isEqualToString:source]) {
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
         [self notifyUnitsWasUpdate];
-        DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
-        command.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
-        command.hashCode = [SMShared current].memory.currentUnit.hashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:command];
+        DeviceCommand *getUnitCommand = [CommandFactory commandForType:CommandTypeGetUnits];
+        getUnitCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
+        getUnitCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
+        [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
+        DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
+        getSceneListCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
+        getSceneListCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
+        [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
     }
 }
 
@@ -310,7 +312,8 @@
     @synchronized(self) {
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
-            self.topbar.titleLabel.text = unit.name;
+            titleString = unit.name;
+            [self updateTitleLabel];
         }
         [unitView loadOrRefreshUnit:unit];
     }
@@ -347,6 +350,41 @@
     }else {
         // has notifications
         [self updateNotifications:notifications];
+    }
+}
+
+#pragma mark -
+#pragma mark command delivery service delegate
+
+- (void)commandDeliveryServiceNotifyNetworkModeMayChanged:(NetworkMode)lastedNetwokMode {
+    if(lastedNetwokMode == 1) {
+        // External
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            stateString = NSLocalizedString(@"external", @"");
+        } else if([SMShared current].deliveryService.tcpService.isConnectting) {
+            stateString = NSLocalizedString(@"connectting", @"");
+        } else {
+            stateString = NSLocalizedString(@"disconnect", @"");
+        }
+    } else if(lastedNetwokMode == 2) {
+        // Internal
+        stateString = NSLocalizedString(@"internal", @"");
+    } else {
+        // Unknow
+        stateString = NSLocalizedString(@"disconnect", @"");
+    }
+    
+    [self updateTitleLabel];
+}
+
+- (void)updateTitleLabel {
+    if([NSString isBlank:stateString]) {
+        [self commandDeliveryServiceNotifyNetworkModeMayChanged:[SMShared current].deliveryService.currentNetworkMode];
+    }
+    if(![NSString isBlank:titleString]) {
+        self.topbar.titleLabel.text = [NSString stringWithFormat:@"%@ (%@)", titleString, stateString];
+    } else {
+        self.topbar.titleLabel.text = stateString;
     }
 }
 
@@ -446,12 +484,12 @@
 
 // 确保录音提示音已经结束,防止提示语进入识别范围
 - (void)delayStartListening {
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
     [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
 }
 
 - (void)startListening:(NSTimer *)timer {
     [speechRecognitionUtil startListening];
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
 }
 
 #pragma mark -
@@ -462,9 +500,9 @@
 }
 
 - (void)endRecord {
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
     recognizerState = RecognizerStateRecordingEnd;
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
 }
 
 - (void)recognizeCancelled {
@@ -478,6 +516,7 @@
 }
 
 - (void)recognizeSuccess:(NSString *)result {
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     if(![NSString isBlank:result]) {
         //process text message
         DeviceCommandVoiceControl *command = (DeviceCommandVoiceControl *)[CommandFactory commandForType:CommandTypeUpdateDeviceViaVoice];
@@ -488,27 +527,35 @@
         [self speechRecognizerFailed:@"empty speaking..."];
         //
     }
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateReady;
 }
 
 - (void)recognizeError:(int)errorCode {
-    [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
     recognizerState = RecognizerStateReady;
 }
 
 - (void)speechRecognizerFailed:(NSString *)message {
-    NSLog(@"need alert fail the error message is : [   %@  ]", message);
+#ifdef DEBUG
+    NSLog(@"[SPEECH RECOGNIZER] Error, reason is [ %@ ]", message);
+#endif
 }
 
 #pragma mark -
 #pragma mark text message processor delegate
 
 
+- (void)destory {
+    [self unSubscribeEvnets];
+}
 
-
-
+- (void)unSubscribeEvnets {
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
+}
 
 #pragma mark -
 #pragma mark getter and setters
@@ -521,18 +568,6 @@
         speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;
-}
-
-- (NSString *)flagMessage {
-    if(flag == 0) {
-        
-    } else if(flag == 1) {
-        
-    } else if(flag == 2) {
-        
-    }
-    
-    return [NSString emptyString];
 }
 
 @end

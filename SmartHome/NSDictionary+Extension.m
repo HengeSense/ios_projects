@@ -37,7 +37,6 @@
     NSNumber *_date_ = [self notNSNullObjectForKey:key];
     if(_date_ == nil) return nil;
     return [NSDate dateWithTimeIntervalSince1970:_date_.longLongValue / 1000];
-    //    return [NSDate dateWithTimeIntervalMillisecondSince1970:_date_.longLongValue];
 }
 
 - (NSArray *)arrayForKey:(id)key {

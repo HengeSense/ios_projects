@@ -93,7 +93,7 @@
         imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
         [self addSubview:imgSeperatorLine];
 
-        lblMessage1.text = [NSString isBlank:[SMShared current].settings.screenName] ? [SMShared current].settings.account : [SMShared current].settings.screenName;
+        lblMessage1.text = [SMShared current].settings.account;
         lblMessage2.text = NSLocalizedString(@"edit_profile", @"");
     }
     

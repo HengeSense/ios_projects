@@ -27,6 +27,13 @@
             }
         }
         
+        BOOL hasUnits = [SMShared current].memory.units.count > 0;
+        BOOL anyUnitsBinding = [SMShared current].settings.anyUnitsBinding;
+        if(anyUnitsBinding != hasUnits) {
+            [SMShared current].settings.anyUnitsBinding = hasUnits;
+            [[SMShared current].settings saveSettings];
+        }
+        
         // notify subscriptions
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
         if(subscriptions) {
@@ -35,22 +42,6 @@
                     [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyUnitsWasUpdate) withObject:nil waitUntilDone:NO];
                 }
             }
-        }
-        
-        // update scene list for each unit
-        for(Unit *unit in updateUnitsCommand.units) {
-            DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
-            
-            // set master device code
-            getSceneListCommand.masterDeviceCode = unit.identifier;
-            
-            // set hash code
-            getSceneListCommand.hashCode = unit.sceneHashCode;
-            
-            // set network delivery mode
-            getSceneListCommand.commmandNetworkMode = updateUnitsCommand.commmandNetworkMode;
-            
-            [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
         }
     }
 }

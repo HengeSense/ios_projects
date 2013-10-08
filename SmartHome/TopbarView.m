@@ -69,7 +69,7 @@
 
 - (UILabel *)titleLabel {
     if(titleLabel == nil) {
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 20 : 0, 150, 44)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 20 : 0, 220, 44)];
         titleLabel.center = CGPointMake(self.center.x, titleLabel.center.y);
         titleLabel.textColor = [UIColor lightTextColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
