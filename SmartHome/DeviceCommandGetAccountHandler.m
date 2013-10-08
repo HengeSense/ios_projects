@@ -23,6 +23,8 @@
             if(drawerView != nil) {
                 [drawerView setScreenName:deviceCommand.screenName];
             }
+        } else {
+            
         }
         
         NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetAccountHandler class]];

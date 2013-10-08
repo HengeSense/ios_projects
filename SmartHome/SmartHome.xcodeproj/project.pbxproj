@@ -147,6 +147,7 @@
 		6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A722C17B23E91002BA8C5 /* ConversationView.m */; };
 		6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */; };
 		6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */; };
+		6F953D021803F29B00D847FA /* CameraService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F953D011803F29B00D847FA /* CameraService.m */; };
 		6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F95BF5A17D42B82003A0745 /* RestfulCommandService.m */; };
 		6F95BF6117D4A7CD003A0745 /* SMCommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F95BF6017D4A7CD003A0745 /* SMCommandQueue.m */; };
 		6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7C17BE1EEA007F90A2 /* AlertView.m */; };
@@ -530,6 +531,8 @@
 		6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationMessage.m; sourceTree = "<group>"; };
 		6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationTextMessage.h; sourceTree = "<group>"; };
 		6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConversationTextMessage.m; sourceTree = "<group>"; };
+		6F953D001803F29B00D847FA /* CameraService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraService.h; sourceTree = "<group>"; };
+		6F953D011803F29B00D847FA /* CameraService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraService.m; sourceTree = "<group>"; };
 		6F95BF5917D42B82003A0745 /* RestfulCommandService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestfulCommandService.h; sourceTree = "<group>"; };
 		6F95BF5A17D42B82003A0745 /* RestfulCommandService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestfulCommandService.m; sourceTree = "<group>"; };
 		6F95BF5F17D4A7CD003A0745 /* SMCommandQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCommandQueue.h; sourceTree = "<group>"; };
@@ -1659,6 +1662,8 @@
 				6F89282A17B3F2D000D0C1E3 /* ServiceBase.m */,
 				6FB66D6017C745820002D6C5 /* AccountService.h */,
 				6FB66D6117C745820002D6C5 /* AccountService.m */,
+				6F953D001803F29B00D847FA /* CameraService.h */,
+				6F953D011803F29B00D847FA /* CameraService.m */,
 			);
 			name = rest;
 			sourceTree = "<group>";
@@ -2182,6 +2187,7 @@
 				F2D8E8C717C48EA500090E5B /* CameraViewController.m in Sources */,
 				6FBD013417C4E034002D5618 /* DeviceButton.m in Sources */,
 				F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */,
+				6F953D021803F29B00D847FA /* CameraService.m in Sources */,
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
 				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,
 				6FB66D6217C745820002D6C5 /* AccountService.m in Sources */,
@@ -2308,8 +2314,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2324,8 +2330,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
@@ -2345,8 +2351,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2354,8 +2360,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2370,7 +2376,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2390,8 +2396,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2407,8 +2413,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2427,8 +2433,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E14280C6-50CD-44BC-9900-3A05B6FCC1D5";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";

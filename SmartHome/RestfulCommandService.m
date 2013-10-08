@@ -45,6 +45,15 @@
             NSString *url = [NSString stringWithFormat:@"http://%@:%d/scenecfg?hashCode=%d", unit.localIP, unit.localPort, unit.sceneHashCode.integerValue];
             [self getSceneListByUrl:url unitIdentifier:command.masterDeviceCode];
         }
+    } else if([COMMAND_GET_CAMERA_SERVER isEqualToString:command.commandName]) {
+        if([command isKindOfClass:[DeviceCommandGetCameraServer class]]) {
+            DeviceCommandGetCameraServer *getCameraServerCmd = (DeviceCommandGetCameraServer *)command;
+            DeviceCommandReceivedCameraServer *cmd = [[DeviceCommandReceivedCameraServer alloc] init];
+            cmd.commandName = COMMAND_GET_CAMERA_SERVER;
+            cmd.cameraId = getCameraServerCmd.cameraId;
+            cmd.commmandNetworkMode = CommandNetworkModeInternal;
+            [[SMShared current].deliveryService handleDeviceCommand:cmd];
+        }
     }
 }
 

@@ -18,7 +18,6 @@
     NSUInteger hasRetryCount;
     NSMutableData *currentImageData;
     NSUInteger currentImageLength;
-    NSTimeInterval lastSendTime;
     BOOL needToShakeHands;
     BOOL shakeHandsSuccess;
     BOOL inOpen;

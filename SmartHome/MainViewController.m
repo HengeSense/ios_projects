@@ -17,7 +17,6 @@
 
 #define MAIN_VIEW_TAG         5001
 
-
 @interface MainViewController ()
 
 @end

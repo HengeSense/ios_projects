@@ -63,7 +63,7 @@
     isService = NO;
     networkMode = NetworkModeNotChecked;
     syncObject = [[NSObject alloc] init];
-    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, nil];
+    mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, COMMAND_GET_CAMERA_SERVER, nil];
     
     /* Network monitor */
     reachability = [Reachability reachabilityWithHostname:@"www.baidu.com"];

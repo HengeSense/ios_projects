@@ -9,6 +9,7 @@
 #import "CameraViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CameraLoadingView.h"
+#import "CameraService.h"
 #import "UIColor+ExtentionForHexString.h"
 
 
@@ -22,6 +23,7 @@
     BOOL firstImageHasBeenSet;
     DirectionButton *btnDirection;
     CameraSocket *socket;
+    CameraService *cameraService;
 }
 
 @synthesize cameraDevice;
@@ -99,6 +101,12 @@
 - (void)stopMonitorCamera {
     if(socket != nil && [socket isConnectted]) {
         [socket close];
+        socket = nil;
+    }
+    
+    if(cameraService != nil && [cameraService isPlaying]) {
+        [cameraService close];
+        cameraService = nil;
     }
 }
 
@@ -108,23 +116,32 @@
 - (void)receivedCameraServer:(DeviceCommandReceivedCameraServer *)command {
     if(self.cameraDevice == nil) return;
     if(![self.cameraDevice.identifier isEqualToString:command.cameraId]) return;
-    NSArray *addressSet = [command.server componentsSeparatedByString:@":"];
-    if(addressSet != nil && addressSet.count == 2) {
-        NSString *address = [addressSet objectAtIndex:0];
-        NSString *port = [addressSet objectAtIndex:1];
-        if(socket != nil && [socket isConnectted]) {
-            [socket close];
+    
+    if(command.commmandNetworkMode == CommandNetworkModeInternal) {
+        if(cameraService != nil && [cameraService isPlaying]) {
+            [cameraService close];
         }
-        socket = [[CameraSocket alloc] initWithIPAddress:address andPort:port.integerValue];
-        socket.delegate = self;
-        socket.key = command.conStr;
-        [self performSelectorInBackground:@selector(startSocket) withObject:nil];
-    }
-}
-
-- (void)startSocket {
-    if(socket != nil) {
-        [socket connect];
+        NSString *cameraUrl = [NSString stringWithFormat:@"http://%@:%d/snapshot.cgi?user=%@&pwd=%@", self.cameraDevice.ip, self.cameraDevice.port, self.cameraDevice.user, self.cameraDevice.pwd];
+        cameraService = [[CameraService alloc] initWithUrl:cameraUrl];
+        cameraService.delegate = self;
+        [cameraService open];
+    } else {
+        NSArray *addressSet = [command.server componentsSeparatedByString:@":"];
+        if(addressSet != nil && addressSet.count == 2) {
+            NSString *address = [addressSet objectAtIndex:0];
+            NSString *port = [addressSet objectAtIndex:1];
+            if(socket != nil && [socket isConnectted]) {
+                [socket close];
+            }
+            socket = [[CameraSocket alloc] initWithIPAddress:address andPort:port.integerValue];
+            socket.delegate = self;
+            socket.key = command.conStr;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                if(socket != nil) {
+                    [socket connect];
+                }
+            });
+        }
     }
 }
 
