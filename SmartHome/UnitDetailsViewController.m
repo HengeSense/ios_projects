@@ -196,6 +196,7 @@
 
 - (void)textViewHasBeenSetting:(NSString *)string {
     DeviceCommandUpdateUnitName *cmd = (DeviceCommandUpdateUnitName *)[CommandFactory commandForType:CommandTypeUpdateUnitName];
+    unit.name = string;
     cmd.masterDeviceCode = unit.identifier;
     cmd.name = string;
     [[SMShared current].deliveryService executeDeviceCommand:cmd];
