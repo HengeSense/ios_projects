@@ -42,7 +42,7 @@
         fieldsNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"device_name",@""),NSLocalizedString(@"device_category", @""),NSLocalizedString(@"device_ip", @""),NSLocalizedString(@"device_port", @""),NSLocalizedString(@"device_nwkAddr", @""),NSLocalizedString(@"device_status", @""), nil];
     }
     if (fieldsValues == nil && device) {
-        NSString *status = device.status?NSLocalizedString(@"closed", @""):NSLocalizedString(@"opened", @"");
+        NSString *status = device.status ? NSLocalizedString(@"status_closed", @""):NSLocalizedString(@"status_opened", @"");
         fieldsValues = [[NSArray alloc] initWithObjects:device.name,NSLocalizedString(device.category, @""),    device.ip,[NSString stringWithFormat:@"%i",device.port],device.nwkAddr,status, nil];
     }
 }
