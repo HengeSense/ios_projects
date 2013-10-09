@@ -2377,7 +2377,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
