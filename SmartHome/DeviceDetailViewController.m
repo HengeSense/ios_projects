@@ -36,7 +36,7 @@
 	// Do any additional setup after loading the view.
 }
 
--(void) initDefaults{
+- (void)initDefaults {
     [super initDefaults];
     if (fieldsNames == nil) {
         fieldsNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"device_name",@""),NSLocalizedString(@"device_category", @""),NSLocalizedString(@"device_ip", @""),NSLocalizedString(@"device_port", @""),NSLocalizedString(@"device_nwkAddr", @""),NSLocalizedString(@"device_status", @""), nil];
@@ -47,7 +47,7 @@
     }
 }
 
--(void) initUI{
+- (void)initUI {
     [super initUI];
     if(device)
         self.topbar.titleLabel.text = device.name;
@@ -66,7 +66,7 @@
     return fieldsNames.count;
 }
 
--(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 

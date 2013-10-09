@@ -195,15 +195,16 @@
 }
 
 - (void)textViewHasBeenSetting:(NSString *)string {
-//    DeviceCommandUpdateUnitName *cmd = (DeviceCommandUpdateUnitName *)[CommandFactory commandForType:CommandTypeUpdateUnitName];
-//    cmd.name = string;
-//    [[SMShared current].deliveryService executeDeviceCommand:cmd];
-//    
-//    UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//    if(cell) {
-//        UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
-//        lblTitle.text = string;
-//    }
+    DeviceCommandUpdateUnitName *cmd = (DeviceCommandUpdateUnitName *)[CommandFactory commandForType:CommandTypeUpdateUnitName];
+    cmd.masterDeviceCode = unit.identifier;
+    cmd.name = string;
+    [[SMShared current].deliveryService executeDeviceCommand:cmd];
+    
+    UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if(cell) {
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
+        lblTitle.text = string;
+    }
 }
 
 @end
