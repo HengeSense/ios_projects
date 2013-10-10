@@ -14,7 +14,6 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
-    BOOL isFirst;
     
     /* This flat to make sure only call connect method once */
     BOOL flag;
@@ -47,8 +46,6 @@
     if(queue == nil) {
         queue = [[SMCommandQueue alloc] init];
     }
-    
-    isFirst = NO;
 }
 
 - (void)connect {
@@ -71,6 +68,15 @@
 - (BOOL)isConnectting {
     if(socket == nil) return NO;
     return socket.isConnectting;
+}
+
+#pragma mark -
+#pragma mark Exeutor Implementations
+
+- (void)queueCommand:(DeviceCommand *)command {
+    if(![queue contains:command]) {
+        [queue pushCommand:command];
+    }
 }
 
 - (void)executeCommand:(DeviceCommand *)command {

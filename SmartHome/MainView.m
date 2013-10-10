@@ -256,6 +256,10 @@
     return;
 }
 
+- (void)showNotificationDetailsByIdentifier:(NSString *)identifier {
+    
+}
+
 #pragma mark -
 #pragma mark selection view delegate
 

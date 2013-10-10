@@ -14,4 +14,8 @@
 - (void)executeCommand:(DeviceCommand *)command;
 - (NSString *)executorName;
 
+@optional
+
+- (void)queueCommand:(DeviceCommand *)command;
+
 @end

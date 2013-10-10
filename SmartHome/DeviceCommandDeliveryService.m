@@ -17,6 +17,7 @@
 #import "DeviceCommandUpdateDevicesHandler.h"
 #import "DeviceCommandGetSceneListHandler.h"
 #import "DeviceCommandGetCameraServerHandler.h"
+#import "DeviceCommandUpdateDeviceTokenHandler.h"
 
 #import "AlertView.h"
 
@@ -87,7 +88,7 @@
     if(command == nil) return;
     if(!self.isService) {
 #ifdef DEBUG
-        NSLog(@"COMMAND [ %@ ] Not Serverd.", command.commandName);
+        NSLog(@"Command Service was not Serverd, can't execute [%@]", command.commandName);
 #endif
         return;
     }
@@ -166,9 +167,13 @@
     // Client will never process this command.
     if(command.resultID == -100) return;
     
-    
     // If the service is not served
-    if(!self.isService) return;
+    if(!self.isService) {
+#ifdef DEBUG
+        NSLog(@"Command Service was not Serverd, can't handle [%@]", command.commandName);
+#endif
+        return;
+    }
     
     DeviceCommandHandler *handler = nil;
     
@@ -190,6 +195,8 @@
         // ...
     } else if([COMMAND_GET_CAMERA_SERVER isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetCameraServerHandler alloc] init];
+    } else if([COMMAND_UPDATE_DEVICE_TOKEN isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandUpdateDeviceTokenHandler alloc] init];
     }
         
     if(handler != nil) {
@@ -197,11 +204,22 @@
     }
 }
 
+- (void)queueCommand:(DeviceCommand *)command {
+#ifdef DEBUG
+    NSLog(@"Queue command [%@].", command.commandName);
+#endif
+    [self.tcpService queueCommand:command];
+}
+
 #pragma mark -
 #pragma mark Service switch
 
 - (void)startService {
     if(!self.isService) {
+        
+#ifdef DEBUG
+        NSLog(@"[COMMAND SERVICE] Start.");
+#endif
         isService = YES;
         
         // Load all units from disk
@@ -238,6 +256,10 @@
         
         // Synchronize memory units to disk
         [[SMShared current].memory syncUnitsToDisk];
+        
+#ifdef DEBUG
+        NSLog(@"[COMMAND SERVICE] Stopped.");
+#endif
     }
 }
 

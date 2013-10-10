@@ -153,6 +153,8 @@
 		6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7C17BE1EEA007F90A2 /* AlertView.m */; };
 		6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */; };
 		6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0E1F417CF45DE00154CDE /* SMShared.m */; };
+		6FA3D842180558520064ED41 /* DeviceCommandUpdateDeviceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA3D841180558520064ED41 /* DeviceCommandUpdateDeviceToken.m */; };
+		6FA3D8451806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA3D8441806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m */; };
 		6FA7859117CBA35F00998541 /* btn_speech@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7859017CBA35F00998541 /* btn_speech@2x.png */; };
 		6FA7859C17CBA40200998541 /* btn_speech_00@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7859217CBA40200998541 /* btn_speech_00@2x.png */; };
 		6FA7859D17CBA40200998541 /* btn_speech_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7859317CBA40200998541 /* btn_speech_01@2x.png */; };
@@ -543,6 +545,10 @@
 		6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsFileManager.m; sourceTree = "<group>"; };
 		6FA0E1F317CF45DE00154CDE /* SMShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMShared.h; sourceTree = "<group>"; };
 		6FA0E1F417CF45DE00154CDE /* SMShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMShared.m; sourceTree = "<group>"; };
+		6FA3D840180558520064ED41 /* DeviceCommandUpdateDeviceToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateDeviceToken.h; sourceTree = "<group>"; };
+		6FA3D841180558520064ED41 /* DeviceCommandUpdateDeviceToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateDeviceToken.m; sourceTree = "<group>"; };
+		6FA3D8431806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateDeviceTokenHandler.h; sourceTree = "<group>"; };
+		6FA3D8441806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateDeviceTokenHandler.m; sourceTree = "<group>"; };
 		6FA7859017CBA35F00998541 /* btn_speech@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech@2x.png"; sourceTree = "<group>"; };
 		6FA7859217CBA40200998541 /* btn_speech_00@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_00@2x.png"; sourceTree = "<group>"; };
 		6FA7859317CBA40200998541 /* btn_speech_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_speech_01@2x.png"; sourceTree = "<group>"; };
@@ -1624,6 +1630,8 @@
 				6F47FAEF17E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m */,
 				6FD0CC0817EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.h */,
 				6FD0CC0917EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m */,
+				6FA3D8431806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.h */,
+				6FA3D8441806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1812,6 +1820,8 @@
 				6F5A227317F28E8000D29BE0 /* DeviceCommandGetUnit.m */,
 				6FDA6E8917F547A500E4C717 /* DeviceCommandAuthBinding.h */,
 				6FDA6E8A17F547A500E4C717 /* DeviceCommandAuthBinding.m */,
+				6FA3D840180558520064ED41 /* DeviceCommandUpdateDeviceToken.h */,
+				6FA3D841180558520064ED41 /* DeviceCommandUpdateDeviceToken.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -2164,6 +2174,7 @@
 				6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */,
 				6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */,
 				F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */,
+				6FA3D8451806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m in Sources */,
 				6FD0CC0417EFEC6F005956E0 /* DeviceCommandGetCameraServer.m in Sources */,
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 				F20B36D017B9DDAD009286D6 /* UnitDetailsViewController.m in Sources */,
@@ -2189,6 +2200,7 @@
 				F2D8E8CD17C5AA4500090E5B /* CustomCheckBox.m in Sources */,
 				6F953D021803F29B00D847FA /* CameraService.m in Sources */,
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
+				6FA3D842180558520064ED41 /* DeviceCommandUpdateDeviceToken.m in Sources */,
 				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,
 				6FB66D6217C745820002D6C5 /* AccountService.m in Sources */,
 				6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */,
@@ -2314,8 +2326,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2330,8 +2342,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				PROVISIONING_PROFILE = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
@@ -2351,8 +2363,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2360,8 +2372,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				PROVISIONING_PROFILE = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2376,8 +2388,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2395,8 +2407,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				PROVISIONING_PROFILE = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2412,8 +2424,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2431,8 +2443,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				PROVISIONING_PROFILE = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC94C5F4-2A10-4516-A23A-5EAE0B731E02";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";

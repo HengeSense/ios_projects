@@ -61,7 +61,9 @@
                 } else {
                     [NSThread sleepForTimeInterval:1];
                     needToShakeHands = YES;
-                    [self tryShakeHands];
+                    if(inOpen && outOpen) {
+                        [self tryShakeHands];
+                    }
                 }
             } else {
                 int bytesRead = 0;
@@ -136,7 +138,6 @@
                 [self close];
                 return;
             }
-            
             NSData *data = [connectionString dataUsingEncoding:NSUTF8StringEncoding];
             [self.outputStream write:data.bytes maxLength:data.length];
             hasRetryCount++;

@@ -20,6 +20,7 @@
 #import "DeviceCommandReceivedCameraServer.h"
 #import "DeviceCommandGetUnit.h"
 #import "DeviceCommandAuthBinding.h"
+#import "DeviceCommandUpdateDeviceToken.h"
 
 typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeNone,
@@ -34,6 +35,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeGetCameraServer,
     CommandTypeBindingUnit,
     CommandTypeAuthBindingUnit,
+    CommandTypeUpdateDeviceToken,
 };
 
 #define COMMAND_UPDATE_ACCOUNT       @"AccountUpdateCommand"
@@ -49,6 +51,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
 #define COMMAND_PUSH_DEVICE_STATUS   @"DeviceFingerExcuteCommand"
 #define COMMAND_BING_UNIT            @"DeviceBindingCommand"
 #define COMMAND_AUTH_BINGDING        @"DeviceBindingAuthCommand"
+#define COMMAND_UPDATE_DEVICE_TOKEN  @"IOSSecretCommand"
 
 @interface CommandFactory : NSObject
 

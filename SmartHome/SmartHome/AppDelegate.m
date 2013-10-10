@@ -101,8 +101,14 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [SMShared current].settings.deviceToken = token;
+    [[SMShared current].settings saveSettings];
+    DeviceCommandUpdateDeviceToken *updateDeviceTokenCommand = (DeviceCommandUpdateDeviceToken *)[CommandFactory commandForType:CommandTypeUpdateDeviceToken];
+    updateDeviceTokenCommand.iosToken = token;
+    [[SMShared current].deliveryService queueCommand:updateDeviceTokenCommand];
 #ifdef DEBUG
-    NSLog(@"[APP DELEGATE] Device token is %@.", [[NSString alloc] initWithData:deviceToken encoding:NSUTF8StringEncoding]);
+    NSLog(@"[APP DELEGATE] Device Token is %@", token);
 #endif
 }
 
@@ -110,6 +116,14 @@
 #ifdef DEBUG
     NSLog(@"[APP DELEGATE] Get device token failed.");
 #endif
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+#ifdef DEBUG
+    NSLog(@"[APP DELEGATE] Received remote push notifications:\r\n%@", userInfo);
+#endif
+    
+    // Do something here ...
 }
 
 #pragma mark -

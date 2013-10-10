@@ -20,13 +20,14 @@
 #define FIRST_TIME_OPEN_APP_KEY   @"first_time_opa.key"
 #define IS_VOICE_KEY              @"is_voice.key"
 #define IS_SHAKE_KEY              @"is_shake.key"
+#define DEVICE_TOKEN_KEY          @"device_token.key"
 
 @implementation GlobalSettings
 
 @synthesize account;
 @synthesize secretKey;
 @synthesize deviceCode;
-
+@synthesize deviceToken;
 @synthesize tcpAddress;
 @synthesize anyUnitsBinding;
 @synthesize isFirstTimeOpenApp;
@@ -46,6 +47,7 @@
             self.secretKey = [NSString emptyString];
             self.tcpAddress = [NSString emptyString];
             self.deviceCode = [NSString emptyString];
+            self.deviceToken = [NSString emptyString];
             self.isVoice = YES;
             self.isShake = NO;
         } else {
@@ -59,6 +61,7 @@
             self.isFirstTimeOpenApp = [settings boolForKey:FIRST_TIME_OPEN_APP_KEY];
             self.isShake = [settings boolForKey:IS_SHAKE_KEY];
             self.isVoice = [settings boolForKey:IS_VOICE_KEY];
+            self.deviceToken = [settings noNilStringForKey:DEVICE_TOKEN_KEY];
         }
     }
     return self;
@@ -69,6 +72,7 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     [dictionary setMayBlankString:self.account forKey:ACCOUNT_KEY];
     [dictionary setMayBlankString:self.secretKey forKey:SECRET_KEY_KEY];
+    [dictionary setMayBlankString:self.deviceToken forKey:DEVICE_TOKEN_KEY];
     [dictionary setBool:self.anyUnitsBinding forKey:ANY_UNITS_BINDING_KEY];
     [dictionary setMayBlankString:self.tcpAddress forKey:TCP_ADDRESS_KEY];
     [dictionary setMayBlankString:self.deviceCode forKey:DEVICE_CODE_KEY];
@@ -89,6 +93,7 @@
         self.secretKey = [NSString emptyString];
         self.account = [NSString emptyString];
         self.deviceCode = [NSString emptyString];
+        self.deviceToken = [NSString emptyString];
         [self saveSettingsInternal];
     }
 }

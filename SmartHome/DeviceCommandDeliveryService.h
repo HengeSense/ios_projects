@@ -39,6 +39,10 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
 - (void)executeDeviceCommand:(DeviceCommand *)command;
 - (void)handleDeviceCommand:(DeviceCommand *)command;
 
+/* Only used for External network */
+/* You can queue command when the service or tcp connection is not ready */
+- (void)queueCommand:(DeviceCommand *)command;
+
 /* Start or stop command delivery service */
 - (void)startService;
 - (void)stopService;

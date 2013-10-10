@@ -57,6 +57,10 @@
         DeviceCommandAuthBinding *command = [[DeviceCommandAuthBinding alloc] init];
         command.commandName = COMMAND_AUTH_BINGDING;
         return command;
+    } else if(type == CommandTypeUpdateDeviceToken) {
+        DeviceCommandUpdateDeviceToken *command = [[DeviceCommandUpdateDeviceToken alloc] init];
+        command.commandName = COMMAND_UPDATE_DEVICE_TOKEN;
+        return command;
     }
     
     return nil;
@@ -86,6 +90,8 @@
         command = [[DeviceCommandReceivedCameraServer alloc] initWithDictionary:json];
     } else if([COMMAND_CHANGE_UNIT_NAME isEqualToString:commandName]) {
         
+    } else if([COMMAND_UPDATE_DEVICE_TOKEN isEqualToString:commandName]) {
+        command = [[DeviceCommand alloc] initWithDictionary:json];
     }
     
     return command;
