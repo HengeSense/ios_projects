@@ -100,6 +100,7 @@
     [self applyBindings];
     
     [[SMShared current].deliveryService startRefreshCurrentUnit];
+    [[SMShared current].deliveryService queueCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 - (void)drawerNavigationItemChanged:(DrawerNavigationItem *)item isFirstTime:(BOOL)isFirst {

@@ -257,7 +257,18 @@
 }
 
 - (void)showNotificationDetailsByIdentifier:(NSString *)identifier {
-    
+    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
+    if (notifications&&notifications.count>0) {
+        for (SMNotification *notification in notifications) {
+            if ([notification.identifier isEqualToString:identifier]) {
+                NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:notification];
+                handler.deleteNotificationDelegate = self;
+                handler.cfNotificationDelegate = self;
+                [self.ownerController.navigationController pushViewController:handler animated:YES];
+                break;
+            }
+        }
+    }
 }
 
 #pragma mark -

@@ -28,6 +28,12 @@
 }
 
 - (void)initDefaults {
+    if(queue == nil) {
+        queue = [[SMCommandQueue alloc] init];
+    }
+}
+
+- (void)connect {
     if(socket == nil) {
         NSString *tcpAddress = [SMShared current].settings.tcpAddress;
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
@@ -43,16 +49,11 @@
         socket.messageHandlerDelegate = self;
     }
     
-    if(queue == nil) {
-        queue = [[SMCommandQueue alloc] init];
-    }
-}
-
-- (void)connect {
     @synchronized(self) {
         if(flag) return;
         flag = YES;
     }
+    
     [socket connect];
 }
 
@@ -76,6 +77,7 @@
 - (void)queueCommand:(DeviceCommand *)command {
     if(![queue contains:command]) {
         [queue pushCommand:command];
+        [self flushQueue];
     }
 }
 

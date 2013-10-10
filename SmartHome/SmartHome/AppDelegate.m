@@ -35,6 +35,9 @@
     navigationController.delegate = ((LoginViewController *)self.rootViewController);
     
     BOOL hasLogin = ![[NSString emptyString] isEqualToString:self.settings.secretKey];
+#ifdef DEBUG
+    NSLog(@"The secret key is [%@]", self.settings.secretKey);
+#endif
     if(hasLogin) {
         // start service 
         [self.deviceCommandDeliveryService startService];
