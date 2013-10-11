@@ -75,6 +75,9 @@
         NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
         if(subscriptions_ != nil) {
             [subscriptions_ removeObject:obj];
+#ifdef DEBUG
+            NSLog(@"[Memory] Remove subscription [%@] for [%@]", [handler description], [[obj class] description]);
+#endif
         }
     }
 }
@@ -286,6 +289,9 @@
     @synchronized(self) {
         if(self.units != nil) [self.units removeAllObjects];
         if(self.subscriptions != nil) [self.subscriptions removeAllObjects];
+#ifdef DEBUG
+        NSLog(@"[Memory] clear units && subscriptions.");
+#endif
     }
 }
 

@@ -70,10 +70,6 @@
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
-    
-#ifdef DEBUG
-    NSLog(@"[MAIN VIEW] Subscribe events.");
-#endif
 }
 
 - (void)initUI {
@@ -192,23 +188,7 @@
 
 #pragma mark-
 #pragma mark notification
-//show notification by identifier
--(void)showNotificationDetailsByIdentifier:(NSString *) identifier{
-    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
-    if (notifications&&notifications.count>0) {
-        for (SMNotification *notification in notifications) {
-            if ([notification.identifier isEqualToString:identifier]) {
-                NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:notification];
-                handler.deleteNotificationDelegate = self;
-                handler.cfNotificationDelegate = self;
-                [self.ownerController.navigationController pushViewController:handler animated:YES];
-                break;
-            }
-        }
 
-    }
-    
-}
 // show notification details
 - (void)tapGestureHandler {
     if (displayNotification == nil) return;
@@ -584,6 +564,9 @@
 
 - (void)destory {
     [self unSubscribeEvents];
+#ifdef DEBUG
+    NSLog(@"[Main View] Destroyed.");
+#endif
 }
 
 - (void)unSubscribeEvents {
@@ -591,9 +574,6 @@
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
-#ifdef DEBUG
-    NSLog(@"[MAIN VIEW] Unsubscribe events.");
-#endif
 }
 
 #pragma mark -

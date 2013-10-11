@@ -180,16 +180,16 @@
 - (void)logout {
     @synchronized(self) {
         [[SMShared current].deliveryService stopService];
-        [[SMShared current].settings clearAuth];
-        [[SMShared current].memory clear];
         
         NavigationView *mainView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
         if(mainView != nil) {
             UIViewController *mainViewController = mainView.ownerController;
             [[ViewsPool sharedPool] clear];
-            
             [self performSelectorOnMainThread:@selector(popupToRootViewController:) withObject:mainViewController waitUntilDone:YES];
         }
+        
+        [[SMShared current].settings clearAuth];
+        [[SMShared current].memory clear];
     }
 }
 
