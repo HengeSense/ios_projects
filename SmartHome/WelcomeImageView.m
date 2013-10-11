@@ -18,9 +18,19 @@
     return self;
 }
 +(UIImageView *) imageViewWithImageName:(NSString *)imageName{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    imageView.frame = CGRectMake(0, 0,IMG_WIDTH,IMG_HEIGHT);
-    return imageView;
+    NSArray *imageNameSplit = [imageName componentsSeparatedByString:@"."];
+    if (imageNameSplit&&imageNameSplit.count == 2) {
+       // NSLog(@"%@,%@,%@",[NSBundle mainBundle],[imageNameSplit objectAtIndex:0],[imageNameSplit objectAtIndex:1]);
+        NSString *path = [[NSBundle mainBundle] pathForResource:[imageNameSplit objectAtIndex:0] ofType:[imageNameSplit objectAtIndex:1]];
+        //NSLog(@"--------path = %@",path);
+        if ([path length]>0) {
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
+            //NSLog(@"----------image = %@",[UIImage imageWithContentsOfFile:path]);
+            imageView.frame = CGRectMake(0, 0,IMG_WIDTH,IMG_HEIGHT);
+            return imageView;
+        }
+    }
+    return [[UIImageView alloc] init];
 }
 
 /*

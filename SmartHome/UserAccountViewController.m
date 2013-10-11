@@ -13,7 +13,8 @@
 #import "ViewsPool.h"
 #import "NavigationView.h"
 #import "MainViewController.h"
-
+#import "VerificationCodeSendViewController.h"
+#import <QuartzCore/QuartzCore.h>
 @interface UserAccountViewController ()
 
 @end
@@ -28,6 +29,9 @@
     NSString *password;
     UIButton *btnSubmit;
     BOOL passwordIsModified;
+    
+    UIButton *btnModifyUsername;
+    UILabel *lblUsername;
 }
 
 @synthesize infoDictionary;
@@ -66,8 +70,37 @@
     
     self.topbar.titleLabel.text = NSLocalizedString(@"account_info.title", @"");
     
+    if (btnModifyUsername == nil) {
+        btnModifyUsername = [[UIButton alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+5, SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
+        btnModifyUsername.layer.cornerRadius = 5;
+        btnModifyUsername.center = CGPointMake(self.view.center.x, btnModifyUsername.center.y);
+        btnModifyUsername.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0,80 , SM_CELL_HEIGHT/2)];
+        lblTitle.backgroundColor = [UIColor clearColor];
+        lblTitle.text = NSLocalizedString(@"username", @"");
+        lblTitle.font = [UIFont systemFontOfSize:16.f];
+        [btnModifyUsername addSubview:lblTitle];
+        
+        lblUsername = [[UILabel alloc] initWithFrame:CGRectMake(85, 0,200 ,SM_CELL_HEIGHT/2)];
+        lblUsername.textAlignment = NSTextAlignmentRight;
+        [lblUsername setBackgroundColor:[UIColor clearColor]];
+        [lblUsername setTextColor:[UIColor grayColor]];
+        [lblUsername setFont:[UIFont systemFontOfSize:16]];
+        lblUsername.text = [SMShared current].settings.account;
+        [btnModifyUsername addSubview:lblUsername];
+        
+        UIImageView *accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory.png"]];
+        accessoryView.frame = CGRectMake(295, 17.5, 12/2, 23/2);
+        [btnModifyUsername addSubview:accessoryView];
+        
+        [btnModifyUsername addTarget:self action:@selector(btnModifyUsernamePressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnModifyUsername];
+
+    }
+
     if (infoTable == nil) {
-        infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0,btnModifyUsername.frame.size.height+btnModifyUsername.frame.origin.y+25, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
         infoTable.center = CGPointMake(self.view.center.x, infoTable.center.y);
         infoTable.delegate = self;
         infoTable.dataSource =self;
@@ -83,16 +116,21 @@
     }
     
     if(btnSubmit == nil) {
-        btnSubmit = [LongButton buttonWithPoint:CGPointMake(0, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 210 : 190)];
+        btnSubmit = [LongButton buttonWithPoint:CGPointMake(0, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 280 : 260)];
         btnSubmit.center = CGPointMake(self.view.center.x, btnSubmit.center.y);
         [btnSubmit setTitle:NSLocalizedString(@"submit", @"") forState:UIControlStateNormal];
         [self.view addSubview:btnSubmit];
         [btnSubmit addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
+- (void)btnModifyUsernamePressed:(UIButton *) sender{
+    VerificationCodeSendViewController *verificationCodeSendViewController = [[VerificationCodeSendViewController alloc] initAsModify:YES];
+    [self.navigationController pushViewController:verificationCodeSendViewController animated:YES];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

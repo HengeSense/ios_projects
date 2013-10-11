@@ -110,7 +110,7 @@
 "format_error"              = "请求格式错误!";
 "pwd_different"             = "两次输入不一致";
 "pwd_format_invalid"        = "密码格式错误";
-
+"modify_tip"                = "此手机号将作为新的用户名使用";
 
 /****************	Drawer View Strings	****************/
 

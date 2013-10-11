@@ -48,7 +48,7 @@
 - (void)initDefaults {
     [super initDefaults];
     if(imgNameArr == nil || imgNameArr.count==0) {
-        imgNameArr = [[NSArray alloc] initWithObjects:@"welcome01.png",@"welcome02.png",@"welcome03.png",@"welcome04.png",@"welcome05.png",@"welcome06.jpg", nil];
+        imgNameArr = [[NSArray alloc] initWithObjects:@"welcome01@2x.png",@"welcome02@2x.png",@"welcome03@2x.png",@"welcome04@2x.png",@"welcome05@2x.png",@"welcome06@2x.jpg", nil];
     }
     if(imgViewArr == nil) {
         imgViewArr = [NSMutableArray new];

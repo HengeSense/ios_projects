@@ -156,7 +156,12 @@
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         [finder requestForBindingUnit];
-        [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+        if (self.topBarType == TopBarTypeSkip) {
+            [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+        }else if(self.topBarType == TopBarTypeDone){
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+
     }
 }
 - (void)btnSkipPressed:(id)sender {

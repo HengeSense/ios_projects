@@ -19,7 +19,9 @@
 
 static NSString *IP;
 
-@implementation DeviceFinder
+@implementation DeviceFinder{
+    NSString *url;
+}
 
 @synthesize delegate;
 @synthesize deviceIdentifier;
@@ -52,6 +54,11 @@ static NSString *IP;
     DeviceCommand *bindingUnitCommand = [CommandFactory commandForType:CommandTypeBindingUnit];
     bindingUnitCommand.masterDeviceCode = self.deviceIdentifier;
     [[SMShared current].deliveryService executeDeviceCommand:bindingUnitCommand];
+    
+    DeviceCommandGetUnit *getUnitCommand = (DeviceCommandGetUnit *)[CommandFactory commandForType:CommandTypeGetUnits];
+    getUnitCommand.commmandNetworkMode = CommandNetworkModeInternal;
+    getUnitCommand.unitServerUrl = url;
+    [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
 }
 
 #pragma mark-
@@ -60,6 +67,7 @@ static NSString *IP;
 - (BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port {
     NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
     self.deviceIdentifier = [json noNilStringForKey:@"deviceCode"];
+    url = [NSString stringWithFormat:@"http://%@:%d/gatewaycfg",[json noNilStringForKey:@"ipv4"],port];
     Unit *unit = [[SMShared current].memory findUnitByIdentifier:self.deviceIdentifier];
     if(unit == nil) {
         if ([self.delegate respondsToSelector:@selector(askwhetherBinding)]) {

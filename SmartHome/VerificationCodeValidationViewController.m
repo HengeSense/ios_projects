@@ -27,10 +27,12 @@
     UIButton *btnResend;
     UIButton *btnNext;
     UILabel *lblCountDown;
+    UIAlertView *checkPassword;
 }
 
 @synthesize phoneNumberToValidation;
 @synthesize countDown;
+@synthesize isModify;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +43,13 @@
     return self;
 }
 
+- (id)initAsModify:(BOOL)modify{
+    self = [super init];
+    if (self) {
+        self.isModify = modify;
+    }
+    return self;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -82,7 +91,12 @@
     if(btnNext == nil) {
         btnNext = [LongButton buttonWithPoint:CGPointMake(5, txtVerificationCode.frame.origin.y + txtVerificationCode.frame.size.height + 5)];
         [btnNext setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
-        [btnNext addTarget:self action:@selector(submitVerificationCode) forControlEvents:UIControlEventTouchUpInside];
+        if (isModify) {
+            [btnNext addTarget:self action:@selector(submitVerificationCodeAndOldPassword:) forControlEvents:UIControlEventTouchUpInside];
+        }else{
+           [btnNext addTarget:self action:@selector(submitVerificationCode) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
         [self.view addSubview:btnNext];
     }
     
@@ -116,7 +130,6 @@
     
     [self startCountDown];
 }
-
 #pragma mark -
 #pragma mark service
 
@@ -188,7 +201,75 @@
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     [[[AccountService alloc] init] registerWithPhoneNumber:self.phoneNumberToValidation checkCode:txtVerificationCode.text success:@selector(registerSuccessfully:) failed:@selector(registerFailed:) target:self callback:nil];
 }
+#pragma mark-
+#pragma mark modify username
+- (void)submitVerificationCodeAndOldPassword:(UIButton *) sender{
+    if (checkPassword == nil) {
+        checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password_valid", @"") message:NSLocalizedString(@"enter_old_pwd", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
+        [checkPassword setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    }
+    [checkPassword show];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        NSString *oldPassword = [alertView textFieldAtIndex:0].text;
+        if([NSString isBlank: oldPassword] || oldPassword.length != 6) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
+            return;
+        }
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
+        [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+        [[[AccountService alloc] init] modifyUsernameByPhoneNumber:self.phoneNumberToValidation checkCode:txtVerificationCode.text oldPassword:oldPassword success:@selector(modifyUsernameSuccess:) failed:@selector(registerFailed:) target:self callback:nil
+         ];
+    }
+}
+- (void)modifyUsernameSuccess:(RestResponse *)resp{
+    if (resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            DeviceCommand *deviceCommand = [[DeviceCommand alloc] initWithDictionary:json];
+            switch (deviceCommand.resultID) {
+                case 1:
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    [SMShared current].settings.account = phoneNumberToValidation;
+                    [[SMShared current].settings saveSettings];
+                    break;
+                case -1:
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"none_verification_code", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    break;
+                case -2:
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_expire", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    break;
+                case -3:
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_error", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    break;
+                case -4:
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"id_is_not_found", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    break;
+                case -5:
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_invalid", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    break;
+                case -6:
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system_exception", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+                    break;
 
+                default:
+                    break;
+            }
+        }
+        
+        return;
+    }
+    [self registerFailed:resp];
+}
 - (void)registerSuccessfully:(RestResponse *)resp {    
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];

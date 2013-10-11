@@ -20,8 +20,9 @@
     UITextField *txtPhoneNumber;
     UILabel *lblPhoneNumber;
     UIButton *btnVerificationCodeSender;
+    UILabel *lblModifyTip;
 }
-
+@synthesize isModify;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,7 +30,13 @@
     }
     return self;
 }
-
+-(id)initAsModify:(BOOL)modify{
+    self = [super init];
+    if (self) {
+        self.isModify = modify;
+    }
+    return self;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -40,7 +47,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 - (void)initUI {
     [super initUI];
     
@@ -70,6 +76,18 @@
         [self.view addSubview:btnVerificationCodeSender];
     }
     
+    if (isModify&&lblModifyTip == nil) {
+        lblModifyTip = [[UILabel alloc] initWithFrame:CGRectMake(6, btnVerificationCodeSender.frame.origin.y+btnVerificationCodeSender.frame.size.height+5, 311, 20)];
+        lblModifyTip.font = [UIFont systemFontOfSize:16];
+        lblModifyTip.backgroundColor = [UIColor clearColor];
+        lblModifyTip.textColor = [UIColor lightGrayColor];
+        lblModifyTip.lineBreakMode = NSLineBreakByWordWrapping;
+        lblModifyTip.text = NSLocalizedString(@"modify_tip", @"");
+        lblModifyTip.numberOfLines = 0;
+        [lblModifyTip sizeThatFits:lblModifyTip.frame.size];
+        [self.view addSubview:lblModifyTip];
+    }
+
     [txtPhoneNumber becomeFirstResponder];
 }
 
@@ -84,8 +102,12 @@
     }
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    
-    [[[AccountService alloc] init] sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
+    if (isModify) {
+        [[[AccountService alloc] init] sendModifyUsernameVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
+    }else{
+        [[[AccountService alloc] init] sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
+    }
+
 }
 
 - (void)verificationCodeSendSuccess:(RestResponse *)resp {
@@ -133,7 +155,7 @@
     if(abs(resp.statusCode) == 1001) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeSuccess];
     } else {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeSuccess];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
     }
     [[AlertView currentAlertView] delayDismissAlertView];
 }

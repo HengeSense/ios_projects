@@ -9,9 +9,11 @@
 #import "NavViewController.h"
 #import "DeviceCommand.h"
 
-@interface VerificationCodeValidationViewController : NavViewController<UITextFieldDelegate>
+@interface VerificationCodeValidationViewController : NavViewController<UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSString *phoneNumberToValidation;
 @property (assign, nonatomic) NSUInteger countDown;
+@property (assign, nonatomic) BOOL isModify;
 
+-(id) initAsModify:(BOOL) modify;
 @end

@@ -39,7 +39,6 @@
 		6F0FAE7817AF7F9F00B75D3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7717AF7F9F00B75D3E /* UIKit.framework */; };
 		6F0FAE7A17AF7F9F00B75D3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */; };
 		6F0FAE7C17AF7F9F00B75D3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0FAE7B17AF7F9F00B75D3E /* CoreGraphics.framework */; };
-		6F0FAE8217AF7F9F00B75D3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8017AF7F9F00B75D3E /* InfoPlist.strings */; };
 		6F0FAE8417AF7F9F00B75D3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8317AF7F9F00B75D3E /* main.m */; };
 		6F0FAE8817AF7F9F00B75D3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAE8717AF7F9F00B75D3E /* AppDelegate.m */; };
 		6F0FAEA817AF805C00B75D3E /* DrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEA717AF805C00B75D3E /* DrawerViewController.m */; };
@@ -1972,7 +1971,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F0FAE8217AF7F9F00B75D3E /* InfoPlist.strings in Resources */,
 				6F73D08417EEE99900FFF974 /* zbar-helpicons.png in Resources */,
 				6F0FAEF117AF840E00B75D3E /* Localizable.strings in Resources */,
 				6F1AFB4D17EEC3470043DB47 /* bg_topbar7@2x.png in Resources */,

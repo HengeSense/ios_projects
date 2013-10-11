@@ -11,6 +11,6 @@
 #import "UnitsBindingViewController.h"
 
 @interface VerificationCodeSendViewController : NavViewController<UITextFieldDelegate>
-
-
+-(id)initAsModify:(BOOL) modify;
+@property(assign,nonatomic) BOOL isModify;
 @end
