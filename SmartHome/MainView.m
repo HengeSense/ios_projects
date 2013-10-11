@@ -70,6 +70,10 @@
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
+    
+#ifdef DEBUG
+    NSLog(@"[MAIN VIEW] Subscribe events.");
+#endif
 }
 
 - (void)initUI {
@@ -579,14 +583,17 @@
 
 
 - (void)destory {
-    [self unSubscribeEvnets];
+    [self unSubscribeEvents];
 }
 
-- (void)unSubscribeEvnets {
+- (void)unSubscribeEvents {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
+#ifdef DEBUG
+    NSLog(@"[MAIN VIEW] Unsubscribe events.");
+#endif
 }
 
 #pragma mark -
