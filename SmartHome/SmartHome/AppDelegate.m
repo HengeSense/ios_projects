@@ -64,6 +64,14 @@
     // register for remote notifications
     [self registerForRemoteNotifications];
     
+    if([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
+        int badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+        if(badge > 0) {
+            NSLog(@"badge number is %d", badge);
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        }
+    }
+    
     return YES;
 }
 							
@@ -125,8 +133,10 @@
 #ifdef DEBUG
     NSLog(@"[APP DELEGATE] Received remote push notifications:\r\n%@", userInfo);
 #endif
-    
-    // Do something here ...
+    NSString *notificationId = [userInfo objectForKey:@"mid"];
+    if(![NSString isBlank:notificationId]) {
+        // Do something here ...
+    }
 }
 
 #pragma mark -

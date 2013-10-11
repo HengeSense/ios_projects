@@ -257,14 +257,15 @@
 }
 
 - (void)showNotificationDetailsByIdentifier:(NSString *)identifier {
+    if([NSString isBlank:identifier]) return;
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
-    if (notifications&&notifications.count>0) {
-        for (SMNotification *notification in notifications) {
-            if ([notification.identifier isEqualToString:identifier]) {
+    if(notifications != nil) {
+        for(SMNotification *notification in notifications) {
+            if([notification.identifier isEqualToString:identifier]) {
                 NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:notification];
                 handler.deleteNotificationDelegate = self;
                 handler.cfNotificationDelegate = self;
-                [self.ownerController.navigationController pushViewController:handler animated:YES];
+                [self.ownerController.navigationController pushViewController:handler animated:NO];
                 break;
             }
         }
@@ -448,7 +449,7 @@
     [self.ownerController disableGestureForDrawerView];
     [UIView animateWithDuration:0.3f
                 animations:^{
-                    view.frame = CGRectMake(view.frame.origin.x, 12, view.frame.size.width, view.frame.size.height);
+                    view.frame = CGRectMake(view.frame.origin.x, ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12), view.frame.size.width, view.frame.size.height);
                 }
                 completion:^(BOOL finished) {
                     speechViewState = SpeechViewStateOpenned;
@@ -460,12 +461,12 @@
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
-    CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 12;
+    CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12);
     ConversationView *view = [self speechView];
     speechViewState = SpeechViewStateClosing;
     [UIView animateWithDuration:0.3f
                      animations:^{
-                         view.frame = CGRectMake(view.frame.origin.x, (0 - viewHeight - 12), view.frame.size.width, view.frame.size.height);
+                         view.frame = CGRectMake(view.frame.origin.x, (0 - viewHeight - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12)), view.frame.size.width, view.frame.size.height);
                      }
                      completion:^(BOOL finished) {
                          [[self speechView] clearMessages];
@@ -577,8 +578,8 @@
 
 - (ConversationView *)speechView {
     if(speechView == nil) {
-        CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT/2 - 10 - 10;
-        speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight - 12), 601/2, viewHeight) andContainerView:self];
+        CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 10 - 10;
+        speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12)), 601/2, viewHeight) andContainerView:self];
         speechView.center = CGPointMake(self.center.x, speechView.center.y);
         speechView.tag = SPEECH_VIEW_TAG;
     }
