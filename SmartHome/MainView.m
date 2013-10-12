@@ -533,7 +533,7 @@
         command.voiceText = result;
         [[SMShared current].deliveryService executeDeviceCommand:command];
     } else {
-        [self speechRecognizerFailed:@"empty speaking..."];
+        [self speechRecognizerFailed:@"Empty speaking..."];
         //
     }
     recognizerState = RecognizerStateReady;
