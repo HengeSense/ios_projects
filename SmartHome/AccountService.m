@@ -49,8 +49,17 @@
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 
-- (void) modifyUsernameByPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode oldPassword:(NSString *)password success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb{
+- (void)modifyUsernameByPhoneNumber:(NSString *)phoneNumber checkCode:(NSString *)checkCode oldPassword:(NSString *)password success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb{
     NSString *url = [NSString stringWithFormat:@"/modify/phone?id=%@&pwd=%@&mobile=%@&checkCode=%@",[SMShared current].settings.deviceCode,password, phoneNumber,checkCode];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
+
+- (void)logoutSync:(SEL)success failed:(SEL)failed target:(id)t callback:(id)cb {
+    NSString *url = [NSString stringWithFormat:@"/phone/logout?deviceCode=%@&security=%@", [SMShared current].settings.deviceCode, [SMShared current].settings.secretKey];
+
+    
+    
+    
+}
+
 @end

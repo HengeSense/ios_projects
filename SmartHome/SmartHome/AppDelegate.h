@@ -22,5 +22,6 @@
 @property (strong, nonatomic) DeviceCommandDeliveryService *deviceCommandDeliveryService;
 
 - (void)logout;
+- (void)registerForRemoteNotifications;
 
 @end

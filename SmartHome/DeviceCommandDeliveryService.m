@@ -23,7 +23,7 @@
 
 #define NETWORK_CHECK_INTERVAL 5
 #define UNIT_REFRESH_INTERVAL  10
-#define HEART_BEAT_TIMEOUT     0.8f
+#define HEART_BEAT_TIMEOUT     1.f
 
 @implementation DeviceCommandDeliveryService {
     Reachability* reachability;

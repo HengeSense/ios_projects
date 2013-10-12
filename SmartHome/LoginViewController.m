@@ -201,6 +201,8 @@
                         
                         txtPassword.text = [NSString emptyString];
                         
+                        [[SMShared current].app registerForRemoteNotifications];
+                        
                         if([SMShared current].settings.anyUnitsBinding) {
                             [self.navigationController pushViewController:[[MainViewController alloc] init] animated:NO];
                         } else {

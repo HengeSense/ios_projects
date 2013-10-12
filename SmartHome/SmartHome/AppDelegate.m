@@ -25,6 +25,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    if(launchOptions) {
+        [self handleNotifications:[launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]];
+    }
+    
     // initial global settings file
     self.settings = [[GlobalSettings alloc] init];
     
@@ -35,20 +41,21 @@
     navigationController.delegate = ((LoginViewController *)self.rootViewController);
     
     BOOL hasLogin = ![[NSString emptyString] isEqualToString:self.settings.secretKey];
-#ifdef DEBUG
-    NSLog(@"The secret key is [%@]", self.settings.secretKey);
-#endif
+
     if(hasLogin) {
         // start service 
         [self.deviceCommandDeliveryService startService];
         
-        if(self.settings.anyUnitsBinding) {
+        if([SMShared current].memory.units.count > 0) {
             [rootViewController.navigationController pushViewController:
              [[MainViewController alloc] init] animated:NO];
         } else {
             [rootViewController.navigationController pushViewController:
              [[UnitsBindingViewController alloc] init] animated:NO];
         }
+        
+        // register for remote notifications
+        [self registerForRemoteNotifications];
     }
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -59,17 +66,6 @@
         self.settings.isFirstTimeOpenApp = NO;
         [self.settings saveSettings];
         [self.rootViewController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated: NO];
-    }
-    
-    // register for remote notifications
-    [self registerForRemoteNotifications];
-    
-    if([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey] != nil) {
-        int badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
-        if(badge > 0) {
-            NSLog(@"badge number is %d", badge);
-            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-        }
     }
     
     return YES;
@@ -91,6 +87,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
     if(![NSString isBlank:self.settings.secretKey]
        && ![NSString isBlank:self.settings.deviceCode]) {
@@ -130,12 +128,8 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-#ifdef DEBUG
-    NSLog(@"[APP DELEGATE] Received remote push notifications:\r\n%@", userInfo);
-#endif
-    NSString *notificationId = [userInfo objectForKey:@"mid"];
-    if(![NSString isBlank:notificationId]) {
-        // Do something here ...
+    if(application.applicationState != UIApplicationStateActive) {
+        [self handleNotifications:userInfo];
     }
 }
 
@@ -144,6 +138,21 @@
 
 - (void)registerForRemoteNotifications {
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];
+}
+
+- (void)handleNotifications:(NSDictionary *)userInfo {
+#ifdef DEBUG
+    NSLog(@"[APP DELEGATE] Received remote push notifications:\r\n %@", (userInfo == nil) ? [NSString emptyString] : userInfo);
+#endif
+    
+    if(userInfo) {
+        NSString *notificationId = [userInfo objectForKey:@"mid"];
+        if(![NSString isBlank:notificationId]) {
+#ifdef DEBUG
+            NSLog(@"[APP DELEGATE] Notification ID %@", notificationId);
+#endif
+        }
+    }
 }
 
 #pragma mark -
@@ -190,6 +199,7 @@
         
         [[SMShared current].settings clearAuth];
         [[SMShared current].memory clear];
+        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     }
 }
 

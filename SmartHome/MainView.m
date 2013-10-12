@@ -64,12 +64,22 @@
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
     
-    // subscribe events
-    
+    [self subscribeEvents];
+}
+
+- (void)subscribeEvents {
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
+
+}
+
+- (void)unSubscribeEvents {
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
 }
 
 - (void)initUI {
@@ -559,13 +569,6 @@
 #ifdef DEBUG
     NSLog(@"[Main View] Destroyed.");
 #endif
-}
-
-- (void)unSubscribeEvents {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
 }
 
 #pragma mark -
