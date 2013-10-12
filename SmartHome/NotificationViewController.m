@@ -75,6 +75,7 @@
     }
     [self saveNotificationsToDisk];
     [modifyArr removeAllObjects];
+    [self sort:messageArr ascending:NO];
 }
 
 - (void)initUI {
@@ -123,7 +124,14 @@
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:modifyArr deleteList:deleteArr];
 }
-
+- (void)sort:(NSArray *) arr ascending:(BOOL) ascending{
+    if (!arr||arr.count == 0) {
+        return;
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creatTime" ascending:ascending];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [arr sortedArrayUsingDescriptors:sortDescriptors];
+}
 #pragma mark -
 #pragma mark table view delegate
 
