@@ -183,6 +183,7 @@
 "found_new_unit"                =   "发现新主控,是否绑定?";
 "binding"                       =   "绑定";
 
+
 /****************	Device's Strings   ****************/
 
 "device_name"       =  "设备名";

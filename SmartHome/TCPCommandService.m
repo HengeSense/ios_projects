@@ -75,10 +75,7 @@
 #pragma mark Exeutor Implementations
 
 - (void)queueCommand:(DeviceCommand *)command {
-    if(![queue contains:command]) {
-        [queue pushCommand:command];
-        [self flushQueue];
-    }
+    [self executeCommand:command];
 }
 
 - (void)executeCommand:(DeviceCommand *)command {

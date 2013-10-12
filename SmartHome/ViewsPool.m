@@ -62,6 +62,12 @@
 - (void)clear {
     @synchronized(self) {
         if(pool != nil) {
+            for(NSString *key in pool.allKeys) {
+                NavigationView *view = [pool objectForKey:key];
+                if(view != nil) {
+                    [view destory];
+                }
+            }
             [pool removeAllObjects];
         }
     }

@@ -18,12 +18,18 @@
         
         DeviceCommandUpdateUnits *updateUnitsCommand = (DeviceCommandUpdateUnits *)command;
         
-        // is update unit or update units
+        // update units
         if([NSString isBlank:updateUnitsCommand.masterDeviceCode]) {
             [[SMShared current].memory replaceUnits:updateUnitsCommand.units];
+        // update unit
         } else {
-            if(updateUnitsCommand.units.count > 0) {
-                [[SMShared current].memory updateUnit:[updateUnitsCommand.units objectAtIndex:0]];
+            if(updateUnitsCommand.resultID == -1) {
+                [[SMShared current].memory removeUnitByIdentifier:updateUnitsCommand.masterDeviceCode];
+            } else {
+                if(updateUnitsCommand.units.count > 0) {
+                    Unit *unit = [updateUnitsCommand.units objectAtIndex:0];
+                    [[SMShared current].memory updateUnit:unit];
+                }
             }
         }
         

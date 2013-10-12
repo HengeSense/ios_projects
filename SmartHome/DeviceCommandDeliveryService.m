@@ -23,6 +23,7 @@
 
 #define NETWORK_CHECK_INTERVAL 5
 #define UNIT_REFRESH_INTERVAL  10
+#define HEART_BEAT_TIMEOUT     0.8f
 
 @implementation DeviceCommandDeliveryService {
     Reachability* reachability;
@@ -31,6 +32,8 @@
     NSArray *mayUsingInternalNetworkCommands;
     
     NetworkMode networkMode;
+    
+    dispatch_queue_t serialQueue;
     
     /*
      * no            0
@@ -66,9 +69,12 @@
     syncObject = [[NSObject alloc] init];
     mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, COMMAND_GET_CAMERA_SERVER, nil];
     
+    serialQueue = dispatch_queue_create("com.queue", DISPATCH_QUEUE_SERIAL);
+    
     /* Network monitor */
     reachability = [Reachability reachabilityWithHostname:@"www.baidu.com"];
     [self startMonitorNetworks];
+    
 }
 
 #pragma mark -
@@ -93,8 +99,11 @@
         return;
     }
     @synchronized(self) {
+        // Execute command will not be executed in main thread
         if([NSThread mainThread] == [NSThread currentThread]) {
-            [self performSelectorInBackground:@selector(executeDeviceCommandInternal:) withObject:command];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self executeDeviceCommandInternal:command];
+            });
         } else {
             [self executeDeviceCommandInternal:command];
         }
@@ -134,6 +143,7 @@
     }
     
     return nil;
+    
 }
 
 /*
@@ -298,19 +308,29 @@
 }
 
 - (void)refreshUnit {
-    Unit *unit = [SMShared current].memory.currentUnit;
-    if(unit != nil) {
-        DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
-        command.masterDeviceCode = unit.identifier;
-        command.hashCode = unit.hashCode;
-        [self executeDeviceCommand:command];
-        
-        DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
-        getSceneListCommand.masterDeviceCode = unit.identifier;
-        getSceneListCommand.hashCode = unit.sceneHashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
-        
-        [self checkInternalOrNotInternalNetwork];
+    dispatch_async(serialQueue, ^{
+        Unit *unit = [SMShared current].memory.currentUnit;
+        if(unit != nil) {
+            // This is a sync method, not checkInternalOrNotInternalNetwork (async method)
+            // Here you must check net work sync, then continue execute command
+            [self checkIsReachableInternalUnit];
+            
+            DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
+            command.masterDeviceCode = unit.identifier;
+            command.hashCode = unit.hashCode;
+            [self executeDeviceCommand:command];
+            
+            DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
+            getSceneListCommand.masterDeviceCode = unit.identifier;
+            getSceneListCommand.hashCode = unit.sceneHashCode;
+            [self executeDeviceCommand:getSceneListCommand];
+        }
+    });
+}
+
+- (void)fireRefreshUnit {
+    if(unitRefresTimer != nil) {
+        [unitRefresTimer fire];
     }
 }
 
@@ -370,7 +390,9 @@
 }
 
 - (void)checkInternalOrNotInternalNetwork {
-    [self performSelectorInBackground:@selector(checkIsReachableInternalUnit) withObject:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self checkIsReachableInternalUnit];
+    });
 }
 
 - (void)checkIsReachableInternalUnit {
@@ -386,7 +408,7 @@
             return;
         }
         
-        NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [[NSURL alloc] initWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:1];
+        NSMutableURLRequest *request =[[NSMutableURLRequest alloc] initWithURL: [[NSURL alloc] initWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:HEART_BEAT_TIMEOUT];
         NSURLResponse *response;
         NSError *error;
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -398,7 +420,9 @@
                     if([SMShared current].memory.currentUnit != nil) {
                         if([[SMShared current].memory.currentUnit.identifier isEqualToString:unitIdentifier]) {
                             networkMode = NetworkModeInternal;
-                            [self notifyNetworkModeUpdate:NetworkModeInternal];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self notifyNetworkModeUpdate:NetworkModeInternal];
+                            });
                             return;
                         }
                     }
@@ -406,7 +430,9 @@
             }
         }
         networkMode = NetworkModeExternal;
-        [self notifyNetworkModeUpdate:NetworkModeExternal];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self notifyNetworkModeUpdate:NetworkModeExternal];
+        });
     }
 }
 

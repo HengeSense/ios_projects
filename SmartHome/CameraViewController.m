@@ -83,7 +83,9 @@
 
 - (void)dismiss {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetCameraServerHandler class] for:self];
-    [self performSelectorInBackground:@selector(stopMonitorCamera) withObject:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self stopMonitorCamera];
+    });
     [super dismiss];
 }
 
@@ -100,8 +102,7 @@
 
 - (void)stopMonitorCamera {
     if(socket != nil && [socket isConnectted]) {
-        [socket close];
-        socket = nil;
+        [socket closeGraceful];
     }
     
     if(cameraService != nil && [cameraService isPlaying]) {
@@ -136,13 +137,15 @@
             socket = [[CameraSocket alloc] initWithIPAddress:address andPort:port.integerValue];
             socket.delegate = self;
             socket.key = command.conStr;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                if(socket != nil) {
-                    [socket connect];
-                }
-            });
+            if(socket != nil) {
+                [self performSelectorInBackground:@selector(openCameraSocketInBackground) withObject:nil];
+            }
         }
     }
+}
+
+- (void)openCameraSocketInBackground {
+    [socket connect];
 }
 
 #pragma mark -
@@ -169,6 +172,9 @@
     if(loadingView != nil) {
         [loadingView showError];
     }
+#ifdef DEBUG
+    NSLog(@"[CAMERA] Closed.");
+#endif
 }
 
 #pragma mark -

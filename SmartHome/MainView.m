@@ -287,14 +287,7 @@
     } else if([@"units" isEqualToString:source]) {
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
         [self notifyUnitsWasUpdate];
-        DeviceCommand *getUnitCommand = [CommandFactory commandForType:CommandTypeGetUnits];
-        getUnitCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
-        getUnitCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
-        DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
-        getSceneListCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
-        getSceneListCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
+        [[SMShared current].deliveryService fireRefreshUnit];
     }
 }
 
@@ -539,7 +532,7 @@
         command.voiceText = result;
         [[SMShared current].deliveryService executeDeviceCommand:command];
     } else {
-        [self speechRecognizerFailed:@"empty speaking..."];
+        [self speechRecognizerFailed:@"Empty speaking..."];
         //
     }
     recognizerState = RecognizerStateReady;
@@ -562,10 +555,13 @@
 
 
 - (void)destory {
-    [self unSubscribeEvnets];
+    [self unSubscribeEvents];
+#ifdef DEBUG
+    NSLog(@"[Main View] Destroyed.");
+#endif
 }
 
-- (void)unSubscribeEvnets {
+- (void)unSubscribeEvents {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];

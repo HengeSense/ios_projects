@@ -20,6 +20,7 @@
     NSUInteger currentImageLength;
     BOOL needToShakeHands;
     BOOL shakeHandsSuccess;
+    BOOL needCloseSocket;
     BOOL inOpen;
     BOOL outOpen;
 }
@@ -31,6 +32,7 @@
     if(self) {
         hasRetryCount = 0;
         shakeHandsSuccess = NO;
+        needCloseSocket = NO;
         needToShakeHands = YES;
         inOpen = NO;
         outOpen = NO;
@@ -60,10 +62,12 @@
                     shakeHandsSuccess = YES;
                 } else {
                     [NSThread sleepForTimeInterval:1];
-                    needToShakeHands = YES;
-                    if(inOpen && outOpen) {
-                        [self tryShakeHands];
+                    if(needCloseSocket) {
+                        [self close];
+                        return;
                     }
+                    needToShakeHands = YES;
+                    [self tryShakeHands];
                 }
             } else {
                 int bytesRead = 0;
@@ -124,8 +128,8 @@
 }
 
 - (void)tryShakeHands {
+    if(shakeHandsSuccess) return;
     @synchronized(self) {
-        if(shakeHandsSuccess) return;
         if(needToShakeHands) {
             needToShakeHands = NO;
             if([NSString isBlank:connectionString]) {
@@ -148,6 +152,18 @@
 - (void)connect {
     if([self isConnectted]) return;
     [super connect];
+}
+
+/* 解决socket线程在睡眠等待的时候,被另外的线程close掉并释放内存,socket醒来后报错 */
+- (void)closeGraceful {
+    if(shakeHandsSuccess) {
+        [self close];
+    } else {
+        needCloseSocket = YES;
+#ifdef DEBUG
+        NSLog(@"[CAMERA] Will delay close.");
+#endif
+    }
 }
 
 - (void)close {

@@ -75,6 +75,9 @@
         NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
         if(subscriptions_ != nil) {
             [subscriptions_ removeObject:obj];
+#ifdef DEBUG
+            NSLog(@"[Memory] Remove subscription [%@] for [%@]", [handler description], [[obj class] description]);
+#endif
         }
     }
 }
@@ -106,6 +109,7 @@
                 [self.units addObject:unit];
             }
         }
+        currentUnitIdentifier = unit.identifier;
         return self.units;
     }
 }
@@ -116,6 +120,7 @@
         if(newUnits != nil) {
             [self.units addObjectsFromArray:newUnits];    
         }
+        currentUnitIdentifier = [NSString emptyString];
         return self.units;
     }
 }
@@ -147,6 +152,29 @@
 - (Unit *)findUnitByIdentifier:(NSString *)identifier {
     @synchronized(self) {
         return [self findUnitByIdentifierInternal:identifier];
+    }
+}
+
+- (void)removeUnitByIdentifier:(NSString *)identifier {
+    @synchronized(self) {
+        if([NSString isBlank:identifier]) return;
+        if(self.units == nil || self.units.count == 0) return;
+        
+        int index = -1;
+        for(int i=0; i<self.units.count; i++) {
+            Unit *u = [self.units objectAtIndex:i];
+            if([u.identifier isEqualToString:identifier]) {
+                index = i;
+                break;
+            }
+        }
+        if(index != -1) {
+            [self.units removeObjectAtIndex:index];
+        }
+        
+        if([currentUnitIdentifier isEqualToString:identifier]) {
+            currentUnitIdentifier = [NSString emptyString];
+        }
     }
 }
 
@@ -286,6 +314,9 @@
     @synchronized(self) {
         if(self.units != nil) [self.units removeAllObjects];
         if(self.subscriptions != nil) [self.subscriptions removeAllObjects];
+#ifdef DEBUG
+        NSLog(@"[Memory] clear units && subscriptions.");
+#endif
     }
 }
 

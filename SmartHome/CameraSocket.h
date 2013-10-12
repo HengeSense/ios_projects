@@ -24,4 +24,6 @@
 - (BOOL)isConnectted;
 - (void)close;
 
+- (void)closeGraceful;
+
 @end

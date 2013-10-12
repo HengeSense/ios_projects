@@ -158,8 +158,8 @@
         [finder requestForBindingUnit];
         if (self.topBarType == TopBarTypeSkip) {
             [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
-        }else if(self.topBarType == TopBarTypeDone){
-            [self.navigationController popViewControllerAnimated:YES];
+        } else if(self.topBarType == TopBarTypeDone){
+            [self dismissModalViewControllerAnimated:YES];
         }
 
     }

@@ -49,6 +49,8 @@
         [btnAdd addTarget:self action:@selector(btnAddPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.topbar addSubview:btnAdd];
     }
+    
+    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
 }
 
 #pragma mark-
@@ -67,6 +69,10 @@
     [tblUnits reloadData];
 }
 
+- (void)notifyUnitsWasUpdate {
+    [self notifyViewUpdate];
+}
+
 #pragma mark -
 #pragma mark table view delegate
 
@@ -82,13 +88,16 @@
     return SM_CELL_HEIGHT / 2;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *topCellIdentifier = @"topCellIdentifier";
     static NSString *centerCellIdentifier = @"cellIdentifier";
     static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
+    static NSString *singleCellIdentifier = @"singleCellIdentifier";
     
     NSString *cellIdentifier;
-    if(indexPath.row == 0) {
+    if(indexPath.row == 0 && unitsIdentifierCollection.count == 1) {
+        cellIdentifier = singleCellIdentifier;
+    } else if(indexPath.row == 0) {
         cellIdentifier = topCellIdentifier;
     } else if(indexPath.row == unitsIdentifierCollection.count - 1) {
         cellIdentifier = bottomCellIdentifier;
@@ -124,9 +133,11 @@
         titleLabel.text = unit.name;
         detailLabel.text = [NSString stringWithFormat:@"%@   ", [NSString isBlank:unit.status] ? NSLocalizedString(@"unknow", @"") : unit.status];
     }
-
+    
     if(unitsIdentifierCollection.count == 1) {
         cell.isSingle = YES;
+    } else {
+
     }
     
     return cell;
@@ -137,6 +148,13 @@
     unitDetailsViewController.unitIdentifier = [unitsIdentifierCollection objectAtIndex:indexPath.row];
     [self.ownerController.navigationController pushViewController:unitDetailsViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)destory {
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+#ifdef DEBUG
+    NSLog(@"[My Devices View] Destoryed.");
+#endif
 }
 
 @end

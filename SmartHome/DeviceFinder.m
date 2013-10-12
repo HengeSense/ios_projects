@@ -67,7 +67,7 @@ static NSString *IP;
 - (BOOL)onUdpSocket:(AsyncUdpSocket *)sock didReceiveData:(NSData *)data withTag:(long)tag fromHost:(NSString *)host port:(UInt16)port {
     NSDictionary *json =[JsonUtils createDictionaryFromJson:data];
     self.deviceIdentifier = [json noNilStringForKey:@"deviceCode"];
-    url = [NSString stringWithFormat:@"http://%@:%d/gatewaycfg",[json noNilStringForKey:@"ipv4"],port];
+    url = [NSString stringWithFormat:@"http://%@:%d/gatewaycfg",[json noNilStringForKey:@"ipv4"], 8777];
     Unit *unit = [[SMShared current].memory findUnitByIdentifier:self.deviceIdentifier];
     if(unit == nil) {
         if ([self.delegate respondsToSelector:@selector(askwhetherBinding)]) {
