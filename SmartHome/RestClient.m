@@ -217,7 +217,7 @@ timeoutInterval=_timeoutInterval, auth=_auth;
 
 - (NSInteger)timeoutInterval {
     if(_timeoutInterval <= 0) {
-        _timeoutInterval = 30;
+        _timeoutInterval = 15;
     }
     return _timeoutInterval;
 }

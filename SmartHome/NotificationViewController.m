@@ -128,7 +128,7 @@
     if (!arr||arr.count == 0) {
         return;
     }
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creatTime" ascending:ascending];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:ascending];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [arr sortedArrayUsingDescriptors:sortDescriptors];
 }

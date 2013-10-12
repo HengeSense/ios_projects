@@ -198,7 +198,9 @@
 
 #pragma mark-
 #pragma mark notification
+
 // show notification details
+
 - (void)tapGestureHandler {
     if (displayNotification == nil) return;
     displayNotification.hasRead = YES;
