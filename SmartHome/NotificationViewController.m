@@ -60,8 +60,11 @@
 
 - (void)initDefaults {
     [super initDefaults];
-    for (SMNotification *notification in messageArr) {
-        notification.hasRead = YES;
+    if (messageArr&&messageArr.count>0) {
+        for (SMNotification *notification in messageArr) {
+            notification.hasRead = YES;
+        }
+        
     }
     
     if (modifyArr == nil) {

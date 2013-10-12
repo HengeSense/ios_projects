@@ -54,7 +54,7 @@
     
     if(lblPhoneNumber == nil) {
         lblPhoneNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 80 : 60, 250, 20)];
-        [lblPhoneNumber setText:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"enter_mobile", @"")]];
+        [lblPhoneNumber setText:[NSString stringWithFormat:@"%@:",(isModify?NSLocalizedString(@"enter_new_mobile", @""): NSLocalizedString(@"enter_mobile", @""))]];
         lblPhoneNumber.font = [UIFont systemFontOfSize:16];
         lblPhoneNumber.backgroundColor = [UIColor clearColor];
         lblPhoneNumber.textColor = [UIColor lightTextColor];
@@ -69,23 +69,34 @@
         [self.view addSubview:txtPhoneNumber];
     }
     
-    if(btnVerificationCodeSender == nil) {
-        btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(5, txtPhoneNumber.frame.origin.y +txtPhoneNumber.frame.size.height + 5)];
-        [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
-        [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnVerificationCodeSender];
-    }
     
-    if (isModify&&lblModifyTip == nil) {
-        lblModifyTip = [[UILabel alloc] initWithFrame:CGRectMake(6, btnVerificationCodeSender.frame.origin.y+btnVerificationCodeSender.frame.size.height+5, 311, 20)];
-        lblModifyTip.font = [UIFont systemFontOfSize:16];
-        lblModifyTip.backgroundColor = [UIColor clearColor];
-        lblModifyTip.textColor = [UIColor lightGrayColor];
-        lblModifyTip.lineBreakMode = NSLineBreakByWordWrapping;
-        lblModifyTip.text = NSLocalizedString(@"modify_tip", @"");
-        lblModifyTip.numberOfLines = 0;
-        [lblModifyTip sizeThatFits:lblModifyTip.frame.size];
-        [self.view addSubview:lblModifyTip];
+    if (isModify) {
+        if (lblModifyTip == nil) {
+            lblModifyTip = [[UILabel alloc] initWithFrame:CGRectMake(6, txtPhoneNumber.frame.origin.y+txtPhoneNumber.frame.size.height+5, 311, 20)];
+            lblModifyTip.font = [UIFont systemFontOfSize:16];
+            lblModifyTip.backgroundColor = [UIColor clearColor];
+            lblModifyTip.textColor = [UIColor lightGrayColor];
+            lblModifyTip.lineBreakMode = NSLineBreakByWordWrapping;
+            lblModifyTip.text = NSLocalizedString(@"modify_tip", @"");
+            lblModifyTip.numberOfLines = 0;
+            [lblModifyTip sizeThatFits:lblModifyTip.frame.size];
+            [self.view addSubview:lblModifyTip];
+        }
+        if(btnVerificationCodeSender == nil) {
+            btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(5, lblModifyTip.frame.origin.y +lblModifyTip.frame.size.height + 5)];
+            [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
+            [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:btnVerificationCodeSender];
+        }
+
+    }else{
+        if(btnVerificationCodeSender == nil) {
+            btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(5, txtPhoneNumber.frame.origin.y +txtPhoneNumber.frame.size.height + 5)];
+            [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
+            [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:btnVerificationCodeSender];
+        }
+
     }
 
     [txtPhoneNumber becomeFirstResponder];
@@ -103,8 +114,10 @@
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"please_wait", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     if (isModify) {
+
         [[[AccountService alloc] init] sendModifyUsernameVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
     }else{
+
         [[[AccountService alloc] init] sendVerificationCodeFor:txtPhoneNumber.text success:@selector(verificationCodeSendSuccess:) failed:@selector(verificationCodeSendError:) target:self callback:nil];
     }
 
@@ -112,6 +125,9 @@
 
 - (void)verificationCodeSendSuccess:(RestResponse *)resp {
     if(resp.statusCode == 200) {
+        
+        NSLog( @"-----> %@",       [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
+        
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
         if(json != nil) {
             NSString *result = [json notNSNullObjectForKey:@"id"];
@@ -136,7 +152,7 @@
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_format_invalid", @"") forType:AlertViewTypeSuccess];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
-                } else if([@"-2" isEqualToString:result]) {
+                } else if(([@"-2" isEqualToString:result]&&!isModify)||([@"-7" isEqualToString:result]&&isModify)) {
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"phone_has_been_register", @"") forType:AlertViewTypeSuccess];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     return;
@@ -148,7 +164,7 @@
 }
 
 - (VerificationCodeValidationViewController *)nextViewController {
-    return [[VerificationCodeValidationViewController alloc] init];
+    return [[VerificationCodeValidationViewController alloc] initAsModify:self.isModify];
 }
 
 - (void)verificationCodeSendError:(RestResponse *)resp {

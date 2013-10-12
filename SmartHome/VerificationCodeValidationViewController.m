@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import "JsonUtils.h"
 #import "UIDevice+Extension.h"
+#import "UserAccountViewController.h"
 
 @interface VerificationCodeValidationViewController ()
 
@@ -90,7 +91,7 @@
     
     if(btnNext == nil) {
         btnNext = [LongButton buttonWithPoint:CGPointMake(5, txtVerificationCode.frame.origin.y + txtVerificationCode.frame.size.height + 5)];
-        [btnNext setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
+        [btnNext setTitle:(isModify? NSLocalizedString(@"submit", @""):NSLocalizedString(@"next_step", @"")) forState:UIControlStateNormal];
         if (isModify) {
             [btnNext addTarget:self action:@selector(submitVerificationCodeAndOldPassword:) forControlEvents:UIControlEventTouchUpInside];
         }else{
@@ -213,7 +214,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         NSString *oldPassword = [alertView textFieldAtIndex:0].text;
-        if([NSString isBlank: oldPassword] || oldPassword.length != 6) {
+        if([NSString isBlank: oldPassword]) {
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"verification_code_error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] alertAutoDisappear:YES lockView:self.view];
             return;
@@ -226,15 +227,22 @@
 }
 - (void)modifyUsernameSuccess:(RestResponse *)resp{
     if (resp.statusCode == 200) {
+        
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        NSLog(@"---------json:%@",[[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
         if(json != nil) {
-            DeviceCommand *deviceCommand = [[DeviceCommand alloc] initWithDictionary:json];
-            switch (deviceCommand.resultID) {
+            NSInteger resultID = [[json noNilStringForKey:@"id"] integerValue];
+            switch (resultID) {
                 case 1:
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     [SMShared current].settings.account = phoneNumberToValidation;
                     [[SMShared current].settings saveSettings];
+                    for (UIViewController *controller in self.navigationController.viewControllers) {
+                        if ([controller isKindOfClass:[UserAccountViewController class]]) {
+                            [self.navigationController popToViewController:controller animated:YES];
+                        }
+                    }
                     break;
                 case -1:
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"none_verification_code", @"") forType:AlertViewTypeSuccess];
@@ -260,7 +268,6 @@
                     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"system_exception", @"") forType:AlertViewTypeSuccess];
                     [[AlertView currentAlertView] delayDismissAlertView];
                     break;
-
                 default:
                     break;
             }
