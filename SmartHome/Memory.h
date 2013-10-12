@@ -47,6 +47,11 @@
 - (Unit *)findUnitByIdentifier:(NSString *)identifier;
 
 /*
+ *  remove a unit by identifier
+ */
+- (void)removeUnitByIdentifier:(NSString *)identifier;
+
+/*
  *  change the current unit vai unit identifier (code)
  */
 - (void)changeCurrentUnitTo:(NSString *)unitIdentifier;

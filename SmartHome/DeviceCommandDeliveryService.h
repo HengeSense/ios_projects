@@ -54,5 +54,6 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
 /* Start and Stop refresh current unit */
 - (void)startRefreshCurrentUnit;
 - (void)stopRefreshCurrentUnit;
+- (void)fireRefreshUnit;
 
 @end

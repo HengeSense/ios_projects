@@ -288,14 +288,7 @@
     } else if([@"units" isEqualToString:source]) {
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
         [self notifyUnitsWasUpdate];
-        DeviceCommand *getUnitCommand = [CommandFactory commandForType:CommandTypeGetUnits];
-        getUnitCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
-        getUnitCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
-        DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
-        getSceneListCommand.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
-        getSceneListCommand.hashCode = [SMShared current].memory.currentUnit.hashCode;
-        [[SMShared current].deliveryService executeDeviceCommand:getSceneListCommand];
+        [[SMShared current].deliveryService fireRefreshUnit];
     }
 }
 

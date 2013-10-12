@@ -67,7 +67,7 @@
 - (void)loadWithZones:(NSArray *)zones {
     [self clearSubviews];
     
-    int totalPages = zones == nil ? 0 : zones.count;
+    int totalPages = (zones == nil) ? 0 : zones.count;
     self.contentSize = CGSizeMake(PANEL_WIDTH * totalPages, PANEL_HEIGHT);
     
     if(zones == nil) return;
