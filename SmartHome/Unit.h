@@ -21,6 +21,8 @@
 @property (strong, nonatomic) NSNumber *hashCode;
 @property (strong, nonatomic) NSMutableArray *zones;
 
+@property (assign, nonatomic, readonly) NSUInteger avalibleDevicesCount;
+
 //
 @property (strong, nonatomic) NSMutableArray *scenesModeList;
 @property (strong, nonatomic) NSNumber *sceneHashCode;

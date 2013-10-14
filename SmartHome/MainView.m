@@ -334,17 +334,11 @@
         if(unit != nil && ![NSString isBlank:unit.name]) {
             titleString = unit.name;
             [self updateTitleLabel];
+        } else {
+            titleString = NSLocalizedString(@"main_view.title", @"");
         }
         [unitView loadOrRefreshUnit:unit];
-        NSInteger availableDeviceCount = 0;
-        for (Zone *zone in unit.zones) {
-            for (Device *device in zone.devices) {
-                if (device.state) {
-                    availableDeviceCount ++;
-                }
-            }
-        }
-        lblAffectDevice.text =  [NSString stringWithFormat:@"%i",availableDeviceCount];
+        lblAffectDevice.text =  [NSString stringWithFormat:@"%d", (unit == nil) ? 0 : unit.avalibleDevicesCount];
     }
 }
 

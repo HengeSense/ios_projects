@@ -27,6 +27,8 @@
 @synthesize sceneHashCode;
 @synthesize scenesModeList = _scenesModeList_;
 
+@synthesize avalibleDevicesCount;
+
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
@@ -119,6 +121,16 @@
         }
     }
     return _devices_;
+}
+
+- (NSUInteger)avalibleDevicesCount {
+    int count = 0;
+    for(Device *device in [self devices]) {
+        if(device.state == 0) {
+            count++;
+        }
+    }
+    return count;
 }
 
 @end

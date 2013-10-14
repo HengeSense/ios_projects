@@ -6,6 +6,7 @@
  Copyright (c) 2013 hentre. All rights reserved.
  */
 
+"app.name"              = "掌上未来";
 
 /****************	Global Strings	****************/
 
@@ -51,7 +52,7 @@
 
 /****************	View's Title Strings	****************/
 
-"main_view.title"                     = "主界面";
+"main_view.title"                     = "掌上未来";
 "my_devices.title"                    = "我的设备";
 "unit_binding_view.title"             = "绑定主控";
 "settings_view.title"                 = "我的设置";
