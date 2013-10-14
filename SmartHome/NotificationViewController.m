@@ -124,13 +124,13 @@
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:modifyArr deleteList:deleteArr];
 }
-- (void)sort:(NSArray *) arr ascending:(BOOL) ascending{
+- (void)sort:(NSMutableArray *) arr ascending:(BOOL) ascending{
     if (!arr||arr.count == 0) {
         return;
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:ascending];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [arr sortedArrayUsingDescriptors:sortDescriptors];
+    [arr sortUsingDescriptors:sortDescriptors];
 }
 #pragma mark -
 #pragma mark table view delegate

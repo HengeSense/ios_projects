@@ -181,7 +181,7 @@
 -(void) btnAutoSearchPressed:(UIButton *) sender{
     [finder startFindingDevice];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"searching_unit", @"") forType:AlertViewTypeWaitting];
-    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:nil];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(delayDismiss) userInfo:nil repeats:NO];
 }
