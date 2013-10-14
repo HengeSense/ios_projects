@@ -53,7 +53,12 @@
     int totalPages = [self calcTotalPagesWithElementsCount:((devices == nil) ? 0 : devices.count)];
     self.contentSize = CGSizeMake(PANEL_WIDTH, totalPages * PANEL_HEIGHT);
     
-    if(devices == nil) return;
+    if(devices == nil || devices.count == 0) {
+        UIImageView *imgNoDevice = [[UIImageView alloc] initWithFrame:CGRectMake(75, 35, 199 / 2, 162 / 2)];
+        imgNoDevice.image = [UIImage imageNamed:@"bg_no_devices.png"];
+        [self addSubview:imgNoDevice];
+        return;
+    }
     
     for(int i=0; i<devices.count; i++) {
         int xIndex = i % 3;
