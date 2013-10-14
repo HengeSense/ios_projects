@@ -333,10 +333,10 @@
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
             titleString = unit.name;
-            [self updateTitleLabel];
         } else {
-            titleString = NSLocalizedString(@"main_view.title", @"");
+            titleString = [NSString emptyString];
         }
+        [self updateTitleLabel];
         [unitView loadOrRefreshUnit:unit];
         lblAffectDevice.text =  [NSString stringWithFormat:@"%d", (unit == nil) ? 0 : unit.avalibleDevicesCount];
     }
@@ -407,7 +407,7 @@
     if(![NSString isBlank:titleString]) {
         self.topbar.titleLabel.text = [NSString stringWithFormat:@"%@ (%@)", titleString, stateString];
     } else {
-        self.topbar.titleLabel.text = stateString;
+        self.topbar.titleLabel.text = NSLocalizedString(@"app.name", @"");
     }
 }
 
