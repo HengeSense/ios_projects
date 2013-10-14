@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UserAccountViewController.m"
-            timestampString = "402330261.735735"
+            timestampString = "403426069.568393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "-updateScreenName"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-delayDimiss"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

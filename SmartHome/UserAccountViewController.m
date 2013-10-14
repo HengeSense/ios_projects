@@ -15,6 +15,7 @@
 #import "MainViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import <QuartzCore/QuartzCore.h>
+
 @interface UserAccountViewController ()
 
 @end
@@ -176,7 +177,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         password = [alertView textFieldAtIndex:0].text;
-        [NSTimer scheduledTimerWithTimeInterval:0.0f target:self selector:@selector(delayProcess) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(delayProcess) userInfo:nil repeats:NO];
     }
 }
 

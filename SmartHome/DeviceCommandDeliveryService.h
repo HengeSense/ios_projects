@@ -56,4 +56,7 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
 - (void)stopRefreshCurrentUnit;
 - (void)fireRefreshUnit;
 
+- (void)notifyTcpConnectionOpened;
+- (void)notifyTcpConnectionClosed;
+
 @end

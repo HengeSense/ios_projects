@@ -9,7 +9,7 @@
 #import "AccountService.h"
 #import "NSString+StringUtils.h"
 #import "SMShared.h"
-#define SMS_URL @"http://hentre.f3322.org:6868/FrontServer-1.0/auth"
+#define SMS_URL @"http://113.247.222.106:6868/FrontServer-1.0/auth"
 #define MD5_KEY @"FFFF"
 
 @implementation AccountService

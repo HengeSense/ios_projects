@@ -142,14 +142,15 @@
         NSLog(@"[TCP COMMAND SOCKET] Closed");
 #endif
     }
+    
+    [[SMShared current].deliveryService notifyTcpConnectionClosed];
 }
 
 - (void)notifyConnectionOpened {
 #ifdef DEBUG
     NSLog(@"[TCP COMMAND SOCKET] Opened");
 #endif
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [[SMShared current].deliveryService notifyTcpConnectionOpened];
 }
 
 @end

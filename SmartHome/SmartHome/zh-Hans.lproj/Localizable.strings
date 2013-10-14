@@ -66,8 +66,8 @@
 
 /****************	Login View Strings	****************/
 
-"username"                 =  "登录名";
-"password"                 =  "登录密码";
+"username"                 =  "账号";
+"password"                 =  "密码";
 "login"                    =  "登录";
 "remember_password"        =  "记住密码";
 "register_new_user"        =  "注册账号";
