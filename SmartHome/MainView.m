@@ -403,6 +403,7 @@
 - (void)updateTitleLabel {
     if([NSString isBlank:stateString]) {
         [self commandDeliveryServiceNotifyNetworkModeMayChanged:[SMShared current].deliveryService.currentNetworkMode];
+        return;
     }
     if(![NSString isBlank:titleString]) {
         self.topbar.titleLabel.text = [NSString stringWithFormat:@"%@ (%@)", titleString, stateString];

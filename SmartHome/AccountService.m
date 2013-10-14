@@ -55,11 +55,7 @@
 }
 
 - (void)logoutSync:(SEL)success failed:(SEL)failed target:(id)t callback:(id)cb {
-    NSString *url = [NSString stringWithFormat:@"/phone/logout?deviceCode=%@&security=%@", [SMShared current].settings.deviceCode, [SMShared current].settings.secretKey];
-
-    
-    
-    
+//    NSString *url = [NSString stringWithFormat:@"/phone/logout?deviceCode=%@&security=%@", [SMShared current].settings.deviceCode, [SMShared current].settings.secretKey];
 }
 
 @end

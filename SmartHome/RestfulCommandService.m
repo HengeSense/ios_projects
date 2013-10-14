@@ -109,6 +109,8 @@
                 updateUnit.masterDeviceCode = unit.identifier;
                 updateUnit.commmandNetworkMode = CommandNetworkModeInternal;
                 [updateUnit.units addObject:unit];
+                //Current network mode must be internal, because this callback is from rest service .
+                [[SMShared current].deliveryService setCurrentNetworkMode:NetworkModeInternal];
                 [[SMShared current].deliveryService handleDeviceCommand:updateUnit];
             }
         }
