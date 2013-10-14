@@ -336,6 +336,15 @@
             [self updateTitleLabel];
         }
         [unitView loadOrRefreshUnit:unit];
+        NSInteger availableDeviceCount = 0;
+        for (Zone *zone in unit.zones) {
+            for (Device *device in zone.devices) {
+                if (device.state) {
+                    availableDeviceCount ++;
+                }
+            }
+        }
+        lblAffectDevice.text =  [NSString stringWithFormat:@"%i",availableDeviceCount];
     }
 }
 
