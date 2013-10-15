@@ -120,7 +120,7 @@
         if(newUnits != nil) {
             [self.units addObjectsFromArray:newUnits];    
         }
-        currentUnitIdentifier = [NSString emptyString];
+        //currentUnitIdentifier = [NSString emptyString];
         return self.units;
     }
 }
@@ -220,7 +220,16 @@
         if([NSString isBlank:currentUnitIdentifier]) {
             return [self.units objectAtIndex:0];
         }
-        return [self findUnitByIdentifierInternal:currentUnitIdentifier];
+        
+        // current unit id is not empty
+        // but this unit id is not exist in local units list
+        // need again to return index 0 of units
+        
+        Unit *u = [self findUnitByIdentifierInternal:currentUnitIdentifier];
+        if(u == nil) {
+            u = [self.units objectAtIndex:0];
+        }
+        return u;
     }
 }
 

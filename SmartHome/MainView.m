@@ -412,6 +412,10 @@
     }
 }
 
+- (void)clearStateString {
+    stateString = [NSString emptyString];
+}
+
 #pragma mark -
 #pragma mark button pressed
 
