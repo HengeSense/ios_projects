@@ -49,11 +49,15 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
 
 /* External or Internal Network Checker */
 - (NetworkMode)currentNetworkMode;
+- (void)setCurrentNetworkMode:(NetworkMode)mode;
 - (void)checkInternalOrNotInternalNetwork;
 
 /* Start and Stop refresh current unit */
 - (void)startRefreshCurrentUnit;
 - (void)stopRefreshCurrentUnit;
 - (void)fireRefreshUnit;
+
+- (void)notifyTcpConnectionOpened;
+- (void)notifyTcpConnectionClosed;
 
 @end

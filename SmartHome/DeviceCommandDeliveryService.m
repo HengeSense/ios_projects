@@ -291,6 +291,16 @@
     [self.tcpService connect];
 }
 
+- (void)notifyTcpConnectionOpened {
+    [self executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+    [self executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [self notifyNetworkModeUpdate:networkMode];
+}
+
+- (void)notifyTcpConnectionClosed {
+    [self notifyNetworkModeUpdate:networkMode];
+}
+
 #pragma mark -
 #pragma mark Refresh current unit
 

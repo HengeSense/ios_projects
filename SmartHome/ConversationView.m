@@ -67,6 +67,10 @@
         tblMessages.delegate = self;
         tblMessages.dataSource = self;
         
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:containerView action:@selector(hideSpeechView)];
+        tapGesture.numberOfTapsRequired = 2;
+        [tblMessages addGestureRecognizer:tapGesture];
+        
         [self addSubview:tblMessages];
     }
     

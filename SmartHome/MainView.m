@@ -333,18 +333,12 @@
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
             titleString = unit.name;
-            [self updateTitleLabel];
+        } else {
+            titleString = [NSString emptyString];
         }
+        [self updateTitleLabel];
         [unitView loadOrRefreshUnit:unit];
-        NSInteger availableDeviceCount = 0;
-        for (Zone *zone in unit.zones) {
-            for (Device *device in zone.devices) {
-                if (device.state) {
-                    availableDeviceCount ++;
-                }
-            }
-        }
-        lblAffectDevice.text =  [NSString stringWithFormat:@"%i",availableDeviceCount];
+        lblAffectDevice.text =  [NSString stringWithFormat:@"%d", (unit == nil) ? 0 : unit.avalibleDevicesCount];
     }
 }
 
@@ -409,12 +403,17 @@
 - (void)updateTitleLabel {
     if([NSString isBlank:stateString]) {
         [self commandDeliveryServiceNotifyNetworkModeMayChanged:[SMShared current].deliveryService.currentNetworkMode];
+        return;
     }
     if(![NSString isBlank:titleString]) {
         self.topbar.titleLabel.text = [NSString stringWithFormat:@"%@ (%@)", titleString, stateString];
     } else {
-        self.topbar.titleLabel.text = stateString;
+        self.topbar.titleLabel.text = NSLocalizedString(@"app.name", @"");
     }
+}
+
+- (void)clearStateString {
+    stateString = [NSString emptyString];
 }
 
 #pragma mark -

@@ -130,6 +130,11 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
+    
+//#ifdef DEBUG
+//    NSLog(@"%@", [[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding]);
+//#endif
+    
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     command.commmandNetworkMode = CommandNetworkModeExternal;
     [[SMShared current].deliveryService handleDeviceCommand:command];
@@ -142,14 +147,15 @@
         NSLog(@"[TCP COMMAND SOCKET] Closed");
 #endif
     }
+    
+    [[SMShared current].deliveryService notifyTcpConnectionClosed];
 }
 
 - (void)notifyConnectionOpened {
 #ifdef DEBUG
     NSLog(@"[TCP COMMAND SOCKET] Opened");
 #endif
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetNotifications]];
+    [[SMShared current].deliveryService notifyTcpConnectionOpened];
 }
 
 @end

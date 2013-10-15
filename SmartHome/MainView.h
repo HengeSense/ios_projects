@@ -38,4 +38,6 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 - (void)hideSpeechView;
 - (void)notifyViewUpdate;
 
+- (void)clearStateString;
+
 @end
