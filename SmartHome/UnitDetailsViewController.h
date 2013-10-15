@@ -11,6 +11,7 @@
 #import "Unit.h"
 #import "ModifyInfoViewController.h"
 #import "DeviceCommandUpdateUnitNameHandler.h"
+
 @interface UnitDetailsViewController : NavViewController<UITableViewDataSource, UITableViewDelegate, TextViewDelegate,DeviceCommandUpdateUnitNameHandlerDelegate>
 
 @property (strong, nonatomic) NSString *unitIdentifier;

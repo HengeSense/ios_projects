@@ -34,8 +34,8 @@
 - (void)initUI {
     //top bar for main view
     [self addSubview:self.topbar];
-    
     self.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
+    [self topbar];
 }
 
 - (TopbarView *)topbar {
@@ -49,11 +49,9 @@
 }
 
 - (void)notifyViewUpdate {
-    // Used for extend
 }
 
 - (void)destory {
-    
 }
 
 @end

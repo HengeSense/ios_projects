@@ -8,6 +8,7 @@
 
 #import "ZoneDetailsViewController.h"
 #import "DeviceDetailViewController.h"
+
 @interface ZoneDetailsViewController ()
 
 @end
@@ -25,10 +26,22 @@
     }
     return self;
 }
--(void) initDefaults{
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+- (void)initDefaults {
     [super initDefaults];
 }
--(void) initUI{
+
+- (void)initUI {
     [super initUI];
     
     if (tblDevice == nil) {
@@ -41,14 +54,18 @@
         [self.view addSubview:tblDevice];
     }
 }
--(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [zone devices].count;
 }
--(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
--(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *deviceCellIdentifier;
+    
     if (indexPath.row == 0) {
         deviceCellIdentifier = @"topCellIdentifier";
     }else if (indexPath.row == [zone devices].count-1){
@@ -77,20 +94,12 @@
     }
     return deviceCell;
 }
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DeviceDetailViewController *deviceDetailViewController = [[DeviceDetailViewController alloc] init];
     Device *device = [[zone devices] objectAtIndex:indexPath.row];
     deviceDetailViewController.device = device;
     [self.navigationController pushViewController:deviceDetailViewController animated:YES];
-}
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 @end

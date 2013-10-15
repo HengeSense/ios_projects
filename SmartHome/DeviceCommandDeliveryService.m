@@ -125,7 +125,6 @@
 }
 
 - (id<CommandExecutor>)determineCommandExcutor:(DeviceCommand *)command {
-    
     if(command.commmandNetworkMode == CommandNetworkModeInternal) {
         return self.restfulService;
     } else if(command.commmandNetworkMode == CommandNetworkModeExternal) {
@@ -143,7 +142,6 @@
     }
     
     return nil;
-    
 }
 
 /*

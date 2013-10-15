@@ -12,13 +12,12 @@
 
 - (void)handle:(DeviceCommand *)command {
     [super handle:command];
-    NSLog(@"class of command:%@",command.description);
-    if ([command isKindOfClass:[DeviceCommandUpdateUnitName class]]) {
-        NSArray *subscriptorArr = [[SMShared current].memory getSubscriptionsFor:self.class];
-        if (subscriptorArr&&subscriptorArr.count>0) {
-            for (UIViewController *controller in subscriptorArr) {
-                if([controller respondsToSelector:@selector(updateUnitName:)]){
-                    [controller performSelector:@selector(updateUnitName:) withObject:command ];
+    if([command isKindOfClass:[DeviceCommandUpdateUnitName class]]) {
+        NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:self.class];
+        if(subscriptions != nil && subscriptions.count > 0) {
+            for(int i=0; i<subscriptions.count; i++) {
+                if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(updateUnitNameOnCompleted:)]) {
+                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(updateUnitNameOnCompleted:) withObject:command waitUntilDone:NO];
                 }
             }
         }

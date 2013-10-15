@@ -12,7 +12,8 @@
 #import "SMDateFormatter.h"
 #import "ZoneDetailsViewController.h"
 #import "ViewsPool.h"
-#import "MyDevicesView.h"
+#import "NavigationView.h"
+
 @interface UnitDetailsViewController ()
 
 @end
@@ -20,7 +21,8 @@
 @implementation UnitDetailsViewController{
     UITableView *tblUnit;
     Unit *unit;
-    NSString *updateName;
+    NSTimer *timeoutTimer;
+    NSString *tempUnitName;
 }
 
 @synthesize unitIdentifier;
@@ -64,7 +66,16 @@
 
 - (void)initDefaults {
     unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
+    
+    // subscribe events
     [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitNameHandler class] for:self];
+}
+
+- (void)backToPreViewController {
+    // unsubscribe events
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateUnitNameHandler class] for:self];
+    
+    [super backToPreViewController];
 }
 
 #pragma mark -
@@ -197,42 +208,57 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark -
+#pragma mark Change unit name
+
 - (void)textViewHasBeenSetting:(NSString *)string {
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(closeAlertViewWithError) userInfo:nil repeats:NO];
+    
+    // Execute update unit name command
     DeviceCommandUpdateUnitName *cmd = (DeviceCommandUpdateUnitName *)[CommandFactory commandForType:CommandTypeUpdateUnitName];
     unit.name = string;
     cmd.masterDeviceCode = unit.identifier;
     cmd.name = string;
     [[SMShared current].deliveryService executeDeviceCommand:cmd];
-    updateName = string;
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
-    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
-}
-
-- (void)delayDimiss {
-    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
-        [[AlertView currentAlertView] delayDismissAlertView];
-    }
-}
-
-
--(void) updateUnitName:(DeviceCommand *)command{
     
-    if (command.resultID == 1) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
-        [[AlertView currentAlertView] delayDismissAlertView];
+    tempUnitName = string;
+}
 
-        UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        if(cell) {
-            UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
-            lblTitle.text = updateName;
+- (void)updateUnitNameOnCompleted:(DeviceCommand *)command {
+    @synchronized(self) {
+        [timeoutTimer invalidate];
+        timeoutTimer = nil;
+        
+        if(command.resultID == 1) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
+            [[AlertView currentAlertView] delayDismissAlertView];
+            UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            if(cell) {
+                UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
+                lblTitle.text = tempUnitName;
+            }
+            NavigationView *myDevicesView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"myDevicesView"];
+            if(myDevicesView != nil) {
+                [myDevicesView notifyViewUpdate];
+            }
+        } else {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"execution_failed", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] delayDismissAlertView];
         }
-        MyDevicesView *myDevicesView = (MyDevicesView *)[[ViewsPool sharedPool] viewWithIdentifier:@"myDevicesView"];
-        [myDevicesView updateUnitName:updateName byUnitIdentifier:self.unitIdentifier];
-
-    }else{
-        [self delayDimiss];
+    
+        tempUnitName = [NSString emptyString];
     }
 }
+
+- (void)closeAlertViewWithError {
+    @synchronized(self) {
+        if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] delayDismissAlertView];
+        }
+    }
+}
+
 @end
