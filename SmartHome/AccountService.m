@@ -9,7 +9,8 @@
 #import "AccountService.h"
 #import "NSString+StringUtils.h"
 #import "SMShared.h"
-#define SMS_URL @"http://113.247.222.106:6868/FrontServer-1.0/auth"
+
+#define AUTH_URL @"http://113.247.222.106:6868/FrontServer-1.0/auth"
 #define MD5_KEY @"FFFF"
 
 @implementation AccountService
@@ -17,7 +18,7 @@
 - (id)init {
     self = [super init];
     if(self) {
-        [self setupWithUrl:SMS_URL];
+        [self setupWithUrl:AUTH_URL];
     }
     return self;
 }

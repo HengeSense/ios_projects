@@ -18,9 +18,9 @@
 @implementation DrawerView {
     UIView *accountView;
     UIImageView *logoView;
+    UIImageView *backgroundImageView;
     UITableView *tblNavigationItems;
     NSArray *navigationItems;
-    UIImageView *backgroundImageView;
     ViewsPool *viewsPool;
     UILabel *lblMessage1;
     CGFloat entryHeight;

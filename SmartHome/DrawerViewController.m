@@ -29,6 +29,8 @@
     UIPanGestureRecognizer *panForMainViewStateHide;
     UIPanGestureRecognizer *panGesture;
     NSString *intentionDirection;
+    
+    BOOL hideStateHasResetTransitionToZero;
 }
 
 @synthesize leftView;
@@ -220,8 +222,18 @@
             }
             if(leftViewIsAboveOnRightView && leftView != nil) [self rightViewToTopLevel];
         }
+        
+        CGFloat maxTransX = lastedMainViewCenterX + translation.x;
+        if(maxTransX > 160 + self.leftViewVisibleWidth) {
+            maxTransX = 160 + self.leftViewVisibleWidth;
+            [gesture setTranslation:CGPointMake(self.leftViewVisibleWidth, 0) inView:self.mainView];
+        } else if(maxTransX < 160 - self.rightViewVisibleWidth) {
+            maxTransX = 160 - self.rightViewVisibleWidth;
+            [gesture setTranslation:CGPointMake(0 - self.rightViewVisibleWidth, 0) inView:self.mainView];
+        }
+        
         CGPoint center = self.mainView.center;
-        [self moveMainViewToCenter:CGPointMake(lastedMainViewCenterX + translation.x, center.y)];
+        [self moveMainViewToCenter:CGPointMake(maxTransX, center.y)];
     } else if(gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
         CGFloat mainViewX = self.mainView.frame.origin.x;
         //left view
@@ -260,12 +272,10 @@
         CGFloat mainViewX = self.mainView.frame.origin.x;
         if(mainViewX > 0 && (lastedMainViewCenterX + translation.x) <= 160) {
             [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
-
             [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
             return;
         } else if(mainViewX < 0 && (lastedMainViewCenterX + translation.x) >= 160) {
             [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
-
             [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
             return;
         } else if(mainViewX == 0) {
@@ -290,7 +300,21 @@
                 lastedMainViewCenterX = self.mainView.center.x + translation.x;
             }
         }
-        [self moveMainViewToCenter:CGPointMake(lastedMainViewCenterX + translation.x, self.mainView.center.y)];
+        
+        // here translation <<  >>  bug
+        CGFloat maxTransX = lastedMainViewCenterX + translation.x;
+        if(maxTransX > 160 + self.leftViewVisibleWidth) {
+            maxTransX = 160 + self.leftViewVisibleWidth;
+            [gesture setTranslation:CGPointMake(translation.x >= self.leftViewVisibleWidth ? self.leftViewVisibleWidth : 0, 0) inView:lockView];
+            hideStateHasResetTransitionToZero = NO;
+        } else if(maxTransX < 160 - self.rightViewVisibleWidth) {
+            maxTransX = 160 - self.rightViewVisibleWidth;
+            [gesture setTranslation:CGPointMake((translation.x <= (0 - self.rightViewVisibleWidth)) ? (0 - self.rightViewVisibleWidth) : 0, 0) inView:lockView];
+            hideStateHasResetTransitionToZero = NO;
+        }
+        
+        [self moveMainViewToCenter:CGPointMake(maxTransX, self.mainView.center.y)];
+        
     } else if(gesture.state == UIGestureRecognizerStateEnded) {
         CGFloat mainViewX = self.mainView.frame.origin.x;
         if(mainViewX > 0) {
