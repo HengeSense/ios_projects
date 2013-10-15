@@ -11,5 +11,6 @@
 #import "DeviceCommandGetUnitsHandler.h"
 
 @interface MyDevicesView : NavigationView <UITableViewDelegate, UITableViewDataSource, DeviceCommandGetUnitsHandlerDelegate>
+-(void) updateUnitName:(NSString *) unitName byUnitIdentifier:(NSString *) identifier;
 
 @end

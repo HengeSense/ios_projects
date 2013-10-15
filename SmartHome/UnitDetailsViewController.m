@@ -11,7 +11,8 @@
 #import "UIColor+ExtentionForHexString.h"
 #import "SMDateFormatter.h"
 #import "ZoneDetailsViewController.h"
-
+#import "ViewsPool.h"
+#import "MyDevicesView.h"
 @interface UnitDetailsViewController ()
 
 @end
@@ -19,6 +20,7 @@
 @implementation UnitDetailsViewController{
     UITableView *tblUnit;
     Unit *unit;
+    NSString *updateName;
 }
 
 @synthesize unitIdentifier;
@@ -62,6 +64,7 @@
 
 - (void)initDefaults {
     unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitNameHandler class] for:self];
 }
 
 #pragma mark -
@@ -200,12 +203,34 @@
     cmd.masterDeviceCode = unit.identifier;
     cmd.name = string;
     [[SMShared current].deliveryService executeDeviceCommand:cmd];
-    
-    UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    if(cell) {
-        UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
-        lblTitle.text = string;
+    updateName = string;
+    [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
+}
+
+- (void)delayDimiss {
+    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
     }
 }
 
+
+-(void) updateUnitName:(DeviceCommand *)command{
+    
+    if (command.resultID == 1) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
+
+        UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        if(cell) {
+            UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
+            lblTitle.text = updateName;
+        }
+        MyDevicesView *myDevicesView = (MyDevicesView *)[[ViewsPool sharedPool] viewWithIdentifier:@"myDevicesView"];
+        [myDevicesView updateUnitName:updateName byUnitIdentifier:self.unitIdentifier];
+
+    }else{
+        [self delayDimiss];
+    }
+}
 @end

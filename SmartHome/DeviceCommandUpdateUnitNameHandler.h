@@ -7,7 +7,8 @@
 //
 
 #import "DeviceCommandHandler.h"
-
+@protocol DeviceCommandUpdateUnitNameHandlerDelegate<NSObject>
+-(void) updateUnitName:(DeviceCommand *) command;
+@end
 @interface DeviceCommandUpdateUnitNameHandler : DeviceCommandHandler
-
 @end

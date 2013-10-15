@@ -149,7 +149,11 @@
     [self.ownerController.navigationController pushViewController:unitDetailsViewController animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
+- (void)updateUnitName:(NSString *)unitName byUnitIdentifier:(NSString *)identifier{
+    Unit *unit = [[SMShared current].memory findUnitByIdentifier:identifier];
+    unit.name = unitName;
+    [tblUnits reloadData];
+}
 - (void)destory {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
 #ifdef DEBUG
