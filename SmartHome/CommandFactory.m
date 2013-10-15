@@ -89,7 +89,7 @@
     } else if([COMMAND_GET_CAMERA_SERVER isEqualToString:commandName]) {
         command = [[DeviceCommandReceivedCameraServer alloc] initWithDictionary:json];
     } else if([COMMAND_CHANGE_UNIT_NAME isEqualToString:commandName]) {
-        
+        command = [[DeviceCommandUpdateUnitName alloc] initWithDictionary:json];
     } else if([COMMAND_UPDATE_DEVICE_TOKEN isEqualToString:commandName]) {
         command = [[DeviceCommand alloc] initWithDictionary:json];
     }

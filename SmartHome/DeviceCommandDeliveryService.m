@@ -18,7 +18,7 @@
 #import "DeviceCommandGetSceneListHandler.h"
 #import "DeviceCommandGetCameraServerHandler.h"
 #import "DeviceCommandUpdateDeviceTokenHandler.h"
-
+#import "DeviceCommandUpdateUnitNameHandler.h"
 #import "AlertView.h"
 
 #define NETWORK_CHECK_INTERVAL 5
@@ -202,7 +202,7 @@
     } else if([COMMAND_PUSH_DEVICE_STATUS isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateDevicesHandler alloc] init];
     } else if([COMMAND_CHANGE_UNIT_NAME isEqualToString:command.commandName]) {
-        // ...
+        handler = [[DeviceCommandUpdateUnitNameHandler alloc] init];
     } else if([COMMAND_GET_CAMERA_SERVER isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetCameraServerHandler alloc] init];
     } else if([COMMAND_UPDATE_DEVICE_TOKEN isEqualToString:command.commandName]) {

@@ -204,6 +204,8 @@
     cmd.name = string;
     [[SMShared current].deliveryService executeDeviceCommand:cmd];
     updateName = string;
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
 }
 
@@ -218,7 +220,7 @@
 -(void) updateUnitName:(DeviceCommand *)command{
     
     if (command.resultID == 1) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
         [[AlertView currentAlertView] delayDismissAlertView];
 
         UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
