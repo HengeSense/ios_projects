@@ -21,4 +21,6 @@
 - (void)close;
 - (BOOL)isPlaying;
 
+- (void)dontNotifyMe;
+
 @end

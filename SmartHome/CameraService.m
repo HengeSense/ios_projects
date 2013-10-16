@@ -12,6 +12,7 @@
 
 @implementation CameraService {
     BOOL playing;
+    BOOL notify;
     long long lastedDownloadingTime;
 }
 
@@ -25,6 +26,7 @@
         self.client.timeoutInterval = 3;
         _url_ = url;
         playing = NO;
+        notify = YES;
         lastedDownloadingTime = -1;
     }
     return self;
@@ -57,10 +59,12 @@
             }
             if(playing) {
                 [self doError:resp.statusCode];
+                return;
             }
         }
         error:^(RestResponse *resp){
             [self doError:resp.statusCode];
+            return;
         }];
 }
 
@@ -69,11 +73,6 @@
     NSLog(@"[CAMERA RESTFUL SERVICE] Error in reading image, status code is %d", statusCode);
 #endif
     [self close];
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(notifyCameraWasDisconnectted)]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate notifyCameraWasDisconnectted];
-        });
-    }
 }
 
 - (void)loadingImageInBackground {
@@ -105,14 +104,22 @@
 - (void)close {
     playing = NO;
     lastedDownloadingTime = -1;
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(notifyCameraWasDisconnectted)]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.delegate notifyCameraWasDisconnectted];
-        });
+    
+    if(notify) {
+        if(self.delegate != nil && [self.delegate respondsToSelector:@selector(notifyCameraWasDisconnectted)]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate notifyCameraWasDisconnectted];
+            });
+        }
     }
+    
 #ifdef DEBUG
     NSLog(@"[CAMERA RESTFUL SERVICE] Closed");
 #endif
+}
+
+- (void)dontNotifyMe {
+    notify = NO;
 }
 
 @end

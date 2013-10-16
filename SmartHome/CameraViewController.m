@@ -106,6 +106,7 @@
     }
     
     if(cameraService != nil && [cameraService isPlaying]) {
+        [cameraService dontNotifyMe];
         [cameraService close];
         cameraService = nil;
     }
