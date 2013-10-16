@@ -218,7 +218,6 @@
     
     // Execute update unit name command
     DeviceCommandUpdateUnitName *cmd = (DeviceCommandUpdateUnitName *)[CommandFactory commandForType:CommandTypeUpdateUnitName];
-    unit.name = string;
     cmd.masterDeviceCode = unit.identifier;
     cmd.name = string;
     [[SMShared current].deliveryService executeDeviceCommand:cmd];
@@ -234,6 +233,7 @@
         if(command.resultID == 1) {
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
             [[AlertView currentAlertView] delayDismissAlertView];
+            unit.name = tempUnitName;
             UITableViewCell *cell = [tblUnit cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             if(cell) {
                 UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
