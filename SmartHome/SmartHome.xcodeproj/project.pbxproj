@@ -273,6 +273,7 @@
 		F205157B17CF42370058DADE /* device_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157917CF42370058DADE /* device_count@2x.png */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C017D9784800280F21 /* PasswordPopupViewController.m */; };
+		F207B501180E90CB00A92603 /* NetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F207B500180E90CB00A92603 /* NetworkHandler.m */; };
 		F20AC1A917F3CCFC00224CB8 /* help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20AC1A817F3CCFC00224CB8 /* help@2x.png */; };
 		F20AC1AB17F3DDD100224CB8 /* btn_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20AC1AA17F3DDD100224CB8 /* btn_add@2x.png */; };
 		F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20AE08A17BDBD540040B80A /* ModifyInfoViewController.m */; };
@@ -732,6 +733,8 @@
 		F205E5BE17D977B600280F21 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordPopupViewController.h; sourceTree = "<group>"; };
 		F205E5C017D9784800280F21 /* PasswordPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordPopupViewController.m; sourceTree = "<group>"; };
+		F207B4FF180E90CB00A92603 /* NetworkHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHandler.h; sourceTree = "<group>"; };
+		F207B500180E90CB00A92603 /* NetworkHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHandler.m; sourceTree = "<group>"; };
 		F20AC1A817F3CCFC00224CB8 /* help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help@2x.png"; sourceTree = "<group>"; };
 		F20AC1AA17F3DDD100224CB8 /* btn_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_add@2x.png"; sourceTree = "<group>"; };
 		F20AE08917BDBD540040B80A /* ModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyInfoViewController.h; sourceTree = "<group>"; };
@@ -1095,6 +1098,8 @@
 				6FF6C4EB17E850E200F637FD /* ImageProvider.m */,
 				6F09060C17F17C1F00C26491 /* SystemAudio.h */,
 				6F09060D17F17C1F00C26491 /* SystemAudio.m */,
+				F207B4FF180E90CB00A92603 /* NetworkHandler.h */,
+				F207B500180E90CB00A92603 /* NetworkHandler.m */,
 			);
 			name = commons;
 			sourceTree = "<group>";
@@ -2196,6 +2201,7 @@
 				6F92A1EA17B7D5B6009AD656 /* ConversationMessage.m in Sources */,
 				6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */,
 				F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */,
+				F207B501180E90CB00A92603 /* NetworkHandler.m in Sources */,
 				6FA3D8451806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m in Sources */,
 				6FD0CC0417EFEC6F005956E0 /* DeviceCommandGetCameraServer.m in Sources */,
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
