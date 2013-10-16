@@ -33,6 +33,7 @@
     self.delegate = self;
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
+    
 }
 
 + (ZonesView *)zonesViewWithPoint:(CGPoint)point {

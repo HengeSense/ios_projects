@@ -84,6 +84,9 @@
 
 - (void)initUI {
     [super initUI];
+    
+    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"icon_red.png"] forState:UIControlStateNormal];
+    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"icon_red.png"] forState:UIControlStateHighlighted];
 
 #pragma mark -
 #pragma selection button (units && scene)
@@ -379,7 +382,17 @@
 #pragma mark -
 #pragma mark command delivery service delegate
 
+- (void)changeStateIconColor:(NSString *)colorStr {
+    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_%@.png", colorStr]] forState:UIControlStateNormal];
+    [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_%@.png", colorStr]] forState:UIControlStateHighlighted];
+}
+
 - (void)commandDeliveryServiceNotifyNetworkModeMayChanged:(NetworkMode)lastedNetwokMode {
+    
+    /*
+     *    Change Title label
+     */
+    
     if(lastedNetwokMode == 1) {
         // External
         if([SMShared current].deliveryService.tcpService.isConnectted) {
@@ -398,6 +411,32 @@
     }
     
     [self updateTitleLabel];
+    
+    /*
+     *    Change Cloud Icon Color
+     */
+    
+    if(lastedNetwokMode == 1) {
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            if([@"在线" isEqualToString:[SMShared current].memory.currentUnit.status]) {
+                [self changeStateIconColor:@"green"];
+            } else {
+                [self changeStateIconColor:@"yellow"];
+            }
+        } else {
+            [self changeStateIconColor:@"red"];
+        }
+        
+    } else if(lastedNetwokMode == 2) {
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            [self changeStateIconColor:@"green"];
+        } else {
+            [self changeStateIconColor:@"yellow"];
+        }
+    } else {
+        [self changeStateIconColor:@"red"];
+    }
+    
 }
 
 - (void)updateTitleLabel {

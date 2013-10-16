@@ -105,6 +105,7 @@
     if(self.mainView != nil) {
         [self.view addSubview:self.mainView];
         panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestureForMainViewStateNormal:)];
+        panGesture.delaysTouchesBegan = YES;
         [self.mainView addGestureRecognizer:panGesture];
     }
     
@@ -489,6 +490,9 @@
         }
     }
 }
+
+#pragma mark -
+#pragma Gesture recognizer delegate
 
 - (void)disableGestureForDrawerView {
     panGesture.enabled = NO;
