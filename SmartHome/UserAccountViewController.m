@@ -34,6 +34,8 @@
     BOOL accountInfoIsModifed;
     UIButton *btnModifyUsername;
     UILabel *lblUsername;
+    
+    NSTimer *timeoutTimer;
 }
 
 @synthesize infoDictionary;
@@ -127,8 +129,10 @@
         btnSubmit.enabled = accountInfoIsModifed;
     }
     
+    if ([self handleNetworkException]) {
+        [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
+    }
     
-    [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
 - (void)btnModifyUsernamePressed:(UIButton *) sender{
@@ -220,61 +224,71 @@
 - (void)delayProcess {
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    
-    DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
-    command.email = [infoDictionary objectForKey:NSLocalizedString(@"mail", @"")];
-    command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick_name", @"")];
-    command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify_pwd", @"")];
-    command.oldPwd = password;
-    [[SMShared current].deliveryService executeDeviceCommand:command];
-    [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
+    timeoutTimer=[NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(delayDimiss) userInfo:nil repeats:NO];
+    if ([self handleNetworkException]) {
+        DeviceCommandUpdateAccount *command = (DeviceCommandUpdateAccount *)[CommandFactory commandForType:CommandTypeUpdateAccount];
+        command.email = [infoDictionary objectForKey:NSLocalizedString(@"mail", @"")];
+        command.screenName = [infoDictionary objectForKey:NSLocalizedString(@"nick_name", @"")];
+        command.pwdToUpdate = [infoDictionary objectForKey:NSLocalizedString(@"modify_pwd", @"")];
+        command.oldPwd = password;
+        [[SMShared current].deliveryService executeDeviceCommand:command];
+    }
+
 }
 
 - (void)delayDimiss {
-    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
-        [[AlertView currentAlertView] delayDismissAlertView];
+    @synchronized(self){
+        if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] delayDismissAlertView];
+        }
+
     }
 }
     
 - (void)didEndUpdateAccount:(DeviceCommand *)command {
-    if (command == nil) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
-        [[AlertView currentAlertView] delayDismissAlertView];
-        return;
-    }
+    @synchronized(self){
+        [timeoutTimer invalidate];
+        timeoutTimer = nil;
 
-    switch (command.resultID) {
-        case 1:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
+        if (command == nil) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
-            accountInfoIsModifed = NO;
-            btnSubmit.enabled = accountInfoIsModifed;
-            [self updateScreenName];
-            [infoTable reloadData];
-            break;
-        case -1:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_invalid", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] delayDismissAlertView];
-            break;
-        case -2:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"mail_name_blank", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] delayDismissAlertView];
-            accountInfoIsModifed = NO;
-            btnSubmit.enabled = accountInfoIsModifed;
-            break;
-        case -3:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"format_error", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] delayDismissAlertView];
-            accountInfoIsModifed = NO;
-            btnSubmit.enabled = accountInfoIsModifed;
-            break;
-        case -4:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_frequently", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] delayDismissAlertView];
-            break;
-        default:
-            break;
+            return;
+        }
+
+        switch (command.resultID) {
+            case 1:
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                accountInfoIsModifed = NO;
+                btnSubmit.enabled = accountInfoIsModifed;
+                [self updateScreenName];
+                [infoTable reloadData];
+                break;
+            case -1:
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"pwd_invalid", @"") forType:AlertViewTypeFailed];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                break;
+            case -2:
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"mail_name_blank", @"") forType:AlertViewTypeFailed];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                accountInfoIsModifed = NO;
+                btnSubmit.enabled = accountInfoIsModifed;
+                break;
+            case -3:
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"format_error", @"") forType:AlertViewTypeFailed];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                accountInfoIsModifed = NO;
+                btnSubmit.enabled = accountInfoIsModifed;
+                break;
+            case -4:
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_frequently", @"") forType:AlertViewTypeFailed];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -335,6 +349,15 @@
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
     [super backToPreViewController];
+}
+- (BOOL)handleNetworkException {
+    if ([[SMShared current].deliveryService.tcpService isConnectted]) {
+        return YES;
+    }else{
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"device_disconnected_cloud", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
+        return NO;
+    }
 }
 
 @end

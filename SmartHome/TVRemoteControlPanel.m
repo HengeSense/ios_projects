@@ -10,7 +10,8 @@
 #import "CommandFactory.h"
 #import "SMShared.h"
 #import "UIColor+ExtentionForHexString.h"
-
+#import "AlertView.h"
+#define ONLINE @"在线"
 @implementation TVRemoteControlPanel {
     SMButton *btnPower;
     SMButton *btnSignal;
@@ -159,30 +160,71 @@
 #pragma mark direction button delegate
 
 - (void)leftButtonClicked {
+    if ([self handleNetworkException])
     [self btnPressed:[NSNumber numberWithInteger:16]];
 }
 
 - (void)rightButtonClicked {
+    if ([self handleNetworkException])
     [self btnPressed:[NSNumber numberWithInteger:17]];
 }
 
 - (void)topButtonClicked {
+    if ([self handleNetworkException])
     [self btnPressed:[NSNumber numberWithInteger:14]];
 }
 
 - (void)bottomButtonClicked {
+    if ([self handleNetworkException])
     [self btnPressed:[NSNumber numberWithInteger:15]];
 }
 
 - (void)centerButtonClicked {
+    if ([self handleNetworkException])
     [self btnPressed:[NSNumber numberWithInteger:18]];
 }
 
 - (void)controlTvWithSingal:(NSInteger)singal {
-    DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
-    updateDevice.masterDeviceCode = self.device.zone.unit.identifier;
-    [updateDevice addCommandString:[self.device commandStringForRemote:singal]];
-    [[SMShared current].deliveryService executeDeviceCommand:updateDevice];
+    if ([self handleNetworkException]) {
+        DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+        updateDevice.masterDeviceCode = self.device.zone.unit.identifier;
+        [updateDevice addCommandString:[self.device commandStringForRemote:singal]];
+        [[SMShared current].deliveryService executeDeviceCommand:updateDevice];
+    }
+}
+
+- (BOOL)handleNetworkException{
+    if (self.device.state == 1) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"device_disconnected_cloud", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
+        return NO;
+    }
+    
+    if([SMShared current].deliveryService.currentNetworkMode == NetworkModeInternal) {
+        return YES;
+    } else {
+        
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            
+                if ([self.device.zone.unit.status isEqualToString:ONLINE]) {
+                    return YES;
+                } else {
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unit_is_offline", @"") forType:AlertViewTypeFailed];
+                    [[AlertView currentAlertView] delayDismissAlertView];
+
+                    return NO;
+                }
+            
+        } else {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"can't_connect_cloud", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] delayDismissAlertView];
+            return NO;
+        }
+        
+        
+    }
+    
+   
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "AirConditionViewController.h"
 #import "RadioButton.h"
 #import <QuartzCore/QuartzCore.h>
-
+#define ONLINE @"在线"
 #define RADIO_MARGIN 60
 #define LABEL_MARGIN_TOP 20
 #define RADIO_CENTER 10
@@ -80,6 +80,7 @@
 }
 
 -(void) closeBtnPressed{
+    if([self handleNetworkException])
     [self executeCommandWithCode:POWER_SWITCH_CODE];
 }
 
@@ -141,6 +142,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     curIndex = indexPath;
     NSInteger commandCode = curIndex.section?HOT_BASE_CODE+curIndex.row:COLD_BASE_CODE+curIndex.row;
+    if([self handleNetworkException])
     [self executeCommandWithCode:commandCode];
     UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
@@ -166,4 +168,39 @@
     curCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
     curCell.backgroundColor = [UIColor clearColor];
 }
+
+- (BOOL)handleNetworkException{
+    if (self.device.state == 1) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"device_disconnected_cloud", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
+        return NO;
+    }
+    
+    if([SMShared current].deliveryService.currentNetworkMode == NetworkModeInternal) {
+        return YES;
+    } else {
+        
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            
+            if ([self.device.zone.unit.status isEqualToString:ONLINE]) {
+                return YES;
+            } else {
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unit_is_offline", @"") forType:AlertViewTypeFailed];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                
+                return NO;
+            }
+            
+        } else {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"can't_connect_cloud", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] delayDismissAlertView];
+            return NO;
+        }
+        
+        
+    }
+    
+    
+}
+
 @end

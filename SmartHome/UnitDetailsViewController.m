@@ -217,12 +217,14 @@
     timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(closeAlertViewWithError) userInfo:nil repeats:NO];
     
     // Execute update unit name command
-    DeviceCommandUpdateUnitName *cmd = (DeviceCommandUpdateUnitName *)[CommandFactory commandForType:CommandTypeUpdateUnitName];
-    unit.name = string;
-    cmd.masterDeviceCode = unit.identifier;
-    cmd.name = string;
-    [[SMShared current].deliveryService executeDeviceCommand:cmd];
-    
+    if ([self handleNetworkException]) {
+        DeviceCommandUpdateUnitName *cmd = (DeviceCommandUpdateUnitName *)[CommandFactory commandForType:CommandTypeUpdateUnitName];
+        unit.name = string;
+        cmd.masterDeviceCode = unit.identifier;
+        cmd.name = string;
+        [[SMShared current].deliveryService executeDeviceCommand:cmd];
+
+    }
     tempUnitName = string;
 }
 
@@ -260,5 +262,13 @@
         }
     }
 }
-
+- (BOOL)handleNetworkException {
+    if ([[SMShared current].deliveryService.tcpService isConnectted]) {
+        return YES;
+    }else{
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"device_disconnected_cloud", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] delayDismissAlertView];
+        return NO;
+    }
+}
 @end
