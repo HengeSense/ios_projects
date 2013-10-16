@@ -31,6 +31,7 @@
     UIButton *btnSubmit;
     BOOL passwordIsModified;
     
+    BOOL accountInfoIsModifed;
     UIButton *btnModifyUsername;
     UILabel *lblUsername;
 }
@@ -53,6 +54,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+
 }
 
 - (void)initDefaults {
@@ -72,7 +74,7 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"account_info.title", @"");
     
     if (btnModifyUsername == nil) {
-        btnModifyUsername = [[UIButton alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+5, SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
+        btnModifyUsername = [[UIButton alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+15, SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
         btnModifyUsername.layer.cornerRadius = 5;
         btnModifyUsername.center = CGPointMake(self.view.center.x, btnModifyUsername.center.y);
         btnModifyUsername.backgroundColor = [UIColor whiteColor];
@@ -101,7 +103,7 @@
     }
 
     if (infoTable == nil) {
-        infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0,btnModifyUsername.frame.size.height+btnModifyUsername.frame.origin.y+25, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0,btnModifyUsername.frame.size.height+btnModifyUsername.frame.origin.y+15, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
         infoTable.center = CGPointMake(self.view.center.x, infoTable.center.y);
         infoTable.delegate = self;
         infoTable.dataSource =self;
@@ -122,6 +124,7 @@
         [btnSubmit setTitle:NSLocalizedString(@"submit", @"") forState:UIControlStateNormal];
         [self.view addSubview:btnSubmit];
         [btnSubmit addTarget:self action:@selector(btnDownPressed:) forControlEvents:UIControlEventTouchUpInside];
+        btnSubmit.enabled = accountInfoIsModifed;
     }
     
     
@@ -171,6 +174,7 @@
 }
 
 - (void)btnDownPressed:(id)sender {
+    [checkPassword textFieldAtIndex:0].text = @"";
     [checkPassword show];
 }
 
@@ -244,6 +248,8 @@
         case 1:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"update_success", @"") forType:AlertViewTypeSuccess];
             [[AlertView currentAlertView] delayDismissAlertView];
+            accountInfoIsModifed = NO;
+            btnSubmit.enabled = accountInfoIsModifed;
             [self updateScreenName];
             [infoTable reloadData];
             break;
@@ -254,10 +260,14 @@
         case -2:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"mail_name_blank", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
+            accountInfoIsModifed = NO;
+            btnSubmit.enabled = accountInfoIsModifed;
             break;
         case -3:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"format_error", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] delayDismissAlertView];
+            accountInfoIsModifed = NO;
+            btnSubmit.enabled = accountInfoIsModifed;
             break;
         case -4:
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_frequently", @"") forType:AlertViewTypeFailed];
@@ -294,11 +304,17 @@
     if ([[titles objectAtIndex:editIndex.row] isEqualToString:NSLocalizedString(@"modify_pwd", @"")]) {
         if(![NSString isBlank:string]) {
             passwordIsModified = YES;
+            accountInfoIsModifed = YES;
+            btnSubmit.enabled = accountInfoIsModifed;
             [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
         }
     } else {
-        [values setObject:string atIndexedSubscript:editIndex.row];
-        [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
+        if (string&&![string isEqualToString:[values objectAtIndex:editIndex.row]]) {
+            [values setObject:string atIndexedSubscript:editIndex.row];
+            [editCell.contentView addSubview:[self viewInCellAtIndexPath:editIndex of:editCell]];
+            accountInfoIsModifed = YES;
+            btnSubmit.enabled = accountInfoIsModifed;
+        }
     }
     [infoDictionary setValue:string forKey:[titles objectAtIndex:editIndex.row]];
 }
