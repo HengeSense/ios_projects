@@ -76,7 +76,7 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"account_info.title", @"");
     
     if (btnModifyUsername == nil) {
-        btnModifyUsername = [[UIButton alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+15, SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
+        btnModifyUsername = [[UIButton alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height+15, SM_CELL_WIDTH/2-5, SM_CELL_HEIGHT/2)];
         btnModifyUsername.layer.cornerRadius = 5;
         btnModifyUsername.center = CGPointMake(self.view.center.x, btnModifyUsername.center.y);
         btnModifyUsername.backgroundColor = [UIColor whiteColor];
