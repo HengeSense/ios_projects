@@ -350,6 +350,7 @@
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
     [super backToPreViewController];
 }
+
 - (BOOL)handleNetworkException {
     if ([[SMShared current].deliveryService.tcpService isConnectted]) {
         return YES;
