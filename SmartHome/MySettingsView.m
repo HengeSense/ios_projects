@@ -62,8 +62,12 @@
             [self.ownerController.navigationController pushViewController:[[PushSettingViewController alloc]init] animated:YES];
             break;
         case 1:
+            [[AlertView currentAlertView] setMessage:@"已是最新版本" forType:AlertViewTypeSuccess];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             break;
         case 2:
+            [[AlertView currentAlertView] setMessage:@"开发中..." forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             break;
         case 3:
             [self.ownerController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
