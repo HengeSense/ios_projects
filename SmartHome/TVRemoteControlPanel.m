@@ -10,7 +10,8 @@
 #import "CommandFactory.h"
 #import "SMShared.h"
 #import "UIColor+ExtentionForHexString.h"
-#import "NetworkHandler.h"
+#import "DeviceUtils.h"
+
 @implementation TVRemoteControlPanel {
     SMButton *btnPower;
     SMButton *btnSignal;
@@ -76,7 +77,6 @@
         [self addSubview:btnVolumeReduction];
     }
 
-    
     if(btnSignal == nil&&self.device.isTV) {
         btnSignal = [[SMButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 146/2 - 20, 18, 146/2, 62/2)];
         btnSignal.titleLabel.font = [UIFont systemFontOfSize:15.f];
@@ -159,32 +159,27 @@
 #pragma mark direction button delegate
 
 - (void)leftButtonClicked {
-    if ([NetworkHandler handleNetworkExceptionOfDevice:self.device])
     [self btnPressed:[NSNumber numberWithInteger:16]];
 }
 
 - (void)rightButtonClicked {
-    if ([NetworkHandler handleNetworkExceptionOfDevice:self.device])
     [self btnPressed:[NSNumber numberWithInteger:17]];
 }
 
 - (void)topButtonClicked {
-if ([NetworkHandler handleNetworkExceptionOfDevice:self.device])
     [self btnPressed:[NSNumber numberWithInteger:14]];
 }
 
 - (void)bottomButtonClicked {
-    if ([NetworkHandler handleNetworkExceptionOfDevice:self.device])
     [self btnPressed:[NSNumber numberWithInteger:15]];
 }
 
 - (void)centerButtonClicked {
-    if ([NetworkHandler handleNetworkExceptionOfDevice:self.device])
     [self btnPressed:[NSNumber numberWithInteger:18]];
 }
 
 - (void)controlTvWithSingal:(NSInteger)singal {
-    if ([NetworkHandler handleNetworkExceptionOfDevice:self.device]) {
+    if([DeviceUtils checkDeviceIsAvailable:self.device]) {
         DeviceCommandUpdateDevice *updateDevice = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
         updateDevice.masterDeviceCode = self.device.zone.unit.identifier;
         [updateDevice addCommandString:[self.device commandStringForRemote:singal]];

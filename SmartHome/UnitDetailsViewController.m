@@ -263,6 +263,7 @@
         }
     }
 }
+
 - (BOOL)handleNetworkException {
     if ([[SMShared current].deliveryService.tcpService isConnectted]) {
         return YES;

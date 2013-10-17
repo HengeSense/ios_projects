@@ -9,7 +9,7 @@
 #import "AirConditionViewController.h"
 #import "RadioButton.h"
 #import <QuartzCore/QuartzCore.h>
-#import "NetworkHandler.h"
+#import "DeviceUtils.h"
 #define RADIO_MARGIN 60
 #define LABEL_MARGIN_TOP 20
 #define RADIO_CENTER 10
@@ -80,7 +80,7 @@
 }
 
 -(void) closeBtnPressed{
-    if([NetworkHandler handleNetworkExceptionOfDevice:self.device])
+    if([DeviceUtils checkDeviceIsAvailable:self.device])
     [self executeCommandWithCode:POWER_SWITCH_CODE];
 }
 
@@ -142,7 +142,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     curIndex = indexPath;
     NSInteger commandCode = curIndex.section?HOT_BASE_CODE+curIndex.row:COLD_BASE_CODE+curIndex.row;
-    if([NetworkHandler handleNetworkExceptionOfDevice:self.device])
+    if([DeviceUtils checkDeviceIsAvailable:self.device])
     [self executeCommandWithCode:commandCode];
     UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {

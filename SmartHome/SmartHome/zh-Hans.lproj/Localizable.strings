@@ -50,6 +50,13 @@
 "disconnect"            = "断开";
 
 
+/****************	TCP Network Strings	****************/
+
+"unit_state_offline"    = "主控未连接云端";
+"device_state_offline"  = "此设备未连接";
+"offline"               = "未连接服务器";
+
+
 /****************	View's Title Strings	****************/
 
 "main_view.title"                     = "掌上未来";

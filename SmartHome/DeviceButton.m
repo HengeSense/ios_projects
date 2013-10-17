@@ -12,6 +12,7 @@
 #import "TVViewController.h"
 #import "CameraViewController.h"
 #import "CommandFactory.h"
+#import "DeviceUtils.h"
 
 #define ON  0
 #define OFF 1
@@ -151,8 +152,9 @@
 #pragma mark event
 
 - (void)btnPressed:(id)sender {
-    if(self.device == nil) {
-        return;
+    
+    if(!(_device_.isTV || _device_.isAircondition || _device_.isSTB)) {
+        if(![DeviceUtils checkDeviceIsAvailable:_device_]) return;
     }
 
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {
@@ -189,6 +191,7 @@
         cameraViewController.cameraDevice = _device_;
         [self.ownerController presentViewController:cameraViewController animated:YES completion:nil];
     }
+    
 }
 
 - (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {

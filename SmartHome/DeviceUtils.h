@@ -10,7 +10,9 @@
 #import "AlertView.h"
 #import "Device.h"
 #import "SMShared.h"
-#define ONLINE @"在线"
-@interface NetworkHandler : NSObject
-+(BOOL) handleNetworkExceptionOfDevice:(Device *) device;
+
+@interface DeviceUtils : NSObject
+
++ (BOOL)checkDeviceIsAvailable:(Device *)device;
+
 @end
