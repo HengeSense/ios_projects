@@ -355,7 +355,7 @@
     if ([[SMShared current].deliveryService.tcpService isConnectted]) {
         return YES;
     }else{
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"device_disconnected_cloud", @"") forType:AlertViewTypeFailed];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"offline", @"") forType:AlertViewTypeFailed];
         [[AlertView currentAlertView] delayDismissAlertView];
         return NO;
     }
