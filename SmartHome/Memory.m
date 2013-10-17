@@ -323,6 +323,8 @@
     @synchronized(self) {
         if(self.units != nil) [self.units removeAllObjects];
         if(self.subscriptions != nil) [self.subscriptions removeAllObjects];
+        currentUnitIdentifier = nil;
+        currentUnit = nil;
 #ifdef DEBUG
         NSLog(@"[Memory] clear units && subscriptions.");
 #endif

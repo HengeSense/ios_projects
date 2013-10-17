@@ -193,13 +193,16 @@
         NavigationView *mainView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
         if(mainView != nil) {
             UIViewController *mainViewController = mainView.ownerController;
-            [[ViewsPool sharedPool] clear];
             [self performSelectorOnMainThread:@selector(popupToRootViewController:) withObject:mainViewController waitUntilDone:YES];
         }
         
+        [[ViewsPool sharedPool] clear];
         [[SMShared current].settings clearAuth];
         [[SMShared current].memory clear];
         [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+#ifdef DEBUG
+        NSLog(@"[APP DELEGATE] Logout Successfully.");
+#endif
     }
 }
 

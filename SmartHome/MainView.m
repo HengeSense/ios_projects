@@ -63,8 +63,6 @@
     recognizerState = RecognizerStateReady;
     speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
     speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
-    
-    [self subscribeEvents];
 }
 
 - (void)subscribeEvents {
@@ -187,6 +185,8 @@
         
         [self addSubview:notificationView];
     }
+    
+    [self subscribeEvents];
 }
 
 /*
