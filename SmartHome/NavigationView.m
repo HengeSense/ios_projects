@@ -44,7 +44,6 @@
         [topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_drawer_nav.png"] forState:UIControlStateNormal];
         [topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_drawer_nav.png"] forState:UIControlStateHighlighted];
         [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
-        [topbar.leftButton addTarget:self.ownerController action:@selector(showLeftView) forControlEvents:UIControlEventTouchUpInside];
     }
     return topbar;
 }
