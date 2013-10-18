@@ -48,6 +48,8 @@
 "internal"              = "内网";
 "external"              = "外网";
 "disconnect"            = "断开";
+"prompt"                = "提示";
+"discard"               = "放弃";
 
 
 /****************	TCP Network Strings	****************/
@@ -112,14 +114,18 @@
 "password_valid"            = "密码验证";
 "enter_old_pwd"             = "请输入旧密码";
 "enter_new_pwd"             = "输入新密码";
-"enter_pwd_again"           = "再次输入";
-"password.is.modified"      = "密码已编辑";
+"enter_pwd_again"           = "再次输入密码";
+"pwd_edited"                = "密码已编辑";
 "mail_name_blank"           = "昵称或邮箱为空!";
 "format_error"              = "请求格式错误!";
 "pwd_different"             = "两次输入不一致";
 "pwd_format_invalid"        = "密码格式错误";
 "modify_tip"                = "此手机号将作为新的用户名使用";
 "enter_new_mobile"          = "请输入新手机号码";
+"modify_account"            = "登录账号修改";
+"modify_profile"            = "用户信息修改";
+"profile_changed_tips"      = "修改的用户信息尚未提交,是否放弃更改?";
+
 
 /****************	Drawer View Strings	****************/
 

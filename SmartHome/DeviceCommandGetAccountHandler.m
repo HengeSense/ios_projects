@@ -23,14 +23,12 @@
             if(drawerView != nil) {
                 [drawerView setScreenName:deviceCommand.screenName];
             }
-        } else {
-            
         }
         
         NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetAccountHandler class]];
         for(int i=0; i<arr.count; i++) {
-            if([[arr objectAtIndex:i] respondsToSelector:@selector(updateAccount:)]) {
-                [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(updateAccount:) withObject:deviceCommand waitUntilDone:NO];
+            if([[arr objectAtIndex:i] respondsToSelector:@selector(getAccountOnComplete:)]) {
+                [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(getAccountOnComplete:) withObject:deviceCommand waitUntilDone:NO];
             }
         }
     }

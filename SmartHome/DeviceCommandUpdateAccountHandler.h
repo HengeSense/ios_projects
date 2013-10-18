@@ -11,7 +11,7 @@
 
 @protocol DeviceCommandUpdateAccountDelegate<NSObject>
 
-- (void)didEndUpdateAccount:(DeviceCommandUpdateAccount *)command;
+- (void)updateAccountOnComplete:(DeviceCommandUpdateAccount *)command;
 
 @end
 

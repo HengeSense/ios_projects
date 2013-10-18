@@ -12,7 +12,7 @@
 
 @protocol DeviceCommandGetAccountDelegate <NSObject>
 
-- (void)updateAccount:(DeviceCommandUpdateAccount *)updateCommand;
+- (void)getAccountOnComplete:(DeviceCommandUpdateAccount *)updateCommand;
 
 @end
 

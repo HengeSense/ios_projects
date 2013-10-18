@@ -15,8 +15,8 @@
     [super handle:command];
     NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandUpdateAccountHandler class]];
     for(int i=0; i<arr.count; i++) {
-        if([[arr objectAtIndex:i] respondsToSelector:@selector(didEndUpdateAccount:)]) {
-            [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(didEndUpdateAccount:) withObject:command waitUntilDone:NO];
+        if([[arr objectAtIndex:i] respondsToSelector:@selector(updateAccountOnComplete:)]) {
+            [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(updateAccountOnComplete:) withObject:command waitUntilDone:NO];
         }
     }
 }

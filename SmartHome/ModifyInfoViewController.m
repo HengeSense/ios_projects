@@ -12,7 +12,7 @@
 
 @end
 
-@implementation ModifyInfoViewController{
+@implementation ModifyInfoViewController {
     UITextField *input;
     UITextField *makesureInput;
 }
@@ -89,7 +89,9 @@
 
 - (void)initUI {
     [super initUI];
+    
     self.topbar.titleLabel.text = self.title;
+    
     if (self.title == NSLocalizedString(@"modify_pwd", @"")) {
         UILabel *one = [[UILabel alloc]initWithFrame:CGRectMake(10, self.topbar.frame.size.height+10, 150, 20)];
         one.font = [UIFont systemFontOfSize:14];
@@ -128,6 +130,10 @@
             [input becomeFirstResponder];
         }
         input.returnKeyType = UIReturnKeyDone;
+    }
+    
+    if(input != nil) {
+        [input becomeFirstResponder];
     }
 }
     
@@ -182,4 +188,5 @@
 - (void)cancel {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end
