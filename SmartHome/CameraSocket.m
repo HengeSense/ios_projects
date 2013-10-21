@@ -24,7 +24,8 @@
     BOOL inOpen;
     BOOL outOpen;
     
-    NSTimer *imageNotReceivedForLongTimeChecker;
+//    NSTimer *imageNotReceivedForLongTimeChecker;
+//    NSLock *timeoutLock;
 }
 
 @synthesize delegate;
@@ -32,6 +33,7 @@
 - (id)initWithIPAddress:(NSString *)ip andPort:(NSInteger)portNumber {
     self = [super initWithIPAddress:ip andPort:portNumber];
     if(self) {
+//        timeoutLock = [[NSLock alloc] init];
         hasRetryCount = 0;
         shakeHandsSuccess = NO;
         needCloseSocket = NO;
@@ -62,6 +64,7 @@
                 // shake hands success
                 if(header[0] == 1) {
                     shakeHandsSuccess = YES;
+//                    imageNotReceivedForLongTimeChecker = [NSTimer scheduledTimerWithTimeInterval:10.f target:self selector:@selector(noImageReceivedForLongTime) userInfo:nil repeats:YES];
                 } else {
                     [NSThread sleepForTimeInterval:1];
                     if(needCloseSocket) {
@@ -151,6 +154,20 @@
     }
 }
 
+/*
+- (void)noImageReceivedForLongTime {
+    if([timeoutLock tryLock]) {
+        if(imageNotReceivedForLongTimeChecker != nil
+           && imageNotReceivedForLongTimeChecker.isValid) {
+            [self closeInternal];
+#ifdef DEBUG
+            NSLog(@"[CAMERA] Closed by timeout timer.");
+#endif
+        }
+    }
+}
+*/
+
 - (void)connect {
     if([self isConnectted]) return;
     [super connect];
@@ -169,6 +186,16 @@
 }
 
 - (void)close {
+//    if([timeoutLock tryLock]) {
+//        if(imageNotReceivedForLongTimeChecker != nil
+//           && imageNotReceivedForLongTimeChecker.isValid) {
+//            [imageNotReceivedForLongTimeChecker invalidate];
+//        }
+        [self closeInternal];
+//    }
+}
+
+- (void)closeInternal {
     [super close];
     inOpen = NO;
     outOpen = NO;
