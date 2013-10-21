@@ -56,8 +56,8 @@
         [udpSocket receiveWithTimeout:5 tag:0];
     } else {
         if(error != nil) {
-            NSString *errorMessage = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
 #ifdef DEBUG
+            NSString *errorMessage = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
             NSLog(@"[UDP UNIT FINDER] Broadcast failed, Reason is [%@]", [NSString isBlank:errorMessage] ? [NSString emptyString] : errorMessage);
 #endif
             [self findUnitOnError:error];

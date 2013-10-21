@@ -30,7 +30,8 @@
     UIPanGestureRecognizer *panGesture;
     NSString *intentionDirection;
     
-    BOOL hideStateHasResetTransitionToZero;
+    BOOL leftTransitionHasReset;
+    BOOL rightTransitionHasReset;
 }
 
 @synthesize leftView;
@@ -274,10 +275,12 @@
         if(mainViewX > 0 && (lastedMainViewCenterX + translation.x) <= 160) {
             [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
             [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
+            leftTransitionHasReset = YES;
             return;
         } else if(mainViewX < 0 && (lastedMainViewCenterX + translation.x) >= 160) {
             [self moveMainViewToCenter:CGPointMake(160, screenCenterY)];
             [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
+            rightTransitionHasReset = YES;
             return;
         } else if(mainViewX == 0) {
             //main view is in center, but gesture are not canncelled now
@@ -302,21 +305,29 @@
             }
         }
         
-        // here translation <<  >>  bug
         CGFloat maxTransX = lastedMainViewCenterX + translation.x;
+        
         if(maxTransX > 160 + self.leftViewVisibleWidth) {
             maxTransX = 160 + self.leftViewVisibleWidth;
-            [gesture setTranslation:CGPointMake(translation.x >= self.leftViewVisibleWidth ? self.leftViewVisibleWidth : 0, 0) inView:lockView];
-            hideStateHasResetTransitionToZero = NO;
+            if(leftTransitionHasReset) {
+                [gesture setTranslation:CGPointMake(self.leftViewVisibleWidth, 0) inView:lockView];
+            } else {
+                [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
+            }
         } else if(maxTransX < 160 - self.rightViewVisibleWidth) {
             maxTransX = 160 - self.rightViewVisibleWidth;
-            [gesture setTranslation:CGPointMake((translation.x <= (0 - self.rightViewVisibleWidth)) ? (0 - self.rightViewVisibleWidth) : 0, 0) inView:lockView];
-            hideStateHasResetTransitionToZero = NO;
+            if(rightTransitionHasReset) {
+                [gesture setTranslation:CGPointMake(0 - self.rightViewVisibleWidth, 0) inView:lockView];
+            } else {
+                [gesture setTranslation:CGPointMake(0, 0) inView:lockView];
+            }
         }
         
         [self moveMainViewToCenter:CGPointMake(maxTransX, self.mainView.center.y)];
         
     } else if(gesture.state == UIGestureRecognizerStateEnded) {
+        leftTransitionHasReset = NO;
+        rightTransitionHasReset = NO;
         CGFloat mainViewX = self.mainView.frame.origin.x;
         if(mainViewX > 0) {
             if(mainViewX <= self.leftViewCenterX) {
