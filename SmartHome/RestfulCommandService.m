@@ -16,7 +16,7 @@
     self = [super init];
     if(self) {
         [super setupWithUrl:[NSString emptyString]];
-        self.client.timeoutInterval = 3;
+        self.client.timeoutInterval = 6;
     }
     return self;
 }

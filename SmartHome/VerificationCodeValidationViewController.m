@@ -51,6 +51,7 @@
     }
     return self;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -127,10 +128,11 @@
         [self.view addSubview:lblCountDown];
     }
     
-    [txtVerificationCode becomeFirstResponder];
-    
     [self startCountDown];
+    
+    [txtVerificationCode becomeFirstResponder];
 }
+
 #pragma mark -
 #pragma mark service
 

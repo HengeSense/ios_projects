@@ -9,14 +9,18 @@
 #import "QRCodeScannerViewController.h"
 #import "PopViewController.h"
 #import "TopbarView.h"
-#import "DeviceFinder.h"
-typedef  NS_ENUM(NSUInteger, TopBarType){
+#import "UnitFinder.h"
+
+typedef NS_ENUM(NSUInteger, TopBarType) {
     TopBarTypeSkip,
     TopBarTypeDone
 };
-@interface UnitsBindingViewController : PopViewController <QRCodeProcessorDelegate,DeviceFinderDelegate,UIAlertViewDelegate>
+
+@interface UnitsBindingViewController : PopViewController <QRCodeProcessorDelegate, UnitFinderDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) TopbarView *topbar;
 @property (assign,nonatomic) TopBarType topBarType;
--(id) initWithType:(NSUInteger) type;
+
+- (id)initWithType:(NSUInteger)type;
+
 @end

@@ -84,6 +84,8 @@
 		6F17672B17C1E232007AED0C /* CommunicationMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672A17C1E232007AED0C /* CommunicationMessage.m */; };
 		6F17672E17C1F7CA007AED0C /* DeviceCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17672D17C1F7CA007AED0C /* DeviceCommand.m */; };
 		6F17673117C1FA15007AED0C /* JsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17673017C1FA15007AED0C /* JsonUtils.m */; };
+		6F1771C21814C8B3007CF3AF /* SMNetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1771C11814C8B3007CF3AF /* SMNetworkTool.m */; };
+		6F1771C51814D827007CF3AF /* DataAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1771C41814D827007CF3AF /* DataAlertView.m */; };
 		6F17C27F17EDE42700D46254 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F17C27E17EDE42700D46254 /* UIDevice+Extension.m */; };
 		6F17C28117EDEDFA00D46254 /* logo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F17C28017EDEDFA00D46254 /* logo2@2x.png */; };
 		6F1AFB4D17EEC3470043DB47 /* bg_topbar7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1AFB4C17EEC3470043DB47 /* bg_topbar7@2x.png */; };
@@ -214,7 +216,7 @@
 		6FD4CFE917C249F200EC98F9 /* BitUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4CFE817C249F200EC98F9 /* BitUtils.m */; };
 		6FD4CFEB17C312BD00EC98F9 /* bg_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */; };
 		6FD6C64917CC539200BDA327 /* PopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C64817CC539200BDA327 /* PopViewController.m */; };
-		6FD6C65517CCE1CC00BDA327 /* DeviceFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */; };
+		6FD6C65517CCE1CC00BDA327 /* UnitFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C65417CCE1CC00BDA327 /* UnitFinder.m */; };
 		6FD6C65B17CCF9F100BDA327 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD6C65A17CCF9F100BDA327 /* Reachability.m */; };
 		6FD8A71717B0DD6F009C7493 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71617B0DD6F009C7493 /* NavigationView.m */; };
 		6FD8A72017B22980009C7493 /* SpeechRecognitionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8A71F17B22980009C7493 /* SpeechRecognitionUtil.m */; };
@@ -297,13 +299,11 @@
 		F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */; };
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
 		F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27B4EC317EFD35D00A55220 /* libzbar.a */; };
-		F27B4ED317F067AA00A55220 /* IPAddressTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F27B4ED217F067AA00A55220 /* IPAddressTool.m */; };
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
 		F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationHandlerViewController.m */; };
 		F280616B17DDC7BC0064F35B /* button_cf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616A17DDC7BB0064F35B /* button_cf@2x.png */; };
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
-		F2911BE217F1615700742713 /* IPAddress.c in Sources */ = {isa = PBXBuildFile; fileRef = F2911BE117F1615700742713 /* IPAddress.c */; };
 		F29BBA5B17F2C41B00B65436 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */; };
 		F29BBA5F17F2C48F00B65436 /* WelcomeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BBA5E17F2C48F00B65436 /* WelcomeImageView.m */; };
 		F29BBA6117F2DD5200B65436 /* welcome05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F29BBA6017F2DD5200B65436 /* welcome05@2x.png */; };
@@ -428,6 +428,10 @@
 		6F17672D17C1F7CA007AED0C /* DeviceCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommand.m; sourceTree = "<group>"; };
 		6F17672F17C1FA15007AED0C /* JsonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonUtils.h; sourceTree = "<group>"; };
 		6F17673017C1FA15007AED0C /* JsonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonUtils.m; sourceTree = "<group>"; };
+		6F1771C01814C8B3007CF3AF /* SMNetworkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworkTool.h; sourceTree = "<group>"; };
+		6F1771C11814C8B3007CF3AF /* SMNetworkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworkTool.m; sourceTree = "<group>"; };
+		6F1771C31814D827007CF3AF /* DataAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAlertView.h; sourceTree = "<group>"; };
+		6F1771C41814D827007CF3AF /* DataAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAlertView.m; sourceTree = "<group>"; };
 		6F17C27D17EDE42700D46254 /* UIDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
 		6F17C27E17EDE42700D46254 /* UIDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
 		6F17C28017EDEDFA00D46254 /* logo2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo2@2x.png"; sourceTree = "<group>"; };
@@ -634,8 +638,8 @@
 		6FD4CFEA17C312BD00EC98F9 /* bg_scanner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_scanner@2x.png"; sourceTree = "<group>"; };
 		6FD6C64717CC539200BDA327 /* PopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewController.h; sourceTree = "<group>"; };
 		6FD6C64817CC539200BDA327 /* PopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewController.m; sourceTree = "<group>"; };
-		6FD6C65317CCE1CC00BDA327 /* DeviceFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceFinder.h; sourceTree = "<group>"; };
-		6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceFinder.m; sourceTree = "<group>"; };
+		6FD6C65317CCE1CC00BDA327 /* UnitFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitFinder.h; sourceTree = "<group>"; };
+		6FD6C65417CCE1CC00BDA327 /* UnitFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitFinder.m; sourceTree = "<group>"; };
 		6FD6C65917CCF9F100BDA327 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6FD6C65A17CCF9F100BDA327 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6FD8A71517B0DD6F009C7493 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
@@ -769,8 +773,6 @@
 		F237168317B3715C0057C95B /* SmsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsService.h; sourceTree = "<group>"; };
 		F237168417B3715C0057C95B /* SmsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsService.m; sourceTree = "<group>"; };
 		F27B4EC317EFD35D00A55220 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
-		F27B4ED117F067AA00A55220 /* IPAddressTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddressTool.h; sourceTree = "<group>"; };
-		F27B4ED217F067AA00A55220 /* IPAddressTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddressTool.m; sourceTree = "<group>"; };
 		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		F280616317DD6E810064F35B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		F280616517DD76A30064F35B /* message_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_accessory@2x.png"; sourceTree = "<group>"; };
@@ -779,8 +781,6 @@
 		F280616A17DDC7BB0064F35B /* button_cf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cf@2x.png"; sourceTree = "<group>"; };
 		F288414017D4A35C00B81DD3 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		F288414117D4A35C00B81DD3 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
-		F2911BE117F1615700742713 /* IPAddress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IPAddress.c; sourceTree = "<group>"; };
-		F2911BE317F1617600742713 /* IPAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPAddress.h; sourceTree = "<group>"; };
 		F29BBA5917F2C41B00B65436 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		F29BBA5D17F2C48F00B65436 /* WelcomeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeImageView.h; sourceTree = "<group>"; };
@@ -1037,6 +1037,8 @@
 				6F0FAEA517AF803800B75D3E /* drawer_navigation */,
 				6F159C0117D754BB005CFFEE /* SMButton.h */,
 				6F159C0217D754BB005CFFEE /* SMButton.m */,
+				F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */,
+				F205E5C017D9784800280F21 /* PasswordPopupViewController.m */,
 				6FF6C4E717E83A4500F637FD /* ImagePlayView.h */,
 				6FF6C4E817E83A4500F637FD /* ImagePlayView.m */,
 				6F09060717F1295900C26491 /* CameraLoadingView.h */,
@@ -1582,8 +1584,8 @@
 			children = (
 				6F984F7B17BE1EEA007F90A2 /* AlertView.h */,
 				6F984F7C17BE1EEA007F90A2 /* AlertView.m */,
-				F205E5BF17D9784800280F21 /* PasswordPopupViewController.h */,
-				F205E5C017D9784800280F21 /* PasswordPopupViewController.m */,
+				6F1771C31814D827007CF3AF /* DataAlertView.h */,
+				6F1771C41814D827007CF3AF /* DataAlertView.m */,
 			);
 			name = alert_view;
 			sourceTree = "<group>";
@@ -1714,8 +1716,8 @@
 		6FD6C65217CCE1B100BDA327 /* udp */ = {
 			isa = PBXGroup;
 			children = (
-				6FD6C65317CCE1CC00BDA327 /* DeviceFinder.h */,
-				6FD6C65417CCE1CC00BDA327 /* DeviceFinder.m */,
+				6FD6C65317CCE1CC00BDA327 /* UnitFinder.h */,
+				6FD6C65417CCE1CC00BDA327 /* UnitFinder.m */,
 			);
 			name = udp;
 			sourceTree = "<group>";
@@ -1891,10 +1893,8 @@
 		F27B4EC517F01D1400A55220 /* IPAddress */ = {
 			isa = PBXGroup;
 			children = (
-				F27B4ED117F067AA00A55220 /* IPAddressTool.h */,
-				F27B4ED217F067AA00A55220 /* IPAddressTool.m */,
-				F2911BE117F1615700742713 /* IPAddress.c */,
-				F2911BE317F1617600742713 /* IPAddress.h */,
+				6F1771C01814C8B3007CF3AF /* SMNetworkTool.h */,
+				6F1771C11814C8B3007CF3AF /* SMNetworkTool.m */,
 			);
 			name = IPAddress;
 			sourceTree = "<group>";
@@ -2165,6 +2165,7 @@
 				6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */,
 				6F0FAEBE17AF823000B75D3E /* SceneModeView.m in Sources */,
 				6F0FAEC117AF823D00B75D3E /* MainView.m in Sources */,
+				6F1771C21814C8B3007CF3AF /* SMNetworkTool.m in Sources */,
 				6F0FAEC417AF824B00B75D3E /* TopbarView.m in Sources */,
 				6F0FAEC717AF82CC00B75D3E /* MainViewController.m in Sources */,
 				6F0FAECA17AF832700B75D3E /* DrawerView.m in Sources */,
@@ -2235,19 +2236,18 @@
 				F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */,
 				6FBB9A2017CB90B500E32485 /* SMCell.m in Sources */,
 				6FD6C64917CC539200BDA327 /* PopViewController.m in Sources */,
-				6FD6C65517CCE1CC00BDA327 /* DeviceFinder.m in Sources */,
+				6FD6C65517CCE1CC00BDA327 /* UnitFinder.m in Sources */,
 				6FD6C65B17CCF9F100BDA327 /* Reachability.m in Sources */,
 				6FDD0EC817CDD369000D95E8 /* AsyncUdpSocket.m in Sources */,
 				6FDD0ED117CDECBA000D95E8 /* TCPCommandService.m in Sources */,
 				6FD081B917CF3E030089A1ED /* DeviceCommandDeliveryService.m in Sources */,
 				6FD081BC17CF3E580089A1ED /* DeviceCommandHandler.m in Sources */,
 				6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */,
+				6F1771C51814D827007CF3AF /* DataAlertView.m in Sources */,
 				6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */,
 				F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */,
 				6F84A77A17D04A5700D46BFA /* Zone.m in Sources */,
-				F2911BE217F1615700742713 /* IPAddress.c in Sources */,
 				6F84A78017D06D6D00D46BFA /* Unit.m in Sources */,
-				F27B4ED317F067AA00A55220 /* IPAddressTool.m in Sources */,
 				F20C788317D0859C003D50C5 /* Memory.m in Sources */,
 				6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */,
 				6F95BF6117D4A7CD003A0745 /* SMCommandQueue.m in Sources */,

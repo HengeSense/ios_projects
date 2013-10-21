@@ -78,6 +78,7 @@
     if(changed) {
         [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
     }
+    
     [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
 }
 

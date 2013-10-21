@@ -279,7 +279,8 @@
 }
 
 - (void)startTcpIfNeed {    
-    if(self.tcpService.isConnectted || self.tcpService.isConnectting) {
+    if(self.tcpService.isConnectted
+       || self.tcpService.isConnectting) {
         return;
     }
     [self performSelectorInBackground:@selector(startTcp) withObject:nil];
@@ -359,10 +360,6 @@
     if(reach.isReachable) {
         if(reach.isReachableViaWiFi) {
             // WIFI &&   Network
-            if(flag == 2) {
-                flag = 1;
-                return;
-            }
             flag = 1;
         } else if(reach.isReachableViaWWAN) {
             // 3G   &&   Network
@@ -373,10 +370,6 @@
     } else {
         if([Reachability reachabilityForLocalWiFi].currentReachabilityStatus != NotReachable) {
             // WIFI && No Network
-            if(flag == 1) {
-                flag = 2;
-                return;
-            }
             flag = 2;
         } else {
             // No (WIFI && 3G && 2G && Network)

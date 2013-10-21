@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "DeviceCommandGetUnitsHandler.h"
 #import "MainViewController.h"
+#import "DataAlertView.h"
+
 @interface UnitsBindingViewController ()
 
 @end
@@ -18,10 +20,6 @@
     UIButton *btnDone;
     UIButton *btnQRCodeScanner;
     UIButton *btnAutoSearch;
-    
-    DeviceFinder *finder;
-    
-    UIAlertView *alertBinding;
 }
 
 @synthesize topbar;
@@ -34,9 +32,10 @@
     }
     return self;
 }
--(id) initWithType:(NSUInteger) type{
+
+- (id)initWithType:(NSUInteger)type {
     self = [super init];
-    if (self) {
+    if(self) {
         self.topBarType = type;
     }
     return self;
@@ -58,14 +57,12 @@
 #pragma mark initializations
 
 - (void)initDefaults {
-    if (finder == nil) {
-        finder = [[DeviceFinder alloc] init];
-        finder.delegate = self;
-    }
+
 }
 
 - (void)initUI {
     [self generateTopbar];
+    
     CGFloat y = [UIDevice systemVersionIsMoreThanOrEuqal7] ? 0 : 20;
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:
         CGRectMake(0, self.topbar.frame.size.height, [UIScreen mainScreen].bounds.size.width, ([UIScreen mainScreen].bounds.size.height - self.topbar.frame.size.height - y))];
@@ -112,11 +109,6 @@
     lblForBtnAutoSearch.numberOfLines = 5;
     lblForBtnAutoSearch.text = NSLocalizedString(@"auto_search_button_tips", @"");
     [self.view addSubview:lblForBtnAutoSearch];
-    
-    if (alertBinding == nil) {
-        alertBinding = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"tips", @"") message:NSLocalizedString(@"found_new_unit", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"no", @"") otherButtonTitles:NSLocalizedString(@"binding", @""), nil];
-        [alertBinding dismissWithClickedButtonIndex:0 animated:YES];
-    }
 }
 
 - (void)generateTopbar {
@@ -125,18 +117,15 @@
     [self.topbar addSubview:self.topbar.rightButton];
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateHighlighted];
-    if (self.topBarType==TopBarTypeDone) {
+    if(self.topBarType==TopBarTypeDone) {
         [self.topbar.rightButton setTitle:NSLocalizedString(@"done", @"") forState:UIControlStateNormal];
         [self.topbar.rightButton addTarget:self action:@selector(btnDonePressed:) forControlEvents:UIControlEventTouchUpInside];
-    }else{
+    } else {
         [self.topbar.rightButton setTitle:NSLocalizedString(@"skip", @"") forState:UIControlStateNormal];
         [self.topbar.rightButton addTarget:self action:@selector(btnSkipPressed:) forControlEvents:UIControlEventTouchUpInside];
-
     }
-    
     self.topbar.rightButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
     self.topbar.rightButton.titleLabel.textColor = [UIColor lightTextColor];
-    
     self.topbar.rightButton.titleLabel.textColor = [UIColor lightGrayColor];
     [self.view addSubview:self.topbar];
     self.topbar.titleLabel.text = NSLocalizedString(@"unit_binding_view.title", @"btn_done.png");
@@ -153,17 +142,6 @@
 #pragma mark -
 #pragma mark events
 
--(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) {
-        [finder requestForBindingUnit];
-        if (self.topBarType == TopBarTypeSkip) {
-            [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
-        } else if(self.topBarType == TopBarTypeDone){
-            [self dismissModalViewControllerAnimated:YES];
-        }
-
-    }
-}
 - (void)btnSkipPressed:(id)sender {
     [self showMainView];
 }
@@ -178,26 +156,74 @@
     [self presentViewController:scannerViewController animated:YES completion:^{}];
 }
 
--(void) btnAutoSearchPressed:(UIButton *) sender{
-    [finder startFindingDevice];
+- (void)btnAutoSearchPressed:(UIButton *)sender {
+    UnitFinder *finder = [[UnitFinder alloc] init];
+    finder.delegate = self;
+    [finder findUnit];
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"searching_unit", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
-    
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(delayDismiss) userInfo:nil repeats:NO];
 }
 
-- (void)delayDismiss {
-    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"no_unit_found", @"") forType:AlertViewTypeFailed];
-        [[AlertView currentAlertView] delayDismissAlertView];
+#pragma mark -
+#pragma mark Unit finder delegate
+
+- (void)findUnitFailed:(NSError *)error {
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"no_unit_found", @"") forType:AlertViewTypeFailed];
+    [[AlertView currentAlertView] delayDismissAlertView];
+}
+
+- (void)findUnitSuccessWithIdentifier:(NSString *)unitIdentifier url:(NSString *)unitUrl {
+    if([NSString isBlank:unitIdentifier] || [NSString isBlank:unitUrl]) {
+        [self findUnitFailed:nil];
+        return;
     }
-}
-
-- (void)askwhetherBinding {
-    if ([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
+    
+    Unit *unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
+    if(unit != nil) {
+        [self findUnitFailed:nil];
+        return;
+    }
+    
+    if([AlertView currentAlertView].alertViewState != AlertViewStateReady) {
         [[AlertView currentAlertView] dismissAlertView];
     }
-    [alertBinding show];
+    
+    DataAlertView *alertBindingView = [[DataAlertView alloc] initWithTitle:NSLocalizedString(@"tips", @"") message:NSLocalizedString(@"found_new_unit", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"no", @"") otherButtonTitles:NSLocalizedString(@"binding", @""), nil];
+    
+    [alertBindingView setParameter:unitUrl forKey:@"url"];
+    [alertBindingView setParameter:unitIdentifier forKey:@"id"];
+    
+    [alertBindingView dismissWithClickedButtonIndex:0 animated:YES];
+    [alertBindingView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        
+        if([alertView isKindOfClass:[DataAlertView class]]) {
+            // Step 1 : Request for binding unit
+            // Step 2 : Refresh current new unit and append to local units list
+            
+            DataAlertView *av = (DataAlertView *)alertView;
+            NSString *url = [av parameterForKey:@"url"];
+            NSString *identifier = [av parameterForKey:@"id"];
+
+            DeviceCommand *bindingUnitCommand = [CommandFactory commandForType:CommandTypeBindingUnit];
+            bindingUnitCommand.masterDeviceCode = identifier;
+            [[SMShared current].deliveryService executeDeviceCommand:bindingUnitCommand];
+            
+            DeviceCommandGetUnit *getUnitCommand = (DeviceCommandGetUnit *)[CommandFactory commandForType:CommandTypeGetUnits];
+            getUnitCommand.commmandNetworkMode = CommandNetworkModeInternal;
+            getUnitCommand.unitServerUrl = url;
+            [[SMShared current].deliveryService executeDeviceCommand:getUnitCommand];
+        }
+        
+        if(self.topBarType == TopBarTypeSkip) {
+            [self.navigationController pushViewController:[[MainViewController alloc] init] animated:YES];
+        } else if(self.topBarType == TopBarTypeDone) {
+            [self dismissModalViewControllerAnimated:YES];
+        }
+    }
 }
 
 #pragma mark -

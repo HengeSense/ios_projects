@@ -10,7 +10,7 @@
 #import "NSString+StringUtils.h"
 #import "BitUtils.h"
 
-#define MAX_RETRY_COUNT 20
+#define MAX_RETRY_COUNT 10
 #define BUFFER_SIZE 4096
 
 @implementation CameraSocket {
@@ -23,6 +23,8 @@
     BOOL needCloseSocket;
     BOOL inOpen;
     BOOL outOpen;
+    
+    NSTimer *imageNotReceivedForLongTimeChecker;
 }
 
 @synthesize delegate;

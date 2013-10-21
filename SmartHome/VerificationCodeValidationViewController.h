@@ -15,5 +15,6 @@
 @property (assign, nonatomic) NSUInteger countDown;
 @property (assign, nonatomic) BOOL isModify;
 
--(id) initAsModify:(BOOL) modify;
+- (id)initAsModify:(BOOL)modify;
+
 @end
