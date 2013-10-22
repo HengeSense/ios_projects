@@ -51,6 +51,9 @@
                     //i think this is a new package
                     [self performSelectorOnMainThread:@selector(notifyHandlerDataDiscard:) withObject:receivedData waitUntilDone:NO];
                     receivedData = [NSMutableData data];
+#ifdef DEBUG
+                    NSLog(@"[External Socket] Received header [~] and old message isn't process successfully, so need to give up some data that we have received before .");
+#endif
                 }
                 [receivedData appendBytes:header length:DATA_HEADER_LENGTH];
                 [self readAllDataToMemory];
@@ -64,6 +67,9 @@
                     //and has never received data before
                     [self performSelectorOnMainThread:@selector(notifyHandlerDataError) withObject:nil waitUntilDone:NO];
                     [self close];
+#ifdef DEBUG
+                    NSLog(@"[External Socket] Data header is not matched [!] 126 .");
+#endif
                     return;
                 }
             }
@@ -135,6 +141,9 @@
             //need to handle this error
             [self performSelectorOnMainThread:@selector(notifyHandlerDataError:) withObject:nil waitUntilDone:NO];
             [self close];
+#ifdef DEBUG
+            NSLog(@"[External Socket] Data header is not matched [!] 126 on unpackage data.");
+#endif
         }
     } else {
         //don't need to process , continue to watting for input stream
@@ -159,10 +168,16 @@
         } else {
             //bad message , not valid from md5
             [self performSelectorOnMainThread:@selector(notifyHandlerDataDiscard:) withObject:data waitUntilDone:NO];
+#ifdef DEBUG
+            NSLog(@"[External Socket] Data not valid by MD5.");
+#endif
         }
     } else {
         //message is too small (less than one byte...), need discard this message
         [self performSelectorOnMainThread:@selector(notifyHandlerDataDiscard:) withObject:data waitUntilDone:NO];
+#ifdef DEBUG
+        NSLog(@"[External Socket] Data is too small.");
+#endif
     }
 }
 

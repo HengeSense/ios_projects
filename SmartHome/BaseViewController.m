@@ -15,6 +15,9 @@
 
 @implementation BaseViewController
 
+#pragma mark -
+#pragma mark About first responder
+
 - (void)registerTapGestureToResignKeyboard {
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] init];
     [tapGesture addTarget:self action:@selector(triggerTapGestureEventForResignKeyboard:)];
@@ -29,9 +32,14 @@
     for (UIView *v in view.subviews) {
         if([v isFirstResponder]) {
             [v resignFirstResponder];
+            return;
         }
     }
 }
+
+#pragma mark -
+#pragma mark Initializations
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,16 +62,17 @@
 }
 
 - (void)initDefaults {
-    
 }
 
 - (void)initUI {
     if([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+    
     if([self respondsToSelector:@selector(setExtendedLayoutIncludesOpaqueBars:)]) {
         self.extendedLayoutIncludesOpaqueBars = NO;
     }
+    
     self.view.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
 }
 

@@ -125,7 +125,7 @@
 
 - (void)clientSocketMessageReadError {
 #ifdef DEBUG
-    NSLog(@"[TCP COMMAND SOCKET] socket data reading or format error");
+    NSLog(@"[TCP COMMAND SOCKET] Socket data reading or format error");
 #endif
 }
 
