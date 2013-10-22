@@ -54,8 +54,8 @@
 - (void)loadOrRefreshUnit:(Unit *)unit {
     /*    */
     zonesView.ownerViewController = self.ownerViewController;
-    BOOL changed;
-    [zonesView loadOrRefreshUnit:unit changed:&changed];
+//    BOOL changed;
+    [zonesView loadOrRefreshUnit:unit];
     
     /*    */
     [zonesNavigationView loadOrRefreshWithZones:unit.zones];
@@ -75,9 +75,9 @@
         }
     }
     
-    if(changed) {
+//    if(changed) {
         [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
-    }
+//    }
     
     [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
 }

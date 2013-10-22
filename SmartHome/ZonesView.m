@@ -40,15 +40,15 @@
     return [[ZonesView alloc] initWithFrame:CGRectMake(point.x, point.y, PANEL_WIDTH, PANEL_HEIGHT)];
 }
 
-- (void)loadOrRefreshUnit:(Unit *)unit changed:(BOOL *)anyZoneChanged {
-    BOOL changed = [self anyZonesChangedBetween:_unit_ newUnit:unit];
+- (void)loadOrRefreshUnit:(Unit *)unit {
+//    BOOL changed = [self anyZonesChangedBetween:_unit_ newUnit:unit];
     _unit_ = unit;
-    if(changed) {
+//    if(changed) {
         [self loadWithZones:_unit_ == nil ? nil : _unit_.zones];
-    } else {
-        [self refreshWithZones:_unit_ == nil ? nil : _unit_.zones];
-    }
-    *anyZoneChanged = changed;
+//    } else {
+//        [self refreshWithZones:_unit_ == nil ? nil : _unit_.zones];
+//    }
+//    *anyZoneChanged = changed;
 }
 
 - (void)refreshWithZones:(NSArray *)zones {
