@@ -162,19 +162,17 @@
 - (void)didCheckVersionComplete:(DeviceCommand *)command {
     switch (command.resultID) {
         case 1:
-            [[AlertView currentAlertView] setMessage:@"当前不是新版本" forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"app_is_not_lasted_version", @"") forType:AlertViewTypeFailed];
             [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             break;
         case -1:
-            [[AlertView currentAlertView] setMessage:@"已是最新版本" forType:AlertViewTypeSuccess];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"app_is_lasted_version", @"") forType:AlertViewTypeSuccess];
             [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             break;
         case -2:
-            [[AlertView currentAlertView] setMessage:@"系统错误" forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
-            break;
-        
         default:
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             break;
     }
 }
