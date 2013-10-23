@@ -28,8 +28,6 @@
 
 - (void)initDefaults {
     [super initDefaults];
-    
-    [[SMShared current].memory subscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
 }
 
 - (void)initUI {
@@ -53,6 +51,8 @@
         [btnLogout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnLogout];
     }
+    
+    [[SMShared current].memory subscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
 }
 
 #pragma mark -
