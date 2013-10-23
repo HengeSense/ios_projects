@@ -190,10 +190,10 @@
     @synchronized(self) {
         [[SMShared current].deliveryService stopService];
         
-        NavigationView *mainView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
-        if(mainView != nil) {
-            UIViewController *mainViewController = mainView.ownerController;
-            [self performSelectorOnMainThread:@selector(popupToRootViewController:) withObject:mainViewController waitUntilDone:YES];
+        NSArray *viewControllers = self.rootViewController.navigationController.viewControllers;
+        if(viewControllers.count >= 2) {
+            UIViewController *controller = [viewControllers objectAtIndex:1];
+            [controller.navigationController popToRootViewControllerAnimated:YES];
         }
         
         [[ViewsPool sharedPool] clear];
