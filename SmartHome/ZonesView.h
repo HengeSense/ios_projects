@@ -17,7 +17,7 @@
 + (ZonesView *)zonesViewWithPoint:(CGPoint)point;
 
 - (void)moveWithZoneIdentifier:(NSString *)zoneIdentifier;
-- (void)loadOrRefreshUnit:(Unit *)unit;
+- (void)loadUnit:(Unit *)unit;
 - (void)notifyStatusChanged;
 
 @end

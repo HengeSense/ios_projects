@@ -77,8 +77,8 @@
 - (void)notifyStatusChanged {
     for(UIView *view in self.subviews) {
         if([view isKindOfClass:[DeviceButton class]]) {
-            DeviceButton *btn = (DeviceButton *)view;
-            [btn refresh];
+            DeviceButton *btnDevice = (DeviceButton *)view;
+            [btnDevice refresh];
         }
     }
 }
@@ -93,6 +93,14 @@
         totalPages = (elementsCount - remainder) / 9 + 1;
     }
     return totalPages;
+}
+
+- (void)clearSubviews {
+    for(UIView *subview in self.subviews) {
+        if([subview isKindOfClass:[DeviceButton class]]) {
+            [subview removeFromSuperview];
+        }
+    }
 }
 
 @end

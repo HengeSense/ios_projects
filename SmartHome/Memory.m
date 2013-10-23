@@ -97,6 +97,9 @@
                 if([oldUnit.identifier isEqualToString:unit.identifier]) {
                     replaceIndex = i;
                     if([NSString isBlank:unit.status]) {
+                        // this unit should be returned by internal network when the status is blank
+                        // so we doesn't need to change unit name
+                        // and also the status must be 'online'
                         unit.name = oldUnit.name;
                         unit.status = @"在线";
                     }
@@ -104,11 +107,15 @@
                 }
             }
             if(replaceIndex != -1) {
+                // update unit
                 [self.units replaceObjectAtIndex:replaceIndex withObject:unit];
             } else {
+                // the unit isn't existed, need append to units list
                 [self.units addObject:unit];
             }
         }
+        
+        // set the unit to current unit
         currentUnitIdentifier = unit.identifier;
         return self.units;
     }

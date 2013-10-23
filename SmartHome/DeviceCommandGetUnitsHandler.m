@@ -24,6 +24,7 @@
         // update unit
         } else {
             if(updateUnitsCommand.resultID == -1) {
+                // this unit is has not binding before, need to remove it .
                 [[SMShared current].memory removeUnitByIdentifier:updateUnitsCommand.masterDeviceCode];
             } else {
                 if(updateUnitsCommand.units.count > 0) {

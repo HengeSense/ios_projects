@@ -25,7 +25,7 @@
     self = [super init];
     if (self) {
         if (messageArr == nil) {
-            messageArr = [NSMutableArray arrayWithArray:[[[NotificationsFileManager alloc] init] readFromDisk]];
+            messageArr = [NSMutableArray arrayWithArray:[[NotificationsFileManager fileManager] readFromDisk]];
         }
         if (mainView == nil) {
             mainView = where;
@@ -60,22 +60,22 @@
 
 - (void)initDefaults {
     [super initDefaults];
-    if (messageArr&&messageArr.count>0) {
+    if (messageArr && messageArr.count > 0) {
         for (SMNotification *notification in messageArr) {
             notification.hasRead = YES;
         }
-        
     }
+    [[NotificationsFileManager fileManager] update:messageArr deleteList:nil];
+    
+    [self sort:messageArr ascending:NO];
     
     if (modifyArr == nil) {
-        modifyArr =[NSMutableArray arrayWithArray:messageArr];
+        modifyArr =[NSMutableArray array];
     }
+    
     if (deleteArr == nil) {
-        deleteArr = [NSMutableArray new];
+        deleteArr = [NSMutableArray array];
     }
-    [self saveNotificationsToDisk];
-    [modifyArr removeAllObjects];
-    [self sort:messageArr ascending:NO];
 }
 
 - (void)initUI {
@@ -121,9 +121,9 @@
 }
 
 - (void)saveNotificationsToDisk {
-    NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
-    [fileManager update:modifyArr deleteList:deleteArr];
+    [[NotificationsFileManager fileManager] update:modifyArr deleteList:deleteArr];
 }
+
 - (void)sort:(NSMutableArray *) arr ascending:(BOOL) ascending{
     if (!arr||arr.count == 0) {
         return;

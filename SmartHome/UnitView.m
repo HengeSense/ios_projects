@@ -52,12 +52,9 @@
 }
 
 - (void)loadOrRefreshUnit:(Unit *)unit {
-    /*    */
     zonesView.ownerViewController = self.ownerViewController;
-//    BOOL changed;
-    [zonesView loadOrRefreshUnit:unit];
-    
-    /*    */
+
+    [zonesView loadUnit:unit];
     [zonesNavigationView loadOrRefreshWithZones:unit.zones];
     
     BOOL found = NO;
@@ -74,11 +71,8 @@
             lastedSelectionZoneIdentifier = zone.identifier;
         }
     }
-    
-//    if(changed) {
-        [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
-//    }
-    
+
+    [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
     [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
 }
 

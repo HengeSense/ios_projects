@@ -33,36 +33,15 @@
     self.delegate = self;
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
-    
 }
 
 + (ZonesView *)zonesViewWithPoint:(CGPoint)point {
     return [[ZonesView alloc] initWithFrame:CGRectMake(point.x, point.y, PANEL_WIDTH, PANEL_HEIGHT)];
 }
 
-- (void)loadOrRefreshUnit:(Unit *)unit {
-//    BOOL changed = [self anyZonesChangedBetween:_unit_ newUnit:unit];
+- (void)loadUnit:(Unit *)unit {
     _unit_ = unit;
-//    if(changed) {
-        [self loadWithZones:_unit_ == nil ? nil : _unit_.zones];
-//    } else {
-//        [self refreshWithZones:_unit_ == nil ? nil : _unit_.zones];
-//    }
-//    *anyZoneChanged = changed;
-}
-
-- (void)refreshWithZones:(NSArray *)zones {
-    for(UIView *view in self.subviews) {
-        if([view isKindOfClass:[DevicesPanelView class]]) {
-            DevicesPanelView *panelView = (DevicesPanelView *)view;
-            for(Zone *zone in zones) {
-                if([panelView.zone.identifier isEqualToString:zone.identifier]) {
-                    panelView.zone = zone;
-                    break;
-                }
-            }
-        }
-    }
+    [self loadWithZones:_unit_ == nil ? nil : _unit_.zones];
 }
 
 - (void)loadWithZones:(NSArray *)zones {
@@ -81,40 +60,6 @@
     }
 }
 
-- (BOOL)anyZonesChangedBetween:(Unit *)oldUnit newUnit:(Unit *)newUnit {
-    if(oldUnit == nil && newUnit == nil) return NO;
-    if((oldUnit == nil && newUnit != nil) || (oldUnit != nil && newUnit == nil)) return YES;
-    if(![oldUnit.identifier isEqualToString:newUnit.identifier]) return YES;
-    if((oldUnit.zones == nil && newUnit.zones != nil) || (oldUnit.zones != nil && newUnit.zones == nil)) return YES;
-    if(oldUnit.zones.count != newUnit.zones.count) return YES;
-
-    BOOL changed = NO;
-    for(Unit *n in newUnit.zones) {
-        BOOL found = NO;
-        for(Unit *o in oldUnit.zones) {
-            if([n.identifier isEqualToString:o.identifier]) {
-                found = YES;
-                break;
-            }
-        }
-        if(!found) {
-            changed = YES;
-            break;
-        }
-    }
-    
-    return changed;
-}
-
-- (void)notifyStatusChanged {
-    for(UIView *view in self.subviews) {
-        if([view isKindOfClass:[DevicesPanelView class]]) {
-            DevicesPanelView *panelView = (DevicesPanelView *)view;
-            [panelView notifyStatusChanged];
-        }
-    }
-}
-
 - (void)moveWithZoneIdentifier:(NSString *)zoneIdentifier {
     if([NSString isBlank:zoneIdentifier]) return;
     for(UIView *view in self.subviews) {
@@ -124,6 +69,18 @@
                 self.contentOffset = CGPointMake(panel.frame.origin.x, 0) ;
                 return;
             }
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark Notify
+
+- (void)notifyStatusChanged {
+    for(UIView *view in self.subviews) {
+        if([view isKindOfClass:[DevicesPanelView class]]) {
+            DevicesPanelView *panelView = (DevicesPanelView *)view;
+            [panelView notifyStatusChanged];
         }
     }
 }
@@ -153,6 +110,17 @@
                 }
                 return;
             }
+        }
+    }
+}
+
+#pragma mark- 
+#pragma mark Overidde
+
+- (void)clearSubviews {
+    for(UIView *subview in self.subviews) {
+        if([subview isKindOfClass:[DevicesPanelView class]]) {
+            [subview removeFromSuperview];
         }
     }
 }
