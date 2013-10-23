@@ -21,10 +21,14 @@
 #define CLOSE 3
 #define STOP  2
 
+#define TWO_TIMES_CLICK_INTERVAL 500
+
 @implementation DeviceButton {
     UIButton *btn;
     UILabel *lblTitle;
     NSMutableDictionary *statusImage;
+    
+    double lastedClickTime;
 }
 
 @synthesize device = _device_;
@@ -48,6 +52,8 @@
     if(statusImage == nil) {
         statusImage = [NSMutableDictionary dictionary];
     }
+    
+    lastedClickTime = -1;
 }
 
 - (void)initUI {
@@ -156,6 +162,18 @@
     if(!(_device_.isTV || _device_.isAircondition || _device_.isSTB)) {
         if(![DeviceUtils checkDeviceIsAvailable:_device_]) return;
     }
+    
+    // Check btn click is too often
+    double now = [NSDate date].timeIntervalSince1970 * 1000;
+    if(lastedClickTime != -1) {
+        if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            lastedClickTime = now;
+            return;
+        }
+    }
+    lastedClickTime = now;
 
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {
         DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
@@ -191,7 +209,6 @@
         cameraViewController.cameraDevice = _device_;
         [self.ownerController presentViewController:cameraViewController animated:YES completion:nil];
     }
-    
 }
 
 - (void)selectionViewNotifyItemSelected:(id)item from:(NSString *)source {

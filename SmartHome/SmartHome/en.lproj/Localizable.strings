@@ -200,6 +200,7 @@
 
 /****************	Device's Strings   ****************/
 
+"btn_press_often"   =  "亲,请慢点点!";
 "device_name"       =  "设备名";
 "device_category"   =  "设备类型";
 "device_ip"         =  "设备IP";
