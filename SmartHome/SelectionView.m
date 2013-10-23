@@ -46,10 +46,9 @@
     }
     
     if(tblItems == nil) {
-        tblItems = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, self.bounds.size.width, self.bounds.size.height - 49 - 6 - 10)];
+        tblItems = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, self.bounds.size.width, self.bounds.size.height - 49 - 6 - 10 - 50)];
         tblItems.backgroundColor = [UIColor clearColor];
         tblItems.separatorStyle = UITableViewCellSeparatorStyleNone;
-        tblItems.scrollEnabled = NO;
         tblItems.dataSource = self;
         tblItems.delegate = self;
         [self addSubview:tblItems];
@@ -67,7 +66,9 @@
 }
 
 + (void)showWithItems:(NSArray *)items selectedIdentifier:(NSString *)identifier source:(NSString *)source delegate:(id)target {
-    CGFloat height = (items == nil ? 0 : items.count) * 45 + 49 + 6 + 10 + 30 + 30;
+    
+    NSInteger itemsCount = items.count > 6 ? 6 : items.count;
+    CGFloat height = (itemsCount) * 45 + 49 + 6 + 10 + 30 + 30;
     
     UIView *lockView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     lockView.backgroundColor = [UIColor blackColor];
