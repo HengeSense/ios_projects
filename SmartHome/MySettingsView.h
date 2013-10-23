@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
 #import "DeviceCommandCheckVersionHandler.h"
-@interface MySettingsView : NavigationView<UITableViewDataSource, UITableViewDelegate,DeviceCommandCheckVersionHandlerDelegate>
+
+@interface MySettingsView : NavigationView<UITableViewDataSource, UITableViewDelegate, DeviceCommandCheckVersionHandlerDelegate>
 
 @end

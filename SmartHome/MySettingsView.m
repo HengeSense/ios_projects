@@ -149,13 +149,17 @@
     [self.ownerController.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)checkVersion{
+#pragma mark -
+#pragma mark Check app verion
+
+- (void)checkVersion {
     DeviceCommandCheckVersion *command = (DeviceCommandCheckVersion *)[CommandFactory commandForType:CommandTypeCheckVersion];
     NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
     command.curVersion = [infoDict noNilStringForKey:@"CFBundleShortVersionString"];
     [[SMShared current].deliveryService executeDeviceCommand:command];
 }
-- (void)didCheckVersionComplete:(DeviceCommand *)command{
+
+- (void)didCheckVersionComplete:(DeviceCommand *)command {
     switch (command.resultID) {
         case 1:
             [[AlertView currentAlertView] setMessage:@"当前不是新版本" forType:AlertViewTypeFailed];
@@ -174,7 +178,12 @@
             break;
     }
 }
--(void) destory{
+
+#pragma mark - 
+#pragma mark Override
+
+- (void)destory {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
 }
+
 @end

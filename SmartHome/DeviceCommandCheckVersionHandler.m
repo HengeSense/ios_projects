@@ -9,10 +9,10 @@
 #import "DeviceCommandCheckVersionHandler.h"
 
 @implementation DeviceCommandCheckVersionHandler
-- (void)handle:(DeviceCommand *)command{
+
+- (void)handle:(DeviceCommand *)command {
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandCheckVersion class]]) {
-
         NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandCheckVersionHandler class]];
         if(subscriptions != nil && subscriptions.count > 0) {
             for(int i=0; i<subscriptions.count; i++) {
@@ -22,7 +22,6 @@
             }
         }
     }
-
-    
 }
+
 @end

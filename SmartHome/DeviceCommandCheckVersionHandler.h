@@ -7,9 +7,13 @@
 //
 
 #import "DeviceCommandHandler.h"
+
 @protocol DeviceCommandCheckVersionHandlerDelegate<NSObject>
--(void)didCheckVersionComplete:(DeviceCommand *) command;
+
+- (void)didCheckVersionComplete:(DeviceCommand *)command;
+
 @end
+
 @interface DeviceCommandCheckVersionHandler : DeviceCommandHandler
 
 @end

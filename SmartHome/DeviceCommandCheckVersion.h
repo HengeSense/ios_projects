@@ -9,5 +9,7 @@
 #import "DeviceCommand.h"
 
 @interface DeviceCommandCheckVersion : DeviceCommand
+
 @property (strong,nonatomic) NSString *curVersion;
+
 @end

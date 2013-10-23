@@ -9,13 +9,15 @@
 #import "DeviceCommandCheckVersion.h"
 
 @implementation DeviceCommandCheckVersion
+
 @synthesize curVersion;
-- (NSMutableDictionary *) toDictionary{
+
+- (NSMutableDictionary *)toDictionary {
     NSMutableDictionary *json = [super toDictionary];
     if(json) {
         [json setMayBlankString:self.curVersion forKey:@"curVersion"];
     }
     return json;
-
 }
+
 @end
