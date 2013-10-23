@@ -13,25 +13,25 @@
 + (DeviceCommand *)commandForType:(CommandType)type {
     if(type == CommandTypeNone) return nil;
     
-    if(type == CommandTypeUpdateAccount) {
+    if(type == CommandTypeGetUnits) {
+        DeviceCommandGetUnit *command = [[DeviceCommandGetUnit alloc] init];
+        command.commandName = COMMAND_GET_UNITS;
+        return command;
+    } else if(type == CommandTypeGetSceneList) {
+        DeviceCommand *command = [[DeviceCommand alloc] init];
+        command.commandName = COMMAND_GET_SCENE_LIST;
+        return command;
+    } else if(type == CommandTypeGetNotifications) {
+        DeviceCommand *command = [[DeviceCommand alloc] init];
+        command.commandName = COMMAND_GET_NOTIFICATIONS;
+        return command;
+    } else if(type == CommandTypeUpdateAccount) {
         DeviceCommandUpdateAccount *command = [[DeviceCommandUpdateAccount alloc] init];
         command.commandName = COMMAND_UPDATE_ACCOUNT;
         return command;
     } else if(type == CommandTypeGetAccount) {
         DeviceCommand *command = [[DeviceCommand alloc] init];
         command.commandName = COMMAND_GET_ACCOUNT;
-        return command;
-    } else if(type == CommandTypeGetUnits) {
-        DeviceCommandGetUnit *command = [[DeviceCommandGetUnit alloc] init];
-        command.commandName = COMMAND_GET_UNITS;
-        return command;
-    } else if(type == CommandTypeGetNotifications) {
-        DeviceCommand *command = [[DeviceCommand alloc] init];
-        command.commandName = COMMAND_GET_NOTIFICATIONS;
-        return command;
-    } else if(type == CommandTypeGetSceneList) {
-        DeviceCommand *command = [[DeviceCommand alloc] init];
-        command.commandName = COMMAND_GET_SCENE_LIST;
         return command;
     } else if(type == CommandTypeUpdateDeviceViaVoice) {
         DeviceCommandVoiceControl *command = [[DeviceCommandVoiceControl alloc] init];
