@@ -298,6 +298,8 @@
 		F237167F17B349650057C95B /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F237167E17B349650057C95B /* libxml2.dylib */; };
 		F237168217B371460057C95B /* UIViewController+UIViewControllerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */; };
 		F237168517B3715C0057C95B /* SmsService.m in Sources */ = {isa = PBXBuildFile; fileRef = F237168417B3715C0057C95B /* SmsService.m */; };
+		F26FDA5A1817A6940056FD71 /* DeviceCommandCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = F26FDA591817A6940056FD71 /* DeviceCommandCheckVersion.m */; };
+		F26FDA5D1817AB380056FD71 /* DeviceCommandCheckVersionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F26FDA5C1817AB380056FD71 /* DeviceCommandCheckVersionHandler.m */; };
 		F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27B4EC317EFD35D00A55220 /* libzbar.a */; };
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
@@ -772,6 +774,10 @@
 		F237168117B371460057C95B /* UIViewController+UIViewControllerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+UIViewControllerExtension.m"; sourceTree = "<group>"; };
 		F237168317B3715C0057C95B /* SmsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsService.h; sourceTree = "<group>"; };
 		F237168417B3715C0057C95B /* SmsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsService.m; sourceTree = "<group>"; };
+		F26FDA581817A6940056FD71 /* DeviceCommandCheckVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandCheckVersion.h; sourceTree = "<group>"; };
+		F26FDA591817A6940056FD71 /* DeviceCommandCheckVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandCheckVersion.m; sourceTree = "<group>"; };
+		F26FDA5B1817AB380056FD71 /* DeviceCommandCheckVersionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandCheckVersionHandler.h; sourceTree = "<group>"; };
+		F26FDA5C1817AB380056FD71 /* DeviceCommandCheckVersionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandCheckVersionHandler.m; sourceTree = "<group>"; };
 		F27B4EC317EFD35D00A55220 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		F280616317DD6E810064F35B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
@@ -1658,6 +1664,8 @@
 				6FD0CC0917EFEFA9005956E0 /* DeviceCommandGetCameraServerHandler.m */,
 				6FA3D8431806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.h */,
 				6FA3D8441806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m */,
+				F26FDA5B1817AB380056FD71 /* DeviceCommandCheckVersionHandler.h */,
+				F26FDA5C1817AB380056FD71 /* DeviceCommandCheckVersionHandler.m */,
 			);
 			name = command_handler;
 			sourceTree = "<group>";
@@ -1848,6 +1856,8 @@
 				6FDA6E8A17F547A500E4C717 /* DeviceCommandAuthBinding.m */,
 				6FA3D840180558520064ED41 /* DeviceCommandUpdateDeviceToken.h */,
 				6FA3D841180558520064ED41 /* DeviceCommandUpdateDeviceToken.m */,
+				F26FDA581817A6940056FD71 /* DeviceCommandCheckVersion.h */,
+				F26FDA591817A6940056FD71 /* DeviceCommandCheckVersion.m */,
 			);
 			name = command;
 			sourceTree = "<group>";
@@ -2288,12 +2298,14 @@
 				F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */,
 				6FFAFE0917E1B493001EB9D0 /* ZoneDetailsViewController.m in Sources */,
 				6F47FAE317E2C2E50027C0F7 /* PasswordForgotViewController.m in Sources */,
+				F26FDA5D1817AB380056FD71 /* DeviceCommandCheckVersionHandler.m in Sources */,
 				6F47FAED17E311970027C0F7 /* DeviceCommandUpdateUnitName.m in Sources */,
 				6F47FAF017E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m in Sources */,
 				6FB5AC9617E6A356009AF916 /* CameraPicPath.m in Sources */,
 				6FB5AC9917E6A89F009AF916 /* PlayCameraPicViewController.m in Sources */,
 				6FDA6E8217F4838A00E4C717 /* ZonesNavigationView.m in Sources */,
 				6FB5AC9F17E70108009AF916 /* DeviceCommandUpdateDevice.m in Sources */,
+				F26FDA5A1817A6940056FD71 /* DeviceCommandCheckVersion.m in Sources */,
 				6FF6C4E917E83A4500F637FD /* ImagePlayView.m in Sources */,
 				6FF6C4EC17E850E200F637FD /* ImageProvider.m in Sources */,
 			);
@@ -2354,8 +2366,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2370,8 +2382,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "1168A197-862D-4770-A1E9-B7404EB4152B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1168A197-862D-4770-A1E9-B7404EB4152B";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7";
@@ -2391,8 +2403,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2400,8 +2412,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "1168A197-862D-4770-A1E9-B7404EB4152B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1168A197-862D-4770-A1E9-B7404EB4152B";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2416,8 +2428,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2435,8 +2447,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1168A197-862D-4770-A1E9-B7404EB4152B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1168A197-862D-4770-A1E9-B7404EB4152B";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2452,8 +2464,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 阳 赵 (7BGAE3L9Q9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Changsha Hentre Information Technology Co., Ltd. (JJH6E5JL26)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -2471,8 +2483,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1168A197-862D-4770-A1E9-B7404EB4152B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1168A197-862D-4770-A1E9-B7404EB4152B";
+				PROVISIONING_PROFILE = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36A5A6C2-F763-499F-AA0A-9E0C876CCF06";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";

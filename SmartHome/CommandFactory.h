@@ -21,6 +21,7 @@
 #import "DeviceCommandGetUnit.h"
 #import "DeviceCommandAuthBinding.h"
 #import "DeviceCommandUpdateDeviceToken.h"
+#import "DeviceCommandCheckVersion.h"
 
 typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeNone,
@@ -36,6 +37,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeBindingUnit,
     CommandTypeAuthBindingUnit,
     CommandTypeUpdateDeviceToken,
+    CommandTypeCheckVersion
 };
 
 #define COMMAND_UPDATE_ACCOUNT       @"AccountUpdateCommand"
@@ -52,6 +54,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
 #define COMMAND_BING_UNIT            @"DeviceBindingCommand"
 #define COMMAND_AUTH_BINGDING        @"DeviceBindingAuthCommand"
 #define COMMAND_UPDATE_DEVICE_TOKEN  @"IOSSecretCommand"
+#define COMMAND_CHECK_VERSION        @"VersionUpgradeCommand"
 
 @interface CommandFactory : NSObject
 

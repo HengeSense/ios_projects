@@ -28,6 +28,8 @@
 
 - (void)initDefaults {
     [super initDefaults];
+    
+    [[SMShared current].memory subscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
 }
 
 - (void)initUI {
@@ -62,8 +64,7 @@
             [self.ownerController.navigationController pushViewController:[[PushSettingViewController alloc]init] animated:YES];
             break;
         case 1:
-            [[AlertView currentAlertView] setMessage:@"已是最新版本" forType:AlertViewTypeSuccess];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            [self checkVersion];
             break;
         case 2:
             [[AlertView currentAlertView] setMessage:@"开发中..." forType:AlertViewTypeFailed];
@@ -148,4 +149,32 @@
     [self.ownerController.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (void)checkVersion{
+    DeviceCommandCheckVersion *command = (DeviceCommandCheckVersion *)[CommandFactory commandForType:CommandTypeCheckVersion];
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    command.curVersion = [infoDict noNilStringForKey:@"CFBundleShortVersionString"];
+    [[SMShared current].deliveryService executeDeviceCommand:command];
+}
+- (void)didCheckVersionComplete:(DeviceCommand *)command{
+    switch (command.resultID) {
+        case 1:
+            [[AlertView currentAlertView] setMessage:@"当前不是新版本" forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            break;
+        case -1:
+            [[AlertView currentAlertView] setMessage:@"已是最新版本" forType:AlertViewTypeSuccess];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            break;
+        case -2:
+            [[AlertView currentAlertView] setMessage:@"系统错误" forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            break;
+        
+        default:
+            break;
+    }
+}
+-(void) destory{
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
+}
 @end

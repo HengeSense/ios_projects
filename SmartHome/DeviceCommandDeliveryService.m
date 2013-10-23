@@ -19,6 +19,7 @@
 #import "DeviceCommandGetCameraServerHandler.h"
 #import "DeviceCommandUpdateDeviceTokenHandler.h"
 #import "DeviceCommandUpdateUnitNameHandler.h"
+#import "DeviceCommandCheckVersionHandler.h"
 #import "AlertView.h"
 
 #define NETWORK_CHECK_INTERVAL 5
@@ -205,6 +206,8 @@
         handler = [[DeviceCommandGetCameraServerHandler alloc] init];
     } else if([COMMAND_UPDATE_DEVICE_TOKEN isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateDeviceTokenHandler alloc] init];
+    } else if([COMMAND_CHECK_VERSION isEqualToString:command.commandName]) {
+        handler = [[DeviceCommandCheckVersionHandler alloc] init];
     }
         
     if(handler != nil) {

@@ -61,6 +61,10 @@
         DeviceCommandUpdateDeviceToken *command = [[DeviceCommandUpdateDeviceToken alloc] init];
         command.commandName = COMMAND_UPDATE_DEVICE_TOKEN;
         return command;
+    } else if (type == CommandTypeCheckVersion) {
+        DeviceCommandCheckVersion *command = [[DeviceCommandCheckVersion alloc] init];
+        command.commandName = COMMAND_CHECK_VERSION;
+        return command;
     }
     
     return nil;
@@ -92,6 +96,8 @@
         command = [[DeviceCommandUpdateUnitName alloc] initWithDictionary:json];
     } else if([COMMAND_UPDATE_DEVICE_TOKEN isEqualToString:commandName]) {
         command = [[DeviceCommand alloc] initWithDictionary:json];
+    }else if ([COMMAND_CHECK_VERSION isEqualToString:commandName]){
+        command = [[DeviceCommandCheckVersion alloc] initWithDictionary:json];
     }
     
     return command;
