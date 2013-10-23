@@ -17,6 +17,7 @@
 #define COLD_BASE_CODE 141
 #define HOT_BASE_CODE 152
 #define POWER_SWITCH_CODE 138
+#define TWO_TIMES_CLICK_INTERVAL 500
 
 @interface AirConditionViewController ()
 
@@ -26,6 +27,7 @@
     UIButton *closeBtn;
     UITableView *temperatureTable;
     NSIndexPath *curIndex;
+    double lastedClickTime;
     
 }
 @synthesize device = _device;
@@ -55,6 +57,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void) initDefaults{
+    [super initDefaults];
+    lastedClickTime = -1;
+}
 -(void) initUI{
     [super initUI];
     
@@ -80,6 +86,18 @@
 }
 
 -(void) closeBtnPressed{
+    // Check btn click is too often
+    double now = [NSDate date].timeIntervalSince1970 * 1000;
+    if(lastedClickTime != -1) {
+        if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            lastedClickTime = now;
+            return;
+        }
+    }
+    lastedClickTime = now;
+
     if([DeviceUtils checkDeviceIsAvailable:self.device])
     [self executeCommandWithCode:POWER_SWITCH_CODE];
 }
@@ -140,6 +158,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    // Check btn click is too often
+    double now = [NSDate date].timeIntervalSince1970 * 1000;
+    if(lastedClickTime != -1) {
+        if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            lastedClickTime = now;
+            return;
+        }
+    }
+    lastedClickTime = now;
+
+    
     curIndex = indexPath;
     NSInteger commandCode = curIndex.section?HOT_BASE_CODE+curIndex.row:COLD_BASE_CODE+curIndex.row;
     if([DeviceUtils checkDeviceIsAvailable:self.device])
@@ -168,5 +199,4 @@
     curCell.textLabel.textColor = [UIColor colorWithHexString:@"696970"];
     curCell.backgroundColor = [UIColor clearColor];
 }
-
 @end

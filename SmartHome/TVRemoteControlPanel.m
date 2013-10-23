@@ -11,6 +11,7 @@
 #import "SMShared.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "DeviceUtils.h"
+#define TWO_TIMES_CLICK_INTERVAL 500
 
 @implementation TVRemoteControlPanel {
     SMButton *btnPower;
@@ -21,6 +22,7 @@
     SMButton *btnVolumeReduction;
     DirectionButton *btnDirection;
     NSMutableArray *btnDigitalGroups;
+    double lastedClickTime;
 }
 
 @synthesize device = _device_;
@@ -30,6 +32,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _device_ = device;
+        [self initDefaults];
         [self initUI];
     }
     return self;
@@ -39,6 +42,9 @@
     return [[TVRemoteControlPanel alloc] initWithFrame:CGRectMake(point.x, point.y, [UIScreen mainScreen].bounds.size.width, 380) andDevice:device];
 }
 
+- (void)initDefaults{
+    lastedClickTime = -1;
+}
 - (void)initUI {
     if(btnPower == nil) {
         btnPower = [[SMButton alloc] initWithFrame:CGRectMake(20, 15, 75/2, 78/2)];
@@ -142,6 +148,18 @@
 }
 
 - (void)btnPressed:(id)sender {
+    // Check btn click is too often
+    double now = [NSDate date].timeIntervalSince1970 * 1000;
+    if(lastedClickTime != -1) {
+        if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            lastedClickTime = now;
+            return;
+        }
+    }
+    lastedClickTime = now;
+
     if(sender != nil) {
         NSNumber *number = nil;
         if([sender isKindOfClass:[SMButton class]]) {
