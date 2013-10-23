@@ -69,6 +69,7 @@
                     [NSThread sleepForTimeInterval:1];
                     if(needCloseSocket) {
                         [self close];
+                        self.delegate = nil;
                         return;
                     }
                     needToShakeHands = YES;
@@ -177,6 +178,7 @@
 - (void)closeGraceful {
     if(shakeHandsSuccess) {
         [self close];
+        self.delegate = nil;
     } else {
         needCloseSocket = YES;
 #ifdef DEBUG

@@ -59,6 +59,8 @@
 
 - (void)disconnect {
     [socket close];
+    socket.messageHandlerDelegate = nil;
+    socket = nil;
 }
 
 - (BOOL)isConnectted {

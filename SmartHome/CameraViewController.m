@@ -122,6 +122,8 @@
     if(command.commmandNetworkMode == CommandNetworkModeInternal) {
         if(cameraService != nil && [cameraService isPlaying]) {
             [cameraService close];
+            cameraService.delegate = nil;
+            cameraService = nil;
         }
         NSString *cameraUrl = [NSString stringWithFormat:@"http://%@:%d/snapshot.cgi?user=%@&pwd=%@", self.cameraDevice.ip, self.cameraDevice.port, self.cameraDevice.user, self.cameraDevice.pwd];
         cameraService = [[CameraService alloc] initWithUrl:cameraUrl];
