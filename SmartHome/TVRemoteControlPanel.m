@@ -11,6 +11,7 @@
 #import "SMShared.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "DeviceUtils.h"
+
 #define TWO_TIMES_CLICK_INTERVAL 500
 
 @implementation TVRemoteControlPanel {
@@ -74,7 +75,7 @@
         [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
         [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateHighlighted];
         btnVolumeReduction.userObject = [NSNumber numberWithInteger:(self.device.isTV?20:112)];
-        btnVolumeIncreases.titleLabel.font = [UIFont systemFontOfSize:15.f];
+        btnVolumeReduction.titleLabel.font = [UIFont systemFontOfSize:15.f];
         [btnVolumeReduction setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
         [btnVolumeReduction setTitle:NSLocalizedString(@"volume_reduce", @"") forState:UIControlStateNormal];
         [btnVolumeReduction setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
