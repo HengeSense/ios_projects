@@ -12,6 +12,7 @@
 #import "CameraService.h"
 #import "UIColor+ExtentionForHexString.h"
 
+#define TWO_TIMES_CLICK_INTERVAL 500
 
 @interface CameraViewController ()
 
@@ -24,6 +25,7 @@
     DirectionButton *btnDirection;
     CameraSocket *socket;
     CameraService *cameraService;
+    double lastedClickTime;
 }
 
 @synthesize cameraDevice;
@@ -204,6 +206,19 @@
 
 - (void)adjustCamera:(NSString *)direction {
     if(self.cameraDevice == nil) return;
+    
+    // Check btn click is too often
+    double now = [NSDate date].timeIntervalSince1970 * 1000;
+    if(lastedClickTime != -1) {
+        if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            lastedClickTime = now;
+            return;
+        }
+    }
+    lastedClickTime = now;
+    
     DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
     updateDeviceCommand.masterDeviceCode = self.cameraDevice.zone.unit.identifier;
     [updateDeviceCommand addCommandString:[self.cameraDevice commandStringForCamera:direction]];
