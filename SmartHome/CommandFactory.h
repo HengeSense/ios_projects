@@ -37,7 +37,8 @@ typedef NS_ENUM(NSUInteger, CommandType) {
     CommandTypeBindingUnit,
     CommandTypeAuthBindingUnit,
     CommandTypeUpdateDeviceToken,
-    CommandTypeCheckVersion
+    CommandTypeCheckVersion,
+    CommandTypeSendHeartBeat,
 };
 
 #define COMMAND_UPDATE_ACCOUNT       @"AccountUpdateCommand"
@@ -55,6 +56,7 @@ typedef NS_ENUM(NSUInteger, CommandType) {
 #define COMMAND_AUTH_BINGDING        @"DeviceBindingAuthCommand"
 #define COMMAND_UPDATE_DEVICE_TOKEN  @"IOSSecretCommand"
 #define COMMAND_CHECK_VERSION        @"VersionUpgradeCommand"
+#define COMMAND_SEND_HEART_BEAT      @"HeartBeatCommand"
 
 @interface CommandFactory : NSObject
 

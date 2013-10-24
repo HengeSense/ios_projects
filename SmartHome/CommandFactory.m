@@ -41,6 +41,11 @@
         DeviceCommandUpdateDevice *command = [[DeviceCommandUpdateDevice alloc] init];
         command.commandName = COMMAND_KEY_CONTROL;
         return command;
+    } else if(type == CommandTypeSendHeartBeat) {
+        DeviceCommand *command = [[DeviceCommand alloc] init];
+        command.commandName = COMMAND_SEND_HEART_BEAT;
+        command.commmandNetworkMode = CommandNetworkModeExternal;
+        return command;
     } else if(type == CommandTypeUpdateUnitName) {
         DeviceCommandUpdateUnitName *command = [[DeviceCommandUpdateUnitName alloc] init];
         command.commandName = COMMAND_CHANGE_UNIT_NAME;

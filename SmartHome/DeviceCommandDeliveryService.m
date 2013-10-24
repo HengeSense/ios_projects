@@ -327,15 +327,20 @@
             // Here you must check net work sync, then continue execute command
             [self checkIsReachableInternalUnit];
             
+            // Update current unit
             DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
             command.masterDeviceCode = unit.identifier;
             command.hashCode = unit.hashCode;
             [self executeDeviceCommand:command];
             
+            // Update scene list for current unit
             DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
             getSceneListCommand.masterDeviceCode = unit.identifier;
             getSceneListCommand.hashCode = unit.sceneHashCode;
             [self executeDeviceCommand:getSceneListCommand];
+            
+            // Send heart beat command
+//            [self executeDeviceCommand:[CommandFactory commandForType:CommandTypeSendHeartBeat]];
         }
     });
 }

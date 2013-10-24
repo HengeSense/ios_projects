@@ -7,6 +7,7 @@
 //
 
 #import "CommunicationMessage.h"
+#import "CommandFactory.h"
 
 @implementation CommunicationMessage
 
@@ -21,8 +22,18 @@
 - (NSData *)generateData {
     if(self.deviceCommand == nil) return nil;
     
-    //append data header
     NSMutableData *message = [NSMutableData data];
+    
+    // ******************
+    // Process Heart Beat Command
+    // Append heart beat command data header (This command is a special command, only send a byte what is 127.)
+    // ******************
+    if([COMMAND_SEND_HEART_BEAT isEqualToString:self.deviceCommand.commandName]) {
+        [self addHeartBeatDataHeaderFor:message];
+        return message;
+    }
+    
+    //append data header
     [self addDataHeaderFor:message];
     
     NSData *dataDomain = [JsonUtils createJsonDataFromDictionary:[self.deviceCommand toDictionary]];
@@ -44,6 +55,12 @@
     [self addMD5Using:dataDomain for:(NSMutableData *)message];
     
     return message;
+}
+
+- (void)addHeartBeatDataHeaderFor:(NSMutableData *)message {
+    uint8_t header[DATA_HEADER_LENGTH];
+    header[0] = 127;
+    [message appendBytes:header length:DATA_HEADER_LENGTH];
 }
 
 - (void)addDataHeaderFor:(NSMutableData *)message {
