@@ -479,6 +479,7 @@
 - (BOOL)commandCanDeliveryInInternalNetwork:(DeviceCommand *)command {
     if(mayUsingInternalNetworkCommands == nil) return NO;
     
+    /* This is a special command */
     if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
         if([NSString isBlank:command.masterDeviceCode]) {
             DeviceCommandGetUnit *cmd = (DeviceCommandGetUnit *)command;
@@ -487,6 +488,7 @@
             return YES;
         }
     }
+    
     for(int i=0; i<mayUsingInternalNetworkCommands.count; i++) {
         NSString *cmdName = [mayUsingInternalNetworkCommands objectAtIndex:i];
         if([cmdName isEqualToString:command.commandName]) {
