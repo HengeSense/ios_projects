@@ -13,13 +13,12 @@
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
     if(self) {
-        
     }
     return self;
 }
 
-- (NSDictionary *)toJson {
-    return [NSDictionary dictionary];
+- (NSMutableDictionary *)toJson {
+    return [NSMutableDictionary dictionary];
 }
 
 @end

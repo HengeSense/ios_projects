@@ -19,8 +19,19 @@
     if(self && json) {
         self.name = [json stringForKey:@"name"];
         self.code = [json integerForKey:@"code"];
+        self.masterDeviceCode = [json noNilStringForKey:@"masterDeviceCode"];
     }
     return self;
+}
+
+- (NSMutableDictionary *)toJson {
+    NSMutableDictionary *json = [super toJson];
+    if(json) {
+        [json setInteger:self.code forKey:@"code"];
+        [json setMayBlankString:self.name forKey:@"name"];
+        [json setMayBlankString:self.masterDeviceCode forKey:@"masterDeviceCode"];
+    }
+    return json;
 }
 
 @end

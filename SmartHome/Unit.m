@@ -34,9 +34,11 @@
     if(self) {
         if(json != nil) {
             self.identifier = [json stringForKey:@"_id"];
+            
             if(self.identifier != nil) {
                 self.identifier = [self.identifier substringToIndex:self.identifier.length-4];
             }
+            
             self.localIP = [json stringForKey:@"localIp"];
             self.name = [json stringForKey:@"name"];
             self.localPort = [json integerForKey:@"localPort"];
@@ -46,11 +48,21 @@
             self.sceneHashCode = [json numberForKey:@"sceneHashCode"];
             
             NSArray *_zones_ = [json notNSNullObjectForKey:@"zones"];
-            for(int i=0; i<_zones_.count; i++) {
-                NSDictionary *_zone_ = [_zones_ objectAtIndex:i];
-                Zone *zone = [[Zone alloc] initWithJson:_zone_];
-                zone.unit = self;
-                [self.zones addObject:zone];
+            if(_zones_ != nil) {
+                for(int i=0; i<_zones_.count; i++) {
+                    NSDictionary *_zone_ = [_zones_ objectAtIndex:i];
+                    Zone *zone = [[Zone alloc] initWithJson:_zone_];
+                    zone.unit = self;
+                    [self.zones addObject:zone];
+                }
+            }
+            
+            NSArray *_scenes_ = [json notNSNullObjectForKey:@"scenesList"];
+            if(_scenes_ != nil) {
+                for(int i=0; i<_scenes_.count; i++) {
+                    NSDictionary *_scene_ = [_scenes_ objectAtIndex:i];
+                    [self.scenesModeList addObject:[[SceneMode alloc] initWithJson:_scene_]];
+                }
             }
         }
     }
@@ -81,6 +93,12 @@
     // scene hash code
     
     // scenesModeList
+    NSMutableArray *_smodes_ = [NSMutableArray array];
+    for(int i=0; i<self.scenesModeList.count; i++) {
+        SceneMode *smode = [self.scenesModeList objectAtIndex:i];
+        [_smodes_ addObject:[smode toJson]];
+    }
+    [json setObject:_smodes_ forKey:@"scenesList"];
     
     return json;
 }
@@ -98,6 +116,18 @@
         Zone *zone = [self.zones objectAtIndex:i];
         if([_id_ isEqualToString:zone.identifier]) {
             return zone;
+        }
+    }
+    return nil;
+}
+
+- (Device *)deviceForId:(NSString *)_id_ {
+    if([NSString isBlank:_id_]) return nil;
+    for(int i=0; i<self.zones.count; i++) {
+        Zone *zone = [self.zones objectAtIndex:i];
+        Device *device = [zone deviceForId:_id_];
+        if(device != nil) {
+            return device;
         }
     }
     return nil;

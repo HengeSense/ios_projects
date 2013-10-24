@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Zone.h"
+#import "SceneMode.h"
 #import "Entity.h"
 
 @interface Unit : Entity
@@ -31,5 +32,6 @@
 @property (strong, nonatomic, readonly) NSArray *devices;
 
 - (Zone *)zoneForId:(NSString *)_id_;
+- (Device *)deviceForId:(NSString *)_id_;
 
 @end
