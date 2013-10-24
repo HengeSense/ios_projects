@@ -203,7 +203,7 @@
                         
                         [[SMShared current].app registerForRemoteNotifications];
                         
-                        if([SMShared current].settings.anyUnitsBinding) {
+                        if([[SMShared current].memory hasUnit]) {
                             [self.navigationController pushViewController:[[MainViewController alloc] init] animated:NO];
                         } else {
                             [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];

@@ -293,12 +293,9 @@
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
                         [SMShared current].settings.deviceCode = command.deviceCode;
                         [[SMShared current].settings saveSettings];
-                        if([SMShared current].settings.anyUnitsBinding) {
-                            ((LoginViewController *)[SMShared current].app.rootViewController).hasLogin = YES;
-                            [self.navigationController popToRootViewControllerAnimated:NO];
-                        } else {
-                            [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
-                        }
+                        ((LoginViewController *)[SMShared current].app.rootViewController).hasLogin = YES;
+                        [self.navigationController popToRootViewControllerAnimated:NO];
+                        [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
                         return;
                     }
                 } else if([@"-1" isEqualToString:command.result]) {

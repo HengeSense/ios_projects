@@ -14,7 +14,6 @@
 #define GLOBAL_SETTINGS_KEY       @"global_settings.key"
 #define ACCOUNT_KEY               @"account.key"
 #define SECRET_KEY_KEY            @"secret_key.key"
-#define ANY_UNITS_BINDING_KEY     @"any_units_binding.key"
 #define TCP_ADDRESS_KEY           @"tcp_address.key"
 #define DEVICE_CODE_KEY           @"device_code.key"
 #define FIRST_TIME_OPEN_APP_KEY   @"first_time_opa.key"
@@ -29,7 +28,6 @@
 @synthesize deviceCode;
 @synthesize deviceToken;
 @synthesize tcpAddress;
-@synthesize anyUnitsBinding;
 @synthesize isFirstTimeOpenApp;
 @synthesize isShake;
 @synthesize isVoice;
@@ -41,7 +39,6 @@
         NSDictionary *settings = [defaults objectForKey:GLOBAL_SETTINGS_KEY];
         if(settings == nil) {
             //no settings file before
-            self.anyUnitsBinding = NO;
             self.isFirstTimeOpenApp = YES;
             self.account = [NSString emptyString];
             self.secretKey = [NSString emptyString];
@@ -55,7 +52,6 @@
             //need to fill object property
             self.account = [settings noNilStringForKey:ACCOUNT_KEY];
             self.secretKey = [settings noNilStringForKey:SECRET_KEY_KEY];
-            self.anyUnitsBinding = [settings boolForKey:ANY_UNITS_BINDING_KEY];
             self.tcpAddress = [settings noNilStringForKey:TCP_ADDRESS_KEY];
             self.deviceCode = [settings noNilStringForKey:DEVICE_CODE_KEY];
             self.isFirstTimeOpenApp = [settings boolForKey:FIRST_TIME_OPEN_APP_KEY];
@@ -73,7 +69,6 @@
     [dictionary setMayBlankString:self.account forKey:ACCOUNT_KEY];
     [dictionary setMayBlankString:self.secretKey forKey:SECRET_KEY_KEY];
     [dictionary setMayBlankString:self.deviceToken forKey:DEVICE_TOKEN_KEY];
-    [dictionary setBool:self.anyUnitsBinding forKey:ANY_UNITS_BINDING_KEY];
     [dictionary setMayBlankString:self.tcpAddress forKey:TCP_ADDRESS_KEY];
     [dictionary setMayBlankString:self.deviceCode forKey:DEVICE_CODE_KEY];
     [dictionary setBool:self.isFirstTimeOpenApp forKey:FIRST_TIME_OPEN_APP_KEY];

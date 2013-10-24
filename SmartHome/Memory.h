@@ -83,6 +83,12 @@
 
 
 /*
+ *
+ */
+- (BOOL)hasUnit;
+
+
+/*
  * clear both subscriptions and units
  */
 - (void)clear;

@@ -21,6 +21,15 @@
         // update units
         if([NSString isBlank:updateUnitsCommand.masterDeviceCode]) {
             [[SMShared current].memory replaceUnits:updateUnitsCommand.units];
+            if(updateUnitsCommand.units != nil) {
+                for(int i=0; i<updateUnitsCommand.units.count; i++) {
+                    Unit *unit = [updateUnitsCommand.units objectAtIndex:i];
+                    DeviceCommand *cmd = [CommandFactory commandForType:CommandTypeGetSceneList];
+                    cmd.masterDeviceCode = unit.identifier;
+                    cmd.hashCode = unit.sceneHashCode;
+                    [[SMShared current].deliveryService executeDeviceCommand:cmd];
+                }
+            }
         // update unit
         } else {
             if(updateUnitsCommand.resultID == -1) {
@@ -32,13 +41,6 @@
                     [[SMShared current].memory updateUnit:unit];
                 }
             }
-        }
-        
-        BOOL hasUnits = [SMShared current].memory.units.count > 0;
-        BOOL anyUnitsBinding = [SMShared current].settings.anyUnitsBinding;
-        if(anyUnitsBinding != hasUnits) {
-            [SMShared current].settings.anyUnitsBinding = hasUnits;
-            [[SMShared current].settings saveSettings];
         }
         
         // notify subscriptions

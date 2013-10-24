@@ -17,7 +17,6 @@
 @property (assign, nonatomic) BOOL isVoice;
 @property (assign, nonatomic) BOOL isShake;
 @property (assign, nonatomic) BOOL isFirstTimeOpenApp;
-@property (assign, nonatomic) BOOL anyUnitsBinding;
 @property (strong, nonatomic) NSString *deviceToken;
 
 - (NSDictionary *)toDictionary;

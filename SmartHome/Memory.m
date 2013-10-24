@@ -132,6 +132,13 @@
     }
 }
 
+- (BOOL)hasUnit {
+    @synchronized(self) {
+        if(self.units == nil) return NO;
+        return self.units.count > 0;
+    }
+}
+
 - (void)clearUnits {
     @synchronized(self) {
         [self.units removeAllObjects];
