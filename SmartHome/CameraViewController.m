@@ -186,7 +186,7 @@
 }
 
 #pragma mark -
-#pragma mark camera socket delegate
+#pragma mark Camera socket delegate
 
 /* Called by main thread */
 - (void)notifyNewImageWasReceived:(UIImage *)image {

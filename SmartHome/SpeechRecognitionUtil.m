@@ -36,7 +36,7 @@
 - (void)initDefaults {
     NSString *initString = [NSString stringWithFormat:@"appid=%@,timeout=%@", IFLY_APP_ID, CONNECTION_TIME_OUT];
     [IFlySpeechRecognizer createRecognizer:initString delegate:self];
-    self.domain = @"iat";
+    self.domain = @"sms";
     self.vadBos = @"2000";
     self.vadEos = @"1000";
     self.asrSch = @"0";

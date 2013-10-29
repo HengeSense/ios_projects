@@ -598,7 +598,10 @@
 }
 
 - (void)recognizeSuccess:(NSString *)result {
-    if(recognizerState == RecognizerStateReady) return;
+    if(recognizerState == RecognizerStateReady) {
+        [self resetRecognizer];
+        return;
+    }
     [self resetRecognizer];
     if(![NSString isBlank:result]) {
         //process text message
