@@ -202,25 +202,26 @@
 
 /****************	Device's Strings   ****************/
 
-"btn_press_often"   =  "亲,请慢点点!";
-"device_name"       =  "设备名";
-"device_category"   =  "设备类型";
-"device_ip"         =  "设备IP";
-"device_port"       =  "设备端口";
-"device_nwkAddr"    =  "设备网络地址";
-"device_status"     =  "设备状态";
-"curtain_start"     =  "开启窗帘";
-"curtain_stop"      =  "暂停";
-"curtain_close"     =  "合起窗帘";
-"heating"           =  "制热";
-"cryogen"           =  "制冷";
-"signal_source"     =  "信源";
-"menu"              =  "菜单";
-"connect_failed"    =  "连接已终止!";
-"play"              =  "播放";
-"volume_increase"   =  "音量+";
-"volume_reduce"     =  "音量-";
+"btn_press_often"       =  "亲,请慢点点!";
+"device_name"           =  "设备名";
+"device_category"       =  "设备类型";
+"device_ip"             =  "设备IP";
+"device_port"           =  "设备端口";
+"device_nwkAddr"        =  "设备网络地址";
+"device_status"         =  "设备状态";
+"curtain_start"         =  "开启窗帘";
+"curtain_stop"          =  "暂停";
+"curtain_close"         =  "合起窗帘";
+"heating"               =  "制热";
+"cryogen"               =  "制冷";
+"signal_source"         =  "信源";
+"menu"                  =  "菜单";
+"connect_failed"        =  "连接已终止!";
+"play"                  =  "播放";
+"volume_increase"       =  "音量+";
+"volume_reduce"         =  "音量-";
 "catch_screen_success"  =  "照片已保存到相册";
+"camera_is_not_running" =  "摄像头未连接";
 
 
 

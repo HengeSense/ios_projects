@@ -31,6 +31,11 @@
     double lastedClickTime;
     UIButton *btnCatchScreen;
     
+    BOOL cameraIsRunning;
+    
+    /*  for screen shots */
+    BOOL isCapture;
+    
     /*  for recording    */
     BOOL isRecoding;
     dispatch_queue_t writtenQueue;
@@ -54,8 +59,13 @@
 	// Do any additional setup after loading the view.
 }
 
+#pragma mark -
+#pragma mark Initializations
+
 - (void)initDefaults {
+    cameraIsRunning = NO;
     isRecoding = NO;
+    isCapture = NO;
 }
 
 - (void)initUI {
@@ -68,12 +78,12 @@
         backgroundView.layer.cornerRadius = 10;
         [self.view addSubview:backgroundView];
     }
+    
     if (btnCatchScreen == nil) {
         btnCatchScreen = [[UIButton alloc] initWithFrame:CGRectMake(266, backgroundView.frame.origin.y+15, 44, 44)];
         [btnCatchScreen setBackgroundImage:[UIImage imageNamed:@"btn_catch_screen.png"] forState:UIControlStateNormal];
         [btnCatchScreen addTarget:self action:@selector(catchScreen) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnCatchScreen];
-        
     }
     
     if(imgCameraShots == nil) {
@@ -92,8 +102,6 @@
         btnDirection.delegate = self;
         [backgroundView addSubview:btnDirection];
     }
-    
-    
     
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetCameraServerHandler class] for:self];
     [self startMonitorCamera];
@@ -114,7 +122,7 @@
 }
 
 #pragma mark -
-#pragma mark service
+#pragma mark Open && Stop Camera
 
 - (void)startMonitorCamera {
     if(self.cameraDevice == nil) return;
@@ -125,6 +133,8 @@
 }
 
 - (void)stopMonitorCamera {
+    cameraIsRunning = NO;
+    
     if(socket != nil && [socket isConnectted]) {
         [socket closeGraceful];
     }
@@ -137,7 +147,7 @@
 }
 
 #pragma mark -
-#pragma mark device command get camera server delegate
+#pragma mark Device command get camera server delegate
 
 - (void)receivedCameraServer:(DeviceCommandReceivedCameraServer *)command {
     if(self.cameraDevice == nil) return;
@@ -195,6 +205,7 @@
 
 - (void)notifyCameraConnectted {
     firstImageHasBeenSet = NO;
+    cameraIsRunning = YES;
 }
 
 - (void)notifyCameraWasDisconnectted {
@@ -210,22 +221,33 @@
 }
 
 #pragma mark -
-#pragma mark Camera operations 
+#pragma mark Screen shots
 
 - (void)catchScreen {
-    if(imgCameraShots != nil && imgCameraShots.image != nil) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImageWriteToSavedPhotosAlbum(imgCameraShots.image, nil, nil, nil);
-            [SystemAudio photoShutter];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"catch_screen_success", @"") forType:AlertViewTypeSuccess];
-                [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
-
+    if(isCapture) return;
+    
+    if(cameraIsRunning) {
+        if(imgCameraShots != nil && imgCameraShots.image != nil) {
+            isCapture = YES;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImageWriteToSavedPhotosAlbum(imgCameraShots.image, nil, nil, nil);
+                [SystemAudio photoShutter];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"catch_screen_success", @"") forType:AlertViewTypeSuccess];
+                    [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+                    isCapture = NO;
+                });
             });
-        });
+        }
     } else {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"camera_is_not_running", @"") forType:AlertViewTypeSuccess];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        return;
     }
 }
+
+#pragma mark -
+#pragma mark Screen recording
 
 - (void)recodingWithImage:(UIImage *)image {
     
@@ -252,7 +274,6 @@
                     NSLog(@"the is %@", exception.description);
                 }
                 @finally {
-                    
                 }
             }
 //        });
@@ -275,8 +296,18 @@
     [self adjustCamera:@"3"];
 }
 
+/*  this function is developing, will open soon   */
+
 - (void)centerButtonClicked {
     // Start or stop recording
+    
+    return;
+    
+    if(!cameraIsRunning) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"camera_is_not_running", @"") forType:AlertViewTypeSuccess];
+        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        return;
+    }
     
     if((socket != nil && [socket isConnectted]) || (cameraService != nil && cameraService.isPlaying)) {
         // Camera is playing ...
@@ -299,9 +330,6 @@
         }
     } else {
         // Camera is not playing ...
-        
-        
-        
     }
 }
 
