@@ -10,9 +10,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CameraLoadingView.h"
 #import "CameraService.h"
+#import "VideoConverter.h"
+#import "CameraScreenShotsSaver.h"
 #import "UIColor+ExtentionForHexString.h"
 
 #define TWO_TIMES_CLICK_INTERVAL 500
+
+#define RECORDING_BUFFER_LIST_LENGTH 9
 
 @interface CameraViewController ()
 
@@ -26,6 +30,12 @@
     CameraSocket *socket;
     CameraService *cameraService;
     double lastedClickTime;
+    
+    
+    /*  for recording    */
+    BOOL isRecoding;
+    dispatch_queue_t writtenQueue;
+    NSMutableArray *recordingList;
 }
 
 @synthesize cameraDevice;
@@ -43,6 +53,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)initDefaults {
+    isRecoding = NO;
 }
 
 - (void)initUI {
@@ -156,6 +170,7 @@
 #pragma mark -
 #pragma mark camera socket delegate
 
+/* Called by main thread */
 - (void)notifyNewImageWasReceived:(UIImage *)image {
     if(!firstImageHasBeenSet) {
         CameraLoadingView * loadingView = (CameraLoadingView *)[imgCameraShots viewWithTag:9999];
@@ -164,6 +179,10 @@
         }
     }
     imgCameraShots.image = image;
+    
+//    if(isRecoding) {
+//        [self recodingWithImage:image];
+//    }
 }
 
 - (void)notifyCameraConnectted {
@@ -183,6 +202,59 @@
 }
 
 #pragma mark -
+#pragma mark Camera operations 
+
+- (void)catchScreen {
+    if(imgCameraShots != nil && imgCameraShots.image != nil) {
+        BOOL success = [CameraScreenShotsSaver saveToAlbumsWithImage:imgCameraShots.image];
+        if(success) {
+            
+        } else {
+            
+        }
+    } else {
+        
+    }
+}
+
+- (void)recodingWithImage:(UIImage *)image {
+    
+    if(image == nil) {
+        // we think recoding is end when the image is nil
+    }
+    
+    if(recordingList.count == RECORDING_BUFFER_LIST_LENGTH) {
+        NSLog(@"Full...");
+        NSMutableArray *images = recordingList;
+//        dispatch_async(writtenQueue, ^{
+            for(int i=0; i<recordingList.count; i++) {
+                @try {
+                    NSLog(@"jjjjjjjjjj");
+                    
+                    UIImage *image = [images objectAtIndex:i];
+                    
+                    //[NSFileManager defaultManager] createFileAtPath:@"" contents:image attributes:<#(NSDictionary *)#>
+                    
+                    [UIImageJPEGRepresentation(image, 1) writeToFile:[VIDEO_DIRECTORY stringByAppendingString:[NSString stringWithFormat:@"%d.jpg", i]] atomically:YES];
+                    NSLog(@"save");
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"the is %@", exception.description);
+                }
+                @finally {
+                    
+                }
+            }
+//        });
+        
+        recordingList = [NSMutableArray arrayWithCapacity:RECORDING_BUFFER_LIST_LENGTH];
+    } else {
+        [recordingList addObject:image];
+        NSLog(@"add");
+    }
+}
+
+#pragma mark -
 #pragma mark direction button delegate
 
 - (void)leftButtonClicked {
@@ -194,6 +266,33 @@
 }
 
 - (void)centerButtonClicked {
+    // Start or stop recording
+    
+    if((socket != nil && [socket isConnectted]) || (cameraService != nil && cameraService.isPlaying)) {
+        // Camera is playing ...
+        
+        if(isRecoding) {
+            // is recording now , so need to stop recording
+            
+            
+            
+        } else {
+            // is not recording now, so need to start recording
+            
+            writtenQueue = dispatch_queue_create("com.hentre.videos", DISPATCH_QUEUE_SERIAL);
+            
+            recordingList = [NSMutableArray arrayWithCapacity:RECORDING_BUFFER_LIST_LENGTH];
+            
+            isRecoding = YES;
+            
+            NSLog(@"is recording");
+        }
+    } else {
+        // Camera is not playing ...
+        
+        
+        
+    }
 }
 
 - (void)topButtonClicked {

@@ -140,7 +140,6 @@
 		6F73D08317EEE99900FFF974 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07C17EEE99900FFF974 /* zbar-help.html */; };
 		6F73D08417EEE99900FFF974 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */; };
 		6F73D08517EEE99900FFF974 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F73D07E17EEE99900FFF974 /* zbar-samples.png */; };
-		6F740E2517F7CC2400F9A112 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F740E2417F7CC2400F9A112 /* iflyMSC.framework */; };
 		6F7FEFF6180BE58400B3F061 /* bg_no_devices@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7FEFF5180BE58400B3F061 /* bg_no_devices@2x.png */; };
 		6F84355817E9A66F0084C316 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355617E9A66F0084C316 /* icon.png */; };
 		6F84355917E9A66F0084C316 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F84355717E9A66F0084C316 /* icon@2x.png */; };
@@ -156,6 +155,9 @@
 		6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F95BF5A17D42B82003A0745 /* RestfulCommandService.m */; };
 		6F95BF6117D4A7CD003A0745 /* SMCommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F95BF6017D4A7CD003A0745 /* SMCommandQueue.m */; };
 		6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7C17BE1EEA007F90A2 /* AlertView.m */; };
+		6F9C92F7181DFF85002EE7EC /* VideoConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C92F6181DFF85002EE7EC /* VideoConverter.m */; };
+		6F9C933C181E546D002EE7EC /* CameraScreenShotsSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C933B181E546D002EE7EC /* CameraScreenShotsSaver.m */; };
+		6F9C9340181F50AC002EE7EC /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9C933F181F50AC002EE7EC /* iflyMSC.framework */; };
 		6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */; };
 		6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0E1F417CF45DE00154CDE /* SMShared.m */; };
 		6FA3D842180558520064ED41 /* DeviceCommandUpdateDeviceToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA3D841180558520064ED41 /* DeviceCommandUpdateDeviceToken.m */; };
@@ -526,7 +528,6 @@
 		6F73D07C17EEE99900FFF974 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
 		6F73D07D17EEE99900FFF974 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
 		6F73D07E17EEE99900FFF974 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
-		6F740E2417F7CC2400F9A112 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		6F7FEFF5180BE58400B3F061 /* bg_no_devices@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_no_devices@2x.png"; sourceTree = "<group>"; };
 		6F84355517E985D40084C316 /* ParameterExtentions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParameterExtentions.h; sourceTree = "<group>"; };
 		6F84355617E9A66F0084C316 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -555,6 +556,11 @@
 		6F95BF6017D4A7CD003A0745 /* SMCommandQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCommandQueue.m; sourceTree = "<group>"; };
 		6F984F7B17BE1EEA007F90A2 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		6F984F7C17BE1EEA007F90A2 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
+		6F9C92F5181DFF85002EE7EC /* VideoConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoConverter.h; sourceTree = "<group>"; };
+		6F9C92F6181DFF85002EE7EC /* VideoConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoConverter.m; sourceTree = "<group>"; };
+		6F9C933A181E546D002EE7EC /* CameraScreenShotsSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraScreenShotsSaver.h; sourceTree = "<group>"; };
+		6F9C933B181E546D002EE7EC /* CameraScreenShotsSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraScreenShotsSaver.m; sourceTree = "<group>"; };
+		6F9C933F181F50AC002EE7EC /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		6F9EDFA817D8D55800AFDBDF /* NotificationsFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsFileManager.h; sourceTree = "<group>"; };
 		6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsFileManager.m; sourceTree = "<group>"; };
 		6FA0E1F317CF45DE00154CDE /* SMShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMShared.h; sourceTree = "<group>"; };
@@ -809,10 +815,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F9C9340181F50AC002EE7EC /* iflyMSC.framework in Frameworks */,
 				F22DF72917C1F5FB00BF7C3A /* Security.framework in Frameworks */,
 				F237167F17B349650057C95B /* libxml2.dylib in Frameworks */,
 				F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */,
-				6F740E2517F7CC2400F9A112 /* iflyMSC.framework in Frameworks */,
 				6FD8A72217B229C4009C7493 /* SystemConfiguration.framework in Frameworks */,
 				6F0FAF4B17AF8B4600B75D3E /* CoreVideo.framework in Frameworks */,
 				6F0FAF4917AF8B4000B75D3E /* CoreMedia.framework in Frameworks */,
@@ -979,10 +985,10 @@
 		6F0FAE7617AF7F9F00B75D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6F9C933F181F50AC002EE7EC /* iflyMSC.framework */,
 				F27B4EC317EFD35D00A55220 /* libzbar.a */,
 				F237167E17B349650057C95B /* libxml2.dylib */,
 				6F0FAF4417AF8B0D00B75D3E /* libiconv.dylib */,
-				6F740E2417F7CC2400F9A112 /* iflyMSC.framework */,
 				F22DF72317C1CA3500BF7C3A /* Security.framework */,
 				6FD8A72117B229C4009C7493 /* SystemConfiguration.framework */,
 				6F0FAF4A17AF8B4600B75D3E /* CoreVideo.framework */,
@@ -1084,6 +1090,7 @@
 		6F0FAE9F17AF7FFE00B75D3E /* commons */ = {
 			isa = PBXGroup;
 			children = (
+				6F9C9339181E5423002EE7EC /* camera */,
 				6F84355417E985B90084C316 /* protocals */,
 				6FEB91CD17BB201C007C04A1 /* socket */,
 				6FD8A73017B234FF009C7493 /* rest */,
@@ -1594,6 +1601,17 @@
 				6F1771C41814D827007CF3AF /* DataAlertView.m */,
 			);
 			name = alert_view;
+			sourceTree = "<group>";
+		};
+		6F9C9339181E5423002EE7EC /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				6F9C92F5181DFF85002EE7EC /* VideoConverter.h */,
+				6F9C92F6181DFF85002EE7EC /* VideoConverter.m */,
+				6F9C933A181E546D002EE7EC /* CameraScreenShotsSaver.h */,
+				6F9C933B181E546D002EE7EC /* CameraScreenShotsSaver.m */,
+			);
+			name = camera;
 			sourceTree = "<group>";
 		};
 		6FB4240817B4B4560042EA41 /* view */ = {
@@ -2220,6 +2238,7 @@
 				6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */,
 				6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */,
 				6FD0CC0117EFE8CA005956E0 /* CameraSocket.m in Sources */,
+				6F9C92F7181DFF85002EE7EC /* VideoConverter.m in Sources */,
 				6F1EE66A17BC787900580760 /* UnitsBindingViewController.m in Sources */,
 				6F1EE66D17BCD41500580760 /* ClientSocket.m in Sources */,
 				F20AE08B17BDBD540040B80A /* ModifyInfoViewController.m in Sources */,
@@ -2301,6 +2320,7 @@
 				F26FDA5D1817AB380056FD71 /* DeviceCommandCheckVersionHandler.m in Sources */,
 				6F47FAED17E311970027C0F7 /* DeviceCommandUpdateUnitName.m in Sources */,
 				6F47FAF017E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m in Sources */,
+				6F9C933C181E546D002EE7EC /* CameraScreenShotsSaver.m in Sources */,
 				6FB5AC9617E6A356009AF916 /* CameraPicPath.m in Sources */,
 				6FB5AC9917E6A89F009AF916 /* PlayCameraPicViewController.m in Sources */,
 				6FDA6E8217F4838A00E4C717 /* ZonesNavigationView.m in Sources */,
@@ -2433,6 +2453,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					/Users/young/Downloads/iOS_noui_1/lib,
+					/Users/young/Downloads/IOS_PROJECTS/SmartHome,
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2469,6 +2491,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					/Users/young/Downloads/iOS_noui_1/lib,
+					/Users/young/Downloads/IOS_PROJECTS/SmartHome,
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

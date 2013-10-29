@@ -9,7 +9,6 @@
 #import "SpeechRecognitionUtil.h"
 
 @implementation SpeechRecognitionUtil {
-    IFlySpeechRecognizer *speechRecognizer;
     NSMutableString *textResult;
 }
 
@@ -35,10 +34,8 @@
 }
 
 - (void)initDefaults {
-    if(speechRecognizer == nil) {
-        NSString *initString = [NSString stringWithFormat:@"appid=%@,timeout=%@", IFLY_APP_ID, CONNECTION_TIME_OUT];
-        speechRecognizer = [IFlySpeechRecognizer createRecognizer:initString delegate:self];
-    }
+    NSString *initString = [NSString stringWithFormat:@"appid=%@,timeout=%@", IFLY_APP_ID, CONNECTION_TIME_OUT];
+    [IFlySpeechRecognizer createRecognizer:initString delegate:self];
     self.domain = @"iat";
     self.vadBos = @"2000";
     self.vadEos = @"1000";
@@ -46,6 +43,8 @@
     self.asrPtt = @"0";
     self.sampleRate = @"16000";
     self.plainResult = @"0";
+    
+    
 }
 
 
@@ -53,26 +52,28 @@
 #pragma mark iFly recognizer control
 
 - (void)startListening {
-    textResult = nil;
-    [speechRecognizer setParameter:@"domain" value:self.domain];
-    [speechRecognizer setParameter:@"vad_bos" value:self.vadBos];
-    [speechRecognizer setParameter:@"vad_eos" value:self.vadEos];
-    [speechRecognizer setParameter:@"asr_sch" value:self.asrSch];
-    [speechRecognizer setParameter:@"asr_ptt" value:self.asrPtt];
-    [speechRecognizer setParameter:@"sample_rate" value:self.sampleRate];
-    [speechRecognizer setParameter:@"plain_result" value:self.plainResult];
-    if([@"asr" isEqualToString:self.domain]) {
-        [speechRecognizer setParameter:@"grammarID" value:self.grammarID];
+    if([IFlySpeechRecognizer getRecognizer] != nil) {
+        textResult = nil;
+        [[IFlySpeechRecognizer getRecognizer] setParameter:@"domain" value:self.domain];
+        [[IFlySpeechRecognizer getRecognizer] setParameter:@"vad_bos" value:self.vadBos];
+        [[IFlySpeechRecognizer getRecognizer] setParameter:@"vad_eos" value:self.vadEos];
+        [[IFlySpeechRecognizer getRecognizer] setParameter:@"asr_sch" value:self.asrSch];
+        [[IFlySpeechRecognizer getRecognizer] setParameter:@"asr_ptt" value:self.asrPtt];
+        [[IFlySpeechRecognizer getRecognizer] setParameter:@"sample_rate" value:self.sampleRate];
+        [[IFlySpeechRecognizer getRecognizer] setParameter:@"plain_result" value:self.plainResult];
+        if([@"asr" isEqualToString:self.domain]) {
+            [[IFlySpeechRecognizer getRecognizer] setParameter:@"grammarID" value:self.grammarID];
+        }
+        [[IFlySpeechRecognizer getRecognizer] startListening];
     }
-    [speechRecognizer startListening];
 }
 
 - (void)stopListening {
-    [speechRecognizer stopListening];
+    [[IFlySpeechRecognizer getRecognizer] stopListening];
 }
 
 - (void)cancel {
-    [speechRecognizer cancel];
+    [[IFlySpeechRecognizer getRecognizer] cancel];
 }
 
 #pragma mark -
