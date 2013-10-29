@@ -17,6 +17,8 @@
 #define TWO_TIMES_CLICK_INTERVAL 500
 #define RECORDING_BUFFER_LIST_LENGTH 9
 
+#define TMP_DIRECTORY [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"smarthome-videos"] stringByAppendingPathComponent:@"tmp"]
+
 @interface CameraViewController ()
 
 @end
@@ -309,28 +311,34 @@
         return;
     }
     
-    if((socket != nil && [socket isConnectted]) || (cameraService != nil && cameraService.isPlaying)) {
-        // Camera is playing ...
-        
-        if(isRecoding) {
-            // is recording now , so need to stop recording
-            
-            
-            
-        } else {
-            // is not recording now, so need to start recording
-            
-            writtenQueue = dispatch_queue_create("com.hentre.videos", DISPATCH_QUEUE_SERIAL);
-            
-            recordingList = [NSMutableArray arrayWithCapacity:RECORDING_BUFFER_LIST_LENGTH];
-            
-            isRecoding = YES;
-            
-            NSLog(@"is recording");
-        }
+    if(isRecoding) {
+        // Is recording now , so need to stop recording
+        isRecoding = NO;
+#ifdef DEBUG
+        NSLog(@"[CAMERA] Will Stop Recording...");
+#endif
     } else {
-        // Camera is not playing ...
+        // Is not recording now, so need to start recording
+        
+        // Initial
+        writtenQueue = dispatch_queue_create("com.hentre.videos", DISPATCH_QUEUE_SERIAL);
+        recordingList = [NSMutableArray arrayWithCapacity:RECORDING_BUFFER_LIST_LENGTH];
+        isRecoding = YES;
+        
+        // Clear tmp directory
+        
+        if([[NSFileManager defaultManager] fileExistsAtPath:TMP_DIRECTORY isDirectory:nil]) {
+            [[NSFileManager defaultManager] removeItemAtPath:TMP_DIRECTORY error:nil];
+        }
+        
+        // Create tmp directory
+        [[NSFileManager defaultManager] createDirectoryAtPath:TMP_DIRECTORY withIntermediateDirectories:YES attributes:nil error:nil];
+        
+#ifdef DEBUG
+        NSLog(@"[CAMERA] Start Recording...");
+#endif
     }
+   
 }
 
 - (void)topButtonClicked {
