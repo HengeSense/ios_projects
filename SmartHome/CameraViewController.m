@@ -286,7 +286,7 @@
 }
 
 #pragma mark -
-#pragma mark direction button delegate
+#pragma mark Direction button delegate
 
 - (void)leftButtonClicked {
     [self adjustCamera:@"2"];
