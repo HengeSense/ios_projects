@@ -11,7 +11,6 @@
 #import "CameraLoadingView.h"
 #import "CameraService.h"
 #import "VideoConverter.h"
-#import "AlbumsSaver.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SystemAudio.h"
 #define TWO_TIMES_CLICK_INTERVAL 500
@@ -70,7 +69,7 @@
         [self.view addSubview:backgroundView];
     }
     if (btnCatchScreen == nil) {
-        btnCatchScreen = [[UIButton alloc] initWithFrame:CGRectMake(266, backgroundView.frame.origin.y+59, 44, 44)];
+        btnCatchScreen = [[UIButton alloc] initWithFrame:CGRectMake(266, backgroundView.frame.origin.y+15, 44, 44)];
         [btnCatchScreen setBackgroundImage:[UIImage imageNamed:@"btn_catch_screen.png"] forState:UIControlStateNormal];
         [btnCatchScreen addTarget:self action:@selector(catchScreen) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnCatchScreen];
@@ -214,17 +213,17 @@
 #pragma mark Camera operations 
 
 - (void)catchScreen {
-    [SystemAudio photoShutter];
     if(imgCameraShots != nil && imgCameraShots.image != nil) {
-        AlbumsSaver *saver = [[AlbumsSaver alloc] init];
-        [saver saveToAlbumsWithImage:imgCameraShots.image
-            success:^{
-                
-            } failed:^{
-                
-            }];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImageWriteToSavedPhotosAlbum(imgCameraShots.image, nil, nil, nil);
+            [SystemAudio photoShutter];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"catch_screen_success", @"") forType:AlertViewTypeSuccess];
+                [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+
+            });
+        });
     } else {
-        
     }
 }
 

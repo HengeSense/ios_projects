@@ -220,5 +220,7 @@
 "play"              =  "播放";
 "volume_increase"   =  "音量+";
 "volume_reduce"     =  "音量-";
+"catch_screen_success"  =  "照片已保存到相册";
+
 
 
