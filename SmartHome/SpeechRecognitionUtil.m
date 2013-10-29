@@ -43,15 +43,13 @@
     self.asrPtt = @"0";
     self.sampleRate = @"16000";
     self.plainResult = @"0";
-    
-    
 }
 
 
 #pragma mark -
 #pragma mark iFly recognizer control
 
-- (void)startListening {
+- (BOOL)startListening {
     if([IFlySpeechRecognizer getRecognizer] != nil) {
         textResult = nil;
         [[IFlySpeechRecognizer getRecognizer] setParameter:@"domain" value:self.domain];
@@ -61,11 +59,15 @@
         [[IFlySpeechRecognizer getRecognizer] setParameter:@"asr_ptt" value:self.asrPtt];
         [[IFlySpeechRecognizer getRecognizer] setParameter:@"sample_rate" value:self.sampleRate];
         [[IFlySpeechRecognizer getRecognizer] setParameter:@"plain_result" value:self.plainResult];
+        
         if([@"asr" isEqualToString:self.domain]) {
             [[IFlySpeechRecognizer getRecognizer] setParameter:@"grammarID" value:self.grammarID];
         }
-        [[IFlySpeechRecognizer getRecognizer] startListening];
+        
+        return [[IFlySpeechRecognizer getRecognizer] startListening];
     }
+    
+    return NO;
 }
 
 - (void)stopListening {

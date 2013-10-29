@@ -512,7 +512,9 @@
 
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    if(recognizerState != RecognizerStateReady) {
+        [speechRecognitionUtil stopListening];
+    }
     CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12);
     ConversationView *view = [self speechView];
     speechViewState = SpeechViewStateClosing;
@@ -532,6 +534,11 @@
 #pragma mark -
 #pragma mark speech control
 
+- (void)resetRecognizer {
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    recognizerState = RecognizerStateReady;
+}
+
 - (void)btnSpeechPressed:(id)sender {
     if(speechViewState == SpeechViewStateClosed) {
         [self showSpeechView];
@@ -545,7 +552,7 @@
         recognizerState = RecognizerStateRecordBegin;
         AudioServicesPlaySystemSound(RECORD_BEGIN_SOUND_ID);
         [self delayStartListening];
-    } else if(recognizerState == RecognizerStateRecording) {
+    } else if(recognizerState != RecognizerStateReady) {
         [speechRecognitionUtil stopListening];
     }
 }
@@ -557,7 +564,11 @@
 }
 
 - (void)startListening:(NSTimer *)timer {
-    [speechRecognitionUtil startListening];
+    if(![speechRecognitionUtil startListening]) {
+#ifdef DEBUG
+        NSLog(@"[SPEECH VIEW] Start lisenting failed .");
+#endif
+    }
 }
 
 #pragma mark -
@@ -569,22 +580,26 @@
 
 - (void)endRecord {
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
-    AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
     recognizerState = RecognizerStateRecordingEnd;
+    AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
 }
 
 - (void)recognizeCancelled {
+    [self speechRecognizerFailed:@"Cancelled by user."];
 }
 
 - (void)speakerVolumeChanged:(int)volume {
-    int v = volume / 3;
-    if(v > 9) v = 9;
-    if(v < 0) v = 0;
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"btn_speech_0%d.png", v]] forState:UIControlStateNormal];
+    if(recognizerState == RecognizerStateRecording) {
+        int v = volume / 3;
+        if(v > 9) v = 9;
+        if(v < 0) v = 0;
+        [btnSpeech setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"btn_speech_0%d.png", v]] forState:UIControlStateNormal];
+    }
 }
 
 - (void)recognizeSuccess:(NSString *)result {
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    if(recognizerState == RecognizerStateReady) return;
+    [self resetRecognizer];
     if(![NSString isBlank:result]) {
         //process text message
         DeviceCommandVoiceControl *command = (DeviceCommandVoiceControl *)[CommandFactory commandForType:CommandTypeUpdateDeviceViaVoice];
@@ -592,16 +607,13 @@
         command.voiceText = result;
         [[SMShared current].deliveryService executeDeviceCommand:command];
     } else {
-        [self speechRecognizerFailed:@"Empty speaking..."];
-        //
+        [self speechRecognizerFailed:@"No speaking"];
     }
-    recognizerState = RecognizerStateReady;
 }
 
 - (void)recognizeError:(int)errorCode {
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    [self resetRecognizer];
     [self speechRecognizerFailed:[NSString stringWithFormat:@"error code is %d", errorCode]];
-    recognizerState = RecognizerStateReady;
 }
 
 - (void)speechRecognizerFailed:(NSString *)message {

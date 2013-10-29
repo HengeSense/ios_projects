@@ -11,7 +11,7 @@
 #import "CameraLoadingView.h"
 #import "CameraService.h"
 #import "VideoConverter.h"
-#import "CameraScreenShotsSaver.h"
+#import "AlbumsSaver.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SystemAudio.h"
 #define TWO_TIMES_CLICK_INTERVAL 500
@@ -216,13 +216,13 @@
 - (void)catchScreen {
     [SystemAudio photoShutter];
     if(imgCameraShots != nil && imgCameraShots.image != nil) {
-        
-        BOOL success = [CameraScreenShotsSaver saveToAlbumsWithImage:imgCameraShots.image];
-        if(success) {
-            [SystemAudio photoShutter];
-        } else {
-            
-        }
+        AlbumsSaver *saver = [[AlbumsSaver alloc] init];
+        [saver saveToAlbumsWithImage:imgCameraShots.image
+            success:^{
+                
+            } failed:^{
+                
+            }];
     } else {
         
     }
