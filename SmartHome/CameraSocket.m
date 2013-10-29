@@ -123,8 +123,14 @@
             [self performSelectorOnMainThread:@selector(notifyConnectionOpen) withObject:nil waitUntilDone:NO];
         }
     } else if(eventCode == NSStreamEventEndEncountered) {
+#ifdef DEBUG
+        NSLog(@"[TCP CAMERA SOCKET] Socket end encountered.");
+#endif
         [self close];
     } else if(eventCode == NSStreamEventErrorOccurred) {
+#ifdef DEBUG
+        NSLog(@"[TCP CAMERA SOCKET] Socket error occurred.");
+#endif
         [self close];
     } else if(eventCode == NSStreamEventNone) {
         //no event

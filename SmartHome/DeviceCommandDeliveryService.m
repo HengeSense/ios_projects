@@ -340,7 +340,7 @@
             [self executeDeviceCommand:getSceneListCommand];
             
             // Send heart beat command
-//            [self executeDeviceCommand:[CommandFactory commandForType:CommandTypeSendHeartBeat]];
+            [self executeDeviceCommand:[CommandFactory commandForType:CommandTypeSendHeartBeat]];
         }
     });
 }

@@ -199,7 +199,6 @@
         }
     }
     imgCameraShots.image = image;
-    
 //    if(isRecoding) {
 //        [self recodingWithImage:image];
 //    }

@@ -44,6 +44,25 @@
                 return;
             }
             
+            // should be ignore
+            // this is heart beat message
+            if(header[0] == 127) {
+#ifdef DEBUG
+                NSLog(@"[External Socket] Received heart beat message.");
+#endif
+                if(!self.inputStream.hasBytesAvailable) {
+                    return;
+                }
+#ifdef DEBUG
+                NSLog(@"[External Socket] Has bytes after heart beat message.");
+#endif
+                bytesRead = [self.inputStream read:header maxLength:DATA_HEADER_LENGTH];
+                if(bytesRead != DATA_HEADER_LENGTH) {
+                    //unkonw, maybe server client was closed...
+                    return;
+                }
+            }
+            
             //header data was matched
             if(header[0] == 126) {
                 if(receivedData.length != 0) {
