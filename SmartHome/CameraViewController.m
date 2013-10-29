@@ -13,7 +13,7 @@
 #import "VideoConverter.h"
 #import "CameraScreenShotsSaver.h"
 #import "UIColor+ExtentionForHexString.h"
-
+#import "SystemAudio.h"
 #define TWO_TIMES_CLICK_INTERVAL 500
 
 #define RECORDING_BUFFER_LIST_LENGTH 9
@@ -30,6 +30,7 @@
     CameraSocket *socket;
     CameraService *cameraService;
     double lastedClickTime;
+    UIButton *btnCatchScreen;
     
     /*  for recording    */
     BOOL isRecoding;
@@ -68,6 +69,13 @@
         backgroundView.layer.cornerRadius = 10;
         [self.view addSubview:backgroundView];
     }
+    if (btnCatchScreen == nil) {
+        btnCatchScreen = [[UIButton alloc] initWithFrame:CGRectMake(266, backgroundView.frame.origin.y+59, 44, 44)];
+        [btnCatchScreen setBackgroundImage:[UIImage imageNamed:@"btn_catch_screen.png"] forState:UIControlStateNormal];
+        [btnCatchScreen addTarget:self action:@selector(catchScreen) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btnCatchScreen];
+        
+    }
     
     if(imgCameraShots == nil) {
         imgCameraShots = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 288, 216)];
@@ -85,6 +93,8 @@
         btnDirection.delegate = self;
         [backgroundView addSubview:btnDirection];
     }
+    
+    
     
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetCameraServerHandler class] for:self];
     [self startMonitorCamera];
@@ -204,10 +214,12 @@
 #pragma mark Camera operations 
 
 - (void)catchScreen {
+    [SystemAudio photoShutter];
     if(imgCameraShots != nil && imgCameraShots.image != nil) {
+        
         BOOL success = [CameraScreenShotsSaver saveToAlbumsWithImage:imgCameraShots.image];
         if(success) {
-            
+            [SystemAudio photoShutter];
         } else {
             
         }

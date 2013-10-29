@@ -12,5 +12,6 @@
 
 + (void)playClassicSmsSound;
 + (void)shake;
++ (void)photoShutter;
 
 @end

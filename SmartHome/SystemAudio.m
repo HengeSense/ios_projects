@@ -19,4 +19,7 @@
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
++ (void)photoShutter{
+    AudioServicesPlaySystemSound(1108);
+}
 @end
