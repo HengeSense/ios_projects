@@ -1,5 +1,5 @@
 //
-//  CameraScreenShotsSaver.h
+//  AlbumsSaver.h
 //  SmartHome
 //
 //  Created by Zhao yang on 10/28/13.
@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CameraScreenShotsSaver : NSObject
+@interface AlbumsSaver : NSObject
 
-+ (BOOL)saveToAlbumsWithImage:(UIImage *)image;
+- (void)saveToAlbumsWithImage:(UIImage *)image success:(void (^)())s failed:(void (^)())f;
 
 @end

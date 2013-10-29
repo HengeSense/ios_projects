@@ -156,7 +156,7 @@
 		6F95BF6117D4A7CD003A0745 /* SMCommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F95BF6017D4A7CD003A0745 /* SMCommandQueue.m */; };
 		6F984F7D17BE1EEA007F90A2 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F984F7C17BE1EEA007F90A2 /* AlertView.m */; };
 		6F9C92F7181DFF85002EE7EC /* VideoConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C92F6181DFF85002EE7EC /* VideoConverter.m */; };
-		6F9C933C181E546D002EE7EC /* CameraScreenShotsSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C933B181E546D002EE7EC /* CameraScreenShotsSaver.m */; };
+		6F9C933C181E546D002EE7EC /* AlbumsSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C933B181E546D002EE7EC /* AlbumsSaver.m */; };
 		6F9C9340181F50AC002EE7EC /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9C933F181F50AC002EE7EC /* iflyMSC.framework */; };
 		6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */; };
 		6FA0E1F517CF45DE00154CDE /* SMShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0E1F417CF45DE00154CDE /* SMShared.m */; };
@@ -558,8 +558,8 @@
 		6F984F7C17BE1EEA007F90A2 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		6F9C92F5181DFF85002EE7EC /* VideoConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoConverter.h; sourceTree = "<group>"; };
 		6F9C92F6181DFF85002EE7EC /* VideoConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoConverter.m; sourceTree = "<group>"; };
-		6F9C933A181E546D002EE7EC /* CameraScreenShotsSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraScreenShotsSaver.h; sourceTree = "<group>"; };
-		6F9C933B181E546D002EE7EC /* CameraScreenShotsSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraScreenShotsSaver.m; sourceTree = "<group>"; };
+		6F9C933A181E546D002EE7EC /* AlbumsSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumsSaver.h; sourceTree = "<group>"; };
+		6F9C933B181E546D002EE7EC /* AlbumsSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumsSaver.m; sourceTree = "<group>"; };
 		6F9C933F181F50AC002EE7EC /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		6F9EDFA817D8D55800AFDBDF /* NotificationsFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsFileManager.h; sourceTree = "<group>"; };
 		6F9EDFA917D8D55800AFDBDF /* NotificationsFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsFileManager.m; sourceTree = "<group>"; };
@@ -1608,8 +1608,8 @@
 			children = (
 				6F9C92F5181DFF85002EE7EC /* VideoConverter.h */,
 				6F9C92F6181DFF85002EE7EC /* VideoConverter.m */,
-				6F9C933A181E546D002EE7EC /* CameraScreenShotsSaver.h */,
-				6F9C933B181E546D002EE7EC /* CameraScreenShotsSaver.m */,
+				6F9C933A181E546D002EE7EC /* AlbumsSaver.h */,
+				6F9C933B181E546D002EE7EC /* AlbumsSaver.m */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -2320,7 +2320,7 @@
 				F26FDA5D1817AB380056FD71 /* DeviceCommandCheckVersionHandler.m in Sources */,
 				6F47FAED17E311970027C0F7 /* DeviceCommandUpdateUnitName.m in Sources */,
 				6F47FAF017E313110027C0F7 /* DeviceCommandUpdateUnitNameHandler.m in Sources */,
-				6F9C933C181E546D002EE7EC /* CameraScreenShotsSaver.m in Sources */,
+				6F9C933C181E546D002EE7EC /* AlbumsSaver.m in Sources */,
 				6FB5AC9617E6A356009AF916 /* CameraPicPath.m in Sources */,
 				6FB5AC9917E6A89F009AF916 /* PlayCameraPicViewController.m in Sources */,
 				6FDA6E8217F4838A00E4C717 /* ZonesNavigationView.m in Sources */,
