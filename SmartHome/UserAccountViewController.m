@@ -101,6 +101,13 @@
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
+- (void)updateUsername:(NSString *)username{
+    UITableViewCell *usernameCell = [infoTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    UILabel *detailLabel = (UILabel *)[usernameCell viewWithTag:888];
+    if (detailLabel)
+    detailLabel.text = username;
+}
+
 #pragma mark -
 #pragma mark UI Table View Delegate
 

@@ -258,6 +258,7 @@
             displayNotification = notification;
         }
         if ([notification.type isEqualToString:@"AL"]&&alLastTime<[notification.createTime timeIntervalSince1970]&&notification.hasRead == NO) {
+            alLastTime = [notification.createTime timeIntervalSince1970];
             lastNotHandlerAlNotification = notification;
         }
     }

@@ -240,9 +240,11 @@
                     [[AlertView currentAlertView] delayDismissAlertView];
                     [SMShared current].settings.account = phoneNumberToValidation;
                     [[SMShared current].settings saveSettings];
+                    [[checkPassword textFieldAtIndex:0] resignFirstResponder];
                     for (UIViewController *controller in self.navigationController.viewControllers) {
                         if ([controller isKindOfClass:[UserAccountViewController class]]) {
-                            [self.navigationController popToViewController:controller animated:YES];
+                            [self.navigationController popToViewController:controller animated:NO];
+                            [(UserAccountViewController *) controller updateUsername:self.phoneNumberToValidation];
                         }
                     }
                     break;

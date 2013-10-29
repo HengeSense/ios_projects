@@ -15,5 +15,5 @@
 @interface UserAccountViewController : NavViewController<UITableViewDataSource, UITableViewDelegate, TextViewDelegate,UIAlertViewDelegate, DeviceCommandGetAccountDelegate, DeviceCommandUpdateAccountDelegate>
 
 @property (nonatomic,strong) NSMutableDictionary *infoDictionary;
-
+-(void)updateUsername:(NSString *) username;
 @end
