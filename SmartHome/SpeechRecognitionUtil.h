@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 young. All rights reserved.
 //
 
-#define IFLY_APP_ID            @"522837cb"
-#define CONNECTION_TIME_OUT    @"20000"      //Unit is ms
+#define IFLY_APP_ID            @"51c0059d"
+#define CONNECTION_TIME_OUT    @"10000"      //Unit is ms
 
 
 #import <UIKit/UIKit.h>
@@ -70,7 +70,7 @@
 /* 命令词识别的语法id 只针对 domain 为 asr的应用 */
 @property(strong, nonatomic) NSString *grammarID;
 
-- (void)startListening;
+- (BOOL)startListening;
 - (void)stopListening;
 - (void)cancel;
 
