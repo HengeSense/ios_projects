@@ -13,8 +13,8 @@
 #import "VideoConverter.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SystemAudio.h"
-#define TWO_TIMES_CLICK_INTERVAL 500
 
+#define TWO_TIMES_CLICK_INTERVAL 500
 #define RECORDING_BUFFER_LIST_LENGTH 9
 
 @interface CameraViewController ()
