@@ -31,7 +31,6 @@
     CameraService *cameraService;
     double lastedClickTime;
     
-    
     /*  for recording    */
     BOOL isRecoding;
     dispatch_queue_t writtenQueue;
