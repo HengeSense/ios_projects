@@ -130,6 +130,7 @@
     isPlaying = NO;
     isFirst = YES;
     playView.image = nil;
+    [loadingView showError];
 #ifdef DEBUG
     NSLog(@"[Image provider] Download Ended.");
 #endif
