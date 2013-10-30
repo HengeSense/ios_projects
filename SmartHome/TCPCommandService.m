@@ -14,9 +14,6 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
-    
-    /* This flat to make sure only call connect method once */
-    BOOL flag;
 }
 
 - (id)init {
@@ -34,43 +31,50 @@
 }
 
 - (void)connect {
-    if(socket == nil) {
+    @synchronized(self) {
         NSString *tcpAddress = [SMShared current].settings.tcpAddress;
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
         if(addressSet == nil || addressSet.count != 2) {
-#ifdef DEBUG
+    #ifdef DEBUG
             NSLog(@"TCP COMMAND SOCKET] Server address error [ %@ ]", tcpAddress == nil ? [NSString emptyString] : tcpAddress);
-#endif
+    #endif
             return;
         }
         NSString *addr = [addressSet objectAtIndex:0];
         NSString *port = [addressSet objectAtIndex:1];
         socket = [[ExtranetClientSocket alloc] initWithIPAddress:addr andPort:port.integerValue];
         socket.messageHandlerDelegate = self;
+        
+        [self performSelectorInBackground:@selector(connectInternal) withObject:nil];
     }
-    
-    @synchronized(self) {
-        if(flag) return;
-        flag = YES;
-    }
-    
+}
+
+- (void)connectInternal {
     [socket connect];
 }
 
 - (void)disconnect {
-    [socket close];
-    socket.messageHandlerDelegate = nil;
-    socket = nil;
+    @synchronized(self) {
+        if(socket != nil) {
+            [socket close];
+            socket.messageHandlerDelegate = nil;
+            socket = nil;
+        }
+    }
 }
 
 - (BOOL)isConnectted {
-    if(socket == nil) return NO;
-    return socket.isConnect;
+    @synchronized(self) {
+        if(socket == nil) return NO;
+        return socket.isConnect;
+    }
 }
 
 - (BOOL)isConnectting {
-    if(socket == nil) return NO;
-    return socket.isConnectting;
+    @synchronized(self) {
+        if(socket == nil) return NO;
+        return socket.isConnectting;
+    }
 }
 
 #pragma mark -
@@ -91,9 +95,10 @@
     return @"TCP SERVICE";
 }
 
+/* Send all of device commands queue to server */
 - (void)flushQueue {
     @synchronized(self) {
-        if(socket.isConnect && [socket canWrite] && queue.count > 0) {
+        if(socket != nil && socket.isConnect && [socket canWrite] && queue.count > 0) {
             NSMutableData *dataToSender = [NSMutableData data];
             DeviceCommand *command = [queue popup];
             while (command != nil) {
@@ -132,24 +137,15 @@
 }
 
 - (void)clientSocketWithReceivedMessage:(NSData *)messages {
-    
 //#ifdef DEBUG
 //    NSLog(@"%@", [[NSString alloc] initWithData:messages encoding:NSUTF8StringEncoding]);
 //#endif
-    
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     command.commmandNetworkMode = CommandNetworkModeExternal;
     [[SMShared current].deliveryService handleDeviceCommand:command];
 }
 
 - (void)notifyConnectionClosed {
-    @synchronized(self) {
-        flag = NO;
-#ifdef DEBUG
-        NSLog(@"[TCP COMMAND SOCKET] Closed");
-#endif
-    }
-    
     [[SMShared current].deliveryService notifyTcpConnectionClosed];
 }
 

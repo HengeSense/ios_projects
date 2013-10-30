@@ -10,7 +10,7 @@
 #import "NSString+StringUtils.h"
 #import "SMShared.h"
 
-#define AUTH_URL @"http://113.247.222.106:6868/FrontServer-1.0/auth"
+#define AUTH_URL @"http://222.247.62.149:6868/FrontServer-1.0/auth"
 #define MD5_KEY @"FFFF"
 
 @implementation AccountService

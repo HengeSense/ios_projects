@@ -263,7 +263,6 @@
         
         // Disconnect tcp connection
         [self.tcpService disconnect];
-        tcpService = nil;
         
         // Synchronize memory units to disk
         [[SMShared current].memory syncUnitsToDisk];
@@ -286,10 +285,6 @@
        || self.tcpService.isConnectting) {
         return;
     }
-    [self performSelectorInBackground:@selector(startTcp) withObject:nil];
-}
-
-- (void)startTcp {
     [self.tcpService connect];
 }
 

@@ -158,7 +158,7 @@
         } else {
             //data header error
             //need to handle this error
-            [self performSelectorOnMainThread:@selector(notifyHandlerDataError:) withObject:nil waitUntilDone:NO];
+            [self performSelectorOnMainThread:@selector(notifyHandlerDataError) withObject:nil waitUntilDone:NO];
             [self close];
 #ifdef DEBUG
             NSLog(@"[External Socket] Data header is not matched [!] 126 on unpackage data.");
