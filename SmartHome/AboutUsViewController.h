@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NavViewController.h"
-@interface AboutUsViewController :NavViewController<UIScrollViewDelegate,UIWebViewDelegate>
+
+@interface AboutUsViewController :NavViewController
 
 @end

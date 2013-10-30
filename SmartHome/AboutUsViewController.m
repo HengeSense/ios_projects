@@ -14,7 +14,6 @@
 
 @implementation AboutUsViewController{
     UITextView *txtAboutUs;
-    UIWebView *webViewAboutUs;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,13 +49,6 @@
         txtAboutUs.bounces = NO;
         [self.view addSubview:txtAboutUs];
     }
-//    if (webViewAboutUs == nil) {
-//        webViewAboutUs = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 1055)];
-//        NSString *htmlString =
-//        [webViewAboutUs loadHTMLString:htmlString baseURL:nil];
-//        txtScrollView.contentSize = CGSizeMake(320, 1055);
-//        [txtScrollView addSubview:webViewAboutUs];
-//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,10 +56,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
+
 @end
