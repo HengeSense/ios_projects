@@ -206,6 +206,7 @@
 }
 #pragma mark-
 #pragma mark modify username
+
 - (void)submitVerificationCodeAndOldPassword:(UIButton *) sender{
     if (checkPassword == nil) {
         checkPassword = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"password_valid", @"") message:NSLocalizedString(@"enter_old_pwd", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"") otherButtonTitles:NSLocalizedString(@"ok", @""), nil];
@@ -213,6 +214,7 @@
     }
     [checkPassword show];
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         NSString *oldPassword = [alertView textFieldAtIndex:0].text;
@@ -227,11 +229,10 @@
          ];
     }
 }
+
 - (void)modifyUsernameSuccess:(RestResponse *)resp{
     if (resp.statusCode == 200) {
-        
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
-        NSLog(@"---------json:%@",[[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
         if(json != nil) {
             NSInteger resultID = [[json noNilStringForKey:@"id"] integerValue];
             switch (resultID) {
@@ -281,6 +282,7 @@
     }
     [self registerFailed:resp];
 }
+
 - (void)registerSuccessfully:(RestResponse *)resp {    
     if(resp.statusCode == 200) {
         NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
@@ -295,9 +297,11 @@
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
                         [SMShared current].settings.deviceCode = command.deviceCode;
                         [[SMShared current].settings saveSettings];
+                        
                         ((LoginViewController *)[SMShared current].app.rootViewController).hasLogin = YES;
                         [self.navigationController popToRootViewControllerAnimated:NO];
                         [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
+                        [[SMShared current].deliveryService startService];
                         return;
                     }
                 } else if([@"-1" isEqualToString:command.result]) {
