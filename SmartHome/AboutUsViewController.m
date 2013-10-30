@@ -39,6 +39,8 @@
 - (void)initUI{
     [super initUI];
     
+    self.topbar.titleLabel.text = NSLocalizedString(@"about_us", @"");
+    
     if (txtScrollView == nil) {
         txtScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height-self.topbar.frame.size.height)];
         txtScrollView.bouncesZoom = NO;
