@@ -13,7 +13,6 @@
 @end
 
 @implementation AboutUsViewController{
-    UIScrollView *txtScrollView;
     UITextView *txtAboutUs;
     UIWebView *webViewAboutUs;
 }
@@ -39,22 +38,17 @@
 - (void)initUI{
     [super initUI];
     
-    if (txtScrollView == nil) {
-        txtScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, self.view.bounds.size.width, self.view.bounds.size.height-self.topbar.frame.size.height)];
-        txtScrollView.bouncesZoom = NO;
-        txtScrollView.delaysContentTouches = NO;
-        [self.view addSubview:txtScrollView];
-    }
     
     if (txtAboutUs == nil) {
-        txtAboutUs = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 1055)];
-        txtScrollView.contentSize = CGSizeMake(320, 1055);
+        txtAboutUs = [[UITextView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, 320, self.view.bounds.size.height-self.topbar.frame.size.height)];
+        txtAboutUs.contentSize = CGSizeMake(320, 1055);
         NSDictionary *infoDict = [NSBundle mainBundle].infoDictionary;
         NSString *currentVersion = [infoDict noNilStringForKey:@"CFBundleShortVersionString"];
         txtAboutUs.text =[NSString stringWithFormat:NSLocalizedString(@"about_us_text", @""),currentVersion];
         txtAboutUs.editable = NO;
         txtAboutUs.font = [UIFont systemFontOfSize:16];
-        [txtScrollView addSubview:txtAboutUs];
+        txtAboutUs.bounces = NO;
+        [self.view addSubview:txtAboutUs];
     }
 //    if (webViewAboutUs == nil) {
 //        webViewAboutUs = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 1055)];
