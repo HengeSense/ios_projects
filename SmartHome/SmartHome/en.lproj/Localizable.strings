@@ -189,7 +189,7 @@
 "status_opened"                 =   "已开启";
 "status_closed"                 =   "已关闭";
 "app_is_lasted_version"         =   "当前已是最新版本";
-"app_is_not_lasted_version"     =   "检测到新版本,请去App Store更新";
+"app_is_not_lasted_version"     =   "当前版本已过期";
 
 
 /****************	Device Find View Strings   ****************/
