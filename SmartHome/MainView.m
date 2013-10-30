@@ -17,7 +17,6 @@
 #import "NotificationsFileManager.h"
 #import "UnitView.h"
 
-#define SPEECH_VIEW_TAG                  46001
 #define SPEECH_BUTTON_WIDTH              195
 #define SPEECH_BUTTON_HEIGHT             198
 #define DELAY_START_LISTENING_DURATION   0.6f
@@ -61,8 +60,6 @@
     
     speechViewState = SpeechViewStateClosed;
     recognizerState = RecognizerStateReady;
-    speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
-    speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
 }
 
 - (void)subscribeEvents {
@@ -492,13 +489,13 @@
 
 - (void)showSpeechView {
     if(speechViewState != SpeechViewStateClosed) return;
-    ConversationView *view = (ConversationView *)[self viewWithTag:SPEECH_VIEW_TAG];
-    if(view == nil) {
-        view = [self speechView];
-        [self addSubview:view];
-    }
+    
     speechViewState = SpeechViewStateOpenning;
     [self.ownerController disableGestureForDrawerView];
+    
+    ConversationView *view = [self speechView];
+    [self addSubview:view];
+
     [UIView animateWithDuration:0.3f
                 animations:^{
                     view.frame = CGRectMake(view.frame.origin.x, ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12), view.frame.size.width, view.frame.size.height);
@@ -512,12 +509,17 @@
 
 - (void)hideSpeechView {
     if(speechViewState != SpeechViewStateOpenned) return;
+    
     if(recognizerState != RecognizerStateReady) {
         [speechRecognitionUtil stopListening];
     }
+    
+    speechViewState = SpeechViewStateClosing;
+    [self.ownerController enableGestureForDrawerView];
+    
     CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12);
     ConversationView *view = [self speechView];
-    speechViewState = SpeechViewStateClosing;
+    
     [UIView animateWithDuration:0.3f
                      animations:^{
                          view.frame = CGRectMake(view.frame.origin.x, (0 - viewHeight - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12)), view.frame.size.width, view.frame.size.height);
@@ -526,7 +528,6 @@
                          [[self speechView] clearMessages];
                          [[self speechView] hideWelcomeMessage];
                          [[self speechView] removeFromSuperview];
-                         [self.ownerController enableGestureForDrawerView];
                          speechViewState = SpeechViewStateClosed;
                      }];
 }
@@ -552,7 +553,7 @@
         recognizerState = RecognizerStateRecordBegin;
         AudioServicesPlaySystemSound(RECORD_BEGIN_SOUND_ID);
         [self delayStartListening];
-    } else if(recognizerState != RecognizerStateReady) {
+    } else {
         [speechRecognitionUtil stopListening];
     }
 }
@@ -564,6 +565,10 @@
 }
 
 - (void)startListening:(NSTimer *)timer {
+    if(speechRecognitionUtil == nil) {
+        speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
+        speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
+    }
     if(![speechRecognitionUtil startListening]) {
 #ifdef DEBUG
         NSLog(@"[SPEECH VIEW] Start lisenting failed .");
@@ -579,8 +584,8 @@
 }
 
 - (void)endRecord {
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateRecordingEnd;
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
 }
 
@@ -598,10 +603,6 @@
 }
 
 - (void)recognizeSuccess:(NSString *)result {
-    if(recognizerState == RecognizerStateReady) {
-        [self resetRecognizer];
-        return;
-    }
     [self resetRecognizer];
     if(![NSString isBlank:result]) {
         //process text message
@@ -610,7 +611,7 @@
         command.voiceText = result;
         [[SMShared current].deliveryService executeDeviceCommand:command];
     } else {
-        [self speechRecognizerFailed:@"No speaking"];
+        [self speechRecognizerFailed:@"no speaking"];
     }
 }
 
@@ -621,7 +622,7 @@
 
 - (void)speechRecognizerFailed:(NSString *)message {
 #ifdef DEBUG
-    NSLog(@"[SPEECH RECOGNIZER] Error, reason is [ %@ ]", message);
+    NSLog(@"[SPEECH RECOGNIZER] Recognize failed, reason is [ %@ ]", message);
 #endif
 }
 
@@ -644,7 +645,6 @@
         CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 10 - 10;
         speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12)), 601/2, viewHeight) andContainerView:self];
         speechView.center = CGPointMake(self.center.x, speechView.center.y);
-        speechView.tag = SPEECH_VIEW_TAG;
     }
     return speechView;
 }

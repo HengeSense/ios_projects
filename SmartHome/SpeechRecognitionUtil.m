@@ -51,7 +51,7 @@
 
 - (BOOL)startListening {
     if([IFlySpeechRecognizer getRecognizer] != nil) {
-        textResult = nil;
+        
         [[IFlySpeechRecognizer getRecognizer] setParameter:@"domain" value:self.domain];
         [[IFlySpeechRecognizer getRecognizer] setParameter:@"vad_bos" value:self.vadBos];
         [[IFlySpeechRecognizer getRecognizer] setParameter:@"vad_eos" value:self.vadEos];
@@ -104,12 +104,10 @@
 }
 
 - (void)onResults:(NSArray *)results {
-    if(textResult == nil) {
-        textResult = [[NSMutableString alloc] init];
-        NSDictionary *dic = [results objectAtIndex:0];
-        for(NSString *key in dic) {
-            [textResult appendFormat:@"%@", key];
-        }
+    textResult = [[NSMutableString alloc] init];
+    NSDictionary *dic = [results objectAtIndex:0];
+    for(NSString *key in dic) {
+        [textResult appendFormat:@"%@", key];
     }
 }
 

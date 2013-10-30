@@ -57,6 +57,7 @@
                 NSLog(@"[External Socket] Has bytes after heart beat message.");
 #endif
                 bytesRead = [self.inputStream read:header maxLength:DATA_HEADER_LENGTH];
+                
                 if(bytesRead != DATA_HEADER_LENGTH) {
                     //unkonw, maybe server client was closed...
                     return;
@@ -156,6 +157,16 @@
                 // less than one message , continue to watting for input stream
             }
         } else {
+            
+            if(bytes[0] == 127) {
+#ifdef DEBUG
+                NSLog(@"[External Socket] Heart beat byte is in message.");
+#endif
+                receivedData = [NSMutableData dataWithData:[receivedData subdataWithRange:NSMakeRange(1, receivedData.length - 1)]];
+                [self processReceivedData];
+                return;
+            }
+            
             //data header error
             //need to handle this error
             [self performSelectorOnMainThread:@selector(notifyHandlerDataError) withObject:nil waitUntilDone:NO];
@@ -166,6 +177,17 @@
         }
     } else {
         //don't need to process , continue to watting for input stream
+        
+        if(receivedData.length == 1) {
+            uint8_t bytes[1];
+            [receivedData getBytes:bytes length:1];
+            if(bytes[0] == 127) {
+                receivedData = [NSMutableData data];
+#ifdef DEBUG
+                NSLog(@"[External Socket] Give up heart beat message.");
+#endif
+            }
+        }
     }
 }
 
