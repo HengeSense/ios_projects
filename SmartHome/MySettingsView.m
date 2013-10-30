@@ -12,7 +12,7 @@
 #import "SMCell.h"
 #import "PushSettingViewController.h"
 #import "WelcomeViewController.h"
-
+#import "AboutUsViewController.h"
 @implementation MySettingsView {
     UITableView *tblSettings;
     UIButton *btnLogout;
@@ -67,8 +67,7 @@
             [self checkVersion];
             break;
         case 2:
-            [[AlertView currentAlertView] setMessage:@"开发中..." forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+            [self.ownerController.navigationController pushViewController:[[AboutUsViewController alloc] init] animated: YES];
             break;
         case 3:
             [self.ownerController.navigationController pushViewController:[[WelcomeViewController alloc] init] animated:YES];
