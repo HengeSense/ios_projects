@@ -22,4 +22,13 @@
 + (void)photoShutter{
     AudioServicesPlaySystemSound(1108);
 }
+
++ (void)voiceRecordBegin {
+    AudioServicesPlaySystemSound(1110);
+}
+
++ (void)voiceRecordEnd {
+    AudioServicesPlaySystemSound(1112);
+}
+
 @end

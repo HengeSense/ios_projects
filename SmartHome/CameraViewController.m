@@ -199,6 +199,7 @@
         }
     }
     imgCameraShots.image = image;
+    
 //    if(isRecoding) {
 //        [self recodingWithImage:image];
 //    }
@@ -325,7 +326,6 @@
         isRecoding = YES;
         
         // Clear tmp directory
-        
         if([[NSFileManager defaultManager] fileExistsAtPath:TMP_DIRECTORY isDirectory:nil]) {
             [[NSFileManager defaultManager] removeItemAtPath:TMP_DIRECTORY error:nil];
         }

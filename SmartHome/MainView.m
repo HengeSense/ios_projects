@@ -8,7 +8,6 @@
 
 
 #import "MainView.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import "NotificationViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SMDateFormatter.h"
@@ -16,12 +15,11 @@
 #import "CommandFactory.h"
 #import "NotificationsFileManager.h"
 #import "UnitView.h"
+#import "SystemAudio.h"
 
 #define SPEECH_BUTTON_WIDTH              195
 #define SPEECH_BUTTON_HEIGHT             198
 #define DELAY_START_LISTENING_DURATION   0.6f
-#define RECORD_BEGIN_SOUND_ID            1113
-#define RECORD_END_SOUND_ID              1114
 
 @implementation MainView {
     SpeechViewState speechViewState;
@@ -551,7 +549,7 @@
 - (void)btnSpeechRecordingPressed:(id)sender {    
     if(recognizerState == RecognizerStateReady) {
         recognizerState = RecognizerStateRecordBegin;
-        AudioServicesPlaySystemSound(RECORD_BEGIN_SOUND_ID);
+        [SystemAudio voiceRecordBegin];
         [self delayStartListening];
     } else {
         [speechRecognitionUtil stopListening];
@@ -586,7 +584,7 @@
 - (void)endRecord {
     recognizerState = RecognizerStateRecordingEnd;
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
-    AudioServicesPlaySystemSound(RECORD_END_SOUND_ID);
+    [SystemAudio voiceRecordEnd];
 }
 
 - (void)recognizeCancelled {

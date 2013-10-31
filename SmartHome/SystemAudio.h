@@ -13,5 +13,7 @@
 + (void)playClassicSmsSound;
 + (void)shake;
 + (void)photoShutter;
++ (void)voiceRecordBegin;
++ (void)voiceRecordEnd;
 
 @end
