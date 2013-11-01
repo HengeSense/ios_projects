@@ -45,7 +45,7 @@
     [super initUI];
     
     if (tblDevice == nil) {
-        tblDevice =[[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, SM_CELL_WIDTH/2, self.view.frame.size.height-self.topbar.frame.size.height) style:UITableViewStylePlain];
+        tblDevice =[[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.frame.size.height - 5) style:UITableViewStylePlain];
         tblDevice.center = CGPointMake(self.view.center.x, tblDevice.center.y);
         tblDevice.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblDevice.backgroundColor = [UIColor clearColor];

@@ -38,10 +38,10 @@
 
 - (void)initDefaults {
     [super initDefaults];
-    if (fieldsNames == nil) {
+    if(fieldsNames == nil) {
         fieldsNames = [[NSArray alloc] initWithObjects:NSLocalizedString(@"device_name",@""),NSLocalizedString(@"device_category", @""),NSLocalizedString(@"device_ip", @""),NSLocalizedString(@"device_port", @""),NSLocalizedString(@"device_nwkAddr", @""),NSLocalizedString(@"device_status", @""), nil];
     }
-    if (fieldsValues == nil && device) {
+    if(fieldsValues == nil && device) {
         NSString *status = device.status ? NSLocalizedString(@"status_closed", @""):NSLocalizedString(@"status_opened", @"");
         fieldsValues = [[NSArray alloc] initWithObjects:device.name,NSLocalizedString(device.category, @""),    device.ip,[NSString stringWithFormat:@"%i",device.port],device.nwkAddr,status, nil];
     }
@@ -49,10 +49,11 @@
 
 - (void)initUI {
     [super initUI];
-    if(device)
+    if(device) {
         self.topbar.titleLabel.text = device.name;
-    if (tblDetail ==nil) {
-        tblDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height,SM_CELL_WIDTH/2, self.view.frame.size.height-self.topbar.frame.size.height) style:UITableViewStylePlain];
+    }
+    if(tblDetail ==nil) {
+        tblDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.frame.size.height - 5) style:UITableViewStylePlain];
         tblDetail.center = CGPointMake(self.view.center.x, tblDetail.center.y);
         tblDetail.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblDetail.backgroundColor = [UIColor clearColor];
@@ -62,7 +63,7 @@
     }
 }
 
--(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return fieldsNames.count;
 }
 
@@ -70,7 +71,7 @@
     return 1;
 }
 
--(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellDetailIndentifier;
     if (indexPath.row == 0) {
         cellDetailIndentifier = @"topCellIdentifier";

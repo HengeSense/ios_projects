@@ -42,6 +42,7 @@
     BOOL isRecoding;
     dispatch_queue_t writtenQueue;
     NSMutableArray *recordingList;
+    NSUInteger imageOffset;
 }
 
 @synthesize cameraDevice;
@@ -269,7 +270,7 @@
                     
                     //[NSFileManager defaultManager] createFileAtPath:@"" contents:image attributes:<#(NSDictionary *)#>
                     
-                    [UIImageJPEGRepresentation(image, 1) writeToFile:[VIDEO_DIRECTORY stringByAppendingString:[NSString stringWithFormat:@"%d.jpg", i]] atomically:YES];
+                    [UIImageJPEGRepresentation(image, 1) writeToFile:[TMP_DIRECTORY stringByAppendingString:[NSString stringWithFormat:@"%d.jpg", imageOffset]] atomically:YES];
                     NSLog(@"save");
                 }
                 @catch (NSException *exception) {
@@ -302,9 +303,7 @@
 
 - (void)centerButtonClicked {
     // Start or stop recording
-    
     return;
-    
     if(!cameraIsRunning) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"camera_is_not_running", @"") forType:AlertViewTypeSuccess];
         [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
@@ -323,6 +322,7 @@
         // Initial
         writtenQueue = dispatch_queue_create("com.hentre.videos", DISPATCH_QUEUE_SERIAL);
         recordingList = [NSMutableArray arrayWithCapacity:RECORDING_BUFFER_LIST_LENGTH];
+        imageOffset = 0;
         isRecoding = YES;
         
         // Clear tmp directory

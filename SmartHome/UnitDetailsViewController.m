@@ -101,7 +101,9 @@
     if(section == 0) {
         lblTitle.text = NSLocalizedString(@"unit_info", @"");
     } else {
-        lblTitle.text = NSLocalizedString(@"zone_info", @"");
+        if(unit.zones.count > 0) {
+            lblTitle.text = NSLocalizedString(@"zone_info", @"");
+        }
     }
     return view;
 }
