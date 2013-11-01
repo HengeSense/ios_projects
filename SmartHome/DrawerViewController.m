@@ -9,6 +9,8 @@
 #import "DrawerViewController.h"
 #import "UIDevice+Extension.h"
 
+#define CENTER_VIEW_TAG        3900
+
 #define BLACK_MASK_VIEW_TAG    2900
 #define BLACK_MASK_VIEW_ALPHA  0.6
 #define BLACK_BOARD_SCALE      0.95
@@ -29,7 +31,6 @@
     UIPanGestureRecognizer *panForMainViewStateHide;
     UIPanGestureRecognizer *panGesture;
     NSString *intentionDirection;
-    
     BOOL leftTransitionHasReset;
     BOOL rightTransitionHasReset;
 }
@@ -37,6 +38,7 @@
 @synthesize leftView;
 @synthesize rightView;
 @synthesize mainView;
+@synthesize centerView = _centerView_;
 @synthesize rightViewCenterX;
 @synthesize leftViewCenterX;
 @synthesize leftViewVisibleWidth;
@@ -63,7 +65,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)applyBindings {
+- (void)initialDrawerViewController {
     //20 is the status bar height
     if([UIDevice systemVersionIsMoreThanOrEuqal7]) {
         screenCenterY = ([UIScreen mainScreen].bounds.size.height) / 2;
@@ -103,11 +105,19 @@
         [self.view addSubview:self.leftView];
     }
     
-    if(self.mainView != nil) {
+    if(self.mainView == nil) {
+        /* Create Main View */
+        self.mainView = [[UIView alloc] initWithFrame:self.view.bounds];
+        self.mainView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:self.mainView];
         panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestureForMainViewStateNormal:)];
         panGesture.delaysTouchesBegan = YES;
         [self.mainView addGestureRecognizer:panGesture];
+    }
+    
+    /* Very funny ... haha ~ */
+    if(self.centerView != nil) {
+        self.centerView = self.centerView;
     }
     
     if(self.leftViewCenterX == 0) {
@@ -149,8 +159,10 @@
     leftViewIsAboveOnRightView = YES;
 }
 
+#pragma mark -
+#pragma mark Gesture
+
 - (void)handlePanGestureForMainViewStateNormal:(UIPanGestureRecognizer *)gesture {
-    
     CGPoint translation = [gesture translationInView:self.mainView];
     
     if(gesture.state == UIGestureRecognizerStateBegan) {
@@ -211,14 +223,14 @@
         }
         if(translation.x > 0) {
             if(leftView == nil) {
-                [self showMainView:NO];
+                [self showCenterView:NO];
                 [gesture setTranslation:CGPointMake(0, 0) inView:self.mainView];
                 return;
             }
             if(!leftViewIsAboveOnRightView && rightView != nil) [self leftViewToTopLevel];
         } else if(translation.x < 0) {
             if(rightView == nil) {
-                [self showMainView:NO];
+                [self showCenterView:NO];
                 [gesture setTranslation:CGPointMake(0, 0) inView:self.mainView];
                 return;
             }
@@ -246,7 +258,7 @@
             }
             //hide
             else {
-                [self showMainView:YES];
+                [self showCenterView:YES];
             }
         }
         //right view
@@ -254,7 +266,7 @@
             if(mainViewX < (0 - self.showDrawerMaxTrasitionX)) {
                 [self showRightView];
             } else {
-                [self showMainView:YES];
+                [self showCenterView:YES];
             }
         }
         lastedMainViewCenterX = self.mainView.center.x;
@@ -262,7 +274,7 @@
 }
 
 - (void)handleTapGestureForMainViewStateHide:(UITapGestureRecognizer *)gesture {
-    [self showMainView:YES];
+    [self showCenterView:YES];
 }
 
 - (void)handlePanGestureForMainViewStateHide:(UIPanGestureRecognizer *)gesture {
@@ -331,21 +343,24 @@
         CGFloat mainViewX = self.mainView.frame.origin.x;
         if(mainViewX > 0) {
             if(mainViewX <= self.leftViewCenterX) {
-                [self showMainView:YES];
+                [self showCenterView:YES];
             } else {
                 [self showLeftView];
             }
         } else if(mainViewX < 0){
             if((mainViewX + 320) >= self.rightViewCenterX) {
-                [self showMainView:YES];
+                [self showCenterView:YES];
             } else {
                 [self showRightView];
             }
         } else {
-            [self showMainView:YES];
+            [self showCenterView:YES];
         }
     }
 }
+
+#pragma mark -
+#pragma mark Public methods
 
 - (void)showLeftView {
     if(self.leftView == nil) return;
@@ -367,7 +382,7 @@
     }];
 }
 
-- (void)showMainView:(BOOL)animate {
+- (void)showCenterView:(BOOL)animate {
     if(self.mainView == nil) return;
     if(!(self.panFromScrollViewFirstPage && [intentionDirection isEqualToString:@"left"])
        && !(self.panFromScrollViewLastPage && [intentionDirection isEqualToString:@"right"])) {
@@ -425,7 +440,11 @@
 
 - (void)rightViewToTopLevel {
     if(leftViewIsAboveOnRightView) {
-        [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:2];
+        if(leftView == nil) {
+            [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+        } else {
+            [self.view exchangeSubviewAtIndex:0 withSubviewAtIndex:2];
+        }
         leftViewIsAboveOnRightView = NO;
     }
 }
@@ -498,6 +517,23 @@
         UIView *view = [self.leftView viewWithTag:BLACK_MASK_VIEW_TAG];
         if(view == nil) {
             [self.leftView addSubview:blackLeftMaskView];
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark getter and setters
+
+- (void)setCenterView:(UIView *)centerView {
+    _centerView_ = centerView;
+    if(self.mainView != nil) {
+        UIView *v = [self.mainView viewWithTag:CENTER_VIEW_TAG];
+        if(v != nil) {
+            [v removeFromSuperview];
+        }
+        if(_centerView_ != nil) {
+            _centerView_.tag = CENTER_VIEW_TAG;
+            [self.mainView addSubview:_centerView_];
         }
     }
 }

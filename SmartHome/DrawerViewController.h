@@ -19,17 +19,18 @@
 @property (nonatomic) BOOL panFromScrollViewFirstPage;
 @property (nonatomic) BOOL panFromScrollViewLastPage;
 @property (strong, nonatomic) UIView *mainView;
+@property (strong, nonatomic) UIView *centerView;
 @property (strong, nonatomic) UIView *leftView;
 @property (strong, nonatomic) UIView *rightView;
 @property (strong, nonatomic) UIScrollView *scrollView;
 
 - (void)showRightView;
-- (void)showMainView:(BOOL)animate;
+- (void)showCenterView:(BOOL)animate;
 - (void)showLeftView;
 
 - (void)disableGestureForDrawerView;
 - (void)enableGestureForDrawerView;
 
-- (void)applyBindings;
+- (void)initialDrawerViewController;
 
 @end

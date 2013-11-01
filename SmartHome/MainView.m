@@ -19,7 +19,7 @@
 
 #define SPEECH_BUTTON_WIDTH              195
 #define SPEECH_BUTTON_HEIGHT             198
-#define DELAY_START_LISTENING_DURATION   0.6f
+//#define DELAY_START_LISTENING_DURATION   0.4f
 
 @implementation MainView {
     SpeechViewState speechViewState;
@@ -550,17 +550,17 @@
     if(recognizerState == RecognizerStateReady) {
         recognizerState = RecognizerStateRecordBegin;
         [SystemAudio voiceRecordBegin];
-        [self delayStartListening];
+//        [self delayStartListening];
+        [self startListening:nil];
     } else {
         [speechRecognitionUtil stopListening];
     }
 }
 
-// 确保录音提示音已经结束,防止提示语进入识别范围
-- (void)delayStartListening {
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
-    [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
-}
+//// 确保录音提示音已经结束,防止提示语进入识别范围
+//- (void)delayStartListening {
+//    [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
+//}
 
 - (void)startListening:(NSTimer *)timer {
     if(speechRecognitionUtil == nil) {
@@ -579,6 +579,7 @@
 
 - (void)beginRecord {
     recognizerState = RecognizerStateRecording;
+    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
 }
 
 - (void)endRecord {

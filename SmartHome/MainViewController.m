@@ -15,8 +15,6 @@
 #import "CommandFactory.h"
 #import "ViewsPool.h"
 
-#define MAIN_VIEW_TAG         5001
-
 @interface MainViewController ()
 
 @end
@@ -75,15 +73,6 @@
         screenHeight += 20;
     }
     
-    //initial main view
-    if(self.mainView == nil) {
-        //initial white board
-        self.mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 20)];
-        self.mainView.backgroundColor = [UIColor whiteColor];
-        
-        [self drawerNavigationItemChanged:[drawerItems objectAtIndex:0] isFirstTime:YES];
-    }
-    
     //initial drawer navigation view
     if(self.leftView == nil) {
         DrawerView *dv = [[DrawerView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 20) andItems:drawerItems];
@@ -92,12 +81,13 @@
         self.leftView = dv;
     }
     
+    [self drawerNavigationItemChanged:[drawerItems objectAtIndex:0] isFirstTime:YES];
+    
     //parameter of drawer navigation view controller
     self.leftViewVisibleWidth = 120;
     self.showDrawerMaxTrasitionX = 40;
     
-    //after initial
-    [self applyBindings];
+    [self initialDrawerViewController];
     
     [[SMShared current].deliveryService startRefreshCurrentUnit];
     [[SMShared current].deliveryService queueCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
@@ -107,7 +97,7 @@
     if(item == nil) return;
     if(currentItem != nil) {
         if([item.itemIdentifier isEqualToString:currentItem.itemIdentifier]) {
-            [self showMainView:YES];
+            [self showCenterView:YES];
             return;
         }
     }
@@ -133,18 +123,15 @@
             view.topbar.titleLabel.text = NSLocalizedString(@"settings_view.title", @"");
         }
         if(view != nil) {
-            view.tag = MAIN_VIEW_TAG;
             [[ViewsPool sharedPool] putView:view forIdentifier:item.itemIdentifier];
         }
     }
     
     if(view != nil) {
         view.ownerController = self;
-        UIView *v = [self.mainView viewWithTag:MAIN_VIEW_TAG];
-        if(v != nil) [v removeFromSuperview];
-        [self.mainView addSubview:view];
+        self.centerView = view;
         if(!isFirst) {
-            [self showMainView:YES];
+            [self showCenterView:YES];
         }
         [view notifyViewUpdate];
     }
