@@ -31,6 +31,7 @@
 - (void)initUI {
     self.pagingEnabled = YES;
     self.delegate = self;
+    self.delaysContentTouches = YES;
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
 }
