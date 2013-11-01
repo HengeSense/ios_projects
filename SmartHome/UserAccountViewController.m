@@ -305,6 +305,8 @@
                 break;
             case -2:
                 [[AlertView currentAlertView] setMessage:NSLocalizedString(@"mail_name_blank", @"") forType:AlertViewTypeFailed];
+                
+                
                 [[AlertView currentAlertView] delayDismissAlertView];
                 break;
             case -3:
