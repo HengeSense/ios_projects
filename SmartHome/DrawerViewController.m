@@ -107,7 +107,7 @@
     
     if(self.mainView == nil) {
         /* Create Main View */
-        self.mainView = [[UIView alloc] initWithFrame:self.view.bounds];
+        mainView = [[UIView alloc] initWithFrame:self.view.bounds];
         self.mainView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:self.mainView];
         panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestureForMainViewStateNormal:)];

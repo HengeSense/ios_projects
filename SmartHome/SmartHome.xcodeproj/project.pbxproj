@@ -1187,8 +1187,6 @@
 				6F1EE66917BC787900580760 /* UnitsBindingViewController.m */,
 				F288414017D4A35C00B81DD3 /* UserAccountViewController.h */,
 				F288414117D4A35C00B81DD3 /* UserAccountViewController.m */,
-				6FB5AC9717E6A89F009AF916 /* PlayCameraPicViewController.h */,
-				6FB5AC9817E6A89F009AF916 /* PlayCameraPicViewController.m */,
 				F29BBA5917F2C41B00B65436 /* WelcomeViewController.h */,
 				F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */,
 				F2204119181FD70A0050000C /* AboutUsViewController.h */,
@@ -1374,6 +1372,8 @@
 		6F47FAE817E2C3FB0027C0F7 /* notifications_controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6FB5AC9717E6A89F009AF916 /* PlayCameraPicViewController.h */,
+				6FB5AC9817E6A89F009AF916 /* PlayCameraPicViewController.m */,
 				6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */,
 				6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */,
 				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,

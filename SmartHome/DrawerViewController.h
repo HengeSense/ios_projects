@@ -18,7 +18,7 @@
 @property (nonatomic) CGFloat rightViewVisibleWidth;
 @property (nonatomic) BOOL panFromScrollViewFirstPage;
 @property (nonatomic) BOOL panFromScrollViewLastPage;
-@property (strong, nonatomic) UIView *mainView;
+@property (strong, nonatomic, readonly) UIView *mainView;
 @property (strong, nonatomic) UIView *centerView;
 @property (strong, nonatomic) UIView *leftView;
 @property (strong, nonatomic) UIView *rightView;
