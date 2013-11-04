@@ -103,7 +103,7 @@
         if(message.isWarning && message.data.isCameraData){
             UIButton *btnCheck = [[UIButton alloc] initWithFrame:CGRectMake(5, view.frame.size.height+view.frame.origin.y+5, 152.5, 98/2)];
             [btnCheck setBackgroundImage:[UIImage imageNamed:@"btn_orange.png"] forState:UIControlStateNormal];
-            [btnCheck setTitle:NSLocalizedString(@"view_message", @"") forState:UIControlStateNormal];
+            [btnCheck setTitle:NSLocalizedString(@"view_video", @"") forState:UIControlStateNormal];
             [btnCheck addTarget:self action:@selector(btnCheckPressed:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:btnCheck];
             UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(10+152.5, btnCheck.frame.origin.y, 152.5, 98/2)];

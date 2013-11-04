@@ -43,6 +43,7 @@
     
     NSString *titleString;
     NSString *stateString;
+    NSString *statusString;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -332,6 +333,7 @@
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
             titleString = unit.name;
+            statusString = unit.status;
         } else {
             titleString = [NSString emptyString];
         }

@@ -104,9 +104,6 @@
         if(json != nil) {
             Unit *unit = [[Unit alloc] initWithJson:json];
             if(unit != nil) {
-                if([NSString isBlank:unit.status]) {
-                    unit.status = @"在线";
-                }
                 DeviceCommandUpdateUnits *updateUnit = [[DeviceCommandUpdateUnits alloc] init];
                 updateUnit.commandName = COMMAND_GET_UNITS;
                 updateUnit.masterDeviceCode = unit.identifier;
