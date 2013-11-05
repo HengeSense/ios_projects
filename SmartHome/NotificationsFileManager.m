@@ -190,8 +190,8 @@
                                 if(!noti.hasRead) {
                                     [notificationsToSave addObject:noti];
                                 }
-                                [notificationsToSave addObjectsFromArray:newNotifications];
                             }
+                            [notificationsToSave addObjectsFromArray:newNotifications];
                         } else {
                             // 需要删除的已读老消息数量
                             int hasReadedNeedToDelCount = oldNotifications.count -  (MAX_NOTIFICATIONS_COUNT - hasReadCount - newNotifications.count);
