@@ -38,7 +38,7 @@
 - (void)initUI{
     [super initUI];
     
-    self.topbar.titleLabel.text = NSLocalizedString(@"about_us", @"");
+    self.topbar.titleLabel.text = NSLocalizedString(@"declare", @"");
     
     if (txtAboutUs == nil) {
         txtAboutUs = [[UITextView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height, 320, self.view.bounds.size.height-self.topbar.frame.size.height)];

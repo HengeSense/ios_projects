@@ -11,6 +11,8 @@
 #import "SMTextField.h"
 #import "LongButton.h"
 #import "JsonUtils.h"
+#import "AboutUsViewController.h"
+#import "CustomCheckBox.h"
 
 @interface VerificationCodeSendViewController ()
 
@@ -21,6 +23,10 @@
     UILabel *lblPhoneNumber;
     UIButton *btnVerificationCodeSender;
     UILabel *lblModifyTip;
+    
+    UIButton *btnCheckBox;
+    UILabel *lblAgree;
+    UIButton *btnShowDeclare;
 }
 
 @synthesize isModify;
@@ -89,21 +95,56 @@
         if(btnVerificationCodeSender == nil) {
             btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(5, lblModifyTip.frame.origin.y +lblModifyTip.frame.size.height + 5)];
             [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
+            btnVerificationCodeSender.enabled = NO;
             [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:btnVerificationCodeSender];
         }
     } else {
         if(btnVerificationCodeSender == nil) {
             btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(5, txtPhoneNumber.frame.origin.y +txtPhoneNumber.frame.size.height + 5)];
+            btnVerificationCodeSender.enabled = YES;
             [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
             [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:btnVerificationCodeSender];
+        }
+        if (btnCheckBox == nil) {
+            btnCheckBox = [CustomCheckBox checkBoxWithPoint:CGPointMake(15, btnVerificationCodeSender.frame.size.height+btnVerificationCodeSender.frame.origin.y+20)];
+            btnCheckBox.selected = YES;
+            [btnCheckBox addTarget:self action:@selector(btnCheckBoxPressed) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:btnCheckBox];
+        }
+        if (lblAgree == nil) {
+            lblAgree = [[UILabel alloc] initWithFrame:CGRectMake(25+btnCheckBox.frame.size.width, btnCheckBox.frame.origin.y, 120, btnCheckBox.frame.size.height)];
+            lblAgree.backgroundColor = [UIColor clearColor];
+            lblAgree.text = NSLocalizedString(@"read.and.agree", @"");
+            lblAgree.textColor = [UIColor lightGrayColor];
+            [self.view addSubview:lblAgree];
+        }
+        if (btnShowDeclare == nil) {
+            btnShowDeclare = [[UIButton alloc] initWithFrame:CGRectMake(25+lblAgree.frame.size.width, lblAgree.frame.origin.y, 120, lblAgree.frame.size.height)];
+            [btnShowDeclare setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+            [btnShowDeclare setTitleColor:[UIColor lightTextColor] forState:UIControlStateSelected];
+            [btnShowDeclare setTitle:NSLocalizedString(@"declare", @"") forState:UIControlStateNormal];
+            [btnShowDeclare addTarget:self action:@selector(btnShowDeclarePressed) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:btnShowDeclare];
         }
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [txtPhoneNumber becomeFirstResponder];
+}
+
+#pragma mark -
+#pragma mark btn pressed
+
+- (void)btnCheckBoxPressed{
+    btnCheckBox.selected = !btnCheckBox.selected;
+    btnVerificationCodeSender.enabled = btnCheckBox.selected;
+}
+
+- (void)btnShowDeclarePressed{
+    [self.navigationController pushViewController:[[AboutUsViewController alloc] init] animated:YES];
 }
 
 #pragma mark -
