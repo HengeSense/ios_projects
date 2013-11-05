@@ -103,6 +103,10 @@
                         unit.name = oldUnit.name;
                         unit.status = @"在线";
                     }
+                    
+                    // New unit doesn't contains sences list, so copy old unit list to new unit
+                    unit.sceneHashCode = oldUnit.sceneHashCode;
+                    unit.scenesModeList = oldUnit.scenesModeList;
                     break;
                 }
             }
