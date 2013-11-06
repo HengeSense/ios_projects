@@ -166,7 +166,7 @@
             cell.isCenter = YES;
         } else if(indexPath.row == 2) {
             titleLabel.text = NSLocalizedString(@"unit_state", @"");
-            detailLabel.text = unit == nil ? [NSString emptyString] : unit.status;
+            detailLabel.text = unit == nil ? [NSString emptyString] : ([NSString isBlank:unit.status]?NSLocalizedString(@"online", @""):unit.status);
             cell.accessoryViewVisible = YES;
             cell.isCenter = YES;
         } else if(indexPath.row == 3) {
