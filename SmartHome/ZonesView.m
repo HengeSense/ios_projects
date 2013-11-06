@@ -49,6 +49,7 @@
     [self clearSubviews];
     
     int totalPages = (zones == nil) ? 0 : zones.count;
+    if(totalPages == 0) totalPages = 1;
     self.contentSize = CGSizeMake(PANEL_WIDTH * totalPages, PANEL_HEIGHT);
     
     if(zones == nil) return;

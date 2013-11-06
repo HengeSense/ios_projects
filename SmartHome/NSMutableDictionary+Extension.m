@@ -14,6 +14,10 @@
     [self setObject:[NSNumber numberWithInteger:integer] forKey:key];
 }
 
+- (void)setDouble:(double)db forKey:(id<NSCopying>)key {
+    [self setObject:[NSNumber numberWithDouble:db] forKey:key];
+}
+
 /* if object is blank , return */
 - (void)setNoNilObject:(id)object forKey:(id<NSCopying>)key {
     if(object == nil || object == [NSNull null]) return;

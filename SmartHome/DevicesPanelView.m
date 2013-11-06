@@ -51,6 +51,7 @@
     [self clearSubviews];
     
     int totalPages = [self calcTotalPagesWithElementsCount:((devices == nil) ? 0 : devices.count)];
+    if(totalPages == 0) totalPages = 1;
     self.contentSize = CGSizeMake(PANEL_WIDTH, totalPages * PANEL_HEIGHT);
     
     if(devices == nil || devices.count == 0) {

@@ -74,6 +74,8 @@
 
     [self notifyCurrentSelectionZoneChanged:lastedSelectionZoneIdentifier];
     [self notifyZonesNavigationChanged:lastedSelectionZoneIdentifier];
+    
+    [self setNeedsDisplay];
 }
 
 - (void)notifyCurrentSelectionZoneChanged:(NSString *)zoneIdentifier {
