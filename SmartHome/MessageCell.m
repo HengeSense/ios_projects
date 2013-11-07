@@ -36,6 +36,7 @@
         textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 240,MESSAGE_CELL_HEIGHT-25)];
         textLabel.tag = TEXT_LABEL_TAG;
         textLabel.font =[UIFont systemFontOfSize:14];
+        textLabel.textAlignment = NSTextAlignmentLeft;
         textLabel.textColor = [UIColor lightTextColor];
         textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         textLabel.numberOfLines = 0;

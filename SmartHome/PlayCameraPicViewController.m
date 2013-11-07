@@ -10,7 +10,7 @@
 #import "CameraPicPath.h"
 #import "CameraLoadingView.h"
 #import "LongButton.h"
-
+#define FIRST_BUTTON_TAG 2000
 @interface PlayCameraPicViewController ()
 
 @end
@@ -73,6 +73,9 @@
         for (int i = 0; i<data.cameraPicPaths.count; i++) {
             LongButton *btnPlayCamera = [LongButton buttonWithPoint:CGPointMake(5, self.topbar.bounds.size.height + i * 54 + 245)];
             CameraPicPath *path = [data.cameraPicPaths objectAtIndex:i];
+            if (i == 0) {
+                btnPlayCamera.tag = FIRST_BUTTON_TAG;
+            }
             NSString *url = [NSString stringWithFormat:@"%@%@", data.http, path.path];
             [btnPlayCamera setParameter:url forKey:@"url"];
             [btnPlayCamera setTitle:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"play", @""), path.name] forState:UIControlStateNormal];
@@ -82,6 +85,9 @@
     }
     
     self.topbar.titleLabel.text = NSLocalizedString(@"view_message_video", @"");
+    LongButton *firstButton = (LongButton *)[self.view viewWithTag:FIRST_BUTTON_TAG];
+    [self play:firstButton];
+
 }
 
 - (void)dismiss {

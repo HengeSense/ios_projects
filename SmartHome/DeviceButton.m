@@ -119,7 +119,7 @@
         } else if(_device_.isCurtainOrSccurtain) {
             [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:OPEN].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:CLOSE].stringValue];
-            [self registerImage:[UIImage imageNamed:@"icon_curtain_off.png"] forStatus:[NSNumber numberWithInteger:STOP].stringValue];
+            [self registerImage:[UIImage imageNamed:@"icon_curtain_on.png"] forStatus:[NSNumber numberWithInteger:STOP].stringValue];
         } else if(_device_.isTV) {
             [self registerImage:[UIImage imageNamed:@"icon_tv_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_tv_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];

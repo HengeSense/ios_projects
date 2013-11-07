@@ -79,6 +79,7 @@
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 5, 240,MESSAGE_CELL_HEIGHT)];
         textLabel.tag = TEXT_LABEL_TAG;
         UIFont *font = [UIFont systemFontOfSize:14];
+        textLabel.textAlignment = NSTextAlignmentLeft;
         textLabel.font = font;
         textLabel.text = [@"    " stringByAppendingString:message.text];
         textLabel.textColor = [UIColor lightTextColor];
