@@ -3,7 +3,7 @@
 //  SmartHome
 //
 //  Created by Zhao yang on 8/2/13.
-//  Copyright (c) 2013 hentre. All rights reserved.
+//  Copyright (c) 2013 zhaoyang. All rights reserved.
 //
 
 #import "DrawerViewController.h"
