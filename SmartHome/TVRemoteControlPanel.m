@@ -108,6 +108,7 @@
             btnDigital.userObject = [NSNumber numberWithInteger:(self.device.isTV?i+2:i+90)];
             [btnDigital setBackgroundImage:[UIImage imageNamed:@"btn_rc_number.png"] forState:UIControlStateNormal];
             [btnDigital setBackgroundImage:[UIImage imageNamed:@"btn_rc_number.png"] forState:UIControlStateHighlighted];
+            [btnDigital setBackgroundImage:[UIImage imageNamed:@"btn_rc_number_center.png"] forState:UIControlStateSelected];
             [btnDigital addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:btnDigital];
             [btnDigitalGroups addObject:btnDigital];
