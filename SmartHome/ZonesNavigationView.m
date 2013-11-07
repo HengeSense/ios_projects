@@ -39,13 +39,15 @@
     [self clearSubviews];
     
     int totalElements = zones == nil ? 0 : zones.count;
-    int totalPage = (totalElements + 5 - (totalElements % 5)) / 5;
-    self.contentSize = CGSizeMake(80, totalPage * PANEL_HEIGHT);
+//    int totalPage = (totalElements + 5 - (totalElements % 5)) / 5;
+    
+    CGFloat height = (totalElements <= 5 ? PANEL_HEIGHT : (36 * totalElements));
+    self.contentSize = CGSizeMake(80, height);
     
     if(zones == nil) return;
     
     for(int i=0; i<zones.count; i++) {
-        CGFloat y = ((i + 5 - (i % 5)) / 5 - 1) * PANEL_HEIGHT + (i % 5) * 38;
+        CGFloat y = ((i + 5 - (i % 5)) / 5 - 1) * PANEL_HEIGHT + (i % 5) * 36;
         Zone *zone = [zones objectAtIndex:i];
         SMButton *btnZone = [[SMButton alloc] initWithFrame:CGRectMake(0, y, 80, 28)];
         btnZone.userObject = zone.identifier;
@@ -83,6 +85,13 @@
         if([view isKindOfClass:[SMButton class]]) {
             SMButton *btn = (SMButton *)view;
             if([btn.userObject isEqualToString:zoneIdentifier]) {
+                if(btn.frame.origin.y < self.contentOffset.y) {
+                    self.contentOffset = CGPointMake(self.contentOffset.x, btn.frame.origin.y);
+                }
+                if(btn.frame.origin.y >= (self.contentOffset.y + PANEL_HEIGHT)) {
+                    
+                    self.contentOffset = CGPointMake(self.contentOffset.x, btn.frame.origin.y - (PANEL_HEIGHT / 5) * 4);
+                }
                 [self setButtonSelected:btn isSelected:YES];
             } else {
                 [self setButtonSelected:btn isSelected:NO];
