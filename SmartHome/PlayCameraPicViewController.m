@@ -10,7 +10,9 @@
 #import "CameraPicPath.h"
 #import "CameraLoadingView.h"
 #import "LongButton.h"
+
 #define FIRST_BUTTON_TAG 2000
+
 @interface PlayCameraPicViewController ()
 
 @end
@@ -85,9 +87,13 @@
     }
     
     self.topbar.titleLabel.text = NSLocalizedString(@"view_message_video", @"");
-    LongButton *firstButton = (LongButton *)[self.view viewWithTag:FIRST_BUTTON_TAG];
-    [self play:firstButton];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    LongButton *firstButton = (LongButton *)[self.view viewWithTag:FIRST_BUTTON_TAG];
+    if(firstButton != nil) {
+        [self play:firstButton];
+    }
 }
 
 - (void)dismiss {
