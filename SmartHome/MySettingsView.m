@@ -154,10 +154,9 @@
 - (void)checkVersion {
     DeviceCommandCheckVersion *command = (DeviceCommandCheckVersion *)[CommandFactory commandForType:CommandTypeCheckVersion];
     NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-    command.curVersion = [infoDict noNilStringForKey:@"CFBundleShortVersionString"];
+    command.curVersion = [NSNumber numberWithDouble:[infoDict doubleForKey:@"CFBundleVersion"]];
     [[SMShared current].deliveryService executeDeviceCommand:command];
 }
-
 - (void)didCheckVersionComplete:(DeviceCommand *)command {
     switch (command.resultID) {
         case 1:

@@ -10,6 +10,6 @@
 
 @interface DeviceCommandCheckVersion : DeviceCommand
 
-@property (strong,nonatomic) NSString *curVersion;
+@property (strong,nonatomic) NSNumber *curVersion;
 
 @end

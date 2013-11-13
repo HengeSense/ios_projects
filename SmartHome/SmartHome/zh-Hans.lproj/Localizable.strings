@@ -57,7 +57,7 @@
 "unit_state_offline"    = "主控未连接云端";
 "device_state_offline"  = "此设备未连接";
 "offline"               = "未连接服务器";
-
+"online"                = "在线";
 
 /****************	View's Title Strings	****************/
 

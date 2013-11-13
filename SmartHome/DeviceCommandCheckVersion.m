@@ -15,7 +15,7 @@
 - (NSMutableDictionary *)toDictionary {
     NSMutableDictionary *json = [super toDictionary];
     if(json) {
-        [json setMayBlankString:self.curVersion forKey:@"curVersion"];
+        [json setObject:self.curVersion forKey:@"curVersion"];
     }
     return json;
 }
