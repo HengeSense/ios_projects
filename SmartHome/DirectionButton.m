@@ -22,7 +22,6 @@
 
 @synthesize delegate;
 
-
 - (id)initWithFrame:(CGRect)frame andType:(NSString *)type
 {
     self = [super initWithFrame:frame];
@@ -48,7 +47,8 @@
 - (void)initDefaults {
     
 }
--(void) initTVTypeUI{
+
+- (void)initTVTypeUI {
     CGPoint center = CGPointMake(70, 70.5);
     if(imgLeftButton == nil) {
         imgLeftButton = [[UIImageView alloc] initWithFrame:CGRectMake(4, 0, 81/2, 182/2)];
@@ -97,6 +97,7 @@
         backgroundImageView.image = [UIImage imageNamed:@"bg_camera.png"];
         [self addSubview:backgroundImageView];
     }
+    
     if(imgLeftButton == nil) {
         imgLeftButton = [[UIImageView alloc] initWithFrame:CGRectMake(4, 0, 81/2, 182/2)];
         imgLeftButton.center = CGPointMake(imgLeftButton.center.x, backgroundImageView.center.y-1);
@@ -137,6 +138,27 @@
         [self addGestureRecognizer:tapGesture];
     }
 }
+
+- (void)changeControlStateOnTimer:(NSTimer *)timer {
+    UIImageView *imgView = timer.userInfo;
+    NSString *imgName = @"";
+    if([imgView isEqual:imgCenterButton]) {
+        imgName = @"btn_rc_center_selected.png";
+    } else if ([imgView isEqual:imgBottomButton]) {
+        imgName = @"btn_rc_down_selected.png";
+    } else if ([imgView isEqual:imgLeftButton]) {
+        imgName = @"btn_rc_left_selected.png";
+    } else if ([imgView isEqual:imgRightButton]) {
+        imgName = @"btn_rc_right_selected.png";
+    } else if ([imgView isEqual:imgTopButton]) {
+        imgName = @"btn_rc_top_selected.png";
+    }
+    if(![imgName isEqualToString:@""]) {
+        imgView.image = [UIImage imageNamed:imgName];
+        NSLog(@"imgview.img=%@",imgView.image);
+    }
+}
+
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture {
     if(self.delegate == nil) return;
     
@@ -151,7 +173,6 @@
     isRight = (x0 / y0 > 1 || x0 / y0 < -1) && x0 > 0 && !isCenter;
     
     if(isCenter) {
-        
         if([self.delegate respondsToSelector:@selector(centerButtonClicked)]) {
             [self.delegate centerButtonClicked];
             UIImage *centerImg = imgCenterButton.image;
@@ -162,29 +183,21 @@
             } completion:^(BOOL finished){
                 imgCenterButton.image =centerImg;
                 imgCenterButton.alpha = 1;
-                
             }];
-
         }
     } else if(isTop&&!outOfBounds) {
-
         if([self.delegate respondsToSelector:@selector(topButtonClicked)]) {
             [self.delegate topButtonClicked];
             UIImage *topImg = imgTopButton.image;
             [UIView animateWithDuration:0.3f animations:^{
                 imgTopButton.image = [UIImage imageNamed:@"btn_rc_top_selected.png"];
                 imgTopButton.alpha = 0.5;
-                
             } completion:^(BOOL finished){
                 imgTopButton.image = topImg;
                 imgTopButton.alpha = 1;
-                
             }];
-
         }
-
     } else if (isLeft&&!outOfBounds) {
-
         if([self.delegate respondsToSelector:@selector(leftButtonClicked)]) {
             [self.delegate leftButtonClicked];
             UIImage *leftImg = imgLeftButton.image;
@@ -195,25 +208,20 @@
                 imgLeftButton.image = leftImg;
                 imgLeftButton.alpha = 1;
             }];
-
         }
     } else if (isBottom&&!outOfBounds) {
-        
         if([self.delegate respondsToSelector:@selector(bottomButtonClicked)]) {
             [self.delegate bottomButtonClicked];
             UIImage *bottomImg = imgBottomButton.image;
             [UIView animateWithDuration:0.3f animations:^{
                 imgBottomButton.image = [UIImage imageNamed:@"btn_rc_down_selected.png"];
                 imgBottomButton.alpha = 0.5;
-                
             } completion:^(BOOL finished){
                 imgBottomButton.image =bottomImg;
                 imgBottomButton.alpha = 1;
             }];
-
         }
     } else if(isRight&&!outOfBounds) {
-
         if([self.delegate respondsToSelector:@selector(rightButtonClicked)]) {
             [self.delegate rightButtonClicked];
             UIImage *rightImg = imgRightButton.image;
@@ -224,7 +232,6 @@
                 imgRightButton.image =rightImg;
                 imgRightButton.alpha = 1;
             }];
-
         }
     } else {
         return;
