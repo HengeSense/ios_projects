@@ -137,25 +137,6 @@
         [self addGestureRecognizer:tapGesture];
     }
 }
-- (void)changeControlStateOnTimer:(NSTimer *) timer{
-    UIImageView *imgView = timer.userInfo;
-    NSString *imgName = @"";
-    if ([imgView isEqual:imgCenterButton]) {
-        imgName = @"btn_rc_center_selected.png";
-    }else if ([imgView isEqual:imgBottomButton]){
-        imgName = @"btn_rc_down_selected.png";
-    }else if ([imgView isEqual:imgLeftButton]){
-        imgName = @"btn_rc_left_selected.png";
-    }else if ([imgView isEqual:imgRightButton]){
-        imgName = @"btn_rc_right_selected.png";
-    }else if ([imgView isEqual:imgTopButton]){
-        imgName = @"btn_rc_top_selected.png";
-    }
-    if (![imgName isEqualToString:@""]) {
-        imgView.image = [UIImage imageNamed:imgName];
-        NSLog(@"imgview.img=%@",imgView.image);
-    }
-}
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture {
     if(self.delegate == nil) return;
     
