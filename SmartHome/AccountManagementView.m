@@ -7,8 +7,8 @@
 //
 
 #import "AccountManagementView.h"
-#import "AccountService.h"
 #import "Users.h"
+#import "UserManagementService.h"
 #import "SystemService.h"
 #define BTN_MARGIN 30
 #define BTN_HEIGHT 49
@@ -23,7 +23,7 @@
     UIButton *btnPhone;
     UIButton *btnUnbinding;
     
-    AccountService *accountService;
+    UserManagementService *userManagementService;
     
 }
 
@@ -39,8 +39,8 @@
 }
 - (void)initDefaults{
     [super initDefaults];
-    if (accountService == nil) {
-        accountService = [[AccountService alloc] init];
+    if (userManagementService == nil) {
+        userManagementService = [[UserManagementService alloc] init];
     }
 }
 - (void)initUI{
@@ -184,13 +184,14 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1023&& buttonIndex == 0) {
-        [accountService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
+//        [userManagementService ]
+        [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
     }
 }
 
 - (void)notifyViewUpdate {
     curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
-    [accountService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
+    [userManagementService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
     [tblUnits reloadData];
 }
 
