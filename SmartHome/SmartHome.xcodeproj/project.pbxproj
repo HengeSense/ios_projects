@@ -193,6 +193,7 @@
 		6FC1021A17D9C72F00CA08F8 /* SceneMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1021917D9C72F00CA08F8 /* SceneMode.m */; };
 		6FC1021E17D9D4D900CA08F8 /* icon_curtain_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC1021C17D9D4D900CA08F8 /* icon_curtain_on@2x.png */; };
 		6FC1022117D9F24E00CA08F8 /* SelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1022017D9F24E00CA08F8 /* SelectionItem.m */; };
+		6FC310271834634D00CDF44E /* SystemService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC310261834634D00CDF44E /* SystemService.m */; };
 		6FC8C07017D975DC003B3904 /* DeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */; };
 		6FC8C07317D979A1003B3904 /* icon_light_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07117D979A1003B3904 /* icon_light_off@2x.png */; };
 		6FC8C07417D979A1003B3904 /* icon_light_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FC8C07217D979A1003B3904 /* icon_light_on@2x.png */; };
@@ -368,7 +369,6 @@
 		6F0FAE7917AF7F9F00B75D3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6F0FAE7B17AF7F9F00B75D3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F0FAE7F17AF7F9F00B75D3E /* SmartHome-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmartHome-Info.plist"; sourceTree = "<group>"; };
-		6F0FAE8117AF7F9F00B75D3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F0FAE8317AF7F9F00B75D3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F0FAE8517AF7F9F00B75D3E /* SmartHome-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartHome-Prefix.pch"; sourceTree = "<group>"; };
 		6F0FAE8617AF7F9F00B75D3E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -395,7 +395,6 @@
 		6F0FAEC917AF832700B75D3E /* DrawerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawerView.m; sourceTree = "<group>"; };
 		6F0FAEEA17AF83A400B75D3E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6F0FAEEC17AF83B200B75D3E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		6F0FAEEE17AF83E300B75D3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		6F0FAEF217AF840E00B75D3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F0FAEF417AF841500B75D3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6F0FAEF917AF874100B75D3E /* AirConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirConditionViewController.h; sourceTree = "<group>"; };
@@ -623,6 +622,8 @@
 		6FC1021C17D9D4D900CA08F8 /* icon_curtain_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_curtain_on@2x.png"; sourceTree = "<group>"; };
 		6FC1021F17D9F24D00CA08F8 /* SelectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionItem.h; sourceTree = "<group>"; };
 		6FC1022017D9F24E00CA08F8 /* SelectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionItem.m; sourceTree = "<group>"; };
+		6FC310251834634D00CDF44E /* SystemService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemService.h; sourceTree = "<group>"; };
+		6FC310261834634D00CDF44E /* SystemService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemService.m; sourceTree = "<group>"; };
 		6FC8C06E17D975DC003B3904 /* DeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDetailViewController.h; sourceTree = "<group>"; };
 		6FC8C06F17D975DC003B3904 /* DeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceDetailViewController.m; sourceTree = "<group>"; };
 		6FC8C07117D979A1003B3904 /* icon_light_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_light_off@2x.png"; sourceTree = "<group>"; };
@@ -1045,7 +1046,6 @@
 			isa = PBXGroup;
 			children = (
 				6F0FAE7F17AF7F9F00B75D3E /* SmartHome-Info.plist */,
-				6F0FAE8017AF7F9F00B75D3E /* InfoPlist.strings */,
 				6F0FAE8317AF7F9F00B75D3E /* main.m */,
 				6F0FAE8517AF7F9F00B75D3E /* SmartHome-Prefix.pch */,
 				6FDF6B4D17F9C91200B206A8 /* Default.png */,
@@ -1148,6 +1148,7 @@
 		6F0FAEA017AF800500B75D3E /* services */ = {
 			isa = PBXGroup;
 			children = (
+				6FC310241834633A00CDF44E /* systems */,
 				6FD081B617CF3DBF0089A1ED /* communications */,
 				6FD081B517CF231B0089A1ED /* command_handler */,
 			);
@@ -1690,6 +1691,15 @@
 				6FBD013317C4E034002D5618 /* DeviceButton.m */,
 			);
 			name = switch_button;
+			sourceTree = "<group>";
+		};
+		6FC310241834633A00CDF44E /* systems */ = {
+			isa = PBXGroup;
+			children = (
+				6FC310251834634D00CDF44E /* SystemService.h */,
+				6FC310261834634D00CDF44E /* SystemService.m */,
+			);
+			name = systems;
 			sourceTree = "<group>";
 		};
 		6FD081B517CF231B0089A1ED /* command_handler */ = {
@@ -2355,6 +2365,7 @@
 				6FDFB05617DD7221002E23B1 /* SMNotification.m in Sources */,
 				6FDFB05917DD722C002E23B1 /* NotificationData.m in Sources */,
 				F280616417DD6E810064F35B /* MessageCell.m in Sources */,
+				6FC310271834634D00CDF44E /* SystemService.m in Sources */,
 				F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */,
 				6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */,
 				6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */,
@@ -2380,15 +2391,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6F0FAE8017AF7F9F00B75D3E /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6F0FAE8117AF7F9F00B75D3E /* en */,
-				6F0FAEEE17AF83E300B75D3E /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		6F0FAEF317AF840E00B75D3E /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
