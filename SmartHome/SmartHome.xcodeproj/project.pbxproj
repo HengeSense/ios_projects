@@ -46,7 +46,6 @@
 		6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEAE17AF80F500B75D3E /* NSString+StringUtils.m */; };
 		6F0FAEB217AF814000B75D3E /* UIColor+ExtentionForHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEB117AF814000B75D3E /* UIColor+ExtentionForHexString.m */; };
 		6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEBA17AF822000B75D3E /* MySettingsView.m */; };
-		6F0FAEBE17AF823000B75D3E /* SceneModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEBD17AF823000B75D3E /* SceneModeView.m */; };
 		6F0FAEC117AF823D00B75D3E /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEC017AF823D00B75D3E /* MainView.m */; };
 		6F0FAEC417AF824B00B75D3E /* TopbarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEC317AF824B00B75D3E /* TopbarView.m */; };
 		6F0FAEC717AF82CC00B75D3E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0FAEC617AF82CC00B75D3E /* MainViewController.m */; };
@@ -391,8 +390,6 @@
 		6F0FAEB117AF814000B75D3E /* UIColor+ExtentionForHexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ExtentionForHexString.m"; sourceTree = "<group>"; };
 		6F0FAEB917AF822000B75D3E /* MySettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingsView.h; sourceTree = "<group>"; };
 		6F0FAEBA17AF822000B75D3E /* MySettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingsView.m; sourceTree = "<group>"; };
-		6F0FAEBC17AF823000B75D3E /* SceneModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneModeView.h; sourceTree = "<group>"; };
-		6F0FAEBD17AF823000B75D3E /* SceneModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneModeView.m; sourceTree = "<group>"; };
 		6F0FAEBF17AF823D00B75D3E /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		6F0FAEC017AF823D00B75D3E /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		6F0FAEC217AF824B00B75D3E /* TopbarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopbarView.h; sourceTree = "<group>"; };
@@ -1201,8 +1198,6 @@
 				6FD8A71617B0DD6F009C7493 /* NavigationView.m */,
 				6F0FAEB917AF822000B75D3E /* MySettingsView.h */,
 				6F0FAEBA17AF822000B75D3E /* MySettingsView.m */,
-				6F0FAEBC17AF823000B75D3E /* SceneModeView.h */,
-				6F0FAEBD17AF823000B75D3E /* SceneModeView.m */,
 				6F0FAEBF17AF823D00B75D3E /* MainView.h */,
 				6F0FAEC017AF823D00B75D3E /* MainView.m */,
 				6F0FAEC217AF824B00B75D3E /* TopbarView.h */,
@@ -2283,7 +2278,6 @@
 				6F0FAEAF17AF80F500B75D3E /* NSString+StringUtils.m in Sources */,
 				6F0FAEB217AF814000B75D3E /* UIColor+ExtentionForHexString.m in Sources */,
 				6F0FAEBB17AF822000B75D3E /* MySettingsView.m in Sources */,
-				6F0FAEBE17AF823000B75D3E /* SceneModeView.m in Sources */,
 				6F0FAEC117AF823D00B75D3E /* MainView.m in Sources */,
 				6F1771C21814C8B3007CF3AF /* SMNetworkTool.m in Sources */,
 				6F0FAEC417AF824B00B75D3E /* TopbarView.m in Sources */,
