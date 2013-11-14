@@ -14,6 +14,7 @@
 #import "UserAccountViewController.h"
 
 #define ACCOUNT_VIEW_HEIGHT 70
+#define LOGO_VIEW_HEIGHT 57/2
 
 @implementation DrawerView {
     UIView *accountView;
@@ -46,7 +47,7 @@
 }
 
 - (void)initDefaults {
-    entryHeight = ([UIScreen mainScreen].bounds.size.height - ACCOUNT_VIEW_HEIGHT - 20) / 5;
+    entryHeight = 86;
 }
 
 - (void)initUI {
@@ -59,7 +60,7 @@
     }
     
     if(logoView == nil) {
-        logoView = [[UIImageView alloc] initWithFrame:CGRectMake(22, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 30 : 10, 148/2, 57/2)];
+        logoView = [[UIImageView alloc] initWithFrame:CGRectMake(22, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 30 : 10, 148/2, LOGO_VIEW_HEIGHT)];
         logoView.image = [UIImage imageNamed:@"logo3.png"];
         [self addSubview:logoView];
         
