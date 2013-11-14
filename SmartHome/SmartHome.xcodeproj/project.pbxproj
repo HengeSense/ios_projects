@@ -97,6 +97,8 @@
 		6F1EE66717BC73FE00580760 /* line_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F1EE66517BC73FE00580760 /* line_scanner@2x.png */; };
 		6F1EE66A17BC787900580760 /* UnitsBindingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE66917BC787900580760 /* UnitsBindingViewController.m */; };
 		6F1EE66D17BCD41500580760 /* ClientSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE66C17BCD41500580760 /* ClientSocket.m */; };
+		6F262D621834781B0002ADC0 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F262D611834781B0002ADC0 /* User.m */; };
+		6F262D65183479960002ADC0 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F262D64183479960002ADC0 /* Users.m */; };
 		6F2E437A17CB05BD006FE4E8 /* btn_orange_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E437917CB05BD006FE4E8 /* btn_orange_highlight@2x.png */; };
 		6F2E437E17CB08D9006FE4E8 /* btn_dark_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E437D17CB08D9006FE4E8 /* btn_dark_small@2x.png */; };
 		6F347A4F17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A4E17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m */; };
@@ -463,6 +465,10 @@
 		6F1EE66917BC787900580760 /* UnitsBindingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsBindingViewController.m; sourceTree = "<group>"; };
 		6F1EE66B17BCD41500580760 /* ClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientSocket.h; sourceTree = "<group>"; };
 		6F1EE66C17BCD41500580760 /* ClientSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientSocket.m; sourceTree = "<group>"; };
+		6F262D601834781B0002ADC0 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		6F262D611834781B0002ADC0 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		6F262D63183479960002ADC0 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Users.h; sourceTree = "<group>"; };
+		6F262D64183479960002ADC0 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Users.m; sourceTree = "<group>"; };
 		6F2E437917CB05BD006FE4E8 /* btn_orange_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_orange_highlight@2x.png"; sourceTree = "<group>"; };
 		6F2E437D17CB08D9006FE4E8 /* btn_dark_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_dark_small@2x.png"; sourceTree = "<group>"; };
 		6F347A4D17D8B45B00B486D3 /* DeviceCommandGetSceneListHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetSceneListHandler.h; sourceTree = "<group>"; };
@@ -1170,6 +1176,10 @@
 				6F0F475417C5EC790057F9A4 /* ui */,
 				6FFAFDFF17E154A5001EB9D0 /* Entity.h */,
 				6FFAFE0017E154A5001EB9D0 /* Entity.m */,
+				6F262D601834781B0002ADC0 /* User.h */,
+				6F262D611834781B0002ADC0 /* User.m */,
+				6F262D63183479960002ADC0 /* Users.h */,
+				6F262D64183479960002ADC0 /* Users.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -2301,10 +2311,12 @@
 				6F92A1ED17B7D6CC009AD656 /* ConversationTextMessage.m in Sources */,
 				F20B36CD17B87CF1009286D6 /* MyDevicesView.m in Sources */,
 				F207B501180E90CB00A92603 /* DeviceUtils.m in Sources */,
+				6F262D621834781B0002ADC0 /* User.m in Sources */,
 				6FA3D8451806784C0064ED41 /* DeviceCommandUpdateDeviceTokenHandler.m in Sources */,
 				6FD0CC0417EFEC6F005956E0 /* DeviceCommandGetCameraServer.m in Sources */,
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 				F20B36D017B9DDAD009286D6 /* UnitDetailsViewController.m in Sources */,
+				6F262D65183479960002ADC0 /* Users.m in Sources */,
 				6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */,
 				6FC3102A1834682C00CDF44E /* AccountManagementView.m in Sources */,
 				6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */,
