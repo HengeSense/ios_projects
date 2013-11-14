@@ -8,6 +8,8 @@
 
 #import "SceneModeView.h"
 #import "SMCell.h"
+#import "AccountService.h"
+#import "Users.h"
 
 @implementation SceneModeView {
     UITableView *tblSceneMode;
@@ -36,7 +38,13 @@
         tblSceneMode.backgroundColor = [UIColor clearColor];
         [self addSubview:tblSceneMode];
     }
+    
+    
+    
+    
 }
+
+
 
 #pragma mark -
 #pragma mark table view delegate
