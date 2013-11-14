@@ -95,7 +95,7 @@
     if(command == nil) return;
     if(!self.isService) {
 #ifdef DEBUG
-        NSLog(@"Command Service was not Serverd, can't execute [%@]", command.commandName);
+//        NSLog(@"Command Service was not Serverd, can't execute [%@]", command.commandName);
 #endif
         return;
     }
@@ -115,7 +115,7 @@
     id<CommandExecutor> executor = [self determineCommandExcutor:command];
     if(executor != nil) {
 #ifdef DEBUG
-        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
+//        NSLog(@"Execute [%@] From [%@]", command.commandName, [executor executorName]);
 #endif
         [executor executeCommand:command];
     } else {
@@ -161,7 +161,7 @@
     } else if(command.commmandNetworkMode == CommandNetworkModeInternal) {
         networkModeString = @"Internal";
     }
-    NSLog(@"Received [%@] From [%@]", command.commandName, networkModeString);
+//    NSLog(@"Received [%@] From [%@]", command.commandName, networkModeString);
 #endif
 
     // Security key is invalid or expired

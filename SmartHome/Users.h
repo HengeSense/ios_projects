@@ -12,6 +12,7 @@
 @interface Users : Entity
 
 @property (strong, nonatomic) NSMutableArray *users;
+@property (assign, nonatomic, readonly) NSUInteger count;
 
 - (User *)userWithId:(NSString *)identifier;
 - (User *)userWithForMobile:(NSString *)mobile;

@@ -55,14 +55,6 @@
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 
-- (void)usersForUnit:(NSString *)unitIdentifier success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    
-}
-
-- (void)unBindUnit:(NSString *)unitIdentifier forUser:(NSString *)userIdentifier success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    
-}
-
 - (void)logoutSync:(SEL)success failed:(SEL)failed target:(id)t callback:(id)cb {
 //    NSString *url = [NSString stringWithFormat:@"/phone/logout?deviceCode=%@&security=%@", [SMShared current].settings.deviceCode, [SMShared current].settings.secretKey];
 }

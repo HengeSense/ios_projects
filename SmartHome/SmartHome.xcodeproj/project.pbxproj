@@ -101,6 +101,7 @@
 		6F262D6818347F250002ADC0 /* icon_users_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F262D6618347F250002ADC0 /* icon_users_selected@2x.png */; };
 		6F262D6918347F250002ADC0 /* icon_users_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F262D6718347F250002ADC0 /* icon_users_unselected@2x.png */; };
 		6F262D6C18349F6A0002ADC0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F262D6E18349F6A0002ADC0 /* InfoPlist.strings */; };
+		6F262D721834AC6C0002ADC0 /* UserManagementService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F262D711834AC6C0002ADC0 /* UserManagementService.m */; };
 		6F2E437A17CB05BD006FE4E8 /* btn_orange_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E437917CB05BD006FE4E8 /* btn_orange_highlight@2x.png */; };
 		6F2E437E17CB08D9006FE4E8 /* btn_dark_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F2E437D17CB08D9006FE4E8 /* btn_dark_small@2x.png */; };
 		6F347A4F17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F347A4E17D8B45C00B486D3 /* DeviceCommandGetSceneListHandler.m */; };
@@ -472,6 +473,8 @@
 		6F262D6718347F250002ADC0 /* icon_users_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_users_unselected@2x.png"; sourceTree = "<group>"; };
 		6F262D6D18349F6A0002ADC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F262D6F18349F6F0002ADC0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6F262D701834AC6C0002ADC0 /* UserManagementService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManagementService.h; sourceTree = "<group>"; };
+		6F262D711834AC6C0002ADC0 /* UserManagementService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManagementService.m; sourceTree = "<group>"; };
 		6F2E437917CB05BD006FE4E8 /* btn_orange_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_orange_highlight@2x.png"; sourceTree = "<group>"; };
 		6F2E437D17CB08D9006FE4E8 /* btn_dark_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_dark_small@2x.png"; sourceTree = "<group>"; };
 		6F347A4D17D8B45B00B486D3 /* DeviceCommandGetSceneListHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandGetSceneListHandler.h; sourceTree = "<group>"; };
@@ -1792,6 +1795,8 @@
 				6FB66D6117C745820002D6C5 /* AccountService.m */,
 				6F953D001803F29B00D847FA /* CameraService.h */,
 				6F953D011803F29B00D847FA /* CameraService.m */,
+				6F262D701834AC6C0002ADC0 /* UserManagementService.h */,
+				6F262D711834AC6C0002ADC0 /* UserManagementService.m */,
 			);
 			name = rest;
 			sourceTree = "<group>";
@@ -2398,6 +2403,7 @@
 				F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */,
 				6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */,
 				6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */,
+				6F262D721834AC6C0002ADC0 /* UserManagementService.m in Sources */,
 				6FFAFDFE17E0A3FE001EB9D0 /* NSDate+Extension.m in Sources */,
 				6FFAFE0117E154A6001EB9D0 /* Entity.m in Sources */,
 				6FFAFE0417E15752001EB9D0 /* NSMutableDictionary+Extension.m in Sources */,

@@ -15,7 +15,15 @@
 - (id)initWithJson:(NSDictionary *)json {
     self = [super initWithJson:json];
     if(self && json) {
-        
+        NSArray *_users = [json arrayForKey:@"users"];
+        if(_users != nil) {
+            for(int i=0; i<_users.count; i++) {
+                NSDictionary *_user = [_users objectAtIndex:i];
+                if(_user != nil) {
+                    [self.users addObject:[[User alloc] initWithJson:_user]];
+                }
+            }
+        }
     }
     return self;
 }
@@ -53,6 +61,10 @@
         _users_ = [NSMutableArray array];
     }
     return _users_;
+}
+
+- (NSUInteger)count {
+    return self.users.count;
 }
 
 @end

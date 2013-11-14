@@ -296,6 +296,7 @@
                         [SMShared current].settings.account = self.phoneNumberToValidation;
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
                         [SMShared current].settings.deviceCode = command.deviceCode;
+                        [SMShared current].settings.restAddress = command.restAddress;
                         [[SMShared current].settings saveSettings];
                         
                         ((LoginViewController *)[SMShared current].app.rootViewController).hasLogin = YES;

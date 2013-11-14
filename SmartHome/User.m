@@ -19,7 +19,19 @@
 - (id)initWithJson:(NSDictionary *)json {
     self = [super initWithJson:json];
     if(self && json) {
-        
+        self.identifier = [json noNilStringForKey:@"id"];
+        self.name = [json noNilStringForKey:@"screenName"];
+        self.mobile = [json noNilStringForKey:@"phoneNumber"];
+        NSString *_status = [json noNilStringForKey:@"status"];
+        if([NSString isBlank:_status]) {
+            self.userState = UserStateUnknow;
+        } else if([@"在线" isEqualToString:_status]) {
+            self.userState = UserStateOnline;
+        } else if([@"下线" isEqualToString:_status]) {
+            self.userState = UserStateOffline;
+        } else {
+            self.userState = UserStateUnknow;
+        }
     }
     return self;
 }

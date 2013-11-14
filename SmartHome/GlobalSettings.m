@@ -20,6 +20,7 @@
 #define IS_VOICE_KEY              @"is_voice.key"
 #define IS_SHAKE_KEY              @"is_shake.key"
 #define DEVICE_TOKEN_KEY          @"device_token.key"
+#define REST_ADDRESS_KEY          @"rest_address.key"
 
 @implementation GlobalSettings
 
@@ -28,6 +29,7 @@
 @synthesize deviceCode;
 @synthesize deviceToken;
 @synthesize tcpAddress;
+@synthesize restAddress;
 @synthesize isFirstTimeOpenApp;
 @synthesize isShake;
 @synthesize isVoice;
@@ -44,6 +46,7 @@
             self.secretKey = [NSString emptyString];
             self.tcpAddress = [NSString emptyString];
             self.deviceCode = [NSString emptyString];
+            self.restAddress = [NSString emptyString];
             self.deviceToken = [NSString emptyString];
             self.isVoice = YES;
             self.isShake = NO;
@@ -58,6 +61,7 @@
             self.isShake = [settings boolForKey:IS_SHAKE_KEY];
             self.isVoice = [settings boolForKey:IS_VOICE_KEY];
             self.deviceToken = [settings noNilStringForKey:DEVICE_TOKEN_KEY];
+            self.restAddress = [settings noNilStringForKey:REST_ADDRESS_KEY];
         }
     }
     return self;
@@ -71,6 +75,7 @@
     [dictionary setMayBlankString:self.deviceToken forKey:DEVICE_TOKEN_KEY];
     [dictionary setMayBlankString:self.tcpAddress forKey:TCP_ADDRESS_KEY];
     [dictionary setMayBlankString:self.deviceCode forKey:DEVICE_CODE_KEY];
+    [dictionary setMayBlankString:self.restAddress forKey:REST_ADDRESS_KEY];
     [dictionary setBool:self.isFirstTimeOpenApp forKey:FIRST_TIME_OPEN_APP_KEY];
     [dictionary setBool:self.isShake forKey:IS_SHAKE_KEY];
     [dictionary setBool:self.isVoice forKey:IS_VOICE_KEY];

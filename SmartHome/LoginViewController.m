@@ -191,6 +191,7 @@
                         [SMShared current].settings.secretKey = command.security;
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
                         [SMShared current].settings.deviceCode = command.deviceCode;
+                        [SMShared current].settings.restAddress = command.restAddress;
                         [[SMShared current].settings saveSettings];
                         
                         //start service
