@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "MainView.h"
 #import "MySettingsView.h"
-#import "SceneModeView.h"
+#import "AccountManagementView.h"
 #import "MyDevicesView.h"
 #import "TopbarView.h"
 #import "CommandFactory.h"
@@ -43,6 +43,7 @@
 
     DrawerNavigationItem *mainView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *myDevicesView = [[DrawerNavigationItem alloc] init];
+    DrawerNavigationItem *accountManagementView = [[DrawerNavigationItem alloc] init];
     DrawerNavigationItem *settingsView = [[DrawerNavigationItem alloc] init];
      
     mainView.itemIdentifier = @"mainView";
@@ -55,6 +56,11 @@
     myDevicesView.itemImageName = @"icon_devices_unselected.png";
     myDevicesView.itemCheckedImageName = @"icon_devices_selected.png";
     
+    accountManagementView.itemIdentifier = @"accountManagementView";
+    accountManagementView.itemTitle = NSLocalizedString(@"account_management", @"");
+    accountManagementView.itemImageName = @"icon_home_unselected.png";
+    accountManagementView.itemCheckedImageName = @"icon_home_selected.png";
+    
     settingsView.itemIdentifier = @"settingsView";
     settingsView.itemTitle = NSLocalizedString(@"settings_view", @"");
     settingsView.itemImageName = @"icon_settings_unselected.png";
@@ -62,6 +68,7 @@
     
     [drawerItems addObject:mainView];
     [drawerItems addObject:myDevicesView];
+    [drawerItems addObject:accountManagementView];
     [drawerItems addObject:settingsView];
 }
 
@@ -115,9 +122,9 @@
         } else if([@"myDevicesView" isEqualToString:item.itemIdentifier]) {
             view = [[MyDevicesView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
             view.topbar.titleLabel.text = NSLocalizedString(@"my_devices.title", @"");
-        } else if([@"sceneModeView" isEqualToString:item.itemIdentifier]) {
-            view = [[SceneModeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
-            view.topbar.titleLabel.text = NSLocalizedString(@"scene_mode.title", @"");
+        } else if([@"accountManagementView" isEqualToString:item.itemIdentifier]) {
+            view = [[AccountManagementView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
+            view.topbar.titleLabel.text = NSLocalizedString(@"account_management.title", @"");
         } else if([@"settingsView" isEqualToString:item.itemIdentifier]) {
             view = [[MySettingsView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-20) owner:self];
             view.topbar.titleLabel.text = NSLocalizedString(@"settings_view.title", @"");

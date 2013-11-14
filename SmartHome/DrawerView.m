@@ -46,7 +46,7 @@
 }
 
 - (void)initDefaults {
-    entryHeight = ([UIScreen mainScreen].bounds.size.height - ACCOUNT_VIEW_HEIGHT - 20) / 4;
+    entryHeight = ([UIScreen mainScreen].bounds.size.height - ACCOUNT_VIEW_HEIGHT - 20) / 5;
 }
 
 - (void)initUI {
