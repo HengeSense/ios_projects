@@ -45,7 +45,7 @@
     return nil;
 }
 
-- (User *)userWithForMobile:(NSString *)mobile {
+- (User *)userWithMobile:(NSString *)mobile {
     if([NSString isBlank:mobile]) return nil;
     for(int i=0; i<self.users.count; i++) {
         User *user = [self.users objectAtIndex:i];

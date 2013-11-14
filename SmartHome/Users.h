@@ -15,6 +15,6 @@
 @property (assign, nonatomic, readonly) NSUInteger count;
 
 - (User *)userWithId:(NSString *)identifier;
-- (User *)userWithForMobile:(NSString *)mobile;
+- (User *)userWithMobile:(NSString *)mobile;
 
 @end
