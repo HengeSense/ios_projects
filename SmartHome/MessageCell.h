@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "SMNotification.h"
+
 #define MESSAGE_CELL_HEIGHT 80
 #define TYPE_IMAGE_TAG 1001
 #define TEXT_LABEL_TAG 1000
 #define CELL_VIEW_TAG 999
+
 @interface MessageCell : UITableViewCell
--(void) loadWithMessage:(SMNotification *) message;
+
 @property (strong,nonatomic) SMNotification *notificaion;
+
+- (void)loadWithMessage:(SMNotification *)message;
+
 @end

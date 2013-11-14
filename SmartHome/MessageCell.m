@@ -8,6 +8,7 @@
 
 #import "MessageCell.h"
 #import "SMDateFormatter.h"
+
 @implementation MessageCell{
     UIView  *view;
     UIImageView *typeMessage;
@@ -16,7 +17,9 @@
     UIImageView *seperatorLine;
     UILabel *lblTime;
 }
+
 @synthesize notificaion;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier 
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -25,8 +28,8 @@
     }
     return self;
 }
--(void) initUI{
-    
+
+- (void)initUI {
     if (typeMessage == nil) {
         typeMessage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 50/2, 39/2)];
         typeMessage.backgroundColor = [UIColor clearColor];
@@ -43,6 +46,7 @@
         textLabel.backgroundColor = [UIColor clearColor];
 
     }
+    
     if (lblTime == nil) {
         lblTime = [[UILabel alloc] initWithFrame:CGRectMake(40, MESSAGE_CELL_HEIGHT-20, 240, 15)];
         lblTime.backgroundColor = [UIColor clearColor];
@@ -72,15 +76,14 @@
         [self addSubview:view];
     }
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-
-
 }
--(void) loadWithMessage:(SMNotification *) message{
-    if ([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]) {
+
+-(void) loadWithMessage:(SMNotification *) message {
+    if([message.type isEqualToString:@"MS"]||[message.type isEqualToString:@"AT"]) {
         typeMessage.image = [UIImage imageNamed:@"icon_message.png"];
-    }else if([message.type isEqualToString:@"CF"]){
+    } else if([message.type isEqualToString:@"CF"]){
         typeMessage.image = [UIImage imageNamed:@"icon_validation.png"];
-    }else if([message.type isEqualToString:@"AL"]){
+    } else if([message.type isEqualToString:@"AL"]){
         typeMessage.image = [UIImage imageNamed:@"icon_warning"];
     }
     typeMessage.tag = TYPE_IMAGE_TAG;
@@ -93,7 +96,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
