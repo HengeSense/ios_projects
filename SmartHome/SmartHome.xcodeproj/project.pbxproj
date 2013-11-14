@@ -300,7 +300,6 @@
 		F20B36D017B9DDAD009286D6 /* UnitDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* UnitDetailsViewController.m */; };
 		F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */; };
 		F20C788317D0859C003D50C5 /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C788217D0859B003D50C5 /* Memory.m */; };
-		F2118A51183471AE0057E7AC /* UnitsManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2118A50183471AE0057E7AC /* UnitsManageViewController.m */; };
 		F2118A531834750B0057E7AC /* power_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2118A521834750B0057E7AC /* power_selected@2x.png */; };
 		F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F217126017E1A44F00000967 /* PushSettingViewController.m */; };
 		F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0317CB3CEB0043400F /* ScrollNavButton.m */; };
@@ -797,8 +796,6 @@
 		F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnitsHandler.m; sourceTree = "<group>"; };
 		F20C788117D0859A003D50C5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		F20C788217D0859B003D50C5 /* Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memory.m; sourceTree = "<group>"; };
-		F2118A4F183471AE0057E7AC /* UnitsManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsManageViewController.h; sourceTree = "<group>"; };
-		F2118A50183471AE0057E7AC /* UnitsManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsManageViewController.m; sourceTree = "<group>"; };
 		F2118A521834750B0057E7AC /* power_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power_selected@2x.png"; sourceTree = "<group>"; };
 		F217125F17E1A44F00000967 /* PushSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingViewController.h; sourceTree = "<group>"; };
 		F217126017E1A44F00000967 /* PushSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingViewController.m; sourceTree = "<group>"; };
@@ -1234,8 +1231,6 @@
 				F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */,
 				F2204119181FD70A0050000C /* AboutUsViewController.h */,
 				F220411A181FD70A0050000C /* AboutUsViewController.m */,
-				F2118A4F183471AE0057E7AC /* UnitsManageViewController.h */,
-				F2118A50183471AE0057E7AC /* UnitsManageViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -2385,7 +2380,6 @@
 				6F347A5217D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m in Sources */,
 				F29BBA5F17F2C48F00B65436 /* WelcomeImageView.m in Sources */,
 				6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m in Sources */,
-				F2118A51183471AE0057E7AC /* UnitsManageViewController.m in Sources */,
 				6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevices.m in Sources */,
 				6F347A5B17D8B64500B486D3 /* DeviceCommandVoiceControl.m in Sources */,
 				6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */,

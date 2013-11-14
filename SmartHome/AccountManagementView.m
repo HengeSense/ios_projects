@@ -7,10 +7,18 @@
 //
 
 #import "AccountManagementView.h"
-
+#define BTN_MARGIN 30
+#define BTN_HEIGHT 49
+#define BTN_WIDTH 101.5
 @implementation AccountManagementView{
     UITableView *tblUnits;
-    NSArray *unitsIdentifierCollection;
+    NSString *curUnitIdentifier;
+    NSArray *unitBindingAccounts;
+    
+    UIView *buttonPanelView;
+    UIButton *btnMsg;
+    UIButton *btnPhone;
+    UIButton *btnUnbinding;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -38,7 +46,36 @@
         [self addSubview:tblUnits];
     }
     
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    if (buttonPanelView == nil) {
+        buttonPanelView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, self.frame.size.width-10, BTN_HEIGHT)];
+        buttonPanelView.backgroundColor = [UIColor clearColor];
+        buttonPanelView.hidden = YES;
+        [self addSubview:buttonPanelView];
+        
+        if (btnMsg == nil) {
+            btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(10, 5,BTN_WIDTH , BTN_HEIGHT)];
+            [btnMsg setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
+            [btnMsg setTitle:NSLocalizedString(@"send.message", @"") forState:UIControlStateNormal];
+            [buttonPanelView addSubview:btnMsg];
+        }
+        
+        if (btnPhone == nil) {
+            btnPhone = [[UIButton alloc] initWithFrame:CGRectMake(btnMsg.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
+            [btnPhone setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
+            [btnPhone setTitle:NSLocalizedString(@"call.phoneNumber", @"") forState:UIControlStateNormal];
+            [buttonPanelView addSubview:btnPhone];
+        }
+        
+        if (btnUnbinding == nil) {
+            btnUnbinding = [[UIButton alloc] initWithFrame:CGRectMake(btnPhone.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
+            [btnUnbinding setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
+            [btnUnbinding setTitle:NSLocalizedString(@"call.phoneNumber", @"") forState:UIControlStateNormal];
+            [buttonPanelView addSubview:btnUnbinding];
+        }
+
+        
+    }
+
 
     
     
@@ -48,7 +85,7 @@
 #pragma mark- table delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return unitsIdentifierCollection == nil ? 0 : unitsIdentifierCollection.count;
+    return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return SM_CELL_HEIGHT/2;
@@ -63,11 +100,11 @@
     static NSString *singleCellIdentifier = @"singleCellIdentifier";
     
     NSString *cellIdentifier;
-    if(indexPath.row == 0 && unitsIdentifierCollection.count == 1) {
+    if(indexPath.row == 0 && unitBindingAccounts.count == 1) {
         cellIdentifier = singleCellIdentifier;
     } else if(indexPath.row == 0) {
         cellIdentifier = topCellIdentifier;
-    } else if(indexPath.row == unitsIdentifierCollection.count - 1) {
+    } else if(indexPath.row == unitBindingAccounts.count - 1) {
         cellIdentifier = bottomCellIdentifier;
     } else {
         cellIdentifier = centerCellIdentifier;
@@ -95,16 +132,16 @@
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
     UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
     
-    Unit *unit = [[SMShared current].memory findUnitByIdentifier:[unitsIdentifierCollection objectAtIndex:indexPath.row]];
-    
-    if(unit != nil) {
-        titleLabel.text = unit.name;
-        detailLabel.text = [NSString stringWithFormat:@"%@   ", [NSString isBlank:unit.status] ? NSLocalizedString(@"online", @"") : unit.status];
-    }
-    
-    if(unitsIdentifierCollection.count == 1) {
-        cell.isSingle = YES;
-    }
+//    Unit *unit = [[SMShared current].memory findUnitByIdentifier:[unitsIdentifierCollection objectAtIndex:indexPath.row]];
+//    
+//    if(unit != nil) {
+//        titleLabel.text = unit.name;
+//        detailLabel.text = [NSString stringWithFormat:@"%@   ", [NSString isBlank:unit.status] ? NSLocalizedString(@"online", @"") : unit.status];
+//    }
+//    
+//    if(unitsIdentifierCollection.count == 1) {
+//        cell.isSingle = YES;
+//    }
     
     return cell;
 
@@ -113,23 +150,17 @@
     return;
 }
 
-#pragma mark
-#pragma mark- command delegate
-
-- (void)notifyUnitsWasUpdate {
-    [self notifyViewUpdate];
-}
 
 - (void)notifyViewUpdate {
-    unitsIdentifierCollection = [[SMShared current].memory allUnitsIdentifierAsArray];
+    curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
     [tblUnits reloadData];
 }
 
 
 - (void)destory {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+
 #ifdef DEBUG
-    NSLog(@"[My Devices View] Destoryed.");
+    NSLog(@"AccountManagement View] Destoryed.");
 #endif
 }
 

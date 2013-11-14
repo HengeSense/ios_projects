@@ -7,9 +7,8 @@
 //
 
 #import "NavigationView.h"
-#import "DeviceCommandGetUnitsHandler.h"
 #import "SMCell.h"
 
-@interface AccountManagementView : NavigationView<UITableViewDataSource,UITableViewDelegate,DeviceCommandGetUnitsHandlerDelegate>
+@interface AccountManagementView : NavigationView<UITableViewDataSource,UITableViewDelegate>
 
 @end
