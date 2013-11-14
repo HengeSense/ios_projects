@@ -10,7 +10,7 @@
 
 @implementation Users
 
-@synthesize users;
+@synthesize users = _users_;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super initWithJson:json];
@@ -27,7 +27,6 @@
 }
 
 - (User *)userWithId:(NSString *)identifier {
-    if(self.users == nil) return nil;
     if([NSString isBlank:identifier]) return nil;
     for(int i=0; i<self.users.count; i++) {
         User *user = [self.users objectAtIndex:i];
@@ -39,7 +38,6 @@
 }
 
 - (User *)userWithForMobile:(NSString *)mobile {
-    if(self.users == nil) return nil;
     if([NSString isBlank:mobile]) return nil;
     for(int i=0; i<self.users.count; i++) {
         User *user = [self.users objectAtIndex:i];
@@ -48,6 +46,13 @@
         }
     }
     return nil;
+}
+
+- (NSMutableArray *)users {
+    if(_users_ == nil) {
+        _users_ = [NSMutableArray array];
+    }
+    return _users_;
 }
 
 @end
