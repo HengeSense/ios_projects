@@ -7,9 +7,13 @@
 //
 
 #import "Entity.h"
+#import "User.h"
 
 @interface Users : Entity
 
 @property (strong, nonatomic) NSMutableArray *users;
+
+- (User *)findUserById:(NSString *)identifier;
+- (User *)findUserByMobile:(NSString *)mobile;
 
 @end

@@ -58,8 +58,8 @@
     
     accountManagementView.itemIdentifier = @"accountManagementView";
     accountManagementView.itemTitle = NSLocalizedString(@"account_management", @"");
-    accountManagementView.itemImageName = @"icon_home_unselected.png";
-    accountManagementView.itemCheckedImageName = @"icon_home_selected.png";
+    accountManagementView.itemImageName = @"icon_users_unselected.png";
+    accountManagementView.itemCheckedImageName = @"icon_users_selected.png";
     
     settingsView.itemIdentifier = @"settingsView";
     settingsView.itemTitle = NSLocalizedString(@"settings_view", @"");
