@@ -296,6 +296,8 @@
 		F20B36D017B9DDAD009286D6 /* UnitDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* UnitDetailsViewController.m */; };
 		F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */; };
 		F20C788317D0859C003D50C5 /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C788217D0859B003D50C5 /* Memory.m */; };
+		F2118A51183471AE0057E7AC /* UnitsManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2118A50183471AE0057E7AC /* UnitsManageViewController.m */; };
+		F2118A531834750B0057E7AC /* power_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2118A521834750B0057E7AC /* power_selected@2x.png */; };
 		F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F217126017E1A44F00000967 /* PushSettingViewController.m */; };
 		F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0317CB3CEB0043400F /* ScrollNavButton.m */; };
 		F2204114181F58F40050000C /* btn_recoder_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2204112181F58F40050000C /* btn_recoder_start@2x.png */; };
@@ -785,6 +787,9 @@
 		F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnitsHandler.m; sourceTree = "<group>"; };
 		F20C788117D0859A003D50C5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		F20C788217D0859B003D50C5 /* Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memory.m; sourceTree = "<group>"; };
+		F2118A4F183471AE0057E7AC /* UnitsManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsManageViewController.h; sourceTree = "<group>"; };
+		F2118A50183471AE0057E7AC /* UnitsManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsManageViewController.m; sourceTree = "<group>"; };
+		F2118A521834750B0057E7AC /* power_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power_selected@2x.png"; sourceTree = "<group>"; };
 		F217125F17E1A44F00000967 /* PushSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingViewController.h; sourceTree = "<group>"; };
 		F217126017E1A44F00000967 /* PushSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingViewController.m; sourceTree = "<group>"; };
 		F2178C0217CB3CEB0043400F /* ScrollNavButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollNavButton.h; sourceTree = "<group>"; };
@@ -994,9 +999,9 @@
 				6F0FAEA317AF801700B75D3E /* controllers */,
 				6F0FAEA217AF800F00B75D3E /* views */,
 				6F0FAEA117AF800A00B75D3E /* models */,
+				6F0FAE9E17AF7FF700B75D3E /* images */,
 				6F0FAEA017AF800500B75D3E /* services */,
 				6F0FAE9F17AF7FFE00B75D3E /* commons */,
-				6F0FAE9E17AF7FF700B75D3E /* images */,
 				6F0FAE9D17AF7FEE00B75D3E /* components */,
 				6F0FAE7D17AF7F9F00B75D3E /* SmartHome */,
 				6F0FAE7617AF7F9F00B75D3E /* Frameworks */,
@@ -1214,6 +1219,8 @@
 				F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */,
 				F2204119181FD70A0050000C /* AboutUsViewController.h */,
 				F220411A181FD70A0050000C /* AboutUsViewController.m */,
+				F2118A4F183471AE0057E7AC /* UnitsManageViewController.h */,
+				F2118A50183471AE0057E7AC /* UnitsManageViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1291,6 +1298,7 @@
 		6F159BD717D6E594005CFFEE /* remote_control */ = {
 			isa = PBXGroup;
 			children = (
+				F2118A521834750B0057E7AC /* power_selected@2x.png */,
 				F205133A182B8CAC000A71DA /* btn_rc_selected.png */,
 				6F159BE217D6E68A005CFFEE /* btn_rc_number@2x.png */,
 				F205132E182B6B79000A71DA /* btn_rc_center_selected@2x.png */,
@@ -2126,6 +2134,7 @@
 				6F0420EA17C4817800F7F6AF /* btn_camera_center@2x.png in Resources */,
 				6F0420EB17C4817800F7F6AF /* btn_camera_right@2x.png in Resources */,
 				6F0420EC17C4817800F7F6AF /* btn_camera_top@2x.png in Resources */,
+				F2118A531834750B0057E7AC /* power_selected@2x.png in Resources */,
 				6F0420F217C4824900F7F6AF /* btn_camera_left@2x.png in Resources */,
 				6F0420F417C49E3500F7F6AF /* bg_drawer_cell@2x.png in Resources */,
 				F20AC1AB17F3DDD100224CB8 /* btn_add@2x.png in Resources */,
@@ -2357,6 +2366,7 @@
 				6F347A5217D8B47100B486D3 /* DeviceCommandVoiceControlHandler.m in Sources */,
 				F29BBA5F17F2C48F00B65436 /* WelcomeImageView.m in Sources */,
 				6F347A5517D8B48800B486D3 /* DeviceCommandUpdateDevicesHandler.m in Sources */,
+				F2118A51183471AE0057E7AC /* UnitsManageViewController.m in Sources */,
 				6F347A5817D8B63500B486D3 /* DeviceCommandUpdateDevices.m in Sources */,
 				6F347A5B17D8B64500B486D3 /* DeviceCommandVoiceControl.m in Sources */,
 				6F9EDFAA17D8D55800AFDBDF /* NotificationsFileManager.m in Sources */,
