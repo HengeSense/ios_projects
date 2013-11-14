@@ -230,6 +230,10 @@
 /****************	Account Management View Strings	****************/
 
 "account_management"    =  "账户管理";
+"send.message"          =  "发送短信";
+"call.phoneNumber"      =  "拨打电话";
+"unbinding"             =  "解除绑定";
+"confirm.unbinding"     =  "是否确定解除用户[%@]与主控[%@]的绑定关系？";
 
 
 /*************** About us text *************************/

@@ -9,6 +9,6 @@
 #import "NavigationView.h"
 #import "SMCell.h"
 
-@interface AccountManagementView : NavigationView<UITableViewDataSource,UITableViewDelegate>
+@interface AccountManagementView : NavigationView<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 @end

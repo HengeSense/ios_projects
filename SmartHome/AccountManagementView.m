@@ -7,6 +7,9 @@
 //
 
 #import "AccountManagementView.h"
+#import "AccountService.h"
+#import "Users.h"
+#import "SystemService.h"
 #define BTN_MARGIN 30
 #define BTN_HEIGHT 49
 #define BTN_WIDTH 101.5
@@ -14,11 +17,14 @@
     UITableView *tblUnits;
     NSString *curUnitIdentifier;
     NSArray *unitBindingAccounts;
-    
+    User *selectedUser;
     UIView *buttonPanelView;
     UIButton *btnMsg;
     UIButton *btnPhone;
     UIButton *btnUnbinding;
+    
+    AccountService *accountService;
+    
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -26,12 +32,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [super initDefaults];
         [self initUI];
     }
     return self;
 }
 - (void)initDefaults{
     [super initDefaults];
+    if (accountService == nil) {
+        accountService = [[AccountService alloc] init];
+    }
 }
 - (void)initUI{
     [super initUI];
@@ -69,7 +79,7 @@
         if (btnUnbinding == nil) {
             btnUnbinding = [[UIButton alloc] initWithFrame:CGRectMake(btnPhone.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnUnbinding setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
-            [btnUnbinding setTitle:NSLocalizedString(@"call.phoneNumber", @"") forState:UIControlStateNormal];
+            [btnUnbinding setTitle:NSLocalizedString(@"unbinding", @"") forState:UIControlStateNormal];
             [buttonPanelView addSubview:btnUnbinding];
         }
 
@@ -79,6 +89,21 @@
 
     
     
+}
+#pragma mark
+#pragma mark- btn events
+- (void)btnPressed:(UIButton *) sender{
+    
+    if ([sender isEqual:btnMsg]) {
+        [SystemService messageToMobile:selectedUser.mobile withMessage:nil];
+    } else if ([sender isEqual:btnPhone]){
+        [SystemService dialToMobile:selectedUser.mobile];
+    }else if ([sender isEqual:btnUnbinding]){
+        UIAlertView  *confirmAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"tips", @"") message:[NSString stringWithFormat: NSLocalizedString(@"confirm.unbinding", @""),selectedUser.name,[SMShared current].memory.currentUnit.name]delegate:self cancelButtonTitle:NSLocalizedString(@"determine", @"") otherButtonTitles:NSLocalizedString(@"cancel", @""), nil];
+        confirmAlertView.tag = 1023;
+        [confirmAlertView dismissWithClickedButtonIndex:1 animated:YES];
+        [confirmAlertView show];
+    }
 }
 
 #pragma mark
@@ -147,16 +172,64 @@
 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    return;
+    selectedUser = [unitBindingAccounts objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.5 animations:^{
+        cell.center = CGPointMake(cell.center.x, cell.center.y+BTN_HEIGHT);
+    } completion:nil];
 }
 
+#pragma mark
+#pragma mark- alertview delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1023&& buttonIndex == 0) {
+        [accountService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
+    }
+}
 
 - (void)notifyViewUpdate {
     curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
+    [accountService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
     [tblUnits reloadData];
 }
 
+#pragma mark
+#pragma mark- handle success and failed 
 
+- (void)getUsersForUnitSuccess:(RestResponse *) resp{
+    if (resp&&resp.statusCode == 200) {
+        NSString *json = [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
+        NSLog(@"users json%@",json);
+        return;
+    }
+    [self getUsersForUnitFailed:resp];
+}
+- (void)getUsersForUnitFailed:(RestResponse *) resp{
+    if(resp != nil && abs(resp.statusCode) == 1001) {
+        // 超时处理
+        return;
+    } else {
+        // Error
+    }
+}
+
+- (void)unbindingSuccess:(RestResponse *) resp{
+    if (resp&&resp.statusCode == 200) {
+        NSString *json = [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
+        NSLog(@"users json%@",json);
+        return;
+    }
+    [self unbindingFailed:resp];
+}
+- (void)unbindingFailed:(RestResponse *) resp{
+    if(resp != nil && abs(resp.statusCode) == 1001) {
+        // 超时处理
+        return;
+    } else {
+        // Error
+    }
+}
 - (void)destory {
 
 #ifdef DEBUG
