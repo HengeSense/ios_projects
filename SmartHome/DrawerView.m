@@ -69,7 +69,7 @@
     }
     
     if(accountView == nil) {
-        accountView = [[UIView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height, 120, ACCOUNT_VIEW_HEIGHT)];
+        accountView = [[UIView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height + 5, 120, ACCOUNT_VIEW_HEIGHT)];
         lblMessage1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 22, 100, 18)];
         UILabel *lblMessage2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 42, 100, 18)];
         lblMessage1.backgroundColor = [UIColor clearColor];
