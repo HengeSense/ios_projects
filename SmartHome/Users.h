@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) NSMutableArray *users;
 
-- (User *)findUserById:(NSString *)identifier;
-- (User *)findUserByMobile:(NSString *)mobile;
+- (User *)userWithId:(NSString *)identifier;
+- (User *)userWithForMobile:(NSString *)mobile;
 
 @end

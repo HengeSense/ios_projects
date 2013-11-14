@@ -7,7 +7,6 @@
 //
 
 #import "ServiceBase.h"
-#import "Users.h"
 
 @interface AccountService : ServiceBase
 
@@ -23,6 +22,10 @@
 
 - (void)modifyUsernameByPhoneNumber:(NSString *) phoneNumber checkCode:(NSString *) checkCode oldPassword:(NSString *) password success:(SEL) s failed:(SEL) f target:(id)t callback:(id) cb;
 
-//- (Users *)getUsers
+/* Account && users management */
+
+- (void)usersForUnit:(NSString *)unitIdentifier success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
+
+- (void)unBindUnit:(NSString *)unitIdentifier forUser:(NSString *)userIdentifier success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
 
 @end
