@@ -14,6 +14,8 @@
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;
     SMCommandQueue *queue;
+    
+    NSUInteger failureCount;
 }
 
 - (id)init {
@@ -28,6 +30,7 @@
     if(queue == nil) {
         queue = [[SMCommandQueue alloc] init];
     }
+    failureCount = 0;
 }
 
 - (void)connect {
@@ -75,6 +78,43 @@
         if(socket == nil) return NO;
         return socket.isConnectting;
     }
+}
+
+- (void)refreshTcpAddress {
+    AccountService *accountService = [[AccountService alloc] init];
+    [accountService relogin:@selector(reloginSuccess:) failed:@selector(reloginFailed:) target:self callback:nil];
+}
+
+- (void)reloginSuccess:(RestResponse *)resp {
+    if(resp != nil && resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            NSString *result = [json stringForKey:@"id"];
+            if(![NSString isBlank:result]) {
+                if([@"1" isEqualToString:result]) {
+                    NSString *tcp = [json stringForKey:@"tcp"];
+                    if(![NSString isBlank:tcp]) {
+#ifdef DEBUG
+                        NSLog(@"[COMMAND SERVICE] Get new tcp address [%@].", tcp);
+#endif
+                        [SMShared current].settings.tcpAddress = tcp;
+                        [[SMShared current].settings saveSettings];
+                    }
+                    return;
+                } else if([@"-3000" isEqualToString:result]) {
+                    [[SMShared current].app logout];
+                    return;
+                }
+            }
+        }
+    }
+    [self reloginFailed:resp];
+}
+
+- (void)reloginFailed:(RestResponse *)resp {
+#ifdef DEBUG
+    NSLog(@"[COMMAND SERVICE] Refresh tcp address failed, status code is %d", resp.statusCode);
+#endif
 }
 
 #pragma mark -
@@ -146,6 +186,9 @@
 }
 
 - (void)notifyConnectionClosed {
+#ifdef DEBUG
+    NSLog(@"[TCP COMMAND SOCKET] Closed");
+#endif
     [[SMShared current].deliveryService notifyTcpConnectionClosed];
 }
 
@@ -154,6 +197,13 @@
     NSLog(@"[TCP COMMAND SOCKET] Opened");
 #endif
     [[SMShared current].deliveryService notifyTcpConnectionOpened];
+}
+
+- (void)notifyConnectionTimeout {
+#ifdef DEBUG
+    NSLog(@"[TCP COMMAND] Connection timeout.");
+#endif
+    [self refreshTcpAddress];
 }
 
 @end

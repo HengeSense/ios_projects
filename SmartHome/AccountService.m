@@ -55,6 +55,11 @@
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 
+- (void)relogin:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
+    NSString *url = [NSString stringWithFormat:@"/login/reLogin?deviceCode=%@&securityKey=%@&appKey=%@", [SMShared current].settings.deviceCode, [SMShared current].settings.secretKey, APP_KEY];
+    [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
+}
+
 - (void)logoutSync:(SEL)success failed:(SEL)failed target:(id)t callback:(id)cb {
 //    NSString *url = [NSString stringWithFormat:@"/phone/logout?deviceCode=%@&security=%@", [SMShared current].settings.deviceCode, [SMShared current].settings.secretKey];
 }

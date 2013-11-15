@@ -10,11 +10,14 @@
 #import "CommunicationMessage.h"
 
 #define BUFFER_SIZE 1024
+#define TIME_OUT    12
 
 @implementation ExtranetClientSocket {
     NSMutableData *receivedData;
     BOOL inOpen;
     BOOL outOpen;
+    
+    NSTimer *timeout;
 }
 
 @synthesize messageHandlerDelegate;
@@ -24,7 +27,25 @@
     if(receivedData != nil) {
         receivedData = nil;
     }
+    if(timeout != nil) {
+        if(timeout.isValid) {
+            [timeout invalidate];
+        }
+        timeout = nil;
+    }
+    timeout = [NSTimer scheduledTimerWithTimeInterval:TIME_OUT target:self selector:@selector(connectTimeout) userInfo:nil repeats:NO];
     [super connect];
+}
+
+- (void)connectTimeout {
+    if(!self.isConnect) {
+        [self close];
+        if(self.messageHandlerDelegate != nil && [self.messageHandlerDelegate respondsToSelector:@selector(notifyConnectionTimeout)]) {
+            [self.messageHandlerDelegate notifyConnectionTimeout];
+        }
+    } else {
+        timeout = nil;
+    }
 }
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
@@ -270,12 +291,20 @@
 #pragma mark override super method
 
 - (void)close {
-    receivedData = nil;
-    [super close];
-    inOpen = NO;
-    outOpen = NO;
-    if(self.messageHandlerDelegate != nil && [self.messageHandlerDelegate respondsToSelector:@selector(notifyConnectionClosed)]) {
-        [self.messageHandlerDelegate notifyConnectionClosed];
+    @synchronized(self) {
+        if(timeout != nil) {
+            if(timeout.isValid) {
+                [timeout invalidate];
+            }
+            timeout = nil;
+        }
+        receivedData = nil;
+        [super close];
+        inOpen = NO;
+        outOpen = NO;
+        if(self.messageHandlerDelegate != nil && [self.messageHandlerDelegate respondsToSelector:@selector(notifyConnectionClosed)]) {
+            [self.messageHandlerDelegate notifyConnectionClosed];
+        }
     }
 }
 

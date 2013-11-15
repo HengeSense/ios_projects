@@ -28,9 +28,9 @@
 - (void)connect {
     CFReadStreamRef readStream = NULL;
     CFWriteStreamRef writeStream = NULL;
-    
+
     CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)self.ipAddress, self.port, &readStream, &writeStream);
-    
+
     inputStream = CFBridgingRelease(readStream);
     outputStream = CFBridgingRelease(writeStream);
 

@@ -27,6 +27,7 @@
 
 - (void)notifyConnectionClosed;
 - (void)notifyConnectionOpened;
+- (void)notifyConnectionTimeout;
 
 @end
 

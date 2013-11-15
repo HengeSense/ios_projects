@@ -22,4 +22,6 @@
 
 - (void)modifyUsernameByPhoneNumber:(NSString *) phoneNumber checkCode:(NSString *) checkCode oldPassword:(NSString *) password success:(SEL) s failed:(SEL) f target:(id)t callback:(id) cb;
 
+- (void)relogin:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb;
+
 @end

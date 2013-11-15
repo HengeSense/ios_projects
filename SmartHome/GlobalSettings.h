@@ -13,7 +13,7 @@
 @property (strong, nonatomic) NSString *account;
 @property (strong, nonatomic) NSString *secretKey;
 @property (strong, nonatomic) NSString *deviceCode;
-@property (strong, nonatomic) NSString *tcpAddress;
+@property (strong, atomic)    NSString *tcpAddress;
 @property (strong, nonatomic) NSString *restAddress;
 @property (assign, nonatomic) BOOL isVoice;
 @property (assign, nonatomic) BOOL isShake;

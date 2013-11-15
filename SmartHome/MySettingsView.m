@@ -90,7 +90,7 @@
     return SM_CELL_HEIGHT / 2;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *topCellIdentifier = @"topCellIdentifier";
     static NSString *centerCellIdentifier = @"cellIdentifier";
     static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
