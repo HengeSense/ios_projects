@@ -9,8 +9,6 @@
 #import "UserManagementService.h"
 #import "SMShared.h"
 
-#define USER_MANAGE_URL @"http://smarthome.hentre.com:6868/FrontServer-1.0/mgr/acc"
-
 @implementation UserManagementService
 
 - (id)init {
