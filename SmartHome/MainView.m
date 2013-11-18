@@ -109,7 +109,20 @@
         btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
         [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
         [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateHighlighted];
-        [btnSpeech addTarget:self action:@selector(btnSpeechPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+        
+        
+//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [btnSpeech addTarget:self action:@selector(btnSpeechTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
+//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+//        
+
+        
+        
         [self addSubview:btnSpeech];
     }
     
@@ -503,7 +516,7 @@
                 completion:^(BOOL finished) {
                     speechViewState = SpeechViewStateOpenned;
                     if(speechView.messageCount == 0) [speechView showWelcomeMessage];
-                    [self btnSpeechRecordingPressed:nil];
+//                    [self btnSpeechRecordingPressed:nil];
                 }];
 }
 
@@ -540,12 +553,29 @@
     recognizerState = RecognizerStateReady;
 }
 
-- (void)btnSpeechPressed:(id)sender {
+- (void)btnSpeechTouchUpInside:(id)sender {
     if(speechViewState == SpeechViewStateClosed) {
         [self showSpeechView];
     } else if(speechViewState ==  SpeechViewStateOpenned) {
         [self btnSpeechRecordingPressed:sender];
     }
+}
+
+- (void)btnSpeechTouchDown:(id)sender {
+    NSLog(@"a");
+    [self startListening:nil];
+}
+
+- (void)btnSpeechTouchUpOutside:(id)sender {
+    NSLog(@"b");
+}
+
+- (void)btnSpeechTouchDragEnter:(id)sender {
+    NSLog(@"c");
+}
+
+- (void)btnSpeechTouchDragExit:(id)sender {
+    NSLog(@"d");
 }
 
 - (void)btnSpeechRecordingPressed:(id)sender {    
