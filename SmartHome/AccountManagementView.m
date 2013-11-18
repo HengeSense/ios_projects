@@ -30,6 +30,7 @@
     UserManagementService *userManagementService;
     
     BOOL allowAddButtonPanelView;
+    BOOL currentIsOwner;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -47,6 +48,14 @@
     allowAddButtonPanelView = NO;
     if (userManagementService == nil) {
         userManagementService = [[UserManagementService alloc] init];
+    }
+    
+    currentIsOwner = NO;
+    for (User *u in unitBindingAccounts) {
+        if (u.isOwner&&u.isCurrentUser) {
+            currentIsOwner = YES;
+            break;
+        }
     }
 }
 - (void)initUI{
@@ -98,8 +107,28 @@
     
     
 }
--(void)showButtonPanelFor:(User *) user{
-    
+-(void)showButtonAtIndexPath{
+    User *user = [unitBindingAccounts objectAtIndex:curIndexPath.row];
+    if (user == nil) {
+        return;
+    }
+    btnMsg.hidden = NO;
+    btnPhone.hidden = NO;
+    btnUnbinding.hidden = NO;
+    if (user.isCurrentUser) {
+        btnMsg.hidden = YES;
+        btnPhone.hidden = YES;
+        if (user.isOwner) {
+            btnUnbinding.hidden = YES;
+        }
+    }else{
+        if (!currentIsOwner) {
+            btnUnbinding.hidden = YES;
+        }
+    }
+    if (buttonPanelView.superview) {
+        [buttonPanelView removeFromSuperview];
+    }
 }
 #pragma mark
 #pragma mark- btn events
@@ -190,8 +219,8 @@
         if (detailLabel) {
             detailLabel.text = @"";
         }
+//        [self showButtonAtIndexPath];
         [cell addSubview:buttonPanelView];
-//        }
     }else{
         User  *user ;
         if (indexPath.row<unitBindingAccounts.count) {
