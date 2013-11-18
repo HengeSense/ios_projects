@@ -306,6 +306,8 @@
 		F20B36D017B9DDAD009286D6 /* UnitDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B36CF17B9DDAD009286D6 /* UnitDetailsViewController.m */; };
 		F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */; };
 		F20C788317D0859C003D50C5 /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = F20C788217D0859B003D50C5 /* Memory.m */; };
+		F20EE2ED183A12FB00F6D6D9 /* ButtonPanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F20EE2EC183A12FB00F6D6D9 /* ButtonPanelCell.m */; };
+		F20EE2F0183A140900F6D6D9 /* AccountManageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = F20EE2EF183A140900F6D6D9 /* AccountManageCellData.m */; };
 		F2118A531834750B0057E7AC /* power_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2118A521834750B0057E7AC /* power_selected@2x.png */; };
 		F217126117E1A44F00000967 /* PushSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F217126017E1A44F00000967 /* PushSettingViewController.m */; };
 		F2178C0417CB3CEB0043400F /* ScrollNavButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2178C0317CB3CEB0043400F /* ScrollNavButton.m */; };
@@ -809,6 +811,10 @@
 		F20C787F17D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetUnitsHandler.m; sourceTree = "<group>"; };
 		F20C788117D0859A003D50C5 /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		F20C788217D0859B003D50C5 /* Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memory.m; sourceTree = "<group>"; };
+		F20EE2EB183A12FB00F6D6D9 /* ButtonPanelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonPanelCell.h; sourceTree = "<group>"; };
+		F20EE2EC183A12FB00F6D6D9 /* ButtonPanelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonPanelCell.m; sourceTree = "<group>"; };
+		F20EE2EE183A140900F6D6D9 /* AccountManageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManageCellData.h; sourceTree = "<group>"; };
+		F20EE2EF183A140900F6D6D9 /* AccountManageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManageCellData.m; sourceTree = "<group>"; };
 		F2118A521834750B0057E7AC /* power_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "power_selected@2x.png"; sourceTree = "<group>"; };
 		F217125F17E1A44F00000967 /* PushSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSettingViewController.h; sourceTree = "<group>"; };
 		F217126017E1A44F00000967 /* PushSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSettingViewController.m; sourceTree = "<group>"; };
@@ -962,6 +968,8 @@
 				6F92A1E917B7D5B6009AD656 /* ConversationMessage.m */,
 				6F92A1EB17B7D6CC009AD656 /* ConversationTextMessage.h */,
 				6F92A1EC17B7D6CC009AD656 /* ConversationTextMessage.m */,
+				F20EE2EE183A140900F6D6D9 /* AccountManageCellData.h */,
+				F20EE2EF183A140900F6D6D9 /* AccountManageCellData.m */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -1303,6 +1311,8 @@
 				6FBB9A1F17CB90B500E32485 /* SMCell.m */,
 				F280616217DD6E810064F35B /* MessageCell.h */,
 				F280616317DD6E810064F35B /* MessageCell.m */,
+				F20EE2EB183A12FB00F6D6D9 /* ButtonPanelCell.h */,
+				F20EE2EC183A12FB00F6D6D9 /* ButtonPanelCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -2377,6 +2387,7 @@
 				6F953D021803F29B00D847FA /* CameraService.m in Sources */,
 				F2D8E8D817C5BBB600090E5B /* RadioButton.m in Sources */,
 				6FA3D842180558520064ED41 /* DeviceCommandUpdateDeviceToken.m in Sources */,
+				F20EE2ED183A12FB00F6D6D9 /* ButtonPanelCell.m in Sources */,
 				6F0F475917C5ECC00057F9A4 /* Device.m in Sources */,
 				6FB66D6217C745820002D6C5 /* AccountService.m in Sources */,
 				6FB66D6517C751570002D6C5 /* VerificationCodeValidationViewController.m in Sources */,
@@ -2448,6 +2459,7 @@
 				F26FDA5A1817A6940056FD71 /* DeviceCommandCheckVersion.m in Sources */,
 				6FF6C4E917E83A4500F637FD /* ImagePlayView.m in Sources */,
 				6FF6C4EC17E850E200F637FD /* ImageProvider.m in Sources */,
+				F20EE2F0183A140900F6D6D9 /* AccountManageCellData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

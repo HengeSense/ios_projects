@@ -149,6 +149,8 @@
     return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count+(buttonPanelViewIsVisable?1:0);
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
     return SM_CELL_HEIGHT/2;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -248,11 +250,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row<unitBindingAccounts.count) {
         selectedUser = [unitBindingAccounts objectAtIndex:indexPath.row];
+    }else{
+        [self hideButtonPanelView];
+        return;
     }
     if (!buttonPanelViewIsVisable) {
         [self showButtonPanelViewAtIndexPath:indexPath];
     }else {
         [self hideButtonPanelView];
+        if (![curIndexPath isEqual:indexPath]) {
+            [self showButtonPanelViewAtIndexPath:indexPath];
+        }
+        
     }
     
 }
