@@ -65,9 +65,15 @@
 }
 
 - (BOOL)boolForKey:(id)key {
-    NSString *_bool_ = [self notNSNullObjectForKey:key];
+    id _bool_ = [self notNSNullObjectForKey:key];
     if(_bool_ != nil) {
-        return [@"yes" isEqualToString:_bool_] || [@"YES" isEqualToString:_bool_];
+        if([_bool_ isKindOfClass:[NSNumber class]]) {
+            NSNumber *num = (NSNumber *)_bool_;
+            return num.integerValue == 1;
+        } else if([_bool_ isKindOfClass:[NSString class]]) {
+            NSString *str = (NSString *)_bool_;
+            return [@"yes" isEqualToString:str] || [@"YES" isEqualToString:str];
+        }
     }
     return NO;
 }

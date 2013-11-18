@@ -24,6 +24,8 @@
         self.identifier = [json noNilStringForKey:@"id"];
         self.name = [json noNilStringForKey:@"screenName"];
         self.mobile = [json noNilStringForKey:@"phoneNumber"];
+        self.isOwner = [json boolForKey:@"owner"];
+        
         NSString *_status = [json noNilStringForKey:@"status"];
         if([NSString isBlank:_status]) {
             self.userState = UserStateUnknow;
