@@ -79,6 +79,7 @@
             btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnMsg setBackgroundImage:[UIImage imageNamed:@"icon_send_msg.png"] forState:UIControlStateNormal];
             btnMsg.center = CGPointMake(btnMsg.center.x, buttonPanelView.center.y);
+            [btnMsg addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
 //            [btnMsg setTitle:NSLocalizedString(@"send.message", @"") forState:UIControlStateNormal];
             [buttonPanelView addSubview:btnMsg];
         }
@@ -88,6 +89,7 @@
             [btnPhone setBackgroundImage:[UIImage imageNamed:@"icon_dial_phone.png"] forState:UIControlStateNormal];
             btnPhone.center = CGPointMake(btnPhone.center.x,buttonPanelView.center.y);
 //            [btnPhone setTitle:NSLocalizedString(@"call.phoneNumber", @"") forState:UIControlStateNormal];
+            [btnPhone addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [buttonPanelView addSubview:btnPhone];
         }
 //
@@ -97,6 +99,7 @@
             btnUnbinding.titleLabel.font = [UIFont systemFontOfSize:14];
             [btnUnbinding setTitle:NSLocalizedString(@"unbinding", @"") forState:UIControlStateNormal];
             btnUnbinding.center = CGPointMake(btnUnbinding.center.x, buttonPanelView.center.y);
+            [btnUnbinding addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [buttonPanelView addSubview:btnUnbinding];
         }
 
@@ -178,48 +181,39 @@
     SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
         cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10+BTN_WIDTH, 2, BTN_WIDTH, BTN_HEIGHT)];
+        imageView.center = CGPointMake(imageView.center.x, cell.center.y);
+        imageView.tag = 998;
+        [cell addSubview:imageView];
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 2, 150, 40)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(61, 2, 100, 40)];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor blackColor];
+        titleLabel.font = [UIFont systemFontOfSize:12.f];
         titleLabel.tag = 999;
         [cell addSubview:titleLabel];
         
-        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 140 : 150, 2, 150, 40)];
+        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7]? 171  : 181, 2, 100, 40)];
         detailLabel.textAlignment = NSTextAlignmentRight;
         detailLabel.textColor = [UIColor darkGrayColor];
         detailLabel.backgroundColor = [UIColor clearColor];
-        detailLabel.font = [UIFont systemFontOfSize:16.f];
+        detailLabel.font = [UIFont systemFontOfSize:12.f];
         detailLabel.tag = 888;
         [cell addSubview:detailLabel];
+        
     }
     NSLog(@"%i",!allowAddButtonPanelView||(allowAddButtonPanelView&&indexPath.row == unitBindingAccounts.count-1));
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
     UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:998];
     if (allowAddButtonPanelView&&![indexPath isEqual:curIndexPath]) {
-//        if (indexPath.row == unitBindingAccounts.count-1&&) {
-//            UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
-//            UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
-//            User  *user ;
-//            if (indexPath.row<unitBindingAccounts.count) {
-//                user = [unitBindingAccounts objectAtIndex:indexPath.row];
-//            }
-//            if(user != nil) {
-//                titleLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
-//                detailLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
-//            }
-//            
-//            if(unitBindingAccounts.count == 1) {
-//                cell.isSingle = YES;
-//            }
-//        }else{
         if (titleLabel) {
             titleLabel.text = @"";
         }
         if (detailLabel) {
             detailLabel.text = @"";
         }
-//        [self showButtonAtIndexPath];
+        [self showButtonAtIndexPath];
         [cell addSubview:buttonPanelView];
     }else{
         User  *user ;
@@ -229,6 +223,18 @@
         if(user != nil) {
             titleLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
             detailLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
+            
+            if (user.isCurrentUser) {
+                if (user.isOwner) {
+                    imageView.image = [UIImage imageNamed:@"icon_me_owner.png"];
+                }else{
+                    imageView.image = [UIImage imageNamed:@"icon_me.png"];
+                }
+            }else{
+                if (user.isOwner) {
+                    imageView.image = [UIImage imageNamed:@"icon_owner.png"];
+                }
+            }
         }
         
         if(unitBindingAccounts.count == 1) {
