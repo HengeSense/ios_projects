@@ -155,4 +155,15 @@
 #endif
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    
+    if(![self pointInside:point withEvent:event]) {
+        return nil;
+    }
+    
+    for(int i=0; i<self.subviews.count; i++) {
+        UIView *view = [[self.subviews objectAtIndex:i] hitTest:point withEvent:event];
+    }
+}
+
 @end
