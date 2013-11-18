@@ -25,7 +25,7 @@
 }
 
 - (void)unBindUnit:(NSString *)unitIdentifier forUser:(NSString *)userIdentifier success:(SEL)s failed:(SEL)f target:(id)t callback:(id)cb {
-    NSString *url = [NSString stringWithFormat:@"/unbind/%@?deviceCode=%@&appKey=%@&security=%@", unitIdentifier, [SMShared current].settings.deviceCode, APP_KEY, [SMShared current].settings.secretKey];
+    NSString *url = [NSString stringWithFormat:@"/unbind/%@/%@?deviceCode=%@&appKey=%@&security=%@", unitIdentifier, userIdentifier, [SMShared current].settings.deviceCode, APP_KEY, [SMShared current].settings.secretKey];
     [self.client getForUrl:url acceptType:@"text/*" success:s error:f for:t callback:cb];
 }
 
