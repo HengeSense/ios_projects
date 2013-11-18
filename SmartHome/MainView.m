@@ -114,12 +114,12 @@
         
         
         
-//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDown:) forControlEvents:UIControlEventTouchDown];
         [btnSpeech addTarget:self action:@selector(btnSpeechTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
-//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
-//        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
-//        
+        [btnSpeech addTarget:self action:@selector(btnSpeechTouchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
+        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+        [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+        
 
         
         
@@ -557,7 +557,8 @@
     if(speechViewState == SpeechViewStateClosed) {
         [self showSpeechView];
     } else if(speechViewState ==  SpeechViewStateOpenned) {
-        [self btnSpeechRecordingPressed:sender];
+//        [self btnSpeechRecordingPressed:sender];
+        [speechRecognitionUtil stopListening];
     }
 }
 
