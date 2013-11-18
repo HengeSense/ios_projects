@@ -10,14 +10,18 @@
 #import "Users.h"
 #import "UserManagementService.h"
 #import "SystemService.h"
-#define BTN_MARGIN 30
-#define BTN_HEIGHT 49
-#define BTN_WIDTH 101.5
+#import "UIView+Extensions.h"
+#define BTN_MARGIN 35
+#define BTN_WIDTH 41/2
+#define BTN_HEIGHT 41/2
 @implementation AccountManagementView{
     UITableView *tblUnits;
     NSString *curUnitIdentifier;
     NSArray *unitBindingAccounts;
+    
     User *selectedUser;
+    NSIndexPath *curIndexPath;
+    
     UIView *buttonPanelView;
     UIButton *btnMsg;
     UIButton *btnPhone;
@@ -25,6 +29,7 @@
     
     UserManagementService *userManagementService;
     
+    BOOL allowAddButtonPanelView;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -39,6 +44,7 @@
 }
 - (void)initDefaults{
     [super initDefaults];
+    allowAddButtonPanelView = NO;
     if (userManagementService == nil) {
         userManagementService = [[UserManagementService alloc] init];
     }
@@ -57,29 +63,31 @@
     }
     
     if (buttonPanelView == nil) {
-        buttonPanelView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, self.frame.size.width-10, BTN_HEIGHT)];
+        buttonPanelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
         buttonPanelView.backgroundColor = [UIColor clearColor];
-        buttonPanelView.hidden = YES;
-        [self addSubview:buttonPanelView];
         
         if (btnMsg == nil) {
-            btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(10, 5,BTN_WIDTH , BTN_HEIGHT)];
-            [btnMsg setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
-            [btnMsg setTitle:NSLocalizedString(@"send.message", @"") forState:UIControlStateNormal];
+            btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
+            [btnMsg setBackgroundImage:[UIImage imageNamed:@"icon_send_msg.png"] forState:UIControlStateNormal];
+            btnMsg.center = CGPointMake(btnMsg.center.x, buttonPanelView.center.y);
+//            [btnMsg setTitle:NSLocalizedString(@"send.message", @"") forState:UIControlStateNormal];
             [buttonPanelView addSubview:btnMsg];
         }
         
         if (btnPhone == nil) {
             btnPhone = [[UIButton alloc] initWithFrame:CGRectMake(btnMsg.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
-            [btnPhone setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
-            [btnPhone setTitle:NSLocalizedString(@"call.phoneNumber", @"") forState:UIControlStateNormal];
+            [btnPhone setBackgroundImage:[UIImage imageNamed:@"icon_dial_phone.png"] forState:UIControlStateNormal];
+            btnPhone.center = CGPointMake(btnPhone.center.x,buttonPanelView.center.y);
+//            [btnPhone setTitle:NSLocalizedString(@"call.phoneNumber", @"") forState:UIControlStateNormal];
             [buttonPanelView addSubview:btnPhone];
         }
-        
+//
         if (btnUnbinding == nil) {
-            btnUnbinding = [[UIButton alloc] initWithFrame:CGRectMake(btnPhone.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
-            [btnUnbinding setBackgroundImage:[UIImage imageNamed:@"button_cf.png"] forState:UIControlStateNormal];
+            btnUnbinding = [[UIButton alloc] initWithFrame:CGRectMake(btnPhone.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,100 , BTN_HEIGHT)];
+            [btnUnbinding setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            btnUnbinding.titleLabel.font = [UIFont systemFontOfSize:14];
             [btnUnbinding setTitle:NSLocalizedString(@"unbinding", @"") forState:UIControlStateNormal];
+            btnUnbinding.center = CGPointMake(btnUnbinding.center.x, buttonPanelView.center.y);
             [buttonPanelView addSubview:btnUnbinding];
         }
 
@@ -88,6 +96,9 @@
 
 
     
+    
+}
+-(void)showButtonPanelFor:(User *) user{
     
 }
 #pragma mark
@@ -110,7 +121,7 @@
 #pragma mark- table delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count;
+    return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count+(allowAddButtonPanelView?1:0);
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return SM_CELL_HEIGHT/2;
@@ -129,7 +140,7 @@
         cellIdentifier = singleCellIdentifier;
     } else if(indexPath.row == 0) {
         cellIdentifier = topCellIdentifier;
-    } else if(indexPath.row == unitBindingAccounts.count - 1) {
+    } else if(indexPath.row == unitBindingAccounts.count - 1+(allowAddButtonPanelView?1:0)) {
         cellIdentifier = bottomCellIdentifier;
     } else {
         cellIdentifier = centerCellIdentifier;
@@ -153,46 +164,110 @@
         detailLabel.tag = 888;
         [cell addSubview:detailLabel];
     }
-    
+    NSLog(@"%i",!allowAddButtonPanelView||(allowAddButtonPanelView&&indexPath.row == unitBindingAccounts.count-1));
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
     UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
-    
-//    Unit *unit = [[SMShared current].memory findUnitByIdentifier:[unitsIdentifierCollection objectAtIndex:indexPath.row]];
-//    
-//    if(unit != nil) {
-//        titleLabel.text = unit.name;
-//        detailLabel.text = [NSString stringWithFormat:@"%@   ", [NSString isBlank:unit.status] ? NSLocalizedString(@"online", @"") : unit.status];
-//    }
-//    
-//    if(unitsIdentifierCollection.count == 1) {
-//        cell.isSingle = YES;
-//    }
-    
+    if (allowAddButtonPanelView&&![indexPath isEqual:curIndexPath]) {
+//        if (indexPath.row == unitBindingAccounts.count-1&&) {
+//            UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
+//            UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
+//            User  *user ;
+//            if (indexPath.row<unitBindingAccounts.count) {
+//                user = [unitBindingAccounts objectAtIndex:indexPath.row];
+//            }
+//            if(user != nil) {
+//                titleLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
+//                detailLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
+//            }
+//            
+//            if(unitBindingAccounts.count == 1) {
+//                cell.isSingle = YES;
+//            }
+//        }else{
+        if (titleLabel) {
+            titleLabel.text = @"";
+        }
+        if (detailLabel) {
+            detailLabel.text = @"";
+        }
+        [cell addSubview:buttonPanelView];
+//        }
+    }else{
+        User  *user ;
+        if (indexPath.row<unitBindingAccounts.count) {
+            user = [unitBindingAccounts objectAtIndex:indexPath.row];
+        }
+        if(user != nil) {
+            titleLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
+            detailLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
+        }
+        
+        if(unitBindingAccounts.count == 1) {
+            cell.isSingle = YES;
+        }
+        
+    }
+    cell.accessoryViewVisible = YES;
+
     return cell;
 
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    selectedUser = [unitBindingAccounts objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.5 animations:^{
-        cell.center = CGPointMake(cell.center.x, cell.center.y+BTN_HEIGHT);
-    } completion:nil];
-}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row<unitBindingAccounts.count) {
+        selectedUser = [unitBindingAccounts objectAtIndex:indexPath.row];
+    }
+    if (!allowAddButtonPanelView) {
+        [self showButtonPanelViewAtIndexPath:indexPath];
+    }else {
+        [self hideButtonPanelView];
+    }
+    
+}
+- (void)showButtonPanelViewAtIndexPath:(NSIndexPath *) indexPath{
+    allowAddButtonPanelView = YES;
+    curIndexPath = indexPath;
+    if (curIndexPath.row==unitBindingAccounts.count-1) {
+        [tblUnits beginUpdates];
+        [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+        [tblUnits reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        [tblUnits endUpdates];
+        return;
+    }
+    [tblUnits beginUpdates];
+    [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+    [tblUnits endUpdates];
+    
+
+}
+- (void)hideButtonPanelView{
+    allowAddButtonPanelView = NO;
+    if (curIndexPath.row==unitBindingAccounts.count-1) {
+        [tblUnits beginUpdates];
+        [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+        [tblUnits reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        [tblUnits endUpdates];
+        return;
+    }
+    [tblUnits beginUpdates];
+    [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+    [tblUnits endUpdates];
+
+}
 #pragma mark
 #pragma mark- alertview delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1023&& buttonIndex == 0) {
-//        [userManagementService ]
         [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
     }
 }
 
 - (void)notifyViewUpdate {
     curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
-    [userManagementService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
-    [tblUnits reloadData];
+    if(curUnitIdentifier){
+        [userManagementService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
+    }
 }
 
 #pragma mark
@@ -200,9 +275,14 @@
 
 - (void)getUsersForUnitSuccess:(RestResponse *) resp{
     if (resp&&resp.statusCode == 200) {
-        NSString *json = [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
-        NSLog(@"users json%@",json);
-        return;
+        NSArray *usersJson = [JsonUtils createDictionaryFromJson:resp.body];
+        if(usersJson != nil) {
+            Users *users = [[Users alloc] initWithJson:[NSDictionary dictionaryWithObject:usersJson forKey:@"users"]];
+            unitBindingAccounts = users.users;
+            // do some thing here ...
+            [tblUnits reloadData];
+            return;
+        }
     }
     [self getUsersForUnitFailed:resp];
 }
