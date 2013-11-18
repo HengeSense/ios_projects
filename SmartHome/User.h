@@ -18,6 +18,8 @@ typedef NS_ENUM(NSUInteger, UserState) {
 
 @property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSString *name;
+@property (assign, nonatomic) BOOL isOwner;
+@property (assign, nonatomic, readonly) BOOL isCurrentUser;
 @property (assign, nonatomic) UserState userState;
 @property (strong, nonatomic) NSString *mobile;
 @property (strong, nonatomic, readonly) NSString *stringForUserState;

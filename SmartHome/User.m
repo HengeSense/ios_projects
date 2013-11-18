@@ -7,11 +7,13 @@
 //
 
 #import "User.h"
+#import "SMShared.h"
 
 @implementation User
 
 @synthesize identifier;
 @synthesize name;
+@synthesize isOwner;
 @synthesize userState;
 @synthesize mobile;
 @synthesize stringForUserState;
@@ -50,6 +52,13 @@
     } else {
         return NSLocalizedString(@"unknow", @"");
     }
+}
+
+- (BOOL)isCurrentUser {
+    if([NSString isBlank:self.identifier]) {
+        return NO;
+    }
+    return [self.identifier isEqualToString:[SMShared current].settings.deviceCode];
 }
 
 @end
