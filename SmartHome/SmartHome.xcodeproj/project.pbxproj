@@ -147,7 +147,6 @@
 		6F6996101839EB2A0082F13C /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F69960B1839EB2A0082F13C /* icon@2x.png */; };
 		6F6996111839EB2A0082F13C /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F69960C1839EB2A0082F13C /* settings_icon.png */; };
 		6F6996121839EB2A0082F13C /* settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F69960D1839EB2A0082F13C /* settings_icon@2x.png */; };
-		6F6996141839EC9E0082F13C /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F6996131839EC9E0082F13C /* Images-2.xcassets */; };
 		6F6AB3A117C31C06001F1D33 /* btn_scanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A317C31C06001F1D33 /* btn_scanner@2x.png */; };
 		6F6AB3A517C31C16001F1D33 /* btn_finder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A717C31C16001F1D33 /* btn_finder@2x.png */; };
 		6F6AB3AB17C31CB4001F1D33 /* bg_finder_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AB3A917C31CB4001F1D33 /* bg_finder_shadow@2x.png */; };
@@ -539,7 +538,6 @@
 		6F69960B1839EB2A0082F13C /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		6F69960C1839EB2A0082F13C /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		6F69960D1839EB2A0082F13C /* settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_icon@2x.png"; sourceTree = "<group>"; };
-		6F6996131839EC9E0082F13C /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		6F6AB3A217C31C06001F1D33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/btn_scanner@2x.png"; sourceTree = "<group>"; };
 		6F6AB3A417C31C0C001F1D33 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/btn_scanner@2x.png"; sourceTree = "<group>"; };
 		6F6AB3A617C31C16001F1D33 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/btn_finder@2x.png"; sourceTree = "<group>"; };
@@ -1069,7 +1067,6 @@
 				6F0FAE8617AF7F9F00B75D3E /* AppDelegate.h */,
 				6F0FAE8717AF7F9F00B75D3E /* AppDelegate.m */,
 				6FDF6B4117F9C40800B206A8 /* Images.xcassets */,
-				6F6996131839EC9E0082F13C /* Images-2.xcassets */,
 				6F0FAE7E17AF7F9F00B75D3E /* Supporting Files */,
 			);
 			path = SmartHome;
@@ -2253,7 +2250,6 @@
 				F205157A17CF42370058DADE /* message_count@2x.png in Resources */,
 				F205157B17CF42370058DADE /* device_count@2x.png in Resources */,
 				6F262D6818347F250002ADC0 /* icon_users_selected@2x.png in Resources */,
-				6F6996141839EC9E0082F13C /* Images-2.xcassets in Resources */,
 				F203A14B17F5393800BABDEC /* btn_start_shadow@2x.png in Resources */,
 				6F159BE117D6E66C005CFFEE /* btn_rc_power@2x.png in Resources */,
 				6F159BE317D6E68A005CFFEE /* btn_rc_number@2x.png in Resources */,
