@@ -621,6 +621,9 @@
     [self resetRecognizer];
     if(![NSString isBlank:result]) {
         //process text message
+#ifdef DEBUG
+        NSLog(@"[SPEECH VIEW] Send voice command [%@].", result);
+#endif
         DeviceCommandVoiceControl *command = (DeviceCommandVoiceControl *)[CommandFactory commandForType:CommandTypeUpdateDeviceViaVoice];
         command.masterDeviceCode = [SMShared current].memory.currentUnit.identifier;
         command.voiceText = result;

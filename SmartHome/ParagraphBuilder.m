@@ -74,13 +74,13 @@ headIndent:(CGFloat)hi*/ lineBreakMode:(LINE_BREAK_MODE)lbm
     paragraphSpaceBeforeStyle.valueSize = sizeof(float);
     
     CTParagraphStyleSetting settings[] = {
-        lineSpaceStyle,
         alignmentStyle,
+        lineSpaceStyle,
         fristLineIndentStyle,
         headIndentStyle,
         lineBreakMode,
         paragraphSpaceStyle,
-        paragraphSpaceBeforeStyle
+//        paragraphSpaceBeforeStyle
     };
     
     CTParagraphStyleRef paragraph = CTParagraphStyleCreate(settings, sizeof(settings));
