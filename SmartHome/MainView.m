@@ -27,6 +27,8 @@
     SpeechRecognitionUtil *speechRecognitionUtil;
 
     UIButton *btnSpeech;
+    UIImageView *imgSpeechVolumnAffect;
+    
     UIButton *btnUnit;
     UIButton *btnScene;
     
@@ -64,7 +66,6 @@
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
-
 }
 
 - (void)unSubscribeEvents {
@@ -103,23 +104,22 @@
 #pragma mark -
 #pragma mark speech button
     
+    if(imgSpeechVolumnAffect == nil) {
+        imgSpeechVolumnAffect = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), [UIScreen mainScreen].bounds.size.width, (SPEECH_BUTTON_HEIGHT / 2))];
+        imgSpeechVolumnAffect.backgroundColor = [UIColor yellowColor];
+        [self addSubview:imgSpeechVolumnAffect];
+    }
+    
     if(btnSpeech == nil) {
         btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
         [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
         [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateHighlighted];
-        
-        
-        
-        
         
         [btnSpeech addTarget:self action:@selector(btnSpeechTouchDown:) forControlEvents:UIControlEventTouchDown];
         [btnSpeech addTarget:self action:@selector(btnSpeechTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
         [btnSpeech addTarget:self action:@selector(btnSpeechTouchUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
         [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
         [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
-        
-
-        
         
         [self addSubview:btnSpeech];
     }

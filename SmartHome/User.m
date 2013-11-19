@@ -48,9 +48,9 @@
 
 - (NSString *)stringForUserState {
     if(self.userState == UserStateOnline) {
-        return NSLocalizedString(@"online", @"");
+        return NSLocalizedString(@"user_online", @"");
     } else if(self.userState == UserStateOffline) {
-        return NSLocalizedString(@"offline", @"");
+        return NSLocalizedString(@"user_offline", @"");
     } else {
         return NSLocalizedString(@"unknow", @"");
     }
