@@ -36,9 +36,9 @@
 - (void)initDefaults {
     NSString *initString = [NSString stringWithFormat:@"appid=%@,timeout=%@", IFLY_APP_ID, CONNECTION_TIME_OUT];
     [IFlySpeechRecognizer createRecognizer:initString delegate:self];
-    self.domain = @"sms";
-    self.vadBos = @"2000";
-    self.vadEos = @"1000";
+    self.domain = @"iat";
+    self.vadBos = @"10000";
+    self.vadEos = @"10000";
     self.asrSch = @"0";
     self.asrPtt = @"0";
     self.sampleRate = @"16000";
@@ -112,6 +112,7 @@
 }
 
 - (void)onCancel {
+    textResult = [[NSMutableString alloc] init];
     // need to test
     if(self.speechRecognitionNotificationDelegate != nil
        && [self.speechRecognitionNotificationDelegate respondsToSelector:@selector(recognizeCancelled)]) {

@@ -15,11 +15,9 @@
 #import "CommandFactory.h"
 #import "NotificationsFileManager.h"
 #import "UnitView.h"
-#import "SystemAudio.h"
 
 #define SPEECH_BUTTON_WIDTH              195
 #define SPEECH_BUTTON_HEIGHT             198
-//#define DELAY_START_LISTENING_DURATION   0.4f
 
 @implementation MainView {
     SpeechViewState speechViewState;
@@ -516,7 +514,6 @@
                 completion:^(BOOL finished) {
                     speechViewState = SpeechViewStateOpenned;
                     if(speechView.messageCount == 0) [speechView showWelcomeMessage];
-//                    [self btnSpeechRecordingPressed:nil];
                 }];
 }
 
@@ -556,44 +553,31 @@
 - (void)btnSpeechTouchUpInside:(id)sender {
     if(speechViewState == SpeechViewStateClosed) {
         [self showSpeechView];
-    } else if(speechViewState ==  SpeechViewStateOpenned) {
-//        [self btnSpeechRecordingPressed:sender];
+    } else if(speechViewState == SpeechViewStateOpenned) {
         [speechRecognitionUtil stopListening];
     }
 }
 
 - (void)btnSpeechTouchDown:(id)sender {
-    NSLog(@"a");
-    [self startListening:nil];
-}
-
-- (void)btnSpeechTouchUpOutside:(id)sender {
-    NSLog(@"b");
-}
-
-- (void)btnSpeechTouchDragEnter:(id)sender {
-    NSLog(@"c");
-}
-
-- (void)btnSpeechTouchDragExit:(id)sender {
-    NSLog(@"d");
-}
-
-- (void)btnSpeechRecordingPressed:(id)sender {    
-    if(recognizerState == RecognizerStateReady) {
-        recognizerState = RecognizerStateRecordBegin;
-        [SystemAudio voiceRecordBegin];
-//        [self delayStartListening];
-        [self startListening:nil];
-    } else {
-        [speechRecognitionUtil stopListening];
+    if(speechViewState == SpeechViewStateOpenned) {
+        if(recognizerState == RecognizerStateReady) {
+            recognizerState = RecognizerStateRecordBegin;
+            [self startListening:nil];
+        }
     }
 }
 
-//// 确保录音提示音已经结束,防止提示语进入识别范围
-//- (void)delayStartListening {
-//    [NSTimer scheduledTimerWithTimeInterval:DELAY_START_LISTENING_DURATION target:self selector:@selector(startListening:) userInfo:nil repeats:NO];
-//}
+- (void)btnSpeechTouchUpOutside:(id)sender {
+    [speechRecognitionUtil cancel];
+}
+
+- (void)btnSpeechTouchDragExit:(id)sender {
+    //touch down and dragg out of button
+}
+
+- (void)btnSpeechTouchDragEnter:(id)sender {
+    //touch down and dragg enter button when previous status is out of button
+}
 
 - (void)startListening:(NSTimer *)timer {
     if(speechRecognitionUtil == nil) {
@@ -602,7 +586,7 @@
     }
     if(![speechRecognitionUtil startListening]) {
 #ifdef DEBUG
-        NSLog(@"[SPEECH VIEW] Start lisenting failed .");
+        NSLog(@"[SPEECH VIEW] Start lisenting failed.");
 #endif
     }
 }
@@ -618,7 +602,6 @@
 - (void)endRecord {
     recognizerState = RecognizerStateRecordingEnd;
     [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
-    [SystemAudio voiceRecordEnd];
 }
 
 - (void)recognizeCancelled {
@@ -627,10 +610,10 @@
 
 - (void)speakerVolumeChanged:(int)volume {
     if(recognizerState == RecognizerStateRecording) {
-        int v = volume / 3;
-        if(v > 9) v = 9;
-        if(v < 0) v = 0;
-        [btnSpeech setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"btn_speech_0%d.png", v]] forState:UIControlStateNormal];
+//        int v = volume / 3;
+//        if(v > 9) v = 9;
+//        if(v < 0) v = 0;
+//        [btnSpeech setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"btn_speech_0%d.png", v]] forState:UIControlStateNormal];
     }
 }
 
