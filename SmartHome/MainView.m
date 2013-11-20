@@ -16,8 +16,8 @@
 #import "NotificationsFileManager.h"
 #import "UnitView.h"
 
-#define SPEECH_BUTTON_WIDTH              195
-#define SPEECH_BUTTON_HEIGHT             198
+#define SPEECH_BUTTON_WIDTH              173
+#define SPEECH_BUTTON_HEIGHT             173
 
 @implementation MainView {
     SpeechViewState speechViewState;
@@ -106,7 +106,6 @@
     
     if(imgSpeechVolumnAffect == nil) {
         imgSpeechVolumnAffect = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), 417 / 2, 195 / 2)];
-        imgSpeechVolumnAffect.center = CGPointMake(160, imgSpeechVolumnAffect.center.y);
         
         NSMutableArray *animateImages = [NSMutableArray arrayWithCapacity:5];
         for(int i=1; i<=5; i++) {
@@ -115,13 +114,12 @@
         }
         imgSpeechVolumnAffect.animationImages = animateImages;
         imgSpeechVolumnAffect.animationDuration = 1.5f;
+        imgSpeechVolumnAffect.hidden = YES;
         [self addSubview:imgSpeechVolumnAffect];
-        
-        [imgSpeechVolumnAffect startAnimating];
     }
     
     if(btnSpeech == nil) {
-        btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
+        btnSpeech = [[UIButton alloc] initWithFrame:CGRectMake(((self.frame.size.width - SPEECH_BUTTON_WIDTH/2) / 2), (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 7), (SPEECH_BUTTON_WIDTH / 2), (SPEECH_BUTTON_HEIGHT / 2))];
         [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
         [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateHighlighted];
         
@@ -132,6 +130,8 @@
         [btnSpeech addTarget:self action:@selector(btnSpeechTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
         
         [self addSubview:btnSpeech];
+        
+        imgSpeechVolumnAffect.center = CGPointMake(160, btnSpeech.center.y - 1);
     }
     
 #pragma mark -
@@ -574,7 +574,7 @@
 #pragma mark speech control
 
 - (void)resetRecognizer {
-//    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    [self stopSpeechAnimate];
     recognizerState = RecognizerStateReady;
 }
 
@@ -688,7 +688,7 @@
 
 - (ConversationView *)speechView {
     if(speechView == nil) {
-        CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 10 - 10;
+        CGFloat viewHeight = self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 32;
         speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12)), 601/2, viewHeight) andContainerView:self];
         speechView.center = CGPointMake(self.center.x, speechView.center.y);
     }
