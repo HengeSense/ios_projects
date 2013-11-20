@@ -123,6 +123,25 @@
     lblMessage1.text = name;
 }
 
+- (void)changeItemToIndexPath:(NSIndexPath *)indexPath {
+    if(tblNavigationItems == nil) return;
+    DrawerNavigationItem *item = [navigationItems objectAtIndex:indexPath.row];
+    if(indexPath.row != checkedRowIndex) {
+        DrawerNavItemCell *cell = (DrawerNavItemCell *)[tblNavigationItems cellForRowAtIndexPath:[NSIndexPath indexPathForRow:checkedRowIndex inSection:0]];
+        DrawerNavigationItem *oldItem = [navigationItems objectAtIndex:checkedRowIndex];
+        [self setCell:cell isChecked:NO item:oldItem];
+        cell = (DrawerNavItemCell *)[tblNavigationItems cellForRowAtIndexPath:indexPath];
+        [self setCell:cell isChecked:YES item:item];
+        checkedRowIndex = indexPath.row;
+    }
+    if(item) {
+        if(self.drawerNavigationItemChangedDelegate != nil &&
+           [self.drawerNavigationItemChangedDelegate respondsToSelector:@selector(drawerNavigationItemChanged:isFirstTime:)]) {
+            [self.drawerNavigationItemChangedDelegate drawerNavigationItemChanged:item isFirstTime:NO];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark table view delegate && data source
 
@@ -172,21 +191,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    DrawerNavigationItem *item = [navigationItems objectAtIndex:indexPath.row];
-    if(indexPath.row != checkedRowIndex) {
-        DrawerNavItemCell *cell = (DrawerNavItemCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:checkedRowIndex inSection:0]];
-        DrawerNavigationItem *oldItem = [navigationItems objectAtIndex:checkedRowIndex];
-        [self setCell:cell isChecked:NO item:oldItem];
-        cell = (DrawerNavItemCell *)[tableView cellForRowAtIndexPath:indexPath];
-        [self setCell:cell isChecked:YES item:item];
-        checkedRowIndex = indexPath.row;
-    }
-    if(item) {
-        if(self.drawerNavigationItemChangedDelegate != nil &&
-           [self.drawerNavigationItemChangedDelegate respondsToSelector:@selector(drawerNavigationItemChanged:isFirstTime:)]) {
-            [self.drawerNavigationItemChangedDelegate drawerNavigationItemChanged:item isFirstTime:NO];
-        }
-    }
+    [self changeItemToIndexPath:indexPath];
 }
 
 - (void)setCell:(DrawerNavItemCell *)cell isChecked:(BOOL)checked item:(DrawerNavigationItem *)item {

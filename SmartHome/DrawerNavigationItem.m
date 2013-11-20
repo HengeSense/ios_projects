@@ -14,5 +14,6 @@
 @synthesize itemImageName;
 @synthesize itemCheckedImageName;
 @synthesize itemTitle;
+@synthesize itemIndex;
 
 @end

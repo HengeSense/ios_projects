@@ -50,21 +50,25 @@
     mainView.itemTitle = NSLocalizedString(@"main_view", @"");
     mainView.itemImageName = @"icon_home_unselected.png";
     mainView.itemCheckedImageName = @"icon_home_selected.png";
+    mainView.itemIndex = 0;
         
     myDevicesView.itemIdentifier = @"myDevicesView";
     myDevicesView.itemTitle = NSLocalizedString(@"my_devices", @"");
     myDevicesView.itemImageName = @"icon_devices_unselected.png";
     myDevicesView.itemCheckedImageName = @"icon_devices_selected.png";
+    myDevicesView.itemIndex = 1;
     
     accountManagementView.itemIdentifier = @"accountManagementView";
     accountManagementView.itemTitle = NSLocalizedString(@"account_management", @"");
     accountManagementView.itemImageName = @"icon_users_unselected.png";
     accountManagementView.itemCheckedImageName = @"icon_users_selected.png";
+    accountManagementView.itemIndex = 2;
     
     settingsView.itemIdentifier = @"settingsView";
     settingsView.itemTitle = NSLocalizedString(@"settings_view", @"");
     settingsView.itemImageName = @"icon_settings_unselected.png";
     settingsView.itemCheckedImageName = @"icon_settings_selected.png";
+    settingsView.itemIndex = 3;
     
     [drawerItems addObject:mainView];
     [drawerItems addObject:myDevicesView];
@@ -115,7 +119,13 @@
 }
 
 - (void)changeDrawerItemWithViewIdentifier:(NSString *)identifier {
-    [self drawerNavigationItemChanged:[self findItemByIdentifier:identifier] isFirstTime:NO];
+    if(self.leftView != nil && [self.leftView isKindOfClass:[DrawerView class]]) {
+        DrawerView *dv = (DrawerView *)self.leftView;
+        DrawerNavigationItem *item = [self findItemByIdentifier:identifier];
+        if(item != nil) {
+            [dv changeItemToIndexPath:[NSIndexPath indexPathForRow:item.itemIndex inSection:0]];
+        }
+    }
 }
 
 - (void)drawerNavigationItemChanged:(DrawerNavigationItem *)item isFirstTime:(BOOL)isFirst {

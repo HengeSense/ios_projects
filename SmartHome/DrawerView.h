@@ -24,4 +24,6 @@
 
 - (void)setScreenName:(NSString *)name;
 
+- (void)changeItemToIndexPath:(NSIndexPath *)indexPath;
+
 @end

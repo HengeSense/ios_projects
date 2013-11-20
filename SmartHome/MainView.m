@@ -105,9 +105,19 @@
 #pragma mark speech button
     
     if(imgSpeechVolumnAffect == nil) {
-        imgSpeechVolumnAffect = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), [UIScreen mainScreen].bounds.size.width, (SPEECH_BUTTON_HEIGHT / 2))];
-        imgSpeechVolumnAffect.backgroundColor = [UIColor yellowColor];
+        imgSpeechVolumnAffect = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.frame.size.height - SPEECH_BUTTON_HEIGHT / 2), 417 / 2, 195 / 2)];
+        imgSpeechVolumnAffect.center = CGPointMake(160, imgSpeechVolumnAffect.center.y);
+        
+        NSMutableArray *animateImages = [NSMutableArray arrayWithCapacity:5];
+        for(int i=1; i<=5; i++) {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"sp-a-%d@2x", i] ofType:@"png"];
+            [animateImages addObject:[UIImage imageWithContentsOfFile:filePath]];
+        }
+        imgSpeechVolumnAffect.animationImages = animateImages;
+        imgSpeechVolumnAffect.animationDuration = 1.5f;
         [self addSubview:imgSpeechVolumnAffect];
+        
+        [imgSpeechVolumnAffect startAnimating];
     }
     
     if(btnSpeech == nil) {
@@ -542,11 +552,29 @@
                      }];
 }
 
+- (void)startSpeechAnimate {
+    if(imgSpeechVolumnAffect != nil) {
+        imgSpeechVolumnAffect.hidden = NO;
+        if(!imgSpeechVolumnAffect.isAnimating) {
+            [imgSpeechVolumnAffect startAnimating];
+        }
+    }
+}
+
+- (void)stopSpeechAnimate {
+    if(imgSpeechVolumnAffect != nil) {
+        if(imgSpeechVolumnAffect.isAnimating) {
+            [imgSpeechVolumnAffect stopAnimating];
+        }
+        imgSpeechVolumnAffect.hidden = YES;
+    }
+}
+
 #pragma mark -
 #pragma mark speech control
 
 - (void)resetRecognizer {
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+//    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
     recognizerState = RecognizerStateReady;
 }
 
@@ -596,12 +624,12 @@
 
 - (void)beginRecord {
     recognizerState = RecognizerStateRecording;
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech_00.png"] forState:UIControlStateNormal];
+    [self startSpeechAnimate];
 }
 
 - (void)endRecord {
     recognizerState = RecognizerStateRecordingEnd;
-    [btnSpeech setBackgroundImage:[UIImage imageNamed:@"btn_speech.png"] forState:UIControlStateNormal];
+    [self stopSpeechAnimate];
 }
 
 - (void)recognizeCancelled {

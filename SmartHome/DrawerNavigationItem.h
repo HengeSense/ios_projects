@@ -14,5 +14,6 @@
 @property (strong, nonatomic) NSString *itemImageName;
 @property (strong, nonatomic) NSString *itemCheckedImageName;
 @property (strong, nonatomic) NSString *itemTitle;
+@property (assign, nonatomic) NSUInteger itemIndex;
 
 @end
