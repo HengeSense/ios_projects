@@ -404,19 +404,12 @@
 
 - (void)unbindingSuccess:(RestResponse *) resp{
     if (resp&&resp.statusCode == 200) {
-//        [[SMShared current].memory removeUnitByIdentifier:curUnitIdentifier];
-//        [self notifyViewUpdate];
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"execution_success", @"") forType:AlertViewTypeSuccess];
         [[AlertView currentAlertView] delayDismissAlertView];
         if (selectedUser.isCurrentUser) {
-//            if ([[SMShared current].deliveryService currentNetworkMode] == NetworkModeExternal) {
-            
-            
-                [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-            
-
-            
-//            }
+            [unitBindingAccounts removeAllObjects];
+            [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+            [self.ownerController changeDrawerItemWithViewIdentifier:@"mainView"];
         }
         return;
     }
