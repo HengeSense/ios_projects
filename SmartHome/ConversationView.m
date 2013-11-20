@@ -83,14 +83,14 @@
         
         UILabel *lblWelcomeTitle1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
         lblWelcomeTitle1.text = NSLocalizedString(@"welcome_message_line1", @"");
-        lblWelcomeTitle1.font = [UIFont systemFontOfSize:20.f];
+        lblWelcomeTitle1.font = [UIFont systemFontOfSize:19.f];
         lblWelcomeTitle1.textColor = [UIColor lightGrayColor];
         lblWelcomeTitle1.backgroundColor = [UIColor clearColor];
         [lblWelcomeTitle1 sizeToFit];
         
         UILabel *lblWelcomeTitle2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
         lblWelcomeTitle2.text = NSLocalizedString(@"welcome_message_line2", @"");
-        lblWelcomeTitle2.font = [UIFont systemFontOfSize:20.f];
+        lblWelcomeTitle2.font = [UIFont systemFontOfSize:19.f];
         lblWelcomeTitle2.textColor = [UIColor lightGrayColor];
         lblWelcomeTitle2.backgroundColor = [UIColor clearColor];
         [lblWelcomeTitle2 sizeToFit];
@@ -103,7 +103,7 @@
     }
 
     UIButton *btnCloseSelf = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44/2, 45/2)];
-    btnCloseSelf.center = CGPointMake(self.frame.size.width-7, 7);
+    btnCloseSelf.center = CGPointMake(self.frame.size.width-11, 11);
     [btnCloseSelf setBackgroundImage:[UIImage imageNamed:@"btn_speech_close.png"] forState:UIControlStateNormal];
     [btnCloseSelf setBackgroundImage:[UIImage imageNamed:@"btn_speech_close.png"] forState:UIControlStateHighlighted];
     [btnCloseSelf addTarget:containerView action:@selector(hideSpeechView) forControlEvents:UIControlEventTouchUpInside];

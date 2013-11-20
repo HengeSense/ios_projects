@@ -255,7 +255,7 @@
     for (SMNotification *notification in notificationsArr) {
         if(!notification.hasRead) count++;
     }
-    return  count;
+    return count;
 }
 
 - (void)updateNotifications:(NSArray *)notifications {
