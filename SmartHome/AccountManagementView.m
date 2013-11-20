@@ -93,10 +93,11 @@
         }
 //
         if (btnUnbinding == nil) {
-            btnUnbinding = [[UIButton alloc] initWithFrame:CGRectMake(btnPhone.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,100 , BTN_HEIGHT)];
+            btnUnbinding = [[UIButton alloc] initWithFrame:CGRectMake(btnPhone.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnUnbinding setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             btnUnbinding.titleLabel.font = [UIFont systemFontOfSize:14];
-            [btnUnbinding setTitle:NSLocalizedString(@"unbinding", @"") forState:UIControlStateNormal];
+            [btnUnbinding setBackgroundImage:[UIImage imageNamed:@"unbinding.png"] forState:UIControlStateNormal];
+//            [btnUnbinding setTitle:NSLocalizedString(@"unbinding", @"") forState:UIControlStateNormal];
             btnUnbinding.center = CGPointMake(btnUnbinding.center.x, buttonPanelView.center.y);
             [btnUnbinding addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [buttonPanelView addSubview:btnUnbinding];
@@ -210,6 +211,7 @@
         ButtonPanelCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
             cell = [[ButtonPanelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:NO];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         [self showButton];
         [cell addSubview:buttonPanelView];
@@ -218,21 +220,21 @@
     }else{
         SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if(cell == nil) {
-            
             cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10+BTN_WIDTH, 2, BTN_WIDTH, BTN_HEIGHT)];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTN_WIDTH, 2, BTN_WIDTH, BTN_HEIGHT)];
             imageView.center = CGPointMake(imageView.center.x, cell.center.y);
             imageView.tag = 998;
             [cell addSubview:imageView];
             
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(61, 2, 100, 40)];
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(61, 2, 130, 40)];
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.textColor = [UIColor blackColor];
             titleLabel.font = [UIFont systemFontOfSize:12.f];
             titleLabel.tag = 999;
             [cell addSubview:titleLabel];
             
-            UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7]? 171  : 181, 2, 100, 40)];
+            UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7]? 191  : 201, 2, 100, 40)];
             detailLabel.textAlignment = NSTextAlignmentRight;
             detailLabel.textColor = [UIColor darkGrayColor];
             detailLabel.backgroundColor = [UIColor clearColor];
@@ -278,8 +280,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (indexPath.row<unitBindingAccounts.count) {
         AccountManageCellData *selectData = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:indexPath.row];
+        if (selectData.isPanel) {
+            return;
+        }
         selectedUser = selectData.user;
     }else{
         [self hideButtonPanelView];
@@ -309,13 +315,14 @@
     [self addPanelData:data];
     if (curIndexPath.row==unitBindingAccounts.count-2) {
         [tblUnits beginUpdates];
-        [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+        NSLog(@"1111");
+        [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [tblUnits reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [tblUnits endUpdates];
         return;
     }
     [tblUnits beginUpdates];
-    [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+    [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [tblUnits endUpdates];
     
 
@@ -325,13 +332,13 @@
     [self removePanelData];
     if (curIndexPath.row==unitBindingAccounts.count-1) {
         [tblUnits beginUpdates];
-        [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+        [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [tblUnits reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         [tblUnits endUpdates];
         return;
     }
     [tblUnits beginUpdates];
-    [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+    [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [tblUnits endUpdates];
 
 }
@@ -340,6 +347,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1023&& buttonIndex == 0) {
+        [self hideButtonPanelView];
         [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
         [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self];
@@ -352,8 +360,10 @@
     }
     if (unitBindingAccounts) {
         [unitBindingAccounts removeAllObjects];
+        [tblUnits reloadData];
     }
     curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
+    NSLog(@"id%@",curUnitIdentifier);
     if(![NSString isBlank:curUnitIdentifier]){
         [userManagementService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
     }
@@ -407,7 +417,6 @@
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"execution_success", @"") forType:AlertViewTypeSuccess];
         [[AlertView currentAlertView] delayDismissAlertView];
         if (selectedUser.isCurrentUser) {
-            [unitBindingAccounts removeAllObjects];
             [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
             [self.ownerController changeDrawerItemWithViewIdentifier:@"mainView"];
         }
