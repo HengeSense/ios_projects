@@ -100,6 +100,24 @@
     [[SMShared current].deliveryService queueCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
 
+- (DrawerNavigationItem *)findItemByIdentifier:(NSString *)identifier {
+    if([NSString isBlank:identifier]) return nil;
+    if(drawerItems == nil) return nil;
+    
+    for(int i=0; i<drawerItems.count; i++) {
+        DrawerNavigationItem *item = [drawerItems objectAtIndex:i];
+        if([item.itemIdentifier isEqualToString:identifier]) {
+            return item;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)changeDrawerItemWithViewIdentifier:(NSString *)identifier {
+    [self drawerNavigationItemChanged:[self findItemByIdentifier:identifier] isFirstTime:NO];
+}
+
 - (void)drawerNavigationItemChanged:(DrawerNavigationItem *)item isFirstTime:(BOOL)isFirst {
     if(item == nil) return;
     if(currentItem != nil) {

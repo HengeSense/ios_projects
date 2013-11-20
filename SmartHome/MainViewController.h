@@ -12,4 +12,6 @@
 
 @interface MainViewController : DrawerViewController<DrawerNavigationItemChangedDelegate>
 
+- (void)changeDrawerItemWithViewIdentifier:(NSString *)identifier;
+
 @end

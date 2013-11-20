@@ -42,6 +42,7 @@
 @synthesize isCamera;
 
 @synthesize isOnline;
+@synthesize isAvailableDevice;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super init];
@@ -99,6 +100,11 @@
 
 #pragma mark -
 #pragma mark device type or state
+
+- (BOOL)isAvailableDevice {
+    return self.isLightOrInlight || self.isSocket || self.isCurtainOrSccurtain || self.isTV || self.isAircondition
+    || self.isSTB || self.isCamera || self.isWarsignal;
+}
 
 - (BOOL)isLight {
     return [@"light" isEqualToString:self.category];
