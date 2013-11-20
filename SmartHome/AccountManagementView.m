@@ -410,10 +410,11 @@
         [[AlertView currentAlertView] delayDismissAlertView];
         if (selectedUser.isCurrentUser) {
 //            if ([[SMShared current].deliveryService currentNetworkMode] == NetworkModeExternal) {
-                DeviceCommandUpdateUnits *command = [[DeviceCommandUpdateUnits alloc] init];
-                [[SMShared current].deliveryService executeDeviceCommand:command];
             
             
+                [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
+            
+
             
 //            }
         }
