@@ -9,5 +9,6 @@
 #import "AccountManageCellData.h"
 
 @implementation AccountManageCellData
-
+@synthesize user;
+@synthesize isPanel;
 @end

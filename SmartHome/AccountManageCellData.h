@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "User.h"
 @interface AccountManageCellData : NSObject
-
+@property (strong,nonatomic) User *user;
+@property (assign,nonatomic) BOOL isPanel;
 @end

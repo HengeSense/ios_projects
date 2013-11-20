@@ -8,17 +8,19 @@
 
 #import "AccountManagementView.h"
 #import "Users.h"
+#import "AccountManageCellData.h"
 #import "UserManagementService.h"
 #import "SystemService.h"
 #import "UIView+Extensions.h"
 #import "AlertView.h"
+
 #define BTN_MARGIN 35
 #define BTN_WIDTH 41/2
 #define BTN_HEIGHT 41/2
 @implementation AccountManagementView{
     UITableView *tblUnits;
     NSString *curUnitIdentifier;
-    NSArray *unitBindingAccounts;
+    NSMutableArray *unitBindingAccounts;
     
     User *selectedUser;
     NSIndexPath *curIndexPath;
@@ -49,6 +51,10 @@
     buttonPanelViewIsVisable = NO;
     if (userManagementService == nil) {
         userManagementService = [[UserManagementService alloc] init];
+    }
+    
+    if (unitBindingAccounts == nil) {
+        unitBindingAccounts = [NSMutableArray array];
     }
     
 }
@@ -103,8 +109,21 @@
     
     
 }
--(void)showButtonAtIndexPath{
-    User *user = [unitBindingAccounts objectAtIndex:curIndexPath.row];
+- (void) addPanelData:(AccountManageCellData *) data{
+    if (!unitBindingAccounts) {
+        return;
+    }
+    [unitBindingAccounts insertObject:data atIndex:curIndexPath.row+1];
+}
+- (void) removePanelData{
+    if (!unitBindingAccounts||unitBindingAccounts.count<=curIndexPath.row+1) {
+        return;
+    }
+    [unitBindingAccounts removeObjectAtIndex:curIndexPath.row+1];
+}
+-(void)showButton{
+    AccountManageCellData *data = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:curIndexPath.row];
+    User *user = data.user;
     if (user == nil) {
         return;
     }
@@ -146,7 +165,7 @@
 #pragma mark- table delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count+(buttonPanelViewIsVisable?1:0);
+    return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -161,62 +180,72 @@
     static NSString *centerCellIdentifier = @"cellIdentifier";
     static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
     static NSString *singleCellIdentifier = @"singleCellIdentifier";
+    static NSString *centerPanelIdentifier = @"centerPanelIdentifier";
+    static NSString *bottomPanelIdentifier = @"bottomPanelIdentifier";
+    
+    
     
     NSString *cellIdentifier;
-    if(indexPath.row == 0 && unitBindingAccounts.count == 1) {
-        cellIdentifier = singleCellIdentifier;
-    } else if(indexPath.row == 0) {
-        cellIdentifier = topCellIdentifier;
-    } else if(indexPath.row == unitBindingAccounts.count - 1+(buttonPanelViewIsVisable?1:0)) {
-        cellIdentifier = bottomCellIdentifier;
-    } else {
-        cellIdentifier = centerCellIdentifier;
+    AccountManageCellData *data = [unitBindingAccounts objectAtIndex:indexPath.row];
+    
+    if (data.isPanel) {
+        if (indexPath.row == unitBindingAccounts.count -1) {
+            cellIdentifier = bottomPanelIdentifier;
+        }else{
+            cellIdentifier = centerPanelIdentifier;
+        }
+    }else{
+        if(indexPath.row == 0 && unitBindingAccounts.count == 1) {
+            cellIdentifier = singleCellIdentifier;
+        } else if(indexPath.row == 0) {
+            cellIdentifier = topCellIdentifier;
+        } else if(indexPath.row == unitBindingAccounts.count - 1) {
+            cellIdentifier = bottomCellIdentifier;
+        } else {
+            cellIdentifier = centerCellIdentifier;
+       }
     }
     
-    SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell == nil) {
-        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10+BTN_WIDTH, 2, BTN_WIDTH, BTN_HEIGHT)];
-        imageView.center = CGPointMake(imageView.center.x, cell.center.y);
-        imageView.tag = 998;
-        [cell addSubview:imageView];
-        
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(61, 2, 100, 40)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textColor = [UIColor blackColor];
-        titleLabel.font = [UIFont systemFontOfSize:12.f];
-        titleLabel.tag = 999;
-        [cell addSubview:titleLabel];
-        
-        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7]? 171  : 181, 2, 100, 40)];
-        detailLabel.textAlignment = NSTextAlignmentRight;
-        detailLabel.textColor = [UIColor darkGrayColor];
-        detailLabel.backgroundColor = [UIColor clearColor];
-        detailLabel.font = [UIFont systemFontOfSize:12.f];
-        detailLabel.tag = 888;
-        [cell addSubview:detailLabel];
-        
-    }
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
-    UIImageView *imageView = (UIImageView *)[cell viewWithTag:998];
-    if (buttonPanelViewIsVisable&&![indexPath isEqual:curIndexPath]) {
-        if (imageView) {
-            imageView.image = nil;
+    if (data.isPanel) {
+        ButtonPanelCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[ButtonPanelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:NO];
         }
-        if (titleLabel) {
-            titleLabel.text = @"";
-        }
-        if (detailLabel) {
-            detailLabel.text = @"";
-        }
-        [self showButtonAtIndexPath];
+        [self showButton];
         [cell addSubview:buttonPanelView];
+        return cell;
+
     }else{
-        User  *user ;
-        if (indexPath.row<unitBindingAccounts.count) {
-            user = [unitBindingAccounts objectAtIndex:indexPath.row];
+        SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if(cell == nil) {
+            
+            cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10+BTN_WIDTH, 2, BTN_WIDTH, BTN_HEIGHT)];
+            imageView.center = CGPointMake(imageView.center.x, cell.center.y);
+            imageView.tag = 998;
+            [cell addSubview:imageView];
+            
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(61, 2, 100, 40)];
+            titleLabel.backgroundColor = [UIColor clearColor];
+            titleLabel.textColor = [UIColor blackColor];
+            titleLabel.font = [UIFont systemFontOfSize:12.f];
+            titleLabel.tag = 999;
+            [cell addSubview:titleLabel];
+            
+            UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7]? 171  : 181, 2, 100, 40)];
+            detailLabel.textAlignment = NSTextAlignmentRight;
+            detailLabel.textColor = [UIColor darkGrayColor];
+            detailLabel.backgroundColor = [UIColor clearColor];
+            detailLabel.font = [UIFont systemFontOfSize:12.f];
+            detailLabel.tag = 888;
+            [cell addSubview:detailLabel];
+            
         }
+        UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
+        UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
+        UIImageView *imageView = (UIImageView *)[cell viewWithTag:998];
+        
+        User  *user  = data.user;
         if(user != nil) {
             titleLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
             detailLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
@@ -239,17 +268,19 @@
         if(unitBindingAccounts.count == 1) {
             cell.isSingle = YES;
         }
-        
-    }
-    cell.accessoryViewVisible = YES;
 
-    return cell;
+        cell.accessoryViewVisible = YES;
+
+        return cell;
+    }
+
 
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row<unitBindingAccounts.count) {
-        selectedUser = [unitBindingAccounts objectAtIndex:indexPath.row];
+        AccountManageCellData *selectData = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:indexPath.row];
+        selectedUser = selectData.user;
     }else{
         [self hideButtonPanelView];
         return;
@@ -258,8 +289,13 @@
         [self showButtonPanelViewAtIndexPath:indexPath];
     }else {
         [self hideButtonPanelView];
-        if (![curIndexPath isEqual:indexPath]) {
-            [self showButtonPanelViewAtIndexPath:indexPath];
+        if (![curIndexPath isEqual:indexPath]&&curIndexPath.row!=indexPath.row-1) {
+            if (curIndexPath.row+1<indexPath.row) {
+                [self showButtonPanelViewAtIndexPath:[NSIndexPath indexPathForRow:unitBindingAccounts.count-1>=indexPath.row?indexPath.row-1:unitBindingAccounts.count-1 inSection:0]];
+            }else{
+                [self showButtonPanelViewAtIndexPath:[NSIndexPath indexPathForRow:unitBindingAccounts.count-1>=indexPath.row+1?indexPath.row:unitBindingAccounts.count-1 inSection:0]];
+            }
+            
         }
         
     }
@@ -268,7 +304,10 @@
 - (void)showButtonPanelViewAtIndexPath:(NSIndexPath *) indexPath{
     buttonPanelViewIsVisable = YES;
     curIndexPath = indexPath;
-    if (curIndexPath.row==unitBindingAccounts.count-1) {
+    AccountManageCellData *data = [[AccountManageCellData alloc] init];
+    data.isPanel = YES;
+    [self addPanelData:data];
+    if (curIndexPath.row==unitBindingAccounts.count-2) {
         [tblUnits beginUpdates];
         [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
         [tblUnits reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -283,6 +322,7 @@
 }
 - (void)hideButtonPanelView{
     buttonPanelViewIsVisable = NO;
+    [self removePanelData];
     if (curIndexPath.row==unitBindingAccounts.count-1) {
         [tblUnits beginUpdates];
         [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
@@ -301,12 +341,17 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1023&& buttonIndex == 0) {
         [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
+        [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self];
     }
 }
 
 - (void)notifyViewUpdate {
     if (buttonPanelViewIsVisable) {
         [self hideButtonPanelView];
+    }
+    if (unitBindingAccounts) {
+        [unitBindingAccounts removeAllObjects];
     }
     curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
     if(![NSString isBlank:curUnitIdentifier]){
@@ -323,10 +368,15 @@
         NSArray *usersJson = [JsonUtils createDictionaryFromJson:resp.body];
         if(usersJson != nil) {
             Users *users = [[Users alloc] initWithJson:[NSDictionary dictionaryWithObject:usersJson forKey:@"users"]];
-            unitBindingAccounts = users.users;
+            for (User *user in users.users) {
+                AccountManageCellData *cellData = [[AccountManageCellData alloc] init];
+                cellData.user = user;
+                cellData.isPanel = NO;
+                [unitBindingAccounts addObject:cellData];
+            }
             currentIsOwner = NO;
-            for (User *u in unitBindingAccounts) {
-                if (u.isOwner&&u.isCurrentUser) {
+            for (AccountManageCellData *data in unitBindingAccounts) {
+                if (data.user.isOwner&&data.user.isCurrentUser) {
                     currentIsOwner = YES;
                     break;
                 }
@@ -354,10 +404,19 @@
 
 - (void)unbindingSuccess:(RestResponse *) resp{
     if (resp&&resp.statusCode == 200) {
-        [[SMShared current].memory removeUnitByIdentifier:curUnitIdentifier];
-        [self notifyViewUpdate];
+//        [[SMShared current].memory removeUnitByIdentifier:curUnitIdentifier];
+//        [self notifyViewUpdate];
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"execution_success", @"") forType:AlertViewTypeSuccess];
-        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        [[AlertView currentAlertView] delayDismissAlertView];
+        if (selectedUser.isCurrentUser) {
+//            if ([[SMShared current].deliveryService currentNetworkMode] == NetworkModeExternal) {
+                DeviceCommandUpdateUnits *command = [[DeviceCommandUpdateUnits alloc] init];
+                [[SMShared current].deliveryService executeDeviceCommand:command];
+            
+            
+            
+//            }
+        }
         return;
     }
     [self unbindingFailed:resp];

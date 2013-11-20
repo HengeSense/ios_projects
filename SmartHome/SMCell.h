@@ -10,6 +10,7 @@
 
 #define SM_CELL_HEIGHT 93
 #define SM_CELL_WIDTH  624
+#define FIXED_WIDTH 9
 
 @interface SMCell : UITableViewCell
 

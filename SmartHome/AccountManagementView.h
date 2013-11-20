@@ -8,6 +8,7 @@
 
 #import "NavigationView.h"
 #import "SMCell.h"
+#import "ButtonPanelCell.h"
 
 @interface AccountManagementView : NavigationView<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
