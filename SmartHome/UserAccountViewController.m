@@ -85,7 +85,7 @@
         infoTable.backgroundColor = [UIColor clearColor];
         infoTable.sectionHeaderHeight = 0;
         infoTable.sectionFooterHeight = 0;
-        infoTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 5)];
+        infoTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 10)];
         [self.view addSubview:infoTable];
     }
     
@@ -123,9 +123,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if(section == 0) {
-        return 40;
+        return 50;
     } else if(section == 1) {
-        return 130;
+        return 80;
     }
     return 0;
 }
@@ -134,7 +134,7 @@
     UIView *footView = nil;
    
     if(section == 0) {
-        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
         UILabel *lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 29)];
         lblDescription.font = [UIFont systemFontOfSize:14.f];
         lblDescription.textColor = [UIColor lightGrayColor];
@@ -142,7 +142,7 @@
         lblDescription.text = NSLocalizedString(@"modify_account_tips", @"");
         [footView addSubview:lblDescription];
     } if(section == 1) {
-        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 130)];
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 80)];
         UILabel *lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 58)];
         lblDescription.font = [UIFont systemFontOfSize:14.f];
         lblDescription.textColor = [UIColor lightGrayColor];

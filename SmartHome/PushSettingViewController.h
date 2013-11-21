@@ -8,6 +8,6 @@
 
 #import "NavViewController.h"
 
-@interface PushSettingViewController : NavViewController
+@interface PushSettingViewController : NavViewController<UITableViewDataSource, UITableViewDelegate>
 
 @end

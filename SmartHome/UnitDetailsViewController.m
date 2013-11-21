@@ -54,12 +54,14 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"unit_detail", @"");
     
     if(tblUnit == nil) {
-        tblUnit = [[UITableView alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 5 : -5, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topbar.bounds.size.height) style:UITableViewStyleGrouped];
+        tblUnit = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topbar.bounds.size.height) style:UITableViewStyleGrouped];
         tblUnit.backgroundColor = [UIColor clearColor];
-        tblUnit.backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
+        tblUnit.backgroundView = nil;
+        tblUnit.sectionFooterHeight = 0;
+        tblUnit.sectionHeaderHeight = 0;
+        tblUnit.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1)];
         tblUnit.delegate = self;
         tblUnit.dataSource = self;
-        tblUnit.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:tblUnit];
     }
 }
@@ -93,9 +95,9 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, 40)];
     view.backgroundColor = [UIColor clearColor];
-    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(12, 9, 200, 30)];
-    lblTitle.textColor = [UIColor colorWithHexString:@"b8642d"];
-    lblTitle.font = [UIFont boldSystemFontOfSize:19.f];
+    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(12, 10, 200, 30)];
+    lblTitle.textColor = [UIColor lightGrayColor];
+    lblTitle.font = [UIFont systemFontOfSize:16.f];
     lblTitle.backgroundColor = [UIColor clearColor];
     [view addSubview:lblTitle];
     if(section == 0) {
@@ -113,80 +115,51 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    static NSString *topCellIdentifier = @"topCellIdentifier";
-    static NSString *centerCellIdentifier = @"cellIdentifier";
-    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
-    
-    NSString *cellIdentifier;
-    
-    if(indexPath.section == 0) {
-        cellIdentifier = @"staticCellIdentifer";
-    } else {
-        if(indexPath.row == 0) {
-            cellIdentifier = topCellIdentifier;
-        } else if(indexPath.row == unit.zones.count - 1) {
-            cellIdentifier = bottomCellIdentifier;
-        } else {
-            cellIdentifier = centerCellIdentifier;
+    static NSString *cellIdentifier = @"cellIdentifier";
+   
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = [UIColor whiteColor];
+        
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        
+        cell.backgroundView.backgroundColor = [UIColor whiteColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        
+        if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
+            cell.textLabel.font = [UIFont systemFontOfSize:16.f];
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
         }
     }
-   
-    SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell == nil) {
-        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:![UIDevice systemVersionIsMoreThanOrEuqal7]];
-        cell.backgroundColor = [UIColor clearColor];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 120, 40)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textColor = [UIColor blackColor];
-        titleLabel.tag = 999;
-        [cell addSubview:titleLabel];
-        
-        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(([UIDevice systemVersionIsMoreThanOrEuqal7] ? 135 : 150), 2, 140, 40)];
-        detailLabel.textAlignment = NSTextAlignmentRight;
-        detailLabel.textColor = [UIColor darkGrayColor];
-        detailLabel.backgroundColor = [UIColor clearColor];
-        detailLabel.font = [UIFont systemFontOfSize:16.f];
-        detailLabel.tag = 888;
-        [cell addSubview:detailLabel];
-    }
     
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
+    cell.accessoryType = UITableViewCellAccessoryNone;
     
     if(indexPath.section == 0) {
         if(indexPath.row == 0) {
-            titleLabel.text = NSLocalizedString(@"unit_name", @"");
-            detailLabel.text = unit == nil ? [NSString emptyString] : [NSString stringWithFormat:@"%@   ", unit.name];
-            cell.isTop = YES;
+            cell.textLabel.text = NSLocalizedString(@"unit_name", @"");
+            cell.detailTextLabel.text = unit == nil ? [NSString emptyString] : [NSString stringWithFormat:@"%@   ", unit.name];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } else if(indexPath.row == 1) {
-            titleLabel.text = NSLocalizedString(@"unit_address", @"");
-            detailLabel.text = unit == nil ? [NSString emptyString] : unit.localIP;
-            cell.accessoryViewVisible = YES;
-            cell.isCenter = YES;
+            cell.textLabel.text = NSLocalizedString(@"unit_address", @"");
+            cell.detailTextLabel.text = unit == nil ? [NSString emptyString] : unit.localIP;
         } else if(indexPath.row == 2) {
-            titleLabel.text = NSLocalizedString(@"unit_state", @"");
-            detailLabel.text = unit == nil ? [NSString emptyString] : ([NSString isBlank:unit.status]?NSLocalizedString(@"online", @""):unit.status);
-            cell.accessoryViewVisible = YES;
-            cell.isCenter = YES;
+            cell.textLabel.text = NSLocalizedString(@"unit_state", @"");
+            cell.detailTextLabel.text = unit == nil ? [NSString emptyString] : ([NSString isBlank:unit.status]?NSLocalizedString(@"online", @""):unit.status);
         } else if(indexPath.row == 3) {
-            titleLabel.text = NSLocalizedString(@"unit_devices_count", @"");
-            detailLabel.text = unit == nil ? [NSString emptyString] : [NSString stringWithFormat:@"%d", unit.devices.count];
-            cell.accessoryViewVisible = YES;
-            cell.isCenter = YES;
+            cell.textLabel.text = NSLocalizedString(@"unit_devices_count", @"");
+            cell.detailTextLabel.text = unit == nil ? [NSString emptyString] : [NSString stringWithFormat:@"%d", unit.devices.count];
         } else if(indexPath.row == 4) {
-            cell.accessoryViewVisible = YES;
-            detailLabel.text = unit == nil ? [NSString emptyString] : [SMDateFormatter dateToString:unit.updateTime format:@"MM-dd HH:mm"];
-            titleLabel.text = NSLocalizedString(@"unit_lastupdate_time", @"");
-            cell.isBottom = YES;
+            cell.detailTextLabel.text = unit == nil ? [NSString emptyString] : [SMDateFormatter dateToString:unit.updateTime format:@"MM-dd HH:mm"];
+            cell.textLabel.text = NSLocalizedString(@"unit_lastupdate_time", @"");
         }
     } else if(indexPath.section == 1) {
         if(unit.zones != nil) {
             Zone *zone = [unit.zones objectAtIndex:indexPath.row];
-            titleLabel.text = [NSString stringWithFormat:@"%@  (%d)", zone.name, zone.devices == nil ? 0 : zone.devices.count];
-            if(unit.zones.count == 1) {
-                cell.isSingle = YES;
-            }
+            cell.textLabel.text = [NSString stringWithFormat:@"%@  (%d)", zone.name, zone.devices == nil ? 0 : zone.devices.count];
+            cell.detailTextLabel.text = @"";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
     
@@ -275,4 +248,5 @@
         return NO;
     }
 }
+
 @end
