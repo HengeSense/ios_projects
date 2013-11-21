@@ -207,6 +207,10 @@
         [cell addSubview:separatorLineView];
         cell.textLabel.font = [UIFont systemFontOfSize:15.f];
         
+        if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        }
+        
         if (!data.isPanel) {
             
         }
