@@ -13,9 +13,9 @@
 #import "PushSettingViewController.h"
 #import "WelcomeViewController.h"
 #import "AboutUsViewController.h"
+
 @implementation MySettingsView {
     UITableView *tblSettings;
-    UIButton *btnLogout;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -32,24 +32,27 @@
 
 - (void)initUI {
     [super initUI];
+    
     if(tblSettings == nil) {
-        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, SM_CELL_WIDTH / 2, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
-        tblSettings.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, SM_CELL_WIDTH / 2, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        
+        
+        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        
+
+//        tblSettings.separatorColor = [UIColor redColor];
+        tblSettings.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
         tblSettings.center = CGPointMake(self.center.x, tblSettings.center.y);
         tblSettings.backgroundColor = [UIColor clearColor];
         tblSettings.dataSource = self;
         tblSettings.delegate = self;
-        tblSettings.scrollEnabled = NO;
+        
+        
+        
+//        [tblSettings setTableFooterView:btnLogout];
+
         [self addSubview:tblSettings];
-    }
-    
-    if(btnLogout == nil) {
-        btnLogout = [LongButton buttonWithPoint:CGPointMake(0, 0)];
-        btnLogout.center = CGPointMake(self.bounds.size.width / 2, SM_CELL_HEIGHT/2+([UIDevice systemVersionIsMoreThanOrEuqal7] ? 242 : 222));
-        [btnLogout setTitle:NSLocalizedString(@"account_logout", @"") forState:UIControlStateNormal];
-        btnLogout.titleLabel.textColor = [UIColor whiteColor];
-        [btnLogout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btnLogout];
     }
     
     [[SMShared current].memory subscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
@@ -75,7 +78,7 @@
         default:
             break;
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -90,24 +93,40 @@
     return SM_CELL_HEIGHT / 2;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *topCellIdentifier = @"topCellIdentifier";
-    static NSString *centerCellIdentifier = @"cellIdentifier";
-    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
-    
-    NSString *cellIdentifier;
-    
-    if(indexPath.row == 0) {
-        cellIdentifier = topCellIdentifier;
-    } else if(indexPath.row == 3) {
-        cellIdentifier = bottomCellIdentifier;
-    } else {
-        cellIdentifier = centerCellIdentifier;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if(section == 0) {
+        return 49+15;
     }
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if(section == 0) {
+        UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 49+15)];
+        footView.backgroundColor = [UIColor clearColor];
+        LongButton *btnLogout = [LongButton buttonWithPoint:CGPointMake(0, 10)];
+        btnLogout.center = CGPointMake(160, btnLogout.center.y);
+        [btnLogout setTitle:NSLocalizedString(@"account_logout", @"") forState:UIControlStateNormal];
+        btnLogout.titleLabel.textColor = [UIColor whiteColor];
+        [btnLogout addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+        [footView addSubview:btnLogout];
+        return footView;
+    }
+    return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"cellIdentifier";
     
-    SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(cell == nil) {
-        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.backgroundView.backgroundColor = [UIColor whiteColor];
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
         cell.textLabel.font = [UIFont systemFontOfSize:17.f];
     }
     
@@ -157,6 +176,7 @@
     command.curVersion = [NSNumber numberWithDouble:[infoDict doubleForKey:@"CFBundleVersion"]];
     [[SMShared current].deliveryService executeDeviceCommand:command];
 }
+
 - (void)didCheckVersionComplete:(DeviceCommand *)command {
     switch (command.resultID) {
         case 1:
