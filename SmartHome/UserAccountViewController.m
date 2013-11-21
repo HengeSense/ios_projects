@@ -60,7 +60,7 @@
 
 - (void)initDefaults {
     [super initDefaults];
-    values = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", nil];
+    values = [[NSMutableArray alloc] initWithObjects:@"", @"", @"********", nil];
     
     titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick_name", @""),NSLocalizedString(@"mail", @""),NSLocalizedString(@"modify_pwd", @""), nil];
     
@@ -122,7 +122,7 @@
     if(section == 0) {
         return 50;
     } else if(section == 1) {
-        return 80;
+        return 130;
     }
     return 0;
 }
@@ -139,7 +139,7 @@
         lblDescription.text = NSLocalizedString(@"modify_account_tips", @"");
         [footView addSubview:lblDescription];
     } if(section == 1) {
-        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 80)];
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 130)];
         UILabel *lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 58)];
         lblDescription.font = [UIFont systemFontOfSize:14.f];
         lblDescription.textColor = [UIColor lightGrayColor];
@@ -288,7 +288,6 @@
                 accountInfoIsModifed = NO;
                 btnSubmit.enabled = NO;
                 password = [NSString emptyString];
-                [infoTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]].detailTextLabel.text = [NSString emptyString];
                 [self notifyMainViewScreenNameChanged];
                 break;
             case -1:
@@ -337,7 +336,7 @@
         if(![NSString isBlank:string]) {
             accountInfoIsModifed = YES;
             btnSubmit.enabled = accountInfoIsModifed;
-            editCell.detailTextLabel.text = NSLocalizedString(@"pwd_edited", @"");
+//            editCell.detailTextLabel.text = NSLocalizedString(@"pwd_edited", @"");
         }
     } else {
         if (string && ![string isEqualToString:[values objectAtIndex:editIndex.row]]) {
