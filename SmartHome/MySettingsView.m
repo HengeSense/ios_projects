@@ -34,10 +34,14 @@
     [super initUI];
     
     if(tblSettings == nil) {
-        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStyleGrouped];
+        tblSettings.backgroundView = nil;
         tblSettings.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         tblSettings.center = CGPointMake(self.center.x, tblSettings.center.y);
         tblSettings.backgroundColor = [UIColor clearColor];
+        tblSettings.sectionFooterHeight = 0;
+        tblSettings.sectionHeaderHeight = 0;
+        tblSettings.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 5)];
         tblSettings.dataSource = self;
         tblSettings.delegate = self;
         [self addSubview:tblSettings];

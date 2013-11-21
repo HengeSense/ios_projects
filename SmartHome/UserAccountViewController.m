@@ -60,7 +60,7 @@
 
 - (void)initDefaults {
     [super initDefaults];
-    values = [[NSMutableArray alloc]initWithObjects:@"", @"", @"", nil];
+    values = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", nil];
     
     titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick_name", @""),NSLocalizedString(@"mail", @""),NSLocalizedString(@"modify_pwd", @""), nil];
     
@@ -78,24 +78,15 @@
     self.topbar.titleLabel.text = NSLocalizedString(@"account_info.title", @"");
 
     if(infoTable == nil) {
-        infoTable = [[UITableView alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 5 : -5, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topbar.bounds.size.height) style:UITableViewStyleGrouped];
-        infoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        infoTable.backgroundColor = [UIColor clearColor];
-        infoTable.backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];;
-        infoTable.scrollEnabled = NO;
+        infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topbar.bounds.size.height) style:UITableViewStyleGrouped];
         infoTable.delegate = self;
         infoTable.dataSource = self;
-        
+        infoTable.backgroundView = nil;
+        infoTable.backgroundColor = [UIColor clearColor];
+        infoTable.sectionHeaderHeight = 0;
+        infoTable.sectionFooterHeight = 0;
+        infoTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 5)];
         [self.view addSubview:infoTable];
-    }
-    
-    if(btnSubmit == nil) {
-        btnSubmit = [LongButton buttonWithPoint:CGPointMake(0, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 350 : 330)];
-        btnSubmit.center = CGPointMake(self.view.center.x, btnSubmit.center.y);
-        [btnSubmit setTitle:NSLocalizedString(@"submit", @"") forState:UIControlStateNormal];
-        [self.view addSubview:btnSubmit];
-        [btnSubmit addTarget:self action:@selector(btnSubmitClicked:) forControlEvents:UIControlEventTouchUpInside];
-        btnSubmit.enabled = accountInfoIsModifed;
     }
     
     [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
@@ -103,9 +94,7 @@
 
 - (void)updateUsername:(NSString *)username{
     UITableViewCell *usernameCell = [infoTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    UILabel *detailLabel = (UILabel *)[usernameCell viewWithTag:888];
-    if (detailLabel)
-    detailLabel.text = username;
+    usernameCell.detailTextLabel.text = username;
 }
 
 #pragma mark -
@@ -119,7 +108,6 @@
     } else if(indexPath.section == 1) {
         editCell = [tableView cellForRowAtIndexPath:indexPath];
         editIndex = indexPath;
-        
         ModifyInfoViewController *modifyView = [[ModifyInfoViewController alloc] initWithKey:[titles objectAtIndex:indexPath.row] forValue:[values objectAtIndex:indexPath.row] from:self];
         modifyView.textDelegate = self;
         [self presentViewController:modifyView animated:YES completion:nil];
@@ -127,23 +115,49 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 40;
+    return 0;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, 40)];
-    view.backgroundColor = [UIColor clearColor];
-    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(12, 9, 280, 30)];
-    lblTitle.textColor = [UIColor colorWithHexString:@"b8642d"];
-    lblTitle.font = [UIFont boldSystemFontOfSize:16.f];
-    lblTitle.backgroundColor = [UIColor clearColor];
-    [view addSubview:lblTitle];
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if(section == 0) {
-        lblTitle.text = NSLocalizedString(@"modify_account", @"");
-    } else {
-        lblTitle.text = NSLocalizedString(@"modify_profile", @"");
+        return 40;
+    } else if(section == 1) {
+        return 130;
     }
-    return view;
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footView = nil;
+   
+    if(section == 0) {
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 40)];
+        UILabel *lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 29)];
+        lblDescription.font = [UIFont systemFontOfSize:14.f];
+        lblDescription.textColor = [UIColor lightGrayColor];
+        lblDescription.backgroundColor = [UIColor clearColor];
+        lblDescription.text = NSLocalizedString(@"modify_account_tips", @"");
+        [footView addSubview:lblDescription];
+    } if(section == 1) {
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 130)];
+        UILabel *lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 58)];
+        lblDescription.font = [UIFont systemFontOfSize:14.f];
+        lblDescription.textColor = [UIColor lightGrayColor];
+        lblDescription.backgroundColor = [UIColor clearColor];
+        lblDescription.numberOfLines = 2;
+        lblDescription.text = NSLocalizedString(@"modify_profile_tips", @"");
+        [footView addSubview:lblDescription];
+        if(btnSubmit == nil) {
+            btnSubmit = [LongButton buttonWithPoint:CGPointMake(0, 70)];
+            btnSubmit.center = CGPointMake(footView.center.x, btnSubmit.center.y);
+            [btnSubmit setTitle:NSLocalizedString(@"submit", @"") forState:UIControlStateNormal];
+            [btnSubmit addTarget:self action:@selector(btnSubmitClicked:) forControlEvents:UIControlEventTouchUpInside];
+            btnSubmit.enabled = accountInfoIsModifed;
+        }
+        [footView addSubview:btnSubmit];
+    }
+    footView.backgroundColor = [UIColor clearColor];
+    return footView;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -153,64 +167,43 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0) {
         return 1;
-    } else {
+    } else if(section == 1) {
         return values == nil ? 0 : values.count;
     }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"cellIdentifier";
     
-    static NSString *topCellIdentifier = @"topCellIdentifier";
-    static NSString *centerCellIdentifier = @"cellIdentifier";
-    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
-    static NSString *singleCellIdentifier = @"singleCellIdentifier";
-    
-    NSString *cellIdentifier;
-    if(indexPath.section == 0) {
-        cellIdentifier = singleCellIdentifier;
-    } else {
-        if(indexPath.row == 0) {
-            cellIdentifier = topCellIdentifier;
-        } else if(indexPath.row == titles.count - 1) {
-            cellIdentifier = bottomCellIdentifier;
-        } else {
-            cellIdentifier = centerCellIdentifier;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
+            cell.textLabel.font = [UIFont systemFontOfSize:17.f];
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
         }
     }
     
-    SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell == nil) {
-        cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:![UIDevice systemVersionIsMoreThanOrEuqal7]];
-        
-        cell.backgroundColor = [UIColor clearColor];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 120, 40)];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textColor = [UIColor blackColor];
-        titleLabel.tag = 999;
-        [cell addSubview:titleLabel];
-        
-        UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(([UIDevice systemVersionIsMoreThanOrEuqal7] ? 115 : 130), 2, 160, 40)];
-        detailLabel.textAlignment = NSTextAlignmentRight;
-        detailLabel.textColor = [UIColor darkGrayColor];
-        detailLabel.backgroundColor = [UIColor clearColor];
-        detailLabel.font = [UIFont systemFontOfSize:16.f];
-        detailLabel.tag = 888;
-        [cell addSubview:detailLabel];
-    }
-    
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
-    
     if(indexPath.section == 0) {
-        titleLabel.text = NSLocalizedString(@"username", @"");
-        detailLabel.text = [SMShared current].settings.account;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.backgroundView.backgroundColor = [UIColor whiteColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        cell.textLabel.text = NSLocalizedString(@"username", @"");
+        cell.detailTextLabel.text = [SMShared current].settings.account;
     } else if(indexPath.section == 1) {
-        titleLabel.text = [titles objectAtIndex:indexPath.row];
-        detailLabel.text = [values objectAtIndex:indexPath.row];
-    }
-    
-    if(indexPath.section == 0) {
-        cell.isSingle = YES;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.backgroundView.backgroundColor = [UIColor whiteColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        cell.textLabel.text = [titles objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [values objectAtIndex:indexPath.row];
     }
     
     return cell;
@@ -295,8 +288,7 @@
                 accountInfoIsModifed = NO;
                 btnSubmit.enabled = NO;
                 password = [NSString emptyString];
-                ((UILabel *)[[infoTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]] viewWithTag:888]).text = [NSString emptyString];
-                
+                [infoTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]].detailTextLabel.text = [NSString emptyString];
                 [self notifyMainViewScreenNameChanged];
                 break;
             case -1:
@@ -305,8 +297,6 @@
                 break;
             case -2:
                 [[AlertView currentAlertView] setMessage:NSLocalizedString(@"mail_name_blank", @"") forType:AlertViewTypeFailed];
-                
-                
                 [[AlertView currentAlertView] delayDismissAlertView];
                 break;
             case -3:
@@ -347,16 +337,14 @@
         if(![NSString isBlank:string]) {
             accountInfoIsModifed = YES;
             btnSubmit.enabled = accountInfoIsModifed;
-            UILabel *detailLabel = (UILabel *)[editCell viewWithTag:888];
-            detailLabel.text = NSLocalizedString(@"pwd_edited", @"");
+            editCell.detailTextLabel.text = NSLocalizedString(@"pwd_edited", @"");
         }
     } else {
         if (string && ![string isEqualToString:[values objectAtIndex:editIndex.row]]) {
             [values setObject:string atIndexedSubscript:editIndex.row];
             accountInfoIsModifed = YES;
             btnSubmit.enabled = accountInfoIsModifed;
-            UILabel *detailLabel = (UILabel *)[editCell viewWithTag:888];
-            detailLabel.text = string;
+            editCell.detailTextLabel.text = string;
         }
     }
     [infoDictionary setValue:string forKey:[titles objectAtIndex:editIndex.row]];
