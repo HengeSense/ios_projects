@@ -18,6 +18,9 @@
 @end
 
 @implementation PushSettingViewController{
+    
+    UITableView *tblPushSettings;
+    
     UIView *systemSettingView;
     UILabel *lblSystemSetting;
     UIView  *voiceAndShakeView;
@@ -48,102 +51,137 @@
     [super initUI];
     
     self.topbar.titleLabel.text = NSLocalizedString(@"push_settings.title", @"");
-    CGFloat topBarHeight = self.topbar.frame.size.height;
-    UIFont *fontName = [UIFont systemFontOfSize:18];
     
-    if(systemSettingView == nil) {
-        systemSettingView = [[UIView alloc] initWithFrame:CGRectMake(0, topBarHeight+15, 300, ITEM_HEIGHT)];
-        systemSettingView.center = CGPointMake(self.view.center.x, systemSettingView.center.y);
-        systemSettingView.layer.cornerRadius = 10;
-        systemSettingView.backgroundColor = [UIColor whiteColor];
-        [self.view addSubview:systemSettingView];
-        
-        UILabel *lblSysSettingTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, ITEM_HEIGHT)];
-        lblSysSettingTitle.backgroundColor = [UIColor clearColor];
-        lblSysSettingTitle.font = fontName;
-        lblSysSettingTitle.text = NSLocalizedString(@"receive_new_notification", @"");
-        [systemSettingView addSubview:lblSysSettingTitle];
+    if(tblPushSettings == nil) {
+        tblPushSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, self.view.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStyleGrouped];
+        tblPushSettings.dataSource = self;
+        tblPushSettings.delegate = self;
+        tblPushSettings.backgroundView = nil;
+        tblPushSettings.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 10)];
+        tblPushSettings.sectionFooterHeight = 0;
+        tblPushSettings.sectionHeaderHeight = 0;
+        tblPushSettings.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:tblPushSettings];
     }
-    
-    if(lblSystemSetting == nil) {
-        lblSystemSetting = [[UILabel alloc] initWithFrame:CGRectMake(240,0,50,ITEM_HEIGHT)];
-        lblSystemSetting.backgroundColor = [UIColor clearColor];
-        lblSystemSetting.font = [UIFont systemFontOfSize:16];
-        lblSystemSetting.textColor = [UIColor lightGrayColor];
-        lblSystemSetting.text = [[UIApplication sharedApplication] enabledRemoteNotificationTypes]?NSLocalizedString(@"status_opened", @""):NSLocalizedString(@"status_closed", @"");
-        [systemSettingView addSubview:lblSystemSetting];
-    }
-    
-    UILabel *lblHelp1 = [[UILabel alloc] initWithFrame:CGRectMake(0, topBarHeight+10+ITEM_HEIGHT, 300, 100)];
-    lblHelp1.center = CGPointMake(self.view.center.x, lblHelp1.center.y);
-    lblHelp1.backgroundColor = [UIColor clearColor];
-    lblHelp1.textColor = [UIColor lightTextColor];
-    lblHelp1.font = [UIFont systemFontOfSize:14];
-    lblHelp1.lineBreakMode = NSLineBreakByWordWrapping;
-    lblHelp1.numberOfLines = 0;
-    lblHelp1.text = NSLocalizedString(@"push.help1", @"");
-    [lblHelp1 sizeThatFits:lblHelp1.frame.size];
-    [self.view addSubview:lblHelp1];
-    
-    if(voiceAndShakeView == nil) {
-        voiceAndShakeView = [[UIView alloc] initWithFrame:CGRectMake(0,lblHelp1.frame.origin.y+lblHelp1.frame.size.height - 5, 300, 2*ITEM_HEIGHT+1)];
-        voiceAndShakeView.center = CGPointMake(self.view.center.x, voiceAndShakeView.center.y);
-        voiceAndShakeView.layer.cornerRadius = 10;
-        voiceAndShakeView.backgroundColor = [UIColor whiteColor];
-        
-        [self.view addSubview:voiceAndShakeView];
-        UILabel *lblVoice = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, ITEM_HEIGHT)];
-        lblVoice.backgroundColor = [UIColor clearColor];
-        lblVoice.font = fontName;
-        lblVoice.text = NSLocalizedString(@"voice", @"");
-        [voiceAndShakeView addSubview:lblVoice];
-        
-        UILabel *lblShake = [[UILabel alloc] initWithFrame:CGRectMake(10, ITEM_HEIGHT, 100, ITEM_HEIGHT)];
-        lblShake.backgroundColor = [UIColor clearColor];
-        lblShake.font = fontName;
-        lblShake.text = NSLocalizedString(@"shake", @"");
-        [voiceAndShakeView addSubview:lblShake];
+}
 
-        UIView *seperatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, ITEM_HEIGHT-1, 300, 1)];
-        seperatorLine.backgroundColor = [UIColor grayColor];
-        [voiceAndShakeView addSubview:seperatorLine];
-    }
-    
-    UILabel *lblHelp2 = [[UILabel alloc] initWithFrame:CGRectMake(0, voiceAndShakeView.frame.size.height+voiceAndShakeView.frame.origin.y, 300, 50)];
-    lblHelp2.center = CGPointMake(self.view.center.x, lblHelp2.center.y);
-    lblHelp2.backgroundColor = [UIColor clearColor];
-    lblHelp2.textColor = [UIColor lightTextColor];
-    lblHelp2.font = [UIFont systemFontOfSize:14];
-    lblHelp2.lineBreakMode = NSLineBreakByWordWrapping;
-    lblHelp2.numberOfLines = 0;
-    lblHelp2.text = NSLocalizedString(@"push.help2", @"");
-    [lblHelp2 sizeThatFits:lblHelp2.frame.size];
-    [self.view addSubview:lblHelp2];
+#pragma mark -
+#pragma mark - Table view delegate
 
-    if(voiceSwitch == nil) {
-        voiceSwitch = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 240 : 210, 12, 100, 40)];
-        [voiceSwitch setOn:[SMShared current].settings.isVoice animated:NO];
-        [voiceSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-        [voiceAndShakeView addSubview:voiceSwitch];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(section == 0) return 1;
+    if(section == 1) return 2;
+    return 0;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if(section == 0) {
+        return 90;
+    } else if(section == 1) {
+        return 50;
+    }
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footView = nil;
+    
+    if(section == 0) {
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 90)];
+        UILabel *lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 75)];
+        lblDescription.font = [UIFont systemFontOfSize:14.f];
+        lblDescription.numberOfLines = 3;
+        lblDescription.textColor = [UIColor lightGrayColor];
+        lblDescription.backgroundColor = [UIColor clearColor];
+        lblDescription.text = NSLocalizedString(@"push.help1", @"");
+        [footView addSubview:lblDescription];
+    } if(section == 1) {
+        footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
+        UILabel *lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 29)];
+        lblDescription.font = [UIFont systemFontOfSize:14.f];
+        lblDescription.textColor = [UIColor lightGrayColor];
+        lblDescription.backgroundColor = [UIColor clearColor];
+        lblDescription.text = NSLocalizedString(@"push.help2", @"");
+        [footView addSubview:lblDescription];
+    }
+    footView.backgroundColor = [UIColor clearColor];
+    return footView;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *normalCellIdentifier = @"ncellIdentifier";
+    static NSString *switchCellIdentifier = @"sCellIdentifier";
+    
+    UITableViewCell *cell = nil;
+
+    cell = [tableView dequeueReusableCellWithIdentifier:indexPath.section == 0 ? normalCellIdentifier : switchCellIdentifier];
+
+    if(cell == nil) {
+        if(indexPath.section == 0) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:normalCellIdentifier];
+        } else {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:switchCellIdentifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.backgroundView.backgroundColor = [UIColor whiteColor];
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        
+        if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
+            cell.textLabel.font = [UIFont systemFontOfSize:16.f];
+        }
+        
+        if(indexPath.section == 0) {
+            if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
+                cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            }
+        } else {
+            UISwitch *swh = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 255 : 225, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 5 : 8, 50, 29)];
+            [cell addSubview:swh];
+            [swh addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+            
+            if(indexPath.row == 0) {
+                swh.tag = 800;
+            } else {
+                swh.tag = 801;
+            }
+        }
     }
     
-    if(shakeSwitch == nil) {
-        shakeSwitch = [[UISwitch alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7] ? 240 : 210, ITEM_HEIGHT+12, 100, 40)];
-        [shakeSwitch setOn:[SMShared current].settings.isShake animated:NO];
-        [shakeSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
-        [voiceAndShakeView addSubview:shakeSwitch];
+    if(indexPath.section == 0) {
+        cell.textLabel.text = NSLocalizedString(@"receive_new_notification", @"");
+        cell.detailTextLabel.text = [[UIApplication sharedApplication] enabledRemoteNotificationTypes]?NSLocalizedString(@"status_opened", @""):NSLocalizedString(@"status_closed", @"");
+    } else if(indexPath.section == 1) {
+        if(indexPath.row == 0) {
+            UISwitch *sh = (UISwitch *)[cell viewWithTag:800];
+            cell.textLabel.text = NSLocalizedString(@"voice", @"");
+            [sh setOn:[SMShared current].settings.isVoice animated:NO];
+        } else if(indexPath.row == 1) {
+            UISwitch *sh = (UISwitch *)[cell viewWithTag:801];
+            cell.textLabel.text = NSLocalizedString(@"shake", @"");
+            [sh setOn:[SMShared current].settings.isShake animated:NO];
+        }
     }
+    
+    return cell;
 }
     
 - (void)switchChanged:(UISwitch *)sender {
     if(sender == nil) return;
-    if ([sender isEqual:voiceSwitch]) {
+    if (sender.tag == 800) {
         if(sender.isOn) {
             [SystemAudio playClassicSmsSound];
         }
         [SMShared current].settings.isVoice = sender.isOn;
         [[SMShared current].settings saveSettings];
-    } else if([sender isEqual:shakeSwitch]) {
+    } else if(sender.tag == 801) {
         if(sender.isOn) {
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         }

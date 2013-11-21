@@ -34,7 +34,7 @@
     [super initUI];
     
     if(tblUnits == nil) {
-        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, [UIScreen mainScreen].bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 10, [UIScreen mainScreen].bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height - 10) style:UITableViewStylePlain];
         tblUnits.center = CGPointMake(self.center.x, tblUnits.center.y);
         tblUnits.delegate = self;
         tblUnits.dataSource = self;

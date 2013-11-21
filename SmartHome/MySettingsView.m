@@ -41,7 +41,7 @@
         tblSettings.backgroundColor = [UIColor clearColor];
         tblSettings.sectionFooterHeight = 0;
         tblSettings.sectionHeaderHeight = 0;
-        tblSettings.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 5)];
+        tblSettings.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 10)];
         tblSettings.dataSource = self;
         tblSettings.delegate = self;
         [self addSubview:tblSettings];

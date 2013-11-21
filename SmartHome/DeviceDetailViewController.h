@@ -10,6 +10,7 @@
 #import "NavViewController.h"
 #import "Device.h"
 #import "SMCell.h"
+
 @interface DeviceDetailViewController : NavViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (strong, nonatomic) Device *device;

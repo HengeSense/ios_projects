@@ -59,7 +59,7 @@
         tblUnit.backgroundView = nil;
         tblUnit.sectionFooterHeight = 0;
         tblUnit.sectionHeaderHeight = 0;
-        tblUnit.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 5)];
+        tblUnit.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1)];
         tblUnit.delegate = self;
         tblUnit.dataSource = self;
         [self.view addSubview:tblUnit];
@@ -93,9 +93,9 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, 45)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SM_CELL_WIDTH / 2, 40)];
     view.backgroundColor = [UIColor clearColor];
-    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(12, 15, 200, 30)];
+    UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(12, 10, 200, 30)];
     lblTitle.textColor = [UIColor lightGrayColor];
     lblTitle.font = [UIFont systemFontOfSize:16.f];
     lblTitle.backgroundColor = [UIColor clearColor];
@@ -111,7 +111,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 45;
+    return 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

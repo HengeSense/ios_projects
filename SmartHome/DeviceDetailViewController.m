@@ -53,7 +53,7 @@
         self.topbar.titleLabel.text = device.name;
     }
     if(tblDetail ==nil) {
-        tblDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 5, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - self.topbar.frame.size.height - 5) style:UITableViewStylePlain];
+        tblDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 10, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - self.topbar.frame.size.height - 10) style:UITableViewStylePlain];
         tblDetail.center = CGPointMake(self.view.center.x, tblDetail.center.y);
         tblDetail.backgroundColor = [UIColor clearColor];
         tblDetail.dataSource = self;
