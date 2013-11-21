@@ -60,7 +60,6 @@
 }
 - (void)initUI{
     [super initUI];
-    self.backgroundColor = [UIColor whiteColor];
     if(tblUnits == nil) {
         tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, self.bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height) style:UITableViewStylePlain];
         tblUnits.center = CGPointMake(self.center.x, tblUnits.center.y);
@@ -74,7 +73,6 @@
     if (buttonPanelView == nil) {
         buttonPanelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
         buttonPanelView.backgroundColor = [UIColor clearColor];
-        buttonPanelView.hidden = YES;
         if (btnMsg == nil) {
             btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnMsg setBackgroundImage:[UIImage imageNamed:@"icon_send_msg.png"] forState:UIControlStateNormal];
@@ -146,7 +144,6 @@
     if (buttonPanelView.superview) {
         [buttonPanelView removeFromSuperview];
     }
-    buttonPanelView.hidden = NO;
 }
 #pragma mark
 #pragma mark- btn events
@@ -178,10 +175,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-
-- (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *userCellIdentifier = @"userCellIdentifier";
     static NSString *panelCellIdentifier = @"panelIdentifier";
@@ -203,37 +196,19 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         //            cell = [[ButtonPanelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:NO];
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView.backgroundColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor whiteColor];
-        UIView *separatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, SM_CELL_HEIGHT / 2 - 0.5, cell.bounds.size.width, 0.5)];
+        UIView *separatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(46, SM_CELL_HEIGHT / 2 - 0.5, cell.bounds.size.width, 0.5)];
         separatorLineView.backgroundColor = [UIColor lightGrayColor];
         separatorLineView.alpha = 0.5;
         [cell addSubview:separatorLineView];
-
+        cell.textLabel.font = [UIFont systemFontOfSize:15.f];
         
         if (!data.isPanel) {
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 2, BTN_WIDTH, BTN_HEIGHT)];
-            imageView.center = CGPointMake(imageView.center.x, cell.center.y);
-            imageView.tag = 998;
-            [cell addSubview:imageView];
             
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(61, 2, 130, 40)];
-            titleLabel.backgroundColor = [UIColor clearColor];
-            titleLabel.textColor = [UIColor blackColor];
-            titleLabel.font = [UIFont systemFontOfSize:12.f];
-            titleLabel.tag = 999;
-            [cell addSubview:titleLabel];
-            
-            UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIDevice systemVersionIsMoreThanOrEuqal7]? 191  : 201, 2, 100, 40)];
-            detailLabel.textAlignment = NSTextAlignmentRight;
-            detailLabel.textColor = [UIColor darkGrayColor];
-            detailLabel.backgroundColor = [UIColor clearColor];
-            detailLabel.font = [UIFont systemFontOfSize:12.f];
-            detailLabel.tag = 888;
-            [cell addSubview:detailLabel];
         }
     }
     if (data.isPanel) {
@@ -243,26 +218,23 @@
         
     }else{
 //        SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
-        UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
-        UIImageView *imageView = (UIImageView *)[cell viewWithTag:998];
         
         User  *user  = data.user;
         if(user != nil) {
-            titleLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
-            detailLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
             
             if (user.isCurrentUser) {
                 if (user.isOwner) {
-                    imageView.image = [UIImage imageNamed:@"icon_me_owner.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"icon_me_owner.png"];
                 }else{
-                    imageView.image = [UIImage imageNamed:@"icon_me.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"icon_me.png"];
                 }
             }else{
                 if (user.isOwner) {
-                    imageView.image = [UIImage imageNamed:@"icon_owner.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"icon_owner.png"];
                 }else{
-                    imageView.image = nil;
+                    cell.imageView.image = [UIImage imageNamed:@"transparent.png"];
                 }
             }
         }
@@ -326,7 +298,6 @@
     [tblUnits beginUpdates];
     [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [tblUnits endUpdates];
-    buttonPanelView.hidden = YES;
 
 }
 #pragma mark

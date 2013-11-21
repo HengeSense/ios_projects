@@ -101,6 +101,9 @@
 #pragma mark UI Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"detailTextLabel%@",editCell.detailTextLabel);
+    NSLog(@"detailTextLabel text%@",editCell.detailTextLabel.text);
+
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.section == 0) {
         VerificationCodeSendViewController *verificationCodeSendViewController = [[VerificationCodeSendViewController alloc] initAsModify:YES];
@@ -196,7 +199,6 @@
         cell.detailTextLabel.text = [SMShared current].settings.account;
     } else if(indexPath.section == 1) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.backgroundColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor whiteColor];
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
@@ -336,7 +338,6 @@
         if(![NSString isBlank:string]) {
             accountInfoIsModifed = YES;
             btnSubmit.enabled = accountInfoIsModifed;
-//            editCell.detailTextLabel.text = NSLocalizedString(@"pwd_edited", @"");
         }
     } else {
         if (string && ![string isEqualToString:[values objectAtIndex:editIndex.row]]) {
