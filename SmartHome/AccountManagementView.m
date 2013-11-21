@@ -13,7 +13,6 @@
 #import "SystemService.h"
 #import "UIView+Extensions.h"
 #import "AlertView.h"
-#import <QuartzCore/QuartzCore.h>
 
 #define BTN_MARGIN 35
 #define BTN_WIDTH 41/2
@@ -61,21 +60,21 @@
 }
 - (void)initUI{
     [super initUI];
+    self.backgroundColor = [UIColor whiteColor];
     if(tblUnits == nil) {
-        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, SM_CELL_WIDTH / 2, self.frame.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
+        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, self.bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height) style:UITableViewStylePlain];
         tblUnits.center = CGPointMake(self.center.x, tblUnits.center.y);
-        tblUnits.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblUnits.delegate = self;
+        tblUnits.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblUnits.dataSource = self;
-        tblUnits.backgroundColor = [UIColor whiteColor];
-        tblUnits.layer.cornerRadius = 4;
+        tblUnits.backgroundColor = [UIColor clearColor];
         [self addSubview:tblUnits];
     }
     
     if (buttonPanelView == nil) {
         buttonPanelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
         buttonPanelView.backgroundColor = [UIColor clearColor];
-        
+        buttonPanelView.hidden = YES;
         if (btnMsg == nil) {
             btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnMsg setBackgroundImage:[UIImage imageNamed:@"icon_send_msg.png"] forState:UIControlStateNormal];
@@ -147,6 +146,7 @@
     if (buttonPanelView.superview) {
         [buttonPanelView removeFromSuperview];
     }
+    buttonPanelView.hidden = NO;
 }
 #pragma mark
 #pragma mark- btn events
@@ -178,6 +178,10 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
+- (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *userCellIdentifier = @"userCellIdentifier";
     static NSString *panelCellIdentifier = @"panelIdentifier";
@@ -201,9 +205,17 @@
         //            cell = [[ButtonPanelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:NO];
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.backgroundView.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor whiteColor];
+        UIView *separatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, SM_CELL_HEIGHT / 2 - 0.5, cell.bounds.size.width, 0.5)];
+        separatorLineView.backgroundColor = [UIColor lightGrayColor];
+        separatorLineView.alpha = 0.5;
+        [cell addSubview:separatorLineView];
+
         
         if (!data.isPanel) {
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTN_WIDTH, 2, BTN_WIDTH, BTN_HEIGHT)];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 2, BTN_WIDTH, BTN_HEIGHT)];
             imageView.center = CGPointMake(imageView.center.x, cell.center.y);
             imageView.tag = 998;
             [cell addSubview:imageView];
@@ -282,8 +294,9 @@
     if (!buttonPanelViewIsVisable) {
         [self showButtonPanelViewAtIndexPath:indexPath];
     }else {
-        [self hideButtonPanelView];
         if (![curIndexPath isEqual:indexPath]&&curIndexPath.row!=indexPath.row-1) {
+            [self hideButtonPanelView];
+
             if (curIndexPath.row+1<indexPath.row) {
                 [self showButtonPanelViewAtIndexPath:[NSIndexPath indexPathForRow:unitBindingAccounts.count-1>=indexPath.row?indexPath.row-1:unitBindingAccounts.count-1 inSection:0]];
             }else{
@@ -301,14 +314,6 @@
     AccountManageCellData *data = [[AccountManageCellData alloc] init];
     data.isPanel = YES;
     [self addPanelData:data];
-    if (curIndexPath.row==unitBindingAccounts.count-2) {
-        [tblUnits beginUpdates];
-        NSLog(@"1111");
-        [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        [tblUnits reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        [tblUnits endUpdates];
-        return;
-    }
     [tblUnits beginUpdates];
     [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [tblUnits endUpdates];
@@ -318,16 +323,10 @@
 - (void)hideButtonPanelView{
     buttonPanelViewIsVisable = NO;
     [self removePanelData];
-    if (curIndexPath.row==unitBindingAccounts.count-1) {
-        [tblUnits beginUpdates];
-        [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        [tblUnits reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        [tblUnits endUpdates];
-        return;
-    }
     [tblUnits beginUpdates];
     [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [tblUnits endUpdates];
+    buttonPanelView.hidden = YES;
 
 }
 #pragma mark
