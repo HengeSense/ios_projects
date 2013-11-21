@@ -124,9 +124,9 @@
 "pwd_format_invalid"        = "密码格式错误";
 "modify_tip"                = "此手机号将作为新的用户名使用";
 "enter_new_mobile"          = "请输入新手机号码";
-"modify_account"            = "登录账号修改";
-"modify_profile"            = "用户信息修改";
 "profile_changed_tips"      = "修改的用户信息尚未提交,是否放弃更改?";
+"modify_account_tips"       = "点击修改用户登录账号";
+"modify_profile_tips"       = "除去修改用户登录账号之外的所有信息修改完成后,需要点击提交更改按钮进行提交";
 
 
 /****************	Drawer View Strings	****************/

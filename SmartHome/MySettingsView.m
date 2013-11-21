@@ -34,24 +34,16 @@
     [super initUI];
     
     if(tblSettings == nil) {
-//        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, SM_CELL_WIDTH / 2, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
-        
-        
-        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height + 5, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStylePlain];
-        
-
-//        tblSettings.separatorColor = [UIColor redColor];
+        tblSettings = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, self.bounds.size.height - self.topbar.bounds.size.height - 5) style:UITableViewStyleGrouped];
+        tblSettings.backgroundView = nil;
         tblSettings.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        
         tblSettings.center = CGPointMake(self.center.x, tblSettings.center.y);
         tblSettings.backgroundColor = [UIColor clearColor];
+        tblSettings.sectionFooterHeight = 0;
+        tblSettings.sectionHeaderHeight = 0;
+        tblSettings.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 5)];
         tblSettings.dataSource = self;
         tblSettings.delegate = self;
-        
-        
-        
-//        [tblSettings setTableFooterView:btnLogout];
-
         [self addSubview:tblSettings];
     }
     
@@ -78,7 +70,7 @@
         default:
             break;
     }
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -95,7 +87,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if(section == 0) {
-        return 49+15;
+        return 49 + 15;
     }
     return 0;
 }
