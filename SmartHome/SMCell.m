@@ -85,7 +85,6 @@
         accessoryImageView.image = [UIImage imageNamed:@"accessory.png"];
         [self addSubview:accessoryImageView];
     }
-    NSLog(@"smcell.ba.count %i",self.backgroundView.subviews.count);
 }
 
 - (void)setIsSingle:(BOOL)isSingle_ {

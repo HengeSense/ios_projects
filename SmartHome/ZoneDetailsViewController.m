@@ -45,9 +45,8 @@
     [super initUI];
     
     if (tblDevice == nil) {
-        tblDevice =[[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.frame.size.height - 5) style:UITableViewStylePlain];
+        tblDevice =[[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 5, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - self.topbar.frame.size.height - 5) style:UITableViewStylePlain];
         tblDevice.center = CGPointMake(self.view.center.x, tblDevice.center.y);
-        tblDevice.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblDevice.backgroundColor = [UIColor clearColor];
         tblDevice.dataSource = self;
         tblDevice.delegate = self;
@@ -63,34 +62,37 @@
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *deviceCellIdentifier;
-    
-    if (indexPath.row == 0) {
-        deviceCellIdentifier = @"topCellIdentifier";
-    }else if (indexPath.row == [zone devices].count-1){
-        deviceCellIdentifier = @"bottomCellIdentifier";
-    }else{
-        deviceCellIdentifier = @"cellIdentifier";
-    }
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
 
-    SMCell *deviceCell = [tableView dequeueReusableCellWithIdentifier:deviceCellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"cellIdentifier";
+
+    UITableViewCell *deviceCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (deviceCell == nil) {
-        deviceCell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:deviceCellIdentifier];
-        UILabel *lblStatus = [[UILabel alloc] initWithFrame:CGRectMake(SM_CELL_WIDTH/2-75, 0, 50, SM_CELL_HEIGHT/2)];
-        lblStatus.backgroundColor = [UIColor clearColor];
-        lblStatus.font = [UIFont systemFontOfSize:16];
-        lblStatus.textColor = [UIColor lightGrayColor];
-        lblStatus.tag = 1000;
-        [deviceCell addSubview:lblStatus];
+        deviceCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        deviceCell.backgroundColor = [UIColor whiteColor];
+        deviceCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        deviceCell.backgroundView = [[UIView alloc] initWithFrame:deviceCell.bounds];
+        deviceCell.selectedBackgroundView = [[UIView alloc] initWithFrame:deviceCell.bounds];
+        
+        deviceCell.backgroundView.backgroundColor = [UIColor whiteColor];
+        deviceCell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        
+        if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
+            deviceCell.textLabel.font = [UIFont systemFontOfSize:16.f];
+            deviceCell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        }
     }
-    UILabel *lblStatus = (UILabel *)[deviceCell viewWithTag:1000];
     Device *device = [[zone devices] objectAtIndex:indexPath.row];
+    
     deviceCell.textLabel.text = device.name;
     if (device.status == 1) {
-        lblStatus.text = NSLocalizedString(@"status_closed", @"");
+        deviceCell.detailTextLabel.text = NSLocalizedString(@"status_closed", @"");
     }else {
-        lblStatus.text = NSLocalizedString(@"status_opened", @"");
+        deviceCell.detailTextLabel.text = NSLocalizedString(@"status_opened", @"");
     }
     return deviceCell;
 }
@@ -100,6 +102,7 @@
     Device *device = [[zone devices] objectAtIndex:indexPath.row];
     deviceDetailViewController.device = device;
     [self.navigationController pushViewController:deviceDetailViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

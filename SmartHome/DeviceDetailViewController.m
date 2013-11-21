@@ -53,9 +53,8 @@
         self.topbar.titleLabel.text = device.name;
     }
     if(tblDetail ==nil) {
-        tblDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 5, SM_CELL_WIDTH/2, self.view.frame.size.height - self.topbar.frame.size.height - 5) style:UITableViewStylePlain];
+        tblDetail = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.frame.size.height + 5, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - self.topbar.frame.size.height - 5) style:UITableViewStylePlain];
         tblDetail.center = CGPointMake(self.view.center.x, tblDetail.center.y);
-        tblDetail.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblDetail.backgroundColor = [UIColor clearColor];
         tblDetail.dataSource = self;
         tblDetail.delegate = self;
@@ -71,33 +70,34 @@
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellDetailIndentifier;
-    if (indexPath.row == 0) {
-        cellDetailIndentifier = @"topCellIdentifier";
-    }else if (indexPath.row == fieldsNames.count-1){
-        cellDetailIndentifier = @"bottomCellIdentifier";
-    }else{
-        cellDetailIndentifier = @"cellIdentifier";
+    static NSString *cellIdentifier = @"cellIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell.backgroundColor = [UIColor whiteColor];
+        
+        cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+        
+        cell.backgroundView.backgroundColor = [UIColor whiteColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        
+        if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
+            cell.textLabel.font = [UIFont systemFontOfSize:16.f];
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        }
     }
-    SMCell *cellDetail = [tableView dequeueReusableCellWithIdentifier:cellDetailIndentifier];
-    if (cellDetail == nil) {
-        cellDetail = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellDetailIndentifier];
-        UILabel *lblValue = [[UILabel alloc] initWithFrame:CGRectMake(SM_CELL_WIDTH/2-120, 0, 100, SM_CELL_HEIGHT/2)];
-        lblValue.textAlignment = NSTextAlignmentRight;
-        lblValue.backgroundColor = [UIColor clearColor];
-        lblValue.font = [UIFont systemFontOfSize:16];
-        lblValue.textColor = [UIColor lightGrayColor];
-        lblValue.tag = 1000;
-        [cellDetail addSubview:lblValue];
+    cell.textLabel.text = [fieldsNames objectAtIndex:indexPath.row];
+    if (fieldsValues && fieldsValues.count == fieldsNames.count) {
+        cell.detailTextLabel.text = [fieldsValues objectAtIndex:indexPath.row];
     }
-    UILabel *lblValue = (UILabel *)[cellDetail viewWithTag:1000];
-    if (fieldsValues&&fieldsValues.count == fieldsNames.count) {
-        lblValue.text = [fieldsValues objectAtIndex:indexPath.row];
-    }
-    cellDetail.textLabel.text = [fieldsNames objectAtIndex:indexPath.row];
-    cellDetail.accessoryViewVisible = YES;
-    return cellDetail;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
