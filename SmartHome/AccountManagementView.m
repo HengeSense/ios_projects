@@ -13,6 +13,7 @@
 #import "SystemService.h"
 #import "UIView+Extensions.h"
 #import "AlertView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define BTN_MARGIN 35
 #define BTN_WIDTH 41/2
@@ -66,7 +67,8 @@
         tblUnits.separatorStyle = UITableViewCellSeparatorStyleNone;
         tblUnits.delegate = self;
         tblUnits.dataSource = self;
-        tblUnits.backgroundColor = [UIColor clearColor];
+        tblUnits.backgroundColor = [UIColor whiteColor];
+        tblUnits.layer.cornerRadius = 4;
         [self addSubview:tblUnits];
     }
     
@@ -177,12 +179,12 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *topCellIdentifier = @"topCellIdentifier";
-    static NSString *centerCellIdentifier = @"cellIdentifier";
-    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
-    static NSString *singleCellIdentifier = @"singleCellIdentifier";
-    static NSString *centerPanelIdentifier = @"centerPanelIdentifier";
-    static NSString *bottomPanelIdentifier = @"bottomPanelIdentifier";
+    static NSString *userCellIdentifier = @"userCellIdentifier";
+    static NSString *panelCellIdentifier = @"panelIdentifier";
+//    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
+//    static NSString *singleCellIdentifier = @"singleCellIdentifier";
+//    static NSString *centerPanelIdentifier = @"centerPanelIdentifier";
+//    static NSString *bottomPanelIdentifier = @"bottomPanelIdentifier";
     
     
     
@@ -190,38 +192,17 @@
     AccountManageCellData *data = [unitBindingAccounts objectAtIndex:indexPath.row];
     
     if (data.isPanel) {
-        if (indexPath.row == unitBindingAccounts.count -1) {
-            cellIdentifier = bottomPanelIdentifier;
-        }else{
-            cellIdentifier = centerPanelIdentifier;
-        }
+        cellIdentifier = panelCellIdentifier;
     }else{
-        if(indexPath.row == 0 && unitBindingAccounts.count == 1) {
-            cellIdentifier = singleCellIdentifier;
-        } else if(indexPath.row == 0) {
-            cellIdentifier = topCellIdentifier;
-        } else if(indexPath.row == unitBindingAccounts.count - 1) {
-            cellIdentifier = bottomCellIdentifier;
-        } else {
-            cellIdentifier = centerCellIdentifier;
-       }
+        cellIdentifier = userCellIdentifier;
     }
-    
-    if (data.isPanel) {
-        ButtonPanelCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[ButtonPanelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:NO];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        [self showButton];
-        [cell addSubview:buttonPanelView];
-        return cell;
-
-    }else{
-        SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if(cell == nil) {
-            cell = [[SMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        //            cell = [[ButtonPanelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:NO];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if (!data.isPanel) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTN_WIDTH, 2, BTN_WIDTH, BTN_HEIGHT)];
             imageView.center = CGPointMake(imageView.center.x, cell.center.y);
             imageView.tag = 998;
@@ -241,8 +222,15 @@
             detailLabel.font = [UIFont systemFontOfSize:12.f];
             detailLabel.tag = 888;
             [cell addSubview:detailLabel];
-            
         }
+    }
+    if (data.isPanel) {
+//        ButtonPanelCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        [self showButton];
+        [cell addSubview:buttonPanelView];
+        
+    }else{
+//        SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         UILabel *titleLabel = (UILabel *)[cell viewWithTag:999];
         UILabel *detailLabel = (UILabel *)[cell viewWithTag:888];
         UIImageView *imageView = (UIImageView *)[cell viewWithTag:998];
@@ -267,15 +255,15 @@
             }
         }
         
-        if(unitBindingAccounts.count == 1) {
-            cell.isSingle = YES;
-        }
+//        if(unitBindingAccounts.count == 1) {
+//            cell.isSingle = YES;
+//        }
+//
+//        cell.accessoryViewVisible = YES;
 
-        cell.accessoryViewVisible = YES;
-
-        return cell;
     }
 
+    return cell;
 
 }
 
