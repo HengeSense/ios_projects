@@ -61,7 +61,7 @@
 - (void)initUI{
     [super initUI];
     if(tblUnits == nil) {
-        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, self.bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height) style:UITableViewStylePlain];
+        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height+5, self.bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height-5) style:UITableViewStylePlain];
         tblUnits.center = CGPointMake(self.center.x, tblUnits.center.y);
         tblUnits.delegate = self;
         tblUnits.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -256,15 +256,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     if (indexPath.row<unitBindingAccounts.count) {
         AccountManageCellData *selectData = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:indexPath.row];
         if (selectData.isPanel) {
             return;
         }
         selectedUser = selectData.user;
+        if (selectedUser.isOwner&&selectedUser.isCurrentUser) {
+            return;
+        }
     }else{
-        [self hideButtonPanelView];
         return;
     }
     if (!buttonPanelViewIsVisable) {
@@ -310,13 +311,13 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1023&& buttonIndex == 0) {
         [self hideButtonPanelView];
-        [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
-        [NSTimer scheduledTimerWithTimeInterval:0.6f target:self selector:@selector(delayAlert) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.6f target:self selector:@selector(delayProcess) userInfo:nil repeats:NO];
     }
 }
-- (void)delayAlert{
+- (void)delayProcess{
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self];
+    [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
 }
 - (void)notifyViewUpdate {
     if (buttonPanelViewIsVisable) {
@@ -327,7 +328,7 @@
         [tblUnits reloadData];
     }
     curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
-    NSLog(@"id%@",curUnitIdentifier);
+
     if(![NSString isBlank:curUnitIdentifier]){
         [userManagementService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
     }
@@ -338,7 +339,7 @@
 
 - (void)getUsersForUnitSuccess:(RestResponse *) resp{
     if (resp&&resp.statusCode == 200) {
-        NSLog(@"%@",[[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding]);
+
         NSArray *usersJson = [JsonUtils createDictionaryFromJson:resp.body];
         if(usersJson != nil) {
             Users *users = [[Users alloc] initWithJson:[NSDictionary dictionaryWithObject:usersJson forKey:@"users"]];
