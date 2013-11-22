@@ -50,7 +50,7 @@
     if(btnPower == nil) {
         btnPower = [[SMButton alloc] initWithFrame:CGRectMake(20, 15, 75/2, 78/2)];
         [btnPower setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
-        [btnPower setBackgroundImage:[UIImage imageNamed:@"btn_rc_number_selected.png"] forState:UIControlStateHighlighted];
+        [btnPower setBackgroundImage:[UIImage imageNamed:@"power_selected.png"] forState:UIControlStateHighlighted];
         [btnPower addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
         btnPower.userObject = [NSNumber numberWithInteger:(self.device.isTV?1:89)];
         [self addSubview:btnPower];

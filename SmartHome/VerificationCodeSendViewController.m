@@ -95,7 +95,6 @@
         if(btnVerificationCodeSender == nil) {
             btnVerificationCodeSender = [LongButton buttonWithPoint:CGPointMake(5, lblModifyTip.frame.origin.y +lblModifyTip.frame.size.height + 5)];
             [btnVerificationCodeSender setTitle:NSLocalizedString(@"next_step", @"") forState:UIControlStateNormal];
-            btnVerificationCodeSender.enabled = NO;
             [btnVerificationCodeSender addTarget:self action:@selector(sendVerificationCode) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:btnVerificationCodeSender];
         }

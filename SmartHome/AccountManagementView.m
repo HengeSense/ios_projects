@@ -74,7 +74,7 @@
         buttonPanelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,SM_CELL_WIDTH/2, SM_CELL_HEIGHT/2)];
         buttonPanelView.backgroundColor = [UIColor clearColor];
         if (btnMsg == nil) {
-            btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
+            btnMsg = [[UIButton alloc] initWithFrame:CGRectMake(46, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnMsg setBackgroundImage:[UIImage imageNamed:@"icon_send_msg.png"] forState:UIControlStateNormal];
             btnMsg.center = CGPointMake(btnMsg.center.x, buttonPanelView.center.y);
             [btnMsg addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -311,11 +311,13 @@
     if (alertView.tag == 1023&& buttonIndex == 0) {
         [self hideButtonPanelView];
         [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
-        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
-        [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self];
+        [NSTimer scheduledTimerWithTimeInterval:0.6f target:self selector:@selector(delayAlert) userInfo:nil repeats:NO];
     }
 }
-
+- (void)delayAlert{
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self];
+}
 - (void)notifyViewUpdate {
     if (buttonPanelViewIsVisable) {
         [self hideButtonPanelView];
@@ -390,12 +392,12 @@
     if(resp != nil && abs(resp.statusCode) == 1001) {
         // 超时处理
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
-        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        [[AlertView currentAlertView] delayDismissAlertView];
         return;
     } else {
         // Error
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
-        [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+        [[AlertView currentAlertView] delayDismissAlertView];
     }
 }
 - (void)destory {

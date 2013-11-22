@@ -139,26 +139,6 @@
     }
 }
 
-- (void)changeControlStateOnTimer:(NSTimer *)timer {
-    UIImageView *imgView = timer.userInfo;
-    NSString *imgName = @"";
-    if([imgView isEqual:imgCenterButton]) {
-        imgName = @"btn_rc_center_selected.png";
-    } else if ([imgView isEqual:imgBottomButton]) {
-        imgName = @"btn_rc_down_selected.png";
-    } else if ([imgView isEqual:imgLeftButton]) {
-        imgName = @"btn_rc_left_selected.png";
-    } else if ([imgView isEqual:imgRightButton]) {
-        imgName = @"btn_rc_right_selected.png";
-    } else if ([imgView isEqual:imgTopButton]) {
-        imgName = @"btn_rc_top_selected.png";
-    }
-    if(![imgName isEqualToString:@""]) {
-        imgView.image = [UIImage imageNamed:imgName];
-        NSLog(@"imgview.img=%@",imgView.image);
-    }
-}
-
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture {
     if(self.delegate == nil) return;
     
@@ -176,7 +156,7 @@
         if([self.delegate respondsToSelector:@selector(centerButtonClicked)]) {
             [self.delegate centerButtonClicked];
             UIImage *centerImg = imgCenterButton.image;
-            [UIView animateWithDuration:0.3f animations:^{
+            [UIView animateWithDuration:0.1f animations:^{
                 imgCenterButton.image = [UIImage imageNamed:@"btn_rc_center_selected.png"];
                 imgCenterButton.alpha = 0.5;
                 
@@ -189,7 +169,7 @@
         if([self.delegate respondsToSelector:@selector(topButtonClicked)]) {
             [self.delegate topButtonClicked];
             UIImage *topImg = imgTopButton.image;
-            [UIView animateWithDuration:0.3f animations:^{
+            [UIView animateWithDuration:0.1f animations:^{
                 imgTopButton.image = [UIImage imageNamed:@"btn_rc_top_selected.png"];
                 imgTopButton.alpha = 0.5;
             } completion:^(BOOL finished){
@@ -201,7 +181,7 @@
         if([self.delegate respondsToSelector:@selector(leftButtonClicked)]) {
             [self.delegate leftButtonClicked];
             UIImage *leftImg = imgLeftButton.image;
-            [UIView animateWithDuration:0.3f animations:^{
+            [UIView animateWithDuration:0.1f animations:^{
                 imgLeftButton.image = [UIImage imageNamed:@"btn_rc_left_selected.png"];
                 imgLeftButton.alpha = 0.5;
             } completion:^(BOOL finished){
@@ -213,7 +193,7 @@
         if([self.delegate respondsToSelector:@selector(bottomButtonClicked)]) {
             [self.delegate bottomButtonClicked];
             UIImage *bottomImg = imgBottomButton.image;
-            [UIView animateWithDuration:0.3f animations:^{
+            [UIView animateWithDuration:0.1f animations:^{
                 imgBottomButton.image = [UIImage imageNamed:@"btn_rc_down_selected.png"];
                 imgBottomButton.alpha = 0.5;
             } completion:^(BOOL finished){
@@ -225,7 +205,7 @@
         if([self.delegate respondsToSelector:@selector(rightButtonClicked)]) {
             [self.delegate rightButtonClicked];
             UIImage *rightImg = imgRightButton.image;
-            [UIView animateWithDuration:0.3f animations:^{
+            [UIView animateWithDuration:0.1f animations:^{
                 imgRightButton.image = [UIImage imageNamed:@"btn_rc_right_selected.png"];
                 imgRightButton.alpha = 0.5;
             } completion:^(BOOL finished){
