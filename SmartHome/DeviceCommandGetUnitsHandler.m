@@ -27,6 +27,7 @@
                     DeviceCommand *cmd = [CommandFactory commandForType:CommandTypeGetSceneList];
                     cmd.masterDeviceCode = unit.identifier;
                     cmd.hashCode = unit.sceneHashCode;
+                    cmd.commmandNetworkMode = CommandNetworkModeExternal;
                     [[SMShared current].deliveryService executeDeviceCommand:cmd];
                 }
             }
