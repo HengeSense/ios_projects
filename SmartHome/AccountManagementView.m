@@ -208,7 +208,7 @@
             cell.backgroundView.backgroundColor = [UIColor lightTextColor];
             cell.backgroundColor = [UIColor lightTextColor];
         } else {
-            cell.accessoryType = UITableViewCellAccessoryDetailButton;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.backgroundView.backgroundColor = [UIColor whiteColor];
             cell.backgroundColor = [UIColor whiteColor];
         }
