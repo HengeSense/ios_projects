@@ -76,7 +76,7 @@
 
 "main_view.title"                     = "掌上未来";
 "my_devices.title"                    = "我的设备";
-"account_management.title"            = "账户管理";
+"account_management.title"            = "用户管理";
 "unit_binding_view.title"             = "绑定主控";
 "settings_view.title"                 = "我的设置";
 "verification_code_send.title"        = "验证手机号码";
@@ -241,7 +241,7 @@
 
 /****************	Account Management View Strings	****************/
 
-"account_management"    =  "账户管理";
+"account_management"    =  "用户管理";
 "user_online"           =  "在线";
 "user_offline"          =  "下线";
 "send.message"          =  "发送短信";
