@@ -60,7 +60,7 @@
 
 - (void)initDefaults {
     [super initDefaults];
-    values = [[NSMutableArray alloc] initWithObjects:@"", @"", @"********", nil];
+    values = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", nil];
     
     titles = [[NSArray alloc] initWithObjects:NSLocalizedString(@"nick_name", @""),NSLocalizedString(@"mail", @""),NSLocalizedString(@"modify_pwd", @""), nil];
     
@@ -205,7 +205,11 @@
         cell.backgroundView.backgroundColor = [UIColor whiteColor];
         cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
         cell.textLabel.text = [titles objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [values objectAtIndex:indexPath.row];
+        if (indexPath.row == 2) {
+            cell.detailTextLabel.text = @"********";
+        }else{
+            cell.detailTextLabel.text = [values objectAtIndex:indexPath.row];
+        }
     }
     
     return cell;
