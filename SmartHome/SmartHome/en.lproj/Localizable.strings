@@ -59,6 +59,9 @@
 "last.update"           = "最后更新";
 "ago"                   = "以前";
 "just_now"              = "刚刚";
+"minute"                = "分钟";
+"hour"                  = "小时";
+"day"                   = "天";
 
 
 /****************	TCP Network Strings	****************/

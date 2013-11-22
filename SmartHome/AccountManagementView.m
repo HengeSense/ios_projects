@@ -233,14 +233,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row<unitBindingAccounts.count) {
+    if (indexPath.row < unitBindingAccounts.count) {
         AccountManageCellData *selectData = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:indexPath.row];
         if (selectData.isPanel) return;
         selectedUser = selectData.user;
-        if (selectedUser.isOwner && selectedUser.isCurrentUser) return;
     } else {
         return;
     }
+    
     if(!buttonPanelViewIsVisable) {
         [self showButtonPanelViewAtIndexPath:indexPath];
     } else {
@@ -302,10 +302,6 @@
 }
 
 - (void)notifyViewUpdate {
-//    if(buttonPanelViewIsVisable) {
-//        [self hideButtonPanelView];
-//    }
-    
     // current unit is empty
     if([NSString isBlank:[SMShared current].memory.currentUnit.identifier]) {
         buttonPanelViewIsVisable = NO;
@@ -331,6 +327,12 @@
     
     tblUnits.pullTableIsRefreshing = YES;
     [self pullTableViewDidTriggerRefresh:tblUnits];
+}
+
+- (void)refreshDataIsOk {
+    if(tblUnits != nil && tblUnits.pullTableIsRefreshing) {
+        tblUnits.pullTableIsRefreshing = NO;
+    }
 }
 
 - (void)refresh {
@@ -359,11 +361,11 @@
                     break;
                 }
             }
-            // do some thing here ...
             buttonPanelViewIsVisable = NO;
             [tblUnits reloadData];
             tblUnits.pullLastRefreshDate = [NSDate date];
-            tblUnits.pullTableIsRefreshing = NO;
+            
+            [self performSelector:@selector(refreshDataIsOk) withObject:nil afterDelay:0.5f];
             return;
         }
     }
