@@ -9,7 +9,8 @@
 #import "NavigationView.h"
 #import "SMCell.h"
 #import "ButtonPanelCell.h"
+#import "PullTableView.h"
 
-@interface AccountManagementView : NavigationView<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@interface AccountManagementView : NavigationView<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, PullTableViewDelegate>
 
 @end

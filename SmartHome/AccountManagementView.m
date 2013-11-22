@@ -17,7 +17,8 @@
 #define BTN_MARGIN 35
 #define BTN_WIDTH 41/2
 #define BTN_HEIGHT 41/2
-@implementation AccountManagementView{
+
+@implementation AccountManagementView {
     UITableView *tblUnits;
     NSString *curUnitIdentifier;
     NSMutableArray *unitBindingAccounts;
@@ -46,6 +47,7 @@
     }
     return self;
 }
+
 - (void)initDefaults{
     [super initDefaults];
     buttonPanelViewIsVisable = NO;
@@ -56,9 +58,9 @@
     if (unitBindingAccounts == nil) {
         unitBindingAccounts = [NSMutableArray array];
     }
-    
 }
-- (void)initUI{
+
+- (void)initUI {
     [super initUI];
     if(tblUnits == nil) {
         tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height+5, self.bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height-5) style:UITableViewStylePlain];
@@ -101,26 +103,23 @@
             [btnUnbinding addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [buttonPanelView addSubview:btnUnbinding];
         }
-
-        
     }
-
-
-    
-    
 }
+
 - (void) addPanelData:(AccountManageCellData *) data{
     if (!unitBindingAccounts) {
         return;
     }
     [unitBindingAccounts insertObject:data atIndex:curIndexPath.row+1];
 }
+
 - (void) removePanelData{
     if (!unitBindingAccounts||unitBindingAccounts.count<=curIndexPath.row+1) {
         return;
     }
     [unitBindingAccounts removeObjectAtIndex:curIndexPath.row+1];
 }
+
 -(void)showButton{
     AccountManageCellData *data = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:curIndexPath.row];
     User *user = data.user;
@@ -145,10 +144,11 @@
         [buttonPanelView removeFromSuperview];
     }
 }
-#pragma mark
-#pragma mark- btn events
+
+#pragma mark -
+#pragma mark Events
+
 - (void)btnPressed:(UIButton *) sender{
-    
     if ([sender isEqual:btnMsg]) {
         [SystemService messageToMobile:selectedUser.mobile withMessage:nil];
     } else if ([sender isEqual:btnPhone]){
@@ -167,14 +167,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
     return SM_CELL_HEIGHT/2;
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *userCellIdentifier = @"userCellIdentifier";
     static NSString *panelCellIdentifier = @"panelIdentifier";
@@ -252,7 +253,6 @@
     }
 
     return cell;
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -279,12 +279,10 @@
             }else{
                 [self showButtonPanelViewAtIndexPath:[NSIndexPath indexPathForRow:unitBindingAccounts.count-1>=indexPath.row+1?indexPath.row:unitBindingAccounts.count-1 inSection:0]];
             }
-            
         }
-        
     }
-    
 }
+
 - (void)showButtonPanelViewAtIndexPath:(NSIndexPath *) indexPath{
     buttonPanelViewIsVisable = YES;
     curIndexPath = indexPath;
@@ -294,19 +292,22 @@
     [tblUnits beginUpdates];
     [tblUnits insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [tblUnits endUpdates];
-    
-
 }
+
 - (void)hideButtonPanelView{
     buttonPanelViewIsVisable = NO;
     [self removePanelData];
     [tblUnits beginUpdates];
     [tblUnits deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:curIndexPath.row+1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [tblUnits endUpdates];
-
 }
-#pragma mark
-#pragma mark- alertview delegate
+
+#pragma mark -
+#pragma mark Pull table view delegate
+
+
+#pragma mark -
+#pragma mark Alert view delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 1023&& buttonIndex == 0) {
@@ -314,11 +315,13 @@
         [NSTimer scheduledTimerWithTimeInterval:0.6f target:self selector:@selector(delayProcess) userInfo:nil repeats:NO];
     }
 }
+
 - (void)delayProcess{
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self];
     [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
 }
+
 - (void)notifyViewUpdate {
     if (buttonPanelViewIsVisable) {
         [self hideButtonPanelView];
@@ -334,8 +337,8 @@
     }
 }
 
-#pragma mark
-#pragma mark- handle success and failed 
+#pragma mark -
+#pragma mark Handle success and failed
 
 - (void)getUsersForUnitSuccess:(RestResponse *) resp{
     if (resp&&resp.statusCode == 200) {
@@ -389,6 +392,7 @@
     }
     [self unbindingFailed:resp];
 }
+
 - (void)unbindingFailed:(RestResponse *) resp{
     if(resp != nil && abs(resp.statusCode) == 1001) {
         // 超时处理
@@ -401,8 +405,8 @@
         [[AlertView currentAlertView] delayDismissAlertView];
     }
 }
-- (void)destory {
 
+- (void)destory {
 #ifdef DEBUG
     NSLog(@"AccountManagement View] Destoryed.");
 #endif
