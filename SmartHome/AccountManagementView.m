@@ -133,8 +133,6 @@
     btnPhone.hidden = NO;
     btnUnbinding.hidden = NO;
     if (user.isCurrentUser) {
-        btnMsg.hidden = YES;
-        btnPhone.hidden = YES;
         if (user.isOwner) {
             btnUnbinding.hidden = YES;
         }
@@ -310,6 +308,7 @@
     
     // current unit is empty
     if([NSString isBlank:[SMShared current].memory.currentUnit.identifier]) {
+        buttonPanelViewIsVisable = NO;
         if(unitBindingAccounts != nil) {
             [unitBindingAccounts removeAllObjects];
             [tblUnits reloadData];
@@ -326,6 +325,7 @@
             }
         } else {
             curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
+            buttonPanelViewIsVisable = NO;
         }
     }
     
@@ -360,6 +360,7 @@
                 }
             }
             // do some thing here ...
+            buttonPanelViewIsVisable = NO;
             [tblUnits reloadData];
             tblUnits.pullLastRefreshDate = [NSDate date];
             tblUnits.pullTableIsRefreshing = NO;
