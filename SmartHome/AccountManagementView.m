@@ -14,9 +14,10 @@
 #import "UIView+Extensions.h"
 #import "AlertView.h"
 
-#define BTN_MARGIN 35
-#define BTN_WIDTH 41/2
-#define BTN_HEIGHT 41/2
+#define BTN_MARGIN                  35
+#define BTN_WIDTH                   41 / 2
+#define BTN_HEIGHT                  41 / 2
+#define REFRESH_AGAIN_DURATION      1
 
 @implementation AccountManagementView {
     PullTableView *tblUnits;
@@ -35,6 +36,8 @@
     
     BOOL buttonPanelViewIsVisable;
     BOOL currentIsOwner;
+    
+//    NSDate *lastRereshDate;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -83,7 +86,6 @@
             [btnMsg setBackgroundImage:[UIImage imageNamed:@"icon_send_msg.png"] forState:UIControlStateNormal];
             btnMsg.center = CGPointMake(btnMsg.center.x, buttonPanelView.center.y);
             [btnMsg addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
-//            [btnMsg setTitle:NSLocalizedString(@"send.message", @"") forState:UIControlStateNormal];
             [buttonPanelView addSubview:btnMsg];
         }
         
@@ -91,17 +93,15 @@
             btnPhone = [[UIButton alloc] initWithFrame:CGRectMake(btnMsg.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnPhone setBackgroundImage:[UIImage imageNamed:@"icon_dial_phone.png"] forState:UIControlStateNormal];
             btnPhone.center = CGPointMake(btnPhone.center.x,buttonPanelView.center.y);
-//            [btnPhone setTitle:NSLocalizedString(@"call.phoneNumber", @"") forState:UIControlStateNormal];
             [btnPhone addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [buttonPanelView addSubview:btnPhone];
         }
-//
+
         if (btnUnbinding == nil) {
             btnUnbinding = [[UIButton alloc] initWithFrame:CGRectMake(btnPhone.frame.origin.x+BTN_WIDTH+BTN_MARGIN, 5,BTN_WIDTH , BTN_HEIGHT)];
             [btnUnbinding setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             btnUnbinding.titleLabel.font = [UIFont systemFontOfSize:14];
             [btnUnbinding setBackgroundImage:[UIImage imageNamed:@"unbinding.png"] forState:UIControlStateNormal];
-//            [btnUnbinding setTitle:NSLocalizedString(@"unbinding", @"") forState:UIControlStateNormal];
             btnUnbinding.center = CGPointMake(btnUnbinding.center.x, buttonPanelView.center.y);
             [btnUnbinding addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [buttonPanelView addSubview:btnUnbinding];
@@ -116,14 +116,14 @@
     [unitBindingAccounts insertObject:data atIndex:curIndexPath.row+1];
 }
 
-- (void) removePanelData{
+- (void)removePanelData {
     if (!unitBindingAccounts||unitBindingAccounts.count<=curIndexPath.row+1) {
         return;
     }
     [unitBindingAccounts removeObjectAtIndex:curIndexPath.row+1];
 }
 
--(void)showButton{
+- (void)showButton {
     AccountManageCellData *data = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:curIndexPath.row];
     User *user = data.user;
     if (user == nil) {
@@ -171,122 +171,93 @@
     return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return SM_CELL_HEIGHT/2;
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *userCellIdentifier = @"userCellIdentifier";
     static NSString *panelCellIdentifier = @"panelIdentifier";
-//    static NSString *bottomCellIdentifier = @"bottomCellIdentifier";
-//    static NSString *singleCellIdentifier = @"singleCellIdentifier";
-//    static NSString *centerPanelIdentifier = @"centerPanelIdentifier";
-//    static NSString *bottomPanelIdentifier = @"bottomPanelIdentifier";
     
-    
-    
-    NSString *cellIdentifier;
     AccountManageCellData *data = [unitBindingAccounts objectAtIndex:indexPath.row];
-    
-    if (data.isPanel) {
-        cellIdentifier = panelCellIdentifier;
-    }else{
-        cellIdentifier = userCellIdentifier;
-    }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(data == nil) return nil;
+  
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:data.isPanel ? panelCellIdentifier : userCellIdentifier];
     if (cell == nil) {
-        //            cell = [[ButtonPanelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier needFixed:NO];
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:data.isPanel ? panelCellIdentifier : userCellIdentifier];
+        
+        // cell style
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        cell.backgroundView.backgroundColor = [UIColor whiteColor];
-        cell.backgroundColor = [UIColor whiteColor];
-        UIView *separatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(46, SM_CELL_HEIGHT / 2 - 0.5, cell.bounds.size.width, 0.5)];
-        separatorLineView.backgroundColor = [UIColor lightGrayColor];
-        separatorLineView.alpha = 0.5;
-        [cell addSubview:separatorLineView];
-        cell.textLabel.font = [UIFont systemFontOfSize:15.f];
         
+        // cell font style
+        cell.textLabel.font = [UIFont systemFontOfSize:13.f];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:13.f];
         if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
             cell.detailTextLabel.textColor = [UIColor lightGrayColor];
         }
         
-        if (!data.isPanel) {
-            
+        // cell separator line
+        UIView *separatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(46, cell.bounds.size.height - 0.7, cell.bounds.size.width, 0.7)];
+        separatorLineView.backgroundColor = [UIColor lightGrayColor];
+        separatorLineView.alpha = 0.7;
+        [cell addSubview:separatorLineView];
+        
+        // cell accessory
+        if(data.isPanel) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.backgroundView.backgroundColor = [UIColor lightTextColor];
+            cell.backgroundColor = [UIColor lightTextColor];
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryDetailButton;
+            cell.backgroundView.backgroundColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor whiteColor];
         }
     }
-    if (data.isPanel) {
-//        ButtonPanelCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if(data.isPanel) {
         [self showButton];
         [cell addSubview:buttonPanelView];
-        
-    }else{
-//        SMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        User  *user  = data.user;
+    } else {
+        User *user = data.user;
         if(user != nil) {
             cell.textLabel.text = [NSString stringWithFormat:@"%@(%@)" ,user.name,user.mobile];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@   ", [user stringForUserState]];
-            
-            if (user.isCurrentUser) {
-                if (user.isOwner) {
-                    cell.imageView.image = [UIImage imageNamed:@"icon_me_owner.png"];
-                }else{
-                    cell.imageView.image = [UIImage imageNamed:@"icon_me.png"];
-                }
-            }else{
-                if (user.isOwner) {
-                    cell.imageView.image = [UIImage imageNamed:@"icon_owner.png"];
-                }else{
-                    cell.imageView.image = [UIImage imageNamed:@"transparent.png"];
-                }
+            if(user.isCurrentUser) {
+                cell.imageView.image = [UIImage imageNamed:user.isOwner ? @"icon_me_owner.png" : @"icon_me.png"];
+            } else {
+                cell.imageView.image = [UIImage imageNamed:user.isOwner ? @"icon_owner.png" : @"transparent.png"];
             }
         }
-        
-//        if(unitBindingAccounts.count == 1) {
-//            cell.isSingle = YES;
-//        }
-//
-//        cell.accessoryViewVisible = YES;
-
     }
-
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row<unitBindingAccounts.count) {
         AccountManageCellData *selectData = (AccountManageCellData *)[unitBindingAccounts objectAtIndex:indexPath.row];
-        if (selectData.isPanel) {
-            return;
-        }
+        if (selectData.isPanel) return;
         selectedUser = selectData.user;
-        if (selectedUser.isOwner&&selectedUser.isCurrentUser) {
-            return;
-        }
-    }else{
+        if (selectedUser.isOwner && selectedUser.isCurrentUser) return;
+    } else {
         return;
     }
-    if (!buttonPanelViewIsVisable) {
+    if(!buttonPanelViewIsVisable) {
         [self showButtonPanelViewAtIndexPath:indexPath];
-    }else {
-        if (![curIndexPath isEqual:indexPath]&&curIndexPath.row!=indexPath.row-1) {
+    } else {
+        if (![curIndexPath isEqual:indexPath] && curIndexPath.row!=indexPath.row-1) {
             [self hideButtonPanelView];
-
-            if (curIndexPath.row+1<indexPath.row) {
+            if(curIndexPath.row+1<indexPath.row) {
                 [self showButtonPanelViewAtIndexPath:[NSIndexPath indexPathForRow:unitBindingAccounts.count-1>=indexPath.row?indexPath.row-1:unitBindingAccounts.count-1 inSection:0]];
-            }else{
+            } else{
                 [self showButtonPanelViewAtIndexPath:[NSIndexPath indexPathForRow:unitBindingAccounts.count-1>=indexPath.row+1?indexPath.row:unitBindingAccounts.count-1 inSection:0]];
             }
         }
     }
 }
 
-- (void)showButtonPanelViewAtIndexPath:(NSIndexPath *) indexPath{
+- (void)showButtonPanelViewAtIndexPath:(NSIndexPath *) indexPath {
     buttonPanelViewIsVisable = YES;
     curIndexPath = indexPath;
     AccountManageCellData *data = [[AccountManageCellData alloc] init];
@@ -297,7 +268,7 @@
     [tblUnits endUpdates];
 }
 
-- (void)hideButtonPanelView{
+- (void)hideButtonPanelView {
     buttonPanelViewIsVisable = NO;
     [self removePanelData];
     [tblUnits beginUpdates];
@@ -309,47 +280,69 @@
 #pragma mark Pull table view delegate
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView {
-
+    [self refresh];
 }
 
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView {
+    // no implementations
+}
 
 #pragma mark -
 #pragma mark Alert view delegate
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 1023&& buttonIndex == 0) {
         [self hideButtonPanelView];
         [NSTimer scheduledTimerWithTimeInterval:0.6f target:self selector:@selector(delayProcess) userInfo:nil repeats:NO];
     }
 }
 
-- (void)delayProcess{
+- (void)delayProcess {
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"processing", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self];
     [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
 }
 
 - (void)notifyViewUpdate {
-    if (buttonPanelViewIsVisable) {
+    if(buttonPanelViewIsVisable) {
         [self hideButtonPanelView];
     }
-    if (unitBindingAccounts) {
-        [unitBindingAccounts removeAllObjects];
-        [tblUnits reloadData];
+    
+    // current unit is empty
+    if([NSString isBlank:[SMShared current].memory.currentUnit.identifier]) {
+        if(unitBindingAccounts != nil) {
+            [unitBindingAccounts removeAllObjects];
+            [tblUnits reloadData];
+        }
+        return;
+    } else {
+        // current unit not changed
+        if([[SMShared current].memory.currentUnit.identifier isEqualToString:curUnitIdentifier]) {
+            // check refresh is too often ?
+            if(tblUnits.pullLastRefreshDate != nil) {
+                NSTimeInterval timerInterval = [[NSDate date] timeIntervalSinceDate:tblUnits.pullLastRefreshDate];
+                double minutes = timerInterval / 60;
+                if(minutes < REFRESH_AGAIN_DURATION) return;
+            }
+        } else {
+            curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
+        }
     }
-    curUnitIdentifier = [SMShared current].memory.currentUnit.identifier;
+    
+    tblUnits.pullTableIsRefreshing = YES;
+    [self pullTableViewDidTriggerRefresh:tblUnits];
+}
 
-    if(![NSString isBlank:curUnitIdentifier]){
-        [userManagementService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
-    }
+- (void)refresh {
+    [userManagementService usersForUnit:curUnitIdentifier success:@selector(getUsersForUnitSuccess:) failed:@selector(getUsersForUnitFailed:) target:self callback:nil];
 }
 
 #pragma mark -
 #pragma mark Handle success and failed
 
-- (void)getUsersForUnitSuccess:(RestResponse *) resp{
-    if (resp&&resp.statusCode == 200) {
-
+- (void)getUsersForUnitSuccess:(RestResponse *)resp {
+    if (resp && resp.statusCode == 200) {
+        [unitBindingAccounts removeAllObjects];
         NSArray *usersJson = [JsonUtils createDictionaryFromJson:resp.body];
         if(usersJson != nil) {
             Users *users = [[Users alloc] initWithJson:[NSDictionary dictionaryWithObject:usersJson forKey:@"users"]];
@@ -368,6 +361,8 @@
             }
             // do some thing here ...
             [tblUnits reloadData];
+            tblUnits.pullLastRefreshDate = [NSDate date];
+            tblUnits.pullTableIsRefreshing = NO;
             return;
         }
     }
@@ -375,6 +370,7 @@
 }
 
 - (void)getUsersForUnitFailed:(RestResponse *) resp{
+    tblUnits.pullTableIsRefreshing = NO;
     if(resp != nil && abs(resp.statusCode) == 1001) {
         // 超时处理
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
@@ -388,7 +384,7 @@
 }
 
 - (void)unbindingSuccess:(RestResponse *) resp{
-    if (resp&&resp.statusCode == 200) {
+    if (resp && resp.statusCode == 200) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"execution_success", @"") forType:AlertViewTypeSuccess];
         [[AlertView currentAlertView] delayDismissAlertView];
         if (selectedUser.isCurrentUser) {
