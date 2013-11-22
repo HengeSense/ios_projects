@@ -355,8 +355,6 @@
     double now = [NSDate date].timeIntervalSince1970 * 1000;
     if(lastedClickTime != -1) {
         if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             lastedClickTime = now;
             return;
         }

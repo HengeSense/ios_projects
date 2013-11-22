@@ -78,7 +78,7 @@
         closeBtn =[[UIButton alloc] initWithFrame:CGRectMake(0, temperatureTable.frame.origin.y-78/2-10, 75/2, 78/2)];
         closeBtn.center = CGPointMake(self.view.center.x, closeBtn.center.y);
         [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
-        [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateHighlighted];
+        [closeBtn setBackgroundImage:[UIImage imageNamed:@"power_selected.png"] forState:UIControlStateHighlighted];
         [closeBtn setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateSelected];
         [closeBtn addTarget:self action:@selector(closeBtnPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:closeBtn];
@@ -90,8 +90,6 @@
     double now = [NSDate date].timeIntervalSince1970 * 1000;
     if(lastedClickTime != -1) {
         if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             lastedClickTime = now;
             return;
         }
@@ -162,8 +160,6 @@
     double now = [NSDate date].timeIntervalSince1970 * 1000;
     if(lastedClickTime != -1) {
         if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"btn_press_often", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
             lastedClickTime = now;
             return;
         }
