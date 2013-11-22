@@ -8,10 +8,12 @@
 
 #import "ImageProvider.h"
 
-#define IMAGE_PLAY_INTERVAL 300
+#define IMAGE_PLAY_INTERVAL       300
+#define MAX_DOWNLOAD_ERROR_COUNT  3
 
 @implementation ImageProvider {
     long long lastedDownloadingTime;
+    NSUInteger errorCount;
 }
 
 @synthesize delegate;
@@ -27,6 +29,7 @@
 
 - (void)initDefaults {
     lastedDownloadingTime = -1;
+    errorCount = 0;
 }
 
 - (void)startDownloader:(NSString *)url imageIndex:(NSInteger)index {
@@ -34,6 +37,7 @@
         return;
     } else {
         self.isDownloading = YES;
+        errorCount = 0;
         [self startDownloaderInternal:url imageIndex:index];
     }
 }
@@ -62,6 +66,7 @@
     if(error == nil && response != nil && data != nil) {
         NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
         if(resp.statusCode == 200) {
+            errorCount = 0;
             UIImage *image = [UIImage imageWithData:data];
             if(image != nil) {
                 if(lastedDownloadingTime == -1) {
@@ -86,8 +91,14 @@
             }
         } else {
             if(resp.statusCode == 404) {
-                self.isDownloading = NO;
-                [self performSelectorOnMainThread:@selector(notifyImageStreamWasEnded) withObject:nil waitUntilDone:NO];
+                errorCount++;
+                if(errorCount <= MAX_DOWNLOAD_ERROR_COUNT && self.isDownloading) {
+                    index++;
+                    [self startDownloaderInternal:url imageIndex:index];
+                } else {
+                    self.isDownloading = NO;
+                    [self performSelectorOnMainThread:@selector(notifyImageStreamWasEnded) withObject:nil waitUntilDone:NO];
+                }
             } else {
                 self.isDownloading = NO;
                 [self performSelectorOnMainThread:@selector(notifyImageReadingError) withObject:nil waitUntilDone:NO];
