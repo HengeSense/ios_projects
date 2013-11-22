@@ -51,6 +51,14 @@
 "prompt"                = "提示";
 "discard"               = "放弃";
 
+/*************** Refresh Table View Strings *************************/
+
+"pull.refresh"          = "下拉刷新";
+"release.refresh"       = "释放立即刷新";
+"refreshing"            = "刷新中...";
+"last.update"           = "最后更新";
+"ago"                   = "以前";
+
 
 /****************	TCP Network Strings	****************/
 

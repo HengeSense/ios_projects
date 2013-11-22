@@ -19,7 +19,7 @@
 #define BTN_HEIGHT 41/2
 
 @implementation AccountManagementView {
-    UITableView *tblUnits;
+    PullTableView *tblUnits;
     NSString *curUnitIdentifier;
     NSMutableArray *unitBindingAccounts;
     
@@ -63,7 +63,10 @@
 - (void)initUI {
     [super initUI];
     if(tblUnits == nil) {
-        tblUnits = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height+5, self.bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height-5) style:UITableViewStylePlain];
+        tblUnits = [[PullTableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height+5, self.bounds.size.width, self.frame.size.height - self.topbar.bounds.size.height-5) style:UITableViewStylePlain];
+        tblUnits.pullDelegate = self;
+        tblUnits.pullTextColor = [UIColor lightTextColor];
+        tblUnits.pullArrowImage = [UIImage imageNamed:@"whiteArrow"];
         tblUnits.center = CGPointMake(self.center.x, tblUnits.center.y);
         tblUnits.delegate = self;
         tblUnits.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -162,7 +165,7 @@
 }
 
 #pragma mark
-#pragma mark- table delegate
+#pragma mark- Table delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return unitBindingAccounts == nil ? 0 : unitBindingAccounts.count;
@@ -304,6 +307,10 @@
 
 #pragma mark -
 #pragma mark Pull table view delegate
+
+- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView {
+
+}
 
 
 #pragma mark -
