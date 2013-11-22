@@ -17,7 +17,7 @@
 #define BTN_MARGIN                  35
 #define BTN_WIDTH                   41 / 2
 #define BTN_HEIGHT                  41 / 2
-#define REFRESH_AGAIN_DURATION      1
+#define REFRESH_AGAIN_DURATION      2
 
 @implementation AccountManagementView {
     PullTableView *tblUnits;
@@ -151,12 +151,12 @@
 #pragma mark -
 #pragma mark Events
 
-- (void)btnPressed:(UIButton *) sender{
-    if ([sender isEqual:btnMsg]) {
+- (void)btnPressed:(UIButton *)sender {
+    if([sender isEqual:btnMsg]) {
         [SystemService messageToMobile:selectedUser.mobile withMessage:nil];
     } else if ([sender isEqual:btnPhone]){
         [SystemService dialToMobile:selectedUser.mobile];
-    }else if ([sender isEqual:btnUnbinding]){
+    } else if ([sender isEqual:btnUnbinding]){
         UIAlertView  *confirmAlertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"tips", @"") message:[NSString stringWithFormat: NSLocalizedString(@"confirm.unbinding", @""),selectedUser.name,[SMShared current].memory.currentUnit.name]delegate:self cancelButtonTitle:NSLocalizedString(@"determine", @"") otherButtonTitles:NSLocalizedString(@"cancel", @""), nil];
         confirmAlertView.tag = 1023;
         [confirmAlertView dismissWithClickedButtonIndex:1 animated:YES];
@@ -304,9 +304,9 @@
 }
 
 - (void)notifyViewUpdate {
-    if(buttonPanelViewIsVisable) {
-        [self hideButtonPanelView];
-    }
+//    if(buttonPanelViewIsVisable) {
+//        [self hideButtonPanelView];
+//    }
     
     // current unit is empty
     if([NSString isBlank:[SMShared current].memory.currentUnit.identifier]) {
