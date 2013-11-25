@@ -24,6 +24,9 @@
     DirectionButton *btnDirection;
     NSMutableArray *btnDigitalGroups;
     double lastedClickTime;
+    
+    SMButton *btnMute;
+    SMButton *btnInput;
 }
 
 @synthesize device = _device_;
@@ -35,6 +38,9 @@
         _device_ = device;
         [self initDefaults];
         [self initUI];
+        if (!device.isTV&&!device.isAircondition) {
+            [self initUserObjectForOtherDevice];
+        }
     }
     return self;
 }
@@ -84,17 +90,22 @@
         [self addSubview:btnVolumeReduction];
     }
 
-    if(btnSignal == nil&&self.device.isTV) {
-        btnSignal = [[SMButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 146/2 - 20, 18, 146/2, 62/2)];
-        btnSignal.titleLabel.font = [UIFont systemFontOfSize:15.f];
-        [btnSignal setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
-        [btnSignal setTitle:NSLocalizedString(@"signal_source", @"") forState:UIControlStateNormal];
-        [btnSignal setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
-        [btnSignal setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
-        [btnSignal setBackgroundImage:[UIImage imageNamed:@"btn_rc_selected.png"] forState:UIControlStateHighlighted];
-        [btnSignal addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
-        btnSignal.userObject = [NSNumber numberWithInteger:35];
-        [self addSubview:btnSignal];
+    if(btnSignal == nil) {
+        if (self.device.isTV) {
+            btnSignal = [[SMButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 146/2 - 20, 18, 146/2, 62/2)];
+            btnSignal.titleLabel.font = [UIFont systemFontOfSize:15.f];
+            [btnSignal setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
+            [btnSignal setTitle:NSLocalizedString(@"signal_source", @"") forState:UIControlStateNormal];
+            [btnSignal setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
+            [btnSignal setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
+            [btnSignal setBackgroundImage:[UIImage imageNamed:@"btn_rc_selected.png"] forState:UIControlStateHighlighted];
+            [btnSignal addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
+            btnSignal.userObject = [NSNumber numberWithInteger:35];
+            [self addSubview:btnSignal];
+        }else if (self.device.isBackgroundMusic){
+            
+        }
+        
     }
     
     if(btnDigitalGroups == nil) {
@@ -145,6 +156,12 @@
         btnDirection.center = CGPointMake(self.bounds.size.width/2, btnDirection.center.y);
         btnDirection.delegate = self;
         [self addSubview:btnDirection];
+    }
+}
+
+- (void)initUserObjectForOtherDevice{
+    if (self.device.isBackgroundMusic) {
+        
     }
 }
 

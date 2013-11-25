@@ -11,6 +11,7 @@
 #import "AirConditionViewController.h"
 #import "TVViewController.h"
 #import "CameraViewController.h"
+#import "BackgroundMusicViewController.h"
 #import "CommandFactory.h"
 #import "DeviceUtils.h"
 
@@ -201,6 +202,9 @@
         AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] initWithDevice:_device_];
         airConditionViewController.title = _device_.name;
         [self.ownerController presentViewController:airConditionViewController animated:YES completion:nil];
+//        BackgroundMusicViewController *backgroundMusicViewController = [[BackgroundMusicViewController alloc] initWithDevice:_device_];
+//        backgroundMusicViewController.title = _device_.name;
+//        [self.ownerController presentModalViewController:backgroundMusicViewController animated:YES];
     } else if(_device_.isCamera) {
         CameraViewController *cameraViewController = [[CameraViewController alloc] init];
         cameraViewController.title = _device_.name;

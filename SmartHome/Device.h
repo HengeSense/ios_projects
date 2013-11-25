@@ -45,6 +45,7 @@
 @property (assign, nonatomic, readonly) BOOL isSTB;                  //红外线-机顶盒
 @property (assign, nonatomic, readonly) BOOL isCamera;               //摄像头
 @property (assign, nonatomic, readonly) BOOL isWarsignal;            //安防,警报
+@property (assign, nonatomic, readonly) BOOL isBackgroundMusic;      //背景音乐
 
 @property (assign, nonatomic, readonly) BOOL isAvailableDevice;
 
