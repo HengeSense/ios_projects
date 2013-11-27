@@ -40,6 +40,7 @@
 @synthesize isSTB;
 @synthesize isTV;
 @synthesize isCamera;
+@synthesize isBackgroundMusic;
 
 @synthesize isOnline;
 @synthesize isAvailableDevice;

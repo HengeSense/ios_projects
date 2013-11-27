@@ -291,6 +291,7 @@
 		F203A14A17F5393800BABDEC /* btn_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F203A14717F5393800BABDEC /* btn_start@2x.png */; };
 		F203A14B17F5393800BABDEC /* btn_start_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F203A14817F5393800BABDEC /* btn_start_shadow@2x.png */; };
 		F203A14C17F5393800BABDEC /* welcome06@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F203A14917F5393800BABDEC /* welcome06@2x.jpg */; };
+		F204F2F018432F5A00D45490 /* BackgroundMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F204F2EF18432F5A00D45490 /* BackgroundMusicViewController.m */; };
 		F2051334182B6B79000A71DA /* btn_rc_center_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205132E182B6B79000A71DA /* btn_rc_center_selected@2x.png */; };
 		F2051335182B6B79000A71DA /* btn_rc_down_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205132F182B6B79000A71DA /* btn_rc_down_selected@2x.png */; };
 		F2051336182B6B79000A71DA /* btn_rc_left_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2051330182B6B79000A71DA /* btn_rc_left_selected@2x.png */; };
@@ -795,6 +796,8 @@
 		F203A14717F5393800BABDEC /* btn_start@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_start@2x.png"; sourceTree = "<group>"; };
 		F203A14817F5393800BABDEC /* btn_start_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_start_shadow@2x.png"; sourceTree = "<group>"; };
 		F203A14917F5393800BABDEC /* welcome06@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "welcome06@2x.jpg"; sourceTree = "<group>"; };
+		F204F2EE18432F5A00D45490 /* BackgroundMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundMusicViewController.h; sourceTree = "<group>"; };
+		F204F2EF18432F5A00D45490 /* BackgroundMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundMusicViewController.m; sourceTree = "<group>"; };
 		F205132E182B6B79000A71DA /* btn_rc_center_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_center_selected@2x.png"; sourceTree = "<group>"; };
 		F205132F182B6B79000A71DA /* btn_rc_down_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_down_selected@2x.png"; sourceTree = "<group>"; };
 		F2051330182B6B79000A71DA /* btn_rc_left_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_rc_left_selected@2x.png"; sourceTree = "<group>"; };
@@ -1462,6 +1465,8 @@
 				6F0FAF0C17AF87AC00B75D3E /* TVViewController.m */,
 				F2D8E8C517C48EA500090E5B /* CameraViewController.h */,
 				F2D8E8C617C48EA500090E5B /* CameraViewController.m */,
+				F204F2EE18432F5A00D45490 /* BackgroundMusicViewController.h */,
+				F204F2EF18432F5A00D45490 /* BackgroundMusicViewController.m */,
 			);
 			name = devices_control_controllers;
 			sourceTree = "<group>";
@@ -2411,6 +2416,7 @@
 				6F8A722D17B23E91002BA8C5 /* ConversationView.m in Sources */,
 				6F8927C117B3976A00D0C1E3 /* GlobalSettings.m in Sources */,
 				6F09060917F1295900C26491 /* CameraLoadingView.m in Sources */,
+				F204F2F018432F5A00D45490 /* BackgroundMusicViewController.m in Sources */,
 				6F89282B17B3F2D000D0C1E3 /* ServiceBase.m in Sources */,
 				F220411B181FD70A0050000C /* AboutUsViewController.m in Sources */,
 				6F9693AF183F00A50048B3D6 /* EGORefreshTableHeaderView.m in Sources */,
