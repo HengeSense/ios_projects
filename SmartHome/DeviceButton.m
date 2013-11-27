@@ -139,6 +139,10 @@
         } else if(_device_.isWarsignal) {
             [self registerImage:[UIImage imageNamed:@"icon_security_on.png"] forStatus:[NSNumber numberWithInteger:ON].stringValue];
             [self registerImage:[UIImage imageNamed:@"icon_security_off.png"] forStatus:[NSNumber numberWithInteger:OFF].stringValue];
+        } else if(_device_.isBackgroundMusic) {
+            
+        } else if(_device_.isDVD) {
+            
         }
     }
 }
