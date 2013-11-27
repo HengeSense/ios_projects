@@ -59,7 +59,7 @@
         [btnPower setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
         [btnPower setBackgroundImage:[UIImage imageNamed:@"power_selected.png"] forState:UIControlStateHighlighted];
         [btnPower addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
-        btnPower.userObject = [NSNumber numberWithInteger:(self.device.isTV?1:89)];
+        btnPower.userObject = [NSNumber numberWithInteger:201];
         [self.view addSubview:btnPower];
     }
     
@@ -67,7 +67,7 @@
         btnInput = [[SMButton alloc] initWithFrame:CGRectMake(124, 18+TOPBAR_HEIGHT, 146/2, 62/2)];
         [btnInput setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
         [btnInput setBackgroundImage:[UIImage imageNamed:@"btn_rc_selected.png"] forState:UIControlStateHighlighted];
-        btnInput.userObject = [NSNumber numberWithInteger:(self.device.isTV?20:112)];
+        btnInput.userObject = [NSNumber numberWithInteger:212];
         btnInput.titleLabel.font = [UIFont systemFontOfSize:15.f];
         [btnInput setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
         [btnInput setTitle:NSLocalizedString(@"volume_reduce", @"") forState:UIControlStateNormal];
@@ -82,7 +82,7 @@
         btnMute = [[SMButton alloc] initWithFrame:CGRectMake(256, 15+TOPBAR_HEIGHT, 75/2, 78/2)];
         [btnMute setBackgroundImage:[UIImage imageNamed:@"btn_rc_power.png"] forState:UIControlStateNormal];
         [btnMute setBackgroundImage:[UIImage imageNamed:@"power_selected.png"] forState:UIControlStateHighlighted];
-        btnMute.userObject = [NSNumber numberWithInteger:(self.device.isTV?20:112)];
+        btnMute.userObject = [NSNumber numberWithInteger:233];
         btnMute.titleLabel.font = [UIFont systemFontOfSize:15.f];
         [btnMute setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 0, 0)];
         [btnMute addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -99,7 +99,7 @@
             SMButton *btnDigital = [[SMButton alloc] initWithFrame:CGRectMake(x, y+TOPBAR_HEIGHT, 75/2, 78/2)];
             [btnDigital setTitleColor:[UIColor colorWithHexString:@"b8642d"] forState:UIControlStateNormal];
             [btnDigital setTitle:[NSString stringWithFormat:@"%d", i>=9 ? 0 : (i+1)] forState:UIControlStateNormal];
-            btnDigital.userObject = [NSNumber numberWithInteger:(self.device.isTV?i+2:i+90)];
+            btnDigital.userObject = [NSNumber numberWithInteger:201+i];
             [btnDigital setBackgroundImage:[UIImage imageNamed:@"btn_rc_number.png"] forState:UIControlStateNormal];
             [btnDigital setBackgroundImage:[UIImage imageNamed:@"btn_rc_number_selected.png"] forState:UIControlStateHighlighted];
             [btnDigital addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -148,23 +148,23 @@
 #pragma mark direction button delegate
 
 - (void)leftButtonClicked {
-    [self btnPressed:[NSNumber numberWithInteger:16]];
+    [self btnPressed:[NSNumber numberWithInteger:217]];
 }
 
 - (void)rightButtonClicked {
-    [self btnPressed:[NSNumber numberWithInteger:17]];
+    [self btnPressed:[NSNumber numberWithInteger:216]];
 }
 
 - (void)topButtonClicked {
-    [self btnPressed:[NSNumber numberWithInteger:14]];
+    [self btnPressed:[NSNumber numberWithInteger:215]];
 }
 
 - (void)bottomButtonClicked {
-    [self btnPressed:[NSNumber numberWithInteger:15]];
+    [self btnPressed:[NSNumber numberWithInteger:218]];
 }
 
 - (void)centerButtonClicked {
-    [self btnPressed:[NSNumber numberWithInteger:18]];
+    [self btnPressed:[NSNumber numberWithInteger:213]];
 }
 
 - (void)controlTvWithSingal:(NSInteger)singal {
