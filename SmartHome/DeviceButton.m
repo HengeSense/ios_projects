@@ -29,7 +29,7 @@
     UILabel *lblTitle;
     NSMutableDictionary *statusImage;
     
-    double lastedClickTime;
+    double lastClickedTime;
 }
 
 @synthesize device = _device_;
@@ -54,7 +54,7 @@
         statusImage = [NSMutableDictionary dictionary];
     }
     
-    lastedClickTime = -1;
+    lastClickedTime = -1;
 }
 
 - (void)initUI {
@@ -170,13 +170,13 @@
     
     // Check btn click is too often
     double now = [NSDate date].timeIntervalSince1970 * 1000;
-    if(lastedClickTime != -1) {
-        if(now - lastedClickTime <= TWO_TIMES_CLICK_INTERVAL) {
-            lastedClickTime = now;
+    if(lastClickedTime != -1) {
+        if(now - lastClickedTime <= TWO_TIMES_CLICK_INTERVAL) {
+            lastClickedTime = now;
             return;
         }
     }
-    lastedClickTime = now;
+    lastClickedTime = now;
 
     if(_device_.isLightOrInlight || _device_.isSocket || _device_.isWarsignal) {
         DeviceCommandUpdateDevice *updateDeviceCommand = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
