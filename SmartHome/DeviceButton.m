@@ -202,14 +202,15 @@
         AirConditionViewController *airConditionViewController = [[AirConditionViewController alloc] initWithDevice:_device_];
         airConditionViewController.title = _device_.name;
         [self.ownerController presentViewController:airConditionViewController animated:YES completion:nil];
-//        BackgroundMusicViewController *backgroundMusicViewController = [[BackgroundMusicViewController alloc] initWithDevice:_device_];
-//        backgroundMusicViewController.title = _device_.name;
-//        [self.ownerController presentModalViewController:backgroundMusicViewController animated:YES];
     } else if(_device_.isCamera) {
         CameraViewController *cameraViewController = [[CameraViewController alloc] init];
         cameraViewController.title = _device_.name;
         cameraViewController.cameraDevice = _device_;
         [self.ownerController presentViewController:cameraViewController animated:YES completion:nil];
+    } else if(_device_.isBackgroundMusic) {
+        BackgroundMusicViewController *backgroundMusicViewController = [[BackgroundMusicViewController alloc] initWithDevice:_device_];
+        backgroundMusicViewController.title = _device_.name;
+        [self.ownerController presentModalViewController:backgroundMusicViewController animated:YES];
     }
 }
 

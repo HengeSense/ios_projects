@@ -41,6 +41,7 @@
 @synthesize isTV;
 @synthesize isCamera;
 @synthesize isBackgroundMusic;
+@synthesize isDVD;
 
 @synthesize isOnline;
 @synthesize isAvailableDevice;
@@ -102,9 +103,13 @@
 #pragma mark -
 #pragma mark device type or state
 
+- (BOOL)isOnline {
+    return self.state == 1;
+}
+
 - (BOOL)isAvailableDevice {
     return self.isLightOrInlight || self.isSocket || self.isCurtainOrSccurtain || self.isTV || self.isAircondition
-    || self.isSTB || self.isCamera || self.isWarsignal;
+    || self.isSTB || self.isCamera || self.isWarsignal || self.isBackgroundMusic;
 }
 
 - (BOOL)isLight {
@@ -143,20 +148,24 @@
     return [self isRemote] && self.irType == 1;
 }
 
-- (BOOL)isAircondition {
-    return [self isRemote] && self.irType == 4;
+- (BOOL)isDVD {
+    return [self isRemote] && self.irType == 2;
 }
 
 - (BOOL)isSTB {
     return [self isRemote] && self.irType == 3;
 }
 
-- (BOOL)isCamera {
-    return [@"camera" isEqualToString:self.category];
+- (BOOL)isAircondition {
+    return [self isRemote] && self.irType == 4;
 }
 
-- (BOOL)isOnline {
-    return self.state == 1;
+- (BOOL)isBackgroundMusic {
+    return [self isRemote] && self.irType == 6;
+}
+
+- (BOOL)isCamera {
+    return [@"camera" isEqualToString:self.category];
 }
 
 - (BOOL)isWarsignal {
