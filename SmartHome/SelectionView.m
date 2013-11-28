@@ -96,6 +96,7 @@
 - (void)dismiss {
     if(dismissing) return;
     dismissing = YES;
+    self.delegate = nil;
     [UIView animateWithDuration:0.3f
             animations:^{
                 self.center = CGPointMake(self.center.x, self.center.y + self.bounds.size.height);
