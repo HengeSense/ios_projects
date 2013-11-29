@@ -13,6 +13,7 @@
 #import "DeviceUtils.h"
 
 #define TWO_TIMES_CLICK_INTERVAL 500
+#define FIX_MARGIN 50
 
 @implementation TVRemoteControlPanel {
     SMButton *btnPower;
@@ -64,7 +65,7 @@
     
 
     if(btnVolumeIncreases == nil) {
-        btnVolumeIncreases = [[SMButton alloc] initWithFrame:CGRectMake(67, 18, 146/2, 62/2)];
+        btnVolumeIncreases = [[SMButton alloc] initWithFrame:CGRectMake(self.device.isTV?67: 58+FIX_MARGIN, 18, 146/2, 62/2)];
         [btnVolumeIncreases setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
         [btnVolumeIncreases setBackgroundImage:[UIImage imageNamed:@"btn_rc_selected.png"] forState:UIControlStateHighlighted];
         btnVolumeIncreases.userObject = [NSNumber numberWithInteger:(self.device.isTV?19:111)];
@@ -77,7 +78,7 @@
     }
     
     if(btnVolumeReduction == nil) {
-        btnVolumeReduction = [[SMButton alloc] initWithFrame:CGRectMake(147, 18, 146/2, 62/2)];
+        btnVolumeReduction = [[SMButton alloc] initWithFrame:CGRectMake(self.device.isTV?147:108+73+FIX_MARGIN, 18, 146/2, 62/2)];
         [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc.png"] forState:UIControlStateNormal];
         [btnVolumeReduction setBackgroundImage:[UIImage imageNamed:@"btn_rc_selected.png"] forState:UIControlStateHighlighted];
         btnVolumeReduction.userObject = [NSNumber numberWithInteger:(self.device.isTV?20:112)];

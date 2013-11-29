@@ -303,6 +303,10 @@
 		F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205150C17CDA27F0058DADE /* lineright@2x.png */; };
 		F205157A17CF42370058DADE /* message_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157817CF42370058DADE /* message_count@2x.png */; };
 		F205157B17CF42370058DADE /* device_count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F205157917CF42370058DADE /* device_count@2x.png */; };
+		F20582E1184830CB0059ED96 /* background_music_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20582DD184830CB0059ED96 /* background_music_on@2x.png */; };
+		F20582E2184830CB0059ED96 /* btn_play_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20582DE184830CB0059ED96 /* btn_play_selected@2x.png */; };
+		F20582E3184830CB0059ED96 /* btn_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20582DF184830CB0059ED96 /* btn_play@2x.png */; };
+		F20582E4184830CB0059ED96 /* background_music_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20582E0184830CB0059ED96 /* background_music_off@2x.png */; };
 		F205B78317B0EEE2003EC863 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205B78217B0EEE2003EC863 /* NavViewController.m */; };
 		F205E5C117D9784800280F21 /* PasswordPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F205E5C017D9784800280F21 /* PasswordPopupViewController.m */; };
 		F207B501180E90CB00A92603 /* DeviceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F207B500180E90CB00A92603 /* DeviceUtils.m */; };
@@ -809,6 +813,10 @@
 		F205150C17CDA27F0058DADE /* lineright@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lineright@2x.png"; sourceTree = "<group>"; };
 		F205157817CF42370058DADE /* message_count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_count@2x.png"; sourceTree = "<group>"; };
 		F205157917CF42370058DADE /* device_count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "device_count@2x.png"; sourceTree = "<group>"; };
+		F20582DD184830CB0059ED96 /* background_music_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_music_on@2x.png"; sourceTree = "<group>"; };
+		F20582DE184830CB0059ED96 /* btn_play_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_play_selected@2x.png"; sourceTree = "<group>"; };
+		F20582DF184830CB0059ED96 /* btn_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_play@2x.png"; sourceTree = "<group>"; };
+		F20582E0184830CB0059ED96 /* background_music_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_music_off@2x.png"; sourceTree = "<group>"; };
 		F205B78117B0EEE2003EC863 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
 		F205B78217B0EEE2003EC863 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 		F205E5BB17D977B600280F21 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
@@ -1147,6 +1155,7 @@
 		6F0FAE9E17AF7FF700B75D3E /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F20582DC184830AA0059ED96 /* background_music */,
 				6F262D731834C60E0002ADC0 /* users_management */,
 				6F4A51B6180E863000EF751D /* network_states */,
 				6FDF6B4A17F9C74000B206A8 /* logo */,
@@ -2068,6 +2077,17 @@
 			name = temperature_view;
 			sourceTree = "<group>";
 		};
+		F20582DC184830AA0059ED96 /* background_music */ = {
+			isa = PBXGroup;
+			children = (
+				F20582DD184830CB0059ED96 /* background_music_on@2x.png */,
+				F20582DE184830CB0059ED96 /* btn_play_selected@2x.png */,
+				F20582DF184830CB0059ED96 /* btn_play@2x.png */,
+				F20582E0184830CB0059ED96 /* background_music_off@2x.png */,
+			);
+			name = background_music;
+			sourceTree = "<group>";
+		};
 		F205E5BA17D9777300280F21 /* MJPopup */ = {
 			isa = PBXGroup;
 			children = (
@@ -2218,6 +2238,7 @@
 				F22DF72017C1AEE600BF7C3A /* cbx_unchecked@2x.png in Resources */,
 				F22DF72217C1AEFB00BF7C3A /* cbx_checked@2x.png in Resources */,
 				F22DF72B17C1FFE300BF7C3A /* btn_orange@2x.png in Resources */,
+				F20582E2184830CB0059ED96 /* btn_play_selected@2x.png in Resources */,
 				6F9693B6183F00A50048B3D6 /* blueArrow@2x.png in Resources */,
 				6F5A228217F292D000D29BE0 /* welcome02@2x.png in Resources */,
 				F22DF72D17C2009500BF7C3A /* txt_main@2x.png in Resources */,
@@ -2306,6 +2327,7 @@
 				F205150D17CDA27F0058DADE /* lineleft@2x.png in Resources */,
 				F205150E17CDA27F0058DADE /* lineright@2x.png in Resources */,
 				6FA0772D183C620A00144471 /* sp-a-5@2x.png in Resources */,
+				F20582E1184830CB0059ED96 /* background_music_on@2x.png in Resources */,
 				6F262D7A1834C77F0002ADC0 /* icon_me_owner@2x.png in Resources */,
 				6FDD0ED717CDED30000D95E8 /* icon_feed_back@2x.png in Resources */,
 				6FDD0ED817CDED30000D95E8 /* icon_about_us@2x.png in Resources */,
@@ -2338,6 +2360,7 @@
 				6F262D791834C77F0002ADC0 /* icon_dial_phone@2x.png in Resources */,
 				6F159BFF17D7176E005CFFEE /* btn_rc_right@2x.png in Resources */,
 				6F159C0017D7176E005CFFEE /* btn_rc_top@2x.png in Resources */,
+				F20582E4184830CB0059ED96 /* background_music_off@2x.png in Resources */,
 				6F347A5E17D8BFB800B486D3 /* btn_scene@2x.png in Resources */,
 				6F347A5F17D8BFB800B486D3 /* btn_unit@2x.png in Resources */,
 				6FC8C07317D979A1003B3904 /* icon_light_off@2x.png in Resources */,
@@ -2364,6 +2387,7 @@
 				6F47FADE17E2B80E0027C0F7 /* icon_security_on@2x.png in Resources */,
 				6F5A228117F292D000D29BE0 /* welcome01@2x.png in Resources */,
 				6F47FAE017E2BBB60027C0F7 /* icon_curtain_off@2x.png in Resources */,
+				F20582E3184830CB0059ED96 /* btn_play@2x.png in Resources */,
 				F2051337182B6B79000A71DA /* btn_rc_number_selected@2x.png in Resources */,
 				6F73D08317EEE99900FFF974 /* zbar-help.html in Resources */,
 			);

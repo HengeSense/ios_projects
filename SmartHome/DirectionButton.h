@@ -24,5 +24,6 @@
 
 + (DirectionButton *)cameraDirectionButtonWithPoint:(CGPoint)point;
 + (DirectionButton *)tvDirectionButtonWithPoint:(CGPoint)point;
++ (DirectionButton *)bgMusicDirectionButtonWithPoint:(CGPoint)point;
 
 @end

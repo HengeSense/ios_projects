@@ -18,6 +18,7 @@
     UITapGestureRecognizer *tapGesture;
     CGFloat centerRound;
     CGFloat outRound;
+    NSString *btnType;
 }
 
 @synthesize delegate;
@@ -27,10 +28,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self initDefaults];
+        btnType = type;
         if([@"tv" isEqualToString:type]) {
             [self initTVTypeUI];
         } else if([@"camera" isEqualToString:type]) {
             [self initCameraTypeUI];
+        }else if ([@"bgMusic" isEqualToString:type]) {
+            [self initTVTypeUI];
+            imgCenterButton.image = [UIImage imageNamed:@"btn_play.png"];
         }
     }
     return self;
@@ -42,6 +47,10 @@
 
 + (DirectionButton *)tvDirectionButtonWithPoint:(CGPoint)point {
     return [[DirectionButton alloc] initWithFrame:CGRectMake(point.x, point.y, 281/2, 282/2) andType:@"tv"];
+}
+
++ (DirectionButton *)bgMusicDirectionButtonWithPoint:(CGPoint)point{
+    return [[DirectionButton alloc] initWithFrame:CGRectMake(point.x, point.y, 281/2, 282/2) andType:@"bgMusic"];
 }
 
 - (void)initDefaults {
@@ -157,7 +166,7 @@
             [self.delegate centerButtonClicked];
             UIImage *centerImg = imgCenterButton.image;
             [UIView animateWithDuration:0.1f animations:^{
-                imgCenterButton.image = [UIImage imageNamed:@"btn_rc_center_selected.png"];
+                imgCenterButton.image = [btnType isEqualToString:@"bgMusic"]?[UIImage imageNamed:@"btn_play_selected.png"]:[UIImage imageNamed:@"btn_rc_center_selected.png"];
                 imgCenterButton.alpha = 0.5;
                 
             } completion:^(BOOL finished){
