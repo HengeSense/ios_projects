@@ -16,5 +16,6 @@
 - (void)registerTapGestureToResignKeyboard;
 - (void)initDefaults;
 - (void)initUI;
+- (void)setUp;
 
 @end

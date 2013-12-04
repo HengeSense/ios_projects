@@ -8,6 +8,7 @@
 
 #import "ZoneDetailsViewController.h"
 #import "DeviceDetailViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
 @interface ZoneDetailsViewController ()
 
@@ -79,11 +80,11 @@
         deviceCell.selectedBackgroundView = [[UIView alloc] initWithFrame:deviceCell.bounds];
         
         deviceCell.backgroundView.backgroundColor = [UIColor whiteColor];
-        deviceCell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        deviceCell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
         
         if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
             deviceCell.textLabel.font = [UIFont systemFontOfSize:16.f];
-            deviceCell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            deviceCell.detailTextLabel.textColor = [UIColor colorWithHexString:@"e5e5e5"];
         }
     }
     Device *device = [[zone devices] objectAtIndex:indexPath.row];

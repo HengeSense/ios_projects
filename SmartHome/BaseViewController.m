@@ -54,6 +54,7 @@
     [super viewDidLoad];
     [self initDefaults];
     [self initUI];
+    [self setUp];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +75,10 @@
     }
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
+}
+
+- (void)setUp {
+    
 }
 
 @end

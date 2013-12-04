@@ -302,6 +302,8 @@
 }
 
 - (void)notifyViewUpdate {
+    [super notifyViewUpdate];
+    
     // current unit is empty
     if([NSString isBlank:[SMShared current].memory.currentUnit.identifier]) {
         buttonPanelViewIsVisable = NO;

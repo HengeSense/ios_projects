@@ -16,6 +16,7 @@
 
 @synthesize ownerController;
 @synthesize topbar;
+@synthesize isActive;
 @synthesize backgroundImageView;
 
 - (id)initWithFrame:(CGRect)frame owner:(MainViewController *)controller {
@@ -24,6 +25,7 @@
         ownerController = controller;
         [self initDefaults];
         [self initUI];
+        [self setUp];
     }
     return self;
 }
@@ -35,6 +37,9 @@
     //top bar for main view
     [self addSubview:self.topbar];
     self.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
+}
+
+- (void)setUp {
 }
 
 - (TopbarView *)topbar {
@@ -49,6 +54,9 @@
 }
 
 - (void)notifyViewUpdate {
+    if(self.ownerController != nil) {
+        self.ownerController.rightViewEnable = NO;
+    }
 }
 
 - (void)destory {

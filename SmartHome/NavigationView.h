@@ -16,11 +16,13 @@
 @property (strong, nonatomic) MainViewController *ownerController;
 @property (strong, nonatomic, readonly) TopbarView *topbar;
 @property (strong, nonatomic) UIImageView *backgroundImageView;
+@property (assign, nonatomic) BOOL isActive;
 
 - (id)initWithFrame:(CGRect)frame owner:(MainViewController *)controller;
 
 - (void)initDefaults;
 - (void)initUI;
+- (void)setUp;
 
 - (void)notifyViewUpdate;
 - (void)destory;

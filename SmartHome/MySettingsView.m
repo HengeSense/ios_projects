@@ -13,6 +13,7 @@
 #import "PushSettingViewController.h"
 #import "WelcomeViewController.h"
 #import "AboutUsViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
 @implementation MySettingsView {
     UITableView *tblSettings;
@@ -118,7 +119,7 @@
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView.backgroundColor = [UIColor whiteColor];
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
-        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
         cell.textLabel.font = [UIFont systemFontOfSize:17.f];
     }
     

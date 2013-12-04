@@ -7,6 +7,7 @@
 //
 
 #import "DeviceDetailViewController.h"
+#import "UIColor+ExtentionForHexString.h"
 
 @interface DeviceDetailViewController ()
 
@@ -86,11 +87,11 @@
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         
         cell.backgroundView.backgroundColor = [UIColor whiteColor];
-        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
         
         if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
             cell.textLabel.font = [UIFont systemFontOfSize:16.f];
-            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"e5e5e5"];
         }
     }
     cell.textLabel.text = [fieldsNames objectAtIndex:indexPath.row];

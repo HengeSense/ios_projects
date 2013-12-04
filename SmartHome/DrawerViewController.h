@@ -11,13 +11,15 @@
 
 @interface DrawerViewController : UIViewController<UIScrollViewDelegate>
 
-@property (nonatomic) CGFloat leftViewCenterX;
-@property (nonatomic) CGFloat rightViewCenterX;
-@property (nonatomic) CGFloat showDrawerMaxTrasitionX;
-@property (nonatomic) CGFloat leftViewVisibleWidth;
-@property (nonatomic) CGFloat rightViewVisibleWidth;
-@property (nonatomic) BOOL panFromScrollViewFirstPage;
-@property (nonatomic) BOOL panFromScrollViewLastPage;
+@property (assign, nonatomic) CGFloat leftViewCenterX;
+@property (assign, nonatomic) CGFloat rightViewCenterX;
+@property (assign, nonatomic) CGFloat showDrawerMaxTrasitionX;
+@property (assign, nonatomic) CGFloat leftViewVisibleWidth;
+@property (assign, nonatomic) CGFloat rightViewVisibleWidth;
+@property (assign, nonatomic) BOOL panFromScrollViewFirstPage;
+@property (assign, nonatomic) BOOL panFromScrollViewLastPage;
+@property (assign, nonatomic) BOOL rightViewEnable;
+@property (assign, nonatomic) BOOL leftViewEnable;
 @property (strong, nonatomic, readonly) UIView *mainView;
 @property (strong, nonatomic) UIView *centerView;
 @property (strong, nonatomic) UIView *leftView;

@@ -101,9 +101,6 @@
 #pragma mark UI Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"detailTextLabel%@",editCell.detailTextLabel);
-    NSLog(@"detailTextLabel text%@",editCell.detailTextLabel.text);
-
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.section == 0) {
         VerificationCodeSendViewController *verificationCodeSendViewController = [[VerificationCodeSendViewController alloc] initAsModify:YES];
@@ -184,7 +181,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         if(![UIDevice systemVersionIsMoreThanOrEuqal7]) {
             cell.textLabel.font = [UIFont systemFontOfSize:17.f];
-            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"e5e5e5"];
         }
     }
     
@@ -194,7 +191,7 @@
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView.backgroundColor = [UIColor whiteColor];
-        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
         cell.textLabel.text = NSLocalizedString(@"username", @"");
         cell.detailTextLabel.text = [SMShared current].settings.account;
     } else if(indexPath.section == 1) {
@@ -203,7 +200,7 @@
         cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
         cell.backgroundView.backgroundColor = [UIColor whiteColor];
-        cell.selectedBackgroundView.backgroundColor = [UIColor lightGrayColor];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
         cell.textLabel.text = [titles objectAtIndex:indexPath.row];
         if (indexPath.row == 2) {
             cell.detailTextLabel.text = @"********";

@@ -9,8 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "ParameterExtentions.h"
 
+@protocol LongPressDelegate;
+
 @interface SMButton : UIButton<ParameterExtentions>
 
+@property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) id userObject;
+@property (assign, nonatomic) id<LongPressDelegate> longPressDelegate;
 
 @end
+
+@protocol LongPressDelegate <NSObject>
+
+- (void)smButtonLongPressed:(SMButton *)button;
+
+@end
+
+

@@ -13,8 +13,10 @@
 #import "UIColor+ExtentionForHexString.h"
 #import "UserAccountViewController.h"
 
+#define DRAWER_WIDTH 140
+
 #define ACCOUNT_VIEW_HEIGHT 70
-#define LOGO_VIEW_HEIGHT 57/2
+#define LOGO_VIEW_HEIGHT    57/2
 
 @implementation DrawerView {
     UIView *accountView;
@@ -47,30 +49,30 @@
 }
 
 - (void)initDefaults {
-    entryHeight = 86;
+    entryHeight = 40;
 }
 
 - (void)initUI {
     self.backgroundColor = [UIColor colorWithHexString:@"#3a3e47"];
     
     if(backgroundImageView == nil) {
-        backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120, self.frame.size.height)];
+        backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DRAWER_WIDTH + 2, self.frame.size.height)];
         backgroundImageView.image = [[UIImage imageNamed:@"bg_drawer_cell.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
         [self addSubview:backgroundImageView];
     }
     
     if(logoView == nil) {
-        logoView = [[UIImageView alloc] initWithFrame:CGRectMake(22, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 30 : 10, 148/2, LOGO_VIEW_HEIGHT)];
+        logoView = [[UIImageView alloc] initWithFrame:CGRectMake(33, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 30 : 10, 148/2, LOGO_VIEW_HEIGHT)];
         logoView.image = [UIImage imageNamed:@"logo3.png"];
         [self addSubview:logoView];
         
-        UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height + 15, 120, 2)];
+        UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height + 15, DRAWER_WIDTH + 10, 2)];
         imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
         [self addSubview:imgSeperatorLine];
     }
     
     if(accountView == nil) {
-        accountView = [[UIView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height + 5, 120, ACCOUNT_VIEW_HEIGHT)];
+        accountView = [[UIView alloc] initWithFrame:CGRectMake(0, logoView.frame.origin.y + logoView.bounds.size.height + 5, DRAWER_WIDTH + 10, ACCOUNT_VIEW_HEIGHT)];
         lblMessage1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 22, 100, 18)];
         UILabel *lblMessage2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 42, 100, 18)];
         lblMessage1.backgroundColor = [UIColor clearColor];
@@ -90,7 +92,7 @@
         [accountView addSubview:accountBackground];
         [self addSubview:accountView];
         
-        UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, accountView.frame.origin.y + accountView.bounds.size.height, 120, 2)];
+        UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, accountView.frame.origin.y + accountView.bounds.size.height, DRAWER_WIDTH + 10, 2)];
         imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
         [self addSubview:imgSeperatorLine];
 
@@ -100,7 +102,7 @@
     
     if(tblNavigationItems == nil) {
         tblNavigationItems = [[UITableView alloc]
-            initWithFrame:CGRectMake(0, ACCOUNT_VIEW_HEIGHT + accountView.frame.origin.y, 120,
+            initWithFrame:CGRectMake(0, ACCOUNT_VIEW_HEIGHT + accountView.frame.origin.y, DRAWER_WIDTH,
             self.frame.size.height - ACCOUNT_VIEW_HEIGHT) style:UITableViewStylePlain];
         tblNavigationItems.dataSource = self;
         tblNavigationItems.delegate = self;
@@ -153,13 +155,9 @@
         NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"DrawerNavItemCell" owner:self options:nil];
         cell = [arr objectAtIndex:0];
         cell.backgroundColor = [UIColor clearColor];
-        CGRect imgRect = cell.imgPart.frame;
-        cell.imgPart.frame = CGRectMake(imgRect.origin.x, 12, imgRect.size.width, imgRect.size.height);
-        CGRect lblRect = cell.lblPart.frame;
-        cell.lblPart.frame = CGRectMake(lblRect.origin.x, cell.frame.size.height - lblRect.size.height - 14, lblRect.size.width, lblRect.size.height);
         cell.lblPart.font = [UIFont systemFontOfSize:13.f];
         if(indexPath.row != navigationItems.count - 1) {
-            UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, cell.frame.size.height-2, 120, 2)];
+            UIImageView *imgSeperatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, cell.frame.size.height-2, DRAWER_WIDTH + 10, 2)];
             imgSeperatorLine.image = [UIImage imageNamed:@"line_cell_seperator.png"];
             [cell addSubview:imgSeperatorLine];
         }

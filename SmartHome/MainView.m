@@ -202,7 +202,9 @@
         
         [self addSubview:notificationView];
     }
-    
+}
+
+- (void)setUp {
     [self subscribeEvents];
 }
 

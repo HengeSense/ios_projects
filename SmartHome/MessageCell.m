@@ -9,7 +9,7 @@
 #import "MessageCell.h"
 #import "SMDateFormatter.h"
 
-@implementation MessageCell{
+@implementation MessageCell {
     UIView  *view;
     UIImageView *typeMessage;
     UILabel *textLabel;
@@ -44,7 +44,6 @@
         textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         textLabel.numberOfLines = 0;
         textLabel.backgroundColor = [UIColor clearColor];
-
     }
     
     if (lblTime == nil) {

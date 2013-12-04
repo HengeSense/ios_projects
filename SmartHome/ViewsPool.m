@@ -38,7 +38,19 @@
 
 - (UIView *)viewWithIdentifier:(NSString *)identifier {
     @synchronized(self) {
-        return [pool objectForKey:identifier];
+        NavigationView *view = [pool objectForKey:identifier];
+        if(pool != nil) {
+            for(NSString *key in pool.allKeys) {
+                NavigationView *view = [pool objectForKey:key];
+                if(view != nil) {
+                    view.isActive = NO;
+                }
+            }
+        }
+        if(view != nil) {
+            view.isActive = YES;
+        }
+        return view;
     }
 }
 

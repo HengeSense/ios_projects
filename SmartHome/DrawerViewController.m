@@ -157,6 +157,8 @@
     
     lastedMainViewCenterX = 160;
     leftViewIsAboveOnRightView = YES;
+    self.leftViewEnable = YES;
+    self.rightViewEnable = YES;
 }
 
 #pragma mark -
@@ -184,7 +186,7 @@
                 } else {
                     self.scrollView.scrollEnabled = NO;
                 }
-            } else if (self.scrollView.scrollEnabled){
+            } else if(self.scrollView.scrollEnabled) {
                 if([@"" isEqualToString:intentionDirection]) {
                     intentionDirection = @"left";
                 }
@@ -222,14 +224,14 @@
             }
         }
         if(translation.x > 0) {
-            if(leftView == nil) {
+            if(leftView == nil || !self.leftViewEnable) {
                 [self showCenterView:NO];
                 [gesture setTranslation:CGPointMake(0, 0) inView:self.mainView];
                 return;
             }
             if(!leftViewIsAboveOnRightView && rightView != nil) [self leftViewToTopLevel];
         } else if(translation.x < 0) {
-            if(rightView == nil) {
+            if(rightView == nil || !self.rightViewEnable) {
                 [self showCenterView:NO];
                 [gesture setTranslation:CGPointMake(0, 0) inView:self.mainView];
                 return;
