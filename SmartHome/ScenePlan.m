@@ -50,7 +50,6 @@
     self = [super init];
     if(self && unit != nil) {
         self.unitIdentifier = unit.identifier;
-        self.unit = unit;
         self.ownerAccount = [SMShared current].settings.deviceCode;
         for(int i=0; i<unit.zones.count; i++) {
             Zone *zone = [unit.zones objectAtIndex:i];
@@ -113,7 +112,7 @@
 
 - (Unit *)unit {
     if(_unit_ == nil) {
-        _unit_ = [[SMShared current].memory findUnitByIdentifier:self.identifier];
+        _unit_ = [[SMShared current].memory findUnitByIdentifier:self.unitIdentifier];
     }
     return _unit_;
 }

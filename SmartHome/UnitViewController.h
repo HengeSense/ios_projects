@@ -7,7 +7,31 @@
 //
 
 #import "NavViewController.h"
+#import "NavigationView.h"
+#import "ConversationView.h"
+#import "SpeechRecognitionUtil.h"
+#import "DeviceCommandGetUnitsHandler.h"
+#import "DeviceCommandGetNotificationsHandler.h"
+#import "DeviceCommandVoiceControlHandler.h"
+#import "DeviceCommandUpdateDevicesHandler.h"
+#import "SelectionView.h"
+#import "NotificationHandlerViewController.h"
 
-@interface UnitViewController : NavViewController
+typedef NS_ENUM(NSInteger, SpeechViewState) {
+    SpeechViewStateOpenning   = 1,
+    SpeechViewStateOpenned    = 2,
+    SpeechViewStateClosing    = 3,
+    SpeechViewStateClosed     = 4
+};
+
+typedef NS_ENUM(NSInteger, RecognizerState) {
+    RecognizerStateReady,
+    RecognizerStateRecordBegin,
+    RecognizerStateRecording,
+    RecognizerStateRecordingEnd,
+    RecognizerStateProceesing
+};
+
+@interface UnitViewController : NavViewController<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate>
 
 @end

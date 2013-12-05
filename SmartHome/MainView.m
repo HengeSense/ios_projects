@@ -19,6 +19,21 @@
 #define SPEECH_BUTTON_WIDTH              173
 #define SPEECH_BUTTON_HEIGHT             173
 
+typedef NS_ENUM(NSInteger, SpeechViewState) {
+    SpeechViewStateOpenning   = 1,
+    SpeechViewStateOpenned    = 2,
+    SpeechViewStateClosing    = 3,
+    SpeechViewStateClosed     = 4
+};
+
+typedef NS_ENUM(NSInteger, RecognizerState) {
+    RecognizerStateReady,
+    RecognizerStateRecordBegin,
+    RecognizerStateRecording,
+    RecognizerStateRecordingEnd,
+    RecognizerStateProceesing
+};
+
 @implementation MainView {
     SpeechViewState speechViewState;
     RecognizerState recognizerState;

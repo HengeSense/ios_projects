@@ -11,18 +11,32 @@
 #import "SMActionSheet.h"
 #import "ScenePlanDevice.h"
 #import "ScenePlanFileManager.h"
+#import "SceneManagerService.h"
 
 @interface SceneEditViewController ()
 
 @end
 
 @implementation SceneEditViewController {
+    NSString *scenePlanIdentifier;
     UITableView *tblScenePlan;
     ScenePlan *scenePlan;
 }
 
 @synthesize unit = _unit_;
 @synthesize sceneModeIdentifier;
+
+- (id)initWithSceneIdentifier:(NSString *)sceneIdentifier {
+    self = [super init];
+    if(self) {
+        if([NSString isBlank:sceneIdentifier]) {
+            scenePlanIdentifier = [NSString emptyString];
+        } else {
+            scenePlanIdentifier = sceneIdentifier;
+        }
+    }
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,6 +65,17 @@
 
 - (void)initUI {
     [super initUI];
+    
+    self.topbar.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(8, [UIDevice systemVersionIsMoreThanOrEuqal7] ? 28 : 8, 101/2, 59/2)];
+    [self.topbar addSubview:self.topbar.leftButton];
+    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateNormal];
+    [self.topbar.leftButton setBackgroundImage:[UIImage imageNamed:@"btn_done.png"] forState:UIControlStateHighlighted];
+    [self.topbar.leftButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateNormal];
+    [self.topbar.leftButton setTitleColor:[UIColor lightTextColor] forState:UIControlStateHighlighted];
+    [self.topbar.leftButton setTitle:NSLocalizedString(@"cancel", @"") forState:UIControlStateNormal];
+    self.topbar.leftButton.titleLabel.font = [UIFont systemFontOfSize:15.f];
+    [self.topbar.leftButton addTarget:self action:@selector(closePage:) forControlEvents:UIControlEventTouchUpInside];
+
     tblScenePlan = [[UITableView alloc] initWithFrame:CGRectMake(0, self.topbar.bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - self.topbar.bounds.size.height) style:UITableViewStyleGrouped];
     tblScenePlan.delegate = self;
     tblScenePlan.dataSource = self;
@@ -63,12 +88,47 @@
 
 - (void)setUp {
     [super setUp];
-    
+}
 
+- (void)dismiss {
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"saving", @"") forType:AlertViewTypeWaitting];
+    [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
+    
+    
+    SceneManagerService *sceneManagerService = [[SceneManagerService alloc] init];
+    [sceneManagerService saveScenePlan:scenePlan success:@selector(saveScenePlanSuccess:) error:@selector(saveScenePlanFailed:) target:self callback:nil];
+}
+
+- (void)saveScenePlanSuccess:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            if([json integerForKey:@"i"] == 1) {
+                [[ScenePlanFileManager fileManager] saveScenePlan:scenePlan];
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"save_success", @"") forType:AlertViewTypeSuccess];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                [super dismiss];
+                return;
+            }
+        }
+    }
+    [self saveScenePlanFailed:resp];
+}
+
+- (void)saveScenePlanFailed:(RestResponse *)resp {
+    if(abs(resp.statusCode) == 1001) {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
+    } else {
+        [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
+    }
+    [[AlertView currentAlertView] delayDismissAlertView];
+}
+
+- (void)closePage:(id)sender {
+    [super dismiss];
 }
 
 - (void)refresh {
-    
 }
 
 #pragma mark -
@@ -133,6 +193,23 @@
     
     if(indexPath.section == 0) {
         cell.textLabel.text = NSLocalizedString(@"security_scene", @"");
+        if(![NSString isBlank:scenePlan.securityIdentifier]) {
+            BOOL found = NO;
+            for(int i=0; i<scenePlan.unit.scenesModeList.count; i++) {
+                SceneMode *mode = [scenePlan.unit.scenesModeList objectAtIndex:i];
+                if(mode.isSecurityMode && [[NSString stringWithFormat:@"%d", mode.code] isEqualToString:scenePlan.securityIdentifier]) {
+                    cell.detailTextLabel.text = mode.name;
+                    found = YES;
+                    break;
+                }
+            }
+            if(!found) {
+                scenePlan.securityIdentifier = [NSString emptyString];
+                cell.detailTextLabel.text = NSLocalizedString(@"un_set", @"");
+            }
+        } else {
+            cell.detailTextLabel.text = NSLocalizedString(@"un_set", @"");
+        }
     } else {
         ScenePlanDevice *devicePlan = [self devicePlanForIndexPath:indexPath];
         cell.textLabel.text = devicePlan.device.name;
@@ -147,17 +224,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SMActionSheet *actionSheet = [[SMActionSheet alloc] init];
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    actionSheet.title = NSLocalizedString(@"please_select", @"");
+    actionSheet.delegate = self;
+    [actionSheet setParameter:indexPath forKey:@"indexPath"];
+    
+    if(indexPath.section == 0) {
+        if(scenePlan.unit != nil) {
+            for(int i=0; i<scenePlan.unit.scenesModeList.count; i++) {
+                SceneMode *sm = [scenePlan.unit.scenesModeList objectAtIndex:i];
+                [actionSheet addButtonWithTitle:sm.name];
+//                if([[NSString stringWithFormat:@"%d", sm.code] isEqualToString:scenePlan.securityIdentifier]) {
+//                    actionSheet.destructiveButtonIndex = index;
+//                }
+            }
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"un_set", @"")];
+            if([NSString isBlank:scenePlan.securityIdentifier]) {
+//                actionSheet.destructiveButtonIndex = index;
+            }
+            actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"cancel", @"")];
+            [actionSheet showInView:self.view];
+        }
+        return;
+    }
     
     ScenePlanDevice *devicePlan = [self devicePlanForIndexPath:indexPath];
     if(devicePlan == nil) return;
-
-    SMActionSheet *actionSheet = [[SMActionSheet alloc] init];
-    actionSheet.delegate = self;
-    [actionSheet setParameter:devicePlan forKey:@"devicePlan"];
-    [actionSheet setParameter:indexPath forKey:@"indexPath"];
     
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    actionSheet.title = NSLocalizedString(@"please_select", @"");
+    [actionSheet setParameter:devicePlan forKey:@"devicePlan"];
     
     if(devicePlan.device.isRemote) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"power", @"")];
@@ -186,26 +281,36 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if([actionSheet isKindOfClass:[SMActionSheet class]]) {
         SMActionSheet *as = (SMActionSheet *)actionSheet;
-        
-        ScenePlanDevice *devicePlan = [as parameterForKey:@"devicePlan"];
-        if(devicePlan.device.isSocket || devicePlan.device.isCurtainOrSccurtain || devicePlan.device.isLightOrInlight) {
-            if(buttonIndex == 0) {
-                devicePlan.status = 0;
-            } else if(buttonIndex == 1) {
-                devicePlan.status = 1;
-            } else if(buttonIndex == 2) {
-                devicePlan.status = -100;
+        NSIndexPath *indexPath = [as parameterForKey:@"indexPath"];
+        UITableViewCell *cell = [tblScenePlan cellForRowAtIndexPath:indexPath];
+        if(indexPath.section == 0) {
+            if(buttonIndex >= 0 && buttonIndex < scenePlan.unit.scenesModeList.count) {
+                SceneMode *mode = [scenePlan.unit.scenesModeList objectAtIndex:buttonIndex];
+                scenePlan.securityIdentifier = [NSString stringWithFormat:@"%d", mode.code];
+                cell.detailTextLabel.text = mode.name;
+            } else if(buttonIndex == scenePlan.unit.scenesModeList.count) {
+                scenePlan.securityIdentifier = [NSString emptyString];
+                cell.detailTextLabel.text = NSLocalizedString(@"un_set", @"");
             }
-        } else if(devicePlan.device.isRemote) {
-            if(buttonIndex == 0) {
-                devicePlan.status = 0;
-            } else if(buttonIndex == 1) {
-                devicePlan.status = -100;
+        } else {
+            ScenePlanDevice *devicePlan = [as parameterForKey:@"devicePlan"];
+            if(devicePlan.device.isSocket || devicePlan.device.isCurtainOrSccurtain || devicePlan.device.isLightOrInlight) {
+                if(buttonIndex == 0) {
+                    devicePlan.status = 0;
+                } else if(buttonIndex == 1) {
+                    devicePlan.status = 1;
+                } else if(buttonIndex == 2) {
+                    devicePlan.status = -100;
+                }
+            } else if(devicePlan.device.isRemote) {
+                if(buttonIndex == 0) {
+                    devicePlan.status = 0;
+                } else if(buttonIndex == 1) {
+                    devicePlan.status = -100;
+                }
             }
+            cell.detailTextLabel.text = [self statusStringForDevice:devicePlan];
         }
-        
-        UITableViewCell *cell = [tblScenePlan cellForRowAtIndexPath:[as parameterForKey:@"indexPath"]];
-        cell.detailTextLabel.text = [self statusStringForDevice:devicePlan];
     }
 }
 
@@ -279,13 +384,10 @@
             [_unit_.zones addObject:_zone];
         }
     }
-    
-    // load scene plan from disk .
+    scenePlan = [[ScenePlan alloc] initWithUnit:_unit_];
+    scenePlan.scenePlanIdentifier = scenePlanIdentifier;
     ScenePlanFileManager *manager = [ScenePlanFileManager fileManager];
-    
-    if(scenePlan == nil) {
-        scenePlan = [[ScenePlan alloc] initWithUnit:_unit_];
-    }
+    [manager syncScenePlan:scenePlan];
 }
 
 @end

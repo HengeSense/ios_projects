@@ -51,6 +51,9 @@
 "disconnect"            = "断开";
 "prompt"                = "提示";
 "discard"               = "放弃";
+"login_success"         = "登录成功!";
+"save_success"          = "保存成功!";
+"saving"                = "保存中...";
 
 /*************** Refresh Table View Strings *************************/
 

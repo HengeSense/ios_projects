@@ -15,4 +15,6 @@
 @property (strong, nonatomic) Unit *unit;
 @property (assign, nonatomic) NSString *sceneModeIdentifier;
 
+- (id)initWithSceneIdentifier:(NSString *)sceneIdentifier;
+
 @end

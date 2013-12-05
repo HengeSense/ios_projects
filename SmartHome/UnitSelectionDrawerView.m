@@ -54,16 +54,6 @@
 }
 
 - (void)setUp {
-    [self subscribeEvents];
-    [self notifyUnitsWasUpdate];
-}
-
-- (void)subscribeEvents {
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-}
-
-- (void)unSubscribeEvents {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
 }
 
 #pragma mark -
@@ -97,18 +87,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Unit *unit = [units objectAtIndex:indexPath.row];
     NSLog(unit.name);
-    
     [self.ownerController showCenterView:YES];
-}
-
-#pragma mark -
-#pragma mark Get units handler delegate
-
-- (void)notifyUnitsWasUpdate {
-    NSLog(@" dsfojsdoi  update ....");
-    [units removeAllObjects];
-    [units addObjectsFromArray:[SMShared current].memory.units];
-    [tblUnits reloadData];
 }
 
 @end

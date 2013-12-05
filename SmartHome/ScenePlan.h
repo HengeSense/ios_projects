@@ -36,16 +36,3 @@
 - (ScenePlanDevice *)devicePlanForIdentifier:(NSString *)identifier;
 
 @end
-
-
-
-
-
-#pragma mark -
-#pragma mark Scene Plan Device
-
-
-
-
-
-

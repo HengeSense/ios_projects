@@ -8,13 +8,14 @@
 
 #import "NavigationView.h"
 #import "SMButton.h"
+#import "DeviceCommandGetUnitsHandler.h"
 
-#define SCENE_MODE_BACK    @"back"
-#define SCENE_MODE_OUT     @"out"
-#define SCENE_MODE_GET_UP  @"getUp"
-#define SCENE_MODE_SLEEP   @"sleep"
+#define SCENE_MODE_BACK    @"1"
+#define SCENE_MODE_OUT     @"2"
+#define SCENE_MODE_GET_UP  @"3"
+#define SCENE_MODE_SLEEP   @"4"
 
-@interface PortalView : NavigationView<LongPressDelegate>
+@interface PortalView : NavigationView<LongPressDelegate, DeviceCommandGetUnitsHandlerDelegate>
 
 
 @end

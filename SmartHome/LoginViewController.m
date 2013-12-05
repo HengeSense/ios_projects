@@ -17,6 +17,8 @@
 #import "JsonUtils.h"
 #import "UIDevice+Extension.h"
 #import "DeviceCommand.h"
+#import "ScenePlanFileManager.h"
+#import "SceneManagerService.h"
 
 #define LINE_HIGHT 5
 
@@ -186,7 +188,9 @@
             DeviceCommand *command = [[DeviceCommand alloc] initWithDictionary:json];
             if(command != nil && ![NSString isBlank:command.result]) {
                 if([@"1" isEqualToString:command.result]) {
+                    // login success
                     if(![NSString isBlank:command.security] && ![NSString isBlank:command.tcpAddress]) {
+                        // save account info
                         [SMShared current].settings.account = txtUserName.text;
                         [SMShared current].settings.secretKey = command.security;
                         [SMShared current].settings.tcpAddress = command.tcpAddress;
@@ -194,21 +198,18 @@
                         [SMShared current].settings.restAddress = command.restAddress;
                         [[SMShared current].settings saveSettings];
                         
-                        //start service
+                        // start service
                         if(![SMShared current].deliveryService.isService) {
                             [[SMShared current].deliveryService startService];
                         }
-                        [[AlertView currentAlertView] dismissAlertView];
                         
                         txtPassword.text = [NSString emptyString];
-                        
                         [[SMShared current].app registerForRemoteNotifications];
                         
-                        if([[SMShared current].memory hasUnit]) {
-                            [self.navigationController pushViewController:[[MainViewController alloc] init] animated:NO];
-                        } else {
-                            [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
-                        }
+                        // get scene plan
+                        SceneManagerService *sceneService = [[SceneManagerService alloc] init];
+                        [sceneService getAllScenePlans:@selector(getScenePlansSuccess:) error:@selector(getScenePlansFailed:) target:self callback:nil];
+                        
                         return;
                     }
                 } else if([@"-1" isEqualToString:command.result] || [@"-2" isEqualToString:command.result]) {
@@ -226,6 +227,14 @@
     [self loginFailed:resp];
 }
 
+- (void)toMainPage {
+    if([[SMShared current].memory hasUnit]) {
+        [self.navigationController pushViewController:[[MainViewController alloc] init] animated:NO];
+    } else {
+        [self.navigationController pushViewController:[[UnitsBindingViewController alloc] init] animated:YES];
+    }
+}
+
 - (void)loginFailed:(RestResponse *)resp {
     if(abs(resp.statusCode) == 1001) {
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"request_timeout", @"") forType:AlertViewTypeFailed];
@@ -241,6 +250,40 @@
 
 - (void)showFindPasswordViewController {
     [self.navigationController pushViewController:[[PasswordForgotViewController alloc] init] animated:YES];
+}
+
+#pragma mark -
+#pragma mark Scene plan rest call back
+
+- (void)getScenePlansSuccess:(RestResponse *)resp {
+    if(resp.statusCode == 200) {
+        NSDictionary *json = [JsonUtils createDictionaryFromJson:resp.body];
+        if(json != nil) {
+            if([json integerForKey:@"i"] == 1) {
+//                NSString *str = [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
+                NSArray *plans = [json arrayForKey:@"m"];
+                [[ScenePlanFileManager fileManager] deleteAllScenePlan];
+                for(int i=0; i<plans.count; i++) {
+                    ScenePlan *plan = [[ScenePlan alloc] initWithJson:[plans objectAtIndex:i]];
+                    [[ScenePlanFileManager fileManager] saveScenePlan:plan];
+                }
+                [[AlertView currentAlertView] setMessage:NSLocalizedString(@"login_success", @"") forType:AlertViewTypeSuccess];
+                [[AlertView currentAlertView] delayDismissAlertView];
+                [self toMainPage];
+            }
+            return;
+        }
+    }
+    [self getScenePlansFailed:resp];
+}
+
+- (void)getScenePlansFailed:(RestResponse *)resp {
+#ifdef DEBUG
+    NSLog(@"[LOGIN VIEW CONTROLLER] Get Scene Plan Failed . [Code %d]", resp.statusCode);
+#endif
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"login_success", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] delayDismissAlertView];
+    [self toMainPage];
 }
 
 #pragma mark -

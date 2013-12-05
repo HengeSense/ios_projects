@@ -44,20 +44,20 @@
 - (void)initUI {
     [super initUI];
     
-    UIButton *btnShowUnitController = [[UIButton alloc] initWithFrame:CGRectMake(180, 93, 22, 23)];
-    [btnShowUnitController setBackgroundImage:[UIImage imageNamed:@"device_count"] forState:UIControlStateNormal];
-    [btnShowUnitController setBackgroundImage:[UIImage imageNamed:@"device_count"] forState:UIControlStateHighlighted];
-    [btnShowUnitController setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnShowUnitController addTarget:self action:@selector(showUnitController:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:btnShowUnitController];
-    
-    btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(230, 95, 25, 20)];
+    btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(180, 97, 24, 21)];
     [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateNormal];
     [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateHighlighted];
     [btnShowNotification setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:btnShowNotification];
     
-    imgNetworkState = [[UIImageView alloc] initWithFrame:CGRectMake(280, 93, 24, 21)];
+    UIButton *btnShowUnitController = [[UIButton alloc] initWithFrame:CGRectMake(230, 95, 25, 20)];
+    [btnShowUnitController setBackgroundImage:[UIImage imageNamed:@"btn_unit_panel"] forState:UIControlStateNormal];
+    [btnShowUnitController setBackgroundImage:[UIImage imageNamed:@"btn_unit_panel"] forState:UIControlStateHighlighted];
+    [btnShowUnitController setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnShowUnitController addTarget:self action:@selector(showUnitController:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btnShowUnitController];
+    
+    imgNetworkState = [[UIImageView alloc] initWithFrame:CGRectMake(280, 94, 24, 21)];
     imgNetworkState.image = [UIImage imageNamed:@"red"];
     [self addSubview:imgNetworkState];
     
@@ -116,6 +116,12 @@
     }
 }
 
+- (void)notifyUnitsWasUpdate {
+    @synchronized(self) {
+        
+    }
+}
+
 - (void)destory {
 }
 
@@ -140,7 +146,7 @@
 
 - (void)smButtonLongPressed:(SMButton *)button {
     if(button == nil) return;
-    SceneEditViewController *controller = [[SceneEditViewController alloc] init];
+    SceneEditViewController *controller = [[SceneEditViewController alloc] initWithSceneIdentifier:button.identifier];
     controller.sceneModeIdentifier = button.identifier;
     controller.unit = [SMShared current].memory.currentUnit;
     controller.title = NSLocalizedString(@"scene_edit", @"");

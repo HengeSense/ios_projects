@@ -14,5 +14,8 @@
 @property (assign, nonatomic) NSInteger code;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *masterDeviceCode;
+@property (strong, nonatomic) NSString *type;
+
+@property (assign, nonatomic, readonly) BOOL isSecurityMode;
 
 @end

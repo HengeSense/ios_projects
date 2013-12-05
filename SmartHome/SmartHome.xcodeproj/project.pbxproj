@@ -144,6 +144,7 @@
 		6F39DA8C184F21300037D8D3 /* green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F39DA89184F21300037D8D3 /* green@2x.png */; };
 		6F39DA8D184F21300037D8D3 /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F39DA8A184F21300037D8D3 /* red@2x.png */; };
 		6F39DA8E184F21300037D8D3 /* yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F39DA8B184F21300037D8D3 /* yellow@2x.png */; };
+		6F39DA90184F29440037D8D3 /* btn_unit_panel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F39DA8F184F29440037D8D3 /* btn_unit_panel@2x.png */; };
 		6F3AF6E017F9723000EADE15 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AF6DE17F9723000EADE15 /* Default-568h@2x.png */; };
 		6F3AF6E117F9723000EADE15 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3AF6DF17F9723000EADE15 /* Default@2x.png */; };
 		6F3F2D3A17C5AEC7003C3848 /* bg_speech@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3F2D3917C5AEC7003C3848 /* bg_speech@2x.png */; };
@@ -293,6 +294,7 @@
 		6FDD0ED917CDED30000D95E8 /* icon_logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */; };
 		6FDD0EDA17CDED30000D95E8 /* icon_notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0ED617CDED30000D95E8 /* icon_notification@2x.png */; };
 		6FDD0EDC17CDED63000D95E8 /* accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDD0EDB17CDED63000D95E8 /* accessory@2x.png */; };
+		6FDEAE211850302C0039FFB0 /* SceneManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEAE201850302C0039FFB0 /* SceneManagerService.m */; };
 		6FDF6B4217F9C40800B206A8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6B4117F9C40800B206A8 /* Images.xcassets */; };
 		6FDF6B4E17F9C91200B206A8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6B4D17F9C91200B206A8 /* Default.png */; };
 		6FDF756217B8B6CD004EF7FD /* bubble_theirs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */; };
@@ -577,6 +579,7 @@
 		6F39DA89184F21300037D8D3 /* green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green@2x.png"; sourceTree = "<group>"; };
 		6F39DA8A184F21300037D8D3 /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
 		6F39DA8B184F21300037D8D3 /* yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow@2x.png"; sourceTree = "<group>"; };
+		6F39DA8F184F29440037D8D3 /* btn_unit_panel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_unit_panel@2x.png"; sourceTree = "<group>"; };
 		6F3AF6DE17F9723000EADE15 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		6F3AF6DF17F9723000EADE15 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6F3F2D3917C5AEC7003C3848 /* bg_speech@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_speech@2x.png"; sourceTree = "<group>"; };
@@ -826,6 +829,8 @@
 		6FDD0ED517CDED30000D95E8 /* icon_logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_logout@2x.png"; sourceTree = "<group>"; };
 		6FDD0ED617CDED30000D95E8 /* icon_notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_notification@2x.png"; sourceTree = "<group>"; };
 		6FDD0EDB17CDED63000D95E8 /* accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accessory@2x.png"; sourceTree = "<group>"; };
+		6FDEAE1F1850302C0039FFB0 /* SceneManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManagerService.h; sourceTree = "<group>"; };
+		6FDEAE201850302C0039FFB0 /* SceneManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManagerService.m; sourceTree = "<group>"; };
 		6FDF6B4117F9C40800B206A8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6FDF6B4D17F9C91200B206A8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6FDF756117B8B6CD004EF7FD /* bubble_theirs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_theirs@2x.png"; sourceTree = "<group>"; };
@@ -1544,6 +1549,7 @@
 				6F39DA6A184F14F10037D8D3 /* btn_home_unselected@2x.png */,
 				6F39DA6B184F14F10037D8D3 /* btn_home_unset@2x.png */,
 				6F39DA6C184F14F10037D8D3 /* btn_home@2x.png */,
+				6F39DA8F184F29440037D8D3 /* btn_unit_panel@2x.png */,
 				6F39DA6D184F14F10037D8D3 /* btn_out_unselected.png */,
 				6F39DA6E184F14F10037D8D3 /* btn_out_unset@2x.png */,
 				6F39DA6F184F14F10037D8D3 /* btn_out@2x.png */,
@@ -2037,6 +2043,8 @@
 				6F953D011803F29B00D847FA /* CameraService.m */,
 				6F262D701834AC6C0002ADC0 /* UserManagementService.h */,
 				6F262D711834AC6C0002ADC0 /* UserManagementService.m */,
+				6FDEAE1F1850302C0039FFB0 /* SceneManagerService.h */,
+				6FDEAE201850302C0039FFB0 /* SceneManagerService.m */,
 			);
 			name = rest;
 			sourceTree = "<group>";
@@ -2364,6 +2372,7 @@
 				6F4A51BA180E864B00EF751D /* icon_green@2x.png in Resources */,
 				6F0F69CE184DBDD3008B7680 /* icon_device_unselected@2x.png in Resources */,
 				6F1EE66717BC73FE00580760 /* line_scanner@2x.png in Resources */,
+				6F39DA90184F29440037D8D3 /* btn_unit_panel@2x.png in Resources */,
 				6F1BE41717BD11B6003C973D /* bg_bottom_bar_black@2x.png in Resources */,
 				6F9693B5183F00A50048B3D6 /* blueArrow.png in Resources */,
 				6F262D7D1834C77F0002ADC0 /* icon_send_msg@2x.png in Resources */,
@@ -2658,6 +2667,7 @@
 				6F84A77717D047B400D46BFA /* DeviceCommandUpdateUnits.m in Sources */,
 				F20C788017D04A1F003D50C5 /* DeviceCommandGetUnitsHandler.m in Sources */,
 				6F84A77A17D04A5700D46BFA /* Zone.m in Sources */,
+				6FDEAE211850302C0039FFB0 /* SceneManagerService.m in Sources */,
 				6F84A78017D06D6D00D46BFA /* Unit.m in Sources */,
 				F20C788317D0859C003D50C5 /* Memory.m in Sources */,
 				6F95BF5B17D42B82003A0745 /* RestfulCommandService.m in Sources */,

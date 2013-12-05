@@ -10,7 +10,7 @@
 #import "MainViewController.h"
 #import "DeviceCommandGetUnitsHandler.h"
 
-@interface UnitSelectionDrawerView : UIView<DeviceCommandGetUnitsHandlerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface UnitSelectionDrawerView : UIView<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) MainViewController *ownerController;
 

@@ -13,7 +13,8 @@
 
 + (ScenePlanFileManager *)fileManager;
 
-- (void)syncToDisk:(ScenePlan *)scenePlan;
-- (ScenePlan *)readFromDisk;
+- (void)saveScenePlan:(ScenePlan *)scenePlan;
+- (ScenePlan *)syncScenePlan:(ScenePlan *)scenePlan;
+- (void)deleteAllScenePlan;
 
 @end

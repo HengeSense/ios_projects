@@ -17,20 +17,6 @@
 #import "SelectionView.h"
 #import "NotificationHandlerViewController.h"   
 
-typedef NS_ENUM(NSInteger, SpeechViewState) {
-    SpeechViewStateOpenning   = 1,
-    SpeechViewStateOpenned    = 2,
-    SpeechViewStateClosing    = 3,
-    SpeechViewStateClosed     = 4
-};
-
-typedef NS_ENUM(NSInteger, RecognizerState) {
-    RecognizerStateReady,
-    RecognizerStateRecordBegin,
-    RecognizerStateRecording,
-    RecognizerStateRecordingEnd,
-    RecognizerStateProceesing
-};
 
 @interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate,DeleteNotificationDelegate,CFNotificationDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate>
 
