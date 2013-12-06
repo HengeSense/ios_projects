@@ -69,8 +69,8 @@
     btnSceneBack = [[SMButton alloc] initWithFrame:CGRectMake(45, 140 - toMinusHeight, 86, 86)];
     btnSceneBack.identifier = SCENE_MODE_BACK;
     [btnSceneBack setParameter:NSLocalizedString(@"scene_home", @"") forKey:@"name"];
-    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home"] forState:UIControlStateNormal];
-    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home_unselected"] forState:UIControlStateHighlighted];
+//    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home"] forState:UIControlStateNormal];
+//    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home_unselected"] forState:UIControlStateHighlighted];
     btnSceneBack.longPressDelegate = self;
     [btnSceneBack addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
     UIImageView *imgBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_back"]];
@@ -79,8 +79,8 @@
     
     btnSceneOut = [[SMButton alloc] initWithFrame:CGRectMake(199, 140 - toMinusHeight, 86, 86)];
     btnSceneOut.identifier = SCENE_MODE_OUT;
-    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out"] forState:UIControlStateNormal];
-    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out_unselected"] forState:UIControlStateHighlighted];
+//    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out"] forState:UIControlStateNormal];
+//    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out_unselected"] forState:UIControlStateHighlighted];
     [btnSceneOut setParameter:NSLocalizedString(@"scene_out", @"") forKey:@"name"];
     btnSceneOut.longPressDelegate = self;
     [btnSceneOut addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -90,8 +90,8 @@
     
     btnSceneGetUp = [[SMButton alloc] initWithFrame:CGRectMake(45, 300 - toMinusHeight, 86, 86)];
     btnSceneGetUp.identifier = SCENE_MODE_GET_UP;
-    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up"] forState:UIControlStateNormal];
-    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up_unselected"] forState:UIControlStateHighlighted];
+//    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up"] forState:UIControlStateNormal];
+//    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up_unselected"] forState:UIControlStateHighlighted];
     [btnSceneGetUp setParameter:NSLocalizedString(@"scene_get_up", @"") forKey:@"name"];
     btnSceneGetUp.longPressDelegate = self;
     [btnSceneGetUp addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -101,8 +101,8 @@
     
     btnSceneSleep = [[SMButton alloc] initWithFrame:CGRectMake(199, 300 - toMinusHeight, 86, 86)];
     btnSceneSleep.identifier = SCENE_MODE_SLEEP;
-    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep"] forState:UIControlStateNormal];
-    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep_unselected"] forState:UIControlStateHighlighted];
+//    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep"] forState:UIControlStateNormal];
+//    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep_unselected"] forState:UIControlStateHighlighted];
     [btnSceneSleep setParameter:NSLocalizedString(@"scene_sleep", @"") forKey:@"name"];
     btnSceneSleep.longPressDelegate = self;
     [btnSceneSleep addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -228,9 +228,19 @@
     ScenePlan *plan = [[ScenePlan alloc] initWithUnit:mergedUnit];
     plan.scenePlanIdentifier = planId;
     ScenePlanFileManager *manager = [ScenePlanFileManager fileManager];
-    [manager syncScenePlan:plan];
-    
+    BOOL hasSet = [manager syncScenePlan:plan] != nil;
     [plans setObject:plan forKey:planId];
+    
+    // Refresh button image that scene plan is set or unset
+    if([SCENE_MODE_BACK isEqualToString:planId]) {
+        [btnSceneBack setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_home" : @"btn_home_unset"] forState:UIControlStateNormal];
+    } else if([SCENE_MODE_GET_UP isEqualToString:planId]) {
+        [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_get_up" :@"btn_get_up_unset"] forState:UIControlStateNormal];
+    } else if([SCENE_MODE_OUT isEqualToString:planId]) {
+        [btnSceneOut setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_out" : @"btn_out_unset"] forState:UIControlStateNormal];
+    } else if([SCENE_MODE_SLEEP isEqualToString:planId]) {
+        [btnSceneSleep setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_sleep" : @"btn_sleep_unset"] forState:UIControlStateNormal];
+    }
 }
 
 @end

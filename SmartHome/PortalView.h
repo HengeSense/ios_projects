@@ -18,5 +18,6 @@
 @interface PortalView : NavigationView<LongPressDelegate, DeviceCommandGetUnitsHandlerDelegate>
 
 - (void)notifyMeCurrentUnitWasChanged;
+- (void)updateScenePlanFor:(Unit *)unit withSPlanId:(NSString *)planId;
 
 @end

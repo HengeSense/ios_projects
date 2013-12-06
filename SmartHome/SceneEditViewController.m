@@ -100,7 +100,7 @@
                 [[ScenePlanFileManager fileManager] saveScenePlan:scenePlan];
                 [[AlertView currentAlertView] setMessage:NSLocalizedString(@"save_success", @"") forType:AlertViewTypeSuccess];
                 [[AlertView currentAlertView] delayDismissAlertView];
-                [super dismiss];
+                [self closePage:nil];
                 return;
             }
         }
