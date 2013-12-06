@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "PopViewController.h"
 #import "PortalView.h"
+#import "ScenePlan.h"
 
 @interface SceneEditViewController : PopViewController<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
-@property (strong, nonatomic) Unit *unit;
-@property (assign, nonatomic) NSString *sceneModeIdentifier;
-
-- (id)initWithSceneIdentifier:(NSString *)sceneIdentifier;
+@property (strong, nonatomic) ScenePlan *scenePlan;
 
 @end

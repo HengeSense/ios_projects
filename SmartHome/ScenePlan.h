@@ -35,4 +35,6 @@
 - (ScenePlanZone *)zonePlanForIdentifier:(NSString *)identifier;
 - (ScenePlanDevice *)devicePlanForIdentifier:(NSString *)identifier;
 
+- (void)execute;
+
 @end

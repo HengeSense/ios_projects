@@ -66,12 +66,16 @@
 
 - (void)notifyViewUpdate {
     [super notifyViewUpdate];
-    unitsIdentifierCollection = [[SMShared current].memory allUnitsIdentifierAsArray];
-    [tblUnits reloadData];
+    [self refresh];
 }
 
 - (void)notifyUnitsWasUpdate {
-    [self notifyViewUpdate];
+    [self refresh];
+}
+
+- (void)refresh {
+    unitsIdentifierCollection = [[SMShared current].memory allUnitsIdentifierAsArray];
+    [tblUnits reloadData];
 }
 
 #pragma mark -

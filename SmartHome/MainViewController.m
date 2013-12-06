@@ -120,9 +120,8 @@
     //parameter of drawer navigation view controller
     self.leftViewVisibleWidth = 140;
     self.showDrawerMaxTrasitionX = 40;
-    self.rightViewVisibleWidth = 180;
-    self.rightViewCenterX = 168;
-
+    self.rightViewVisibleWidth = 200;
+    self.rightViewCenterX = 148;
     
     [self initialDrawerViewController];
     

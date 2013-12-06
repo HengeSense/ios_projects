@@ -10,33 +10,19 @@
 #import "UIColor+ExtentionForHexString.h"
 #import "SMActionSheet.h"
 #import "ScenePlanDevice.h"
-#import "ScenePlanFileManager.h"
 #import "SceneManagerService.h"
+#import "ScenePlanFileManager.h"
+#import "ViewsPool.h"
 
 @interface SceneEditViewController ()
 
 @end
 
 @implementation SceneEditViewController {
-    NSString *scenePlanIdentifier;
     UITableView *tblScenePlan;
-    ScenePlan *scenePlan;
 }
 
-@synthesize unit = _unit_;
-@synthesize sceneModeIdentifier;
-
-- (id)initWithSceneIdentifier:(NSString *)sceneIdentifier {
-    self = [super init];
-    if(self) {
-        if([NSString isBlank:sceneIdentifier]) {
-            scenePlanIdentifier = [NSString emptyString];
-        } else {
-            scenePlanIdentifier = sceneIdentifier;
-        }
-    }
-    return self;
-}
+@synthesize scenePlan;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,9 +80,16 @@
     [[AlertView currentAlertView] setMessage:NSLocalizedString(@"saving", @"") forType:AlertViewTypeWaitting];
     [[AlertView currentAlertView] alertAutoDisappear:NO lockView:self.view];
     
-    
     SceneManagerService *sceneManagerService = [[SceneManagerService alloc] init];
     [sceneManagerService saveScenePlan:scenePlan success:@selector(saveScenePlanSuccess:) error:@selector(saveScenePlanFailed:) target:self callback:nil];
+}
+
+- (void)closePage:(id)sender {
+    PortalView *view = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
+    if(view != nil) {
+        [view notifyMeCurrentUnitWasChanged];
+    }
+    [super dismiss];
 }
 
 - (void)saveScenePlanSuccess:(RestResponse *)resp {
@@ -122,13 +115,6 @@
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
     }
     [[AlertView currentAlertView] delayDismissAlertView];
-}
-
-- (void)closePage:(id)sender {
-    [super dismiss];
-}
-
-- (void)refresh {
 }
 
 #pragma mark -
@@ -304,7 +290,15 @@
                 }
             } else if(devicePlan.device.isRemote) {
                 if(buttonIndex == 0) {
-                    devicePlan.status = 0;
+                    if(devicePlan.device.isTV) {
+                        devicePlan.status = 1;
+                    } else if(devicePlan.device.isSTB) {
+                        devicePlan.status = 89;
+                    } else if(devicePlan.device.isAircondition) {
+                        devicePlan.status = 138;
+                    } else if(devicePlan.device.isBackgroundMusic) {
+                        devicePlan.status = 201;
+                    }
                 } else if(buttonIndex == 1) {
                     devicePlan.status = -100;
                 }
@@ -345,49 +339,14 @@
             return NSLocalizedString(@"un_set", @"");
         }
     } else if(devicePlan.device.isRemote) {
-        if(devicePlan.status == 0) {
-           return NSLocalizedString(@"power", @"");
-        } else if(devicePlan.status == -100) {
+        if(devicePlan.status == -100) {
             return NSLocalizedString(@"un_set", @"");
+        } else {
+           return NSLocalizedString(@"power", @"");
         }
     }
     
     return [NSString emptyString];
-}
-
-#pragma mark -
-#pragma mark Getter and setters
-
-- (void)setUnit:(Unit *)unit {
-    if(unit == nil) {
-        _unit_ = nil;
-        scenePlan = nil;
-        return;
-    }
-    
-    _unit_ = [[Unit alloc] init];
-    _unit_.identifier = unit.identifier;
-    
-    for(int i=0; i<unit.zones.count; i++) {
-        Zone *zone = [unit.zones objectAtIndex:i];
-        if(zone.devices.count > 0) {
-            Zone *_zone = [[Zone alloc] init];
-            _zone.name = zone.name;
-            _zone.identifier = zone.identifier;
-            _zone.unit = zone.unit;
-            for(int j=0; j<zone.devices.count; j++) {
-                Device *device = [zone.devices objectAtIndex:j];
-                if(device.isSocket || device.isRemote || device.isLightOrInlight || device.isCurtainOrSccurtain) {
-                    [_zone.devices addObject:device];
-                }
-            }
-            [_unit_.zones addObject:_zone];
-        }
-    }
-    scenePlan = [[ScenePlan alloc] initWithUnit:_unit_];
-    scenePlan.scenePlanIdentifier = scenePlanIdentifier;
-    ScenePlanFileManager *manager = [ScenePlanFileManager fileManager];
-    [manager syncScenePlan:scenePlan];
 }
 
 @end

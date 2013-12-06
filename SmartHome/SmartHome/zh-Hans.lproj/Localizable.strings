@@ -54,6 +54,8 @@
 "login_success"         = "登录成功!";
 "save_success"          = "保存成功!";
 "saving"                = "保存中...";
+"choose_unit"           = "请选择主控";
+
 
 /*************** Refresh Table View Strings *************************/
 
@@ -265,6 +267,10 @@
 "scene_edit"            =  "情景设置";
 "un_set"                =  "未设置";
 "power"                 =  "电源";
+"scene_out"             =  "出门";
+"scene_home"            =  "回家";
+"scene_sleep"           =  "睡觉";
+"scene_get_up"          =  "起床";
 
 
 /*************** About Us View Strings *************************/

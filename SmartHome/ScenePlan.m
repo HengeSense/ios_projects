@@ -9,7 +9,7 @@
 #import "ScenePlan.h"
 #import "SMShared.h"
 #import "ScenePlanZone.h"
-
+#import "ScenePlanDevice.h"
 
 @implementation ScenePlan
 
@@ -89,6 +89,31 @@
         }
     }
     return nil;
+}
+
+- (void)execute {
+    DeviceCommandUpdateDevice *command = (DeviceCommandUpdateDevice *)[CommandFactory commandForType:CommandTypeUpdateDevice];
+    command.masterDeviceCode = self.unitIdentifier;
+    for(int i=0; i<self.scenePlanZones.count; i++) {
+        ScenePlanZone *zonePlan = [self.scenePlanZones objectAtIndex:i];
+        for(int j=0; j<zonePlan.scenePlanDevices.count; j++) {
+            ScenePlanDevice *devicePlan = [zonePlan.scenePlanDevices objectAtIndex:j];
+            if(devicePlan.status != -100) {
+                if(devicePlan.device.isRemote) {
+                    [command addCommandString:[devicePlan.device commandStringForRemote:devicePlan.status]];
+                } else {
+                    [command addCommandString:[devicePlan.device commandStringForStatus:devicePlan.status]];
+                }
+            }
+        }
+    }
+    if(![NSString isBlank:self.securityIdentifier]) {
+        [command addCommandString:[NSString stringWithFormat:@"scene-%@", self.securityIdentifier]];
+    }
+    
+//    NSData *data = [JsonUtils createJsonDataFromDictionary:[command toDictionary]];
+//    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [[SMShared current].deliveryService executeDeviceCommand:command];
 }
 
 - (ScenePlanDevice *)devicePlanForIdentifier:(NSString *)identifier {

@@ -16,4 +16,6 @@
 
 - (id)initWithFrame:(CGRect)frame owner:(MainViewController *)owner;
 
+- (void)refresh;
+
 @end

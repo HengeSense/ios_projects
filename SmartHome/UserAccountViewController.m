@@ -316,7 +316,7 @@
 }
 
 - (void)notifyMainViewScreenNameChanged {
-    NavigationView *view = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"mainView"];
+    NavigationView *view = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
     if(view != nil) {
         MainViewController *controller = (MainViewController *)view.ownerController;
         if(controller != nil) {

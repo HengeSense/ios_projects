@@ -17,5 +17,6 @@
 
 @interface PortalView : NavigationView<LongPressDelegate, DeviceCommandGetUnitsHandlerDelegate>
 
+- (void)notifyMeCurrentUnitWasChanged;
 
 @end

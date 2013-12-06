@@ -394,7 +394,7 @@
         [[AlertView currentAlertView] delayDismissAlertView];
         if (selectedUser.isCurrentUser) {
             [[SMShared current].deliveryService executeDeviceCommand:[CommandFactory commandForType:CommandTypeGetUnits]];
-            [self.ownerController changeDrawerItemWithViewIdentifier:@"mainView"];
+            [self.ownerController changeDrawerItemWithViewIdentifier:@"portalView"];
         }
         return;
     }
