@@ -13,7 +13,7 @@
 #define CELL_CONTENT_VIEW_TAG   5555
 
 @implementation ConversationView {
-    UIView *containerView;
+    id containerView;
     UIView *welcomeView;
     UIImageView *backgroundImageView;
     UITableView *tblMessages;
@@ -33,7 +33,7 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame andContainerView:(UIView *)cv {
+- (id)initWithFrame:(CGRect)frame andContainer:(id)cv {
     self = [self initWithFrame:frame];
     if(self) {
         containerView = cv;

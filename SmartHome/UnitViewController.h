@@ -34,4 +34,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 
 @interface UnitViewController : NavViewController<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate>
 
+- (void)showSpeechView;
+- (void)hideSpeechView;
+
 @end

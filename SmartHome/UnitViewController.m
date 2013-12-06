@@ -684,7 +684,7 @@
 - (ConversationView *)speechView {
     if(speechView == nil) {
         CGFloat viewHeight = self.view.frame.size.height - SPEECH_BUTTON_HEIGHT / 2 - 32;
-        speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12)), 601/2, viewHeight) andContainerView:self.view];
+        speechView = [[ConversationView alloc] initWithFrame:CGRectMake(0, (0 - viewHeight - ([UIDevice systemVersionIsMoreThanOrEuqal7] ? 22 : 12)), 601/2, viewHeight) andContainer:self];
         speechView.center = CGPointMake(self.view.center.x, speechView.center.y);
     }
     return speechView;

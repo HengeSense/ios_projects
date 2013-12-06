@@ -13,7 +13,7 @@
 
 @property (assign, nonatomic, readonly) NSUInteger messageCount;
 
-- (id)initWithFrame:(CGRect)frame andContainerView:(UIView *)cv;
+- (id)initWithFrame:(CGRect)frame andContainer:(id)cv;
 
 - (void)showWelcomeMessage;
 - (void)hideWelcomeMessage;
