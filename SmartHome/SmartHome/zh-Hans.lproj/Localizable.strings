@@ -271,6 +271,7 @@
 "scene_home"            =  "回家";
 "scene_sleep"           =  "睡觉";
 "scene_get_up"          =  "起床";
+"scene_unset_tips"      =  "长按按钮进行设置";
 
 
 /*************** About Us View Strings *************************/

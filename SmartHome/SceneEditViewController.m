@@ -87,7 +87,8 @@
 - (void)closePage:(id)sender {
     PortalView *view = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
     if(view != nil) {
-        [view notifyMeCurrentUnitWasChanged];
+//        [view notifyMeCurrentUnitWasChanged];
+        [view updateScenePlanFor:self.scenePlan.unit withSPlanId:self.scenePlan.scenePlanIdentifier];
     }
     [super dismiss];
 }
