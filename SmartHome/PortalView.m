@@ -140,10 +140,14 @@
     @synchronized(self) {
         unitHasNotifyUpdateAtLeastOnce = YES;
         [self unitManagerNotifyCurrentUnitWasChanged:nil];
-        if(self.ownerController.rightView != nil && [self.ownerController.rightView isKindOfClass:[UnitSelectionDrawerView class]]) {
-            UnitSelectionDrawerView *selectionView = (UnitSelectionDrawerView *)self.ownerController.rightView;
-            [selectionView refresh];
-        }
+        [self updateUnitSelectionView];
+    }
+}
+
+- (void)updateUnitSelectionView {
+    if(self.ownerController.rightView != nil && [self.ownerController.rightView isKindOfClass:[UnitSelectionDrawerView class]]) {
+        UnitSelectionDrawerView *selectionView = (UnitSelectionDrawerView *)self.ownerController.rightView;
+        [selectionView refresh];
     }
 }
 

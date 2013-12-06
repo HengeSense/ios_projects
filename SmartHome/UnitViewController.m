@@ -14,6 +14,8 @@
 #import "CommandFactory.h"
 #import "NotificationsFileManager.h"
 #import "UnitView.h"
+#import "ViewsPool.h"
+#import "PortalView.h"
 
 #define SPEECH_BUTTON_WIDTH              173
 #define SPEECH_BUTTON_HEIGHT             173
@@ -314,6 +316,11 @@
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
         [self notifyUnitsWasUpdate];
         [[SMShared current].deliveryService fireRefreshUnit];
+    
+        PortalView *portalView = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
+        if(portalView != nil) {
+            [portalView updateUnitSelectionView];
+        }
     }
 }
 
