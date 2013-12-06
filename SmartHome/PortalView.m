@@ -13,6 +13,8 @@
 #import "ScenePlan.h"
 #import "ScenePlanDevice.h"
 #import "ScenePlanFileManager.h"
+#import "UIImage+Extension.h"
+#import "NotificationsFileManager.h"
 
 @implementation PortalView {
     SMButton *btnSceneBack;
@@ -24,6 +26,9 @@
     UIButton *btnShowNotification;
     
     NSMutableDictionary *plans;
+    
+    // 目的：尽可能少调用磁盘读取等方法
+    BOOL unitHasNotifyUpdateAtLeastOnce;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -37,6 +42,7 @@
 - (void)initDefaults {
     [super initDefaults];
     plans = [NSMutableDictionary dictionary];
+    unitHasNotifyUpdateAtLeastOnce = NO;
 }
 
 - (void)initUI {
@@ -69,8 +75,6 @@
     btnSceneBack = [[SMButton alloc] initWithFrame:CGRectMake(45, 140 - toMinusHeight, 86, 86)];
     btnSceneBack.identifier = SCENE_MODE_BACK;
     [btnSceneBack setParameter:NSLocalizedString(@"scene_home", @"") forKey:@"name"];
-//    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home"] forState:UIControlStateNormal];
-//    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home_unselected"] forState:UIControlStateHighlighted];
     btnSceneBack.longPressDelegate = self;
     [btnSceneBack addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
     UIImageView *imgBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_back"]];
@@ -79,8 +83,6 @@
     
     btnSceneOut = [[SMButton alloc] initWithFrame:CGRectMake(199, 140 - toMinusHeight, 86, 86)];
     btnSceneOut.identifier = SCENE_MODE_OUT;
-//    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out"] forState:UIControlStateNormal];
-//    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out_unselected"] forState:UIControlStateHighlighted];
     [btnSceneOut setParameter:NSLocalizedString(@"scene_out", @"") forKey:@"name"];
     btnSceneOut.longPressDelegate = self;
     [btnSceneOut addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -90,8 +92,6 @@
     
     btnSceneGetUp = [[SMButton alloc] initWithFrame:CGRectMake(45, 300 - toMinusHeight, 86, 86)];
     btnSceneGetUp.identifier = SCENE_MODE_GET_UP;
-//    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up"] forState:UIControlStateNormal];
-//    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up_unselected"] forState:UIControlStateHighlighted];
     [btnSceneGetUp setParameter:NSLocalizedString(@"scene_get_up", @"") forKey:@"name"];
     btnSceneGetUp.longPressDelegate = self;
     [btnSceneGetUp addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -101,8 +101,6 @@
     
     btnSceneSleep = [[SMButton alloc] initWithFrame:CGRectMake(199, 300 - toMinusHeight, 86, 86)];
     btnSceneSleep.identifier = SCENE_MODE_SLEEP;
-//    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep"] forState:UIControlStateNormal];
-//    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep_unselected"] forState:UIControlStateHighlighted];
     [btnSceneSleep setParameter:NSLocalizedString(@"scene_sleep", @"") forKey:@"name"];
     btnSceneSleep.longPressDelegate = self;
     [btnSceneSleep addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -118,11 +116,13 @@
 
 - (void)setUp {
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    [[SMShared current].memory subscribeHandler:[Memory class] for:self];
     [self updateScenePlanForCurrentUnit];
 }
 
 - (void)destory {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[Memory class] for:self];
     [plans removeAllObjects];
 }
 
@@ -130,12 +130,16 @@
     if(self.ownerController != nil) {
         self.ownerController.rightViewEnable = YES;
     }
-    [self notifyUnitsWasUpdate];
+    if(!unitHasNotifyUpdateAtLeastOnce) {
+        unitHasNotifyUpdateAtLeastOnce = YES;
+        [self notifyUnitsWasUpdate];
+    }
 }
 
 - (void)notifyUnitsWasUpdate {
     @synchronized(self) {
-        [self notifyMeCurrentUnitWasChanged];
+        unitHasNotifyUpdateAtLeastOnce = YES;
+        [self unitManagerNotifyCurrentUnitWasChanged:nil];
         if(self.ownerController.rightView != nil && [self.ownerController.rightView isKindOfClass:[UnitSelectionDrawerView class]]) {
             UnitSelectionDrawerView *selectionView = (UnitSelectionDrawerView *)self.ownerController.rightView;
             [selectionView refresh];
@@ -143,14 +147,36 @@
     }
 }
 
-- (void)notifyMeCurrentUnitWasChanged {
+- (void)updateStatusDisplay {
+    if([SMShared current].memory.currentUnit != nil) {
+        self.topbar.titleLabel.text = [SMShared current].memory.currentUnit.name;
+    }
+}
+
+#pragma mark -
+#pragma mark Unit Manager Delegate
+
+- (void)unitManagerNotifyCurrentUnitWasChanged:(NSString *)unitIdentifier {
     [self updateStatusDisplay];
     [self updateScenePlanForCurrentUnit];
 }
 
-- (void)updateStatusDisplay {
-    if([SMShared current].memory.currentUnit != nil) {
-        self.topbar.titleLabel.text = [SMShared current].memory.currentUnit.name;
+#pragma mark -
+#pragma mark Notifications
+
+- (void)showNotificationDetailsByIdentifier:(NSString *)identifier {
+    if([NSString isBlank:identifier]) return;
+    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
+    if(notifications != nil) {
+        for(SMNotification *notification in notifications) {
+            if([notification.identifier isEqualToString:identifier]) {
+                NotificationDetailsViewController *handler = [[NotificationDetailsViewController alloc] initWithNotification:notification];
+//                handler.deleteNotificationDelegate = self;
+//                handler.cfNotificationDelegate = self;
+                [self.ownerController.navigationController pushViewController:handler animated:NO];
+                break;
+            }
+        }
     }
 }
 
@@ -197,7 +223,7 @@
 }
 
 #pragma mark -
-#pragma mark Getter and setters
+#pragma mark Scene Plan Manager
 
 - (void)updateScenePlanForCurrentUnit {
     Unit *currentUnit = [SMShared current].memory.currentUnit;

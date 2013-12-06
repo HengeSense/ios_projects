@@ -153,10 +153,6 @@
     
     if([SMShared current].memory.currentUnit != nil && ![unit.identifier isEqualToString:[SMShared current].memory.currentUnit.identifier]) {
         [[SMShared current].memory changeCurrentUnitTo:unit.identifier];
-        PortalView *view = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
-        if(view != nil) {
-            [view notifyMeCurrentUnitWasChanged];
-        }
 //        [[SMShared current].deliveryService fireRefreshUnit];
     }
     [self.ownerController showCenterView:YES];

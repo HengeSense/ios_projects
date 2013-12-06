@@ -148,7 +148,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     curIndexPath = indexPath;
     SMNotification *notificaion = [messageArr objectAtIndex:indexPath.row];
-    NotificationHandlerViewController *handlerViewController = [[NotificationHandlerViewController alloc] initWithMessage:notificaion];
+    NotificationDetailsViewController *handlerViewController = [[NotificationDetailsViewController alloc] initWithNotification:notificaion];
     handlerViewController.cfNotificationDelegate = self;
     handlerViewController.deleteNotificationDelegate =self;
     [self.ownerController.navigationController pushViewController:handlerViewController animated:YES];

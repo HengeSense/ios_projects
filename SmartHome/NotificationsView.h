@@ -10,7 +10,7 @@
 #import "Message.h"
 #import "MessageCell.h"
 #import "DeviceCommandGetNotificationsHandler.h"
-#import "NotificationHandlerViewController.h"
+#import "NotificationDetailsViewController.h"
 
 @interface NotificationsView : NavigationView<UITableViewDataSource, UITableViewDelegate, DeleteNotificationDelegate,CFNotificationDelegate, DeviceCommandGetNotificationsHandlerDelegate>
 

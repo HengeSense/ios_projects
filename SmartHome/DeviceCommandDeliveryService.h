@@ -35,6 +35,18 @@ typedef NS_ENUM(NSUInteger, NetworkMode) {
 @property (strong, nonatomic, readonly) RestfulCommandService *restfulService;
 @property (assign, nonatomic, readonly) BOOL isService;
 
+/*
+ 
+ in method of startRefreshCurrentUnit
+ if the flag is NO only check network and send heartbeat message
+ if the flag is YES also refresh unit and scene modes
+ the default value is YES
+ 
+ UnitViewController of viewWillDisppear and viewWillAppear has changed this flag
+ 
+ */
+@property (assign, nonatomic) BOOL needRefreshUnitAndSceneModes;
+
 /* Execute or handle command */
 - (void)executeDeviceCommand:(DeviceCommand *)command;
 - (void)handleDeviceCommand:(DeviceCommand *)command;

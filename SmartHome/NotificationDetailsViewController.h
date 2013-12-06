@@ -1,5 +1,5 @@
 //
-//  NotificationHandlerViewController.h
+//  NotificationDetailsViewController.h
 //  SmartHome
 //
 //  Created by hadoop user account on 9/09/13.
@@ -25,13 +25,19 @@
 
 @end
 
+@protocol SMNotificationDelegate <NSObject>
 
-@interface NotificationHandlerViewController : NavViewController
+@end
 
-@property (strong,nonatomic) SMNotification *message;
+
+@interface NotificationDetailsViewController : NavViewController
+
+@property (strong,nonatomic) SMNotification *notification;
+@property (assign, nonatomic) id<SMNotificationDelegate> delegate;
+
 @property (assign,nonatomic) id<DeleteNotificationDelegate> deleteNotificationDelegate;
 @property (assign,nonatomic) id<CFNotificationDelegate> cfNotificationDelegate;
 
-- (id)initWithMessage:(SMNotification *)smNotification;
+- (id)initWithNotification:(SMNotification *)notification;
 
 @end

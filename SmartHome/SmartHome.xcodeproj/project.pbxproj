@@ -313,7 +313,7 @@
 		6FE3B76017D5AD32006FCD7C /* CommandFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B75F17D5AD32006FCD7C /* CommandFactory.m */; };
 		6FE3B76317D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */; };
 		6FE3B76617D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */; };
-		6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */; };
+		6FEB91DC17BB65E4007C04A1 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91DB17BB65E4007C04A1 /* NotificationsViewController.m */; };
 		6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEB91E817BB843D007C04A1 /* TemperatureView.m */; };
 		6FF6C4E917E83A4500F637FD /* ImagePlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF6C4E817E83A4500F637FD /* ImagePlayView.m */; };
 		6FF6C4EC17E850E200F637FD /* ImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF6C4EB17E850E200F637FD /* ImageProvider.m */; };
@@ -383,7 +383,7 @@
 		F27B4EC417EFD35D00A55220 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F27B4EC317EFD35D00A55220 /* libzbar.a */; };
 		F280616417DD6E810064F35B /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616317DD6E810064F35B /* MessageCell.m */; };
 		F280616617DD76A30064F35B /* message_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616517DD76A30064F35B /* message_accessory@2x.png */; };
-		F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationHandlerViewController.m */; };
+		F280616917DDA7900064F35B /* NotificationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F280616817DDA7900064F35B /* NotificationDetailsViewController.m */; };
 		F280616B17DDC7BC0064F35B /* button_cf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F280616A17DDC7BB0064F35B /* button_cf@2x.png */; };
 		F288414217D4A35C00B81DD3 /* UserAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F288414117D4A35C00B81DD3 /* UserAccountViewController.m */; };
 		F29BBA5B17F2C41B00B65436 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F29BBA5A17F2C41B00B65436 /* WelcomeViewController.m */; };
@@ -863,8 +863,8 @@
 		6FE3B76217D5D54B006FCD7C /* DeviceCommandGetAccountHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandGetAccountHandler.m; sourceTree = "<group>"; };
 		6FE3B76417D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceCommandUpdateAccountHandler.h; sourceTree = "<group>"; };
 		6FE3B76517D5D579006FCD7C /* DeviceCommandUpdateAccountHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCommandUpdateAccountHandler.m; sourceTree = "<group>"; };
-		6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
-		6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		6FEB91DA17BB65E4007C04A1 /* NotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
+		6FEB91DB17BB65E4007C04A1 /* NotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
 		6FEB91E717BB843D007C04A1 /* TemperatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureView.h; sourceTree = "<group>"; };
 		6FEB91E817BB843D007C04A1 /* TemperatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureView.m; sourceTree = "<group>"; };
 		6FF6C4E717E83A4500F637FD /* ImagePlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePlayView.h; sourceTree = "<group>"; };
@@ -967,8 +967,8 @@
 		F280616217DD6E810064F35B /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		F280616317DD6E810064F35B /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		F280616517DD76A30064F35B /* message_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_accessory@2x.png"; sourceTree = "<group>"; };
-		F280616717DDA7900064F35B /* NotificationHandlerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationHandlerViewController.h; sourceTree = "<group>"; };
-		F280616817DDA7900064F35B /* NotificationHandlerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationHandlerViewController.m; sourceTree = "<group>"; };
+		F280616717DDA7900064F35B /* NotificationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationDetailsViewController.h; sourceTree = "<group>"; };
+		F280616817DDA7900064F35B /* NotificationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailsViewController.m; sourceTree = "<group>"; };
 		F280616A17DDC7BB0064F35B /* button_cf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cf@2x.png"; sourceTree = "<group>"; };
 		F288414017D4A35C00B81DD3 /* UserAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountViewController.h; sourceTree = "<group>"; };
 		F288414117D4A35C00B81DD3 /* UserAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountViewController.m; sourceTree = "<group>"; };
@@ -1653,10 +1653,10 @@
 			children = (
 				6FB5AC9717E6A89F009AF916 /* PlayCameraPicViewController.h */,
 				6FB5AC9817E6A89F009AF916 /* PlayCameraPicViewController.m */,
-				6FEB91DA17BB65E4007C04A1 /* NotificationViewController.h */,
-				6FEB91DB17BB65E4007C04A1 /* NotificationViewController.m */,
-				F280616717DDA7900064F35B /* NotificationHandlerViewController.h */,
-				F280616817DDA7900064F35B /* NotificationHandlerViewController.m */,
+				6FEB91DA17BB65E4007C04A1 /* NotificationsViewController.h */,
+				6FEB91DB17BB65E4007C04A1 /* NotificationsViewController.m */,
+				F280616717DDA7900064F35B /* NotificationDetailsViewController.h */,
+				F280616817DDA7900064F35B /* NotificationDetailsViewController.m */,
 			);
 			name = notifications_controllers;
 			sourceTree = "<group>";
@@ -2659,7 +2659,7 @@
 				6FDF756717B8D78F004EF7FD /* ImageFactory.m in Sources */,
 				F20B36D017B9DDAD009286D6 /* UnitDetailsViewController.m in Sources */,
 				6F262D65183479960002ADC0 /* Users.m in Sources */,
-				6FEB91DC17BB65E4007C04A1 /* NotificationViewController.m in Sources */,
+				6FEB91DC17BB65E4007C04A1 /* NotificationsViewController.m in Sources */,
 				6FC3102A1834682C00CDF44E /* AccountManagementView.m in Sources */,
 				6FEB91E917BB843D007C04A1 /* TemperatureView.m in Sources */,
 				6FD0CC0117EFE8CA005956E0 /* CameraSocket.m in Sources */,
@@ -2744,7 +2744,7 @@
 				6FBAA339184ED2CE000540A2 /* ScenePlanDevice.m in Sources */,
 				F280616417DD6E810064F35B /* MessageCell.m in Sources */,
 				6FC310271834634D00CDF44E /* SystemService.m in Sources */,
-				F280616917DDA7900064F35B /* NotificationHandlerViewController.m in Sources */,
+				F280616917DDA7900064F35B /* NotificationDetailsViewController.m in Sources */,
 				6F668CE817DEE2C700034C90 /* SMDateFormatter.m in Sources */,
 				6FFAFDFB17E0823C001EB9D0 /* DeviceStatus.m in Sources */,
 				6F262D721834AC6C0002ADC0 /* UserManagementService.m in Sources */,

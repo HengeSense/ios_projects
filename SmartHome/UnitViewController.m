@@ -7,7 +7,7 @@
 //
 
 #import "UnitViewController.h"
-#import "NotificationViewController.h"
+#import "NotificationsViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SMDateFormatter.h"
 #import "SceneMode.h"
@@ -35,7 +35,7 @@
     UIButton *btnUnit;
     UIButton *btnScene;
     
-    UILabel *lblAffectDevice;
+//    UILabel *lblAffectDevice;
     
     NSString *titleString;
     NSString *stateString;
@@ -62,16 +62,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
+    [SMShared current].deliveryService.needRefreshUnitAndSceneModes = YES;
+    [[SMShared current].deliveryService fireRefreshUnit];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
+    [SMShared current].deliveryService.needRefreshUnitAndSceneModes = NO;
 }
 
 - (void)initDefaults {
@@ -211,6 +212,7 @@
 }
 
 - (void)setUp {
+    [self notifyViewUpdate];
 }
 
 /*
@@ -295,22 +297,6 @@
 //    return;
 //}
 
-//- (void)showNotificationDetailsByIdentifier:(NSString *)identifier {
-//    if([NSString isBlank:identifier]) return;
-//    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
-//    if(notifications != nil) {
-//        for(SMNotification *notification in notifications) {
-//            if([notification.identifier isEqualToString:identifier]) {
-//                NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:notification];
-//                handler.deleteNotificationDelegate = self;
-//                handler.cfNotificationDelegate = self;
-//                [self.ownerController.navigationController pushViewController:handler animated:NO];
-//                break;
-//            }
-//        }
-//    }
-//}
-
 #pragma mark -
 #pragma mark selection view delegate
 
@@ -367,7 +353,7 @@
         }
         [self updateTitleLabel];
         [unitView loadOrRefreshUnit:unit];
-        lblAffectDevice.text =  [NSString stringWithFormat:@"%d", (unit == nil) ? 0 : unit.avalibleDevicesCount];
+//        lblAffectDevice.text =  [NSString stringWithFormat:@"%d", (unit == nil) ? 0 : unit.avalibleDevicesCount];
     }
 }
 

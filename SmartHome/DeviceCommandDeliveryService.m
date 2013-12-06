@@ -51,6 +51,8 @@
 @synthesize restfulService;
 @synthesize isService;
 
+@synthesize needRefreshUnitAndSceneModes;
+
 #pragma mark -
 #pragma mark Initializations
 
@@ -63,10 +65,10 @@
 }
 
 - (void)initDefaults {
-    
     /* Property set */
     isService = NO;
     networkMode = NetworkModeNotChecked;
+    self.needRefreshUnitAndSceneModes = NO;
     syncObject = [[NSObject alloc] init];
     mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, COMMAND_GET_CAMERA_SERVER, nil];
     
@@ -75,7 +77,6 @@
     /* Network monitor */
     reachability = [Reachability reachabilityWithHostname:@"www.baidu.com"];
     [self startMonitorNetworks];
-    
 }
 
 #pragma mark -
@@ -322,17 +323,19 @@
             // Here you must check net work sync, then continue execute command
             [self checkIsReachableInternalUnit];
             
-            // Update current unit
-            DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
-            command.masterDeviceCode = unit.identifier;
-            command.hashCode = unit.hashCode;
-            [self executeDeviceCommand:command];
-            
-            // Update scene list for current unit
-            DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
-            getSceneListCommand.masterDeviceCode = unit.identifier;
-            getSceneListCommand.hashCode = unit.sceneHashCode;
-            [self executeDeviceCommand:getSceneListCommand];
+            if(self.needRefreshUnitAndSceneModes) {
+                // Update current unit
+                DeviceCommand *command = [CommandFactory commandForType:CommandTypeGetUnits];
+                command.masterDeviceCode = unit.identifier;
+                command.hashCode = unit.hashCode;
+                [self executeDeviceCommand:command];
+                
+                // Update scene list for current unit
+                DeviceCommand *getSceneListCommand = [CommandFactory commandForType:CommandTypeGetSceneList];
+                getSceneListCommand.masterDeviceCode = unit.identifier;
+                getSceneListCommand.hashCode = unit.sceneHashCode;
+                [self executeDeviceCommand:getSceneListCommand];
+            }
             
             // Send heart beat command
             [self executeDeviceCommand:[CommandFactory commandForType:CommandTypeSendHeartBeat]];

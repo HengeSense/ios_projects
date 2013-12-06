@@ -1,19 +1,19 @@
 //
-//  NotificationViewController.m
+//  NotificationsViewController.m
 //  SmartHome
 //
 //  Created by Zhao yang on 8/14/13.
 //  Copyright (c) 2013 hentre. All rights reserved.
 //
 
-#import "NotificationViewController.h"
+#import "NotificationsViewController.h"
 #import "NotificationsFileManager.h"
 
-@interface NotificationViewController ()
+@interface NotificationsViewController ()
 
 @end
 
-@implementation NotificationViewController{
+@implementation NotificationsViewController{
     UITableView *messageTable;
     NSMutableArray *messageArr;
     NSMutableArray *modifyArr;
@@ -22,7 +22,7 @@
     MainView *mainView;
 }
 
-- (id)initFrom:(MainView *)where{
+- (id)initFrom:(MainView *)where {
     self = [super init];
     if (self) {
         if (messageArr == nil) {
@@ -165,7 +165,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     curIndexPath = indexPath;
     SMNotification *notificaion = [messageArr objectAtIndex:indexPath.row];
-    NotificationHandlerViewController *handlerViewController = [[NotificationHandlerViewController alloc] initWithMessage:notificaion];
+    NotificationDetailsViewController *handlerViewController = [[NotificationDetailsViewController alloc] initWithNotification:notificaion];
     handlerViewController.cfNotificationDelegate = self;
     handlerViewController.deleteNotificationDelegate =self;
     [self.navigationController pushViewController:handlerViewController animated:YES];

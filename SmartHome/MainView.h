@@ -15,7 +15,7 @@
 #import "DeviceCommandVoiceControlHandler.h"
 #import "DeviceCommandUpdateDevicesHandler.h"
 #import "SelectionView.h"
-#import "NotificationHandlerViewController.h"   
+#import "NotificationDetailsViewController.h"   
 
 
 @interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate,DeleteNotificationDelegate,CFNotificationDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate>

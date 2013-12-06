@@ -253,7 +253,23 @@
 
 - (void)changeCurrentUnitTo:(NSString *)unitIdentifier {
     @synchronized(self) {
+        if([NSString isBlank:unitIdentifier] && [NSString isBlank:currentUnitIdentifier]) {
+            return;
+        } else if(![NSString isBlank:unitIdentifier] && ![NSString isBlank:currentUnitIdentifier]) {
+            if([unitIdentifier isEqualToString:currentUnitIdentifier]) {
+                return;
+            }
+        }
         currentUnitIdentifier = unitIdentifier;
+        NSArray *subscripts = [self getSubscriptionsFor:[self class]];
+        if(subscripts != nil) {
+            for(int i=0; i<subscripts.count; i++) {
+                id subscipt = [subscripts objectAtIndex:i];
+                if([subscipt respondsToSelector:@selector(unitManagerNotifyCurrentUnitWasChanged:)]) {
+                    [subscipt performSelectorOnMainThread:@selector(unitManagerNotifyCurrentUnitWasChanged:) withObject:currentUnitIdentifier waitUntilDone:NO];
+                }
+            }
+        }
     }
     [[SMShared current].deliveryService checkInternalOrNotInternalNetwork];
 }

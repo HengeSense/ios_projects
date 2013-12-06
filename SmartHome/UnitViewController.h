@@ -15,7 +15,7 @@
 #import "DeviceCommandVoiceControlHandler.h"
 #import "DeviceCommandUpdateDevicesHandler.h"
 #import "SelectionView.h"
-#import "NotificationHandlerViewController.h"
+#import "NotificationDetailsViewController.h"
 
 typedef NS_ENUM(NSInteger, SpeechViewState) {
     SpeechViewStateOpenning   = 1,

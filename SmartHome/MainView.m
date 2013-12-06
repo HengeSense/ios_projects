@@ -8,7 +8,7 @@
 
 
 #import "MainView.h"
-#import "NotificationViewController.h"
+#import "NotificationsViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SMDateFormatter.h"
 #import "SceneMode.h"
@@ -244,7 +244,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     NotificationsFileManager *fileManager = [[NotificationsFileManager alloc] init];
     [fileManager update:[[NSArray alloc] initWithObjects:displayNotification, nil] deleteList:nil];
     [self notifyUpdateNotifications];
-    NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:displayNotification];
+    NotificationDetailsViewController *handler = [[NotificationDetailsViewController alloc] initWithNotification:displayNotification];
     handler.deleteNotificationDelegate = self;
     handler.cfNotificationDelegate = self;
     [self.ownerController.navigationController pushViewController:handler animated:YES];
@@ -311,7 +311,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     if(notifications != nil) {
         for(SMNotification *notification in notifications) {
             if([notification.identifier isEqualToString:identifier]) {
-                NotificationHandlerViewController *handler = [[NotificationHandlerViewController alloc] initWithMessage:notification];
+                NotificationDetailsViewController *handler = [[NotificationDetailsViewController alloc] initWithNotification:notification];
                 handler.deleteNotificationDelegate = self;
                 handler.cfNotificationDelegate = self;
                 [self.ownerController.navigationController pushViewController:handler animated:NO];
@@ -495,7 +495,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 #pragma mark button pressed
 
 - (void)btnShowNotificationPressed:(id)sender {
-    NotificationViewController *notificationViewController = [[NotificationViewController alloc] initFrom:self];
+    NotificationsViewController *notificationViewController = [[NotificationsViewController alloc] initFrom:self];
     [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 

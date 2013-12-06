@@ -13,6 +13,7 @@
 @interface SMNotification : Entity
 
 @property (strong, nonatomic) NSString *type;
+@property (strong, nonatomic, readonly) NSString *typeName;
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSString *mac;
 @property (strong, nonatomic) NSDate *createTime;

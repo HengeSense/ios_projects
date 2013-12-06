@@ -13,6 +13,7 @@
 
 @synthesize text;
 @synthesize type;
+@synthesize typeName;
 @synthesize mac;
 @synthesize createTime;
 @synthesize data = _data;
@@ -59,6 +60,11 @@
     }
     
     return json;
+}
+
+- (NSString *)typeName {
+    if([NSString isBlank:self.type]) return [NSString emptyString];
+    return NSLocalizedString(self.type.lowercaseString, @"");
 }
 
 - (BOOL)isWarning {

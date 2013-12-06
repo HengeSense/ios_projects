@@ -10,6 +10,12 @@
 #import "Unit.h"
 #import "DeviceStatus.h"
 
+@protocol UnitManagerDelegate <NSObject>
+
+- (void)unitManagerNotifyCurrentUnitWasChanged:(NSString *)unitIdentifier;
+
+@end
+
 @interface Memory : NSObject
 
 @property (strong, atomic) NSMutableArray *units;
@@ -98,5 +104,6 @@
  *  sync memory units to disk file
  */
 - (void)syncUnitsToDisk;
+
 
 @end
