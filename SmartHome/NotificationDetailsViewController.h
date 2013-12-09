@@ -12,20 +12,10 @@
 #import "MessageCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@protocol DeleteNotificationDelegate<NSObject>
-
--(void) didWhenDeleted;
-
-@end
-
-
-@protocol CFNotificationDelegate <NSObject>
-
--(void) didAgreeOrRefuse:(NSString *) operation;
-
-@end
 
 @protocol SMNotificationDelegate <NSObject>
+
+- (void)smNotificationsWasUpdated;
 
 @end
 
@@ -34,9 +24,6 @@
 
 @property (strong,nonatomic) SMNotification *notification;
 @property (assign, nonatomic) id<SMNotificationDelegate> delegate;
-
-@property (assign,nonatomic) id<DeleteNotificationDelegate> deleteNotificationDelegate;
-@property (assign,nonatomic) id<CFNotificationDelegate> cfNotificationDelegate;
 
 - (id)initWithNotification:(SMNotification *)notification;
 

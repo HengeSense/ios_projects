@@ -18,7 +18,7 @@
 #import "NotificationDetailsViewController.h"   
 
 
-@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate,DeleteNotificationDelegate,CFNotificationDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate>
+@interface MainView : NavigationView<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandGetNotificationsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate>
 
 - (void)showSpeechView;
 - (void)hideSpeechView;

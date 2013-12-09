@@ -29,6 +29,8 @@
     
     // 目的：尽可能少调用磁盘读取等方法
     BOOL unitHasNotifyUpdateAtLeastOnce;
+    
+    SMNotification *lastedNotification;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -59,6 +61,8 @@
     [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateNormal];
     [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateHighlighted];
     [btnShowNotification setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnShowNotification addTarget:self action:@selector(showNotificationDetails) forControlEvents:UIControlEventTouchUpInside];
+    btnShowNotification.hidden = YES;
     [self addSubview:btnShowNotification];
     
     UIButton *btnShowUnitController = [[UIButton alloc] initWithFrame:CGRectMake(230, 95 - toMinusHeight, 25, 20)];
@@ -69,7 +73,7 @@
     [self addSubview:btnShowUnitController];
     
     imgNetworkState = [[UIImageView alloc] initWithFrame:CGRectMake(280, 94 - toMinusHeight, 24, 21)];
-    imgNetworkState.image = [UIImage imageNamed:@"red"];
+    [self changeStateIconColor:@"red"];
     [self addSubview:imgNetworkState];
     
     btnSceneBack = [[SMButton alloc] initWithFrame:CGRectMake(45, 140 - toMinusHeight, 86, 86)];
@@ -117,12 +121,16 @@
 - (void)setUp {
     [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory subscribeHandler:[Memory class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
+    [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [self updateScenePlanForCurrentUnit];
 }
 
 - (void)destory {
     [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
     [[SMShared current].memory unSubscribeHandler:[Memory class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
+    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
     [plans removeAllObjects];
 }
 
@@ -134,6 +142,7 @@
         unitHasNotifyUpdateAtLeastOnce = YES;
         [self notifyUnitsWasUpdate];
     }
+    [self notifyUpdateNotifications];
 }
 
 - (void)notifyUnitsWasUpdate {
@@ -158,6 +167,36 @@
 }
 
 #pragma mark -
+#pragma mark Command Delivery Service Delegate
+
+- (void)commandDeliveryServiceNotifyNetworkModeMayChanged:(NetworkMode)lastedNetwokMode {
+    if(lastedNetwokMode == 1) {
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            if([@"在线" isEqualToString:[SMShared current].memory.currentUnit.status]) {
+                [self changeStateIconColor:@"green"];
+            } else {
+                [self changeStateIconColor:@"yellow"];
+            }
+        } else {
+            [self changeStateIconColor:@"red"];
+        }
+        
+    } else if(lastedNetwokMode == 2) {
+        if([SMShared current].deliveryService.tcpService.isConnectted) {
+            [self changeStateIconColor:@"green"];
+        } else {
+            [self changeStateIconColor:@"yellow"];
+        }
+    } else {
+        [self changeStateIconColor:@"red"];
+    }
+}
+
+- (void)changeStateIconColor:(NSString *)colorString {
+    imgNetworkState.image = [UIImage imageNamed:colorString];
+}
+
+#pragma mark -
 #pragma mark Unit Manager Delegate
 
 - (void)unitManagerNotifyCurrentUnitWasChanged:(NSString *)unitIdentifier {
@@ -168,6 +207,41 @@
 #pragma mark -
 #pragma mark Notifications
 
+- (void)notifyUpdateNotifications {
+    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
+    if (notifications == nil || notifications.count == 0) {
+        lastedNotification = nil;
+        btnShowNotification.hidden = YES;
+        return;
+    }
+    
+    NSTimeInterval lastTime = 0;
+    NSTimeInterval alLastTime = 0;
+    
+    SMNotification *lastNotHandlerAlNotification = nil;
+    for(SMNotification *notification in notifications) {
+        if ([notification.createTime timeIntervalSince1970] >= lastTime) {
+            lastTime = [notification.createTime timeIntervalSince1970];
+            lastedNotification = notification;
+        }
+        
+        if ([@"AL" isEqualToString: notification.type] && alLastTime < [notification.createTime timeIntervalSince1970] && !notification.hasRead) {
+            alLastTime = [notification.createTime timeIntervalSince1970];
+            lastNotHandlerAlNotification = notification;
+        }
+    }
+    if(lastNotHandlerAlNotification != nil) {
+        lastedNotification = lastNotHandlerAlNotification;
+    }
+    btnShowNotification.hidden = lastedNotification == nil;
+}
+
+- (void)showNotificationDetails {
+    if(lastedNotification != nil) {
+        [self showNotificationDetailsByIdentifier:lastedNotification.identifier];
+    }
+}
+
 - (void)showNotificationDetailsByIdentifier:(NSString *)identifier {
     if([NSString isBlank:identifier]) return;
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
@@ -175,8 +249,6 @@
         for(SMNotification *notification in notifications) {
             if([notification.identifier isEqualToString:identifier]) {
                 NotificationDetailsViewController *handler = [[NotificationDetailsViewController alloc] initWithNotification:notification];
-//                handler.deleteNotificationDelegate = self;
-//                handler.cfNotificationDelegate = self;
                 [self.ownerController.navigationController pushViewController:handler animated:NO];
                 break;
             }

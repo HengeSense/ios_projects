@@ -12,6 +12,6 @@
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "NotificationDetailsViewController.h"
 
-@interface NotificationsView : NavigationView<UITableViewDataSource, UITableViewDelegate, DeleteNotificationDelegate,CFNotificationDelegate, DeviceCommandGetNotificationsHandlerDelegate>
+@interface NotificationsView : NavigationView<UITableViewDataSource, UITableViewDelegate, DeviceCommandGetNotificationsHandlerDelegate, SMNotificationDelegate>
 
 @end

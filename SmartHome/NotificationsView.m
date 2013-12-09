@@ -12,9 +12,6 @@
 @implementation NotificationsView {
     UITableView *tblNotifications;
     NSMutableArray *messageArr;
-    NSMutableArray *modifyArr;
-    NSMutableArray *deleteArr;
-    NSIndexPath    *curIndexPath;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -49,24 +46,13 @@
 
 - (void)loadNotifications {
     messageArr = [NSMutableArray arrayWithArray:[[NotificationsFileManager fileManager] readFromDisk]];
-    
     if (messageArr && messageArr.count > 0) {
         for (SMNotification *notification in messageArr) {
             notification.hasRead = YES;
         }
     }
     [[NotificationsFileManager fileManager] update:messageArr deleteList:nil];
-    
     [self sort:messageArr ascending:NO];
-    
-    if (modifyArr == nil) {
-        modifyArr =[NSMutableArray array];
-    }
-    
-    if (deleteArr == nil) {
-        deleteArr = [NSMutableArray array];
-    }
-    
     [tblNotifications reloadData];
 }
 
@@ -75,36 +61,11 @@
     [self loadNotifications];
 }
 
-- (void)didAgreeOrRefuse:(NSString *)operation {
-    if (operation == nil) return;
-    SMNotification *curMessage = [messageArr objectAtIndex:curIndexPath.row];
-    curMessage.text = [curMessage.text stringByAppendingString:NSLocalizedString(operation, @"")];
-    curMessage.hasProcess = YES;
-    [modifyArr addObject:curMessage];
-    [tblNotifications reloadData];
-    [self saveNotificationsToDisk];
-}
-
-- (void)didWhenDeleted {
-    [deleteArr addObject:[messageArr objectAtIndex:curIndexPath.row]];
-    [messageArr removeObjectAtIndex:curIndexPath.row];
-    [tblNotifications reloadData];
-    [self saveNotificationsToDisk];
-    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"delete_success", @"") forType:AlertViewTypeSuccess];
-    [[AlertView currentAlertView] delayDismissAlertView];
-}
-
-- (void)saveNotificationsToDisk {
-    [[NotificationsFileManager fileManager] update:modifyArr deleteList:deleteArr];
-}
-
-- (void)sort:(NSMutableArray *) arr ascending:(BOOL) ascending{
-    if (!arr||arr.count == 0) {
-        return;
-    }
+- (void)sort:(NSMutableArray *)notis ascending:(BOOL)ascending {
+    if (notis != nil ||notis.count == 0) return;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:ascending];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [arr sortUsingDescriptors:sortDescriptors];
+    [notis sortUsingDescriptors:sortDescriptors];
 }
 
 #pragma mark -
@@ -146,12 +107,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    curIndexPath = indexPath;
     SMNotification *notificaion = [messageArr objectAtIndex:indexPath.row];
-    NotificationDetailsViewController *handlerViewController = [[NotificationDetailsViewController alloc] initWithNotification:notificaion];
-    handlerViewController.cfNotificationDelegate = self;
-    handlerViewController.deleteNotificationDelegate =self;
-    [self.ownerController.navigationController pushViewController:handlerViewController animated:YES];
+    NotificationDetailsViewController *notificationDetailsViewController = [[NotificationDetailsViewController alloc] initWithNotification:notificaion];
+    notificationDetailsViewController.delegate = self;
+    [self.ownerController.navigationController pushViewController:notificationDetailsViewController animated:YES];
+}
+
+#pragma mark -
+#pragma mark SM Notification Delegate
+
+- (void)smNotificationsWasUpdated {
+    messageArr = [NSMutableArray arrayWithArray:[[NotificationsFileManager fileManager] readFromDisk]];
+    [self sort:messageArr ascending:NO];
+    [tblNotifications reloadData];
 }
 
 #pragma mark -

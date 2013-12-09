@@ -245,8 +245,8 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     [fileManager update:[[NSArray alloc] initWithObjects:displayNotification, nil] deleteList:nil];
     [self notifyUpdateNotifications];
     NotificationDetailsViewController *handler = [[NotificationDetailsViewController alloc] initWithNotification:displayNotification];
-    handler.deleteNotificationDelegate = self;
-    handler.cfNotificationDelegate = self;
+//    handler.deleteNotificationDelegate = self;
+//    handler.cfNotificationDelegate = self;
     [self.ownerController.navigationController pushViewController:handler animated:YES];
 }
 
@@ -276,7 +276,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 }
 
 - (void)updateNotifications:(NSArray *)notifications {
-    if (notifications == nil||notifications.count == 0) {
+    if (notifications == nil || notifications.count == 0) {
         lblMessage.text = NSLocalizedString(@"everythings_fine", @"");
         lblTime.text = [NSString emptyString];
         [btnMessageCount setTitle:@"0" forState:UIControlStateNormal];
@@ -291,12 +291,12 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
             lastTime = [notification.createTime timeIntervalSince1970];
             displayNotification = notification;
         }
-        if ([notification.type isEqualToString:@"AL"]&&alLastTime<[notification.createTime timeIntervalSince1970]&&notification.hasRead == NO) {
+        if ([notification.type isEqualToString:@"AL"] && alLastTime<[notification.createTime timeIntervalSince1970] && !notification.hasRead) {
             alLastTime = [notification.createTime timeIntervalSince1970];
             lastNotHandlerAlNotification = notification;
         }
     }
-    if (lastNotHandlerAlNotification !=nil) {
+    if(lastNotHandlerAlNotification != nil) {
         displayNotification = lastNotHandlerAlNotification;
     }
     lblMessage.text = displayNotification.text;
@@ -312,8 +312,8 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
         for(SMNotification *notification in notifications) {
             if([notification.identifier isEqualToString:identifier]) {
                 NotificationDetailsViewController *handler = [[NotificationDetailsViewController alloc] initWithNotification:notification];
-                handler.deleteNotificationDelegate = self;
-                handler.cfNotificationDelegate = self;
+//                handler.deleteNotificationDelegate = self;
+//                handler.cfNotificationDelegate = self;
                 [self.ownerController.navigationController pushViewController:handler animated:NO];
                 break;
             }
@@ -495,8 +495,8 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 #pragma mark button pressed
 
 - (void)btnShowNotificationPressed:(id)sender {
-    NotificationsViewController *notificationViewController = [[NotificationsViewController alloc] initFrom:self];
-    [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
+//    NotificationsViewController *notificationViewController = [[NotificationsViewController alloc] initFrom:self];
+//    [self.ownerController.navigationController pushViewController:notificationViewController animated:YES];
 }
 
 - (void)btnShowSceneList:(id)sender {
