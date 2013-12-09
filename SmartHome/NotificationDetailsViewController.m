@@ -150,6 +150,15 @@
     }
 }
 
+- (void)setUp {
+    NSLog(@"jodsjfoisdjfiosdjfoisdjfoi");
+    self.notification.hasRead = YES;
+    [[NotificationsFileManager fileManager] update:[NSArray arrayWithObject:self.notification] deleteList:nil];
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(smNotificationsWasUpdated)]) {
+        [self.delegate smNotificationsWasUpdated];
+    }
+}
+
 - (void)cancel {
     [self.navigationController popViewControllerAnimated:YES];
 }

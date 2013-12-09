@@ -8,6 +8,8 @@
 
 #import "NotificationsView.h"
 #import "NotificationsFileManager.h"
+#import "ViewsPool.h"
+#import "PortalView.h"
 
 @implementation NotificationsView {
     UITableView *tblNotifications;
@@ -51,9 +53,14 @@
             notification.hasRead = YES;
         }
     }
-    [[NotificationsFileManager fileManager] update:messageArr deleteList:nil];
     [self sort:messageArr ascending:NO];
+    [[NotificationsFileManager fileManager] update:messageArr deleteList:nil];
     [tblNotifications reloadData];
+    
+    PortalView *portalView = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
+    if(portalView != nil && [portalView respondsToSelector:@selector(smNotificationsWasUpdated)]) {
+        [portalView notifyUpdateNotifications];
+    }
 }
 
 - (void)notifyViewUpdate {
@@ -62,7 +69,7 @@
 }
 
 - (void)sort:(NSMutableArray *)notis ascending:(BOOL)ascending {
-    if (notis != nil ||notis.count == 0) return;
+    if (notis != nil || notis.count == 0) return;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:ascending];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [notis sortUsingDescriptors:sortDescriptors];

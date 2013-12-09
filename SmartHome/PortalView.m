@@ -29,6 +29,7 @@
     
     // 目的：尽可能少调用磁盘读取等方法
     BOOL unitHasNotifyUpdateAtLeastOnce;
+    BOOL notificationHasUpdateAtLeastOnce;
     
     SMNotification *lastedNotification;
 }
@@ -45,6 +46,7 @@
     [super initDefaults];
     plans = [NSMutableDictionary dictionary];
     unitHasNotifyUpdateAtLeastOnce = NO;
+    notificationHasUpdateAtLeastOnce = NO;
 }
 
 - (void)initUI {
@@ -138,11 +140,16 @@
     if(self.ownerController != nil) {
         self.ownerController.rightViewEnable = YES;
     }
+    
     if(!unitHasNotifyUpdateAtLeastOnce) {
         unitHasNotifyUpdateAtLeastOnce = YES;
         [self notifyUnitsWasUpdate];
     }
-    [self notifyUpdateNotifications];
+    
+    if(!notificationHasUpdateAtLeastOnce) {
+        notificationHasUpdateAtLeastOnce = YES;
+        [self notifyUpdateNotifications];
+    }
 }
 
 - (void)notifyUnitsWasUpdate {
@@ -208,6 +215,8 @@
 #pragma mark Notifications
 
 - (void)notifyUpdateNotifications {
+    notificationHasUpdateAtLeastOnce = YES;
+    
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
     if (notifications == nil || notifications.count == 0) {
         lastedNotification = nil;
@@ -219,6 +228,7 @@
     NSTimeInterval alLastTime = 0;
     
     SMNotification *lastNotHandlerAlNotification = nil;
+    BOOL needDisplay = NO;
     for(SMNotification *notification in notifications) {
         if ([notification.createTime timeIntervalSince1970] >= lastTime) {
             lastTime = [notification.createTime timeIntervalSince1970];
@@ -229,31 +239,27 @@
             alLastTime = [notification.createTime timeIntervalSince1970];
             lastNotHandlerAlNotification = notification;
         }
+        
+        if(!notification.hasRead){
+            needDisplay = YES;
+        }
     }
     if(lastNotHandlerAlNotification != nil) {
         lastedNotification = lastNotHandlerAlNotification;
     }
-    btnShowNotification.hidden = lastedNotification == nil;
+    btnShowNotification.hidden = !needDisplay;
 }
 
 - (void)showNotificationDetails {
     if(lastedNotification != nil) {
-        [self showNotificationDetailsByIdentifier:lastedNotification.identifier];
+        NotificationDetailsViewController *notificationDetailsViewController = [[NotificationDetailsViewController alloc] initWithNotification:lastedNotification];
+        notificationDetailsViewController.delegate = self;
+        [self.ownerController.navigationController pushViewController:notificationDetailsViewController animated:YES];
     }
 }
 
-- (void)showNotificationDetailsByIdentifier:(NSString *)identifier {
-    if([NSString isBlank:identifier]) return;
-    NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
-    if(notifications != nil) {
-        for(SMNotification *notification in notifications) {
-            if([notification.identifier isEqualToString:identifier]) {
-                NotificationDetailsViewController *handler = [[NotificationDetailsViewController alloc] initWithNotification:notification];
-                [self.ownerController.navigationController pushViewController:handler animated:NO];
-                break;
-            }
-        }
-    }
+- (void)smNotificationsWasUpdated {
+    [self notifyUpdateNotifications];
 }
 
 #pragma mark -
