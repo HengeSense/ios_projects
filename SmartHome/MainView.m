@@ -177,7 +177,6 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
         lblMessage.userInteractionEnabled = YES;
         [lblMessage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandler)]];
         [notificationView addSubview:lblMessage];
-        
     
         lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 100, 10)];
         lblTime.backgroundColor =[UIColor clearColor];

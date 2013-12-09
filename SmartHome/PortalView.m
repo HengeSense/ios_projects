@@ -285,6 +285,8 @@
         ScenePlan *plan = [plans objectForKey:button.identifier];
         if(plan != nil) {
             [plan execute];
+            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"scene_execute", @"") forType:AlertViewTypeSuccess];
+            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
         }
     } else {
         [self smButtonLongPressed:button];

@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     RecognizerStateProceesing
 };
 
-@interface UnitViewController : NavViewController<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate>
+@interface UnitViewController : NavViewController<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate, DeviceCommandGetNotificationsHandlerDelegate, SMNotificationDelegate>
 
 - (void)showSpeechView;
 - (void)hideSpeechView;

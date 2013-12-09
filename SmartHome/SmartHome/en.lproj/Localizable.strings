@@ -55,6 +55,7 @@
 "save_success"          = "保存成功!";
 "saving"                = "保存中...";
 "choose_unit"           = "请选择主控";
+"scene_execute"         = "情景命令已发送";
 
 
 /*************** Refresh Table View Strings *************************/

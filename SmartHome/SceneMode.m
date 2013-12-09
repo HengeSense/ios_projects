@@ -39,7 +39,7 @@
 
 - (BOOL)isSecurityMode {
     if([NSString isBlank:self.type]) return YES;
-    if([@"b" isEqualToString:self.type]) {
+    if([@"o" isEqualToString:self.type]) {
         return NO;
     } else if([@"s" isEqualToString:self.type]) {
         return YES;
