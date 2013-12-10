@@ -38,13 +38,13 @@
 }
 
 - (BOOL)isSecurityMode {
-    if([NSString isBlank:self.type]) return YES;
+    if([NSString isBlank:self.type]) return NO;
     if([@"o" isEqualToString:self.type]) {
         return NO;
     } else if([@"s" isEqualToString:self.type]) {
         return YES;
     } else {
-        return YES;
+        return NO;
     }
 }
 
