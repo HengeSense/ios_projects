@@ -172,7 +172,7 @@
     
     lblMessage = [[UILabel alloc]initWithFrame:CGRectMake(30, 0, 170, 20)];
     lblMessage.backgroundColor = [UIColor clearColor];
-    lblMessage.font = [UIFont systemFontOfSize:11.f];
+    lblMessage.font = [UIFont systemFontOfSize:14.f];
     lblMessage.text = [NSString emptyString];
     lblMessage.textColor = [UIColor lightTextColor];
     lblMessage.userInteractionEnabled = YES;
@@ -182,7 +182,7 @@
     lblTime = [[UILabel alloc]initWithFrame:CGRectMake(lblMessage.frame.origin.x, lblMessage.frame.origin.y+lblMessage.frame.size.height, 140, 10)];
     lblTime.backgroundColor =[UIColor clearColor];
     lblTime.text = [NSString emptyString];
-    lblTime.font = [UIFont systemFontOfSize:11.f];
+    lblTime.font = [UIFont systemFontOfSize:12.f];
     lblTime.textColor = [UIColor lightTextColor];
     [notificationView addSubview: lblTime];
 

@@ -9,38 +9,30 @@
 #import "SMButton.h"
 
 @implementation SMButton {
-    NSMutableDictionary *parameters;
 }
 
 @synthesize identifier;
 @synthesize userObject;
+@synthesize parameters = _parameters_;
 @synthesize longPressDelegate = _longPressDelegate_;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initDefaults];
     }
     return self;
-}
-    
-- (void)initDefaults {
-    parameters = [NSMutableDictionary dictionary];
 }
 
 #pragma mark -
 #pragma mark Extension for parameters
     
 - (void)setParameter:(id)object forKey:(NSString *)key {
-    if(parameters != nil) {
-        [parameters setObject:object forKey:key];
-    }
+    [self.parameters setObject:object forKey:key];
 }
     
 - (id)parameterForKey:(NSString *)key {
-    if(parameters == nil) return nil;
-    return [parameters objectForKey:key];
+    return [self.parameters objectForKey:key];
 }
 
 #pragma mark -
@@ -63,6 +55,16 @@
     if(self.longPressDelegate != nil && gesture.state == UIGestureRecognizerStateBegan) {
         [self.longPressDelegate smButtonLongPressed:self];
     }
+}
+
+#pragma mark -
+#pragma mark Properties
+
+- (NSMutableDictionary *)parameters {
+    if(_parameters_ == nil) {
+        _parameters_ = [NSMutableDictionary dictionary];
+    }
+    return _parameters_;
 }
 
 @end

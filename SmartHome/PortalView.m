@@ -59,9 +59,9 @@
     
     CGFloat toMinusHeight = [UIDevice systemVersionIsMoreThanOrEuqal7] ? 0 : 20;
     
-    btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(180, 97 - toMinusHeight, 24, 21)];
-    [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateNormal];
-    [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateHighlighted];
+    btnShowNotification = [[UIButton alloc] initWithFrame:CGRectMake(180, 94 - toMinusHeight, 30, 21)];
+    [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_new_msg"] forState:UIControlStateNormal];
+    [btnShowNotification setBackgroundImage:[UIImage imageNamed:@"icon_new_msg"] forState:UIControlStateHighlighted];
     [btnShowNotification setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btnShowNotification addTarget:self action:@selector(showNotificationDetails) forControlEvents:UIControlEventTouchUpInside];
     btnShowNotification.hidden = YES;
@@ -81,6 +81,7 @@
     btnSceneBack = [[SMButton alloc] initWithFrame:CGRectMake(45, 140 - toMinusHeight, 86, 86)];
     btnSceneBack.identifier = SCENE_MODE_BACK;
     [btnSceneBack setParameter:NSLocalizedString(@"scene_home", @"") forKey:@"name"];
+    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home_unselected"] forState:UIControlStateHighlighted];
     btnSceneBack.longPressDelegate = self;
     [btnSceneBack addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
     UIImageView *imgBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_back"]];
@@ -89,6 +90,7 @@
     
     btnSceneOut = [[SMButton alloc] initWithFrame:CGRectMake(199, 140 - toMinusHeight, 86, 86)];
     btnSceneOut.identifier = SCENE_MODE_OUT;
+    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out_unselected"] forState:UIControlStateHighlighted];
     [btnSceneOut setParameter:NSLocalizedString(@"scene_out", @"") forKey:@"name"];
     btnSceneOut.longPressDelegate = self;
     [btnSceneOut addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -98,6 +100,7 @@
     
     btnSceneGetUp = [[SMButton alloc] initWithFrame:CGRectMake(45, 300 - toMinusHeight, 86, 86)];
     btnSceneGetUp.identifier = SCENE_MODE_GET_UP;
+    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up_unselected"] forState:UIControlStateHighlighted];
     [btnSceneGetUp setParameter:NSLocalizedString(@"scene_get_up", @"") forKey:@"name"];
     btnSceneGetUp.longPressDelegate = self;
     [btnSceneGetUp addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -107,6 +110,7 @@
     
     btnSceneSleep = [[SMButton alloc] initWithFrame:CGRectMake(199, 300 - toMinusHeight, 86, 86)];
     btnSceneSleep.identifier = SCENE_MODE_SLEEP;
+    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep_unselected"] forState:UIControlStateHighlighted];
     [btnSceneSleep setParameter:NSLocalizedString(@"scene_sleep", @"") forKey:@"name"];
     btnSceneSleep.longPressDelegate = self;
     [btnSceneSleep addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];

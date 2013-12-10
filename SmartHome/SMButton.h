@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) id userObject;
+@property (strong, nonatomic) NSMutableDictionary *parameters;
 @property (assign, nonatomic) id<LongPressDelegate> longPressDelegate;
 
 @end
