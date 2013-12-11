@@ -301,8 +301,8 @@
     [userManagementService unBindUnit:curUnitIdentifier forUser:selectedUser.identifier success:@selector(unbindingSuccess:) failed:@selector(unbindingFailed:) target:self callback:nil];
 }
 
-- (void)notifyViewUpdate {
-    [super notifyViewUpdate];
+- (void)viewBecomeActive {
+    [super viewBecomeActive];
     
     // current unit is empty
     if([NSString isBlank:[SMShared current].memory.currentUnit.identifier]) {

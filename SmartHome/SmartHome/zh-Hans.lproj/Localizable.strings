@@ -162,7 +162,7 @@
 "settings_view"                 = "我的设置";
 "welcome_message_line1"         = "请按住语音按钮";
 "welcome_message_line2"         = "进行说话(双击关闭)";
-"everythings_fine"              = "一切正常!";
+"everythings_fine"              = "当前一切正常!";
 "view_message"                  = "查看";
 "view_video"                    = "查看录像";
 "ms"                            = "消息内容";

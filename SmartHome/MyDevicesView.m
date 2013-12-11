@@ -64,8 +64,8 @@
 #pragma mark -
 #pragma mark view service
 
-- (void)notifyViewUpdate {
-    [super notifyViewUpdate];
+- (void)viewBecomeActive {
+    [super viewBecomeActive];
     [self refresh];
 }
 

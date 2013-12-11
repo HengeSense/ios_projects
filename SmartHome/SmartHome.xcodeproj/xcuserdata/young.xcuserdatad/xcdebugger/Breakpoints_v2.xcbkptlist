@@ -896,11 +896,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PortalView.m"
-            timestampString = "408337304.083054"
+            timestampString = "408418353.889198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-notifyUnitsWasUpdate"
             landmarkType = "5">
             <Locations>
@@ -961,7 +961,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "143"
             endingLineNumber = "143"
-            landmarkName = "-notifyViewUpdate"
+            landmarkName = "-viewBecomeActive"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -988,11 +988,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PortalView.m"
-            timestampString = "408337304.083054"
+            timestampString = "408418591.452631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "-notifyUpdateNotifications"
             landmarkType = "5">
          </BreakpointContent>
@@ -1004,11 +1004,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PortalView.m"
-            timestampString = "408337304.083054"
+            timestampString = "408418591.452631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-notifyUpdateNotifications"
             landmarkType = "5">
          </BreakpointContent>

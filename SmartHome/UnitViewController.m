@@ -316,7 +316,7 @@
     
     if (notifications == nil || notifications.count == 0) {
         lastedNotification = nil;
-        lblMessage.text = [NSString emptyString];
+        lblMessage.text = NSLocalizedString(@"everythings_fine", @"");
         lblTime.text = [NSString emptyString];
         return;
     }

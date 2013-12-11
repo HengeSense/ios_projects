@@ -63,8 +63,8 @@
     }
 }
 
-- (void)notifyViewUpdate {
-    [super notifyViewUpdate];
+- (void)viewBecomeActive {
+    [super viewBecomeActive];
     [self loadNotifications];
 }
 

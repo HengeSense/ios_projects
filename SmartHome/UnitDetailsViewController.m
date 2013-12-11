@@ -219,7 +219,7 @@
             }
             NavigationView *myDevicesView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"myDevicesView"];
             if(myDevicesView != nil) {
-                [myDevicesView notifyViewUpdate];
+                [myDevicesView viewBecomeActive];
             }
         } else {
             [[AlertView currentAlertView] setMessage:NSLocalizedString(@"execution_failed", @"") forType:AlertViewTypeFailed];

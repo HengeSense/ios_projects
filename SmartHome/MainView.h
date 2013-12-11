@@ -22,7 +22,7 @@
 
 - (void)showSpeechView;
 - (void)hideSpeechView;
-- (void)notifyViewUpdate;
+- (void)viewBecomeActive;
 
 - (void)clearStateString;
 

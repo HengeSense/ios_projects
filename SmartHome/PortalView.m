@@ -140,10 +140,13 @@
     [plans removeAllObjects];
 }
 
-- (void)notifyViewUpdate {
+- (void)viewBecomeActive {
     if(self.ownerController != nil) {
         self.ownerController.rightViewEnable = YES;
     }
+    
+    // On matter the view become active how many times,
+    // Only refresh units && notifications once from this method
     
     if(!unitHasNotifyUpdateAtLeastOnce) {
         unitHasNotifyUpdateAtLeastOnce = YES;

@@ -227,7 +227,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
  *
  *
  */
-- (void)notifyViewUpdate {
+- (void)viewBecomeActive {
     [self notifyUnitsWasUpdate];
     [self notifyUpdateNotifications];
 }
