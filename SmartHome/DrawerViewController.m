@@ -111,7 +111,7 @@
         self.mainView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:self.mainView];
         panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestureForMainViewStateNormal:)];
-        panGesture.delaysTouchesBegan = YES;
+        panGesture.delaysTouchesBegan = NO;
         [self.mainView addGestureRecognizer:panGesture];
     }
     

@@ -24,7 +24,7 @@
 - (void)initUI;
 - (void)setUp;
 
-- (void)notifyViewUpdate;
+- (void)viewBecomeActive;
 - (void)destory;
 
 @end

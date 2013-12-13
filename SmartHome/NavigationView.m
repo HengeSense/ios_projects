@@ -53,7 +53,7 @@
     return topbar;
 }
 
-- (void)notifyViewUpdate {
+- (void)viewBecomeActive {
     if(self.ownerController != nil) {
         self.ownerController.rightViewEnable = NO;
     }

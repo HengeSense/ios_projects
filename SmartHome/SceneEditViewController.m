@@ -221,7 +221,9 @@
         if(scenePlan.unit != nil) {
             for(int i=0; i<scenePlan.unit.scenesModeList.count; i++) {
                 SceneMode *sm = [scenePlan.unit.scenesModeList objectAtIndex:i];
-                [actionSheet addButtonWithTitle:sm.name];
+                if(sm.isSecurityMode) {
+                    [actionSheet addButtonWithTitle:sm.name];
+                }
 //                if([[NSString stringWithFormat:@"%d", sm.code] isEqualToString:scenePlan.securityIdentifier]) {
 //                    actionSheet.destructiveButtonIndex = index;
 //                }

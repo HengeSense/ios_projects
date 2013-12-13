@@ -63,13 +63,13 @@
     }
 }
 
-- (void)notifyViewUpdate {
-    [super notifyViewUpdate];
+- (void)viewBecomeActive {
+    [super viewBecomeActive];
     [self loadNotifications];
 }
 
 - (void)sort:(NSMutableArray *)notis ascending:(BOOL)ascending {
-    if (notis != nil || notis.count == 0) return;
+    if (notis == nil || notis.count == 0) return;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:ascending];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [notis sortUsingDescriptors:sortDescriptors];

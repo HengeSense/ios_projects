@@ -200,7 +200,7 @@
         if(!isFirst) {
             [self showCenterView:YES];
         }
-        [view notifyViewUpdate];
+        [view viewBecomeActive];
     }
 }
 
