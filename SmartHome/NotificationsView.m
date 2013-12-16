@@ -11,7 +11,8 @@
 #import "ViewsPool.h"
 #import "PortalView.h"
 #import "XXEventSubscriptionPublisher.h"
-#import "NotificationsFileUpdatedEventFilter.h"
+#import "XXEventNameFilter.h"
+#import "EventNameContants.h"
 
 @implementation NotificationsView {
     UITableView *tblNotifications;
@@ -45,7 +46,7 @@
 }
 
 - (void)setUp {
-    XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:[[NotificationsFileUpdatedEventFilter alloc] init]];
+    XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:[[XXEventNameFilter alloc] initWithSupportedEventName:EventNotificationsFileUpdated]];
     subscription.notifyMustInMainThread = YES;
     [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
 }

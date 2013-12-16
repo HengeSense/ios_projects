@@ -15,7 +15,7 @@
 #import "MainViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
-#import "DeviceCommandEventFilter.h"
+#import "XXEventNameFilter.h"
 #import "XXEventSubscriptionPublisher.h"
 #import "XXEventFilterChain.h"
 #import "DeviceCommandNameEventFilter.h"

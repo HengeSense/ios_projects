@@ -8,8 +8,9 @@
 
 #import "DeviceCommandDeliveryService.h"
 #import "NetworkModeChangedEvent.h"
-#import "DeviceCommandEventFilter.h"
 #import "XXEventSubscriptionPublisher.h"
+#import "DeviceCommandEvent.h"
+#import "XXEventNameFilter.h"
 
 /*  Command Handler  */
 #import "DeviceCommandGetUnitsHandler.h"
@@ -267,8 +268,8 @@
         
         // Load all units from disk
         [[SMShared current].memory loadUnitsFromDisk];
-        
-        XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:[[DeviceCommandEventFilter alloc] init]];
+    
+        XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:[[XXEventNameFilter alloc] initWithSupportedEventName:EventDeviceCommand]];
         [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
 
         if(tcpConnectChecker != nil) {

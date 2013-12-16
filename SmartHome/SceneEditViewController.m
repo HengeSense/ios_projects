@@ -272,7 +272,7 @@
         NSIndexPath *indexPath = [as parameterForKey:@"indexPath"];
         UITableViewCell *cell = [tblScenePlan cellForRowAtIndexPath:indexPath];
         if(indexPath.section == 0) {
-            if(buttonIndex >= 0 && buttonIndex < scenePlan.unit.scenesModeList.count) {
+            if(buttonIndex >= 0 && buttonIndex < scenePlan.unit.securityScenesModeList.count) {
                 SceneMode *mode = [scenePlan.unit.securityScenesModeList objectAtIndex:buttonIndex];
                 scenePlan.securityIdentifier = [NSString stringWithFormat:@"%d", mode.code];
                 cell.detailTextLabel.text = mode.name;

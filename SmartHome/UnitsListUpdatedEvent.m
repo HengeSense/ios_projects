@@ -10,4 +10,12 @@
 
 @implementation UnitsListUpdatedEvent
 
+- (id)init {
+    self = [super init];
+    if(self) {
+        self.name = EventUnitsListUpdated;
+    }
+    return self;
+}
+
 @end

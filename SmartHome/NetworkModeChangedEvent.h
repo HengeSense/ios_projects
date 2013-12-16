@@ -8,6 +8,7 @@
 
 #import "XXEvent.h"
 #import "DeviceCommandDeliveryService.h"
+#import "EventNameContants.h"
 
 @interface NetworkModeChangedEvent : XXEvent
 

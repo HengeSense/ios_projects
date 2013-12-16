@@ -8,6 +8,7 @@
 
 #import "XXEvent.h"
 #import "DeviceCommandUpdateDevices.h"
+#import "EventNameContants.h"
 
 @interface DeviceStatusChangedEvent : XXEvent
 

@@ -12,8 +12,16 @@
 
 @synthesize unitIdentifier = _unitIdentifier_;
 
-- (id)initWithCurrentIdentifier:(NSString *)identifier {
+- (id)init {
     self = [super init];
+    if(self) {
+        self.name = EventCurrentUnitChanged;
+    }
+    return self;
+}
+
+- (id)initWithCurrentIdentifier:(NSString *)identifier {
+    self = [self init];
     if(self) {
         _unitIdentifier_ = identifier;
     }

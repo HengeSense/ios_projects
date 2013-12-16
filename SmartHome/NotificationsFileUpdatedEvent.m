@@ -10,4 +10,12 @@
 
 @implementation NotificationsFileUpdatedEvent
 
+- (id)init {
+    self = [super init];
+    if(self) {
+        self.name = EventNotificationsFileUpdated;
+    }
+    return self;
+}
+
 @end

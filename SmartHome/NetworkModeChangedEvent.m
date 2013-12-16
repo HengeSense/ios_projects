@@ -12,8 +12,16 @@
 
 @synthesize networkMode = _networkMode_;
 
-- (id)initWithNetworkMode:(NetworkMode)networkMode {
+- (id)init {
     self = [super init];
+    if(self) {
+        self.name = EventNetworkModeChanged;
+    }
+    return self;
+}
+
+- (id)initWithNetworkMode:(NetworkMode)networkMode {
+    self = [self init];
     if(self) {
         _networkMode_ = networkMode;
     }

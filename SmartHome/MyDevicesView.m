@@ -12,7 +12,8 @@
 #import "UnitsBindingViewController.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "XXEventSubscriptionPublisher.h"
-#import "UnitsListUpdatedEventFilter.h"
+#import "XXEventNameFilter.h"
+#import "EventNameContants.h"
 
 @implementation MyDevicesView {
     UITableView *tblUnits;
@@ -54,7 +55,7 @@
     
     XXEventSubscription *subscription =
     [[XXEventSubscription alloc] initWithSubscriber:self
-        eventFilter:[[UnitsListUpdatedEventFilter alloc] init]];
+        eventFilter:[[XXEventNameFilter alloc] initWithSupportedEventName:EventUnitsListUpdated]];
         subscription.notifyMustInMainThread = YES;
     [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
 }

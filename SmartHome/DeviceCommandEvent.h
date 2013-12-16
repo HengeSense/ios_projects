@@ -8,6 +8,7 @@
 
 #import "XXEvent.h"
 #import "CommandFactory.h"
+#import "EventNameContants.h"
 
 @interface DeviceCommandEvent : XXEvent
 

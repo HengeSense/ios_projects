@@ -12,8 +12,16 @@
 
 @synthesize command = _command_;
 
-- (id)initWithDeviceCommand:(DeviceCommand *)command {
+- (id)init {
     self = [super init];
+    if(self) {
+        self.name = EventDeviceCommand;
+    }
+    return self;
+}
+
+- (id)initWithDeviceCommand:(DeviceCommand *)command {
+    self = [self init];
     if(self) {
         _command_ = command;
     }

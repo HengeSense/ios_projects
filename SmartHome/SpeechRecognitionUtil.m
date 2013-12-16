@@ -33,6 +33,17 @@
     return self;
 }
 
++ (SpeechRecognitionUtil *)current {
+    static SpeechRecognitionUtil *singletons = nil;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        if(singletons == nil) {
+            singletons = [[SpeechRecognitionUtil alloc] init];
+        }
+    });
+    return singletons;
+}
+
 - (void)initDefaults {
     NSString *initString = [NSString stringWithFormat:@"appid=%@,timeout=%@", IFLY_APP_ID, CONNECTION_TIME_OUT];
     [IFlySpeechRecognizer createRecognizer:initString delegate:self];

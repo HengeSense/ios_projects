@@ -18,14 +18,30 @@
 #import "PortalView.h"
 #import "XXEventFilterChain.h"
 #import "XXEventSubscriptionPublisher.h"
-#import "UnitsListUpdatedEventFilter.h"
-#import "NotificationsFileUpdatedEventFilter.h"
-#import "NetwrokModeChangedEventFilter.h"
-#import "DeviceStatusChangedFilter.h"
+#import "XXEventNameFilter.h"
 #import "DeviceCommandNameEventFilter.h"
+#import "NetworkModeChangedEvent.h"
+#import "UnitsListUpdatedEvent.h"
+#import "NotificationsFileUpdatedEvent.h"
+#import "DeviceStatusChangedEvent.h"
 
 #define SPEECH_BUTTON_WIDTH              173
 #define SPEECH_BUTTON_HEIGHT             173
+
+typedef NS_ENUM(NSInteger, SpeechViewState) {
+    SpeechViewStateOpenning   = 1,
+    SpeechViewStateOpenned    = 2,
+    SpeechViewStateClosing    = 3,
+    SpeechViewStateClosed     = 4
+};
+
+typedef NS_ENUM(NSInteger, RecognizerState) {
+    RecognizerStateReady,
+    RecognizerStateRecordBegin,
+    RecognizerStateRecording,
+    RecognizerStateRecordingEnd,
+    RecognizerStateProceesing
+};
 
 @interface UnitViewController ()
 
@@ -77,16 +93,17 @@
     XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self];
     subscription.notifyMustInMainThread = YES;
     
-    DeviceCommandNameEventFilter *nameFilter = [[DeviceCommandNameEventFilter alloc] init];
-    [nameFilter.supportedCommandNames addObject:COMMAND_VOICE_CONTROL];
+    XXEventNameFilter *eventNameFilter = [[XXEventNameFilter alloc] init];
+    [[[[eventNameFilter addSupportedEventName:EventUnitsListUpdated]
+    addSupportedEventName:EventNotificationsFileUpdated]
+    addSupportedEventName:EventNetworkModeChanged]
+     addSupportedEventName:EventDeviceStatusChanged];
+    
+    DeviceCommandNameEventFilter *commandNameFilter = [[DeviceCommandNameEventFilter alloc] init];
+    [commandNameFilter.supportedCommandNames addObject:COMMAND_VOICE_CONTROL];
     
     XXEventFilterChain *eventFilterChain = [[XXEventFilterChain alloc] init];
-    [[[[[eventFilterChain
-       orFilter:[[UnitsListUpdatedEventFilter alloc] init]]
-       orFilter:[[NotificationsFileUpdatedEventFilter alloc] init]]
-       orFilter:[[NetwrokModeChangedEventFilter alloc] init]]
-       orFilter:[[DeviceStatusChangedFilter alloc] init] ]
-       orFilter:nameFilter];
+    [[eventFilterChain orFilter:eventNameFilter] orFilter:commandNameFilter];
     subscription.filter = eventFilterChain;
     [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
     
@@ -608,9 +625,9 @@
 
 - (void)startListening:(NSTimer *)timer {
     if(speechRecognitionUtil == nil) {
-        speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
-        speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
+        speechRecognitionUtil = [SpeechRecognitionUtil current];
     }
+    speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
     if(![speechRecognitionUtil startListening]) {
 #ifdef DEBUG
         NSLog(@"[SPEECH VIEW] Start lisenting failed.");

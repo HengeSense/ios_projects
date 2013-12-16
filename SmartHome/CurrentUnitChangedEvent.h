@@ -7,6 +7,7 @@
 //
 
 #import "XXEvent.h"
+#import "EventNameContants.h"
 
 @interface CurrentUnitChangedEvent : XXEvent
 

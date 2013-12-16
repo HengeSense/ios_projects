@@ -10,7 +10,6 @@
 
 @interface XXEvent : NSObject
 
-@property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSString *name;
 
 @end

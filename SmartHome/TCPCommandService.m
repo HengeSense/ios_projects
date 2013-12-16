@@ -10,8 +10,10 @@
 #import "NSString+StringUtils.h"
 #import "SMShared.h"
 #import "XXEventSubscriptionPublisher.h"
-#import "DeviceCommandEventFilter.h"
+#import "XXEventNameFilter.h"
+#import "EventNameContants.h"
 #import "CommandFactory.h"
+#import "DeviceCommandEvent.h"
 
 @implementation TCPCommandService {
     ExtranetClientSocket *socket;

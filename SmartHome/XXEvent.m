@@ -10,7 +10,6 @@
 
 @implementation XXEvent
 
-@synthesize identifier;
 @synthesize name;
 
 @end
