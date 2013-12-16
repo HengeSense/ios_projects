@@ -14,6 +14,8 @@
 @property (strong, nonatomic) ScenePlanZone *scenePlanZone;
 @property (strong, nonatomic) NSString *deviceIdentifier;
 @property (assign, nonatomic) NSInteger status;
+@property (strong, nonatomic) NSString *nwkAddr;
+@property (strong, nonatomic) NSString *category;
 
 @property (strong, nonatomic) Device *device;
 

@@ -454,15 +454,19 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     if([SCENE_MODE_BACK isEqualToString:planId]) {
         [btnSceneBack setParameter:hasSet ? @"yes" : @"no" forKey:@"hasPlan"];
         [btnSceneBack setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_home" : @"btn_home_unset"] forState:UIControlStateNormal];
+        plan.name = NSLocalizedString(@"scene_home", @"");
     } else if([SCENE_MODE_GET_UP isEqualToString:planId]) {
         [btnSceneGetUp setParameter:hasSet ? @"yes" : @"no" forKey:@"hasPlan"];
         [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_get_up" :@"btn_get_up_unset"] forState:UIControlStateNormal];
+        plan.name = NSLocalizedString(@"scene_get_up", @"");
     } else if([SCENE_MODE_OUT isEqualToString:planId]) {
         [btnSceneOut setParameter:hasSet ? @"yes" : @"no" forKey:@"hasPlan"];
         [btnSceneOut setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_out" : @"btn_out_unset"] forState:UIControlStateNormal];
+        plan.name = NSLocalizedString(@"scene_out", @"");
     } else if([SCENE_MODE_SLEEP isEqualToString:planId]) {
         [btnSceneSleep setParameter:hasSet ? @"yes" : @"no" forKey:@"hasPlan"];
         [btnSceneSleep setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_sleep" : @"btn_sleep_unset"] forState:UIControlStateNormal];
+        plan.name = NSLocalizedString(@"scene_sleep", @"");
     }
 }
 
