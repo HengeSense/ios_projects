@@ -44,6 +44,22 @@
     }
 }
 
+- (void)publishWithEvent:(XXEvent *)event exceptSubscriber:(id<XXEventSubscriber>)subscriber {
+    if(subscriber == nil) {
+        [self publishWithEvent:event];
+        return;
+    }
+    [self publishWithEvent:event exceptSubscriberId:[subscriber xxEventSubscriberIdentifier]];
+}
+
+- (void)publishWithEvent:(XXEvent *)event exceptSubscriberId:(NSString *)subscriberId {
+    if([XXStringUtils isBlank:subscriberId]) {
+        [self publishWithEvent:event];
+        return;
+    }
+    [self publishWithEvent:event exceptSubscriberIdsArray:[NSArray arrayWithObjects:subscriberId, nil]];
+}
+
 - (void)publishWithEvent:(XXEvent *)event exceptSubscribersArray:(NSArray *)subscribers {
     NSMutableArray *subscriberIds = [NSMutableArray array];
     if(subscribers != nil) {

@@ -18,10 +18,13 @@
 
 
 /**
- *
- *
+ * Publish event for all subscriptions
+ * with conditions
+ * you can provide a except list
  */
 - (void)publishWithEvent:(XXEvent *)event;
+- (void)publishWithEvent:(XXEvent *)event exceptSubscriber:(id<XXEventSubscriber>)subscriber;
+- (void)publishWithEvent:(XXEvent *)event exceptSubscriberId:(NSString *)subscriberId;
 - (void)publishWithEvent:(XXEvent *)event exceptSubscribersArray:(NSArray *)subscribers;
 - (void)publishWithEvent:(XXEvent *)event exceptSubscriberIdsArray:(NSArray *)subscriberIds;
 
