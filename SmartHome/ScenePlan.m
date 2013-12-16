@@ -68,7 +68,12 @@
     [json setMayBlankString:self.unitIdentifier forKey:@"mc"];
     [json setMayBlankString:self.scenePlanIdentifier forKey:@"si"];
     [json setMayBlankString:self.name forKey:@"sn"];
-    [json setMayBlankString:self.securityIdentifier forKey:@"sc"];
+    
+    if([NSString isBlank:self.securityIdentifier]) {
+        [json setMayBlankString:@"-100" forKey:@"sc"];
+    } else {
+        [json setMayBlankString:self.securityIdentifier forKey:@"sc"];
+    }
     
     NSMutableArray *_zones_ = [NSMutableArray array];
     for(int i=0; i<self.scenePlanZones.count; i++) {
@@ -107,10 +112,9 @@
             }
         }
     }
-    if(![NSString isBlank:self.securityIdentifier]) {
+    if(![NSString isBlank:self.securityIdentifier] && ![@"-100" isEqualToString:self.securityIdentifier]) {
         [command addCommandString:[NSString stringWithFormat:@"scene-%@", self.securityIdentifier]];
     }
-    
 //    NSData *data = [JsonUtils createJsonDataFromDictionary:[command toDictionary]];
 //    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     [[SMShared current].deliveryService executeDeviceCommand:command];

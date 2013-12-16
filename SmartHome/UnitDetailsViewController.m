@@ -235,6 +235,7 @@
                 UILabel *lblTitle = (UILabel *)[cell viewWithTag:888];
                 lblTitle.text = tempUnitName;
             }
+            [tblUnit reloadData];
             NavigationView *myDevicesView = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"myDevicesView"];
             if(myDevicesView != nil) {
                 [myDevicesView viewBecomeActive];
