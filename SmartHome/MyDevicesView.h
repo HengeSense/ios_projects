@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NavigationView.h"
-#import "DeviceCommandGetUnitsHandler.h"
+#import "XXEventSubscriber.h"
 
-@interface MyDevicesView : NavigationView <UITableViewDelegate, UITableViewDataSource, DeviceCommandGetUnitsHandlerDelegate>
+@interface MyDevicesView : NavigationView <UITableViewDelegate, UITableViewDataSource, XXEventSubscriber>
 
 @end

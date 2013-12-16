@@ -16,10 +16,11 @@
 @implementation ScenePlanFileManager
 
 + (ScenePlanFileManager *)fileManager {
-    static ScenePlanFileManager *manager;
-    if(manager == nil) {
+    static ScenePlanFileManager *manager = nil;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
         manager = [[ScenePlanFileManager alloc] init];
-    }
+    });
     return manager;
 }
 

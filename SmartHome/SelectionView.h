@@ -20,7 +20,7 @@
 @property (strong, nonatomic) NSArray *items;
 @property (strong, nonatomic) NSString *source;
 @property (strong, nonatomic) NSString *selectedIdentifier;
-@property (assign, nonatomic) id<SelectionViewDelegate> delegate;
+@property (weak, nonatomic) id<SelectionViewDelegate> delegate;
 
 + (void)showWithItems:(NSArray *)items selectedIdentifier:(NSString *)identifier source:(NSString *)source delegate:(id)target;
 

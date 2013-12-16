@@ -20,7 +20,7 @@
 
 @interface DirectionButton : UIView
 
-@property (assign, nonatomic) id<DirectionButtonDelegate> delegate;
+@property (weak, nonatomic) id<DirectionButtonDelegate> delegate;
 
 + (DirectionButton *)cameraDirectionButtonWithPoint:(CGPoint)point;
 + (DirectionButton *)tvDirectionButtonWithPoint:(CGPoint)point;

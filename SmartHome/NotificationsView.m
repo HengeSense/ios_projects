@@ -10,6 +10,8 @@
 #import "NotificationsFileManager.h"
 #import "ViewsPool.h"
 #import "PortalView.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "NotificationsFileUpdatedEventFilter.h"
 
 @implementation NotificationsView {
     UITableView *tblNotifications;
@@ -43,7 +45,9 @@
 }
 
 - (void)setUp {
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:[[NotificationsFileUpdatedEventFilter alloc] init]];
+    subscription.notifyMustInMainThread = YES;
+    [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
 }
 
 - (void)loadNotifications {
@@ -59,7 +63,7 @@
     
     PortalView *portalView = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
     if(portalView != nil && [portalView respondsToSelector:@selector(smNotificationsWasUpdated)]) {
-        [portalView notifyUpdateNotifications];
+        [portalView updateNotifications];
     }
 }
 
@@ -75,10 +79,18 @@
     [notis sortUsingDescriptors:sortDescriptors];
 }
 
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    [self updateNotifications];
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"notificationsViewSubscriber";
+}
+
 #pragma mark -
 #pragma mark Get notifications handler
 
-- (void)notifyUpdateNotifications {
+- (void)updateNotifications {
     if(self.isActive) {
         [self loadNotifications];
     }
@@ -133,7 +145,7 @@
 #pragma mark Destory
 
 - (void)destory {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
 }
 
 @end

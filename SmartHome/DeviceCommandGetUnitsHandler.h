@@ -9,12 +9,6 @@
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandUpdateUnits.h"
 
-@protocol DeviceCommandGetUnitsHandlerDelegate<NSObject>
-
-- (void)notifyUnitsWasUpdate;
-
-@end
-
 @interface DeviceCommandGetUnitsHandler : DeviceCommandHandler
 
 @end

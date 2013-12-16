@@ -8,13 +8,6 @@
 
 #import "DeviceCommandHandler.h"
 #import "DeviceCommandUpdateAccount.h"
-#import "DeviceCommandUpdateAccountHandler.h"
-
-@protocol DeviceCommandGetAccountDelegate <NSObject>
-
-- (void)getAccountOnComplete:(DeviceCommandUpdateAccount *)updateCommand;
-
-@end
 
 @interface DeviceCommandGetAccountHandler : DeviceCommandHandler
 

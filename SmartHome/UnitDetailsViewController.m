@@ -48,6 +48,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    DeviceCommandNameEventFilter *filter = [[DeviceCommandNameEventFilter alloc] init];
+    [filter.supportedCommandNames addObject:COMMAND_CHANGE_UNIT_NAME];
+    XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:filter];
+    subscription.notifyMustInMainThread = YES;
+    [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
+}
+
 - (void)initUI{
     [super initUI];
     
@@ -68,16 +80,22 @@
 
 - (void)initDefaults {
     unit = [[SMShared current].memory findUnitByIdentifier:unitIdentifier];
-    
-    // subscribe events
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateUnitNameHandler class] for:self];
 }
 
 - (void)backToPreViewController {
-    // unsubscribe events
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateUnitNameHandler class] for:self];
-    
     [super backToPreViewController];
+}
+
+#pragma mark -
+#pragma mark event subscriber
+
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    DeviceCommandEvent *evt = (DeviceCommandEvent *)event;
+    [self updateUnitNameOnCompleted:evt.command];
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"unitDetailsViewControllerSubscriber";
 }
 
 #pragma mark -
@@ -240,7 +258,7 @@
 }
 
 - (BOOL)handleNetworkException {
-    if ([[SMShared current].deliveryService.tcpService isConnectted]) {
+    if ([SMShared current].deliveryService.tcpService.isConnectted) {
         return YES;
     }else{
         [[AlertView currentAlertView] setMessage:NSLocalizedString(@"offline", @"") forType:AlertViewTypeFailed];

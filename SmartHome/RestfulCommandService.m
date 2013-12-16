@@ -9,6 +9,8 @@
 #import "RestfulCommandService.h"
 #import "NSString+StringUtils.h"
 #import "SMShared.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "DeviceCommandEvent.h"
 
 @implementation RestfulCommandService
 
@@ -52,13 +54,21 @@
             cmd.commandName = COMMAND_GET_CAMERA_SERVER;
             cmd.cameraId = getCameraServerCmd.cameraId;
             cmd.commmandNetworkMode = CommandNetworkModeInternal;
-            [[SMShared current].deliveryService handleDeviceCommand:cmd];
+            [self publishCommand:cmd];
         }
     }
 }
 
 - (NSString *)executorName {
     return @"RESTFUL SERVICE";
+}
+
+#pragma mark -
+#pragma mark 
+
+- (void)publishCommand:(DeviceCommand *)command {
+    DeviceCommandEvent *event = [[DeviceCommandEvent alloc] initWithDeviceCommand:command];
+    [[XXEventSubscriptionPublisher defaultPublisher] publishWithEvent:event];
 }
 
 #pragma mark -
@@ -73,7 +83,7 @@
     if(resp.statusCode == 200) {
         DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:resp.body]];
         command.commmandNetworkMode = CommandNetworkModeInternal;
-        [[SMShared current].deliveryService handleDeviceCommand:command];
+        [self publishCommand:command];
         return;
     }
     
@@ -111,7 +121,7 @@
                 [updateUnit.units addObject:unit];
                 //Current network mode must be internal, because this callback is from rest service .
                 [[SMShared current].deliveryService setCurrentNetworkMode:NetworkModeInternal];
-                [[SMShared current].deliveryService handleDeviceCommand:updateUnit];
+                [self publishCommand:updateUnit];
             }
         }
         return;
@@ -143,7 +153,7 @@
             command.commandName = COMMAND_GET_SCENE_LIST;
             command.masterDeviceCode = resp.callbackObject;
             command.commmandNetworkMode = CommandNetworkModeInternal;
-            [[SMShared current].deliveryService handleDeviceCommand:command];
+            [self publishCommand:command];
             return;
         }
     } else if(resp.statusCode == 204) {

@@ -10,12 +10,9 @@
 #import "NavigationView.h"
 #import "ConversationView.h"
 #import "SpeechRecognitionUtil.h"
-#import "DeviceCommandGetUnitsHandler.h"
-#import "DeviceCommandGetNotificationsHandler.h"
-#import "DeviceCommandVoiceControlHandler.h"
-#import "DeviceCommandUpdateDevicesHandler.h"
 #import "SelectionView.h"
 #import "NotificationDetailsViewController.h"
+#import "XXEventSubscriber.h"
 
 typedef NS_ENUM(NSInteger, SpeechViewState) {
     SpeechViewStateOpenning   = 1,
@@ -32,7 +29,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     RecognizerStateProceesing
 };
 
-@interface UnitViewController : NavViewController<SpeechRecognitionNotificationDelegate, DeviceCommandGetUnitsHandlerDelegate, DeviceCommandVoiceControlDelegate, SelectionViewDelegate, DevicecommandUpdateDevicesDelegate, CommandDeliveryServiceDelegate, DeviceCommandGetNotificationsHandlerDelegate, SMNotificationDelegate>
+@interface UnitViewController : NavViewController<SpeechRecognitionNotificationDelegate, SelectionViewDelegate, SMNotificationDelegate, XXEventSubscriber>
 
 - (void)showSpeechView;
 - (void)hideSpeechView;

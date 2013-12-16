@@ -26,6 +26,7 @@
 
 @synthesize sceneHashCode;
 @synthesize scenesModeList = _scenesModeList_;
+@synthesize securityScenesModeList = _securityScenesModeList_;
 
 @synthesize avalibleDevicesCount;
 
@@ -161,6 +162,31 @@
         }
     }
     return count;
+}
+
+- (void)refreshSecurityScenesModeList {
+    @synchronized(self) {
+        if(_securityScenesModeList_ == nil) {
+            _securityScenesModeList_ = [NSMutableArray array];
+        } else {
+            [_securityScenesModeList_ removeAllObjects];
+        }
+        for(int i=0; i<self.scenesModeList.count; i++) {
+            SceneMode *sm = [self.scenesModeList objectAtIndex:i];
+            if(sm.isSecurityMode) {
+                [_securityScenesModeList_ addObject:sm];
+            }
+        }
+    }
+}
+
+- (NSMutableArray *)securityScenesModeList {
+    @synchronized(self) {
+        if(_securityScenesModeList_ == nil) {
+            [self refreshSecurityScenesModeList];
+        }
+        return _securityScenesModeList_;
+    }
 }
 
 @end

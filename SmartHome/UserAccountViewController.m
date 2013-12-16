@@ -15,6 +15,10 @@
 #import "MainViewController.h"
 #import "VerificationCodeSendViewController.h"
 #import "UIColor+ExtentionForHexString.h"
+#import "DeviceCommandEventFilter.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "XXEventFilterChain.h"
+#import "DeviceCommandNameEventFilter.h"
 
 @interface UserAccountViewController ()
 
@@ -58,6 +62,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    DeviceCommandNameEventFilter *nameFilter = [[DeviceCommandNameEventFilter alloc] init];
+    [nameFilter.supportedCommandNames addObject:COMMAND_GET_ACCOUNT];
+    [nameFilter.supportedCommandNames addObject:COMMAND_UPDATE_ACCOUNT];
+    XXEventSubscription *subscription
+        = [[XXEventSubscription alloc] initWithSubscriber:self
+          eventFilter:nameFilter];
+    subscription.notifyMustInMainThread = YES;
+    [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
+}
+
 - (void)initDefaults {
     [super initDefaults];
     values = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", nil];
@@ -67,9 +86,6 @@
     if (infoDictionary == nil) {
         infoDictionary = [[NSMutableDictionary alloc] initWithObjects:values forKeys:titles];
     }
-    
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
-    [[SMShared current].memory subscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
 }
 
 - (void)initUI {
@@ -96,6 +112,42 @@
     UITableViewCell *usernameCell = [infoTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     usernameCell.detailTextLabel.text = username;
 }
+
+#pragma mark -
+#pragma mark Event Subscriber
+
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    if([event isKindOfClass:[DeviceCommandEvent class]]) {
+        DeviceCommandEvent *evt = (DeviceCommandEvent *)event;
+        
+        if([evt.command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
+            DeviceCommandUpdateAccount *cmd = (DeviceCommandUpdateAccount *)evt.command;
+            [values setObject:cmd.screenName atIndexedSubscript:0];
+            [values setObject:cmd.email atIndexedSubscript:1];
+            for (int i=0; i<titles.count; i++) {
+                [infoDictionary setValue:[values objectAtIndex:i] forKey:[titles objectAtIndex:i]];
+            }
+            [infoTable reloadData];
+        } else {
+            [self updateAccountOnComplete:evt.command];
+        }
+    }
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"userAccountViewControllerSubscriber";
+}
+
+- (void)notifyMainViewScreenNameChanged {
+    NavigationView *nav = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
+    if(nav != nil) {
+        DrawerView *drawerView = (DrawerView *)nav.ownerController.leftView;
+        if(drawerView != nil) {
+            [drawerView setScreenName:[infoDictionary objectForKey:NSLocalizedString(@"nick_name", @"")]];
+        }
+    }
+}
+
 
 #pragma mark -
 #pragma mark UI Table View Delegate
@@ -213,21 +265,6 @@
 }
 
 #pragma mark -
-#pragma mark Get account 
-
-- (void)getAccountOnComplete:(DeviceCommandUpdateAccount *)updateCommand {
-    if(updateCommand != nil) {
-        [values setObject:updateCommand.screenName atIndexedSubscript:0];
-        [values setObject:updateCommand.email atIndexedSubscript:1];
-        for (int i=0;i<titles.count;++i) {
-            [infoDictionary setValue:[values objectAtIndex:i] forKey:[titles objectAtIndex:i]];
-        }
-        [infoTable reloadData];
-    }
-    return;
-}
-
-#pragma mark -
 #pragma mark Submit Changes
 
 - (void)btnSubmitClicked:(id)sender {
@@ -315,19 +352,6 @@
     }
 }
 
-- (void)notifyMainViewScreenNameChanged {
-    NavigationView *view = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
-    if(view != nil) {
-        MainViewController *controller = (MainViewController *)view.ownerController;
-        if(controller != nil) {
-            DrawerView *dv = (DrawerView *)controller.leftView;
-            if(dv != nil) {
-                [dv setScreenName:[infoDictionary stringForKey:NSLocalizedString(@"nick_name", @"")]];
-            }
-        }
-    }
-}
-
 - (void)textViewHasBeenSetting:(NSString *)string {
     if(editIndex == nil || editCell == nil) {
         editCell = nil;
@@ -371,13 +395,10 @@
         [promptAlertView show];
         return;
     }
-    
     [self reallyBackToPreViewController];
 }
 
 - (void)reallyBackToPreViewController {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetAccountHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandUpdateAccountHandler class] for:self];
     [super backToPreViewController];
 }
 

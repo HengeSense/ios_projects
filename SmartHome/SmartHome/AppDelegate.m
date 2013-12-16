@@ -14,6 +14,7 @@
 #import "ViewsPool.h"
 #import "NavigationView.h"
 #import "WelcomeViewController.h"
+#import "XXEventSubscriptionPublisher.h"
 
 @implementation AppDelegate
 
@@ -199,6 +200,7 @@
         [[ViewsPool sharedPool] clear];
         [[SMShared current].settings clearAuth];
         [[SMShared current].memory clear];
+        [[XXEventSubscriptionPublisher defaultPublisher] unsubscribeAllSubscriptions];
         [[UIApplication sharedApplication] unregisterForRemoteNotifications];
 #ifdef DEBUG
         NSLog(@"[APP DELEGATE] Logout Successfully.");

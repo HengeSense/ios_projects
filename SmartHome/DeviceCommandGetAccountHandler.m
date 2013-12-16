@@ -16,19 +16,11 @@
     [super handle:command];
     if([command isKindOfClass:[DeviceCommandUpdateAccount class]]) {
         DeviceCommandUpdateAccount *deviceCommand = (DeviceCommandUpdateAccount *)command;
-
         NavigationView *nav = (NavigationView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
         if(nav != nil) {
             DrawerView *drawerView = (DrawerView *)nav.ownerController.leftView;
             if(drawerView != nil) {
                 [drawerView setScreenName:deviceCommand.screenName];
-            }
-        }
-        
-        NSArray *arr = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetAccountHandler class]];
-        for(int i=0; i<arr.count; i++) {
-            if([[arr objectAtIndex:i] respondsToSelector:@selector(getAccountOnComplete:)]) {
-                [[arr objectAtIndex:i] performSelectorOnMainThread:@selector(getAccountOnComplete:) withObject:deviceCommand waitUntilDone:NO];
             }
         }
     }

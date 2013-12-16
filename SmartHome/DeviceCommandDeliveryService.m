@@ -7,19 +7,16 @@
 //
 
 #import "DeviceCommandDeliveryService.h"
+#import "NetworkModeChangedEvent.h"
+#import "DeviceCommandEventFilter.h"
+#import "XXEventSubscriptionPublisher.h"
 
 /*  Command Handler  */
 #import "DeviceCommandGetUnitsHandler.h"
-#import "DeviceCommandUpdateAccountHandler.h"
 #import "DeviceCommandGetAccountHandler.h"
 #import "DeviceCommandGetNotificationsHandler.h"
-#import "DeviceCommandVoiceControlHandler.h"
 #import "DeviceCommandUpdateDevicesHandler.h"
 #import "DeviceCommandGetSceneListHandler.h"
-#import "DeviceCommandGetCameraServerHandler.h"
-#import "DeviceCommandUpdateDeviceTokenHandler.h"
-#import "DeviceCommandUpdateUnitNameHandler.h"
-#import "DeviceCommandCheckVersionHandler.h"
 #import "AlertView.h"
 
 #define NETWORK_CHECK_INTERVAL 5
@@ -69,9 +66,9 @@
     isService = NO;
     networkMode = NetworkModeNotChecked;
     self.needRefreshUnitAndSceneModes = NO;
+    
     syncObject = [[NSObject alloc] init];
     mayUsingInternalNetworkCommands = [NSArray arrayWithObjects:COMMAND_KEY_CONTROL, COMMAND_GET_SCENE_LIST, COMMAND_GET_CAMERA_SERVER, nil];
-    
     serialQueue = dispatch_queue_create("com.queue", DISPATCH_QUEUE_SERIAL);
     
     /* Network monitor */
@@ -80,7 +77,7 @@
 }
 
 #pragma mark -
-#pragma mark Device command delivery methods
+#pragma mark Execute device command
 
 /*
  *
@@ -96,13 +93,13 @@
     if(command == nil) return;
     if(!self.isService) {
 #ifdef DEBUG
-//        NSLog(@"Command Service was not Serverd, can't execute [%@]", command.commandName);
+        NSLog(@"[DeliveryService] Service not opened, [%@] can't be executed.", command.commandName);
 #endif
         return;
     }
     @synchronized(self) {
-        // Execute command will not be executed in main thread
-        if([NSThread mainThread] == [NSThread currentThread]) {
+        // Execute command will never executed in main thread
+        if([NSThread currentThread].isMainThread) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [self executeDeviceCommandInternal:command];
             });
@@ -113,6 +110,7 @@
 }
 
 - (void)executeDeviceCommandInternal:(DeviceCommand *)command {
+    /* Find the best command executor */
     id<CommandExecutor> executor = [self determineCommandExcutor:command];
     if(executor != nil) {
 #ifdef DEBUG
@@ -121,18 +119,26 @@
         [executor executeCommand:command];
     } else {
 #ifdef DEBUG
-        NSLog(@"COMMAND [%@] Executor not found.", command.commandName);
+        NSLog(@"[DeliveryService] Executor not found, [%@] can't be executed.", command.commandName);
 #endif
     }
 }
 
 - (id<CommandExecutor>)determineCommandExcutor:(DeviceCommand *)command {
+    /*
+     * If the device command has explicit specify the network mode
+     * that of course we know which executor should be used
+     */
     if(command.commmandNetworkMode == CommandNetworkModeInternal) {
         return self.restfulService;
     } else if(command.commmandNetworkMode == CommandNetworkModeExternal) {
         return self.tcpService;
     }
     
+    /*
+     * At first , check the command wether has been defined in 
+     * Internal network commands list
+     */
     if([self commandCanDeliveryInInternalNetwork:command]) {
         if([self currentNetworkMode] == NetworkModeInternal) {
             return self.restfulService;
@@ -146,13 +152,35 @@
     return nil;
 }
 
-/*
- * To Handle Response From Server
- *
- * Restful or Tcp Connection Response
- */
-- (void)handleDeviceCommand:(DeviceCommand *)command {
+- (BOOL)commandCanDeliveryInInternalNetwork:(DeviceCommand *)command {
+    if(mayUsingInternalNetworkCommands == nil) return NO;
+    /* 
+     * This is a special command
+     * Get all units only execute from tcp (both master device code and unit server url is blank)
+     * Get one unit can execute in rest or tcp
+     */
+    if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
+        if([NSString isBlank:command.masterDeviceCode]) {
+            DeviceCommandGetUnit *cmd = (DeviceCommandGetUnit *)command;
+            return ![NSString isBlank:cmd.unitServerUrl];
+        } else {
+            return YES;
+        }
+    }
+    
+    for(int i=0; i<mayUsingInternalNetworkCommands.count; i++) {
+        NSString *cmdName = [mayUsingInternalNetworkCommands objectAtIndex:i];
+        if([cmdName isEqualToString:command.commandName]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
+#pragma mark -
+#pragma mark Handle device command
+
+- (void)handleDeviceCommand:(DeviceCommand *)command {
     if(command == nil) return;
     
 #ifdef DEBUG
@@ -162,7 +190,7 @@
     } else if(command.commmandNetworkMode == CommandNetworkModeInternal) {
         networkModeString = @"Internal";
     }
-//    NSLog(@"Received [%@] From [%@]", command.commandName, networkModeString);
+//    NSLog(@"[DeliveryService] Received [%@] From [%@]", command.commandName, networkModeString);
 #endif
 
     // Security key is invalid or expired
@@ -173,14 +201,15 @@
         return;
     }
     
-    // This command should be ignore,
-    // Client will never process this command.
+    // If the resutID of command is equal -100
+    // that the command should be ignore,
+    // our client will never process this command.
     if(command.resultID == -100) return;
     
     // If the service is not served
     if(!self.isService) {
 #ifdef DEBUG
-        NSLog(@"Command Service was not Serverd, can't handle [%@]", command.commandName);
+        NSLog(@"[DeliveryService] Service is't opened, can't handle [%@].", command.commandName);
 #endif
         return;
     }
@@ -189,26 +218,14 @@
     
     if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetUnitsHandler alloc] init];
-    } else if([COMMAND_UPDATE_ACCOUNT isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandUpdateAccountHandler alloc] init];
     } else if([COMMAND_GET_ACCOUNT isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetAccountHandler alloc] init];
     } else if([COMMAND_PUSH_NOTIFICATIONS isEqualToString:command.commandName] || [COMMAND_GET_NOTIFICATIONS isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetNotificationsHandler alloc] init];
     } else if([COMMAND_GET_SCENE_LIST isEqualToString:command.commandName]) {
         handler = [[DeviceCommandGetSceneListHandler alloc] init];
-    } else if([COMMAND_VOICE_CONTROL isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandVoiceControlHandler alloc] init];
     } else if([COMMAND_PUSH_DEVICE_STATUS isEqualToString:command.commandName]) {
         handler = [[DeviceCommandUpdateDevicesHandler alloc] init];
-    } else if([COMMAND_CHANGE_UNIT_NAME isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandUpdateUnitNameHandler alloc] init];
-    } else if([COMMAND_GET_CAMERA_SERVER isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandGetCameraServerHandler alloc] init];
-    } else if([COMMAND_UPDATE_DEVICE_TOKEN isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandUpdateDeviceTokenHandler alloc] init];
-    } else if([COMMAND_CHECK_VERSION isEqualToString:command.commandName]) {
-        handler = [[DeviceCommandCheckVersionHandler alloc] init];
     }
         
     if(handler != nil) {
@@ -218,41 +235,63 @@
 
 - (void)queueCommand:(DeviceCommand *)command {
 #ifdef DEBUG
-    NSLog(@"Queue command [%@].", command.commandName);
+    NSLog(@"[DeliveryService] Queue command [%@].", command.commandName);
 #endif
     [self.tcpService queueCommand:command];
 }
 
 #pragma mark -
-#pragma mark Service switch
+#pragma mark Event Subscriber
+
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    if([event isKindOfClass:[DeviceCommandEvent class]]) {
+        DeviceCommandEvent *commandReceivedEvent = (DeviceCommandEvent *)event;
+        [self handleDeviceCommand:commandReceivedEvent.command];
+    }
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"deviceCommandDeliveryServiceSubscriber";
+}
+
+#pragma mark -
+#pragma mark Open or stop delivery service
 
 - (void)startService {
     if(!self.isService) {
         
 #ifdef DEBUG
-        NSLog(@"[COMMAND SERVICE] Start.");
+        NSLog(@"[DeliveryService] Service starting.");
 #endif
         isService = YES;
         
         // Load all units from disk
         [[SMShared current].memory loadUnitsFromDisk];
+        
+        XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:[[DeviceCommandEventFilter alloc] init]];
+        [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
 
         if(tcpConnectChecker != nil) {
             [tcpConnectChecker invalidate];
         }
 
-        // Start network checker
-        // Every 5 seconds to check the tcp is connectted
-        // If it was closed , then open it again
+        // Start a network checker
+        // Every 5 seconds to check the tcp is connectted ?
+        // If it was closed, then should open it again.
         tcpConnectChecker = [NSTimer scheduledTimerWithTimeInterval:NETWORK_CHECK_INTERVAL target:self selector:@selector(checkTcp) userInfo:nil repeats:YES];
-        
         [tcpConnectChecker fire];
+        
+#ifdef DEBUG
+        NSLog(@"[DeliveryService] Service started.");
+#endif
     }
 }
 
 - (void)stopService {
     if(self.isService) {
         isService = NO;
+        
+        [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
         
         [self stopRefreshCurrentUnit];
         
@@ -462,38 +501,7 @@
 }
 
 - (void)notifyNetworkModeUpdate:(NetworkMode)mode {
-    NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
-    for(int i=0; i<subscriptions.count; i++) {
-        id<CommandDeliveryServiceDelegate> delegate = [subscriptions objectAtIndex:i];
-        if(delegate != nil && [delegate respondsToSelector:@selector(commandDeliveryServiceNotifyNetworkModeMayChanged:)]) {
-            [delegate commandDeliveryServiceNotifyNetworkModeMayChanged:mode];
-        }
-    }
-}
-
-#pragma mark -
-#pragma mark Utils
-
-- (BOOL)commandCanDeliveryInInternalNetwork:(DeviceCommand *)command {
-    if(mayUsingInternalNetworkCommands == nil) return NO;
-    
-    /* This is a special command */
-    if([COMMAND_GET_UNITS isEqualToString:command.commandName]) {
-        if([NSString isBlank:command.masterDeviceCode]) {
-            DeviceCommandGetUnit *cmd = (DeviceCommandGetUnit *)command;
-            return ![NSString isBlank:cmd.unitServerUrl];
-        } else {
-            return YES;
-        }
-    }
-    
-    for(int i=0; i<mayUsingInternalNetworkCommands.count; i++) {
-        NSString *cmdName = [mayUsingInternalNetworkCommands objectAtIndex:i];
-        if([cmdName isEqualToString:command.commandName]) {
-            return YES;
-        }
-    }
-    return NO;
+    [[XXEventSubscriptionPublisher defaultPublisher] publishWithEvent:[[NetworkModeChangedEvent alloc] initWithNetworkMode:mode]];
 }
 
 #pragma mark -

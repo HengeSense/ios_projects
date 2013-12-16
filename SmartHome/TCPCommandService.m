@@ -9,6 +9,8 @@
 #import "TCPCommandService.h"
 #import "NSString+StringUtils.h"
 #import "SMShared.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "DeviceCommandEventFilter.h"
 #import "CommandFactory.h"
 
 @implementation TCPCommandService {
@@ -39,7 +41,7 @@
         NSArray *addressSet = [tcpAddress componentsSeparatedByString:@":"];
         if(addressSet == nil || addressSet.count != 2) {
     #ifdef DEBUG
-            NSLog(@"TCP COMMAND SOCKET] Server address error [ %@ ]", tcpAddress == nil ? [NSString emptyString] : tcpAddress);
+            NSLog(@"[TCP COMMAND SOCKET] Server address error [ %@ ]", tcpAddress == nil ? [NSString emptyString] : tcpAddress);
     #endif
             return;
         }
@@ -182,7 +184,8 @@
 //#endif
     DeviceCommand *command = [CommandFactory commandFromJson:[JsonUtils createDictionaryFromJson:messages]];
     command.commmandNetworkMode = CommandNetworkModeExternal;
-    [[SMShared current].deliveryService handleDeviceCommand:command];
+    [[XXEventSubscriptionPublisher defaultPublisher] publishWithEvent:
+     [[DeviceCommandEvent alloc] initWithDeviceCommand:command]];
 }
 
 - (void)notifyConnectionClosed {

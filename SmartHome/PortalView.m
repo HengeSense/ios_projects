@@ -15,6 +15,13 @@
 #import "ScenePlanFileManager.h"
 #import "UIImage+Extension.h"
 #import "NotificationsFileManager.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "CurrentUnitChangedEventFilter.h"
+#import "UnitsListUpdatedEventFilter.h"
+#import "NotificationsFileUpdatedEventFilter.h"
+#import "XXEventFilterChain.h"
+#import "NetwrokModeChangedEventFilter.h"
+
 
 @implementation PortalView {
     SMButton *btnSceneBack;
@@ -84,9 +91,9 @@
     [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home_unselected"] forState:UIControlStateHighlighted];
     btnSceneBack.longPressDelegate = self;
     [btnSceneBack addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *imgBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_back"]];
-    imgBack.center = CGPointMake(btnSceneBack.center.x, 250 - toMinusHeight);
-    [self addSubview:imgBack];
+//    UIImageView *imgBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_back"]];
+//    imgBack.center = CGPointMake(btnSceneBack.center.x, 250 - toMinusHeight);
+//    [self addSubview:imgBack];
     
     btnSceneOut = [[SMButton alloc] initWithFrame:CGRectMake(199, 140 - toMinusHeight, 86, 86)];
     btnSceneOut.identifier = SCENE_MODE_OUT;
@@ -94,9 +101,9 @@
     [btnSceneOut setParameter:NSLocalizedString(@"scene_out", @"") forKey:@"name"];
     btnSceneOut.longPressDelegate = self;
     [btnSceneOut addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *imgOut = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_out"]];
-    imgOut.center = CGPointMake(btnSceneOut.center.x, 250 - toMinusHeight);
-    [self addSubview:imgOut];
+//    UIImageView *imgOut = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_out"]];
+//    imgOut.center = CGPointMake(btnSceneOut.center.x, 250 - toMinusHeight);
+//    [self addSubview:imgOut];
     
     btnSceneGetUp = [[SMButton alloc] initWithFrame:CGRectMake(45, 300 - toMinusHeight, 86, 86)];
     btnSceneGetUp.identifier = SCENE_MODE_GET_UP;
@@ -104,9 +111,9 @@
     [btnSceneGetUp setParameter:NSLocalizedString(@"scene_get_up", @"") forKey:@"name"];
     btnSceneGetUp.longPressDelegate = self;
     [btnSceneGetUp addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *imgGetUp = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_get_up"]];
-    imgGetUp.center = CGPointMake(btnSceneGetUp.center.x, 410 - toMinusHeight);
-    [self addSubview:imgGetUp];
+//    UIImageView *imgGetUp = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_get_up"]];
+//    imgGetUp.center = CGPointMake(btnSceneGetUp.center.x, 410 - toMinusHeight);
+//    [self addSubview:imgGetUp];
     
     btnSceneSleep = [[SMButton alloc] initWithFrame:CGRectMake(199, 300 - toMinusHeight, 86, 86)];
     btnSceneSleep.identifier = SCENE_MODE_SLEEP;
@@ -114,9 +121,9 @@
     [btnSceneSleep setParameter:NSLocalizedString(@"scene_sleep", @"") forKey:@"name"];
     btnSceneSleep.longPressDelegate = self;
     [btnSceneSleep addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIImageView *imgSleep = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_sleep"]];
-    imgSleep.center = CGPointMake(btnSceneSleep.center.x, 410 - toMinusHeight);
-    [self addSubview:imgSleep];
+//    UIImageView *imgSleep = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img_sleep"]];
+//    imgSleep.center = CGPointMake(btnSceneSleep.center.x, 410 - toMinusHeight);
+//    [self addSubview:imgSleep];
  
     [self addSubview:btnSceneBack];
     [self addSubview:btnSceneOut];
@@ -125,18 +132,21 @@
 }
 
 - (void)setUp {
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-    [[SMShared current].memory subscribeHandler:[Memory class] for:self];
-    [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self];
+    subscription.notifyMustInMainThread = YES;
+    XXEventFilterChain *eventFilterChain = [[XXEventFilterChain alloc] init];
+    [[[[eventFilterChain
+        orFilter:[[CurrentUnitChangedEventFilter alloc] init]]
+        orFilter:[[UnitsListUpdatedEventFilter alloc] init]]
+        orFilter:[[NotificationsFileUpdatedEventFilter alloc] init]]
+        orFilter:[[NetwrokModeChangedEventFilter alloc] init]];
+    subscription.filter = eventFilterChain;
+    [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
     [self updateScenePlanForCurrentUnit];
 }
 
 - (void)destory {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[Memory class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
     [plans removeAllObjects];
 }
 
@@ -150,20 +160,12 @@
     
     if(!unitHasNotifyUpdateAtLeastOnce) {
         unitHasNotifyUpdateAtLeastOnce = YES;
-        [self notifyUnitsWasUpdate];
+        [self xxEventPublisherNotifyWithEvent:[[UnitsListUpdatedEvent alloc] init]];
     }
     
     if(!notificationHasUpdateAtLeastOnce) {
         notificationHasUpdateAtLeastOnce = YES;
-        [self notifyUpdateNotifications];
-    }
-}
-
-- (void)notifyUnitsWasUpdate {
-    @synchronized(self) {
-        unitHasNotifyUpdateAtLeastOnce = YES;
-        [self unitManagerNotifyCurrentUnitWasChanged:nil];
-        [self updateUnitSelectionView];
+        [self updateNotifications];
     }
 }
 
@@ -181,9 +183,34 @@
 }
 
 #pragma mark -
-#pragma mark Command Delivery Service Delegate
+#pragma mark Event Subscriber
 
-- (void)commandDeliveryServiceNotifyNetworkModeMayChanged:(NetworkMode)lastedNetwokMode {
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    if([event isKindOfClass:[CurrentUnitChangedEvent class]]) {
+        [self updateStatusDisplay];
+        [self updateScenePlanForCurrentUnit];
+    } else if([event isKindOfClass:[UnitsListUpdatedEvent class]]) {
+        @synchronized(self) {
+            unitHasNotifyUpdateAtLeastOnce = YES;
+            [self updateStatusDisplay];
+            [self updateUnitSelectionView];
+        }
+    } else if([event isKindOfClass:[NotificationsFileUpdatedEvent class]]) {
+        [self updateNotifications];
+    } else if([event isKindOfClass:[NetworkModeChangedEvent class]]) {
+        NetworkModeChangedEvent *evet = (NetworkModeChangedEvent *)event;
+        [self networkStateChanged:evet.networkMode];
+    }
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"portalViewSubscriber";
+}
+
+#pragma mark -
+#pragma mark Network State
+
+- (void)networkStateChanged:(NetworkMode)lastedNetwokMode {
     if(lastedNetwokMode == 1) {
         if([SMShared current].deliveryService.tcpService.isConnectted) {
             if([@"在线" isEqualToString:[SMShared current].memory.currentUnit.status]) {
@@ -211,17 +238,9 @@
 }
 
 #pragma mark -
-#pragma mark Unit Manager Delegate
-
-- (void)unitManagerNotifyCurrentUnitWasChanged:(NSString *)unitIdentifier {
-    [self updateStatusDisplay];
-    [self updateScenePlanForCurrentUnit];
-}
-
-#pragma mark -
 #pragma mark Notifications
 
-- (void)notifyUpdateNotifications {
+- (void)updateNotifications {
     notificationHasUpdateAtLeastOnce = YES;
     
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
@@ -266,7 +285,7 @@
 }
 
 - (void)smNotificationsWasUpdated {
-    [self notifyUpdateNotifications];
+    [self updateNotifications];
 }
 
 #pragma mark -
@@ -353,6 +372,7 @@
     [plans setObject:plan forKey:planId];
     
     // Refresh button image that scene plan is set or unset
+    
     if([SCENE_MODE_BACK isEqualToString:planId]) {
         [btnSceneBack setParameter:hasSet ? @"yes" : @"no" forKey:@"hasPlan"];
         [btnSceneBack setBackgroundImage:[UIImage imageNamed:hasSet ? @"btn_home" : @"btn_home_unset"] forState:UIControlStateNormal];

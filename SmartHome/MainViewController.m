@@ -33,6 +33,7 @@
     [super viewDidLoad];
     [self initDefaults];
     [self initUI];
+    [self setUp];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,7 +125,9 @@
     self.rightViewCenterX = 148;
     
     [self initialDrawerViewController];
-    
+}
+
+- (void)setUp {
     [[SMShared current].deliveryService startRefreshCurrentUnit];
     [[SMShared current].deliveryService queueCommand:[CommandFactory commandForType:CommandTypeGetAccount]];
 }
@@ -189,7 +192,6 @@
         }
         
         if(view != nil) {
-            view.isActive = YES;
             [[ViewsPool sharedPool] putView:view forIdentifier:item.itemIdentifier];
         }
     }
@@ -200,6 +202,8 @@
         if(!isFirst) {
             [self showCenterView:YES];
         }
+        [[ViewsPool sharedPool] setAllViewUnActive];
+        view.isActive = YES;
         [view viewBecomeActive];
     }
 }

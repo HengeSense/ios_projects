@@ -31,10 +31,11 @@
 }
 
 + (SMShared *)current {
-    static SMShared *shared;
-    if(shared == nil) {
+    static SMShared *shared = nil;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
         shared = [[SMShared alloc] init];
-    }
+    });
     return shared;
 }
 
