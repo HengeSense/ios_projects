@@ -9,6 +9,8 @@
 #import "DeviceCommandGetUnitsHandler.h"
 #import "CommandFactory.h"
 #import "Unit.h"
+#import "UnitsListUpdatedEvent.h"
+#import "XXEventSubscriptionPublisher.h"
 
 @implementation DeviceCommandGetUnitsHandler
 
@@ -44,15 +46,7 @@
             }
         }
         
-        // notify subscriptions
-        NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
-        if(subscriptions) {
-            for(int i=0; i<subscriptions.count; i++) {
-                if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(notifyUnitsWasUpdate)]) {
-                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyUnitsWasUpdate) withObject:nil waitUntilDone:NO];
-                }
-            }
-        }
+        [[XXEventSubscriptionPublisher defaultPublisher] publishWithEvent:[[UnitsListUpdatedEvent alloc] init]];
     }
 }
 

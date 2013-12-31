@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PopViewController.h"
-#import "DeviceCommandGetCameraServerHandler.h"
 #import "CameraSocket.h"
 #import "DirectionButton.h"
 #import "DeviceCommandGetCameraServer.h"
 #import "CommandFactory.h"
+#import "XXEventSubscriber.h"
 
-@interface CameraViewController : PopViewController<DirectionButtonDelegate, DeviceCommandGetCameraServerHandlerDelegate, CameraMessageDelegate>
+@interface CameraViewController : PopViewController<DirectionButtonDelegate, CameraMessageDelegate, XXEventSubscriber>
 
 @property (strong, nonatomic) Device *cameraDevice;
 

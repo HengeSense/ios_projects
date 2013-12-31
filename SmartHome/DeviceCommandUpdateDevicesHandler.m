@@ -8,6 +8,8 @@
 
 #import "DeviceCommandUpdateDevicesHandler.h"
 #import "DeviceCommandGetUnitsHandler.h"
+#import "DeviceStatusChangedEvent.h"
+#import "XXEventSubscriptionPublisher.h"
 
 @implementation DeviceCommandUpdateDevicesHandler
 
@@ -16,14 +18,8 @@
     if([command isKindOfClass:[DeviceCommandUpdateDevices class]]) {
         DeviceCommandUpdateDevices *updateDevicesCommand = (DeviceCommandUpdateDevices *)command;
         [[SMShared current].memory updateUnitDevices:updateDevicesCommand.devicesStatus forUnit:updateDevicesCommand.masterDeviceCode];
-        NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[DeviceCommandGetUnitsHandler class]];
-        if(subscriptions != nil && subscriptions.count > 0) {
-            for(int i=0; i<subscriptions.count; i++) {
-                if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(notifyDevicesStatusWasUpdate:)]) {
-                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyDevicesStatusWasUpdate:) withObject:updateDevicesCommand waitUntilDone:NO];
-                }
-            }
-        }
+        
+        [[XXEventSubscriptionPublisher defaultPublisher] publishWithEvent:[[DeviceStatusChangedEvent alloc] initWithCommand:updateDevicesCommand]];
     }
 }
 

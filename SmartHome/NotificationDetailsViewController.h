@@ -23,7 +23,7 @@
 @interface NotificationDetailsViewController : NavViewController
 
 @property (strong,nonatomic) SMNotification *notification;
-@property (assign, nonatomic) id<SMNotificationDelegate> delegate;
+@property (weak, nonatomic) id<SMNotificationDelegate> delegate;
 
 - (id)initWithNotification:(SMNotification *)notification;
 

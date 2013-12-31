@@ -261,6 +261,7 @@
         if(json != nil) {
             if([json integerForKey:@"i"] == 1) {
 //                NSString *str = [[NSString alloc] initWithData:resp.body encoding:NSUTF8StringEncoding];
+//                NSLog(@"%@", str);
                 NSArray *plans = [json arrayForKey:@"m"];
                 [[ScenePlanFileManager fileManager] deleteAllScenePlan];
                 for(int i=0; i<plans.count; i++) {

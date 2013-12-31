@@ -13,7 +13,7 @@
 @interface CameraService : ServiceBase
 
 @property (strong, nonatomic) NSString *url;
-@property (assign, nonatomic) id<CameraMessageDelegate> delegate;
+@property (weak, nonatomic) id<CameraMessageDelegate> delegate;
 
 - (id)initWithUrl:(NSString *)url;
 

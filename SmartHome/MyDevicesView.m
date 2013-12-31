@@ -11,6 +11,9 @@
 #import "SMCell.h"
 #import "UnitsBindingViewController.h"
 #import "UIColor+ExtentionForHexString.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "XXEventNameFilter.h"
+#import "EventNameContants.h"
 
 @implementation MyDevicesView {
     UITableView *tblUnits;
@@ -50,7 +53,22 @@
         [self.topbar addSubview:btnAdd];
     }
     
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    XXEventSubscription *subscription =
+    [[XXEventSubscription alloc] initWithSubscriber:self
+        eventFilter:[[XXEventNameFilter alloc] initWithSupportedEventName:EventUnitsListUpdated]];
+        subscription.notifyMustInMainThread = YES;
+    [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
+}
+
+#pragma mark -
+#pragma mark Subscriber
+
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    [self refresh];
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"myDeviceViewSubscriber";
 }
 
 #pragma mark-
@@ -66,10 +84,6 @@
 
 - (void)viewBecomeActive {
     [super viewBecomeActive];
-    [self refresh];
-}
-
-- (void)notifyUnitsWasUpdate {
     [self refresh];
 }
 
@@ -132,7 +146,7 @@
 }
 
 - (void)destory {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
+    [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
 #ifdef DEBUG
     NSLog(@"[My Devices View] Destoryed.");
 #endif

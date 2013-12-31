@@ -13,6 +13,8 @@
 #import "VideoConverter.h"
 #import "UIColor+ExtentionForHexString.h"
 #import "SystemAudio.h"
+#import "DeviceCommandNameEventFilter.h"
+#import "XXEventSubscriptionPublisher.h"
 
 #define TWO_TIMES_CLICK_INTERVAL 500
 #define RECORDING_BUFFER_LIST_LENGTH 9
@@ -62,6 +64,20 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    DeviceCommandNameEventFilter *filter = [[DeviceCommandNameEventFilter alloc] init];
+    [filter.supportedCommandNames addObject:COMMAND_GET_CAMERA_SERVER];
+    XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self eventFilter:filter];
+    subscription.notifyMustInMainThread = YES;
+    [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
+    
+    [self startMonitorCamera];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
+}
+
 #pragma mark -
 #pragma mark Initializations
 
@@ -105,9 +121,6 @@
         btnDirection.delegate = self;
         [backgroundView addSubview:btnDirection];
     }
-    
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetCameraServerHandler class] for:self];
-    [self startMonitorCamera];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,11 +130,23 @@
 }
 
 - (void)dismiss {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetCameraServerHandler class] for:self];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self stopMonitorCamera];
     });
     [super dismiss];
+}
+
+#pragma mark -
+#pragma mark Event Subscriber
+
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    DeviceCommandEvent *evt = (DeviceCommandEvent *)event;
+    DeviceCommandReceivedCameraServer *cmd = (DeviceCommandReceivedCameraServer *)evt.command;
+    [self receivedCameraServer:cmd];
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"cameraViewControllerSubscriber";
 }
 
 #pragma mark -

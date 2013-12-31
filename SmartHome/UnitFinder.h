@@ -18,7 +18,7 @@
 
 @interface UnitFinder : NSObject<AsyncUdpSocketDelegate>
 
-@property (assign, nonatomic) id<UnitFinderDelegate> delegate;
+@property (weak, nonatomic) id<UnitFinderDelegate> delegate;
 
 - (void)findUnit;
 

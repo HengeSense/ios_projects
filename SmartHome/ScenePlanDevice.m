@@ -14,12 +14,16 @@
 @synthesize deviceIdentifier;
 @synthesize device = _device_;
 @synthesize status;
+@synthesize nwkAddr;
+@synthesize category;
 
 - (id)initWithJson:(NSDictionary *)json {
     self = [super initWithJson:json];
     if(self) {
         self.deviceIdentifier = [json noNilStringForKey:@"cc"];
         self.status = [json integerForKey:@"ss"];
+        self.nwkAddr = [json noNilStringForKey:@"na"];
+        self.category = [json noNilStringForKey:@"cg"];
     }
     return self;
 }
@@ -30,6 +34,8 @@
         self.deviceIdentifier = device.identifier;
         self.device = device;
         self.status = -100;
+        self.nwkAddr = device.nwkAddr;
+        self.category = device.category;
     }
     return self;
 }
@@ -38,6 +44,8 @@
     NSMutableDictionary *json = [super toJson];
     [json setInteger:self.status forKey:@"ss"];
     [json setMayBlankString:self.deviceIdentifier forKey:@"cc"];
+    [json setMayBlankString:self.nwkAddr forKey:@"na"];
+    [json setMayBlankString:self.category forKey:@"cg"];
     return json;
 }
 

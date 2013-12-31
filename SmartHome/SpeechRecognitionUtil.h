@@ -29,7 +29,7 @@
 
 @interface SpeechRecognitionUtil : NSObject<IFlySpeechRecognizerDelegate>
 
-@property(assign, nonatomic) id<SpeechRecognitionNotificationDelegate> speechRecognitionNotificationDelegate;
+@property(weak, nonatomic) id<SpeechRecognitionNotificationDelegate> speechRecognitionNotificationDelegate;
 
 /*
  *   iat:     普通文本转写;
@@ -69,6 +69,8 @@
 
 /* 命令词识别的语法id 只针对 domain 为 asr的应用 */
 @property(strong, nonatomic) NSString *grammarID;
+
++ (SpeechRecognitionUtil *)current;
 
 - (BOOL)startListening;
 - (void)stopListening;

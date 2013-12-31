@@ -9,9 +9,9 @@
 #import "NavigationView.h"
 #import "Message.h"
 #import "MessageCell.h"
-#import "DeviceCommandGetNotificationsHandler.h"
 #import "NotificationDetailsViewController.h"
+#import "XXEventSubscriber.h"
 
-@interface NotificationsView : NavigationView<UITableViewDataSource, UITableViewDelegate, DeviceCommandGetNotificationsHandlerDelegate, SMNotificationDelegate>
+@interface NotificationsView : NavigationView<UITableViewDataSource, UITableViewDelegate, SMNotificationDelegate, XXEventSubscriber>
 
 @end

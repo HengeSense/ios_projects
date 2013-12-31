@@ -19,7 +19,7 @@
 
 @interface QRCodeScannerViewController : UIViewController<ZBarReaderViewDelegate>
 
-@property(assign, nonatomic) id<QRCodeProcessorDelegate> delegate;
+@property(weak, nonatomic) id<QRCodeProcessorDelegate> delegate;
 
 @end
 

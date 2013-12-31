@@ -10,32 +10,11 @@
 #import "Unit.h"
 #import "DeviceStatus.h"
 
-@protocol UnitManagerDelegate <NSObject>
-
-- (void)unitManagerNotifyCurrentUnitWasChanged:(NSString *)unitIdentifier;
-
-@end
-
 @interface Memory : NSObject
 
 @property (strong, atomic) NSMutableArray *units;
 @property (strong, atomic, readonly) Unit *currentUnit;
-@property (strong, nonatomic, readonly) NSMutableDictionary *subscriptions;
 
-/*
- *
- */
-- (void)subscribeHandler:(Class)handler for:(id)obj;
-
-/*
- *
- */
-- (void)unSubscribeHandler:(Class)handler for:(id)obj;
-
-/*
- *
- */
-- (NSArray *)getSubscriptionsFor:(Class)handler;
 
 /*
  *  Update the new units to memory

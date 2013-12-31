@@ -219,11 +219,10 @@
     
     if(indexPath.section == 0) {
         if(scenePlan.unit != nil) {
-            for(int i=0; i<scenePlan.unit.scenesModeList.count; i++) {
-                SceneMode *sm = [scenePlan.unit.scenesModeList objectAtIndex:i];
-                if(sm.isSecurityMode) {
-                    [actionSheet addButtonWithTitle:sm.name];
-                }
+            [scenePlan.unit refreshSecurityScenesModeList];
+            for(int i=0; i<scenePlan.unit.securityScenesModeList.count; i++) {
+                SceneMode *sm = [scenePlan.unit.securityScenesModeList objectAtIndex:i];
+                [actionSheet addButtonWithTitle:sm.name];
 //                if([[NSString stringWithFormat:@"%d", sm.code] isEqualToString:scenePlan.securityIdentifier]) {
 //                    actionSheet.destructiveButtonIndex = index;
 //                }
@@ -273,8 +272,8 @@
         NSIndexPath *indexPath = [as parameterForKey:@"indexPath"];
         UITableViewCell *cell = [tblScenePlan cellForRowAtIndexPath:indexPath];
         if(indexPath.section == 0) {
-            if(buttonIndex >= 0 && buttonIndex < scenePlan.unit.scenesModeList.count) {
-                SceneMode *mode = [scenePlan.unit.scenesModeList objectAtIndex:buttonIndex];
+            if(buttonIndex >= 0 && buttonIndex < scenePlan.unit.securityScenesModeList.count) {
+                SceneMode *mode = [scenePlan.unit.securityScenesModeList objectAtIndex:buttonIndex];
                 scenePlan.securityIdentifier = [NSString stringWithFormat:@"%d", mode.code];
                 cell.detailTextLabel.text = mode.name;
             } else if(buttonIndex == scenePlan.unit.scenesModeList.count) {

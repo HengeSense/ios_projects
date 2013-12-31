@@ -26,6 +26,7 @@
 
 //
 @property (strong, nonatomic) NSMutableArray *scenesModeList;
+@property (strong, nonatomic, readonly) NSMutableArray *securityScenesModeList;
 @property (strong, nonatomic) NSNumber *sceneHashCode;
 
 //
@@ -33,5 +34,7 @@
 
 - (Zone *)zoneForId:(NSString *)_id_;
 - (Device *)deviceForId:(NSString *)_id_;
+
+- (void)refreshSecurityScenesModeList;
 
 @end

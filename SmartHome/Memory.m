@@ -10,6 +10,8 @@
 #import "JsonUtils.h"
 #import "SMShared.h"
 #import "NSString+StringUtils.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "CurrentUnitChangedEvent.h"
 
 #define DIRECTORY [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"smarthome-units"]
 
@@ -19,7 +21,6 @@
 
 @synthesize units;
 @synthesize currentUnit;
-@synthesize subscriptions;
 
 - (id)init {
     self = [super init];
@@ -32,53 +33,6 @@
 - (void)initDefaults {
     if(self.units == nil) {
         self.units = [NSMutableArray array];
-    }
-}
-
-#pragma mark -
-#pragma mark subscriptions 
-
-- (void)subscribeHandler:(Class)handler for:(id)obj {
-    @synchronized(self.subscriptions) {
-        if(obj == nil || handler == nil) return;
-        
-        NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
-        if(subscriptions_ == nil) {
-            subscriptions_ = [NSMutableArray array];
-            [subscriptions_ addObject:obj];
-            [self.subscriptions setObject:subscriptions_ forKey:[handler description]];
-            return;
-        }
-        BOOL found = NO;
-        for(int i=0; i<subscriptions_.count; i++) {
-            if(obj == [subscriptions_ objectAtIndex:i]) {
-                found = YES;
-                break;
-            }
-        }
-        if(!found) {
-            [subscriptions_ addObject:obj];
-        }
-    }
-}
-
-- (NSArray *)getSubscriptionsFor:(Class)handler {
-    @synchronized(self.subscriptions) {
-        if(handler == nil) return nil;
-        return [self.subscriptions objectForKey:[handler description]];
-    }
-}
-
-- (void)unSubscribeHandler:(Class)handler for:(id)obj {
-    @synchronized(self.subscriptions) {
-        if(obj == nil || handler == nil) return;
-        NSMutableArray *subscriptions_ = [self.subscriptions objectForKey:[handler description]];
-        if(subscriptions_ != nil) {
-            [subscriptions_ removeObject:obj];
-#ifdef DEBUG
-            NSLog(@"[Memory] Remove subscription [%@] for [%@]", [handler description], [[obj class] description]);
-#endif
-        }
     }
 }
 
@@ -261,15 +215,7 @@
             }
         }
         currentUnitIdentifier = unitIdentifier;
-        NSArray *subscripts = [self getSubscriptionsFor:[self class]];
-        if(subscripts != nil) {
-            for(int i=0; i<subscripts.count; i++) {
-                id subscipt = [subscripts objectAtIndex:i];
-                if([subscipt respondsToSelector:@selector(unitManagerNotifyCurrentUnitWasChanged:)]) {
-                    [subscipt performSelectorOnMainThread:@selector(unitManagerNotifyCurrentUnitWasChanged:) withObject:currentUnitIdentifier waitUntilDone:NO];
-                }
-            }
-        }
+        [[XXEventSubscriptionPublisher defaultPublisher] publishWithEvent:[[CurrentUnitChangedEvent alloc] initWithCurrentIdentifier:unitIdentifier]];
     }
     [[SMShared current].deliveryService checkInternalOrNotInternalNetwork];
 }
@@ -356,24 +302,12 @@
 - (void)clear {
     @synchronized(self) {
         if(self.units != nil) [self.units removeAllObjects];
-        if(self.subscriptions != nil) [self.subscriptions removeAllObjects];
         currentUnitIdentifier = nil;
         currentUnit = nil;
 #ifdef DEBUG
-        NSLog(@"[Memory] clear units && subscriptions.");
+        NSLog(@"[Memory] Clear units.");
 #endif
     }
-}
-
-
-#pragma mark -
-#pragma mark getter and setter's
-
-- (NSMutableDictionary *)subscriptions {
-    if(subscriptions == nil) {
-        subscriptions = [NSMutableDictionary dictionary];
-    }
-    return subscriptions;
 }
 
 @end

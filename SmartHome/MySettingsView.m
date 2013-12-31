@@ -47,8 +47,6 @@
         tblSettings.delegate = self;
         [self addSubview:tblSettings];
     }
-    
-    [[SMShared current].memory subscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
 }
 
 #pragma mark -
@@ -164,35 +162,32 @@
 #pragma mark Check app verion
 
 - (void)checkVersion {
-    DeviceCommandCheckVersion *command = (DeviceCommandCheckVersion *)[CommandFactory commandForType:CommandTypeCheckVersion];
-    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-    command.curVersion = [NSNumber numberWithDouble:[infoDict doubleForKey:@"CFBundleVersion"]];
-    [[SMShared current].deliveryService executeDeviceCommand:command];
+    [[AlertView currentAlertView] setMessage:NSLocalizedString(@"app_is_lasted_version", @"") forType:AlertViewTypeSuccess];
+    [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
 }
 
-- (void)didCheckVersionComplete:(DeviceCommand *)command {
-    switch (command.resultID) {
-        case 1:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"app_is_not_lasted_version", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
-            break;
-        case -1:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"app_is_lasted_version", @"") forType:AlertViewTypeSuccess];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
-            break;
-        case -2:
-        default:
-            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
-            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
-            break;
-    }
-}
+//- (void)didCheckVersionComplete:(DeviceCommand *)command {
+//    switch (command.resultID) {
+//        case 1:
+//            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"app_is_not_lasted_version", @"") forType:AlertViewTypeFailed];
+//            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+//            break;
+//        case -1:
+//            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"app_is_lasted_version", @"") forType:AlertViewTypeSuccess];
+//            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+//            break;
+//        case -2:
+//        default:
+//            [[AlertView currentAlertView] setMessage:NSLocalizedString(@"unknow_error", @"") forType:AlertViewTypeFailed];
+//            [[AlertView currentAlertView] alertAutoDisappear:YES lockView:nil];
+//            break;
+//    }
+//}
 
 #pragma mark - 
 #pragma mark Override
 
 - (void)destory {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandCheckVersionHandler class] for:self];
 }
 
 @end

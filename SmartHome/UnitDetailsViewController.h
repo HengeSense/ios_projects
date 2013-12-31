@@ -10,9 +10,11 @@
 #import "NavViewController.h"
 #import "Unit.h"
 #import "ModifyInfoViewController.h"
-#import "DeviceCommandUpdateUnitNameHandler.h"
+#import "DeviceCommandNameEventFilter.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "XXEventSubscriber.h"
 
-@interface UnitDetailsViewController : NavViewController<UITableViewDataSource, UITableViewDelegate, TextViewDelegate,DeviceCommandUpdateUnitNameHandlerDelegate>
+@interface UnitDetailsViewController : NavViewController<UITableViewDataSource, UITableViewDelegate, TextViewDelegate, XXEventSubscriber>
 
 @property (strong, nonatomic) NSString *unitIdentifier;
 

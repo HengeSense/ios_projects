@@ -16,9 +16,32 @@
 #import "UnitView.h"
 #import "ViewsPool.h"
 #import "PortalView.h"
+#import "XXEventFilterChain.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "XXEventNameFilter.h"
+#import "DeviceCommandNameEventFilter.h"
+#import "NetworkModeChangedEvent.h"
+#import "UnitsListUpdatedEvent.h"
+#import "NotificationsFileUpdatedEvent.h"
+#import "DeviceStatusChangedEvent.h"
 
 #define SPEECH_BUTTON_WIDTH              173
 #define SPEECH_BUTTON_HEIGHT             173
+
+typedef NS_ENUM(NSInteger, SpeechViewState) {
+    SpeechViewStateOpenning   = 1,
+    SpeechViewStateOpenned    = 2,
+    SpeechViewStateClosing    = 3,
+    SpeechViewStateClosed     = 4
+};
+
+typedef NS_ENUM(NSInteger, RecognizerState) {
+    RecognizerStateReady,
+    RecognizerStateRecordBegin,
+    RecognizerStateRecording,
+    RecognizerStateRecordingEnd,
+    RecognizerStateProceesing
+};
 
 @interface UnitViewController ()
 
@@ -67,21 +90,31 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-    [[SMShared current].memory subscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
-    [[SMShared current].memory subscribeHandler:[DeviceCommandDeliveryService class] for:self];
-    [[SMShared current].memory subscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    XXEventSubscription *subscription = [[XXEventSubscription alloc] initWithSubscriber:self];
+    subscription.notifyMustInMainThread = YES;
+    
+    XXEventNameFilter *eventNameFilter = [[XXEventNameFilter alloc] init];
+    [[[[eventNameFilter addSupportedEventName:EventUnitsListUpdated]
+    addSupportedEventName:EventNotificationsFileUpdated]
+    addSupportedEventName:EventNetworkModeChanged]
+     addSupportedEventName:EventDeviceStatusChanged];
+    
+    DeviceCommandNameEventFilter *commandNameFilter = [[DeviceCommandNameEventFilter alloc] init];
+    [commandNameFilter.supportedCommandNames addObject:COMMAND_VOICE_CONTROL];
+    
+    XXEventFilterChain *eventFilterChain = [[XXEventFilterChain alloc] init];
+    [[eventFilterChain orFilter:eventNameFilter] orFilter:commandNameFilter];
+    subscription.filter = eventFilterChain;
+    [[XXEventSubscriptionPublisher defaultPublisher] subscribeFor:subscription];
+    
     [SMShared current].deliveryService.needRefreshUnitAndSceneModes = YES;
     [[SMShared current].deliveryService fireRefreshUnit];
     
-    [self notifyUpdateNotifications];
+    [self updateNotifications];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetUnitsHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandVoiceControlHandler class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandDeliveryService class] for:self];
-    [[SMShared current].memory unSubscribeHandler:[DeviceCommandGetNotificationsHandler class] for:self];
+    [[XXEventSubscriptionPublisher defaultPublisher] unSubscribeForSubscriber:self];
     [SMShared current].deliveryService.needRefreshUnitAndSceneModes = NO;
 }
 
@@ -212,7 +245,34 @@
  *
  */
 - (void)notifyViewUpdate {
-    [self notifyUnitsWasUpdate];
+    [self updateUnits];
+}
+
+#pragma mark -
+#pragma mark Event Subsriber
+
+- (void)xxEventPublisherNotifyWithEvent:(XXEvent *)event {
+    if([event isKindOfClass:[UnitsListUpdatedEvent class]]) {
+        [self updateUnits];
+    } else if([event isKindOfClass:[NotificationsFileUpdatedEvent class]]) {
+        [self updateNotifications];
+    } else if([event isKindOfClass:[NetworkModeChangedEvent class]]) {
+        NetworkModeChangedEvent *evet = (NetworkModeChangedEvent *)event;
+        [self updateNetworkMode:evet.networkMode];
+    } else if([event isKindOfClass:[DeviceStatusChangedEvent class]]) {
+        DeviceStatusChangedEvent *evet = (DeviceStatusChangedEvent *)event;
+        [self updateDevicesStatus:evet.command];
+    } else if([event isKindOfClass:[DeviceCommandEvent class]]) {
+        DeviceCommandEvent *evt = (DeviceCommandEvent *)event;
+        if([evt.command isKindOfClass:[DeviceCommandVoiceControl class]]) {
+            DeviceCommandVoiceControl *cmd = (DeviceCommandVoiceControl *)evt.command;
+            [self notifyVoiceControlAccept:cmd];
+        }
+    }
+}
+
+- (NSString *)xxEventSubscriberIdentifier {
+    return @"unitViewControllerSubscriber";
 }
 
 #pragma mark -
@@ -230,7 +290,7 @@
          ];
     } else if([@"units" isEqualToString:source]) {
         [[SMShared current].memory changeCurrentUnitTo:it.identifier];
-        [self notifyUnitsWasUpdate];
+        [self updateUnits];
         [[SMShared current].deliveryService fireRefreshUnit];
     
         PortalView *portalView = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
@@ -265,7 +325,7 @@
 #pragma mark -
 #pragma mark device command upate unit handler
 
-- (void)notifyUnitsWasUpdate {
+- (void)updateUnits {
     @synchronized(self) {
         Unit *unit = [SMShared current].memory.currentUnit;
         if(unit != nil && ![NSString isBlank:unit.name]) {
@@ -280,7 +340,7 @@
     }
 }
 
-- (void)notifyDevicesStatusWasUpdate:(DeviceCommandUpdateDevices *)command {
+- (void)updateDevicesStatus:(DeviceCommandUpdateDevices *)command {
     if(unitView != nil) {
         [unitView notifyStatusChanged];
     }
@@ -311,7 +371,7 @@
     }
 }
 
-- (void)notifyUpdateNotifications {
+- (void)updateNotifications {
     NSArray *notifications = [[NotificationsFileManager fileManager] readFromDisk];
     
     if (notifications == nil || notifications.count == 0) {
@@ -346,7 +406,7 @@
 }
 
 - (void)smNotificationsWasUpdated {
-    [self notifyUpdateNotifications];
+    [self updateNotifications];
     
     PortalView *portalView = (PortalView *)[[ViewsPool sharedPool] viewWithIdentifier:@"portalView"];
     if(portalView != nil) {
@@ -364,7 +424,7 @@
     [self.topbar.rightButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_%@.png", colorStr]] forState:UIControlStateHighlighted];
 }
 
-- (void)commandDeliveryServiceNotifyNetworkModeMayChanged:(NetworkMode)lastedNetwokMode {
+- (void)updateNetworkMode:(NetworkMode)lastedNetwokMode {
     
     /*
      *    Change Title label
@@ -418,7 +478,7 @@
 
 - (void)updateTitleLabel {
     if([NSString isBlank:stateString]) {
-        [self commandDeliveryServiceNotifyNetworkModeMayChanged:[SMShared current].deliveryService.currentNetworkMode];
+        [self updateNetworkMode:[SMShared current].deliveryService.currentNetworkMode];
         return;
     }
     if(![NSString isBlank:titleString]) {
@@ -565,9 +625,9 @@
 
 - (void)startListening:(NSTimer *)timer {
     if(speechRecognitionUtil == nil) {
-        speechRecognitionUtil = [[SpeechRecognitionUtil alloc] init];
-        speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
+        speechRecognitionUtil = [SpeechRecognitionUtil current];
     }
+    speechRecognitionUtil.speechRecognitionNotificationDelegate = self;
     if(![speechRecognitionUtil startListening]) {
 #ifdef DEBUG
         NSLog(@"[SPEECH VIEW] Start lisenting failed.");

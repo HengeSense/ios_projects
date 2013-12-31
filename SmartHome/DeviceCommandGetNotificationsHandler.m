@@ -8,6 +8,8 @@
 
 #import "DeviceCommandGetNotificationsHandler.h"
 #import "NotificationsFileManager.h"
+#import "XXEventSubscriptionPublisher.h"
+#import "NotificationsFileUpdatedEvent.h"
 #import "SystemAudio.h"
 
 @implementation DeviceCommandGetNotificationsHandler
@@ -19,14 +21,7 @@
         DeviceCommandUpdateNotifications *receivedNotificationsCommand = (DeviceCommandUpdateNotifications *)command;
         [[NotificationsFileManager fileManager] writeToDisk:receivedNotificationsCommand.notifications];
         
-        NSArray *subscriptions = [[SMShared current].memory getSubscriptionsFor:[self class]];
-        if(subscriptions != nil) {
-            for(int i=0; i<subscriptions.count; i++) {
-                if([[subscriptions objectAtIndex:i] respondsToSelector:@selector(notifyUpdateNotifications)]) {
-                    [[subscriptions objectAtIndex:i] performSelectorOnMainThread:@selector(notifyUpdateNotifications) withObject:nil waitUntilDone:NO];
-                }
-            }
-        }
+        [[XXEventSubscriptionPublisher defaultPublisher] publishWithEvent:[[NotificationsFileUpdatedEvent alloc] init]];
         
         if([COMMAND_PUSH_NOTIFICATIONS isEqualToString:receivedNotificationsCommand.commandName]) {
             if([SMShared current].settings.isVoice) {
