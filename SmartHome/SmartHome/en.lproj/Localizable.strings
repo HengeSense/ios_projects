@@ -1,284 +1,123 @@
 /*
  Localizable.strings
- SmartHome
+ securityguards
  
- Created by Zhao yang on 8/5/13.
+ Created by Zhao yang on 12/27/13.
  Copyright (c) 2013 hentre. All rights reserved.
  */
 
-"app.name"              = "掌上未来";
-
 /****************	Global Strings	****************/
 
-"yes"                   = "是";
-"no"                    = "否";
-"tips"                  = "提示";
-"ok"                    = "好的";
-"cancel"                = "取消";
-"back"                  = "返回";
-"done"                  = "完成";
-"rename"                = "重命名";
-"skip"                  = "跳过";
-"next_step"             = "下一步";
-"please_wait"           = "请稍后";
-"please_select"         = "请选择";
-"unknow_error"          = "系统错误";
-"request_timeout"       = "请求超时";
-"determine"             = "确定";
-"submit"                = "提交更改";
-"has_logout"            = "已登出";
-"processing"            = "处理中,请稍后...";
-"delete"                = "删除";
-"refuse"                = "拒绝";
-"agree"                 = "同意";
-"security_invalid"      = "安全码失效";
-"no_name"               = "未命名";
-"deleting"              = "删除中...";
-"delete_success"        = "删除成功";
-"loading"               = "加载中...";
-"execution_success"     = "执行成功";
-"execution_failed"      = "执行失败";
-"request_frequently"    = "请求过于频繁!";
-"pwd_invalid"           = "密码错误!";
-"update_success"        = "修改成功!";
-"open"                  = "开";
-"close"                 = "关";
-"unknow"                = "未知";
-"error_occur"           = "出错啦!";
-"connectting"           = "连接中...";
-"internal"              = "内网";
-"external"              = "外网";
-"disconnect"            = "断开";
-"prompt"                = "提示";
-"discard"               = "放弃";
-"login_success"         = "登录成功!";
-"save_success"          = "保存成功!";
-"saving"                = "保存中...";
-"choose_unit"           = "请选择主控";
-"scene_execute"         = "情景命令已发送";
+"app_name"                       =      "家庭卫士";
+
+"unknow_error"                   =      "系统错误";
+"request_timeout"                =      "请求超时";
+"please_wait"                    =      "请稍后";
+"submit"                         =      "提交";
 
 
-/*************** Refresh Table View Strings *************************/
+/****************	Right Drawer View Strings	****************/
 
-"pull.refresh"          = "下拉刷新";
-"release.refresh"       = "释放立即刷新";
-"refreshing"            = "刷新中...";
-"last.update"           = "最后更新";
-"ago"                   = "以前";
-"just_now"              = "刚刚";
-"minute"                = "分钟";
-"hour"                  = "小时";
-"day"                   = "天";
+"add_unit"                       =      "添加设备";
+"no_unit_found"                  =      "没有找到新主控";
+"searching"                      =      "正在搜索主控";
+"binding_unit"                   =      "正在申请绑定";
+"binding_unit_success"           =      "已申请绑定主控";
 
 
-/****************	TCP Network Strings	****************/
+/****************	Left Drawer View Strings	****************/
 
-"unit_state_offline"    = "主控未连接云端";
-"device_state_offline"  = "此设备未连接";
-"offline"               = "未连接服务器";
-"online"                = "在线";
-
-
-/****************	View's Title Strings	****************/
-
-"main_view.title"                     = "掌上未来";
-"my_devices.title"                    = "我的设备";
-"my_notifications.title"              = "我的消息";
-"account_management.title"            = "用户管理";
-"unit_binding_view.title"             = "绑定主控";
-"settings_view.title"                 = "我的设置";
-"verification_code_send.title"        = "验证手机号码";
-"verification_validation.title"       = "填写验证码";
-"account_info.title"                  = "账号信息";
-"find_password.title"                 = "找回密码";
-"notification_manager.title"          = "消息管理";
-"push_settings.title"                 = "推送设置";
-"view_message_video"                  = "查看消息视频";
+"portal_drawer_title"            =      "首页";
+"news_drawer_title"              =      "动态";
+"user_mgr_drawer_title"          =      "用户管理";
+"copyright_drawer_title"         =      "版本信息";
+"logout_drawer_title"            =      "注销账号";
+"notifications_drawer_title"     =      "消息中心";
+"logouting"                      =      "注销中...";
+"logout_success"                 =      "注销成功";
 
 
-/****************	Login View Strings	****************/
+/****************	Portal View Strings	****************/
 
-"username"                 =  "账号";
-"password"                 =  "密码";
-"login"                    =  "登录";
-"remember_password"        =  "记住密码";
-"register_new_user"        =  "注册账号";
-"find_password"            =  "找回密码";
-"username_not_blank"       =  "用户名不能为空";
-"password_not_blank"       =  "密码不能为空";
-"name_or_pwd_error"        =  "账号或密码错误";
-"login_later"              =  "请稍后再登录";
-
-
-/****************	Register View Strings	****************/
-
-"enter_mobile"                    = "请输入手机号码";
-"resend_verification_code"        = "重新发送验证码";
-"verification_code_enter.tips"    = "请输入收到的短信验证码";
-"phone_has_been_register"         = "手机已被注册";
-"phone_format_invalid"            = "号码格式错误";
-"send_success"                    = "已发送";
-"verification_code_error"         = "验证码错误";
-"verification_code_expire"        = "验证码已过期";
-"none_verification_code"          = "请先获取验证码";
-"send_password"                   = "发送密码";
-"phone_for_receive_pwd"           = "请填需要找回密码的手机号码";
-"phone_not_exists"                = "号码不存在";
-"send_failed"                     = "发送失败";
-"delay_send"                      = "请稍后再试";
+"btn_voice_title"                =      "点击开启语音模式";
+"heath_index_desc1"              =      "您的健康安全指数已超";
+"heath_index_desc2"              =      "过";
+"heath_index_desc3"              =      "的同类用户";
+"speech_view_title"              =      "语音控制";
+"rename_unit"                    =      "重命名";
+"enter_new_unit_name"            =      "请输入新的主控名";
+"no_network"                     =      "网络无法连接,正在重试中...";
+"no_extra_network"               =      "无法连接云端,正在重试中...";
+"unit_name_not_blank"            =      "主控名不能为空";
+"unit_name_change_success"       =      "修改成功";
+"unit_name_change_failed"        =      "修改失败";
 
 
-/****************    Account Setting's View Strings	****************/
+/****************	Speech View Strings	****************/
 
-"nick_name"                 = "昵称";
-"mail"                      = "邮箱";
-"modify_pwd"                = "修改密码";
-"password_valid"            = "密码验证";
-"enter_old_pwd"             = "请输入旧密码";
-"enter_new_pwd"             = "输入新密码";
-"enter_pwd_again"           = "再次输入密码";
-"pwd_edited"                = "密码已编辑";
-"mail_name_blank"           = "昵称或邮箱为空!";
-"format_error"              = "请求格式错误!";
-"pwd_different"             = "两次输入不一致";
-"pwd_format_invalid"        = "密码格式错误";
-"modify_tip"                = "此手机号将作为新的用户名使用";
-"enter_new_mobile"          = "请输入新手机号码";
-"profile_changed_tips"      = "修改的用户信息尚未提交,是否放弃更改?";
-"modify_account_tips"       = "点击修改用户登录账号";
-"modify_profile_tips"       = "除去修改用户登录账号之外的所有信息修改完成后,需要点击提交更改按钮进行提交";
+"press_begin_speaking"           =      "按住说话";
+"release_end_speaking"           =      "松开结束";
+"please_speaking"                =      "请说话";
+"finger_up_cancel_send"          =      "手指上滑,取消发送";
+"finger_release_cancel_send"     =      "松开手指,取消发送";
+"speech_tips"                    =      "您好,请说出语音指令";
 
 
-/****************	Drawer View Strings	****************/
+/****************	Speech View Strings	****************/
 
-"edit_profile"    =   "点击修改账号";
-
-
-/****************	Main View Strings	****************/
-
-"main_view"                     = "主界面";
-"my_devices"                    = "我的设备";
-"my_notifications"              = "我的消息";
-"scene_mode"                    = "情景模式";
-"settings_view"                 = "我的设置";
-"welcome_message_line1"         = "请按住语音按钮";
-"welcome_message_line2"         = "进行说话(双击关闭)";
-"everythings_fine"              = "当前一切正常!";
-"view_message"                  = "查看";
-"view_video"                    = "查看录像";
-"ms"                            = "消息内容";
-"cf"                            = "验证消息";
-"at"                            = "消息内容";
-"al"                            = "警报内容";
+"unit_binding_tips"      =      "将主控与手机处于同一Wifi下,按下\"自动发现\"按钮,主控与手机将自动绑定";
+"auto_find"              =      "自动发现";
 
 
-/****************	QR Code Scanner View Strings	****************/
+/****************	Camera View Strings	****************/
 
-"qr_code_scanner"        = "扫一扫";
-"qr_code.tips"           = "将二维码放入框内 即可自动扫描";
-
-
-/****************	Device's List View Strings	****************/
-
-"unit_info"            =   "主控信息";
-"devices_list"         =   "设备列表";
-"unit_name"            =   "主控名称";
-"unit_address"         =   "内网地址";
-"unit_state"           =   "状态";
-"unit_devices_count"   =   "设备数";
-"unit_lastupdate_time" =   "最后更新时间";
-"zone_info"            =   "我的区域";
-"unit_detail"          =   "主控详情";
-"change_unit_name"     =   "修改主控名";
+"screenshots"            =      "视频截屏";
+"catch_screen_success"   =      "照片已保存到相册";
+"camera_is_not_running"  =      "摄像头未连接";
 
 
-/****************	Unit's Binding View Strings	****************/
+/****************	Login Strings	****************/
 
-"scanner_button_tips"      = "    在没有无线网络的情况下，你可以采用功能扫一扫将主控设备录入手机。";
-"auto_search_button_tips"  = "    在有无线网络的情况下，你可以采用自动寻找功能将主控录入手机。";
-
-
-/****************	Setting's View Strings	****************/
-
-"push_settings"                 =   "推送设置";
-"account_logout"                =   "退出登录";
-"update_product"                =   "检查产品";
-"about_us"                      =   "关于";
-"help"                          =   "帮助";
-"receive_new_notification"      =   "接收新消息通知";
-"voice"                         =   "声音";
-"shake"                         =   "振动";
-"push.help1"                    =   "  如果你要关闭或开启智能家居的新消息通知，请在iPhone的“设置” － “通知”功能中，找到应用程序“智能家居”进行更改。";
-"push.help2"                    =   "  当程序在运行时，你可以设置声音或者振动。";
-"status_opened"                 =   "已开启";
-"status_closed"                 =   "已关闭";
-"app_is_lasted_version"         =   "当前已是最新版本";
-"app_is_not_lasted_version"     =   "当前版本已过期";
+"phone.number"          =   "手机号";
+"password"              =   "密码";
+"forget.password"       =   "忘记密码";
+"register.account"      =   "注册账号";
+"login"                 =   "登录";
+"name_or_pwd_error"     =   "账号或密码错误";
+"login_later"           =   "请稍后再登录";
+"login_success"         =   "登录成功";
+"username_not_blank"    =   "用户名不能为空";
+"password_not_blank"    =   "密码不能为空";
 
 
-/****************	Device Find View Strings   ****************/
+/****************  Register Strings **************/
 
-"no_unit_found"                 =   "没有找到新主控";
-"searching_unit"                =   "正在搜索主控";
-"found_new_unit"                =   "发现新主控,是否绑定?";
-"binding"                       =   "绑定";
+"please.input.phone.number.for.registerring"  =  "请输入手机号用于注册";
+"register.tip1"                               =  "＊确认后短信获取验证码，请在收到后30分钟内完成注册，否则将会失效！";
+"register.tip2"                               =  "＊验证码输入后将会作为初始密码，请进入系统后重新设置您的密码。";
+"get.verification"                            =  "获取验证码";
+"verification.code"                           =  "验证码";
+"please.input.verification.code"              =  "请输入获取的验证码";
+"finish.register.and.login"                   =  "完成注册并登录";
+"resend.verification.code"                    =  "重新发送验证码";
+"phone_has_been_register"                     =  "手机已被注册";
+"phone_format_invalid"                        =  "号码格式错误";
+"send_success"                                =  "已发送";
+"verification_code_error"                     =  "验证码错误";
+"verification_code_expire"                    =  "验证码已过期";
+"none_verification_code"                      =  "请先获取验证码";
+"send_password"                               =  "发送密码";
 
-
-/****************	Device's Strings   ****************/
-
-"btn_press_often"       =  "亲,请慢点点!";
-"device_name"           =  "设备名";
-"device_category"       =  "设备类型";
-"device_ip"             =  "设备IP";
-"device_port"           =  "设备端口";
-"device_nwkAddr"        =  "设备网络地址";
-"device_status"         =  "设备状态";
-"curtain_start"         =  "开启窗帘";
-"curtain_stop"          =  "暂停";
-"curtain_close"         =  "合起窗帘";
-"heating"               =  "制热";
-"cryogen"               =  "制冷";
-"signal_source"         =  "信源";
-"menu"                  =  "菜单";
-"connect_failed"        =  "连接已终止!";
-"play"                  =  "播放";
-"volume_increase"       =  "音量+";
-"volume_reduce"         =  "音量-";
-"catch_screen_success"  =  "照片已保存到相册";
-"camera_is_not_running" =  "摄像头未连接";
-"custom"                =  "自定义";
-"input.source"          =  "输入源";
-"mute"                  =  "静音";
-
-/****************	Account Management View Strings	****************/
-
-"account_management"    =  "用户管理";
-"user_online"           =  "在线";
-"user_offline"          =  "下线";
-"send.message"          =  "发送短信";
-"call.phoneNumber"      =  "拨打电话";
-"unbinding"             =  "解除绑定";
-"confirm.unbinding"     =  "是否确定解除用户[%@]与主控[%@]的绑定关系？";
+"phone_not_exists"                            =  "号码不存在";
+"send_failed"                                 =  "发送失败";
+"delay_send"                                  =  "请稍后再试";
 
 
-/*************** Scene Edit View Strings *************************/
+/**************** Forget password Strings *************/
 
-"security_settings"     =  "安防";
-"security_scene"        =  "安防情景";
-"scene_edit"            =  "情景设置";
-"un_set"                =  "未设置";
-"power"                 =  "电源";
-"scene_out"             =  "出门";
-"scene_home"            =  "回家";
-"scene_sleep"           =  "睡觉";
-"scene_get_up"          =  "起床";
-"scene_unset_tips"      =  "长按按钮进行设置";
-
-
-/*************** About Us View Strings *************************/
-
-"about_us_text"     = "软件名称：掌上未来\r\n软件版本：%@\r\n客服电话：400-8870-980\r\n公司网址：www.city-hot.cn\r\nCopyright©2013-2015 城市热点无线通信有限公司\r\n语音技术由科大讯飞提供\r\n\r\n免责说明\r\n\r\n1.本软件为“掌上未来”智能家居配套软件，免费提供给购买 “掌上未来”智能家居用户使用，用户须接受本公司的技术支持，否则本公司不会对安装用户提供任何技术支持。用户安装本软件，即表明用户信任软件作者，自愿选择安装本软件，并接受本协议所有条款。如果用户不接受本协议条款，请立即卸载本软件。\r\n2.本公司所出品软件仅为用户提供简单便捷的生活方式，严禁利用本软件侵犯他人隐私权。如软件使用者不能遵守此规定，请马上停止安装或立即卸载本软件，对于因用户使用本软件而造成自身或他人隐私泄露，等任何不良后果，均由用户自行承担，本公司不负任何责任。\r\n3.用户不得对本软件产品进行反向工程（reverse engineer）、反向编译（decompile）或反汇编（disassemble），违者属于侵权行为，并自行承担由此产生的不利后果。\r\n4.本软件保证不含任何病毒、木马等破坏用户数据的恶意代码，但是由于本软件产品可以通过网络等途径下载、传播，对于从非本公司指定站点下载的本软件产品，本公司无法保证该软件是否存在感染病毒、是否隐藏有伪装的特洛伊木马程序或者黑客软件，不承担由此引起的直接和间接损害责任。\r\n5.本软件会不断更新，以便及时为用户提供新功能和修正软件中的BUG。同时软件作者保证本软件的升级模块中也不含有任何旨在破坏用户数据恶意代码。\r\n6.鉴于用户操控设备软硬件环境的差异性和复杂性，本软件所提供的各项功能并不能保证在任何情况下都能正常执行或达到用户所期望的结果。用户使用本软件所产生的一切后果，本公司不承担任何责任。\r\n7.本公司尊重并保护所有使用“掌上未来”品牌智能家居用户的个人隐私权,未经用户亲自许可，或根据相关法律、法规的强制性规定，本公司不会主动向第三方披露。本服务条款的解释权与修改权归本公司所有。\r\n8.注：以上“本公司”均为“湖南城市热点无线通信有限公司”。\r\n";
-"declare"           = "免责声明";
-"read.and.agree"    = "我已阅读并同意";
+"forget.password.tip"                         =  "*确认后密码将会被重置，请在收到新密码后24小时内登录，否则将会失效！";
+"forget.password"                             =  "忘记密码";
+"please.input.phone.number.you.registered"    =  "请输入注册时的手机号";
+"get.new.password"                            =  "获取新密码";
 
 

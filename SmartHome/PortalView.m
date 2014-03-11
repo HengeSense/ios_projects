@@ -119,9 +119,10 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
     [self changeStateIconColor:@"red"];
     [self addSubview:imgNetworkState];
     
-    btnSceneBack = [[SMButton alloc] initWithFrame:CGRectMake(45, 140 - toMinusHeight, 86, 86)];
+    btnSceneBack = [[SMButton alloc] initWithFrame:CGRectMake(35, 135 - toMinusHeight, 110, 110)];
     btnSceneBack.identifier = SCENE_MODE_BACK;
     [btnSceneBack setParameter:NSLocalizedString(@"scene_home", @"") forKey:@"name"];
+    [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home_unset"] forState:UIControlStateNormal];
     [btnSceneBack setBackgroundImage:[UIImage imageNamed:@"btn_home_unselected"] forState:UIControlStateHighlighted];
     btnSceneBack.longPressDelegate = self;
     [btnSceneBack addTarget:self action:@selector(btnScenePressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -129,8 +130,9 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 //    imgBack.center = CGPointMake(btnSceneBack.center.x, 250 - toMinusHeight);
 //    [self addSubview:imgBack];
     
-    btnSceneOut = [[SMButton alloc] initWithFrame:CGRectMake(199, 140 - toMinusHeight, 86, 86)];
+    btnSceneOut = [[SMButton alloc] initWithFrame:CGRectMake(175, 135 - toMinusHeight, 110, 110)];
     btnSceneOut.identifier = SCENE_MODE_OUT;
+    [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out_unset"] forState:UIControlStateNormal];
     [btnSceneOut setBackgroundImage:[UIImage imageNamed:@"btn_out_unselected"] forState:UIControlStateHighlighted];
     [btnSceneOut setParameter:NSLocalizedString(@"scene_out", @"") forKey:@"name"];
     btnSceneOut.longPressDelegate = self;
@@ -139,8 +141,9 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 //    imgOut.center = CGPointMake(btnSceneOut.center.x, 250 - toMinusHeight);
 //    [self addSubview:imgOut];
     
-    btnSceneGetUp = [[SMButton alloc] initWithFrame:CGRectMake(45, 260 - toMinusHeight, 86, 86)];
+    btnSceneGetUp = [[SMButton alloc] initWithFrame:CGRectMake(35, 270 - toMinusHeight, 110, 110)];
     btnSceneGetUp.identifier = SCENE_MODE_GET_UP;
+    [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up_unset"] forState:UIControlStateNormal];
     [btnSceneGetUp setBackgroundImage:[UIImage imageNamed:@"btn_get_up_unselected"] forState:UIControlStateHighlighted];
     [btnSceneGetUp setParameter:NSLocalizedString(@"scene_get_up", @"") forKey:@"name"];
     btnSceneGetUp.longPressDelegate = self;
@@ -149,8 +152,9 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 //    imgGetUp.center = CGPointMake(btnSceneGetUp.center.x, 410 - toMinusHeight);
 //    [self addSubview:imgGetUp];
     
-    btnSceneSleep = [[SMButton alloc] initWithFrame:CGRectMake(199, 260 - toMinusHeight, 86, 86)];
+    btnSceneSleep = [[SMButton alloc] initWithFrame:CGRectMake(175, 270 - toMinusHeight, 110, 110)];
     btnSceneSleep.identifier = SCENE_MODE_SLEEP;
+    [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep_unset"] forState:UIControlStateNormal];
     [btnSceneSleep setBackgroundImage:[UIImage imageNamed:@"btn_sleep_unselected"] forState:UIControlStateHighlighted];
     [btnSceneSleep setParameter:NSLocalizedString(@"scene_sleep", @"") forKey:@"name"];
     btnSceneSleep.longPressDelegate = self;
@@ -424,6 +428,7 @@ typedef NS_ENUM(NSInteger, RecognizerState) {
 }
 
 - (void)updateScenePlanFor:(Unit *)unit withSPlanId:(NSString *)planId {
+    if([NSString isBlank:planId]) return;
     Unit *mergedUnit = [[Unit alloc] init];
     mergedUnit.identifier = unit.identifier;
     
